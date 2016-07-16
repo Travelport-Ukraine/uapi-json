@@ -1,0 +1,43 @@
+{
+  "name": "node-uapi",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Travelport Universal API",
+  "main": "index.js",
+  "scripts": {
+    "test": "export NODE_ENV=development && mocha --recursive --reporter nyan",
+    "cover": "export NODE_ENV=development && istanbul cover _mocha -- --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.travel-swift.com/SWIFT/NodeuAPI.git"
+  },
+  "keywords": [
+    "uapi",
+    "node",
+    "travelport"
+  ],
+  "author": "Mark",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.5.2",
+    "consolidate": "^0.14.1",
+    "handlebars": "^4.0.5",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "object-assign": "^4.0.1",
+    "promise": "^7.0.3",
+    "request": "^2.60.0",
+    "xml2js": "^0.4.9"
+  },
+  "devDependencies": {
+    "argg": "",
+    "moment": "^2.10.6",
+    "istanbul": "^0.4.1",
+    "object-assign": "^4.0.1",
+    "lolex": "",
+    "mocha": "^1.21.5",
+    "proxyquire": "^1.6.0",
+    "sinon": "^1.15.4"
+  }
+}

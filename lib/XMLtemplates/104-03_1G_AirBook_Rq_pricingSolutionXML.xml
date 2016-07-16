@@ -1,0 +1,44 @@
+<!--AirCreateReservationReq-->
+<!--Release 8.1-->
+<!--Version Dated as of 15/Apr/2015 11:24:07-->
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header xmlns:univ="http://www.travelport.com/schema/universal_v36_0">
+        <univ:SupportedVersions airVersion="air_v36_0"/>
+    </soap:Header>
+    <soap:Body>
+        <univ:AirCreateReservationReq AuthorizedBy="user" RetainReservation="Both" TargetBranch="{{TargetBranch}}"
+                                      TraceId="{{requestId}}" xmlns:univ="http://www.travelport.com/schema/universal_v36_0" xmlns:com="http://www.travelport.com/schema/common_v36_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0">
+            <com:BillingPointOfSaleInfo OriginApplication="uAPI" />
+            {{#passengers}}
+            <com:BookingTraveler Key="P_{{@index}}" DOB="{{DOB}}" Gender="{{gender}}" TravelerType="{{ageCategory}}">
+                <com:BookingTravelerName First="{{firstName}}" Last="{{lastName}}" {{#if Prefix}}Prefix="{{title}}"{{/if}}/>
+                <com:DeliveryInfo>
+                    <com:ShippingAddress>
+                        <com:AddressName>Agency</com:AddressName>
+                        <com:Street>Mezhygirska St. 1</com:Street>
+                        <com:City>Kyiv</com:City>
+                        <com:PostalCode>123456</com:PostalCode>
+                        <com:Country>UA</com:Country>
+                    </com:ShippingAddress>
+                </com:DeliveryInfo>
+                <com:PhoneNumber CountryCode="38" Location="IEV" Number="0445857777" Type="Other"/>
+                <com:Email EmailID="avia@711.ua" Type="Other"/>
+                {{#ssr}}
+                <com:SSR Type="{{type}}" FreeText="{{text}}"/>
+                <com:SSR Carrier="F9" FreeText="P/IN/F1234567/IN/05Jan85/M/13Dec14/Jones/Stephen"
+                         SegmentRef="IVaa0tGWQ+2grqSIL81xPQ==" Status="HK" Type="DOCS"/>
+                {{/ssr}}
+            </com:BookingTraveler>
+            {{/passengers}}
+
+            <air:AirPricingSolution {{#each air:AirPricingSolution}}{{@key}}="{{{this}}}" {{/each}}>
+                {{{air:AirPricingSolution_XML.air:AirSegment_XML}}}
+                {{{air:AirPricingSolution_XML.air:AirPricingInfo_XML}}}
+                {{{air:AirPricingSolution_XML.air:FareNote_XML}}}
+            </air:AirPricingSolution>
+
+            <com:ActionStatus Type="{{ActionStatusType}}" TicketDate="{{ticketDate}}" ProviderCode="1G" PseudoCityCode="{{ticketingPcc}}"/>
+
+        </univ:AirCreateReservationReq>
+    </soap:Body>
+</soap:Envelope>
