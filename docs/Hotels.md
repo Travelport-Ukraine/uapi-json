@@ -73,7 +73,7 @@ After a hotel property and rate is selected in the Hotel Rate and Rule Search re
 | --- | --- | --- |
 | people | <code>Arrat\<People\></code> | People array. [See below](#people) |
 | Guarantee | <code>Object</code> | Credit Card information. [See below](#guarantee)   |
-| rates | <code>Array\<Rate\></code> | Selected rates for booking. [See below](#rates)  |
+| rates | <code>Array\<Rate\></code> | Selected rates for booking. [See below](#rates-obj)  |
 | roomsRefs | <code>Array\<RoomRef\></code> | Array of linked people to rooms. [See below](#refs)  |
 | HotelChain | <code>String</code> | Chain from search response. |
 | HotelCode | <code>String</code> | Hotel code from search response. |
@@ -119,7 +119,7 @@ Object that store information about credit card.
 | BankName | <code>String</code> | Credit card bank name. |
 | BankCountryCode | <code>String</code> | 2-letter country code. |
 
-<a name="rates"></a>
+<a name="rates-obj"></a>
 #### Rate object
 Each rate object can be cloned from *rate* response.
 Has next shape:
