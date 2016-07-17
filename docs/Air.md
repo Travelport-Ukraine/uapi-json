@@ -30,7 +30,7 @@ Low Fare Shop functionality combines air availability and a fare quote request t
 <a name="leg"></a>
 #### Leg object
 
-Each leg represents one part of journey. For example IEV-PAR-IEV should have 2 legs: IEV-PAR and PAR-IEV.
+Each leg represents one part of the journey. For example, a typical roundtrip IEV-PAR-IEV should have two legs: IEV-PAR and PAR-IEV. An open-jaw route would still consist of two legs, e.g. IEV-PAR, AMS-IEV. For a more complicated route, more than two legs can be requested.
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -46,4 +46,5 @@ Each leg represents one part of journey. For example IEV-PAR-IEV should have 2 l
 | ADT | <code>Number</code> | Adults count. |
 | INF | <code>Number</code> | Infants count ( < 2 years ) . |
 | CNN | <code>Number</code> | Children count ( < 12 years ). |
+| [Other types](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Shared_Air_Topics/Passenger_Type_Codes.htm) | <code>Number</code> | Other IATA Passenger Type Codes available  (see uAPI documentation). |
 
