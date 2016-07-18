@@ -17,5 +17,5 @@ Return list of currencies exchange rates.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| currencies | <code>Array<Object{from, to}></code> | Array of objects where `where` property represents currency you have and `to` - currency you want. |  
+| currencies | <code>Array<Object{from, to}></code> | Array of objects where `from` property represents currency you have and `to` - currency you want. |  
 
