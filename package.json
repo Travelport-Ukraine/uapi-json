@@ -1,5 +1,5 @@
 {
-  "name": "node-uapi",
+  "name": "uapi-json",
   "version": "0.0.1",
   "private": true,
   "description": "Travelport Universal API",
