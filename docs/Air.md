@@ -26,6 +26,8 @@ Low Fare Shop functionality combines air availability and a fare quote request t
 | --- | --- | --- |
 | legs | <code>Array\<Leg\></code> | See `Leg` description [below](#leg). |
 | passengers | <code>Search Passengers</code> | See `Search Passengers` description [below](#passengers). |
+| cabins | <code>Cabins array</code> | See `Cabins array` description [below](#cabins). |
+| requestId | <code>string</code> | Trace id of this request. |
 
 <a name="leg"></a>
 #### Leg object
@@ -50,7 +52,7 @@ Each leg represents one part of the journey. For example, a typical roundtrip IE
 
 <a name="cabins"></a>
 #### Cabins array
-The cabin array list requested cabin types, currently Economy and Business.
+The cabins array lists requested cabin types, currently `Economy` or `Business` or both.
 
 
 ###Examples
@@ -59,7 +61,7 @@ The cabin array list requested cabin types, currently Economy and Business.
 Search an open-jaw flight LWO-JKT, JKT-IEV with one adult passenger.
 ```JavaScript
 var uAPI_lib = require('uapi-json');
-var config = {
+var auth = {
     username: process.env.USERNAME,
     password: process.env.PASSWORD,
     targetBranch: process.env.BRANCH,
