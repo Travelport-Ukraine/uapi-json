@@ -57,7 +57,7 @@ The cabins array lists requested cabin types, currently `Economy` or `Business` 
 
 ###Examples
 
-#### Shop
+#### Shop example
 Search an open-jaw flight LWO-JKT, JKT-IEV with one adult passenger.
 ```JavaScript
 var uAPI_lib = require('uapi-json');
