@@ -8,12 +8,12 @@ Read [docs](https://goo.gl/qEHwiz) for more information.
 // HotelService creation example
 
 var uAPI = require('uapi-json');
-var HotelService = uAPI.createHotelService(
-    config.username,
-    config.password,
-    config.targetBranch,
-    true
-);
+var auth = {
+   username: 'someusename',
+   password: 'some password',
+   targetBranch: 'some tb',
+};
+var HotelService = uAPI.createHotelService(auth, 0, true);
 
 ```
 
@@ -57,7 +57,7 @@ Each room contains next object:
 ```JavaScript
 HotelService.search({
     location : 'LON',
-    startDate: '2016-09-15'
+    startDate: '2016-09-15',
     endDate:  '2016-09-20',
     rooms: [{
         adults: 1,
