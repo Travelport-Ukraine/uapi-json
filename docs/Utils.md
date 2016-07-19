@@ -19,3 +19,11 @@ Return list of currencies exchange rates.
 | --- | --- | --- |
 | currencies | <code>Array<Object{from, to}></code> | Array of objects where `from` property represents currency you have and `to` - currency you want. |  
 
+#### Example
+
+```JavaScript
+var UtilsService = require('uapi-json');
+UtilsService.currencyConvert({
+    currencies: [{from: 'EUR', to: 'USD'}, {from: 'UAH', to: 'USD'}]
+});
+```
