@@ -15,7 +15,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
     * .void(params) ⇒ <code>Promise</code>
     
 <a name="shop"></a>
-### .search(params)
+### .shop(params)
 Low Fare Shop functionality combines air availability and a fare quote request to return the lowest available fares for a specified itinerary, using origin/destination and date information. Fares are available for one-way, round-trip, and multi-city travel. Low Fare Shop does not require a booked itinerary to return fare data.
 
 **Returns**: <code>Promise</code>   
