@@ -4,6 +4,18 @@ Current version of package provides Travelport Rooms and More via Universal API 
 
 Read [docs](https://goo.gl/qEHwiz) for more information.
 
+```JavaScript
+// HotelService creation example
+
+var uAPI = require('uapi-json');
+var HotelService = uAPI.createHotelService(
+    config.username,
+    config.password,
+    config.targetBranch,
+    true
+);
+
+```
 
 # API
 
@@ -41,6 +53,20 @@ Each room contains next object:
 | adults | <code>Number</code> | Number of adults. |
 | children | <code>Array\<Number\></code> | Each element === one child. Number - child age. Ex. `[10, 12]` means two children 10 and 12 years old.|
 
+#### Example 
+```JavaScript
+HotelService.search({
+    location : 'LON',
+    startDate: '2016-09-15'
+    endDate:  '2016-09-20',
+    rooms: [{
+        adults: 1,
+        // children: [10],
+    }],
+    rating: [4, 5]
+}).then(results => console.log(results));
+
+```
 
 <a name="rates"></a>
 ### .rates(params)
@@ -60,6 +86,22 @@ A Hotel Rate and Rule Search, also known as a Complete Hotel Availability, retur
 | Suppliers | <code>Array<supplier code></code> | Array of supliers codes. Ex. `['AG', 'RS']` |
 | _[HostToken]_ | <code>String</code> | HostToken for non-standalone request. |
 | _[currency]_ | <code>String</code> | Preferred currency. |
+
+#### Example 
+```JavaScript
+HotelService.rate({
+    HotelChain: '00',
+    HotelCode: 'GBLON@_003033',
+    startDate: '2016-09-15'
+    endDate:  '2016-09-20',
+    rooms: [{
+        adults: 1,
+        // children: [10],
+    }],
+    Suppliers: ['AG']
+}).then(results => console.log(results));
+
+```
 
 <a name="book"></a>
 ### .book(params)
@@ -145,6 +187,60 @@ Each object represents one room and people from `people` array, that are linked 
 | adultsRefs | <code>Array<key></code>| Keys from `people` array. |
 | children | <code>Object{age, key}</code> | Object with age and key of children.  |
 
+#### Example
+```JavaScript
+// HotelService creation example
+HotelService.book({
+    people: [{
+        key: 1,
+        TravelerType: "ADT",
+        FirstName: "Luke",
+        LastName: "Skywalker",
+        PrefixName: "MR",
+        Nationality: "US",
+        BirthDate: "2080-05-11",
+        AreaCode: "000",
+        CountryCode: "15",
+        Number: "1231231",
+        Email: "luck.skywalker@jedi.com",
+        Country: "US",
+        City: "Far Away city",
+        Street: "Far away strt 16",
+        PostalCode: 00111
+    }],
+    Guarantee: {
+        CVV: "111",
+        ExpDate: "2100-12",
+        CardHolder: "LUKE SKYWALKER",
+        CardNumber: "4111111111111111",
+        CardType: "VI",
+        BankName: "GBC",
+        BankCountryCode: "US",
+    },
+    rates: [{
+        RatePlanType: 'Some rate plan type',
+        RateSupplier: 'Some rate supplier',
+        RateOfferId: 'Some rate offer id',
+        Total: '100.0EUR',
+        Base: '90.0EUR',
+        Surcharge: '0EUR',
+        Tax: '10.0EUR',
+    }],
+
+    HotelCode: 'GBLON@_003033',
+    HotelChain: '00',
+    startDate: '2016-09-15',
+    endDate: '2016-09-20',
+    roomsRefs: [{
+        adults: 1,
+        adultsRefs: [1],
+    }],
+    HostToken: 'Some host token string',
+    
+}).then(console.log);
+
+```
+
 <a name="cancel"></a>
 ### .cancelBook(params)
 Currently, cancellation is supported only for single room hotel reservations.
@@ -156,3 +252,13 @@ Hotel cancellation via Universal API or the Travelport Rooms and More web site i
 | Param | Type | Description |
 | --- | --- | --- |
 | LocatorCode | <code>String</code> | Locator code from **book** resonse. |
+
+#### Example
+
+#### Example 
+```JavaScript
+HotelService.cancelBook({
+    LocatorCode: 'QWE123',
+}).then(results => console.log(results));
+
+```
