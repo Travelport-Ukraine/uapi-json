@@ -1,6 +1,6 @@
 {
   "name": "uapi-json",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Travelport Universal API",
   "main": "index.js",
   "scripts": {
