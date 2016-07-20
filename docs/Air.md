@@ -68,7 +68,7 @@ var auth = {
     pcc: process.env.PCC
 };
 
-var AirService = uAPI_lib.createAirService(auth);
+var AirService = uAPI_lib.createAirService(auth, 0, process.env.NODE_ENV == 'production');
 
 var params = {
     legs: [
