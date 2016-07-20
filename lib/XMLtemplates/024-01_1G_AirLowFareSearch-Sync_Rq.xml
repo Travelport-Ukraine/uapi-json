@@ -32,7 +32,7 @@
                 </air:PreferredProviders>
             </air:AirSearchModifiers>
             {{#passengers}}
-            <com:SearchPassenger Code="{{ageCategory}}" xmlns:com="http://www.travelport.com/schema/common_v33_0"/>
+            <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v33_0"/>
             {{/passengers}}
         </air:LowFareSearchReq>
     </soap:Body>
