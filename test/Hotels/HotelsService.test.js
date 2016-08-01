@@ -7,10 +7,11 @@ var proxy  = require('proxyquire'),
 var uAPI = require('../../index');
 var config = require('../testconfig.js');
 var HotelService = uAPI.createHotelService(
-    config.username,
-    config.password,
-    config.targetBranch,
-    true
+    {
+        auth: config,
+        debug: true,
+        production: false
+    }
 );
 
 var hotelSearchParams = {

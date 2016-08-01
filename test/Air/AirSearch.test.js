@@ -4,10 +4,11 @@ var proxy  = require('proxyquire'),
 var uAPI = require('../../index');
 var config = require('../testconfig.js');
 var AirService = uAPI.createAirService_by_auth(
-    config.username,
-    config.password,
-    config.targetBranch,
-    config.pcc
+    {
+        auth: config,
+        debug: true,
+        production: false
+    }
 );
 
 

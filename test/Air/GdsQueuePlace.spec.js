@@ -7,11 +7,12 @@ var config = require('../testconfig.smart.js')['36d5'];
 
 
 var AirService = uAPI_lib.createAirService_by_auth(
-    config.username,
-    config.password,
-    config.targetBranch,
-    '7e53',
-    true //debug
+    {
+        auth: config,
+        debug: true,
+        production: false,
+    },
+
 );
 
 var params = {

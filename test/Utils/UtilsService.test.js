@@ -7,10 +7,11 @@ var proxy        = require('proxyquire'),
 var uAPI         = require('../../index');
 var config       = require('../testconfig.js');
 var UtilsService = uAPI.createUtilsService(
-  config.username,
-  config.password,
-  config.targetBranch,
-  2
+    {
+      auth: config,
+      debug: 2,
+      production: false,
+    }
 );
 
 
