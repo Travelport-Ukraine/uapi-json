@@ -1,14 +1,13 @@
-var uApiRequest = require('../uapiRequest');
-var requests = require('../requests');
-var AirParser = require('./AirParser');
-var AirValidator = require('./AirValidator');
-var ErrorHandlers = require('./AirErrors');
-var config = require('../config');
+const uApiRequest = require('../uapi-request');
+const requests = require('../requests');
+const AirParser = require('./AirParser');
+const AirValidator = require('./AirValidator');
+// const ErrorHandlers = require('./AirErrors');
+const config = require('../config');
 
-module.exports = function(auth, debug, production) {
-
-    return {
-        searchLowFares: uApiRequest(
+module.exports = function (auth, debug, production) {
+  return {
+    searchLowFares: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_LOW_FARE_SEARCH_REQUEST,
@@ -19,48 +18,48 @@ module.exports = function(auth, debug, production) {
             debug
         ),
 
-        Availability: uApiRequest(
+    Availability: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
-            requests.AirService.AIR_AVAILABILITY_REQUEST, //TODO
-            null, //TODO
+            requests.AirService.AIR_AVAILABILITY_REQUEST, // TODO
+            null, // TODO
             AirValidator.AIR_AVAILABILITY_REQ,
             null,
             AirParser.AIR_AVAILABILITY_REQ,
             debug
         ),
 
-        AirPrice: uApiRequest(
+    AirPrice: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICE_REQ,
-            'air:AirPriceRsp',
+            'air:airPriceRsp',
             AirValidator.FARE_RULES_TRIPS_TRAVELER_REFS,
             null,
             AirParser.AIR_PRICE_REQUEST
         ),
 
-        AirPrice_PricingSolutionXML: uApiRequest(
+    AirPrice_PricingSolutionXML: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICE_REQ,
-            null, //intentionally, no parsing; we need raw XML
+            null, // intentionally, no parsing; we need raw XML
             AirValidator.AIR_PRICE_BOOKING,
             null,
             AirParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML
         ),
 
-        AirPrice_Manual: uApiRequest(
+    AirPrice_Manual: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICE_REQ,
-            'air:AirPriceRsp',
+            'air:airPriceRsp',
             AirValidator.AIR_PRICE_MANUAL,
             null,
             AirParser.AIR_PRICE_REQUEST
         ),
 
-        CreateReservation: uApiRequest(
+    CreateReservation: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_CREATE_RESERVATION_REQUEST,
@@ -71,57 +70,57 @@ module.exports = function(auth, debug, production) {
             debug
         ),
 
-        Ticket: uApiRequest(
+    Ticket: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_TICKET_REQUEST,
             'air:AirTickerRsp',
-            AirValidator.AIR_REQUEST_BY_PNR, //checks for PNR
+            AirValidator.AIR_REQUEST_BY_PNR, // checks for PNR
             null,
             AirParser.AIR_TICKET_REQUEST
         ),
 
-        ImportPNR: uApiRequest(
+    ImportPNR: uApiRequest(
             config(auth.region, production).UniversalRecord.url,
             auth,
             requests.UniversalRecord.UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST,
             'universal:UniversalRecordImportRsp',
-            AirValidator.AIR_REQUEST_BY_PNR, //checks for PNR
+            AirValidator.AIR_REQUEST_BY_PNR, // checks for PNR
             null,
             AirParser.AIR_IMPORT_REQUEST
         ),
 
-        FareRules_Booked: uApiRequest(
+    FareRules_Booked: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICING_FARE_RULES,
-            'air:AirPriceRsp',
+            'air:airPriceRsp',
             AirValidator.FARE_RULES_BOOKED,
             null,
             AirParser.AIR_PRICE_FARE_RULES
         ),
 
-        FareRules_Trips_TravellerRefs: uApiRequest(
+    FareRules_Trips_TravellerRefs: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICING_FARE_RULES,
-            'air:AirPriceRsp',
+            'air:airPriceRsp',
             AirValidator.FARE_RULES_TRIPS_TRAVELER_REFS,
             null,
             AirParser.AIR_PRICE_FARE_RULES
         ),
 
-        FareRules_Unbooked: uApiRequest(
+    FareRules_Unbooked: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICING_FARE_RULES,
-            'air:AirPriceRsp',
+            'air:airPriceRsp',
             AirValidator.FARE_RULES_BOOKED,
             null,
             AirParser.AIR_PRICE_FARE_RULES
         ),
 
-        FareRules_Unbooked_uAPI: uApiRequest(
+    FareRules_Unbooked_uAPI: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.FARE_RULES_REQUEST,
@@ -131,15 +130,15 @@ module.exports = function(auth, debug, production) {
             AirParser.FARE_RULES_RESPONSE
         ),
 
-        GDSQueue: uApiRequest(
+    GDSQueue: uApiRequest(
             config(auth.region, production).GdsQueueService.url,
             auth,
             requests.GdsQueueService.GDS_QUEUE_PLACE,
-            null, //TODO rewrite into uAPI parser
+            null, // TODO rewrite into uAPI parser
             AirValidator.GDS_QUEUE_PLACE,
             AirParser.AIR_ERRORS,
             AirParser.GDS_QUEUE_PLACE_RESPONSE,
             debug
         ),
-    };
+  };
 };

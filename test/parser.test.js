@@ -2,7 +2,7 @@ var assert = require('assert');
 var parserErrorXML = require('./FakeResponses/error.js');
 
 var uAPI = require('../index');
-var uAPI_Parser = require('../lib/uAPI_Parser');
+var uAPI_Parser = require('./ParserUapi');
 var parser = new uAPI_Parser('v_36_0', {});
 
 describe('parser tests', function () {

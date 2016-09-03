@@ -3,11 +3,11 @@ var proxy  = require('proxyquire'),
 
 var uAPI = require('../../index');
 var config = require('../testconfig.js');
-var AirService = uAPI.createAirService_by_auth(
+var AirService = uAPI.createAirService(
     {
         auth: config,
         debug: true,
-        production: false
+        production: true
     }
 );
 
@@ -22,12 +22,12 @@ describe('#Air', function () {
                     {
                         from: "IEV",
                         to: "BKK",
-                        departureDate: "2016-02-10"
+                        departureDate: "2016-11-10"
                     },
                     {
                         from: "IEV",
                         to: "BKK",
-                        departureDate: "2016-02-20"
+                        departureDate: "2016-11-20"
                     }
                 ],
                 passengers: {
@@ -36,7 +36,7 @@ describe('#Air', function () {
                 },
                 requestId: "test-request"
             };
-            return AirService.searchLowFares(params)
+            return AirService.shop(params)
                 .then(function(err){
                     console.log(JSON.stringify(err));
                 }, function(err){

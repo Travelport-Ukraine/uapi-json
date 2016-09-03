@@ -1,10 +1,10 @@
 var assert = require('assert');
 var proxy  = require('proxyquire');
-var uAPI = require('../lib/uapiRequest');
-var config = require('../lib/config');
+var uAPI = require('./uapiRequest');
+var config = require('./config');
 var auth = require('./testconfig');
-var requests = require('../lib/requests');
-var HotelsErrors = require('../lib/Hotels/HotelsErrors');
+var requests = require('./requests');
+var HotelsErrors = require('./Hotels/HotelsErrors');
 
 describe('uapiRequest tests', function () {
     it('should return error request file not exists', function () {

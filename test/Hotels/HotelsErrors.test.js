@@ -1,5 +1,5 @@
 var assert = require('assert');
-var HotelsErrors = require('../../lib/Hotels/HotelsErrors');
+var HotelsErrors = require('.././Hotels/HotelsErrors');
 describe('#HotelsErrors', function () {
     describe('checking function for error handling', function () {
         it('give empty results error', function () {

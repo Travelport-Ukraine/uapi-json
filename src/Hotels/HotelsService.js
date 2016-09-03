@@ -1,16 +1,16 @@
-var uApiRequest = require('../uapiRequest');
-var requests = require('../requests');
-var HotelsParser = require('./HotelsParser');
-var HotelsValidator = require('./HotelsValidator');
-var HotelsErrors = require('./HotelsErrors');
-var config = require('../config');
+const uApiRequest = require('../uapi-request');
+const requests = require('../requests');
+const HotelsParser = require('./HotelsParser');
+const HotelsValidator = require('./HotelsValidator');
+const HotelsErrors = require('./HotelsErrors');
+const config = require('../config');
 
-module.exports = function(settings) {
-    var auth = settings.auth;
-    var debug = settings.debug;
-    var production = settings.production;
-    return {
-        search: uApiRequest(
+module.exports = function (settings) {
+  const auth = settings.auth;
+  const debug = settings.debug;
+  const production = settings.production;
+  return {
+    search: uApiRequest(
             config(auth.region, production).HotelsService.url,
             auth,
             requests.HotelsService.HOTELS_SEARCH_REQUEST,
@@ -20,7 +20,7 @@ module.exports = function(settings) {
             HotelsParser.HOTELS_SEARCH_REQUEST,
             debug
         ),
-        searchGalileo: uApiRequest(
+    searchGalileo: uApiRequest(
             config(auth.region, production).HotelsService.url,
             auth,
             requests.HotelsService.HOTELS_SEARCH_GALILEO_REQUEST,
@@ -30,7 +30,7 @@ module.exports = function(settings) {
             HotelsParser.HOTELS_SEARCH_GALILEO_REQUEST,
             debug
         ),
-        rates: uApiRequest(
+    rates: uApiRequest(
             config(auth.region, production).HotelsService.url,
             auth,
             requests.HotelsService.HOTELS_RATE_REQUEST,
@@ -40,7 +40,7 @@ module.exports = function(settings) {
             HotelsParser.HOTELS_RATE_REQUEST,
             debug
         ),
-        book: uApiRequest(
+    book: uApiRequest(
             config(auth.region, production).HotelsService.url,
             auth,
             requests.HotelsService.HOTELS_BOOK_REQUEST,
@@ -50,7 +50,7 @@ module.exports = function(settings) {
             HotelsParser.HOTELS_BOOK_REQUEST,
             debug
         ),
-        cancelBook: uApiRequest(
+    cancelBook: uApiRequest(
             config(auth.region, production).UniversalRecord.url,
             auth,
             requests.HotelsService.HOTELS_CANCEL_BOOK_REQUEST,
@@ -59,5 +59,5 @@ module.exports = function(settings) {
             HotelsParser.HOTELS_CANCEL_BOOK_REQUEST,
             debug
         ),
-    };
+  };
 };
