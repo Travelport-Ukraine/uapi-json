@@ -13,7 +13,7 @@ function urls(region, production) {
     },
     AirService: {
       url: 'https://' + region + '.universal-api.'
-            + prefix + 'travelport.com/B2BGateway/connect/uAPI/airService',
+            + prefix + 'travelport.com/B2BGateway/connect/uAPI/AirService',
     },
     UniversalRecord: {
       url: 'https://' + region + '.universal-api.'

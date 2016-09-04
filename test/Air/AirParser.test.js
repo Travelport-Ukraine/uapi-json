@@ -52,7 +52,16 @@ describe('#AirParser', function () {
         assert(JSON.stringify(result) === JSON.stringify(jsonResult), 'Results are not equal.');
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
+
+    it('should compare xml with parsed json', () => {
+      const uParser = new ParserUapi('air:LowFareSearchRsp', 'v_33_0', {});
+      const parseFunction = require('../../src/Air/AirParser').AIR_LOW_FARE_SEARCH_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.1ADTIEVPAR.xml`).toString();
+      const jsonResult = require('../FakeResponses/Air/LowFaresSearch.1ADTIEVPAR.json');
+      return uParser.parse(xml).then(json => {
+        const result = parseFunction.call(uParser, json);
+        assert(JSON.stringify(result) === JSON.stringify(jsonResult), 'Results are not equal.');
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
   });
-
-
 });
