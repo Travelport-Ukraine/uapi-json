@@ -2,7 +2,7 @@ const UError = require('../errors');
 const _ = require('lodash');
 const async = require('async');
 const xml2js = require('xml2js');
-
+const utils = require('../utils');
 const format = require('./AirFormat');
 
 
@@ -115,7 +115,8 @@ const getPassengers = (list, BookingTraveler) => {
 
         // SSR DOC parsing of passport data http://gitlab.travel-swift.com/galileo/galileocommand/blob/master/lib/command/booking.js#L84
         // TODO safety checks
-    const ssr = traveler['common_' + this.uapi_version + ':SSR'].first().FreeText.split('/');
+    const firstTraveler = utils.firstInObj(traveler['common_' + this.uapi_version + ':SSR']);
+    const ssr = firstTraveler.FreeText.split('/');
     // TODO try to parse Swift XI from common_v36_0:AccountingRemark first
 
     const passenger = {
@@ -165,10 +166,10 @@ function importRequest(data) {
 
 const extractFareRulesLong = (obj) => {
   const result = obj['air:FareRule'];
-  _.forEach(result, (item) => {
-    item.renameProperty('air:FareRuleLong', 'Rules');
+  return _.map(result, item => {
+    utils.renameProperty(item, 'air:FareRuleLong', 'Rules');
+    return item;
   });
-  return result;
 };
 
 const AirPriceFareRules = (obj) => {
@@ -186,6 +187,7 @@ function FareRules(obj) {
   return extractFareRulesLong(obj);
 }
 
+/* not used now
 const parsePenalty = function (obj, name) {
   if (!_.isObject(obj)) {
     throw new new Error('DataProcessingException');
@@ -205,6 +207,7 @@ const parsePenalty = function (obj, name) {
 
   throw new Error('Unknown ' + name + ' types ' + JSON.stringify(Object.keys(obj))); // TODO
 };
+*/
 
 /*
  * The flagship function for parsing reservations in

@@ -1,23 +1,20 @@
-const uError = require('../errors');
-
+const UError = require('../errors');
 
 module.exports = function (err) {
+  let errno = 0;
   try {
-    var errno = err[0].detail[0]['common_v34_0:ErrorInfo'][0]['common_v34_0:Code'][0];
+    errno = err[0].detail[0]['common_v34_0:ErrorInfo'][0]['common_v34_0:Code'][0];
   } catch (e) {
-    var errno = 0;
+    console.log('Error not parsed');
   }
   switch (errno * 1) {
     case 4965:
-      throw new uError('EMPTY_RESULTS', err);
-      break;
+      throw new UError('EMPTY_RESULTS', err);
     case 5000:
-      throw new uError('GENERAL_ERROR', err);
-      break;
+      throw new UError('GENERAL_ERROR', err);
     case 5574:
-      throw new uError('NO_ENGINES_RESULTS', err);
-      break;
+      throw new UError('NO_ENGINES_RESULTS', err);
     default:
-      throw new uError('UNHANDLED_ERROR', err);
+      throw new UError('UNHANDLED_ERROR', err);
   }
 };

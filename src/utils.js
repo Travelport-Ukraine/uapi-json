@@ -6,9 +6,23 @@ const Utils = {
     };
   },
   beautifyName(string) {
-    return string.split(' ').map((name) => {
-      return name[0] + name.slice(1).toLowerCase();
-    }).join(' ');
+    return string.split(' ').map((name) => name[0] + name.slice(1).toLowerCase()).join(' ');
+  },
+
+  firstInObj(obj) {
+    return obj[Object.keys(obj)[0]];
+  },
+
+  renameProperty(obj, oldName, newName) {
+    if (oldName === newName) {
+      return obj;
+    }
+    // Check for the old property name to avoid a ReferenceError in strict mode.
+    if ({}.hasOwnProperty.call(obj, oldName)) {
+      obj[newName] = obj[oldName];
+      delete obj[oldName];
+    }
+    return obj;
   },
 };
 module.exports = Utils;

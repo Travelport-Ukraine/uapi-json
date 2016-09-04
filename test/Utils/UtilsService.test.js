@@ -15,7 +15,7 @@ var UtilsService = uAPI.createUtilsService(
 );
 
 
-describe('#UtilsService', function () {
+describe('#utilsService', function () {
   describe('currencyConvert()', function () {
     it('give response object', function () {
       this.timeout('200000');

@@ -109,7 +109,7 @@ var cancelBook = {
 
 bookingInfo = assign(bookingInfo, hotelSearchParams);
 
-describe('#HotelsService', function () {
+describe('#hotelsService', function () {
     describe('searchHotels()', function () {
         it('give response object', function () {
             this.timeout('200000');

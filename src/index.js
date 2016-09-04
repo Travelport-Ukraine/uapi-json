@@ -1,22 +1,22 @@
-const HotelsService = require('./Hotels/HotelsService');
-const AirService = require('./Air/AirService');
-const UtilsService = require('./Utils/UtilsService');
+const hotelsService = require('./Hotels/HotelsService');
+const airService = require('./Air/AirService');
+const utilsService = require('./Utils/UtilsService');
 
 const uAPI = {
   createUtilsService(settings) {
-    return UtilsService(settings);
+    return utilsService(settings);
   },
 
   createHotelService(settings) {
-    return HotelsService(settings);
+    return hotelsService(settings);
   },
 
   createAirService(settings) {
-    return AirService(settings);
+    return airService(settings);
   },
 
   createUniversalService(settings) {
-    return AirService(settings); // TODO: move
+    return airService(settings); // TODO: move
   },
 };
 

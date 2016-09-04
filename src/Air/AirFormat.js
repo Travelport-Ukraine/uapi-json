@@ -3,10 +3,13 @@
  */
 // const moment = require('moment');
 const _ = require('lodash');
+const utils = require('../utils');
 
-_.firstInObj = (obj) => obj[Object.keys(obj)[0]];
-
-const firstFlightDetails = (obj) => (_.isObject(_.firstInObj(obj)) ? _.firstInObj(obj) : {});
+const firstFlightDetails = (obj) => (
+    _.isObject(utils.firstInObj(obj))
+      ? utils.firstInObj(obj)
+      : {}
+  );
 
 function formatTrip(segment, list, fareInfo, flightDetails) {
   const trip = {

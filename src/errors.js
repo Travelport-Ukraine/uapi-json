@@ -104,7 +104,7 @@ const allErrors = {
     errno: 1003,
     msg: 'Leg in leg array does not have all required fields for #Air.searchLowFares()',
   },
-  SMART_SEARCH_UNKNOWN_TASK: { errno: 1100, msg: 'Unknown task type for AirService.smartSearch()' },
+  SMART_SEARCH_UNKNOWN_TASK: { errno: 1100, msg: 'Unknown task type for airService.smartSearch()' },
   PARSING_AIR_NO_REPLY: {
     errno: 1200,
     msg: 'No air:LowFareSearchRsp object in parsed XML for #Air.searchLowFares()',

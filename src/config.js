@@ -1,4 +1,3 @@
-'use strict';
 function urls(region, production) {
   let prefix = '';
   let timeout = 200000;
@@ -14,7 +13,7 @@ function urls(region, production) {
     },
     AirService: {
       url: 'https://' + region + '.universal-api.'
-            + prefix + 'travelport.com/B2BGateway/connect/uAPI/AirService',
+            + prefix + 'travelport.com/B2BGateway/connect/uAPI/airService',
     },
     UniversalRecord: {
       url: 'https://' + region + '.universal-api.'

@@ -15,16 +15,17 @@ Validator.prototype.setSearchPassengers = function () {
   const list = [];
   const self = this;
 
-  Object.keys(this.params.passengers).forEach(
-        function (ageCategory) {
-          let number;
-          if (number = self.params.passengers[ageCategory])
-            for (i = 0; i < number; i++)
-              list.push({
-                ageCategory,
-                child: (ageCategory == 'CNN'), // quickfix
-              });
+  Object.keys(this.params.passengers).forEach((ageCategory) => {
+    const number = self.params.passengers[ageCategory];
+    if (number) {
+      for (let i = 0; i < number; i++) {
+        list.push({
+          ageCategory,
+          child: (ageCategory === 'CNN'), // quickfix
         });
+      }
+    }
+  });
 
   this.params.passengers = list;
 
@@ -32,34 +33,35 @@ Validator.prototype.setSearchPassengers = function () {
 };
 
 Validator.prototype.legs = function () {
-  if (!_.isArray(this.params.legs))
+  if (!_.isArray(this.params.legs)) {
     throw new UError('LEGS_REQUIRED', this.params);
+  }
 
-  this.params.legs.forEach(function (leg, index) {
-    ['from', 'to', 'departureDate'].forEach(function (key) {
-      if (!leg[key])
+  this.params.legs.forEach((leg, index) => {
+    ['from', 'to', 'departureDate'].forEach((key) => {
+      if (!leg[key]) {
         throw new UError('LEGS_REQUIRED_STRUCTURE', { missing: key, index, leg });
+      }
     });
 
-        // TODO validate departureDate as a date type or valid date string in required format
+    // TODO validate departureDate as a date type or valid date string in required format
   });
-
 
   return this;
 };
 
 Validator.prototype.passengers = function () {
   const self = this;
-  if (typeof (this.params.passengers) != 'object')
+  if (typeof (this.params.passengers) !== 'object') {
     throw new UError('PASSENGERS_REQUIRED_LOW', this.params);
-  Object.keys(this.params.passengers).forEach(
-        function (ageCategory) {
-          const number = self.params.passengers[ageCategory];
-          if (typeof (ageCategory) != 'string'
-                || typeof (number) != 'number')
-            throw new UError('PASSENGERS_CATEGORY_INVALID', self.params.passengers);
-        }
-    );
+  }
+
+  Object.keys(this.params.passengers).forEach((ageCategory) => {
+    const number = self.params.passengers[ageCategory];
+    if (typeof (ageCategory) !== 'string' || typeof (number) !== 'number') {
+      throw new UError('PASSENGERS_CATEGORY_INVALID', self.params.passengers);
+    }
+  });
 
   return this;
 };
@@ -70,22 +72,25 @@ Validator.prototype.requestId = function () {
 };
 
 Validator.prototype.pnr = function () {
-  if (!this.params.pnr)
+  if (!this.params.pnr) {
     throw new UError('PNR_REQUIRED', this.params);
+  }
 
   return this;
 };
 
 Validator.prototype.queue = function () {
-  if (!this.params.queue)
+  if (!this.params.queue) {
     throw new UError('QUEUE_REQUIRED', this.params);
+  }
 
   return this;
 };
 
 Validator.prototype.pcc = function () {
-  if (!this.params.pcc)
+  if (!this.params.pcc) {
     throw new UError('PCC_REQUIRED', this.params);
+  }
 
   return this;
 };
@@ -101,7 +106,7 @@ Validator.prototype.removePassengers = function () {
 };
 
 Validator.prototype.workaroundPassengers = function () {
-  _.forEach(this.params.passengers, function (item) {
+  _.forEach(this.params.passengers, (item) => {
     item.ageType = 'ADT';
   });
   return this;
@@ -113,20 +118,22 @@ Validator.prototype.uapi_fare_rule_key = function () {
 };
 
 Validator.prototype.pricingSolutionXML = function () {
-  if (!this.params['air:AirPricingSolution'] || typeof (this.params['air:AirPricingSolution']) !== 'object')
+  if (!this.params['air:AirPricingSolution']
+    || typeof (this.params['air:AirPricingSolution']) !== 'object') {
     throw new Error('air:AirPricingSolution array is expected');
+  }
 
   return this;
 };
 
 // convert all passenger birth dates from DDmmmYY into YYYY-MM-DD
 Validator.prototype.passengerBirthDates = function () {
-  this.params.passengers.forEach(function (item) {
+  this.params.passengers.forEach((item) => {
     const a = moment(item.birthDate, 'DDMMMYY');
 
-    if (!a.isValid())
+    if (!a.isValid()) {
       throw new Error('Invalid birth date');
-
+    }
     item.DOB = a.format('YYYY-MM-DD');
   });
 
