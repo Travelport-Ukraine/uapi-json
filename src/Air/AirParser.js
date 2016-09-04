@@ -267,7 +267,7 @@ const getPricingOptions = (prices) => {
 
 function airPriceRsp(obj) {
   // TODO check root object
-  const data = this.mergeLeafRecursive(obj, 'air:airPriceRsp')['air:airPriceRsp'];
+  const data = this.mergeLeafRecursive(obj, 'air:AirPriceRsp')['air:AirPriceRsp'];
 
   const itinerary = data['air:AirItinerary']; // TODO checks
   const segments = itinerary['air:AirSegment']; // TODO checks
@@ -301,8 +301,8 @@ function airPriceRsp(obj) {
  *
  * NOTE: uses non-parsed input
  */
-const airPriceRspPassengersPerReservation = (obj) => {
-  const data = this.mergeLeafRecursive(obj, 'air:airPriceRsp')['air:airPriceRsp'];
+function airPriceRspPassengersPerReservation(obj) {
+  const data = this.mergeLeafRecursive(obj, 'air:AirPriceRsp')['air:AirPriceRsp'];
 
   const priceResult = data['air:AirPriceResult'];
   const prices = priceResult['air:AirPricingSolution'];
@@ -321,8 +321,8 @@ function airPriceRspPricingSolutionXML(obj) {
   const objCopy = _.cloneDeep(obj);
   const passengersPerReservations = airPriceRspPassengersPerReservation.call(this, objCopy);
 
-  const segments = obj['air:airPriceRsp'][0]['air:AirItinerary'][0]['air:AirSegment'];
-  const priceResult = obj['air:airPriceRsp'][0]['air:AirPriceResult'][0];
+  const segments = obj['air:AirPriceRsp'][0]['air:AirItinerary'][0]['air:AirSegment'];
+  const priceResult = obj['air:AirPriceRsp'][0]['air:AirPriceResult'][0];
   const pricingSolution = priceResult['air:AirPricingSolution'][0];
 
   // remove segment references and add real segments (required)

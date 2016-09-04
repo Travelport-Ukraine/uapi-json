@@ -155,6 +155,12 @@ module.exports = {
             .end();
   },
 
+  AIR_PRICE(params) {
+    return new Validator(params)
+      .bookedPassengers()
+      .end();
+  },
+
   AIR_PRICE_MANUAL(params) {
     return new Validator(params)
             .bookedPassengers() // TODO change into pre-booked?

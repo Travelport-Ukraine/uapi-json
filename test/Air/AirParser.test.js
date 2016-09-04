@@ -11,7 +11,7 @@ describe('#AirParser', function () {
     it('should test parsing of low fare search request', () => {
       const uParser = new ParserUapi('air:LowFareSearchRsp', 'v_33_0', {});
       const parseFunction = require('../../src/Air/AirParser').AIR_LOW_FARE_SEARCH_REQUEST;
-      const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CDNIEVBKK.xml`).toString();
+      const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.xml`).toString();
 
       return uParser.parse(xml).then(json => {
         const result = parseFunction.call(uParser, json);
@@ -45,8 +45,8 @@ describe('#AirParser', function () {
     it('should compare xml with parsed json', () => {
       const uParser = new ParserUapi('air:LowFareSearchRsp', 'v_33_0', {});
       const parseFunction = require('../../src/Air/AirParser').AIR_LOW_FARE_SEARCH_REQUEST;
-      const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CDNIEVBKK.xml`).toString();
-      const jsonResult = require('../FakeResponses/Air/LowFaresSearch.2ADT1CDNIEVBKK.json');
+      const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.xml`).toString();
+      const jsonResult = require('../FakeResponses/Air/LowFaresSearch.2ADT1CNNIEVBKK.json');
       return uParser.parse(xml).then(json => {
         const result = parseFunction.call(uParser, json);
         assert(JSON.stringify(result) === JSON.stringify(jsonResult), 'Results are not equal.');
@@ -63,5 +63,66 @@ describe('#AirParser', function () {
         assert(JSON.stringify(result) === JSON.stringify(jsonResult), 'Results are not equal.');
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
+  });
+
+  describe('AIR_PRICE_REQ_XML()', () => {
+    const test = (jsonResult) => {
+      const airprice = jsonResult['air:AirPricingSolution'];
+      const airpricexml = jsonResult['air:AirPricingSolution_XML'];
+      assert(airprice, 'no air:AirPricingSolution');
+      assert(airpricexml, 'no xml object');
+
+      assert(airprice.TotalPrice, 'No total price');
+      assert(airprice.Key, 'No key');
+      assert(airprice.Taxes, 'No taxes');
+
+      assert(airpricexml['air:AirPricingInfo_XML'], 'no air:AirPricingInfo_XML');
+      assert(airpricexml['air:AirSegment_XML'], 'no air:AirSegment_XML');
+      assert(airpricexml['air:FareNote_XML'], 'no air:FareNote_XML');
+    }
+
+    it('should test parser for correct work', () => {
+      const passengers = [{
+        lastName: 'ENEKEN',
+        firstName: 'SKYWALKER',
+        passCountry: 'UA',
+        passNumber: 'ES221731',
+        birthDate: '25JUL68',
+        gender: 'M',
+        ageCategory: 'ADT',
+      }];
+
+      const uParser = new ParserUapi(null, 'v_36_0', { passengers });
+      const parseFunction = require('../../src/Air/AirParser').AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
+      const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.xml`).toString();
+      const jsonSaved = require('../FakeResponses/Air/AirPricingSolution.IEVPAR.json');
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        test(jsonResult);
+        assert(JSON.stringify(jsonSaved) === JSON.stringify(jsonResult), 'Result is not equal to parsed');
+      });
+    });
+
+    it('should test another request with 2 adults and 1 child', () => {
+      const passengers = [{
+        lastName: 'ENEKEN',
+        firstName: 'SKYWALKER',
+        passCountry: 'UA',
+        passNumber: 'ES221731',
+        birthDate: '25JUL68',
+        gender: 'M',
+        ageCategory: 'ADT',
+      }];
+
+      const uParser = new ParserUapi(null, 'v_36_0', { passengers });
+      const parseFunction = require('../../src/Air/AirParser').AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
+      const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.2ADT1CNN.xml`).toString();
+      const jsonSaved = require('../FakeResponses/Air/AirPricingSolution.IEVPAR.2ADT1CNN.json');
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        test(jsonResult);
+        assert(JSON.stringify(jsonSaved) === JSON.stringify(jsonResult), 'Result is not equal to parsed');
+      });
+    })
   });
 });

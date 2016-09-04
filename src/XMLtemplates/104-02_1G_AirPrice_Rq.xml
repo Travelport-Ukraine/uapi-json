@@ -8,7 +8,7 @@
                          xmlns:air="http://www.travelport.com/schema/air_v36_0">
             <com:BillingPointOfSaleInfo OriginApplication="UAPI" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
             <air:AirItinerary>
-                {{#trips}}
+                {{#segments}}
                 <air:AirSegment ArrivalTime="{{arrival}}"
                                 DepartureTime="{{departure}}"
                                 Carrier="{{airline}}"
@@ -25,15 +25,15 @@
                                 Key="{{@index}}"
                                 Group="0">
                 </air:AirSegment>
-                {{/trips}}
+                {{/segments}}
             </air:AirItinerary>
             {{#passengers}}
             <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
             {{/passengers}}
             <air:AirPricingCommand>
-                {{#trips}}
+                {{#segments}}
                 <air:AirSegmentPricingModifiers AirSegmentRef="{{@index}}" FareBasisCode="{{fareBasis}}"/>
-                {{/trips}}
+                {{/segments}}
             </air:AirPricingCommand>
         </air:AirPriceReq>
     </soap:Body>

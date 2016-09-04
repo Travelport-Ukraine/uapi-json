@@ -18,7 +18,7 @@ module.exports = function (auth, debug, production) {
             debug
         ),
 
-    Availability: uApiRequest(
+    availability: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_AVAILABILITY_REQUEST, // TODO
@@ -29,27 +29,29 @@ module.exports = function (auth, debug, production) {
             debug
         ),
 
-    AirPrice: uApiRequest(
+    airPrice: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICE_REQ,
             'air:airPriceRsp',
             AirValidator.FARE_RULES_TRIPS_TRAVELER_REFS,
             null,
-            AirParser.AIR_PRICE_REQUEST
+            AirParser.AIR_PRICE_REQUEST,
+            debug
         ),
 
-    AirPrice_PricingSolutionXML: uApiRequest(
+    airPricePricingSolutionXML: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICE_REQ,
             null, // intentionally, no parsing; we need raw XML
-            AirValidator.AIR_PRICE_BOOKING,
-            null,
-            AirParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML
+            AirValidator.AIR_PRICE,
+            AirParser.AIR_ERRORS,
+            AirParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML,
+            debug
         ),
 
-    AirPrice_Manual: uApiRequest(
+    airPriceManual: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICE_REQ,
@@ -59,7 +61,7 @@ module.exports = function (auth, debug, production) {
             AirParser.AIR_PRICE_REQUEST
         ),
 
-    CreateReservation: uApiRequest(
+    createReservation: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_CREATE_RESERVATION_REQUEST,
@@ -70,7 +72,7 @@ module.exports = function (auth, debug, production) {
             debug
         ),
 
-    Ticket: uApiRequest(
+    ticket: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_TICKET_REQUEST,
@@ -80,7 +82,7 @@ module.exports = function (auth, debug, production) {
             AirParser.AIR_TICKET_REQUEST
         ),
 
-    ImportPNR: uApiRequest(
+    importPNR: uApiRequest(
             config(auth.region, production).UniversalRecord.url,
             auth,
             requests.UniversalRecord.UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST,
@@ -90,7 +92,7 @@ module.exports = function (auth, debug, production) {
             AirParser.AIR_IMPORT_REQUEST
         ),
 
-    FareRules_Booked: uApiRequest(
+    fareRulesBooked: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICING_FARE_RULES,
@@ -100,7 +102,7 @@ module.exports = function (auth, debug, production) {
             AirParser.AIR_PRICE_FARE_RULES
         ),
 
-    FareRules_Trips_TravellerRefs: uApiRequest(
+    fareRulesTripsTravellerRefs: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICING_FARE_RULES,
@@ -110,7 +112,7 @@ module.exports = function (auth, debug, production) {
             AirParser.AIR_PRICE_FARE_RULES
         ),
 
-    FareRules_Unbooked: uApiRequest(
+    fareRulesUnbooked: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_PRICING_FARE_RULES,
@@ -120,7 +122,7 @@ module.exports = function (auth, debug, production) {
             AirParser.AIR_PRICE_FARE_RULES
         ),
 
-    FareRules_Unbooked_uAPI: uApiRequest(
+    fareRulesUnbooked_uAPI: uApiRequest(
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.FARE_RULES_REQUEST,
@@ -130,7 +132,7 @@ module.exports = function (auth, debug, production) {
             AirParser.FARE_RULES_RESPONSE
         ),
 
-    GDSQueue: uApiRequest(
+    gdsQueue: uApiRequest(
             config(auth.region, production).GdsQueueService.url,
             auth,
             requests.GdsQueueService.GDS_QUEUE_PLACE,
