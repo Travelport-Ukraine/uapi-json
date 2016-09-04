@@ -314,7 +314,7 @@ function airPriceRspPassengersPerReservation(obj) {
     const histogram = countHistogram(fare['air:PassengerType']);
     return histogram;
   });
-};
+}
 
 function airPriceRspPricingSolutionXML(obj) {
   // first let's parse a regular structure
