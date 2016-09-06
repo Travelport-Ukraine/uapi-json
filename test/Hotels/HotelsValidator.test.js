@@ -1,7 +1,7 @@
 var assert = require('assert');
 
 
-var HotelsValidator = require('.././Hotels/HotelsValidator');
+var HotelsValidator = require('../../src/Hotels/HotelsValidator');
 
 describe('#HotelsValidator', function () {
     describe('HOTELS_SEARCH_REQUEST()', function () {

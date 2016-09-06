@@ -3,7 +3,7 @@ var proxy  = require('proxyquire'),
     assert = require('assert'),
     moment = require('moment');
 
-var HotelsParser = require('.././Hotels/HotelsParser');
+var HotelsParser = require('../../src/Hotels/HotelsParser');
 
 describe('#HotelsParser', function () {
     describe('searchParse()', function () {
