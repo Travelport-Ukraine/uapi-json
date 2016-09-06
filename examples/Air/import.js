@@ -4,17 +4,15 @@ const config = require('../../test/testconfig');
 
 const AirService = uAPI.createAirService({
   auth: config,
-  debug: true,
+  debug: 2,
   production: true,
 });
 
 const params = {
-  queue: '50',
-  pcc: '7777',
-  pnr: 'ABCDEF',
+  pnr: 'BMNMLK',
 };
 
-AirService.toQueue(params).then(
+AirService.importPNR(params).then(
   data => console.log(data),
   err => console.log(err)
 );

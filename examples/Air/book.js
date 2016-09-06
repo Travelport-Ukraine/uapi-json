@@ -29,11 +29,15 @@ const params = {
   requestId: 'test-request',
 };
 
-AirService.shop(params).then(trips => {
+AirService.shop(params).then(results => {
+  const fromSegments = results['0'].Directions['0']['0'].Segments;
+  const toSegments = results['0'].Directions['1']['0'].Segments;
+
   const book = {
-    segments: trips['0'].Directions['0']['0'].Segments,
+    segments: fromSegments.concat(toSegments),
+    rule: 'SIP',
     passengers: [{
-      lastName: 'ENEKEN',
+      lastName: 'ANAKIN',
       firstName: 'SKYWALKER',
       passCountry: 'UA',
       passNumber: 'ES221731',
@@ -49,8 +53,8 @@ AirService.shop(params).then(trips => {
       gender: 'M',
       ageCategory: 'ADT',
     }, {
-      lastName: 'ENEKENJS',
-      firstName: 'SKYWALKERJS',
+      lastName: 'ANAKINJR',
+      firstName: 'SKYWALKER',
       passCountry: 'UA',
       passNumber: 'ES221731',
       birthDate: '25JUL05',
