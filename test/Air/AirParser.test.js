@@ -100,7 +100,7 @@ describe('#AirParser', function () {
         const jsonResult = parseFunction.call(uParser, json);
         test(jsonResult);
         assert(JSON.stringify(jsonSaved) === JSON.stringify(jsonResult), 'Result is not equal to parsed');
-      });
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test another request with 2 adults and 1 child', () => {
@@ -122,7 +122,93 @@ describe('#AirParser', function () {
         const jsonResult = parseFunction.call(uParser, json);
         test(jsonResult);
         assert(JSON.stringify(jsonSaved) === JSON.stringify(jsonResult), 'Result is not equal to parsed');
-      });
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
     })
+  });
+
+  function testBooking(jsonResult, platingCarrier = true, tickets = false) {
+    assert(_.isArray(jsonResult), 'result not array');
+    jsonResult.forEach(result => {
+      assert(result.bookingPCC, 'no booking pcc');
+      assert(_.isArray(result.passengers), 'passengers is not array');
+      assert(result.passengers.length);
+      assert(result.pnr, 'no pnr');
+      assert(_.isArray(result.pnrList), 'no pnrList');
+      assert(_.isArray(result.reservations), 'no reservations');
+      assert(result.reservations.length);
+      assert(_.isArray(result.trips), 'no trips');
+
+      result.reservations.forEach(reservation => {
+        let status = 'Reserved';
+        if (tickets) {
+            status = 'Ticketed';
+        }
+        assert(reservation.status === status);
+        assert(!_.isEmpty(reservation.priceInfo), 'no price info');
+        assert(_.isEqual(
+          Object.keys(reservation.priceInfo),
+          ['TotalPrice', 'BasePrice', 'Taxes', 'passengersCount', 'TaxesInfo']
+        ), 'no required fields');
+      });
+
+      if (tickets) {
+        assert(_.isArray(result.tickets), 'No tickets in result');
+        assert(result.tickets.length === result.passengers.length, 'tickets should be for each passenger');
+        result.tickets.forEach(ticket => {
+          assert(!_.isEmpty(ticket.number), 'No ticket number');
+          assert(!_.isEmpty(ticket.uapi_passenger_ref), 'No passenger_ref in tickets');
+        });
+      }
+
+      if (platingCarrier) {
+        assert(!_.isEmpty(result.platingCarrier), 'no plating carrier');
+      }
+    });
+  }
+
+  describe('AIR_CREATE_RESERVATION()', () => {
+    it('should test parsing of create reservation', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.2ADT1CNN.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    })
+  });
+
+
+
+  describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
+    it('should test parsing of universal record import request', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false);
+      });
+    });
+
+    it('should test parsing of universal record import request with tickets', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport.Ticket.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json)
+        testBooking(jsonResult, false, true);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should test parsing of universal record import request with tickets (multiple passengers)', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport.MultiplePassengers.Ticket.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false, true);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
   });
 });

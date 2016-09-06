@@ -67,7 +67,7 @@ module.exports = function (auth, debug, production) {
             requests.AirService.AIR_CREATE_RESERVATION_REQUEST,
             'universal:AirCreateReservationRsp',
             AirValidator.AIR_CREATE_RESERVATION_REQUEST,
-            null,
+            AirParser.AIR_ERRORS,
             AirParser.AIR_CREATE_RESERVATION_REQUEST,
             debug
         ),
@@ -88,8 +88,9 @@ module.exports = function (auth, debug, production) {
             requests.UniversalRecord.UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST,
             'universal:UniversalRecordImportRsp',
             AirValidator.AIR_REQUEST_BY_PNR, // checks for PNR
-            null,
-            AirParser.AIR_IMPORT_REQUEST
+            AirParser.AIR_ERRORS,
+            AirParser.AIR_IMPORT_REQUEST,
+            debug
         ),
 
     fareRulesBooked: uApiRequest(

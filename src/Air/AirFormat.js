@@ -41,17 +41,17 @@ function formatTrip(segment, list, fareInfo, flightDetails) {
     || null;
 
   // fare basis is not available in airPriceRsp/AirItinerary/AirSegment
-  if (fareInfo.FareBasis) {
+  if (fareInfo && fareInfo.FareBasis) {
     trip.fareBasisCode = fareInfo.FareBasis;
   }
 
 
-  if (list.classesAvail) {
+  if (list && list.classesAvail) {
     trip.seatsAvailable = list.classesAvail[trip.bookingClass];
   }
 
 
-  if (list.SegmentRef) {
+  if (list && list.SegmentRef) {
     trip.uapi_SegmentRef = list.SegmentRef;
   }
 
@@ -70,7 +70,9 @@ function formatTrip(segment, list, fareInfo, flightDetails) {
 
   if (_.size(stops) > 0) {
     stops.shift(); // drop first place of take off
-    console.log('yaay, we have tech stops at', JSON.stringify(stops));
+    if (_.size(stops) > 0) {
+      console.log('yaay, we have tech stops at', JSON.stringify(stops));
+    }
     trip.techStops = stops;
   }
 

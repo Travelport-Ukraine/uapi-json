@@ -4,7 +4,7 @@ const async = require('async');
 const xml2js = require('xml2js');
 const utils = require('../utils');
 const format = require('./AirFormat');
-
+const moment = require('moment');
 
 /*
  * take air:AirSegment list and return Directions
@@ -13,7 +13,8 @@ const format = require('./AirFormat');
 const groupSegmentsByLegs = (segments) => {
   const legs = _.toArray(_.groupBy(segments, 'Group'));
   const mapper = legsSegments => _.map(legsSegments, segment => format.formatTrip(segment, {}));
-  return _.map(legs, legsSegments => mapper(legsSegments));
+  const result = _.map(legs, legsSegments => mapper(legsSegments));
+  return result;
 };
 
 const searchLowFaresValidate = (obj) => {
@@ -101,7 +102,7 @@ const ticketRequest = (obj) => ticketParse(obj);
 const nullParsing = (obj) => obj;
 
 
-const getPassengers = (list, BookingTraveler) => {
+function getPassengers(list, BookingTraveler) {
   const passengers = [];
 
   async.forEachOf(list, (key) => {
@@ -116,7 +117,11 @@ const getPassengers = (list, BookingTraveler) => {
         // SSR DOC parsing of passport data http://gitlab.travel-swift.com/galileo/galileocommand/blob/master/lib/command/booking.js#L84
         // TODO safety checks
     const firstTraveler = utils.firstInObj(traveler['common_' + this.uapi_version + ':SSR']);
-    const ssr = firstTraveler.FreeText.split('/');
+    let ssr = [];
+    if (firstTraveler) {
+      ssr = firstTraveler.FreeText.split('/');
+    }
+
     // TODO try to parse Swift XI from common_v36_0:AccountingRemark first
 
     const passenger = {
@@ -124,9 +129,10 @@ const getPassengers = (list, BookingTraveler) => {
       firstName: name.First,
       passCountry: ssr[1], // also in ssr[3]
       passNumber: ssr[2],
-      birthDate: ssr[4], // ssr[6] is pass expiry date
-            // 'ageType': ssr[6], //FIXME available in PricingInfo['PassengerTypeCode']
-      gender: ssr[5],
+      birthDate: moment(traveler.DOB).format('DDMMMYY'),
+      ageType: traveler.TravelerType,
+      gender: traveler.Gender,
+      uapi_ref_key: key,
     };
 
 
@@ -134,34 +140,6 @@ const getPassengers = (list, BookingTraveler) => {
   });
 
   return passengers;
-};
-
-function importRequest(data) {
-  const record = data['universal:UniversalRecord'];
-  // TODO check what if there are several reservations?
-  const reservation = record['air:AirReservation'][0];
-
-
-  const response = {
-    trips: [],
-    passengers: [],
-    uapi_traveler_refs: reservation['common_' + this.uapi_version + ':BookingTravelerRef'],
-    original: data,
-  };
-
-    /* async.forEachOf(reservation['air:AirSegment'], function(segment, index) {
-       response.trips.push(format.formatTrip(segment, {})); //TODO error handling
-    //TODO split by legs!
-    });*/
-
-  // TODO add flatten for AirPriceReq/FareRules
-  response.trips = groupSegmentsByLegs(reservation['air:AirSegment']);
-  response.passengers = getPassengers.call(this,
-    response.uapi_traveler_refs,
-    record['common_' + this.uapi_version + ':BookingTraveler']
-  );
-
-  return response;
 }
 
 const extractFareRulesLong = (obj) => {
@@ -359,6 +337,7 @@ function airPriceRspPricingSolutionXML(obj) {
     });
   });
 
+  pricingSolution['air:AirPricingInfo'] = pricingInfos;
   const resultXml = {};
 
   ['air:AirSegment', 'air:AirPricingInfo', 'air:FareNote'].forEach(root => {
@@ -468,20 +447,46 @@ function extractBookings(obj) {
       reservation.uapi_passenger_refs = passengerRefs;
       reservation.status = 'Reserved';
 
+      if (!!fare.Ticketed === true) {
+        reservation.status = 'Ticketed';
+      }
       newBooking.reservations.push(reservation);
+
       const trips = format.getTripsFromBooking(
         pricing,
         pricing['air:FareInfo'],
         booking['air:AirSegment']
       );
 
-      newBooking.trips.concat(trips);
+      newBooking.trips = trips;
     });
+
+    if (booking['air:DocumentInfo'] && booking['air:DocumentInfo']['air:TicketInfo']) {
+      if (_.isArray(booking['air:DocumentInfo']['air:TicketInfo'])) {
+        newBooking.tickets = booking['air:DocumentInfo']['air:TicketInfo'].map(ticket =>
+          ({
+            number: ticket.Number,
+            uapi_passenger_ref: ticket.BookingTravelerRef,
+          })
+        );
+      } else {
+        const ticket = booking['air:DocumentInfo']['air:TicketInfo'];
+        newBooking.tickets = [{
+          number: ticket.Number,
+          uapi_passenger_ref: ticket.BookingTravelerRef,
+        }];
+      }
+    }
 
     bookings.push(newBooking);
   });
 
   return bookings;
+}
+
+function importRequest(data) {
+  const response = extractBookings.call(this, data);
+  return response;
 }
 
 function gdsQueue(req) {
