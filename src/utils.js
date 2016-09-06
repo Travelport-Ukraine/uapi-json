@@ -1,5 +1,8 @@
 const Utils = {
   price(string) {
+    if (string === undefined || string === null) {
+      return null;
+    }
     return {
       currency: string.slice(0, 3),
       value: 1.0 * string.slice(3, string.length),
@@ -10,7 +13,7 @@ const Utils = {
   },
 
   firstInObj(obj) {
-    return obj[Object.keys(obj)[0]];
+    return obj && obj[Object.keys(obj)[0]];
   },
 
   renameProperty(obj, oldName, newName) {

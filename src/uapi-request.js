@@ -3,6 +3,7 @@ const fs = require('fs');
 const request = require('request');
 const Promise = require('promise');
 const ParserUapi = require('./uapi-parser');
+const _ = require('lodash');
 
 // making default functions work with promises
 const readFile = Promise.denodeify(fs.readFile);
@@ -48,11 +49,8 @@ module.exports = function (service, auth, reqType, rootObject,
       console.log('Input params ', params);
     }
 
-    // create a v36 uAPI parser with default params and request data in env
-    const uParser = new ParserUapi(rootObject, 'v_36_0', params);
-
     const validateInput = (resolve, reject) => {
-      if (params === undefined) {
+      if (_.isEmpty(params)) {
         reject(new UError('EMPTY_PARAMS'));
       }
       params = validateFunction(params);
@@ -126,6 +124,8 @@ module.exports = function (service, auth, reqType, rootObject,
       return result;
     };
 
+    // create a v36 uAPI parser with default params and request data in env
+    const uParser = new ParserUapi(rootObject, 'v_36_0', params);
     return new Promise(validateInput)
             .then(readFile)
             .then(prepareRequest)

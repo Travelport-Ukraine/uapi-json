@@ -30,12 +30,6 @@ function urls(region, production) {
   };
 }
 
-module.exports = function (region, production) {
-  if (region === undefined) {
-    region = 'emea';
-  }
-  if (production === undefined) {
-    production = true;
-  }
+module.exports = function (region = 'emea', production = true) {
   return urls(region, production);
 };
