@@ -10,11 +10,10 @@
     "docs"
   ],
   "scripts": {
-    "test": "export NODE_ENV=development && mocha --recursive --reporter nyan",
+    "test": "mocha --recursive",
     "fix": "eslint --fix src/",
     "lint": "eslint src/",
-    "build": "babel --copy-files src/ -d build/",
-    "cover": "export NODE_ENV=development && istanbul cover _mocha -- --recursive"
+    "build": "babel --copy-files src/ -d build/"
   },
   "repository": {
     "type": "git",
