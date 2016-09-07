@@ -1,10 +1,10 @@
 {
   "name": "uapi-json",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Travelport Universal API",
   "main": "build/",
   "files": [
-    "dist",
+    "build/",
     "README.md",
     "LICENSE",
     "docs"
@@ -13,7 +13,8 @@
     "test": "mocha --recursive",
     "fix": "eslint --fix src/",
     "lint": "eslint src/",
-    "build": "babel --copy-files src/ -d build/"
+    "build": "babel --copy-files src/ -d build/",
+    "prepublish": "npm run lint && npm run test && npm run build"
   },
   "repository": {
     "type": "git",
