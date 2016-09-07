@@ -96,6 +96,9 @@ module.exports = function (service, auth, reqType, rootObject,
       });
     };
 
+    // create a v36 uAPI parser with default params and request data in env
+    const uParser = new ParserUapi(rootObject, 'v_36_0', params);
+
     const parseResponse = function (response) {
       // if there are web server or HTTP auth errors, uAPI returns a JSON
       let data = null;
@@ -124,8 +127,7 @@ module.exports = function (service, auth, reqType, rootObject,
       return result;
     };
 
-    // create a v36 uAPI parser with default params and request data in env
-    const uParser = new ParserUapi(rootObject, 'v_36_0', params);
+
     return new Promise(validateInput)
             .then(readFile)
             .then(prepareRequest)
