@@ -1,4 +1,4 @@
-# Description
+# Description [![Build Status](https://travis-ci.org/Travelport-Ukraine/uapi-json.svg?branch=master)](https://travis-ci.org/Travelport-Ukraine/uapi-json)
 Best Travelport Universal API wrapper ever :airplane: :mountain_railway: :hotel:
 
 Travelport Universal API offers an array of travel content for air, hotel, car, and rail, including ancillaries (optional services). It also provides functionality to build complete traveler, agency, branch, and account profiles.
