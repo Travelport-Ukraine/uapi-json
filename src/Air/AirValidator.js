@@ -129,11 +129,23 @@ Validator.prototype.pricingSolutionXML = function () {
 // convert all passenger birth dates from DDmmmYY into YYYY-MM-DD
 Validator.prototype.passengerBirthDates = function () {
   this.params.passengers.forEach((item) => {
-    const a = moment(item.birthDate, 'DDMMMYY');
+    const a = moment(item.birthDate.toUpperCase(), 'DDMMMYY');
 
     if (!a.isValid()) {
       throw new Error('Invalid birth date');
     }
+    const { passCountry: country,
+            passNumber: num,
+            birthDate: birth,
+            firstName: first,
+            lastName: last,
+            gender } = item;
+    const due = moment().add(10, 'month').format('DDMMMYY');
+
+    item.ssr = {
+      type: 'DOCS',
+      text: `P/${country}/${num}/${country}/${birth}/${gender}/${due}/${first}/${last}`,
+    };
     item.DOB = a.format('YYYY-MM-DD');
   });
 

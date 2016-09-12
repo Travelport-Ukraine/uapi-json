@@ -11,6 +11,28 @@ const firstFlightDetails = (obj) => (
       : {}
   );
 
+function getBaggage(trip, obj) {
+  let add = null;
+  if (obj['air:NumberOfPieces'] !== undefined) {
+    add = { units: 'piece', amount: obj['air:NumberOfPieces'] * 1 };
+  }
+  const weight = obj['air:MaxWeight'];
+  if (_.isObject(weight)) {
+    add = { units: weight.Unit.toLowerCase(), amount: weight.Value * 1 };
+  }
+
+  if (add === null) {
+    console.warn('Baggage information is not number and is not weight!', JSON.stringify(obj));
+    add = { units: 'pieces', amount: 0 };
+  }
+
+  if (trip.baggage === undefined || trip.baggage === null) {
+    return [add];
+  }
+
+  return trip.baggage.concat([add]);
+}
+
 function formatTrip(segment, list, fareInfo, flightDetails) {
   const trip = {
     from: segment.Origin,
@@ -20,12 +42,14 @@ function formatTrip(segment, list, fareInfo, flightDetails) {
     arrival: segment.ArrivalTime,
     airline: segment.Carrier, // FIXME
     flightNumber: segment.FlightNumber,
+    baggage: [],
     // departureTerminal
     // arrivalTerminal
     // MarketingCarrier, OperatingCarrier
     // MarriedToNextSegment
     // SegmentRef: segment['Key']
   };
+  trip.baggage = getBaggage(trip, fareInfo['air:BaggageAllowance']);
 
   // serviceClass: Economy, Business, etc.
   // NOTE: unavailable at airPriceRsp/AirItinerary because trips are
@@ -202,9 +226,8 @@ function formatLowFaresSearch(searchRequest, searchResult) {
           throw new Error('Code is not set for PassengerTypeCode item');
         }));
 
-
+        code = list[0];
         if (!list[0] || list.length !== 1) { // TODO throw error
-          code = list[0];
           console.log('Warning: different categories '
             + list.join() + ' in single fare calculation ' + key + ' in fare ' + fareKey);
         }
@@ -259,5 +282,6 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 module.exports = {
   formatLowFaresSearch,
   formatTrip,
+  getBaggage,
   getTripsFromBooking,
 };

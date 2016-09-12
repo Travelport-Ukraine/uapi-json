@@ -225,6 +225,12 @@ function parseReservation(fare, pricing) {
     // TODO check if pricing['PricingMethod'] == Guaranteed
   }
 
+  if (_.isObject(fare['air:FareInfo'])) {
+    reservation.baggage = _.map(fare['air:FareInfo'], info =>
+      format.getBaggage({}, info['air:BaggageAllowance'])
+    );
+  }
+
   return reservation;
 }
 
@@ -458,24 +464,20 @@ function extractBookings(obj) {
         booking['air:AirSegment']
       );
 
-      newBooking.trips = trips;
+      // recalculating baggage based on reservations
+      newBooking.trips = trips.map((trip, key) => {
+        trip.baggage = newBooking.reservations.map(reserv => reserv.baggage[key][0]);
+        return trip;
+      });
     });
 
     if (booking['air:DocumentInfo'] && booking['air:DocumentInfo']['air:TicketInfo']) {
-      if (_.isArray(booking['air:DocumentInfo']['air:TicketInfo'])) {
-        newBooking.tickets = booking['air:DocumentInfo']['air:TicketInfo'].map(ticket =>
-          ({
-            number: ticket.Number,
-            uapi_passenger_ref: ticket.BookingTravelerRef,
-          })
-        );
-      } else {
-        const ticket = booking['air:DocumentInfo']['air:TicketInfo'];
-        newBooking.tickets = [{
+      newBooking.tickets = booking['air:DocumentInfo']['air:TicketInfo'].map(ticket =>
+        ({
           number: ticket.Number,
           uapi_passenger_ref: ticket.BookingTravelerRef,
-        }];
-      }
+        })
+      );
     }
 
     bookings.push(newBooking);

@@ -137,6 +137,9 @@ describe('#AirParser', function () {
       assert(_.isArray(result.reservations), 'no reservations');
       assert(result.reservations.length);
       assert(_.isArray(result.trips), 'no trips');
+      result.trips.forEach(trip => {
+        assert(_.isArray(trip.baggage), 'No baggage in trips');
+      });
 
       result.reservations.forEach(reservation => {
         let status = 'Reserved';
@@ -167,7 +170,7 @@ describe('#AirParser', function () {
   }
 
   describe('AIR_CREATE_RESERVATION()', () => {
-    it('should test parsing of create reservation', () => {
+    it('should test parsing of create reservation 2ADT1CNN', () => {
       const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
       const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.2ADT1CNN.xml`).toString();
@@ -175,7 +178,37 @@ describe('#AirParser', function () {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult);
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
-    })
+    });
+
+    it('should test parsing of create reservation 1ADT', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.1ADT.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should test parsing of create reservation 1ADT (2)', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.1ADT.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should test parsing of create reservation 1ADT (3)', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.1ADT.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
   });
 
 
