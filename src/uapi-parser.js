@@ -37,6 +37,7 @@ function defaultConfig(ver) {
         'common_' + ver + ':SSR',
         'air:AirReservation',
         'air:PassengerType',
+        'air:TicketInfo',
         'common_' + ver + ':ResponseMessage',
         'air:BaggageAllowanceInfo',
         'air:CarryOnAllowanceInfo',
