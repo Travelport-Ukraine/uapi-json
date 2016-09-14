@@ -29,7 +29,7 @@ Validator.prototype.rooms = function () {
 };
 
 
-Validator.prototype.code = function() {
+Validator.prototype.code = function () {
   if (this.params.location) {
     return this;
   }
