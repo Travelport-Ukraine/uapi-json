@@ -13,7 +13,6 @@
                                 DepartureTime="{{departure}}"
                                 Carrier="{{airline}}"
                                 ClassOfService="{{bookingClass}}"
-                                CabinClass="{{serviceClass}}"
                                 Origin="{{from}}"
                                 Destination="{{to}}"
                                 ETicketability="Yes"

@@ -1,4 +1,4 @@
-const uAPI = require('../../index');
+const uAPI = require('../../src');
 const config = require('../../test/testconfig');
 const moment = require('moment');
 
@@ -11,7 +11,8 @@ const HotelService = uAPI.createHotelService(
 );
 
 HotelService.search({
-  location: 'LON',
+  code: 'RUAACL',
+  // location: 'IEV', use for IATA codes search
   startDate: moment().add(30, 'days').format('YYYY-MM-DD'),
   endDate: moment().add(35, 'days').format('YYYY-MM-DD'),
   currency: 'USD',
