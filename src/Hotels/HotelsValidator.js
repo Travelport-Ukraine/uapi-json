@@ -28,7 +28,21 @@ Validator.prototype.rooms = function () {
   return this;
 };
 
+
+Validator.prototype.code = function() {
+  if (this.params.location) {
+    return this;
+  }
+  if (this.params.code === undefined || this.params.code.length > 6) {
+    throw new UError('VALIDATION_LOCATION', this.params);
+  }
+  return this;
+};
+
 Validator.prototype.location = function () {
+  if (this.params.code) {
+    return this;
+  }
   if (this.params.location === undefined || this.params.location.length > 3) {
     throw new UError('VALIDATION_LOCATION', this.params);
   }
@@ -198,6 +212,7 @@ Validator.prototype.hostToken = function () {
 module.exports = {
   HOTELS_SEARCH_REQUEST(params) {
     return new Validator(params)
+            .code()
             .location()
             .startDate()
             .endDate()
