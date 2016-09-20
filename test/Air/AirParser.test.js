@@ -209,7 +209,6 @@ describe('#AirParser', function () {
         testBooking(jsonResult);
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
-  });
 
     it('should test parsing of reservation with segment failure', () => {
       const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
