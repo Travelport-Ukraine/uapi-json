@@ -223,6 +223,27 @@ describe('#AirParser', function () {
     });
   });
 
+  describe('AIR_TICKET_REQUEST', () => {
+    it('should test parsing ticketing response', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v33_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(jsonResult, true, 'Ticketing is not true');
+      });
+    });
+
+    it('should test parsing ticketing response', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v33_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing.2.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(jsonResult, true, 'Ticketing is not true');
+      });
+    });
+  });
 
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
     it('should test parsing of universal record import request', () => {

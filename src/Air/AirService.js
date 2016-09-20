@@ -32,5 +32,15 @@ module.exports = (settings) => {
       const AirService = airServiceInternal(auth, debug, production);
       return AirService.importPNR(options);
     },
+
+    ticket(options) {
+      const AirService = airServiceInternal(auth, debug, production);
+      return AirService.importPNR(options).then(data => {
+        const ticketParams = Object.assign({}, options, {
+          ReservationLocator: data[0].uapi_pnr_locator,
+        });
+        return AirService.ticket(ticketParams);
+      });
+    },
   };
 };

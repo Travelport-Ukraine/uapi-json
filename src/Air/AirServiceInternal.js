@@ -76,10 +76,11 @@ module.exports = function (auth, debug, production) {
             config(auth.region, production).AirService.url,
             auth,
             requests.AirService.AIR_TICKET_REQUEST,
-            'air:AirTickerRsp',
+            'air:AirTicketingRsp',
             AirValidator.AIR_REQUEST_BY_PNR, // checks for PNR
-            null,
-            AirParser.AIR_TICKET_REQUEST
+            AirParser.AIR_ERRORS,
+            AirParser.AIR_TICKET_REQUEST,
+            debug
         ),
 
     importPNR: uApiRequest(

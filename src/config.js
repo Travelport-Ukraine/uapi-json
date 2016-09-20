@@ -1,10 +1,6 @@
-function urls(region, production) {
-  let prefix = '';
-  let timeout = 200000;
-  if (!production) {
-    prefix = 'pp.';
-    timeout = 100000;
-  }
+function urls(region, production = true) {
+  const prefix = production ? '' : 'pp.';
+  const timeout = production ? 100000 : 200000;
   return {
     timeout,
     HotelsService: {
