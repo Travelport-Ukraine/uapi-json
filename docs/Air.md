@@ -13,13 +13,15 @@ The Air workflow allows you to do what most travel agents did in the past and wh
     * .book(params) ⇒ <code>Promise</code>
     * .ticket(params) ⇒ <code>Promise</code>
     * .void(params) ⇒ <code>Promise</code>
-    
+    * .toQueue(params) ⇒ <code>Promise</code>
+    * .importPNR(params) ⇒ <code>Promise</code>
+
 <a name="shop"></a>
 ### .shop(params)
 Low Fare Shop functionality combines air availability and a fare quote request to return the lowest available fares for a specified itinerary, using origin/destination and date information. Fares are available for one-way, round-trip, and multi-city travel. Low Fare Shop does not require a booked itinerary to return fare data.
 
-**Returns**: <code>Promise</code>   
-**See**: [Low Fare Shopping Model](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Air_Models/Low_Fare_Shopping_Model.htm%3FTocPath%3DAir%7CAir%2520Shopping%2520and%2520Booking%7CLow%2520Fare%2520Shopping%7C_____1)   
+**Returns**: <code>Promise</code>
+**See**: [Low Fare Shopping Model](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Air_Models/Low_Fare_Shopping_Model.htm%3FTocPath%3DAir%7CAir%2520Shopping%2520and%2520Booking%7CLow%2520Fare%2520Shopping%7C_____1)
 
 
 | Param | Type | Description |
@@ -55,50 +57,4 @@ Each leg represents one part of the journey. For example, a typical roundtrip IE
 The cabins array lists requested cabin types, currently `Economy` or `Business` or both.
 
 
-###Examples
-
-#### Shop example
-Search an open-jaw flight LWO-JKT, JKT-IEV with one adult passenger.
-```JavaScript
-var uAPI_lib = require('uapi-json');
-var auth = {
-    username: process.env.USERNAME,
-    password: process.env.PASSWORD,
-    targetBranch: process.env.BRANCH,
-    pcc: process.env.PCC
-};
-
-var AirService = uAPI_lib.createAirService(auth, 0, process.env.NODE_ENV == 'production');
-
-var params = {
-    legs: [
-        {
-            from: "LWO",
-            to: "JKT",
-            departureDate: "2016-07-18"
-        },
-        {
-            from: "JKT",
-            to: "IEV",
-            departureDate: "2016-07-21"
-        }
-    ],
-    passengers: {
-      ADT: 1
-      /*
-      CNN:1,
-      INF: 1,
-      INS: 1, //infant with a seat
-      */
-    },
-    cabins: ['Economy'], //['Business'],
-    requestId: "4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60"
-};
-
-AirService.shop(params)
-    .then(function(data){
-        console.log(JSON.stringify(data, null, 2));
-    }, function(err){
-        console.log(JSON.stringify(err));
-    });
-```
+**See: <a url="../examples/Air/shop.js">Shop example</a>**
