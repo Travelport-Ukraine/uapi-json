@@ -29,8 +29,8 @@ var HotelService = uAPI.createHotelService(auth, 0, true);
 ### .search(params)
 Synchronous Hotel Search returns a list of available hotel property offers that meet the requested search criteria. The Hotel Search is the first transaction in the workflow for Hotel Shopping and Booking.
 
-**Returns**: <code>Promise</code>   
-**See**: [Synchronous Hotel Search](https://support.travelport.com/webhelp/uapi/uAPI.htm#Hotel/Hotel_TRM/TRM_Synchronous_Hotel_Search_15-4.htm%3FTocPath%3DHotel%7CTravelport%2520Rooms%2520and%2520More%2520via%2520Universal%2520API%7CTravelport%2520Rooms%2520and%2520More%2520Workflow%7CHotel%2520Search%7CSynchronous%2520Hotel%2520Search%7C_____2)   
+**Returns**: <code>Promise</code>
+**See**: [Synchronous Hotel Search](https://support.travelport.com/webhelp/uapi/uAPI.htm#Hotel/Hotel_TRM/TRM_Synchronous_Hotel_Search_15-4.htm%3FTocPath%3DHotel%7CTravelport%2520Rooms%2520and%2520More%2520via%2520Universal%2520API%7CTravelport%2520Rooms%2520and%2520More%2520Workflow%7CHotel%2520Search%7CSynchronous%2520Hotel%2520Search%7C_____2)
 
 
 | Param | Type | Description |
@@ -42,7 +42,7 @@ Synchronous Hotel Search returns a list of available hotel property offers that 
 | _[MaxWait]_ | <code>Number</code> | Max wait for results. |
 | _[MaxProperties]_ | <code>Number></code> | Max properties to return. |
 | _[currency]_ | <code>String></code> | Preferred currecny. |
-| _[rating]_ | <code>Array</code> | Array of ratings needed to search. Ex `[3, 4, 5]` for 3,4,5-star hotels. |  
+| _[rating]_ | <code>Array</code> | Array of ratings needed to search. Ex `[3, 4, 5]` for 3,4,5-star hotels. |
 
 #### Room object
 One element in `rooms` array = 1 room to search.
@@ -53,27 +53,14 @@ Each room contains next object:
 | adults | <code>Number</code> | Number of adults. |
 | children | <code>Array\<Number\></code> | Each element === one child. Number - child age. Ex. `[10, 12]` means two children 10 and 12 years old.|
 
-#### Example 
-```JavaScript
-HotelService.search({
-    location : 'LON',
-    startDate: '2016-09-15',
-    endDate:  '2016-09-20',
-    rooms: [{
-        adults: 1,
-        // children: [10],
-    }],
-    rating: [4, 5]
-}).then(results => console.log(results));
-
-```
+**See: <a href="../examples/Hotels/search">Search example</a>**
 
 <a name="rates"></a>
 ### .rates(params)
 A Hotel Rate and Rule Search, also known as a Complete Hotel Availability, returns room rates and rate rules for a specified hotel property offer. After the user/traveler has selected a property from the Hotel Search response, a more detailed search for rates for the property and stay can be made.
 
-**Returns**: <code>Promise</code>   
-**See**: [Stand-Alone Hotel Rate and Rule Search](https://support.travelport.com/webhelp/uapi/uAPI.htm#Hotel/Hotel_TRM/TRM_StandAlone_HotelRateAndRuleSearch.htm%3FTocPath%3DHotel%7CTravelport%2520Rooms%2520and%2520More%2520via%2520Universal%2520API%7CTravelport%2520Rooms%2520and%2520More%2520Workflow%7CHotel%2520Rate%2520and%2520Rule%2520Search%7C_____2)   
+**Returns**: <code>Promise</code>
+**See**: [Stand-Alone Hotel Rate and Rule Search](https://support.travelport.com/webhelp/uapi/uAPI.htm#Hotel/Hotel_TRM/TRM_StandAlone_HotelRateAndRuleSearch.htm%3FTocPath%3DHotel%7CTravelport%2520Rooms%2520and%2520More%2520via%2520Universal%2520API%7CTravelport%2520Rooms%2520and%2520More%2520Workflow%7CHotel%2520Rate%2520and%2520Rule%2520Search%7C_____2)
 
 
 | Param | Type | Description |
@@ -87,28 +74,14 @@ A Hotel Rate and Rule Search, also known as a Complete Hotel Availability, retur
 | _[HostToken]_ | <code>String</code> | HostToken for non-standalone request. |
 | _[currency]_ | <code>String</code> | Preferred currency. |
 
-#### Example 
-```JavaScript
-HotelService.rate({
-    HotelChain: '00',
-    HotelCode: 'GBLON@_003033',
-    startDate: '2016-09-15'
-    endDate:  '2016-09-20',
-    rooms: [{
-        adults: 1,
-        // children: [10],
-    }],
-    Suppliers: ['AG']
-}).then(results => console.log(results));
-
-```
+**See: <a href="../examples/Hotels/rate">Rates example</a>**
 
 <a name="book"></a>
 ### .book(params)
 After a hotel property and rate is selected in the Hotel Rate and Rule Search response, the hotel segment can be reserved.
 
-**Returns**: <code>Promise</code>   
-**See**: [Creating Hotel Bookings](https://support.travelport.com/webhelp/uapi/uAPI.htm#Hotel/Hotel_TRM/TRM_Create_Booking.htm%3FTocPath%3DHotel%7CTravelport%2520Rooms%2520and%2520More%2520via%2520Universal%2520API%7CTravelport%2520Rooms%2520and%2520More%2520Workflow%7CHotel%2520Booking%7CCreating%2520Bookings%7C_____1)   
+**Returns**: <code>Promise</code>
+**See**: [Creating Hotel Bookings](https://support.travelport.com/webhelp/uapi/uAPI.htm#Hotel/Hotel_TRM/TRM_Create_Booking.htm%3FTocPath%3DHotel%7CTravelport%2520Rooms%2520and%2520More%2520via%2520Universal%2520API%7CTravelport%2520Rooms%2520and%2520More%2520Workflow%7CHotel%2520Booking%7CCreating%2520Bookings%7C_____1)
 
 
 | Param | Type | Description |
@@ -168,18 +141,18 @@ Has next shape:
 
 | Param | Type |
 | --- | --- | --- |
-| RatePlanType | <code>String</code> 
+| RatePlanType | <code>String</code>
 | RateSupplier | <code>String</code>
-| RateOfferId | <code>String</code> 
-| Total | <code>String</code> 
-| Base | <code>String</code> 
+| RateOfferId | <code>String</code>
+| Total | <code>String</code>
+| Base | <code>String</code>
 | Surcharge | <code>String</code>
-| Tax | <code>String</code> 
+| Tax | <code>String</code>
 
 
 <a name="refs"></a>
 #### RoomRef object
-Each object represents one room and people from `people` array, that are linked to this room. 
+Each object represents one room and people from `people` array, that are linked to this room.
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -187,78 +160,20 @@ Each object represents one room and people from `people` array, that are linked 
 | adultsRefs | <code>Array<key></code>| Keys from `people` array. |
 | children | <code>Object{age, key}</code> | Object with age and key of children.  |
 
-#### Example
-```JavaScript
-// HotelService creation example
-HotelService.book({
-    people: [{
-        key: 1,
-        TravelerType: "ADT",
-        FirstName: "Luke",
-        LastName: "Skywalker",
-        PrefixName: "MR",
-        Nationality: "US",
-        BirthDate: "2080-05-11",
-        AreaCode: "000",
-        CountryCode: "15",
-        Number: "1231231",
-        Email: "luck.skywalker@jedi.com",
-        Country: "US",
-        City: "Far Away city",
-        Street: "Far away strt 16",
-        PostalCode: 00111
-    }],
-    Guarantee: {
-        CVV: "111",
-        ExpDate: "2100-12",
-        CardHolder: "LUKE SKYWALKER",
-        CardNumber: "4111111111111111",
-        CardType: "VI",
-        BankName: "GBC",
-        BankCountryCode: "US",
-    },
-    rates: [{
-        RatePlanType: 'Some rate plan type',
-        RateSupplier: 'Some rate supplier',
-        RateOfferId: 'Some rate offer id',
-        Total: '100.0EUR',
-        Base: '90.0EUR',
-        Surcharge: '0EUR',
-        Tax: '10.0EUR',
-    }],
-
-    HotelCode: 'GBLON@_003033',
-    HotelChain: '00',
-    startDate: '2016-09-15',
-    endDate: '2016-09-20',
-    roomsRefs: [{
-        adults: 1,
-        adultsRefs: [1],
-    }],
-    HostToken: 'Some host token string',
-    
-}).then(console.log);
-
-```
+**See: <a href="../examples/Hotels/book">Book example</a>**
 
 <a name="cancel"></a>
 ### .cancelBook(params)
 Currently, cancellation is supported only for single room hotel reservations.
 Hotel cancellation via Universal API or the Travelport Rooms and More web site is not supported for multiple rooms in this release. The aggregator must be contacted directly to cancel or modify a multiple room booking.
 
-**Returns**: <code>Promise</code>   
+**Returns**: <code>Promise</code>
 **See**: [Canceling Hotel Bookings](https://support.travelport.com/webhelp/uapi/uAPI.htm#Hotel/Hotel_TRM/TRM%20Hotel%20Cancel.htm#MultiRoom)
-   
+
 | Param | Type | Description |
 | --- | --- | --- |
 | LocatorCode | <code>String</code> | Locator code from **book** resonse. |
 
 #### Example
 
-#### Example 
-```JavaScript
-HotelService.cancelBook({
-    LocatorCode: 'QWE123',
-}).then(results => console.log(results));
-
-```
+**See: <a href="../examples/Hotels/cancel">Cancel example</a>**

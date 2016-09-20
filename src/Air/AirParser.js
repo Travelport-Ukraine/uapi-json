@@ -61,17 +61,11 @@ function lowFaresSearchRequest(obj) {
 
 
 const ticketParse = (obj) => {
-  if (!obj['air:AirTicketingRsp']) {
-    throw new UError('PARSING_AIR_TICKET_NO_REPLY', obj);
-  }
-
-  const rsp = obj['air:AirTicketingRsp']['0'];
-
   let checkResponseMessage = false;
   let checkTickets = false;
 
-  if (obj['air:AirTicketingRsp']['0']['common_v33_0:ResponseMessage']) {
-    const responseMessage = obj['air:AirTicketingRsp']['0']['common_v33_0:ResponseMessage'];
+  if (obj['common_v33_0:ResponseMessage']) {
+    const responseMessage = obj['common_v33_0:ResponseMessage'];
     responseMessage.forEach(msg => {
       if (msg._ === 'OK:Ticket issued') {
         checkResponseMessage = true;
@@ -83,14 +77,15 @@ const ticketParse = (obj) => {
     throw new UError('PARSING_AIR_TICKET_NO_RESPONSE_MESSAGE', obj);
   }
 
-  if (rsp['air:ETR']) {
+  if (obj['air:ETR']) {
     try {
-      checkTickets = rsp['air:ETR'].reduce((acc, x) => {
-        const ticketNumber = x['air:Ticket'][0].$.TicketNumber;
-        return !!(acc && ticketNumber.length);
+      checkTickets = _.reduce(obj['air:ETR'], (acc, x) => {
+        const tickets = _.reduce(x['air:Ticket'], (acc2, t) => !!(acc2 && t.TicketNumber), true);
+        return !!(acc && tickets);
       }, true);
     } catch (e) {
-      throw new UError('PARSING_AIR_TICKET_NO_TICKETS', rsp);
+      console.log(e);
+      throw new UError('PARSING_AIR_TICKET_NO_TICKETS', obj);
     }
   }
 
@@ -393,6 +388,10 @@ function extractBookings(obj) {
 
   if (!record['air:AirReservation'] || record['air:AirReservation'].length === 0) {
     throw new UError('PARSING_NO_BOOKINGS_ERROR');
+  }
+
+  if (obj['air:AirSegmentSellFailureInfo']) {
+    throw new UError('AIR_SEGMENT_FAILURE', obj);
   }
 
   const bookings = [];

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AirTicketingRsp xmlns:air="http://www.travelport.com/schema/air_v33_0" xmlns:common_v33_0="http://www.travelport.com/schema/common_v33_0" TransactionId="420A001C0A074263C19D8A7C13169424" ResponseTime="3051">
+            <common_v33_0:ResponseMessage Code="0" Type="Info" ProviderCode="1G">PNR SP31BW Fare 1 - ELECTRONIC TKT GENERATED TTL FARE  UAH      5743 SUPPORTING DOCUMENTS GENERATED MIR GENERATED - TTL FARE  UAH      5743 ------------------------------------- ITINERARY/INVOICE GENERATED</common_v33_0:ResponseMessage>
+            <common_v33_0:ResponseMessage Code="0" Type="Info" ProviderCode="1G">OK:Ticket issued</common_v33_0:ResponseMessage>
+            <air:ETR Key="69nuEDwIQqe1Gw36Xw/0og==" TotalPrice="UAH5743" BasePrice="USD129.00" Taxes="UAH2376" EquivalentBasePrice="UAH3367" Refundable="false" Exchangeable="false" IssuedDate="2016-09-19T00:00:00.000+03:00" ProviderCode="1G" ProviderLocatorCode="SP31BW" IATANumber="72324464" PseudoCityCode="3AQ0" PlatingCarrier="KL" ElStat="A">
+                <air:AirReservationLocatorCode>2KVH2Z</air:AirReservationLocatorCode>
+                <common_v33_0:AgencyInfo>
+                    <common_v33_0:AgentAction ActionType="Created" AgentCode="UAPI4466145968-D6034EC2" BranchCode="P2660493" AgencyCode="S1828245" EventTime="2016-09-19T00:00:00.000+03:00"/>
+                </common_v33_0:AgencyInfo>
+                <common_v33_0:BookingTraveler Key="gzSSUWBoSOKVnhJpIwfI6g==">
+                    <common_v33_0:BookingTravelerName First="MARKMR" Last="OREL"/>
+                    <common_v33_0:SSR Key="NIAsZRUyRYWwBwQREhqP6w==" Status="HK" Type="DOCS" FreeText="P/UA/OC722084/UA/18APR94/M/19SEP21/OREL/MARK -1OREL/MARKMR" Carrier="KL" ProviderReservationInfoRef="1DVfgrzMQ7iDU8IKX0aZxg=="/>
+                    <common_v33_0:SSR Key="Z1ekRbaqSvee+AsaMw6vtQ==" SegmentRef="E609OEt2T3+OWj/nQiBxzA==" Status="HK" Type="TKNE" FreeText="0745460246213C1" Carrier="KL" ProviderReservationInfoRef="1DVfgrzMQ7iDU8IKX0aZxg==" ElStat="A"/>
+                    <common_v33_0:SSR Key="9GrKnCk5TrmLMasjLyCMDg==" SegmentRef="yf3oKq+SQRasNIoOV3B5uQ==" Status="HK" Type="TKNE" FreeText="0745460246213C2" Carrier="KL" ProviderReservationInfoRef="1DVfgrzMQ7iDU8IKX0aZxg==" ElStat="A"/>
+                    <common_v33_0:SSR Key="/m1m+EyHS7WIU6X3QsCHCQ==" SegmentRef="lcdvcybkQ+mK4a0vKbaclg==" Status="HK" Type="TKNE" FreeText="0745460246213C3" Carrier="KL" ProviderReservationInfoRef="1DVfgrzMQ7iDU8IKX0aZxg==" ElStat="A"/>
+                    <common_v33_0:SSR Key="arVeGKTrTZKuQtjFkY8c2A==" SegmentRef="WzS27KwHShGZfEUazFYzig==" Status="HK" Type="TKNE" FreeText="0745460246213C4" Carrier="KL" ProviderReservationInfoRef="1DVfgrzMQ7iDU8IKX0aZxg==" ElStat="A"/>
+                </common_v33_0:BookingTraveler>
+                <common_v33_0:FormOfPayment Key="S+4VbPvnTJeMW7wz/69/PA==" Type="Cash" Reusable="false" ProfileKey="yB+g5ZGvQt2ktMTsfsOgZw=="/>
+                <common_v33_0:Payment Key="bqDNj2zcS3CA06ULt909uA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="S+4VbPvnTJeMW7wz/69/PA=="/>
+                <common_v33_0:SupplierLocator SupplierCode="KL" SupplierLocatorCode="4JDM9I"/>
+                <air:FareCalc>IEV KL X/AMS KL PAR 64.50KL X/AMS KL IEV 64.50 NUC129.00END ROE1.0 XT 444YK346CJ340RN609FR133IZ346QX</air:FareCalc>
+                <air:Ticket Key="0VTBK8ujStumGZ/Dmb08Rg==" TicketNumber="0745460246213" TicketStatus="N" ElStat="A">
+                    <air:Coupon Key="nXHovg9wRde73LBlOqsJ+Q==" CouponNumber="1" MarketingCarrier="KL" MarketingFlightNumber="1386" Origin="KBP" Destination="AMS" DepartureTime="2016-12-24T14:00:00.000+02:00" StopoverCode="true" BookingClass="X" FareBasis="XSRUA" NotValidBefore="2016-12-24" NotValidAfter="2016-12-24" Status="O" SegmentGroup="0" MarriageGroup="1" ElStat="A"/>
+                    <air:Coupon Key="XvWAIfOCTKyWqBdK9nI2pQ==" CouponNumber="2" MarketingCarrier="KL" MarketingFlightNumber="1227" Origin="AMS" Destination="CDG" DepartureTime="2016-12-25T07:30:00.000+01:00" StopoverCode="false" BookingClass="X" FareBasis="XSRUA" NotValidBefore="2016-12-25" NotValidAfter="2016-12-25" Status="O" SegmentGroup="1" MarriageGroup="1" ElStat="A"/>
+                    <air:Coupon Key="lxibncnIRdiymWEZZ02K3w==" CouponNumber="3" MarketingCarrier="KL" MarketingFlightNumber="2016" Origin="CDG" Destination="AMS" DepartureTime="2016-12-27T16:50:00.000+01:00" StopoverCode="true" BookingClass="X" FareBasis="XSRUA" NotValidBefore="2016-12-27" NotValidAfter="2016-12-27" Status="O" SegmentGroup="2" MarriageGroup="2" ElStat="A"/>
+                    <air:Coupon Key="56KYwRqQQYmFcvssJ8NpsQ==" CouponNumber="4" MarketingCarrier="KL" MarketingFlightNumber="1387" Origin="AMS" Destination="KBP" DepartureTime="2016-12-27T20:35:00.000+01:00" StopoverCode="false" BookingClass="X" FareBasis="XSRUA" NotValidBefore="2016-12-27" NotValidAfter="2016-12-27" Status="O" SegmentGroup="2" MarriageGroup="2" ElStat="A"/>
+                </air:Ticket>
+                <common_v33_0:Commission Key="zpOLhJvDSS2n2ZFi3fDTSg==" Level="Fare" Type="PercentBase" Percentage="1.0"/>
+                <air:AirPricingInfo Key="QKkaxGNKSQGS2tFzvRmUOQ==" TotalPrice="UAH5743" BasePrice="USD129.00" ApproximateTotalPrice="UAH5743" ApproximateBasePrice="UAH3367" EquivalentBasePrice="UAH3367" Taxes="UAH2376" LatestTicketingTime="2016-09-22T23:59:00.000+03:00" TrueLastDateToTicket="2016-09-22T23:59:00.000+03:00" PricingMethod="Guaranteed" ETicketability="Yes" ProviderReservationInfoRef="1DVfgrzMQ7iDU8IKX0aZxg==" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="G">
+                    <air:FareInfo Key="lpz3hfeiTZSdCL1GK93Gyg==" FareBasis="XSRUA" PassengerTypeCode="ADT" Origin="KBP" Destination="AMS" EffectiveDate="2016-09-19T00:00:00.000+03:00" NotValidBefore="2016-12-24" NotValidAfter="2016-12-24">
+                        <air:ContractCode Code="UABA" ProviderCode="1G"/>
+                        <common_v33_0:Endorsement Value="NONENDO/NONREF"/>
+                        <air:BaggageAllowance>
+                            <air:NumberOfPieces>0</air:NumberOfPieces>
+                        </air:BaggageAllowance>
+                    </air:FareInfo>
+                    <air:FareInfo Key="P5qdKJLsRnq8PKj7pH2xcQ==" FareBasis="XSRUA" PassengerTypeCode="ADT" Origin="AMS" Destination="CDG" EffectiveDate="2016-09-19T00:00:00.000+03:00" NotValidBefore="2016-12-25" NotValidAfter="2016-12-25">
+                        <air:ContractCode Code="UABA" ProviderCode="1G"/>
+                        <common_v33_0:Endorsement Value="NONENDO/NONREF"/>
+                        <air:BaggageAllowance>
+                            <air:NumberOfPieces>0</air:NumberOfPieces>
+                        </air:BaggageAllowance>
+                    </air:FareInfo>
+                    <air:FareInfo Key="P/wglW8wT2GvAKLKt+76rA==" FareBasis="XSRUA" PassengerTypeCode="ADT" Origin="CDG" Destination="AMS" EffectiveDate="2016-09-19T00:00:00.000+03:00" NotValidBefore="2016-12-27" NotValidAfter="2016-12-27">
+                        <air:ContractCode Code="UABA" ProviderCode="1G"/>
+                        <common_v33_0:Endorsement Value="NONENDO/NONREF"/>
+                        <air:BaggageAllowance>
+                            <air:NumberOfPieces>0</air:NumberOfPieces>
+                        </air:BaggageAllowance>
+                    </air:FareInfo>
+                    <air:FareInfo Key="rpFCqqsARBaJgEViO9PKhg==" FareBasis="XSRUA" PassengerTypeCode="ADT" Origin="AMS" Destination="KBP" EffectiveDate="2016-09-19T00:00:00.000+03:00" NotValidBefore="2016-12-27" NotValidAfter="2016-12-27">
+                        <air:ContractCode Code="UABA" ProviderCode="1G"/>
+                        <common_v33_0:Endorsement Value="NONENDO/NONREF"/>
+                        <air:BaggageAllowance>
+                            <air:NumberOfPieces>0</air:NumberOfPieces>
+                        </air:BaggageAllowance>
+                    </air:FareInfo>
+                    <air:BookingInfo BookingCode="X" CabinClass="Economy" FareInfoRef="lpz3hfeiTZSdCL1GK93Gyg=="/>
+                    <air:BookingInfo BookingCode="X" CabinClass="Economy" FareInfoRef="P5qdKJLsRnq8PKj7pH2xcQ=="/>
+                    <air:BookingInfo BookingCode="X" CabinClass="Economy" FareInfoRef="P/wglW8wT2GvAKLKt+76rA=="/>
+                    <air:BookingInfo BookingCode="X" CabinClass="Economy" FareInfoRef="rpFCqqsARBaJgEViO9PKhg=="/>
+                    <air:TaxInfo Category="UA" Amount="UAH105" Key="23YKu0ZyQqCWXVCVX2SiZA=="/>
+                    <air:TaxInfo Category="UD" Amount="UAH53" Key="k5FFteyKToqMC7eh4fLAvA=="/>
+                    <air:TaxInfo Category="YK" Amount="UAH444" Key="D58OD/1CRPyb+IFgXNANyQ=="/>
+                    <air:TaxInfo Category="CJ" Amount="UAH346" Key="NPMtr9cJSvKBVtlF1oJHHw=="/>
+                    <air:TaxInfo Category="RN" Amount="UAH340" Key="c5A0yM55THyGZH/RitHesg=="/>
+                    <air:TaxInfo Category="FR" Amount="UAH609" Key="iigDUKRmRimGDMrTXngqsw=="/>
+                    <air:TaxInfo Category="IZ" Amount="UAH133" Key="aKCngDdbQ32VJ+BQtoC6UA=="/>
+                    <air:TaxInfo Category="QX" Amount="UAH346" Key="GlXx/qwWS3uM4kzMXdxL0w=="/>
+                    <air:FareCalc>IEV KL X/AMS KL PAR 64.50XSRUA KL X/AMS KL IEV 64.50XSRUA NUC129.00END ROE1.0</air:FareCalc>
+                    <air:PassengerType Code="ADT" BookingTravelerRef="gzSSUWBoSOKVnhJpIwfI6g==">
+                        <air:FareGuaranteeInfo GuaranteeType="Guaranteed"/>
+                    </air:PassengerType>
+                    <common_v33_0:BookingTravelerRef Key="gzSSUWBoSOKVnhJpIwfI6g=="/>
+                    <air:ChangePenalty>
+                        <air:Amount>USD0.00</air:Amount>
+                    </air:ChangePenalty>
+                    <air:CancelPenalty>
+                        <air:Amount>USD0.00</air:Amount>
+                    </air:CancelPenalty>
+                </air:AirPricingInfo>
+                <air:BaggageAllowances>
+                    <air:BaggageAllowanceInfo TravelerType="ADT" Origin="IEV" Destination="PAR" Carrier="KL">
+                        <air:URLInfo>
+                            <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSKL.BAGG</air:URL>
+                        </air:URLInfo>
+                        <air:TextInfo>
+                            <air:Text>0P</air:Text>
+                            <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                        </air:TextInfo>
+                        <air:BagDetails ApplicableBags="1stChecked" BasePrice="UAH1026" ApproximateBasePrice="UAH1026" TotalPrice="UAH1026" ApproximateTotalPrice="UAH1026">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:BagDetails>
+                        <air:BagDetails ApplicableBags="2ndChecked" BasePrice="UAH2052" ApproximateBasePrice="UAH2052" TotalPrice="UAH2052" ApproximateTotalPrice="UAH2052">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:BagDetails>
+                    </air:BaggageAllowanceInfo>
+                    <air:BaggageAllowanceInfo TravelerType="ADT" Origin="PAR" Destination="IEV" Carrier="KL">
+                        <air:URLInfo>
+                            <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSKL.BAGG</air:URL>
+                        </air:URLInfo>
+                        <air:TextInfo>
+                            <air:Text>0P</air:Text>
+                            <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                        </air:TextInfo>
+                        <air:BagDetails ApplicableBags="1stChecked" BasePrice="EUR35.00" TotalPrice="EUR35.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:BagDetails>
+                        <air:BagDetails ApplicableBags="2ndChecked" BasePrice="EUR70.00" TotalPrice="EUR70.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:BagDetails>
+                    </air:BaggageAllowanceInfo>
+                    <air:CarryOnAllowanceInfo Origin="IEV" Destination="AMS" Carrier="KL">
+                        <air:TextInfo>
+                            <air:Text>1P</air:Text>
+                        </air:TextInfo>
+                        <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="UAH0" TotalPrice="UAH0">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:CarryOnDetails>
+                    </air:CarryOnAllowanceInfo>
+                    <air:CarryOnAllowanceInfo Origin="AMS" Destination="PAR" Carrier="KL">
+                        <air:TextInfo>
+                            <air:Text>1P</air:Text>
+                        </air:TextInfo>
+                        <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" TotalPrice="EUR0.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:CarryOnDetails>
+                    </air:CarryOnAllowanceInfo>
+                    <air:CarryOnAllowanceInfo Origin="PAR" Destination="AMS" Carrier="AF">
+                        <air:TextInfo>
+                            <air:Text>1P</air:Text>
+                        </air:TextInfo>
+                        <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" TotalPrice="EUR0.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:CarryOnDetails>
+                    </air:CarryOnAllowanceInfo>
+                    <air:CarryOnAllowanceInfo Origin="AMS" Destination="IEV" Carrier="KL">
+                        <air:TextInfo>
+                            <air:Text>1P</air:Text>
+                        </air:TextInfo>
+                        <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" TotalPrice="EUR0.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:CarryOnDetails>
+                    </air:CarryOnAllowanceInfo>
+                </air:BaggageAllowances>
+            </air:ETR>
+        </air:AirTicketingRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

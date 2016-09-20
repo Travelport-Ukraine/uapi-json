@@ -209,9 +209,41 @@ describe('#AirParser', function () {
         testBooking(jsonResult);
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
+
+    it('should test parsing of reservation with segment failure', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.SegmentFailure.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(false, 'There should be error');
+      }).catch(err => {
+        assert(err, 'No error returner');
+      });
+    });
   });
 
+  describe('AIR_TICKET_REQUEST', () => {
+    it('should test parsing ticketing response', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v33_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(jsonResult, true, 'Ticketing is not true');
+      });
+    });
 
+    it('should test parsing ticketing response', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v33_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing.2.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(jsonResult, true, 'Ticketing is not true');
+      });
+    });
+  });
 
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
     it('should test parsing of universal record import request', () => {

@@ -13,20 +13,26 @@ const AirService = uAPI.createAirService(
 const params = {
   legs: [
     {
-      from: 'IEV',
-      to: 'PAR',
-      departureDate: '2016-11-10',
+      from: 'LWO',
+      to: 'JKT',
+      departureDate: '2016-07-18'
     },
     {
-      from: 'PAR',
+      from: 'JKT',
       to: 'IEV',
-      departureDate: '2016-11-20',
+      departureDate: '2016-07-21',
     },
   ],
   passengers: {
     ADT: 1,
+    /*
+     CNN:1,
+     INF: 1,
+     INS: 1, //infant with a seat
+     */
   },
-  requestId: 'test-request',
+  cabins: ['Economy'], // ['Business'],
+  requestId: '4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60',
 };
 
 AirService.shop(params)
