@@ -395,6 +395,10 @@ function extractBookings(obj) {
     throw new UError('PARSING_NO_BOOKINGS_ERROR');
   }
 
+  if (obj['air:AirSegmentSellFailureInfo']) {
+    throw new UError('AIR_SEGMENT_FAILURE', obj);
+  }
+
   const bookings = [];
   // var uapi_locators = _.pluck(record['air:AirReservation'], 'LocatorCode');
 

@@ -211,6 +211,18 @@ describe('#AirParser', function () {
     });
   });
 
+    it('should test parsing of reservation with segment failure', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.SegmentFailure.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(false, 'There should be error');
+      }).catch(err => {
+        assert(err, 'No error returner');
+      });
+    });
+  });
 
 
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
