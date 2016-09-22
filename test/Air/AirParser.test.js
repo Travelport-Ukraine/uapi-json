@@ -130,6 +130,7 @@ describe('#AirParser', function () {
     assert(_.isArray(jsonResult), 'result not array');
     jsonResult.forEach(result => {
       assert(result.bookingPCC, 'no booking pcc');
+      assert(result.platingCarrier, 'no PC');
       assert(_.isArray(result.passengers), 'passengers is not array');
       assert(result.passengers.length);
       assert(result.pnr, 'no pnr');
