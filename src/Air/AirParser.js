@@ -17,6 +17,19 @@ const groupSegmentsByLegs = (segments) => {
   return result;
 };
 
+const getPlatingCarrier = (booking) => {
+  let platingCarriers = _.pluck(booking['air:AirPricingInfo'], 'PlatingCarrier').filter(pc => pc);
+
+  if (platingCarriers.length === 0) {
+    // FIXME: use a smart collapse algorithm?
+    platingCarriers = _.pluck(booking['air:TicketingModifiers'], 'PlatingCarrier');
+  }
+
+  const singlePlatingCarrier = _.uniq(platingCarriers);
+
+  return singlePlatingCarrier[0];
+};
+
 const searchLowFaresValidate = (obj) => {
   // +List, e.g. AirPricePointList, see below
   const rootArrays = ['AirPricePoint', 'AirSegment', 'FareInfo', 'FlightDetails', 'Route'];
@@ -409,12 +422,7 @@ function extractBookings(obj) {
     }
 
     // we usually have one plating carrier across all per-passenger reservations
-    let platingCarriers = _.pluck(booking['air:AirPricingInfo'], 'PlatingCarrier');
-    const singlePlatingCarrier = _.uniq(platingCarriers);
-    if (singlePlatingCarrier.length === 1) {
-      // FIXME: use a smart collapse algorithm?
-      platingCarriers = singlePlatingCarrier[0];
-    }
+    const platingCarriers = getPlatingCarrier(booking);
 
     const passengers = getPassengers.call(
       this,
