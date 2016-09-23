@@ -11,7 +11,7 @@
             <air:AirTicketingModifiers>
                 {{#if commission}}
                 <com:Commission Level="Fare" xmlns:com="http://www.travelport.com/schema/common_v33_0"
-                    {{#if commision.percent}}
+                    {{#if commission.percent}}
                         Type="PercentBase" Percentage="{{commission.percent}}"
                     {{else}}
                         Type="Flat" Amount="{{commission.amount}}"
