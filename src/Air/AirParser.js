@@ -430,11 +430,14 @@ function extractBookings(obj) {
       travellers
     );
 
+    const supplierLocator = booking['common_' + this.uapi_version + ':SupplierLocator'] || {};
+
     const newBooking = {
       type: 'uAPI',
       pnr: providerInfo.LocatorCode,
             // pcc: this.env.pcc, //TODO remove search PCC from format?
       uapi_pnr_locator: booking.LocatorCode,
+      uapi_airline_locator: supplierLocator.SupplierLocatorCode || null,
       pnrList: [providerInfo.LocatorCode],
       platingCarrier: platingCarriers,
       createdAt: providerInfo.CreateDate,
