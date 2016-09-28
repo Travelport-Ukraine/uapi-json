@@ -97,6 +97,12 @@ Validator.prototype.pcc = function () {
 
 Validator.prototype.bookedPassengers = function () {
     // TODO check passengers list
+  this.params.passengers = this.params.passengers.map(passenger => {
+    if (passenger.ageCategory === 'CNN') {
+      passenger.child = true;
+    }
+    return passenger;
+  });
   return this;
 };
 
