@@ -12,8 +12,8 @@
                 <air:AirSegment ArrivalTime="{{arrival}}"
                                 DepartureTime="{{departure}}"
                                 Carrier="{{airline}}"
-                                {#if bookingClass} ClassOfService="{{bookingClass}}" {/if}
-                                {#if serviceClass} CabinClass="{{serviceClass}}" {/if}
+                                {{#if bookingClass}} ClassOfService="{{bookingClass}}" {{/if}}
+                                {{#if serviceClass}} CabinClass="{{serviceClass}}" {{/if}}
                                 Origin="{{from}}"
                                 Destination="{{to}}"
                                 ETicketability="Yes"
@@ -33,7 +33,7 @@
             {{/passengers}}
             <air:AirPricingCommand>
                 {{#segments}}
-                <air:AirSegmentPricingModifiers AirSegmentRef="{{@index}}" FareBasisCode="{{fareBasis}}"/>
+                <air:AirSegmentPricingModifiers AirSegmentRef="{{@index}}" FareBasisCode="{{fareBasisCode}}"/>
                 {{/segments}}
             </air:AirPricingCommand>
         </air:AirPriceReq>
