@@ -315,7 +315,18 @@ function airPriceRspPricingSolutionXML(obj) {
 
   const segments = obj['air:AirPriceRsp'][0]['air:AirItinerary'][0]['air:AirSegment'];
   const priceResult = obj['air:AirPriceRsp'][0]['air:AirPriceResult'][0];
-  const pricingSolution = priceResult['air:AirPricingSolution'][0];
+  const pricingSolutions = priceResult['air:AirPricingSolution'];
+  let pricingSolution = 0;
+  if (pricingSolutions.length > 1) {
+    console.log('More than one solution found in booking. Resolving the cheapest one.');
+    const sorted = pricingSolutions.sort(
+      (a, b) => parseFloat(a.$.TotalPrice.slice(3)) - parseFloat(b.$.TotalPrice.slice(3))
+    );
+    pricingSolution = sorted[0];
+  } else {
+    pricingSolution = pricingSolutions[0];
+  }
+
 
   // remove segment references and add real segments (required)
   delete (pricingSolution['air:AirSegmentRef']);
