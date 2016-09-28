@@ -1,0 +1,1722 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AirPriceRsp xmlns:air="http://www.travelport.com/schema/air_v36_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0" TraceId="" TransactionId="72EF83C60A0759D3825C030E752C281B" ResponseTime="4312">
+            <common_v36_0:ResponseMessage Code="710401" Type="Warning" ProviderCode="1G">Taxes returned at the FareInfo level are for informational purposes only, and may differ from those returned at the Itinerary/Passenger Type levels.</common_v36_0:ResponseMessage>
+            <common_v36_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">The price is informational and can only be stored manually.</common_v36_0:ResponseMessage>
+            <air:AirItinerary>
+                <air:AirSegment Key="xxNeClwsT5iOMvsGFk2YTw==" Group="0" Carrier="KL" FlightNumber="3097" ProviderCode="1G" Origin="KBP" Destination="AMS" DepartureTime="2016-11-10T10:00:00.000+02:00" ArrivalTime="2016-11-10T12:05:00.000+01:00" FlightTime="185" TravelTime="185" Distance="1119" ClassOfService="G" Equipment="737" ChangeOfPlane="false" OptionalServicesIndicator="true" AvailabilitySource="S" LinkAvailability="true" PolledAvailabilityOption="O and D cache or polled status used with different local status" AvailabilityDisplayType="Fare Specific Fare Quote Unbooked">
+                    <air:CodeshareInfo OperatingCarrier="PS">Ukraine International Airline</air:CodeshareInfo>
+                    <air:FlightDetails Key="3RcSxn95R9uEPAsK+S/2HA==" Origin="KBP" Destination="AMS" DepartureTime="2016-11-10T10:00:00.000+02:00" ArrivalTime="2016-11-10T12:05:00.000+01:00" FlightTime="185" TravelTime="185" Equipment="73R">
+                        <air:Meals>NoMealService</air:Meals>
+                        <air:InFlightServices>Non-smoking</air:InFlightServices>
+                    </air:FlightDetails>
+                </air:AirSegment>
+                <air:AirSegment Key="RkbjPjXkS1OoCmC9T+E+CQ==" Group="0" Carrier="KL" FlightNumber="2009" ProviderCode="1G" Origin="AMS" Destination="CDG" DepartureTime="2016-11-10T13:50:00.000+01:00" ArrivalTime="2016-11-10T15:05:00.000+01:00" FlightTime="75" TravelTime="75" Distance="247" ClassOfService="G" Equipment="320" ChangeOfPlane="false" OptionalServicesIndicator="true" AvailabilitySource="S" LinkAvailability="true" PolledAvailabilityOption="O and D cache or polled status used with different local status" AvailabilityDisplayType="Fare Specific Fare Quote Unbooked">
+                    <air:CodeshareInfo OperatingCarrier="AF">Air France</air:CodeshareInfo>
+                    <air:FlightDetails Key="lWLyM8VBS/S60YxQSktDZA==" Origin="AMS" Destination="CDG" DepartureTime="2016-11-10T13:50:00.000+01:00" ArrivalTime="2016-11-10T15:05:00.000+01:00" FlightTime="75" TravelTime="75" Equipment="318" DestinationTerminal="2F">
+                        <air:Meals>SnackOrBrunch</air:Meals>
+                        <air:InFlightServices>Non-smoking</air:InFlightServices>
+                    </air:FlightDetails>
+                </air:AirSegment>
+                <air:AirSegment Key="rIW2nFfVSp2ZAu8d5KNsjw==" Group="0" Carrier="KL" FlightNumber="2002" ProviderCode="1G" Origin="CDG" Destination="AMS" DepartureTime="2016-11-20T07:10:00.000+01:00" ArrivalTime="2016-11-20T08:35:00.000+01:00" FlightTime="85" TravelTime="85" Distance="247" ClassOfService="G" Equipment="321" ChangeOfPlane="false" OptionalServicesIndicator="true" AvailabilitySource="S" LinkAvailability="true" PolledAvailabilityOption="O and D cache or polled status used with different local status" AvailabilityDisplayType="Fare Specific Fare Quote Unbooked">
+                    <air:CodeshareInfo OperatingCarrier="AF">Air France</air:CodeshareInfo>
+                    <air:FlightDetails Key="mRzQnV/tRAurKencV/cLhA==" Origin="CDG" Destination="AMS" DepartureTime="2016-11-20T07:10:00.000+01:00" ArrivalTime="2016-11-20T08:35:00.000+01:00" FlightTime="85" TravelTime="85" Equipment="321" OriginTerminal="2F">
+                        <air:Meals>SnackOrBrunch</air:Meals>
+                        <air:InFlightServices>Non-smoking</air:InFlightServices>
+                    </air:FlightDetails>
+                </air:AirSegment>
+                <air:AirSegment Key="x7rdXqZtT2S8CkR3P08F4A==" Group="0" Carrier="KL" FlightNumber="1385" ProviderCode="1G" Origin="AMS" Destination="KBP" DepartureTime="2016-11-20T09:30:00.000+01:00" ArrivalTime="2016-11-20T13:15:00.000+02:00" FlightTime="165" TravelTime="165" Distance="1119" ClassOfService="G" Equipment="737" ChangeOfPlane="false" OptionalServicesIndicator="true" AvailabilitySource="S" LinkAvailability="true" PolledAvailabilityOption="O and D cache or polled status used with different local status" AvailabilityDisplayType="Fare Specific Fare Quote Unbooked">
+                    <air:CodeshareInfo OperatingCarrier="KL">KLM Royal Dutch Airlines</air:CodeshareInfo>
+                    <air:FlightDetails Key="MxaxGYeaRVyW3omjm02wTQ==" Origin="AMS" Destination="KBP" DepartureTime="2016-11-20T09:30:00.000+01:00" ArrivalTime="2016-11-20T13:15:00.000+02:00" FlightTime="165" TravelTime="165" Equipment="73H">
+                        <air:Meals>SnackOrBrunch</air:Meals>
+                        <air:InFlightServices>Non-smoking</air:InFlightServices>
+                    </air:FlightDetails>
+                </air:AirSegment>
+            </air:AirItinerary>
+            <air:AirPriceResult>
+                <air:AirPricingSolution Key="FBdwwNHxRbC87v3+2SGmfQ==" TotalPrice="EUR178.88" BasePrice="USD110.00" ApproximateTotalPrice="EUR178.88" ApproximateBasePrice="EUR98.00" EquivalentBasePrice="EUR98.00" Taxes="EUR80.88" Fees="EUR0.00" ApproximateTaxes="EUR80.88" QuoteDate="2016-09-29">
+                    <air:AirSegmentRef Key="xxNeClwsT5iOMvsGFk2YTw=="/>
+                    <air:AirSegmentRef Key="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                    <air:AirSegmentRef Key="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                    <air:AirSegmentRef Key="x7rdXqZtT2S8CkR3P08F4A=="/>
+                    <air:AirPricingInfo Key="a7M/+5WFQx6PJUsW/sBELw==" TotalPrice="EUR178.88" BasePrice="USD110.00" ApproximateTotalPrice="EUR178.88" ApproximateBasePrice="EUR98.00" EquivalentBasePrice="EUR98.00" ApproximateTaxes="EUR80.88" Taxes="EUR80.88" LatestTicketingTime="2016-10-02T23:59:00.000+03:00" PricingMethod="GuaranteedUsingAirlinePrivateFare" IncludesVAT="false" ETicketability="Yes" PlatingCarrier="KL" ProviderCode="1G">
+                        <air:FareInfo Key="f0Thp0hxQEqthJPrnvPqWw==" FareBasis="GSRUA" PassengerTypeCode="ADT" Origin="KBP" Destination="CDG" EffectiveDate="2016-09-30T01:34:00.000+03:00" DepartureDate="2016-11-10" Amount="EUR49.00" NotValidBefore="2016-11-10" NotValidAfter="2016-11-10" TaxAmount="EUR32.16">
+                            <common_v36_0:Endorsement Value="NONENDO/NONREF"/>
+                            <air:FareRuleKey FareInfoRef="f0Thp0hxQEqthJPrnvPqWw==" ProviderCode="1G">6UUVoSldxwghfukL7ejrzcbKj3F8T9EyxsqPcXxP0TIjSPOlaHfQe5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA+sf5EYPtqNHM3ExqSoG050YrFZ2txsEb7JxlTrV/BjPVCulqMwbpNasTsU9/OBUcojlae0YCVrofTPEGoiED3Tq/20RpEmAXlby9IE1rxlSp7GoYpQef1jaa0ieUFHjEjUXFjZNGAlwm60+5nlRqoOAdcY0m0a4yk4nKb2G5mOFKqOkj9WzImcMtfEW+An1Pr+F729rtUMfv4Xvb2u1Qx+/he9va7VDH7+F729rtUMfv4Xvb2u1Qx80GqQ2wgDK/01BlpTwyo+r9GjARZYw7j/TROTkGAG0MTL3YfiUCTIm3oXgGtFJTfbcF7TvWtaxD5+sudx3n+W1</air:FareRuleKey>
+                            <air:Brand Key="f0Thp0hxQEqthJPrnvPqWw==" BrandID="32729" UpSellBrandID="32730" Name="Economy Basic" Carrier="KL">
+                                <air:Title Type="External" LanguageCode="EN">Economy Basic</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">BASIC</air:Title>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Your ECONOMY BASIC fare with KLM is ideal for those travelling light and includes:
+
+                                    •  Online check in.
+                                    •  Ergonomically designed seating with even more comfort options available.
+                                    •  Complimentary snacks and drinks on board.
+                                    •  Check in a bag for an additional fee.
+                                    •  Carry on one bag + one other small item, combined max weight 12kg.
+                                    •  Earn 25% Flying Blue Miles.
+                                    •  Rebook for an additional fee.
+                                    •  Cancellation not permitted.
+
+
+                                    If the flight will be operated by another airline then the onboard product or service might be different.</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Your ECONOMY BASIC fare with KLM is ideal for those travelling light and includes:
+
+                                    •  Online check in.
+                                    •  Ergonomically designed seating with even more comfort options available.
+                                    •  Complimentary snacks and drinks on board.
+                                    •  Check in a bag for an additional fee.
+                                    •  Carry on one bag + one other small item, combined max weight 12kg.
+                                    •  Earn 25% Flying Blue Miles.
+                                    •  Rebook for an additional fee.
+                                    •  Cancellation not permitted.
+
+
+                                    If the flight will be operated by another airline then the onboard product or service might be different.</air:Text>
+                                <air:Text Type="Strapline" LanguageCode="EN">Discover our high standards in Economy Class</air:Text>
+                                <air:ImageLocation Type="Agent" ImageWidth="111" ImageHeight="150">https://merchandisingmanagement.travelport.com/documents/10431/13190/KL%20-%20Short%20haul%20Eco%201%20-%20150x150.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="111" ImageHeight="150">https://merchandisingmanagement.travelport.com/documents/10431/13190/KL%20-%20Short%20haul%20Eco%201%20-%20150x150.png</air:ImageLocation>
+                                <air:OptionalServices>
+                                    <air:OptionalService Type="Lounge" CreateDate="2016-09-28T22:34:46.284+00:00" ServiceSubCode="0BX" Key="7RVhvvS7QLSqMddfedhPXA==" Chargeable="Not offered">
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Lounge access</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-lounge_access.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-lounge_access.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Somewhere quiet to work or relax</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">Business Class passengers can take the opportunity to visit the lounge before or after their flight. Also specific Flying Blue tier levels enjoy this service
+
+                                            • A quiet space to work or relax.
+                                            • Complimentary snacks and drinks.
+                                            • Magazines and newspapers to read.
+                                            • WiFi usually available.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">Business Class passengers can take the opportunity to visit the lounge before or after their flight. Also specific Flying Blue tier levels enjoy this service
+
+                                            • A quiet space to work or relax.
+                                            • Complimentary snacks and drinks.
+                                            • Magazines and newspapers to read.
+                                            • WiFi usually available.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Lounge access</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Lounges</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="InFlightEntertainment" CreateDate="2016-09-28T22:34:46.284+00:00" Key="VCQosmjZSlqm8eD1cVcqTQ==" Chargeable="Not offered">
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>In seat power</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-in_seat_power_usb.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-in_seat_power_usb.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Power for your laptop or phone</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">In seat power is available in Business Class on all Boeing 777, 747, 787, A330, B737-700/800/900.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">In seat power is available in Business Class on all Boeing 777, 747, 787, A330, B737-700/800/900.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">In seat power</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">USB</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="RuleOverride" CreateDate="2016-09-28T22:34:46.284+00:00" Key="OItDFmJhTY+gu4YqihT8eQ==" SecondaryType="31" Chargeable="Available for a charge">
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Rebooking</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-rebooking.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-rebooking.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Making changes to your reservation</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">At KLM we understand that from time to time you may need to amend your reservation. The amount you will have to pay will depend on the route and class booked.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">At KLM we understand that from time to time you may need to amend your reservation. The amount you will have to pay will depend on the route and class booked.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Rebooking</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Rebooking</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="FrequentFlyer" CreateDate="2016-09-28T22:34:46.284+00:00" Key="RJfqTpN1QF6KRESo55HkTA==" SecondaryType="MG" Chargeable="Included in the brand">
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Flying Blue Miles accrual</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-miles_accrual.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-miles_accrual.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Earn and save</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">Earn Flying Blue Miles every time you fly:
+
+                                            On flights within Europe:
+
+                                            • Business Flexible = 250%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%
+
+                                            On long haul flights:
+
+                                            • Business Flexible = 175%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">Earn Flying Blue Miles every time you fly:
+
+                                            On flights within Europe:
+
+                                            • Business Flexible = 250%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%
+
+                                            On long haul flights:
+
+                                            • Business Flexible = 175%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Flying Blue Miles accrual</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Mileage</air:Title>
+                                    </air:OptionalService>
+                                </air:OptionalServices>
+                            </air:Brand>
+                        </air:FareInfo>
+                        <air:FareInfo Key="lRWxrsnGQ1WAPHb4PubJZg==" FareBasis="GSRUA" PassengerTypeCode="ADT" Origin="CDG" Destination="KBP" EffectiveDate="2016-09-30T01:34:00.000+03:00" DepartureDate="2016-11-20" Amount="EUR49.00" NotValidBefore="2016-11-20" NotValidAfter="2016-11-20" TaxAmount="EUR48.72">
+                            <common_v36_0:Endorsement Value="NONENDO/NONREF"/>
+                            <air:FareRuleKey FareInfoRef="lRWxrsnGQ1WAPHb4PubJZg==" ProviderCode="1G">6UUVoSldxwghfukL7ejrzcbKj3F8T9EyxsqPcXxP0TIjSPOlaHfQe5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA+sf5EYPtqNHM3ExqSoG050mW8k9tzbkKbNz1QfcRp/RffAIozri2ACsTsU9/OBUcojlae0YCVro9TdlxQRdBHLq/20RpEmAXlby9IE1rxlSp7GoYpQef1jaa0ieUFHjEjUXFjZNGAlwm60+5nlRqoM8sv0OdkDoiE4nKb2G5mOFzYnvuEQgJj4MtfEW+An1Pr+F729rtUMfv4Xvb2u1Qx+/he9va7VDH7+F729rtUMfv4Xvb2u1Qx80GqQ2wgDK/01BlpTwyo+r9GjARZYw7j/TROTkGAG0MTL3YfiUCTIm3oXgGtFJTfbcF7TvWtaxD5+sudx3n+W1</air:FareRuleKey>
+                            <air:Brand Key="lRWxrsnGQ1WAPHb4PubJZg==" BrandID="32729" UpSellBrandID="32730" Name="Economy Basic" Carrier="KL">
+                                <air:Title Type="External" LanguageCode="EN">Economy Basic</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">BASIC</air:Title>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Your ECONOMY BASIC fare with KLM is ideal for those travelling light and includes:
+
+                                    •  Online check in.
+                                    •  Ergonomically designed seating with even more comfort options available.
+                                    •  Complimentary snacks and drinks on board.
+                                    •  Check in a bag for an additional fee.
+                                    •  Carry on one bag + one other small item, combined max weight 12kg.
+                                    •  Earn 25% Flying Blue Miles.
+                                    •  Rebook for an additional fee.
+                                    •  Cancellation not permitted.
+
+
+                                    If the flight will be operated by another airline then the onboard product or service might be different.</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Your ECONOMY BASIC fare with KLM is ideal for those travelling light and includes:
+
+                                    •  Online check in.
+                                    •  Ergonomically designed seating with even more comfort options available.
+                                    •  Complimentary snacks and drinks on board.
+                                    •  Check in a bag for an additional fee.
+                                    •  Carry on one bag + one other small item, combined max weight 12kg.
+                                    •  Earn 25% Flying Blue Miles.
+                                    •  Rebook for an additional fee.
+                                    •  Cancellation not permitted.
+
+
+                                    If the flight will be operated by another airline then the onboard product or service might be different.</air:Text>
+                                <air:Text Type="Strapline" LanguageCode="EN">Discover our high standards in Economy Class</air:Text>
+                                <air:ImageLocation Type="Agent" ImageWidth="111" ImageHeight="150">https://merchandisingmanagement.travelport.com/documents/10431/13190/KL%20-%20Short%20haul%20Eco%201%20-%20150x150.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="111" ImageHeight="150">https://merchandisingmanagement.travelport.com/documents/10431/13190/KL%20-%20Short%20haul%20Eco%201%20-%20150x150.png</air:ImageLocation>
+                                <air:OptionalServices>
+                                    <air:OptionalService Type="Lounge" CreateDate="2016-09-28T22:34:46.284+00:00" ServiceSubCode="0BX" Key="rvCXTdFwRGqnczni4JdEag==" Chargeable="Not offered">
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Lounge access</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-lounge_access.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-lounge_access.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Somewhere quiet to work or relax</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">Business Class passengers can take the opportunity to visit the lounge before or after their flight. Also specific Flying Blue tier levels enjoy this service
+
+                                            • A quiet space to work or relax.
+                                            • Complimentary snacks and drinks.
+                                            • Magazines and newspapers to read.
+                                            • WiFi usually available.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">Business Class passengers can take the opportunity to visit the lounge before or after their flight. Also specific Flying Blue tier levels enjoy this service
+
+                                            • A quiet space to work or relax.
+                                            • Complimentary snacks and drinks.
+                                            • Magazines and newspapers to read.
+                                            • WiFi usually available.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Lounge access</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Lounges</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="InFlightEntertainment" CreateDate="2016-09-28T22:34:46.284+00:00" Key="qabmAn29RluDgFFUbTysiQ==" Chargeable="Not offered">
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>In seat power</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-in_seat_power_usb.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-in_seat_power_usb.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Power for your laptop or phone</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">In seat power is available in Business Class on all Boeing 777, 747, 787, A330, B737-700/800/900.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">In seat power is available in Business Class on all Boeing 777, 747, 787, A330, B737-700/800/900.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">In seat power</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">USB</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="RuleOverride" CreateDate="2016-09-28T22:34:46.284+00:00" Key="S+TF6f5CQFKyHz6rsQh2nA==" SecondaryType="31" Chargeable="Available for a charge">
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Rebooking</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-rebooking.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-rebooking.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Making changes to your reservation</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">At KLM we understand that from time to time you may need to amend your reservation. The amount you will have to pay will depend on the route and class booked.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">At KLM we understand that from time to time you may need to amend your reservation. The amount you will have to pay will depend on the route and class booked.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Rebooking</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Rebooking</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="FrequentFlyer" CreateDate="2016-09-28T22:34:46.284+00:00" Key="7DEgZjpcQNS0fAeFrq/r+Q==" SecondaryType="MG" Chargeable="Included in the brand">
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Flying Blue Miles accrual</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-miles_accrual.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-miles_accrual.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Earn and save</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">Earn Flying Blue Miles every time you fly:
+
+                                            On flights within Europe:
+
+                                            • Business Flexible = 250%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%
+
+                                            On long haul flights:
+
+                                            • Business Flexible = 175%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">Earn Flying Blue Miles every time you fly:
+
+                                            On flights within Europe:
+
+                                            • Business Flexible = 250%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%
+
+                                            On long haul flights:
+
+                                            • Business Flexible = 175%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Flying Blue Miles accrual</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Mileage</air:Title>
+                                    </air:OptionalService>
+                                </air:OptionalServices>
+                            </air:Brand>
+                        </air:FareInfo>
+                        <air:BookingInfo BookingCode="G" CabinClass="Economy" FareInfoRef="f0Thp0hxQEqthJPrnvPqWw==" SegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                        <air:BookingInfo BookingCode="G" CabinClass="Economy" FareInfoRef="f0Thp0hxQEqthJPrnvPqWw==" SegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                        <air:BookingInfo BookingCode="G" CabinClass="Economy" FareInfoRef="lRWxrsnGQ1WAPHb4PubJZg==" SegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                        <air:BookingInfo BookingCode="G" CabinClass="Economy" FareInfoRef="lRWxrsnGQ1WAPHb4PubJZg==" SegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                        <air:TaxInfo Category="UA" Amount="EUR3.56" Key="LIf9KYNhSBeQXHqcbDIHkw=="/>
+                        <air:TaxInfo Category="UD" Amount="EUR1.78" Key="I6I0hWmXR0GKusPg3bYQ6A=="/>
+                        <air:TaxInfo Category="YK" Amount="EUR15.14" Key="pzKFvX2YTIuRUyH4quwHkA=="/>
+                        <air:TaxInfo Category="CJ" Amount="EUR11.80" Key="K0eoZgd6QbS8LrQfCLBaKQ=="/>
+                        <air:TaxInfo Category="RN" Amount="EUR11.56" Key="bpqP1HgtTYKcbaQLqsg1ow=="/>
+                        <air:TaxInfo Category="FR" Amount="EUR20.75" Key="ZIC0xgRbSQ6XB3Z3O3Db5w=="/>
+                        <air:TaxInfo Category="IZ" Amount="EUR4.51" Key="CIEs1EpjTUq029TOWf8XJg=="/>
+                        <air:TaxInfo Category="QX" Amount="EUR11.78" Key="78B71YV4RrqKLkGbXN5q8Q=="/>
+                        <air:FareCalc>IEV KL X/AMS KL PAR 55.00GSRUA KL X/AMS KL IEV 55.00GSRUA NUC110.00END ROE1.0</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty>
+                            <air:Amount>EUR89.00</air:Amount>
+                        </air:ChangePenalty>
+                        <air:BaggageAllowances>
+                            <air:BaggageAllowanceInfo TravelerType="ADT" Origin="IEV" Destination="PAR" Carrier="KL">
+                                <air:URLInfo>
+                                    <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSKL.BAGG</air:URL>
+                                </air:URLInfo>
+                                <air:TextInfo>
+                                    <air:Text>0P</air:Text>
+                                    <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                                </air:TextInfo>
+                                <air:BagDetails ApplicableBags="1stChecked" BasePrice="UAH1015" TotalPrice="UAH1015">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                                <air:BagDetails ApplicableBags="2ndChecked" BasePrice="UAH2030" TotalPrice="UAH2030">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                            </air:BaggageAllowanceInfo>
+                            <air:BaggageAllowanceInfo TravelerType="ADT" Origin="PAR" Destination="IEV" Carrier="KL">
+                                <air:URLInfo>
+                                    <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSKL.BAGG</air:URL>
+                                </air:URLInfo>
+                                <air:TextInfo>
+                                    <air:Text>0P</air:Text>
+                                    <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                                </air:TextInfo>
+                                <air:BagDetails ApplicableBags="1stChecked" BasePrice="EUR35.00" ApproximateBasePrice="EUR35.00" TotalPrice="EUR35.00" ApproximateTotalPrice="EUR35.00">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                                <air:BagDetails ApplicableBags="2ndChecked" BasePrice="EUR70.00" ApproximateBasePrice="EUR70.00" TotalPrice="EUR70.00" ApproximateTotalPrice="EUR70.00">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                            </air:BaggageAllowanceInfo>
+                            <air:CarryOnAllowanceInfo Origin="IEV" Destination="AMS" Carrier="PS">
+                                <air:TextInfo>
+                                    <air:Text>BAGGAGE ALLOWANCE DATA NOT AVAILABLE</air:Text>
+                                </air:TextInfo>
+                            </air:CarryOnAllowanceInfo>
+                            <air:CarryOnAllowanceInfo Origin="AMS" Destination="PAR" Carrier="AF">
+                                <air:TextInfo>
+                                    <air:Text>1P</air:Text>
+                                </air:TextInfo>
+                                <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" ApproximateBasePrice="EUR0.00" TotalPrice="EUR0.00" ApproximateTotalPrice="EUR0.00">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:CarryOnDetails>
+                            </air:CarryOnAllowanceInfo>
+                            <air:CarryOnAllowanceInfo Origin="PAR" Destination="AMS" Carrier="AF">
+                                <air:TextInfo>
+                                    <air:Text>1P</air:Text>
+                                </air:TextInfo>
+                                <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" ApproximateBasePrice="EUR0.00" TotalPrice="EUR0.00" ApproximateTotalPrice="EUR0.00">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:CarryOnDetails>
+                            </air:CarryOnAllowanceInfo>
+                            <air:CarryOnAllowanceInfo Origin="AMS" Destination="IEV" Carrier="KL">
+                                <air:TextInfo>
+                                    <air:Text>1P</air:Text>
+                                </air:TextInfo>
+                                <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" ApproximateBasePrice="EUR0.00" TotalPrice="EUR0.00" ApproximateTotalPrice="EUR0.00">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:CarryOnDetails>
+                            </air:CarryOnAllowanceInfo>
+                        </air:BaggageAllowances>
+                    </air:AirPricingInfo>
+                    <air:FareNote Key="zrl85z6cR4ebllcSyo/ueg==">RATE USED IN EQU TOTAL IS BSR 1USD - 0.890226EUR</air:FareNote>
+                    <air:FareNote Key="ms1pRgkaThWIkeEjD04TNQ==">LAST DATE TO PURCHASE TICKET: 02OCT16</air:FareNote>
+                    <air:FareNote Key="ouLtJ/p0TG+lktJBPvF2dQ==">TICKETING AGENCY 36D5</air:FareNote>
+                    <air:FareNote Key="YqG9mPaTR3CHUvGAVCEiSA==">DEFAULT PLATING CARRIER KL</air:FareNote>
+                    <air:FareNote Key="k7UnLNHTTiWsxT0CNnj77w==">FARE HAS A PLATING CARRIER RESTRICTION</air:FareNote>
+                    <air:FareNote Key="+xgsCW7GRNKAAL+Je1BKQA==">E-TKT REQUIRED</air:FareNote>
+                    <air:FareNote Key="AC7S93qLTIuLLOAaylZ1vA==">TICKETING FEES MAY APPLY</air:FareNote>
+                    <air:OptionalServices>
+                        <air:OptionalServicesTotal/>
+                        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="EUR14.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.923+00:00" ServiceStatus="Offered" SequenceNumber="551300" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="nShtR32CQ9y4KQBH/ygRwg==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR14.00" ApproximateTotalPrice="EUR14.00" ApproximateBasePrice="EUR14.00" Taxes="EUR0.00" OptionalServicesRuleRef="ADAChhQiQKCtAhnPi0xwfw==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw==" TravelerType="ADT">
+                                <common_v36_0:SeatAttributes>
+                                    <common_v36_0:SeatAttribute Value="O"/>
+                                </common_v36_0:SeatAttributes>
+                            </common_v36_0:ServiceData>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>CHARGEABLE SEAT</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <common_v36_0:Remark>KL 3097 - EUR14.00 PER PASSENGER CHARGEABLE SEAT</common_v36_0:Remark>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI9" CommercialName="CHARGEABLE SEAT">
+                                <air:Title Type="External" LanguageCode="EN">CHARGEABLE SEAT</air:Title>
+                                <air:AirSegmentRef Key="xxNeClwsT5iOMvsGFk2YTw=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="EUR14.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.923+00:00" ServiceStatus="Offered" SequenceNumber="551300" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="mIdxgp/nR22Hl1Fs0Q2cNA==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR14.00" ApproximateTotalPrice="EUR14.00" ApproximateBasePrice="EUR14.00" Taxes="EUR0.00" OptionalServicesRuleRef="i6ZG3sAeRTudVBC06x3scA==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A==" TravelerType="ADT">
+                                <common_v36_0:SeatAttributes>
+                                    <common_v36_0:SeatAttribute Value="O"/>
+                                </common_v36_0:SeatAttributes>
+                            </common_v36_0:ServiceData>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>CHARGEABLE SEAT</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <common_v36_0:Remark>KL 1385 - EUR14.00 PER PASSENGER CHARGEABLE SEAT</common_v36_0:Remark>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI10" CommercialName="CHARGEABLE SEAT">
+                                <air:Title Type="External" LanguageCode="EN">CHARGEABLE SEAT</air:Title>
+                                <air:AirSegmentRef Key="x7rdXqZtT2S8CkR3P08F4A=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="EUR8.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.923+00:00" ServiceStatus="Offered" SequenceNumber="551225" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="2x+Ar0rgTzWgB5VU3KFw4A==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR8.00" ApproximateTotalPrice="EUR8.00" ApproximateBasePrice="EUR8.00" Taxes="EUR0.00" OptionalServicesRuleRef="+OghWL0IST+1HDPTPv5JNg==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ==" TravelerType="ADT">
+                                <common_v36_0:SeatAttributes>
+                                    <common_v36_0:SeatAttribute Value="O"/>
+                                </common_v36_0:SeatAttributes>
+                            </common_v36_0:ServiceData>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>CHARGEABLE SEAT</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <common_v36_0:Remark>KL 2009 - EUR8.00 PER PASSENGER CHARGEABLE SEAT</common_v36_0:Remark>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI11" CommercialName="CHARGEABLE SEAT">
+                                <air:Title Type="External" LanguageCode="EN">CHARGEABLE SEAT</air:Title>
+                                <air:AirSegmentRef Key="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="EUR8.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.923+00:00" ServiceStatus="Offered" SequenceNumber="551225" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="4C4Ln7UiTbG8HWjeVc0p5Q==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR8.00" ApproximateTotalPrice="EUR8.00" ApproximateBasePrice="EUR8.00" Taxes="EUR0.00" OptionalServicesRuleRef="Ix6aKBlYTOOrGiS2LJ8VmA==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw==" TravelerType="ADT">
+                                <common_v36_0:SeatAttributes>
+                                    <common_v36_0:SeatAttribute Value="O"/>
+                                </common_v36_0:SeatAttributes>
+                            </common_v36_0:ServiceData>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>CHARGEABLE SEAT</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <common_v36_0:Remark>KL 2002 - EUR8.00 PER PASSENGER CHARGEABLE SEAT</common_v36_0:Remark>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI12" CommercialName="CHARGEABLE SEAT">
+                                <air:Title Type="External" LanguageCode="EN">CHARGEABLE SEAT</air:Title>
+                                <air:AirSegmentRef Key="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.924+00:00" ServiceStatus="Offered" SequenceNumber="2016000" ServiceSubCode="0CC" SSRCode="ABAG" IssuanceReason="C" Key="llbzR8zOSlq6NKdZml8aNA==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="i4VAMIY6SO+9Q9oLbV6CVQ==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>1ST ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI5" ServiceSubCode="0CC" ServiceType="F" CommercialName="1ST ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Additional baggage as required</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase an additional checked bag.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase an additional checked bag.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">1st Additional bag</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">1st Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-extra_baggage.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-extra_baggage.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                <air:AirSegmentRef Key="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.924+00:00" ServiceStatus="Offered" SequenceNumber="2016000" ServiceSubCode="0CC" SSRCode="ABAG" IssuanceReason="C" Key="6z8AlKyHQmqS1mGXcdMlRA==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="AameTR7qQDW465zY6u0Sdg==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>1ST ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI6" ServiceSubCode="0CC" ServiceType="F" CommercialName="1ST ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Additional baggage as required</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase an additional checked bag.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase an additional checked bag.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">1st Additional bag</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">1st Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-extra_baggage.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-extra_baggage.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                <air:AirSegmentRef Key="x7rdXqZtT2S8CkR3P08F4A=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.925+00:00" ServiceStatus="Offered" SequenceNumber="139500" ServiceSubCode="0CD" SSRCode="BBAG" IssuanceReason="C" Key="8Kw/n9DyR3S0nnEJaIR1KA==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="y18C4KRRR2a16bbbxS+M+Q==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>2ND ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI17" ServiceSubCode="0CD" ServiceType="F" CommercialName="2ND ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Purchase additional bags as required</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase a 2nd additional bag.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase a 2nd additional bag.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">2nd Additional bag</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">2nd Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-2nd_checked_bags.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-2nd_checked_bags.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                <air:AirSegmentRef Key="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.925+00:00" ServiceStatus="Offered" SequenceNumber="139500" ServiceSubCode="0CD" SSRCode="BBAG" IssuanceReason="C" Key="cmuRYpVpR8KFWu6tuXMfkg==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="DWZEASOgQWqeC64hKWDFnA==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>2ND ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI18" ServiceSubCode="0CD" ServiceType="F" CommercialName="2ND ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Purchase additional bags as required</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase a 2nd additional bag.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase a 2nd additional bag.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">2nd Additional bag</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">2nd Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-2nd_checked_bags.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-2nd_checked_bags.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                <air:AirSegmentRef Key="x7rdXqZtT2S8CkR3P08F4A=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.926+00:00" ServiceStatus="Offered" SequenceNumber="140000" ServiceSubCode="0CE" SSRCode="CBAG" IssuanceReason="C" Key="nX5POlA9QWu3AraRqYiAGw==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="9bAS/Zg1Qua6R82TvRPtrw==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>3RD OR MORE ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="3">Per Item</air:FeeApplication>
+                            <air:BrandingInfo Key="BI1" ServiceSubCode="0CE" ServiceType="F" CommercialName="3RD OR MORE ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Purchase even more checked baggage</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase a 3rd or even more checked bags.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase a 3rd or even more checked bags.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">3rd or more additional bags</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">3rd Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-3rd_checked_bags.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-3rd_checked_bags.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                <air:AirSegmentRef Key="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.926+00:00" ServiceStatus="Offered" SequenceNumber="140000" ServiceSubCode="0CE" SSRCode="CBAG" IssuanceReason="C" Key="Uoohxe0ST3eBDkq/T438Pg==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="ilgDx26RQ4OHdoARPZHr/A==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>3RD OR MORE ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="3">Per Item</air:FeeApplication>
+                            <air:BrandingInfo Key="BI2" ServiceSubCode="0CE" ServiceType="F" CommercialName="3RD OR MORE ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Purchase even more checked baggage</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase a 3rd or even more checked bags.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase a 3rd or even more checked bags.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">3rd or more additional bags</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">3rd Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-3rd_checked_bags.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-3rd_checked_bags.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                <air:AirSegmentRef Key="x7rdXqZtT2S8CkR3P08F4A=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalServiceRules Key="ADAChhQiQKCtAhnPi0xwfw==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="i6ZG3sAeRTudVBC06x3scA==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="+OghWL0IST+1HDPTPv5JNg==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="Ix6aKBlYTOOrGiS2LJ8VmA==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="i4VAMIY6SO+9Q9oLbV6CVQ==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="AameTR7qQDW465zY6u0Sdg==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="y18C4KRRR2a16bbbxS+M+Q==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="DWZEASOgQWqeC64hKWDFnA==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="9bAS/Zg1Qua6R82TvRPtrw==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="ilgDx26RQ4OHdoARPZHr/A==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                    </air:OptionalServices>
+                </air:AirPricingSolution>
+                <air:AirPricingSolution Key="ou8oAxJKTlGiEXhqo3pIZA==" TotalPrice="EUR227.88" BasePrice="USD165.00" ApproximateTotalPrice="EUR227.88" ApproximateBasePrice="EUR147.00" EquivalentBasePrice="EUR147.00" Taxes="EUR80.88" Fees="EUR0.00" ApproximateTaxes="EUR80.88" QuoteDate="2016-09-29">
+                    <air:AirSegmentRef Key="xxNeClwsT5iOMvsGFk2YTw=="/>
+                    <air:AirSegmentRef Key="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                    <air:AirSegmentRef Key="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                    <air:AirSegmentRef Key="x7rdXqZtT2S8CkR3P08F4A=="/>
+                    <air:AirPricingInfo Key="0cSmjfEaSVecrbEn/Ae8Eg==" TotalPrice="EUR227.88" BasePrice="USD165.00" ApproximateTotalPrice="EUR227.88" ApproximateBasePrice="EUR147.00" EquivalentBasePrice="EUR147.00" ApproximateTaxes="EUR80.88" Taxes="EUR80.88" LatestTicketingTime="2016-10-02T23:59:00.000+03:00" PricingMethod="GuaranteedUsingAirlinePrivateFare" IncludesVAT="false" ProviderCode="1G">
+                        <air:FareInfo Key="SQHcw0G0StqiduzxEBZzMw==" FareBasis="GBAG0UA" PassengerTypeCode="ADT" Origin="KBP" Destination="CDG" EffectiveDate="2016-09-30T01:34:00.000+03:00" DepartureDate="2016-11-10" Amount="EUR74.00" PrivateFare="PrivateFare" NotValidBefore="2016-11-10" NotValidAfter="2016-11-10" TaxAmount="EUR32.16">
+                            <air:FareRuleKey FareInfoRef="SQHcw0G0StqiduzxEBZzMw==" ProviderCode="1G">6UUVoSldxwghfukL7ejrzcbKj3F8T9EyxsqPcXxP0TIjSPOlaHfQe5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA+sf5EYPtqNHM3ExqSoG050YrFZ2txsEb3qmFjWllWeKVCulqMwbpNbfH3zc0NhSMBIxQItixGqgBmwXxlsTgxdhdVO31nopIMsiOHFaFMf8GWXoXHIgLpyVqfCTByZWB24tvp/Fu5W+zK0Iy0HMiGbqNbjwzJx7oqPv19h9EZpQ/OnMiTo1UUYtZQSwZBEbyPwBShF29N4Sv4Xvb2u1Qx+/he9va7VDH7+F729rtUMfv4Xvb2u1Qx8Qxibp/OJehpo2LrM59tO1jp8ZENljzx72lVAJ3nO/P4u2m9xwViA4cktxA0VgKcakQETvNin4JmbFZUBdXZs1</air:FareRuleKey>
+                            <air:Brand Key="SQHcw0G0StqiduzxEBZzMw==" BrandID="32730" Name="Economy Plus" UpSellBrandFound="false" Carrier="KL">
+                                <air:Title Type="External" LanguageCode="EN">Economy Plus</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">PLUS</air:Title>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Your ECONOMY PLUS fare with KLM includes:
+
+                                    •  Check in a bag max 23kg.
+                                    •  Carry on one bag + one other small item, combined max weight 12kg.
+                                    •  Online check in.
+                                    •  Ergonomically designed seating with even more comfort options available.
+                                    •  Complimentary snacks and drinks on board.
+                                    •  Earn 50% Flying Blue Miles.
+                                    •  Rebook for an additional fee.
+                                    •  Cancellation not permitted.
+
+
+                                    If the flight will be operated by another airline then the onboard product or service might be different.</air:Text>
+                                <air:Text Type="Upsell" LanguageCode="EN">Upgrade to Economy Plus for the option to check in a bag</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Your ECONOMY PLUS fare with KLM includes:
+
+                                    •  Check in a bag max 23kg.
+                                    •  Carry on one bag + one other small item, combined max weight 12kg.
+                                    •  Online check in.
+                                    •  Ergonomically designed seating with even more comfort options available.
+                                    •  Complimentary snacks and drinks on board.
+                                    •  Earn 50% Flying Blue Miles.
+                                    •  Rebook for an additional fee.
+                                    •  Cancellation not permitted.
+
+
+                                    If the flight will be operated by another airline then the onboard product or service might be different.</air:Text>
+                                <air:Text Type="Strapline" LanguageCode="EN">Discover our high standards in Economy Class</air:Text>
+                                <air:ImageLocation Type="Agent" ImageWidth="111" ImageHeight="150">https://merchandisingmanagement.travelport.com/documents/10431/13190/KL%20-%20Short%20haul%20Eco%201%20-%20150x150.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="111" ImageHeight="150">https://merchandisingmanagement.travelport.com/documents/10431/13190/KL%20-%20Short%20haul%20Eco%201%20-%20150x150.png</air:ImageLocation>
+                                <air:OptionalServices>
+                                    <air:OptionalService Type="Lounge" CreateDate="2016-09-28T22:34:46.285+00:00" ServiceSubCode="0BX" Key="2CmTG7ZaTxq6g2agyW3Zxw==" Chargeable="Not offered">
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Lounge access</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-lounge_access.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-lounge_access.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Somewhere quiet to work or relax</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">Business Class passengers can take the opportunity to visit the lounge before or after their flight. Also specific Flying Blue tier levels enjoy this service
+
+                                            • A quiet space to work or relax.
+                                            • Complimentary snacks and drinks.
+                                            • Magazines and newspapers to read.
+                                            • WiFi usually available.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">Business Class passengers can take the opportunity to visit the lounge before or after their flight. Also specific Flying Blue tier levels enjoy this service
+
+                                            • A quiet space to work or relax.
+                                            • Complimentary snacks and drinks.
+                                            • Magazines and newspapers to read.
+                                            • WiFi usually available.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Lounge access</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Lounges</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="InFlightEntertainment" CreateDate="2016-09-28T22:34:46.285+00:00" Key="CV2NpKfDRwmLow7RDiO3IA==" Chargeable="Not offered">
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>In seat power</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-in_seat_power_usb.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-in_seat_power_usb.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Power for your laptop or phone</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">In seat power is available in Business Class on all Boeing 777, 747, 787, A330, B737-700/800/900.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">In seat power is available in Business Class on all Boeing 777, 747, 787, A330, B737-700/800/900.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">In seat power</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">USB</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="RuleOverride" CreateDate="2016-09-28T22:34:46.285+00:00" Key="2mQq794jTOGAAXIAfTdW6A==" SecondaryType="31" Chargeable="Available for a charge">
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Rebooking</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-rebooking.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-rebooking.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Making changes to your reservation</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">At KLM we understand that from time to time you may need to amend your reservation. The amount you will have to pay will depend on the route and class booked.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">At KLM we understand that from time to time you may need to amend your reservation. The amount you will have to pay will depend on the route and class booked.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Rebooking</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Rebooking</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="FrequentFlyer" CreateDate="2016-09-28T22:34:46.285+00:00" Key="msR5kQgARPC+qk01g96MPg==" SecondaryType="MG" Chargeable="Included in the brand">
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Flying Blue Miles accrual</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-miles_accrual.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-miles_accrual.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Earn and save</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">Earn Flying Blue Miles every time you fly:
+
+                                            On flights within Europe:
+
+                                            • Business Flexible = 250%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%
+
+                                            On long haul flights:
+
+                                            • Business Flexible = 175%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">Earn Flying Blue Miles every time you fly:
+
+                                            On flights within Europe:
+
+                                            • Business Flexible = 250%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%
+
+                                            On long haul flights:
+
+                                            • Business Flexible = 175%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Flying Blue Miles accrual</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Mileage</air:Title>
+                                    </air:OptionalService>
+                                </air:OptionalServices>
+                            </air:Brand>
+                        </air:FareInfo>
+                        <air:FareInfo Key="swZKX+LBSU+czv0mEwxcGg==" FareBasis="GBAG0UA" PassengerTypeCode="ADT" Origin="CDG" Destination="KBP" EffectiveDate="2016-09-30T01:34:00.000+03:00" DepartureDate="2016-11-20" Amount="EUR73.00" PrivateFare="PrivateFare" NotValidBefore="2016-11-20" NotValidAfter="2016-11-20" TaxAmount="EUR48.72">
+                            <air:FareRuleKey FareInfoRef="swZKX+LBSU+czv0mEwxcGg==" ProviderCode="1G">6UUVoSldxwghfukL7ejrzcbKj3F8T9EyxsqPcXxP0TIjSPOlaHfQe5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA+sf5EYPtqNHM3ExqSoG050mW8k9tzbkKY33dmwD2WvxffAIozri2ADfH3zc0NhSMBIxQItixGqgKdnqX0AP5cthdVO31nopIMsiOHFaFMf8GWXoXHIgLpyVqfCTByZWB24tvp/Fu5W+zK0Iy0HMiGazwqagSNw6EqPv19h9EZpQUzyV88ZhKIotZQSwZBEbyPwBShF29N4Sv4Xvb2u1Qx+/he9va7VDH7+F729rtUMfv4Xvb2u1Qx8Qxibp/OJehpo2LrM59tO1jp8ZENljzx72lVAJ3nO/P4u2m9xwViA4cktxA0VgKcakQETvNin4JmbFZUBdXZs1</air:FareRuleKey>
+                            <air:Brand Key="swZKX+LBSU+czv0mEwxcGg==" BrandID="32730" Name="Economy Plus" UpSellBrandFound="false" Carrier="KL">
+                                <air:Title Type="External" LanguageCode="EN">Economy Plus</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">PLUS</air:Title>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Your ECONOMY PLUS fare with KLM includes:
+
+                                    •  Check in a bag max 23kg.
+                                    •  Carry on one bag + one other small item, combined max weight 12kg.
+                                    •  Online check in.
+                                    •  Ergonomically designed seating with even more comfort options available.
+                                    •  Complimentary snacks and drinks on board.
+                                    •  Earn 50% Flying Blue Miles.
+                                    •  Rebook for an additional fee.
+                                    •  Cancellation not permitted.
+
+
+                                    If the flight will be operated by another airline then the onboard product or service might be different.</air:Text>
+                                <air:Text Type="Upsell" LanguageCode="EN">Upgrade to Economy Plus for the option to check in a bag</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Your ECONOMY PLUS fare with KLM includes:
+
+                                    •  Check in a bag max 23kg.
+                                    •  Carry on one bag + one other small item, combined max weight 12kg.
+                                    •  Online check in.
+                                    •  Ergonomically designed seating with even more comfort options available.
+                                    •  Complimentary snacks and drinks on board.
+                                    •  Earn 50% Flying Blue Miles.
+                                    •  Rebook for an additional fee.
+                                    •  Cancellation not permitted.
+
+
+                                    If the flight will be operated by another airline then the onboard product or service might be different.</air:Text>
+                                <air:Text Type="Strapline" LanguageCode="EN">Discover our high standards in Economy Class</air:Text>
+                                <air:ImageLocation Type="Agent" ImageWidth="111" ImageHeight="150">https://merchandisingmanagement.travelport.com/documents/10431/13190/KL%20-%20Short%20haul%20Eco%201%20-%20150x150.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="111" ImageHeight="150">https://merchandisingmanagement.travelport.com/documents/10431/13190/KL%20-%20Short%20haul%20Eco%201%20-%20150x150.png</air:ImageLocation>
+                                <air:OptionalServices>
+                                    <air:OptionalService Type="Lounge" CreateDate="2016-09-28T22:34:46.285+00:00" ServiceSubCode="0BX" Key="xp+vXDDNQV+PLnINPVAQ+g==" Chargeable="Not offered">
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Lounge access</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-lounge_access.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-lounge_access.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Somewhere quiet to work or relax</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">Business Class passengers can take the opportunity to visit the lounge before or after their flight. Also specific Flying Blue tier levels enjoy this service
+
+                                            • A quiet space to work or relax.
+                                            • Complimentary snacks and drinks.
+                                            • Magazines and newspapers to read.
+                                            • WiFi usually available.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">Business Class passengers can take the opportunity to visit the lounge before or after their flight. Also specific Flying Blue tier levels enjoy this service
+
+                                            • A quiet space to work or relax.
+                                            • Complimentary snacks and drinks.
+                                            • Magazines and newspapers to read.
+                                            • WiFi usually available.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Lounge access</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Lounges</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="InFlightEntertainment" CreateDate="2016-09-28T22:34:46.285+00:00" Key="IJvfIXSSQemi7kOFdnJ8BQ==" Chargeable="Not offered">
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>In seat power</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-in_seat_power_usb.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-in_seat_power_usb.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Power for your laptop or phone</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">In seat power is available in Business Class on all Boeing 777, 747, 787, A330, B737-700/800/900.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">In seat power is available in Business Class on all Boeing 777, 747, 787, A330, B737-700/800/900.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">In seat power</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">USB</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="RuleOverride" CreateDate="2016-09-28T22:34:46.285+00:00" Key="+A0fZJuLQGWXm6YqG8azIw==" SecondaryType="31" Chargeable="Available for a charge">
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Rebooking</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-rebooking.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-rebooking.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Making changes to your reservation</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">At KLM we understand that from time to time you may need to amend your reservation. The amount you will have to pay will depend on the route and class booked.</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">At KLM we understand that from time to time you may need to amend your reservation. The amount you will have to pay will depend on the route and class booked.</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Rebooking</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Rebooking</air:Title>
+                                    </air:OptionalService>
+                                    <air:OptionalService Type="FrequentFlyer" CreateDate="2016-09-28T22:34:46.285+00:00" Key="yReMORQ2TJWymEnJpciO4A==" SecondaryType="MG" Chargeable="Included in the brand">
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                        <common_v36_0:ServiceData AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                                        <common_v36_0:ServiceInfo>
+                                            <common_v36_0:Description>Flying Blue Miles accrual</common_v36_0:Description>
+                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-miles_accrual.png"/>
+                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-miles_accrual.png"/>
+                                        </common_v36_0:ServiceInfo>
+                                        <air:EMD AssociatedItem="Flight"/>
+                                        <air:Text Type="Strapline" LanguageCode="EN">Earn and save</air:Text>
+                                        <air:Text Type="MarketingAgent" LanguageCode="EN">Earn Flying Blue Miles every time you fly:
+
+                                            On flights within Europe:
+
+                                            • Business Flexible = 250%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%
+
+                                            On long haul flights:
+
+                                            • Business Flexible = 175%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%</air:Text>
+                                        <air:Text Type="MarketingConsumer" LanguageCode="EN">Earn Flying Blue Miles every time you fly:
+
+                                            On flights within Europe:
+
+                                            • Business Flexible = 250%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%
+
+                                            On long haul flights:
+
+                                            • Business Flexible = 175%
+                                            • Economy Fully Flexible = 100%
+                                            • Economy Flexible = 25%-75%
+                                            • Economy = 25%-75%</air:Text>
+                                        <air:Title Type="External" LanguageCode="EN">Flying Blue Miles accrual</air:Title>
+                                        <air:Title Type="Short" LanguageCode="EN">Mileage</air:Title>
+                                    </air:OptionalService>
+                                </air:OptionalServices>
+                            </air:Brand>
+                        </air:FareInfo>
+                        <air:BookingInfo BookingCode="G" CabinClass="Economy" FareInfoRef="SQHcw0G0StqiduzxEBZzMw==" SegmentRef="xxNeClwsT5iOMvsGFk2YTw=="/>
+                        <air:BookingInfo BookingCode="G" CabinClass="Economy" FareInfoRef="SQHcw0G0StqiduzxEBZzMw==" SegmentRef="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                        <air:BookingInfo BookingCode="G" CabinClass="Economy" FareInfoRef="swZKX+LBSU+czv0mEwxcGg==" SegmentRef="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                        <air:BookingInfo BookingCode="G" CabinClass="Economy" FareInfoRef="swZKX+LBSU+czv0mEwxcGg==" SegmentRef="x7rdXqZtT2S8CkR3P08F4A=="/>
+                        <air:TaxInfo Category="UA" Amount="EUR3.56" Key="xvBjb3xwReGJDOu5P8idzw=="/>
+                        <air:TaxInfo Category="UD" Amount="EUR1.78" Key="6Z4moEvRQ2qWBFRNLh+vdQ=="/>
+                        <air:TaxInfo Category="YK" Amount="EUR15.14" Key="acjnx16ERZadrvGbQcBwkw=="/>
+                        <air:TaxInfo Category="CJ" Amount="EUR11.80" Key="DUf8URxRQaWQhERsVEjz+Q=="/>
+                        <air:TaxInfo Category="RN" Amount="EUR11.56" Key="FBjSmOe1TR2+f858NvWpxg=="/>
+                        <air:TaxInfo Category="FR" Amount="EUR20.75" Key="Gx/0363oTYy7jCSyAAux4A=="/>
+                        <air:TaxInfo Category="IZ" Amount="EUR4.51" Key="r3CozYGeRWCdcpOaDq4+PA=="/>
+                        <air:TaxInfo Category="QX" Amount="EUR11.78" Key="fDIh+uX3Q+eFn3gszi8rUg=="/>
+                        <air:PassengerType Code="ADT"/>
+                        <air:BaggageAllowances>
+                            <air:BaggageAllowanceInfo TravelerType="ADT" Origin="IEV" Destination="PAR" Carrier="KL">
+                                <air:URLInfo>
+                                    <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSKL.BAGG</air:URL>
+                                </air:URLInfo>
+                                <air:TextInfo>
+                                    <air:Text>0P</air:Text>
+                                    <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                                </air:TextInfo>
+                                <air:BagDetails ApplicableBags="1stChecked" BasePrice="UAH1015" TotalPrice="UAH1015">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                                <air:BagDetails ApplicableBags="2ndChecked" BasePrice="UAH2030" TotalPrice="UAH2030">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                            </air:BaggageAllowanceInfo>
+                            <air:BaggageAllowanceInfo TravelerType="ADT" Origin="PAR" Destination="IEV" Carrier="KL">
+                                <air:URLInfo>
+                                    <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSKL.BAGG</air:URL>
+                                </air:URLInfo>
+                                <air:TextInfo>
+                                    <air:Text>0P</air:Text>
+                                    <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                                </air:TextInfo>
+                                <air:BagDetails ApplicableBags="1stChecked" BasePrice="EUR35.00" ApproximateBasePrice="EUR35.00" TotalPrice="EUR35.00" ApproximateTotalPrice="EUR35.00">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                                <air:BagDetails ApplicableBags="2ndChecked" BasePrice="EUR70.00" ApproximateBasePrice="EUR70.00" TotalPrice="EUR70.00" ApproximateTotalPrice="EUR70.00">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                            </air:BaggageAllowanceInfo>
+                            <air:CarryOnAllowanceInfo Origin="IEV" Destination="AMS" Carrier="PS">
+                                <air:TextInfo>
+                                    <air:Text>BAGGAGE ALLOWANCE DATA NOT AVAILABLE</air:Text>
+                                </air:TextInfo>
+                            </air:CarryOnAllowanceInfo>
+                            <air:CarryOnAllowanceInfo Origin="AMS" Destination="PAR" Carrier="AF">
+                                <air:TextInfo>
+                                    <air:Text>1P</air:Text>
+                                </air:TextInfo>
+                                <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" ApproximateBasePrice="EUR0.00" TotalPrice="EUR0.00" ApproximateTotalPrice="EUR0.00">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:CarryOnDetails>
+                            </air:CarryOnAllowanceInfo>
+                            <air:CarryOnAllowanceInfo Origin="PAR" Destination="AMS" Carrier="AF">
+                                <air:TextInfo>
+                                    <air:Text>1P</air:Text>
+                                </air:TextInfo>
+                                <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" ApproximateBasePrice="EUR0.00" TotalPrice="EUR0.00" ApproximateTotalPrice="EUR0.00">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:CarryOnDetails>
+                            </air:CarryOnAllowanceInfo>
+                            <air:CarryOnAllowanceInfo Origin="AMS" Destination="IEV" Carrier="KL">
+                                <air:TextInfo>
+                                    <air:Text>1P</air:Text>
+                                </air:TextInfo>
+                                <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" ApproximateBasePrice="EUR0.00" TotalPrice="EUR0.00" ApproximateTotalPrice="EUR0.00">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:CarryOnDetails>
+                            </air:CarryOnAllowanceInfo>
+                        </air:BaggageAllowances>
+                    </air:AirPricingInfo>
+                    <air:OptionalServices>
+                        <air:OptionalServicesTotal/>
+                        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="EUR14.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.924+00:00" ServiceStatus="Offered" SequenceNumber="551300" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="zg9M94Y0R92PLlAYaVrGEA==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR14.00" ApproximateTotalPrice="EUR14.00" ApproximateBasePrice="EUR14.00" Taxes="EUR0.00" OptionalServicesRuleRef="RyXE0nFmSb680uaMA7cArQ==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw==" TravelerType="ADT">
+                                <common_v36_0:SeatAttributes>
+                                    <common_v36_0:SeatAttribute Value="O"/>
+                                </common_v36_0:SeatAttributes>
+                            </common_v36_0:ServiceData>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>CHARGEABLE SEAT</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <common_v36_0:Remark>KL 3097 - EUR14.00 PER PASSENGER CHARGEABLE SEAT</common_v36_0:Remark>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI13" CommercialName="CHARGEABLE SEAT">
+                                <air:Title Type="External" LanguageCode="EN">CHARGEABLE SEAT</air:Title>
+                                <air:AirSegmentRef Key="xxNeClwsT5iOMvsGFk2YTw=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="EUR14.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.924+00:00" ServiceStatus="Offered" SequenceNumber="551300" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="rBiRa6ieSdW5QaToX7TZGw==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR14.00" ApproximateTotalPrice="EUR14.00" ApproximateBasePrice="EUR14.00" Taxes="EUR0.00" OptionalServicesRuleRef="DYoww+l1T22FA9k7Z1AirA==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A==" TravelerType="ADT">
+                                <common_v36_0:SeatAttributes>
+                                    <common_v36_0:SeatAttribute Value="O"/>
+                                </common_v36_0:SeatAttributes>
+                            </common_v36_0:ServiceData>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>CHARGEABLE SEAT</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <common_v36_0:Remark>KL 1385 - EUR14.00 PER PASSENGER CHARGEABLE SEAT</common_v36_0:Remark>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI14" CommercialName="CHARGEABLE SEAT">
+                                <air:Title Type="External" LanguageCode="EN">CHARGEABLE SEAT</air:Title>
+                                <air:AirSegmentRef Key="x7rdXqZtT2S8CkR3P08F4A=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="EUR8.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.924+00:00" ServiceStatus="Offered" SequenceNumber="551225" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="oUbMDowoSo+2xkY3GyVKuQ==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR8.00" ApproximateTotalPrice="EUR8.00" ApproximateBasePrice="EUR8.00" Taxes="EUR0.00" OptionalServicesRuleRef="8wgGN7BMShm6uQePTSh1eg==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ==" TravelerType="ADT">
+                                <common_v36_0:SeatAttributes>
+                                    <common_v36_0:SeatAttribute Value="O"/>
+                                </common_v36_0:SeatAttributes>
+                            </common_v36_0:ServiceData>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>CHARGEABLE SEAT</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <common_v36_0:Remark>KL 2009 - EUR8.00 PER PASSENGER CHARGEABLE SEAT</common_v36_0:Remark>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI15" CommercialName="CHARGEABLE SEAT">
+                                <air:Title Type="External" LanguageCode="EN">CHARGEABLE SEAT</air:Title>
+                                <air:AirSegmentRef Key="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="EUR8.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.924+00:00" ServiceStatus="Offered" SequenceNumber="551225" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="jI/ulPaKROKk5KyJ6YzbmA==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR8.00" ApproximateTotalPrice="EUR8.00" ApproximateBasePrice="EUR8.00" Taxes="EUR0.00" OptionalServicesRuleRef="yLtnHwuKT5+xYiwTfL683w==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw==" TravelerType="ADT">
+                                <common_v36_0:SeatAttributes>
+                                    <common_v36_0:SeatAttribute Value="O"/>
+                                </common_v36_0:SeatAttributes>
+                            </common_v36_0:ServiceData>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>CHARGEABLE SEAT</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <common_v36_0:Remark>KL 2002 - EUR8.00 PER PASSENGER CHARGEABLE SEAT</common_v36_0:Remark>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI16" CommercialName="CHARGEABLE SEAT">
+                                <air:Title Type="External" LanguageCode="EN">CHARGEABLE SEAT</air:Title>
+                                <air:AirSegmentRef Key="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.925+00:00" ServiceStatus="Offered" SequenceNumber="2016000" ServiceSubCode="0CC" SSRCode="ABAG" IssuanceReason="C" Key="bHo9QJKkRwCqj4JEBVllFA==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="yi4CzZ9GTWuV9qn2uT7D9g==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>1ST ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI7" ServiceSubCode="0CC" ServiceType="F" CommercialName="1ST ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Additional baggage as required</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase an additional checked bag.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase an additional checked bag.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">1st Additional bag</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">1st Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-extra_baggage.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-extra_baggage.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                <air:AirSegmentRef Key="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.925+00:00" ServiceStatus="Offered" SequenceNumber="2016000" ServiceSubCode="0CC" SSRCode="ABAG" IssuanceReason="C" Key="FXVa4Z0IQFKGkWCITaR4iw==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="3x+P/fcQTQW+6PehiTCYwg==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>1ST ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI8" ServiceSubCode="0CC" ServiceType="F" CommercialName="1ST ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Additional baggage as required</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase an additional checked bag.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase an additional checked bag.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">1st Additional bag</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">1st Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-extra_baggage.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-extra_baggage.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                <air:AirSegmentRef Key="x7rdXqZtT2S8CkR3P08F4A=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.925+00:00" ServiceStatus="Offered" SequenceNumber="139500" ServiceSubCode="0CD" SSRCode="BBAG" IssuanceReason="C" Key="IhpRVpDETN+AcPtm06MIAA==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="I1Encov8TcKb2Ey5AyJ1Sw==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>2ND ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI19" ServiceSubCode="0CD" ServiceType="F" CommercialName="2ND ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Purchase additional bags as required</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase a 2nd additional bag.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase a 2nd additional bag.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">2nd Additional bag</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">2nd Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-2nd_checked_bags.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-2nd_checked_bags.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                <air:AirSegmentRef Key="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.925+00:00" ServiceStatus="Offered" SequenceNumber="139500" ServiceSubCode="0CD" SSRCode="BBAG" IssuanceReason="C" Key="VxJv7AwBQ6ytYLXLS55mGQ==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="XJvK81jzQNet1zVP1XII4Q==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>2ND ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI20" ServiceSubCode="0CD" ServiceType="F" CommercialName="2ND ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Purchase additional bags as required</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase a 2nd additional bag.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase a 2nd additional bag.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">2nd Additional bag</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">2nd Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-2nd_checked_bags.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-2nd_checked_bags.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                <air:AirSegmentRef Key="x7rdXqZtT2S8CkR3P08F4A=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.926+00:00" ServiceStatus="Offered" SequenceNumber="140000" ServiceSubCode="0CE" SSRCode="CBAG" IssuanceReason="C" Key="4qdxCOQERVOiAeVr0VYw6Q==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="VuCNF9ucSOKNuSG8vawfBA==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="xxNeClwsT5iOMvsGFk2YTw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="RkbjPjXkS1OoCmC9T+E+CQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>3RD OR MORE ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="3">Per Item</air:FeeApplication>
+                            <air:BrandingInfo Key="BI3" ServiceSubCode="0CE" ServiceType="F" CommercialName="3RD OR MORE ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Purchase even more checked baggage</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase a 3rd or even more checked bags.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase a 3rd or even more checked bags.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">3rd or more additional bags</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">3rd Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-3rd_checked_bags.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-3rd_checked_bags.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="xxNeClwsT5iOMvsGFk2YTw=="/>
+                                <air:AirSegmentRef Key="RkbjPjXkS1OoCmC9T+E+CQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="EUR45.00" SupplierCode="KL" PerTraveler="false" CreateDate="2016-09-28T22:34:45.926+00:00" ServiceStatus="Offered" SequenceNumber="140000" ServiceSubCode="0CE" SSRCode="CBAG" IssuanceReason="C" Key="XaMfK0vGS7WGirPUqLJdXA==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="EUR45.00" ApproximateTotalPrice="EUR45.00" ApproximateBasePrice="EUR45.00" Taxes="EUR0.00" OptionalServicesRuleRef="sfZt4HEXRzu+YrQyWKIxUw==">
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="rIW2nFfVSp2ZAu8d5KNsjw==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="wQ5W+RVHQjuB5fs+irhy0A==" AirSegmentRef="x7rdXqZtT2S8CkR3P08F4A==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>3RD OR MORE ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="3">Per Item</air:FeeApplication>
+                            <air:BrandingInfo Key="BI4" ServiceSubCode="0CE" ServiceType="F" CommercialName="3RD OR MORE ADDITIONAL BAG">
+                                <air:Text Type="Strapline" LanguageCode="EN">Purchase even more checked baggage</air:Text>
+                                <air:Text Type="MarketingAgent" LanguageCode="EN">Purchase a 3rd or even more checked bags.</air:Text>
+                                <air:Text Type="MarketingConsumer" LanguageCode="EN">Purchase a 3rd or even more checked bags.</air:Text>
+                                <air:Title Type="External" LanguageCode="EN">3rd or more additional bags</air:Title>
+                                <air:Title Type="Short" LanguageCode="EN">3rd Xbag</air:Title>
+                                <air:ImageLocation Type="Agent" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-3rd_checked_bags.png</air:ImageLocation>
+                                <air:ImageLocation Type="Consumer" ImageWidth="60" ImageHeight="60">https://merchandisingmanagement.travelport.com/documents/10431/13192/tp-attribute-3rd_checked_bags.png</air:ImageLocation>
+                                <air:ServiceGroup Code="BG"/>
+                                <air:AirSegmentRef Key="rIW2nFfVSp2ZAu8d5KNsjw=="/>
+                                <air:AirSegmentRef Key="x7rdXqZtT2S8CkR3P08F4A=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalServiceRules Key="RyXE0nFmSb680uaMA7cArQ==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="DYoww+l1T22FA9k7Z1AirA==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="8wgGN7BMShm6uQePTSh1eg==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="yLtnHwuKT5+xYiwTfL683w==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="yi4CzZ9GTWuV9qn2uT7D9g==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="3x+P/fcQTQW+6PehiTCYwg==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="I1Encov8TcKb2Ey5AyJ1Sw==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="XJvK81jzQNet1zVP1XII4Q==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="VuCNF9ucSOKNuSG8vawfBA==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="sfZt4HEXRzu+YrQyWKIxUw==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                    </air:OptionalServices>
+                </air:AirPricingSolution>
+            </air:AirPriceResult>
+        </air:AirPriceRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

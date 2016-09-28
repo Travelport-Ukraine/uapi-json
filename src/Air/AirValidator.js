@@ -158,6 +158,14 @@ Validator.prototype.passengerBirthDates = function () {
   return this;
 };
 
+Validator.prototype.hasFareBasisCodes = function () {
+  const firstBasis = this.params.segments
+    && this.params.segments[0]
+    && this.params.segments[0].fareBasisCode;
+  this.params.hasFareBasis = !_.isEmpty(firstBasis);
+  return this;
+};
+
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST(params) {
     return new Validator(params)
@@ -176,6 +184,7 @@ module.exports = {
   AIR_PRICE(params) {
     return new Validator(params)
       .bookedPassengers()
+      .hasFareBasisCodes()
       .end();
   },
 

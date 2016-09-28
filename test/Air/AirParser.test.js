@@ -123,6 +123,27 @@ describe('#AirParser', function () {
         test(jsonResult);
         assert(JSON.stringify(jsonSaved) === JSON.stringify(jsonResult), 'Result is not equal to parsed');
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should test another request with 2 air priceing solutions', () => {
+      const passengers = [{
+        lastName: 'ENEKEN',
+        firstName: 'SKYWALKER',
+        passCountry: 'UA',
+        passNumber: 'ES221731',
+        birthDate: '25JUL68',
+        gender: 'M',
+        ageCategory: 'ADT',
+      }];
+
+      const uParser = new ParserUapi(null, 'v_36_0', { passengers });
+      const parseFunction = require('../../src/Air/AirParser').AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
+      const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.2AirPrice.xml`).toString();
+      // const jsonSaved = require('../FakeResponses/Air/AirPricingSolution.2AirPrice.xml.json');
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        test(jsonResult);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
     })
   });
 
