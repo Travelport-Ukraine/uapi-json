@@ -158,7 +158,7 @@ Validator.prototype.passengerBirthDates = function () {
   return this;
 };
 
-Validator.prototype.hasFareBasisCodes = function() {
+Validator.prototype.hasFareBasisCodes = function () {
   const firstBasis = this.params.segments
     && this.params.segments[0]
     && this.params.segments[0].fareBasisCode;
