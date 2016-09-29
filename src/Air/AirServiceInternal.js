@@ -144,5 +144,16 @@ module.exports = function (auth, debug, production) {
             AirParser.GDS_QUEUE_PLACE_RESPONSE,
             debug
         ),
+
+    cancelUR: uApiRequest(
+            config(auth.region, production).UniversalRecord.url,
+            auth,
+            requests.AirService.AIR_CANCEL_UR,
+            null, // TODO rewrite into uAPI parser
+            AirValidator.AIR_CANCEL_UR,
+            AirParser.AIR_ERRORS,
+            AirParser.AIR_CANCEL_UR,
+            debug
+        ),
   };
 };

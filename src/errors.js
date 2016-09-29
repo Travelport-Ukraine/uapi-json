@@ -128,7 +128,7 @@ const allErrors = {
     msg: 'No universal:UniversalRecordImportRsp object in parsed XML for #Air.import()',
   },
   GDS_PLACE_QUEUE_ERROR: { errno: 1500, msg: 'Error during place queue request' },
-  AIR_SEGMENT_FAILURE: { errno: 1501, msg: 'Booking of some segments failure' },
+  AIR_SEGMENT_FAILURE: { errno: 1501, msg: 'Booking of some segments failure. PNR cancelled.' },
 };
 
 

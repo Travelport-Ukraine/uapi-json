@@ -544,5 +544,6 @@ module.exports = {
   AIR_PRICE_FARE_RULES: AirPriceFareRules,
   FARE_RULES_RESPONSE: FareRules,
   GDS_QUEUE_PLACE_RESPONSE: gdsQueue,
+  AIR_CANCEL_UR: nullParsing,
   AIR_ERRORS: AirErrorHandler, // errors handling
 };

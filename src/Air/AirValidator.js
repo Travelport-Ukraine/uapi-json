@@ -246,4 +246,9 @@ module.exports = {
             .pcc()
             .end();
   },
+
+  AIR_CANCEL_UR(params) {
+    return new Validator(params)
+            .end();
+  },
 };
