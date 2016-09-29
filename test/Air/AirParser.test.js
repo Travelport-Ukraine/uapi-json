@@ -298,4 +298,16 @@ describe('#AirParser', function () {
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
   });
+
+  describe('AIR_CANCEL_UR', () => {
+    it('parse cancel by UR', () => {
+      const uParser = new ParserUapi(null, 'v36_0', { });
+      const parseFunction = require('../../src/Air/AirParser').AIR_CANCEL_UR;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCancelUR.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json)
+        testBooking(jsonResult, false, true);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+  });
 });
