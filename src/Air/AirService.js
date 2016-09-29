@@ -26,7 +26,7 @@ module.exports = (settings) => {
         }, data);
         return AirService.createReservation(bookingParams).catch(err => {
           if (err.errno === 1501) {
-            const code = err.details['universal:UniversalRecord']['LocatorCode']
+            const code = err.details['universal:UniversalRecord'].LocatorCode;
             return AirService.cancelUR({
               LocatorCode: code,
             }).then(() => {
