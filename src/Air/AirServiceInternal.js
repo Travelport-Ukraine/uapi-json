@@ -138,7 +138,7 @@ module.exports = function (auth, debug, production) {
             config(auth.region, production).GdsQueueService.url,
             auth,
             requests.GdsQueueService.GDS_QUEUE_PLACE,
-            null, // TODO rewrite into uAPI parser
+            'gdsQueue:GdsQueuePlaceRsp', // TODO rewrite into uAPI parser
             AirValidator.GDS_QUEUE_PLACE,
             AirParser.AIR_ERRORS,
             AirParser.GDS_QUEUE_PLACE_RESPONSE,
