@@ -52,6 +52,10 @@ const countHistogram = (arr) => {
     throw new Error('argument should be an array');
   }
 
+  if (_.isObject(arr[0])) {
+    arr = arr.map(elem => elem.Code);
+  }
+
   arr.sort();
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] !== prev) {
