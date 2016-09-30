@@ -52,6 +52,10 @@ const countHistogram = (arr) => {
     throw new Error('argument should be an array');
   }
 
+  if (_.isObject(arr[0])) {
+    arr = arr.map(elem => elem.Code);
+  }
+
   arr.sort();
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] !== prev) {
@@ -544,5 +548,6 @@ module.exports = {
   AIR_PRICE_FARE_RULES: AirPriceFareRules,
   FARE_RULES_RESPONSE: FareRules,
   GDS_QUEUE_PLACE_RESPONSE: gdsQueue,
+  AIR_CANCEL_UR: nullParsing,
   AIR_ERRORS: AirErrorHandler, // errors handling
 };

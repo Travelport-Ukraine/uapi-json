@@ -54,6 +54,7 @@ module.exports = function (settings) {
             config(auth.region, production).UniversalRecord.url,
             auth,
             requests.HotelsService.HOTELS_CANCEL_BOOK_REQUEST,
+            null,
             HotelsValidator.HOTELS_CANCEL_BOOK_REQUEST,
             HotelsErrors,
             HotelsParser.HOTELS_CANCEL_BOOK_REQUEST,

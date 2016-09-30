@@ -24,7 +24,22 @@ module.exports = (settings) => {
           ticketDate: moment().add(1, 'day').format(),
           ActionStatusType: 'TAW',
         }, data);
-        return AirService.createReservation(bookingParams);
+        return AirService.createReservation(bookingParams).catch(err => {
+          if (err.errno === 1501) {
+            const code = err.details['universal:UniversalRecord'].LocatorCode;
+            return AirService.cancelUR({
+              LocatorCode: code,
+            }).then(() => {
+              throw err;
+            }).catch(() => {
+              if (debug > 0) {
+                console.log('Cant cancel booking with UR', code);
+              }
+              throw err;
+            });
+          }
+          throw err;
+        });
       });
     },
 

@@ -138,10 +138,21 @@ module.exports = function (auth, debug, production) {
             config(auth.region, production).GdsQueueService.url,
             auth,
             requests.GdsQueueService.GDS_QUEUE_PLACE,
-            null, // TODO rewrite into uAPI parser
+            'gdsQueue:GdsQueuePlaceRsp', // TODO rewrite into uAPI parser
             AirValidator.GDS_QUEUE_PLACE,
             AirParser.AIR_ERRORS,
             AirParser.GDS_QUEUE_PLACE_RESPONSE,
+            debug
+        ),
+
+    cancelUR: uApiRequest(
+            config(auth.region, production).UniversalRecord.url,
+            auth,
+            requests.AirService.AIR_CANCEL_UR,
+            null, // TODO rewrite into uAPI parser
+            AirValidator.AIR_CANCEL_UR,
+            AirParser.AIR_ERRORS,
+            AirParser.AIR_CANCEL_UR,
             debug
         ),
   };

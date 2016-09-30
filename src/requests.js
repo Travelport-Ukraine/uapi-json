@@ -19,7 +19,7 @@ module.exports = {
     AIR_CREATE_RESERVATION_REQUEST: xmlDir + '/104-03_1G_AirBook_Rq_pricingSolutionXML.xml',
     AIR_CREATE_RESERVATION_REQUEST_MANUAL: xmlDir + '/104-03_1G_AirBook_Rq.xml',
     AIR_TICKET_REQUEST: xmlDir + '/104-04_1G_AirTicket_Rq.xml',
-
+    AIR_CANCEL_UR: xmlDir + '/AirCancelUR.xml',
     AIR_PRICING_FARE_RULES: xmlDir + '/AirPricing_FareRules.manual_segments.xml',
     FARE_RULES_REQUEST: xmlDir + '/FareRules_uAPI.xml',
 
