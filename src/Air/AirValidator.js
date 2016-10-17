@@ -97,10 +97,10 @@ Validator.prototype.pcc = function () {
 
 Validator.prototype.bookedPassengers = function () {
     // TODO check passengers list
+  this.params.business = (this.params.segments[0].serviceClass === 'Business');
   this.params.passengers = this.params.passengers.map(passenger => {
-    if (passenger.ageCategory === 'CNN') {
-      passenger.child = true;
-    }
+    const birth = moment(passenger.birthDate.toUpperCase(), 'YYYYMMDD');
+    passenger.Age = moment().diff(birth, 'years');
     return passenger;
   });
   return this;
@@ -135,24 +135,34 @@ Validator.prototype.pricingSolutionXML = function () {
 // convert all passenger birth dates from DDmmmYY into YYYY-MM-DD
 Validator.prototype.passengerBirthDates = function () {
   this.params.passengers.forEach((item) => {
-    const a = moment(item.birthDate.toUpperCase(), 'DDMMMYY');
+    const birthSSR = moment(item.birthDate.toUpperCase(), 'YYYYMMDD');
 
-    if (!a.isValid()) {
+    if (!birthSSR.isValid()) {
       throw new Error('Invalid birth date');
     }
     const { passCountry: country,
             passNumber: num,
-            birthDate: birth,
             firstName: first,
             lastName: last,
             gender } = item;
-    const due = moment().add(10, 'month').format('DDMMMYY');
+    const due = moment().add(12, 'month').format('DDMMMYY');
+    const birth = birthSSR.format('DDMMMYY');
+    item.age = parseInt(moment().diff(birthSSR, 'years'), 10);
+
+    if (item.ageCategory === 'CNN') {
+      item.isChild = true;
+      if (item.Age < 10) {
+        item.ageCategory = `C0${item.Age}`;
+      } else {
+        item.ageCategory = `C${item.Age}`;
+      }
+    }
 
     item.ssr = {
       type: 'DOCS',
       text: `P/${country}/${num}/${country}/${birth}/${gender}/${due}/${first}/${last}`,
     };
-    item.DOB = a.format('YYYY-MM-DD');
+    item.DOB = birthSSR.format('YYYY-MM-DD');
   });
 
   return this;

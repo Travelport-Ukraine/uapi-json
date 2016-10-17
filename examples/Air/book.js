@@ -41,7 +41,7 @@ AirService.shop(params).then(results => {
       firstName: 'SKYWALKER',
       passCountry: 'UA',
       passNumber: 'ES221731',
-      birthDate: '25JUL68',
+      birthDate: '19680725',
       gender: 'M',
       ageCategory: 'ADT',
     }, {
@@ -49,7 +49,7 @@ AirService.shop(params).then(results => {
       firstName: 'VAIDER',
       passCountry: 'UA',
       passNumber: 'ES221731',
-      birthDate: '25JUL66',
+      birthDate: '19660725',
       gender: 'M',
       ageCategory: 'ADT',
     }, {
@@ -57,7 +57,7 @@ AirService.shop(params).then(results => {
       firstName: 'SKYWALKER',
       passCountry: 'UA',
       passNumber: 'ES221731',
-      birthDate: '25JUL05',
+      birthDate: '20050725',
       gender: 'M',
       ageCategory: 'CNN',
     }],
