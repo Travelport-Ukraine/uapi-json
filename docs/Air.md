@@ -91,18 +91,9 @@ So under `Directions[0][1]` you will find `Segments` array. This segments are us
     "arrival": "2016-11-10T21:45:00.000+01:00",
     "airline": "KL",
     "flightNumber": "3098",
-    "baggage": [
-      {
-        "units": "piece",
-        "amount": 0
-      }
-    ],
     "serviceClass": "Economy",
     "plane": "E90",
-    "duration": "185",
     "fareBasisCode": "GSRUA",
-    "seatsAvailable": "9",
-    "uapi_SegmentRef": "o/+6FXFrSPaEMv+uAyD5kQ=="
 }
 ```
 
@@ -113,7 +104,7 @@ So under `Directions[0][1]` you will find `Segments` array. This segments are us
 | --- | --- | --- |
 | lastName | <code>String</code> | Passenger last name. |
 | firstName | <code>String</code> | Passenger first name. |
-| birthDate | <code>String</code> | Birth date in format `DDMMMYY`. |
+| birthDate | <code>String</code> | Birth date in format `YYYYMMDD`. |
 | gender | <code>String</code> | One of `['M', 'F']`. |
 | ageCategory | <code>String</code> | One of `['ADT', 'CNN', 'INF']`. Or [other types](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Shared_Air_Topics/Passenger_Type_Codes.htm) |
 | passNumber| <code>String</code> | Pass number. |
