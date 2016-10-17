@@ -87,7 +87,8 @@ describe('#AirParser', function () {
         firstName: 'SKYWALKER',
         passCountry: 'UA',
         passNumber: 'ES221731',
-        birthDate: '25JUL68',
+        birthDate: '19680725',
+        Age: 30,
         gender: 'M',
         ageCategory: 'ADT',
       }];
@@ -109,7 +110,8 @@ describe('#AirParser', function () {
         firstName: 'SKYWALKER',
         passCountry: 'UA',
         passNumber: 'ES221731',
-        birthDate: '25JUL68',
+        birthDate: '19680725',
+        Age: 30,
         gender: 'M',
         ageCategory: 'ADT',
       }];
@@ -131,7 +133,8 @@ describe('#AirParser', function () {
         firstName: 'SKYWALKER',
         passCountry: 'UA',
         passNumber: 'ES221731',
-        birthDate: '25JUL68',
+        birthDate: '19680725',
+        Age: 30,
         gender: 'M',
         ageCategory: 'ADT',
       }];
