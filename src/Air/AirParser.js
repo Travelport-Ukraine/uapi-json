@@ -362,6 +362,7 @@ function airPriceRspPricingSolutionXML(obj) {
       $: {
         BookingTravelerRef: 'P_' + index,
         Code: passenger.ageCategory,
+        Age: passenger.Age,
       },
     });
   });
