@@ -97,10 +97,10 @@ Validator.prototype.pcc = function () {
 
 Validator.prototype.bookedPassengers = function () {
     // TODO check passengers list
+  this.params.business = (this.params.segments[0].serviceClass === 'Business');
   this.params.passengers = this.params.passengers.map(passenger => {
-    if (passenger.ageCategory === 'CNN') {
-      passenger.child = true;
-    }
+    const birth = moment(passenger.birthDate.toUpperCase(), 'YYYYMMDD');
+    passenger.Age = moment().diff(birth, 'years');
     return passenger;
   });
   return this;
