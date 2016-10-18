@@ -153,6 +153,10 @@ describe('#AirParser', function () {
   function testBooking(jsonResult, platingCarrier = true, tickets = false) {
     assert(_.isArray(jsonResult), 'result not array');
     jsonResult.forEach(result => {
+      assert(result.version, 'no version');
+      assert(result.uapi_ur_locator, 'no ur locator');
+      assert(result.uapi_reservation_locator, 'no reservation locator');
+      assert(result.uapi_airline_locator, 'no airline locator');
       assert(result.bookingPCC, 'no booking pcc');
       assert(result.platingCarrier, 'no PC');
       assert(_.isArray(result.passengers), 'passengers is not array');
