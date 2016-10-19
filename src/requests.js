@@ -27,6 +27,7 @@ module.exports = {
 
   UniversalRecord: {
     UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST: xmlDir + '/UniversalRecordImportReq.xml',
+    UNIVERSAL_RECORD_FOID: xmlDir + '/UniversalRecordModifyReq.xml',
   },
 
   UtilsService: {

@@ -52,9 +52,17 @@ module.exports = (settings) => {
       const AirService = airServiceInternal(auth, debug, production);
       return AirService.importPNR(options).then(data => {
         const ticketParams = Object.assign({}, options, {
-          ReservationLocator: data[0].uapi_pnr_locator,
+          ReservationLocator: data[0].uapi_reservation_locator,
         });
-        return AirService.ticket(ticketParams);
+        return AirService.ticket(ticketParams)
+          .then(result => result, error => {
+            if (error.errno === 1503) {
+              return AirService.importPNR(options)
+                .then(booking => AirService.foid(booking[0]))
+                .then(() => AirService.ticket(ticketParams));
+            }
+            return Promise.reject(error);
+          });
       });
     },
   };

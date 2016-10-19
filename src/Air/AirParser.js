@@ -81,6 +81,14 @@ const ticketParse = (obj) => {
   let checkResponseMessage = false;
   let checkTickets = false;
 
+  if (obj['air:TicketFailureInfo']) {
+    const msg = obj['air:TicketFailureInfo'].Message;
+    if (/VALID\sFORM\sOF\sID\s\sFOID\s\sREQUIRED/.exec(msg)) {
+      throw new UError('TICKETING_FOID_REQUIRED');
+    }
+    throw new UError('TICKETING_ERROR', obj);
+  }
+
   if (obj['common_v33_0:ResponseMessage']) {
     const responseMessage = obj['common_v33_0:ResponseMessage'];
     responseMessage.forEach(msg => {
@@ -452,7 +460,9 @@ function extractBookings(obj) {
       type: 'uAPI',
       pnr: providerInfo.LocatorCode,
             // pcc: this.env.pcc, //TODO remove search PCC from format?
-      uapi_pnr_locator: booking.LocatorCode,
+      version: record.Version,
+      uapi_ur_locator: record.LocatorCode,
+      uapi_reservation_locator: booking.LocatorCode,
       uapi_airline_locator: supplierLocator.SupplierLocatorCode || null,
       pnrList: [providerInfo.LocatorCode],
       platingCarrier: platingCarriers,
@@ -550,5 +560,6 @@ module.exports = {
   FARE_RULES_RESPONSE: FareRules,
   GDS_QUEUE_PLACE_RESPONSE: gdsQueue,
   AIR_CANCEL_UR: nullParsing,
+  UNIVERSAL_RECORD_FOID: nullParsing,
   AIR_ERRORS: AirErrorHandler, // errors handling
 };

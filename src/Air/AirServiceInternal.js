@@ -145,6 +145,17 @@ module.exports = function (auth, debug, production) {
             debug
         ),
 
+    foid: uApiRequest(
+      config(auth.region, production).UniversalRecord.url,
+      auth,
+      requests.UniversalRecord.UNIVERSAL_RECORD_FOID,
+      'universal:UniversalRecordModifyRsp',
+      AirValidator.UNIVERSAL_RECORD_FOID,
+      AirParser.AIR_ERRORS,
+      AirParser.UNIVERSAL_RECORD_FOID,
+      debug
+    ),
+
     cancelUR: uApiRequest(
             config(auth.region, production).UniversalRecord.url,
             auth,
