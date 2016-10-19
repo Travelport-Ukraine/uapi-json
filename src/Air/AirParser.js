@@ -82,7 +82,7 @@ const ticketParse = (obj) => {
   let checkTickets = false;
 
   if (obj['air:TicketFailureInfo']) {
-    const msg = obj['air:TicketFailureInfo']['Message'];
+    const msg = obj['air:TicketFailureInfo'].Message;
     if (/VALID\sFORM\sOF\sID\s\sFOID\s\sREQUIRED/.exec(msg)) {
       throw new UError('TICKETING_FOID_REQUIRED');
     }
