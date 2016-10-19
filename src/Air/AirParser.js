@@ -81,6 +81,14 @@ const ticketParse = (obj) => {
   let checkResponseMessage = false;
   let checkTickets = false;
 
+  if (obj['air:TicketFailureInfo']) {
+    const msg = obj['air:TicketFailureInfo']['Message'];
+    if (/VALID\sFORM\sOF\sID\s\sFOID\s\sREQUIRED/.exec(msg)) {
+      throw new UError('TICKETING_FOID_REQUIRED');
+    }
+    throw new UError('TICKETING_ERROR', obj);
+  }
+
   if (obj['common_v33_0:ResponseMessage']) {
     const responseMessage = obj['common_v33_0:ResponseMessage'];
     responseMessage.forEach(msg => {
@@ -552,5 +560,6 @@ module.exports = {
   FARE_RULES_RESPONSE: FareRules,
   GDS_QUEUE_PLACE_RESPONSE: gdsQueue,
   AIR_CANCEL_UR: nullParsing,
+  UNIVERSAL_RECORD_FOID: nullParsing,
   AIR_ERRORS: AirErrorHandler, // errors handling
 };

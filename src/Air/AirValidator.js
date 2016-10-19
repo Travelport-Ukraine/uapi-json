@@ -261,4 +261,9 @@ module.exports = {
     return new Validator(params)
             .end();
   },
+
+  UNIVERSAL_RECORD_FOID(params) {
+    return new Validator(params)
+            .end();
+  },
 };
