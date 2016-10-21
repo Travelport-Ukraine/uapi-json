@@ -1,24 +1,24 @@
 const uApiRequest = require('../../uapi-request');
-const requests = require('../../requests');
-const config = require('../../config');
 const UtilsParser = require('./UtilsParser');
 const UtilsValidator = require('./UtilsValidator');
 const UtilsErrors = require('./UtilsErrors');
+const getConfig = require('../../config');
+
+const templatesDir = `${__dirname}/templates`;
 
 module.exports = function (settings) {
-  const auth = settings.auth;
-  const debug = settings.debug;
-  const production = settings.production;
+  const { auth, debug, production } = settings;
+  const config = getConfig(auth.region, production);
   return {
     currencyConvert: uApiRequest(
-        config(auth.region, production).CurrencyConversion.url,
-        auth,
-        requests.UtilsService.CURRENCY_CONVERSION,
-        null,
-        UtilsValidator.CURRENCY_CONVERSION,
-        UtilsErrors,
-        UtilsParser.CURRENCY_CONVERSION,
-        debug
+      config(auth.region, production).CurrencyConversion.url,
+      auth,
+      `${templatesDir}/UTILS_CURRENCY_CONVERSION.xml`,
+      null,
+      UtilsValidator.CURRENCY_CONVERSION,
+      UtilsErrors,
+      UtilsParser.CURRENCY_CONVERSION,
+      debug
     ),
   };
 };
