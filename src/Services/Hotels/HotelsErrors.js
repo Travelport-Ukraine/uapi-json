@@ -1,4 +1,4 @@
-const UError = require('../errors');
+const UError = require('../../errors');
 
 module.exports = function (err) {
   let errno = 0;
