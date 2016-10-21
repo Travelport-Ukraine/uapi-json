@@ -3,7 +3,7 @@
  */
 // const moment = require('moment');
 const _ = require('lodash');
-const utils = require('../utils');
+const utils = require('../../utils');
 
 const firstFlightDetails = (obj) => (
     _.isObject(utils.firstInObj(obj))

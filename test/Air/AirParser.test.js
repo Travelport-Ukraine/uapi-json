@@ -1,3 +1,4 @@
+var airParser = require('../../src/Services/Air/AirParser');
 var proxy  = require('proxyquire');
 var sinon  = require('sinon');
 var assert = require('assert');
@@ -10,7 +11,7 @@ describe('#AirParser', function () {
   describe('AIR_LOW_FARE_SEARCH()', () => {
     it('should test parsing of low fare search request', () => {
       const uParser = new ParserUapi('air:LowFareSearchRsp', 'v_33_0', {});
-      const parseFunction = require('../../src/Air/AirParser').AIR_LOW_FARE_SEARCH_REQUEST;
+      const parseFunction = airParser.AIR_LOW_FARE_SEARCH_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.xml`).toString();
 
       return uParser.parse(xml).then(json => {
@@ -44,7 +45,7 @@ describe('#AirParser', function () {
 
     it('should compare xml with parsed json', () => {
       const uParser = new ParserUapi('air:LowFareSearchRsp', 'v_33_0', {});
-      const parseFunction = require('../../src/Air/AirParser').AIR_LOW_FARE_SEARCH_REQUEST;
+      const parseFunction = airParser.AIR_LOW_FARE_SEARCH_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.xml`).toString();
       const jsonResult = require('../FakeResponses/Air/LowFaresSearch.2ADT1CNNIEVBKK.json');
       return uParser.parse(xml).then(json => {
@@ -55,7 +56,7 @@ describe('#AirParser', function () {
 
     it('should compare xml with parsed json', () => {
       const uParser = new ParserUapi('air:LowFareSearchRsp', 'v_33_0', {});
-      const parseFunction = require('../../src/Air/AirParser').AIR_LOW_FARE_SEARCH_REQUEST;
+      const parseFunction = airParser.AIR_LOW_FARE_SEARCH_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.1ADTIEVPAR.xml`).toString();
       const jsonResult = require('../FakeResponses/Air/LowFaresSearch.1ADTIEVPAR.json');
       return uParser.parse(xml).then(json => {
@@ -94,7 +95,7 @@ describe('#AirParser', function () {
       }];
 
       const uParser = new ParserUapi(null, 'v_36_0', { passengers });
-      const parseFunction = require('../../src/Air/AirParser').AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
+      const parseFunction = airParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
       const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.xml`).toString();
       const jsonSaved = require('../FakeResponses/Air/AirPricingSolution.IEVPAR.json');
       return uParser.parse(xml).then(json => {
@@ -117,7 +118,7 @@ describe('#AirParser', function () {
       }];
 
       const uParser = new ParserUapi(null, 'v_36_0', { passengers });
-      const parseFunction = require('../../src/Air/AirParser').AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
+      const parseFunction = airParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
       const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.2ADT1CNN.xml`).toString();
       const jsonSaved = require('../FakeResponses/Air/AirPricingSolution.IEVPAR.2ADT1CNN.json');
       return uParser.parse(xml).then(json => {
@@ -140,7 +141,7 @@ describe('#AirParser', function () {
       }];
 
       const uParser = new ParserUapi(null, 'v_36_0', { passengers });
-      const parseFunction = require('../../src/Air/AirParser').AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
+      const parseFunction = airParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
       const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.2AirPrice.xml`).toString();
       // const jsonSaved = require('../FakeResponses/Air/AirPricingSolution.2AirPrice.xml.json');
       return uParser.parse(xml).then(json => {
@@ -201,7 +202,7 @@ describe('#AirParser', function () {
   describe('AIR_CREATE_RESERVATION()', () => {
     it('should test parsing of create reservation 2ADT1CNN', () => {
       const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
-      const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.2ADT1CNN.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json);
@@ -211,7 +212,7 @@ describe('#AirParser', function () {
 
     it('should test parsing of create reservation 1ADT', () => {
       const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
-      const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.1ADT.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json);
@@ -221,7 +222,7 @@ describe('#AirParser', function () {
 
     it('should test parsing of create reservation 1ADT (2)', () => {
       const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
-      const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.1ADT.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json);
@@ -231,7 +232,7 @@ describe('#AirParser', function () {
 
     it('should test parsing of create reservation 1ADT (3)', () => {
       const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
-      const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.1ADT.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json);
@@ -241,7 +242,7 @@ describe('#AirParser', function () {
 
     it('should test parsing of reservation with segment failure', () => {
       const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
-      const parseFunction = require('../../src/Air/AirParser').AIR_CREATE_RESERVATION_REQUEST;
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.SegmentFailure.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json);
@@ -255,7 +256,7 @@ describe('#AirParser', function () {
   describe('AIR_TICKET_REQUEST', () => {
     it('should test parsing ticketing response', () => {
       const uParser = new ParserUapi('air:AirTicketingRsp', 'v33_0', { });
-      const parseFunction = require('../../src/Air/AirParser').AIR_TICKET_REQUEST;
+      const parseFunction = airParser.AIR_TICKET_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/AirTicketing.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json);
@@ -265,7 +266,7 @@ describe('#AirParser', function () {
 
     it('should test parsing ticketing response', () => {
       const uParser = new ParserUapi('air:AirTicketingRsp', 'v33_0', { });
-      const parseFunction = require('../../src/Air/AirParser').AIR_TICKET_REQUEST;
+      const parseFunction = airParser.AIR_TICKET_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/AirTicketing.2.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json);
@@ -277,7 +278,7 @@ describe('#AirParser', function () {
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
     it('should test parsing of universal record import request', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
-      const parseFunction = require('../../src/Air/AirParser').AIR_IMPORT_REQUEST;
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json);
@@ -287,7 +288,7 @@ describe('#AirParser', function () {
 
     it('should test parsing of universal record import request with tickets', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
-      const parseFunction = require('../../src/Air/AirParser').AIR_IMPORT_REQUEST;
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport.Ticket.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json)
@@ -297,7 +298,7 @@ describe('#AirParser', function () {
 
     it('should test parsing of universal record import request with tickets (multiple passengers)', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
-      const parseFunction = require('../../src/Air/AirParser').AIR_IMPORT_REQUEST;
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport.MultiplePassengers.Ticket.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json);
@@ -309,7 +310,7 @@ describe('#AirParser', function () {
   describe('AIR_CANCEL_UR', () => {
     it('parse cancel by UR', () => {
       const uParser = new ParserUapi(null, 'v36_0', { });
-      const parseFunction = require('../../src/Air/AirParser').AIR_CANCEL_UR;
+      const parseFunction = airParser.AIR_CANCEL_UR;
       const xml = fs.readFileSync(`${xmlFolder}/AirCancelUR.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json)

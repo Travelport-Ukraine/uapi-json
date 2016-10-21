@@ -1,6 +1,6 @@
-const UError = require('../errors');
+const UError = require('../../errors');
 const amenties = require('./amenties');
-const Utils = require('../utils');
+const Utils = require('../../utils');
 
 
 const getNextResult = (obj) => {

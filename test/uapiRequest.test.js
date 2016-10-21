@@ -3,7 +3,9 @@ var proxy  = require('proxyquire');
 var uAPI = require('../src/uapi-request');
 var config = require('../src/config');
 var auth = require('./testconfig');
-var requests = require('../src/requests');
+var path = require('path');
+
+var hotelsSearchReqeustPath = `${path.join(__dirname, '../src/Services/Hotels/templates/HOTELS_SEARCH_REQUEST.xml')}`;
 
 var auth = {
   username: '123',
@@ -14,15 +16,15 @@ var auth = {
 describe('uapiRequest tests', function () {
     it('should return error request file not exists', function () {
         var missedFile = 'im the best missing filename';
-        try{
-            var someSerivce = uAPI(config().HotelsService.url, auth, missedFile);
-        }catch(e){
-            assert(e.errno == 8, 'Not resolved error number.');
+        try {
+          var someSerivce = uAPI(config().HotelsService.url, auth, missedFile);
+        } catch(e) {
+          assert(e.errno == 8, 'Not resolved error number.');
         }
     });
 
     it('should give empty data error', function () {
-        var someSerivce = uAPI(config().HotelsService.url, auth, requests.HotelsService.HOTELS_SEARCH_REQUEST, null, null, null, function() {});
+        var someSerivce = uAPI(config().HotelsService.url, auth, hotelsSearchReqeustPath, null, null, null, function() {});
 
         return someSerivce().then(function(msg){}, function(err){
             assert(err.errno == 5);
@@ -31,7 +33,7 @@ describe('uapiRequest tests', function () {
 
     it('should give undefined request error', function () {
         try{
-            var someSerivce = uAPI(config().HotelsService.url, auth, requests.HotelsService.HOTELS_BLABALBAL);
+            var someSerivce = uAPI(config().HotelsService.url, auth, undefined);
         }catch(e){
             assert(e.errno == 7);
         }
@@ -39,7 +41,7 @@ describe('uapiRequest tests', function () {
 
     it('should give auth data error', function () {
         try{
-            var someSerivce = uAPI(config().HotelsService.url, {}, requests.HotelsService.HOTELS_BLABALBAL);
+            var someSerivce = uAPI(config().HotelsService.url, {}, undefined);
         }catch(e){
             assert(e.errno == 3);
         }
@@ -49,7 +51,7 @@ describe('uapiRequest tests', function () {
 
         try{
 
-            var someSerivce = uAPI('', auth, requests.HotelsService.HOTELS_BLABALBAL);
+            var someSerivce = uAPI('', auth, undefined);
         }catch(e){
             assert(e.errno == 2);
         }

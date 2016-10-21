@@ -1,4 +1,4 @@
-const UError = require('../errors');
+const UError = require('../../errors');
 
 function Validator(params) {
   this.params = params;
