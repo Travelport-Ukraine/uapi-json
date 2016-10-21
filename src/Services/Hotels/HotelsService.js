@@ -1,9 +1,9 @@
-const uApiRequest = require('../uapi-request');
-const requests = require('../requests');
+const uApiRequest = require('../../uapi-request');
+const requests = require('../../requests');
 const HotelsParser = require('./HotelsParser');
 const HotelsValidator = require('./HotelsValidator');
 const HotelsErrors = require('./HotelsErrors');
-const config = require('../config');
+const config = require('../../config');
 
 module.exports = function (settings) {
   const auth = settings.auth;

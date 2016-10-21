@@ -1,9 +1,9 @@
-const uApiRequest = require('../uapi-request');
-const requests = require('../requests');
+const uApiRequest = require('../../uapi-request');
+const requests = require('../../requests');
 const AirParser = require('./AirParser');
 const AirValidator = require('./AirValidator');
 // const ErrorHandlers = require('./AirErrors');
-const config = require('../config');
+const config = require('../../config');
 
 module.exports = function (auth, debug, production) {
   return {
