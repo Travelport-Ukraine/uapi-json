@@ -1,10 +1,15 @@
-const UError = require('../../errors');
-const _ = require('lodash');
-const async = require('async');
-const xml2js = require('xml2js');
-const utils = require('../../utils');
-const format = require('./AirFormat');
-const moment = require('moment');
+import _ from 'lodash';
+import async from 'async';
+import xml2js from 'xml2js';
+import moment from 'moment';
+import utils from '../../utils';
+import format from './AirFormat';
+import {
+  AirValidationError,
+  AirParsingError,
+  AirRuntimeError,
+  GdsRuntimeError,
+} from './AirErrors';
 
 /*
  * take air:AirSegment list and return Directions

@@ -1,16 +1,35 @@
-const UError = require('../../errors');
+import {
+  createErrorClass,
+  createErrorsList,
+} from 'node-errors-helpers';
+import errorTypes from '../../error-types';
 
+// Validation errors
+const UtilsValidationError = createErrorClass(
+  'UtilsValidationError',
+  'Utils service validation error',
+  errorTypes.ValidationError
+);
+Object.assign(UtilsValidationError, createErrorsList({
+  CurrenciesMissing: 'Missing currencies',
+}, UtilsValidationError));
 
-module.exports = (err) => {
-  let errno = 0;
-  try {
-    errno = err['SOAP:Fault'][0].detail[0]['common_v34_0:ErrorInfo'][0]['common_v34_0:Code'][0];
-  } catch (e) {
-    console.log('cant parse error');
-  }
+// Parsing errors
+const UtilsParsingError = createErrorClass(
+  'UtilsParsingError',
+  'Utils service parsing error',
+  errorTypes.ParsingError
+);
 
-  switch (errno * 1) {
-    default:
-      throw new UError('UNHANDLED_ERROR', err);
-  }
+// Runtime errors
+const UtilsRuntimeError = createErrorClass(
+  'UtilsRuntimeError',
+  'Utils service runtime error',
+  errorTypes.RuntimeError
+);
+
+export default {
+  UtilsValidationError,
+  UtilsParsingError,
+  UtilsRuntimeError,
 };

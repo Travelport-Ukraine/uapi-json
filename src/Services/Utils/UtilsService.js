@@ -1,4 +1,4 @@
-const uApiRequest = require('../../uapi-request');
+const uApiRequest = require('../../Request/uapi-request');
 const UtilsParser = require('./UtilsParser');
 const UtilsValidator = require('./UtilsValidator');
 const getConfig = require('../../config');

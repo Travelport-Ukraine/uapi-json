@@ -1,4 +1,4 @@
-const uApiRequest = require('../../uapi-request');
+const uApiRequest = require('../../Request/uapi-request');
 const HotelsParser = require('./HotelsParser');
 const HotelsValidator = require('./HotelsValidator');
 const getConfig = require('../../config');

@@ -1,4 +1,9 @@
-const UError = require('../../errors');
+import {
+  HotelsValidationError,
+  HotelsParsingError,
+  HotelsRuntimeError,
+} from './HotelsErrors';
+
 const amenties = require('./amenties');
 const Utils = require('../../utils');
 
@@ -15,9 +20,9 @@ const getHostToken = (obj) => {
 
 const getAmenties = (property) => {
   if (property && property['hotel:Amenities']) {
-    return property['hotel:Amenities'][0]['hotel:Amenity'].map(
-      (e) => ({ [e.$.Code]: amenties[e.$.Code] })
-    );
+    return property['hotel:Amenities'][0]['hotel:Amenity'].map(e => ({
+      [e.$.Code]: amenties[e.$.Code],
+    }));
   }
   return [];
 };
@@ -62,7 +67,7 @@ const searchParse1G = function (obj) {
   };
 
   if (!obj['hotel:HotelSearchAvailabilityRsp']) {
-    throw new UError('PARSING_HOTELS_SEARCH_ERROR', obj);
+    throw new HotelsParsingError.SearchParsingError(obj);
   }
 
   const rsp = obj['hotel:HotelSearchAvailabilityRsp'][0];
@@ -82,13 +87,11 @@ const searchParse1G = function (obj) {
       hotel.Icon = getIcon(elem);
       hotel.Amenties = getAmenties(property);
 
-      hotel.Rates = elem['hotel:RateInfo'].map((rate) =>
-        ({
-          RateSupplier: '1G',
-          PaymentType: 'Post Pay',
-          ApproximateMinimumStayAmount: Utils.price(rate.$.MinimumAmount),
-        })
-      );
+      hotel.Rates = elem['hotel:RateInfo'].map(rate => ({
+        RateSupplier: '1G',
+        PaymentType: 'Post Pay',
+        ApproximateMinimumStayAmount: Utils.price(rate.$.MinimumAmount),
+      }));
 
       return hotel;
     });
@@ -101,7 +104,7 @@ const searchParse = function (obj) {
   const result = {};
 
   if (!obj['hotel:HotelSearchAvailabilityRsp']) {
-    throw new UError('PARSING_HOTELS_SEARCH_ERROR', obj);
+    throw new HotelsParsingError.SearchParsingError(obj);
   }
 
   const rsp = obj['hotel:HotelSearchAvailabilityRsp'][0];
@@ -121,14 +124,12 @@ const searchParse = function (obj) {
         hotel.Description = elem['hotel:PropertyDescription'][0]._;
         hotel.Icon = getIcon(elem);
         hotel.HotelRating = property['hotel:HotelRating'][0]['hotel:Rating'] * 1;
-        hotel.Rates = elem['hotel:RateInfo'].map((rate) =>
-          ({
-            RateSupplier: rate.$.RateSupplier,
-            RateSupplierLogo: rate.$.RateSupplierLogo,
-            PaymentType: rate.$.PaymentType,
-            ApproximateMinimumStayAmount: Utils.price(rate.$.ApproximateMinimumStayAmount),
-          })
-        );
+        hotel.Rates = elem['hotel:RateInfo'].map(rate => ({
+          RateSupplier: rate.$.RateSupplier,
+          RateSupplierLogo: rate.$.RateSupplierLogo,
+          PaymentType: rate.$.PaymentType,
+          ApproximateMinimumStayAmount: Utils.price(rate.$.ApproximateMinimumStayAmount),
+        }));
         hotel.Suppliers = hotel.Rates.map(rate => rate.RateSupplier);
         hotel.Amenties = getAmenties(property);
         hotel.Location = {
@@ -145,7 +146,7 @@ const searchParse = function (obj) {
 
 const rateParse = function (obj) {
   if (!obj['hotel:HotelDetailsRsp']) {
-    throw new UError('PARSING_HOTELS_RATES_ERROR', obj);
+    throw new HotelsParsingError.RateParsingError(obj);
   }
   const rsp = obj['hotel:HotelDetailsRsp'][0];
   const rateobj = rsp;
@@ -171,7 +172,7 @@ const rateParse = function (obj) {
       agregator.hotel.Name = Utils.beautifyName(property.$.Name);
       agregator.hotel.Address = property['hotel:PropertyAddress'][0]['hotel:Address'];
     } else {
-      throw new UError('PARSING_HOTELS_MEDIA_ERROR');
+      throw new HotelsParsingError.MediaParsingError(obj);
     }
 
     if (rate['hotel:HotelDetailItem']) {
@@ -238,7 +239,7 @@ const rateParse = function (obj) {
 const bookParse = function (obj) {
   const result = {};
   if (!obj['universal:HotelCreateReservationRsp']) {
-    throw new UError('PARSING_HOTELS_BOOKING_ERROR', obj);
+    throw new HotelsParsingError.BookingParsingError(obj);
   }
   const rsp = obj['universal:HotelCreateReservationRsp'][0];
   const msg = rsp['common_v34_0:ResponseMessage'] || [];
@@ -274,7 +275,7 @@ const bookParse = function (obj) {
 const cancelBookParse = function (obj) {
   const result = {};
   if (!obj['universal:UniversalRecordCancelRsp']) {
-    throw new UError('PARSING_HOTELS_CANCEL_BOOKING_ERROR', obj);
+    throw new HotelsParsingError.CancelBookingParsingError(obj);
   }
 
   const univ = (obj['universal:UniversalRecordCancelRsp']
@@ -299,13 +300,12 @@ const errorHandler = function (err) {
   }
   switch (errno * 1) {
     case 4965:
-      throw new UError('EMPTY_RESULTS', err);
-    case 5000:
-      throw new UError('GENERAL_ERROR', err);
+      throw new HotelsRuntimeError.NoResultsFound(err);
     case 5574:
-      throw new UError('NO_ENGINES_RESULTS', err);
+      throw new HotelsRuntimeError.NoEnginesResults(err);
+    case 5000:
     default:
-      throw new UError('UNHANDLED_ERROR', err);
+      throw new HotelsRuntimeError(err);
   }
 };
 

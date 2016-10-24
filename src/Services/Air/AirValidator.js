@@ -1,4 +1,10 @@
-const UError = require('../../errors');
+import {
+  AirValidationError,
+  AirParsingError,
+  AirRuntimeError,
+  GdsRuntimeError,
+} from './AirErrors';
+
 const _ = require('lodash');
 
 const moment = require('moment');
@@ -33,8 +39,11 @@ Validator.prototype.setSearchPassengers = function () {
 };
 
 Validator.prototype.legs = function () {
-  if (!_.isArray(this.params.legs)) {
+  if (!this.params.legs) {
     throw new UError('LEGS_REQUIRED', this.params);
+  }
+  if (!_.isArray(this.params.legs)) {
+    throw new UError('LEGS_IS_NOT_ARRAY', this.params);
   }
 
   this.params.legs.forEach((leg, index) => {

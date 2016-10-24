@@ -1,4 +1,7 @@
-const UError = require('../../errors');
+import {
+  UtilsParsingError,
+  UtilsRuntimeError,
+} from './UtilsErrors';
 
 function currencyConvertParse(json) {
   try {
@@ -8,7 +11,7 @@ function currencyConvertParse(json) {
       rate: curr.$.BankSellingRate,
     }));
   } catch (e) {
-    throw new UError('PARSING_ERROR', json);
+    throw new UtilsParsingError(json);
   }
 
   return json;
@@ -24,7 +27,7 @@ const errorHandler = (err) => {
 
   switch (errno * 1) {
     default:
-      throw new UError('UNHANDLED_ERROR', err);
+      throw new UtilsRuntimeError(err);
   }
 };
 

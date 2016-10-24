@@ -1,14 +1,15 @@
-var assert = require('assert');
-var parserErrorXML = require('./FakeResponses/error.js');
+const assert = require('assert');
+const errors = require('../src').errors;
+const UAPIParser = require('../src/Request/uapi-parser');
 
-var uAPI = require('../index');
-var uAPI_Parser = require('../src/uapi-parser');
-var parser = new uAPI_Parser('v_36_0', {});
+const parser = new UAPIParser('v_36_0', {});
 
-describe('parser tests', function () {
-    it('parse with errors', function () {
-        return parser.parseXML('adsdasds').then(function(res){} ,function(err){
-            assert(err.errno === 11, 'Not correct error ');
-        });
-    });
+describe('parser tests', () => {
+  it('parse with errors', () => (
+    parser.parseXML('adsdasds').then(() => {
+      throw new Error('Error should be thrown');
+    }, (err) => {
+      assert(err instanceof errors.Request.RequestSoapError.SoapServerError);
+    })
+  ));
 });

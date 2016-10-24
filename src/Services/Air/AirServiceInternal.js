@@ -1,4 +1,4 @@
-const uApiRequest = require('../../uapi-request');
+const uApiRequest = require('../../Request/uapi-request');
 const AirParser = require('./AirParser');
 const AirValidator = require('./AirValidator');
 const getConfig = require('../../config');
