@@ -1,7 +1,6 @@
 const uApiRequest = require('../../uapi-request');
 const HotelsParser = require('./HotelsParser');
 const HotelsValidator = require('./HotelsValidator');
-const HotelsErrors = require('./HotelsErrors');
 const getConfig = require('../../config');
 
 const templatesDir = `${__dirname}/templates`;
@@ -16,7 +15,7 @@ module.exports = function (settings) {
       `${templatesDir}/HOTELS_SEARCH_REQUEST.xml`,
       null,
       HotelsValidator.HOTELS_SEARCH_REQUEST,
-      HotelsErrors,
+      HotelsParser.HOTELS_ERROR,
       HotelsParser.HOTELS_SEARCH_REQUEST,
       debug
     ),
@@ -26,7 +25,7 @@ module.exports = function (settings) {
       `${templatesDir}/HOTELS_SEARCH_GALILEO_REQUEST.xml`,
       null,
       HotelsValidator.HOTELS_SEARCH_GALILEO_REQUEST,
-      HotelsErrors,
+      HotelsParser.HOTELS_ERROR,
       HotelsParser.HOTELS_SEARCH_GALILEO_REQUEST,
       debug
     ),
@@ -36,7 +35,7 @@ module.exports = function (settings) {
       `${templatesDir}/HOTELS_RATE_REQUEST.xml`,
       null,
       HotelsValidator.HOTELS_RATE_REQUEST,
-      HotelsErrors,
+      HotelsParser.HOTELS_ERROR,
       HotelsParser.HOTELS_RATE_REQUEST,
       debug
     ),
@@ -46,7 +45,7 @@ module.exports = function (settings) {
       `${templatesDir}/HOTELS_BOOK_REQUEST.xml`,
       null,
       HotelsValidator.HOTELS_BOOK_REQUEST,
-      HotelsErrors,
+      HotelsParser.HOTELS_ERROR,
       HotelsParser.HOTELS_BOOK_REQUEST,
       debug
     ),
@@ -56,7 +55,7 @@ module.exports = function (settings) {
       `${templatesDir}/UNIVERSAL_RECORD_CANCEL_UR.xml`,
       null,
       HotelsValidator.HOTELS_CANCEL_BOOK_REQUEST,
-      HotelsErrors,
+      HotelsParser.HOTELS_ERROR,
       HotelsParser.HOTELS_CANCEL_BOOK_REQUEST,
       debug
     ),
