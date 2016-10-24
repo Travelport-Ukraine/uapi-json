@@ -1,13 +1,9 @@
+import _ from 'lodash';
+import moment from 'moment';
 import {
   AirValidationError,
-  AirParsingError,
-  AirRuntimeError,
-  GdsRuntimeError,
+  GdsValidationError,
 } from './AirErrors';
-
-const _ = require('lodash');
-
-const moment = require('moment');
 
 function Validator(params) {
   this.params = params;
@@ -24,7 +20,7 @@ Validator.prototype.setSearchPassengers = function () {
   Object.keys(this.params.passengers).forEach((ageCategory) => {
     const number = self.params.passengers[ageCategory];
     if (number) {
-      for (let i = 0; i < number; i++) {
+      for (let i = 0; i < number; i += 1) {
         list.push({
           ageCategory,
           child: (ageCategory === 'CNN'), // quickfix
@@ -40,16 +36,16 @@ Validator.prototype.setSearchPassengers = function () {
 
 Validator.prototype.legs = function () {
   if (!this.params.legs) {
-    throw new UError('LEGS_REQUIRED', this.params);
+    throw new AirValidationError.LegsMissing(this.params);
   }
   if (!_.isArray(this.params.legs)) {
-    throw new UError('LEGS_IS_NOT_ARRAY', this.params);
+    throw new AirValidationError.LegsInvalidType(this.params);
   }
 
   this.params.legs.forEach((leg, index) => {
     ['from', 'to', 'departureDate'].forEach((key) => {
       if (!leg[key]) {
-        throw new UError('LEGS_REQUIRED_STRUCTURE', { missing: key, index, leg });
+        throw new AirValidationError.LegsInvalidStructure({ missing: key, index, leg });
       }
     });
 
@@ -62,13 +58,15 @@ Validator.prototype.legs = function () {
 Validator.prototype.passengers = function () {
   const self = this;
   if (typeof (this.params.passengers) !== 'object') {
-    throw new UError('PASSENGERS_REQUIRED_LOW', this.params);
+    throw new AirValidationError.PassengersHashMissing(this.params);
   }
 
   Object.keys(this.params.passengers).forEach((ageCategory) => {
     const number = self.params.passengers[ageCategory];
-    if (typeof (ageCategory) !== 'string' || typeof (number) !== 'number') {
-      throw new UError('PASSENGERS_CATEGORY_INVALID', self.params.passengers);
+    if ((typeof ageCategory) !== 'string') {
+      throw new AirValidationError.PassengersCategoryInvalid(this.params);
+    } else if ((typeof number) !== 'number') {
+      throw new AirValidationError.PassengersCountInvalid(this.params);
     }
   });
 
@@ -82,7 +80,7 @@ Validator.prototype.requestId = function () {
 
 Validator.prototype.pnr = function () {
   if (!this.params.pnr) {
-    throw new UError('PNR_REQUIRED', this.params);
+    throw new GdsValidationError.PnrMissing(this.params);
   }
 
   return this;
@@ -90,7 +88,7 @@ Validator.prototype.pnr = function () {
 
 Validator.prototype.queue = function () {
   if (!this.params.queue) {
-    throw new UError('QUEUE_REQUIRED', this.params);
+    throw new GdsValidationError.QueueMissing(this.params);
   }
 
   return this;
@@ -98,7 +96,7 @@ Validator.prototype.queue = function () {
 
 Validator.prototype.pcc = function () {
   if (!this.params.pcc) {
-    throw new UError('PCC_REQUIRED', this.params);
+    throw new GdsValidationError.PccMissing(this.params);
   }
 
   return this;
@@ -107,7 +105,7 @@ Validator.prototype.pcc = function () {
 Validator.prototype.bookedPassengers = function () {
     // TODO check passengers list
   this.params.business = (this.params.segments[0].serviceClass === 'Business');
-  this.params.passengers = this.params.passengers.map(passenger => {
+  this.params.passengers = this.params.passengers.map((passenger) => {
     const birth = moment(passenger.birthDate.toUpperCase(), 'YYYYMMDD');
     passenger.Age = moment().diff(birth, 'years');
     return passenger;

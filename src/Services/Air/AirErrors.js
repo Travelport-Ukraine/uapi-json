@@ -18,6 +18,16 @@ Object.assign(AirValidationError, createErrorsList({
   LegsInvalidType: 'Invalid type for legs in request',
   LegsInvalidStructure: 'Leg in leg array foes not all required fields',
 }, AirValidationError));
+export const GdsValidationError = createErrorClass(
+  'GdsValidationError',
+  'Gds service validation error',
+  errorTypes.ValidationError
+);
+Object.assign(GdsValidationError, createErrorsList({
+  PnrMissing: 'PNR is missing in request',
+  QueueMissing: 'Queue is missing in request',
+  PccMissing: 'Pcc is missing in request',
+}, GdsValidationError));
 
 // Parsing errors
 export const AirParsingError = createErrorClass(
@@ -29,6 +39,7 @@ Object.assign(AirParsingError, createErrorsList({
   ResponseDataMissing: 'One of main data arrays is missing in parsed XML response',
   TicketingResponseMissing: 'Response message text doesn\'t contain OK:Ticket issued',
   TicketingTicketsMissing: 'Tickets not found in ticketing response',
+  ReservationsMissing: 'Reservations missing in response',
 }, AirParsingError));
 
 // Runtime errors
@@ -45,14 +56,17 @@ export const GdsRuntimeError = createErrorClass(
 Object.assign(AirRuntimeError, createErrorsList({
   SegmentBookingFailed: 'Failed to book on or more segments',
   TicketingFailed: 'Ticketing failed',
-  TickeitngFoidRequired: 'FOID required for the PC selected',
+  TicketingFoidRequired: 'FOID required for the PC selected',
+  NoResultsFound: 'No results found',
 }, AirRuntimeError));
 Object.assign(GdsRuntimeError, createErrorsList({
+  PlacingInQueueMessageMissing: 'Placing success message missing',
   PlacingInQueueError: 'Error during placing in queue request',
 }, GdsRuntimeError));
 
 export default {
   AirValidationError,
+  GdsValidationError,
   AirParsingError,
   AirRuntimeError,
   GdsRuntimeError,

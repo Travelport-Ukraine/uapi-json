@@ -15,7 +15,7 @@ const TravellersError = createErrorClass(
   'Travellers information is incorrect',
   HotelsValidationError
 );
-const AddressError = createErrorClass(
+const ContactError = createErrorClass(
   'AddressError',
   'Address information is incorrect',
   HotelsValidationError
@@ -27,23 +27,28 @@ const PaymentDataError = createErrorClass(
 );
 Object.assign(HotelsValidationError, {
   TravellersError,
-  AddressError,
+  ContactError,
   PaymentDataError,
 });
 Object.assign(HotelsValidationError, createErrorsList({
   LocationMissing: 'Missing location in request',
+  LocationInvalid: 'Invalid location in request',
   StartDateMissing: 'Missing startDate in request',
+  StartDateInvalid: 'Invalid startDate in request',
   EndDateMissing: 'Missing endDate in request',
+  EndDateInvalid: 'Invalid endDate in request',
   RoomsMissing: 'Missing rooms in request',
   HotelChainMissing: 'Missing HotelChain in request',
+  HotelChainInvalid: 'Invalid HotelChain in request',
   HotelCodeMissing: 'Missing HotelCode in request',
+  HotelCodeInvalid: 'Invalid HotelCode in request',
   VendorLocationKeyMissing: 'Missing VendorLocationKey in request',
   LocatorCodeMissing: 'Missing LocatorCode in request',
   RatesMissing: 'Missing rates',
   TotalMissing: 'Missing Total price',
   SurchargeMissing: 'Missing Surcharge',
   TaxMissing: 'Missing Tax',
-  BaseMissing: 'Missing Base price',
+  BasePriceMissing: 'Missing Base price',
   RateSupplierMissing: 'Missing RateSupplier',
   RatePlanTypeMissing: 'Missing RatePlanType',
   RateOfferIdMissing: 'Missing RateOfferId',
@@ -51,31 +56,34 @@ Object.assign(HotelsValidationError, createErrorsList({
 }, HotelsValidationError));
 Object.assign(TravellersError, createErrorsList({
   AdultsMissing: 'Missing adults in request',
-  ChildrenMissing: 'Missing children in request',
-  ChildrenAgeInvalid: 'Need to set correct child age',
+  ChildrenTypeInvalid: 'Invalid type for children in request',
+  ChildrenAgeInvalid: 'One or more child in request has invalid age',
   TravellersMissing: 'Missing travellers in request',
   FirstNameMissing: 'Missing FirstName in request',
   LastNameMissing: 'Missing LastName in request',
   PrefixNameMissing: 'Missing PrefixName in request',
   NationalityMissing: 'Missing Nationality in request',
   BirthDateMissing: 'Missing BirthDate in request',
+}, TravellersError));
+Object.assign(ContactError, createErrorsList({
   AreaCodeMissing: 'Missing AreaCode in request',
   CountryCodeMissing: 'Missing CountryCode in request',
   NumberMissing: 'Missing Number in request',
   EmailMissing: 'Missing Email in request',
-}, TravellersError));
-Object.assign(AddressError, createErrorsList({
   CountryMissing: 'Missing Country in request',
+  CountryInvalid: 'Invalid Country in request',
   CityMissing: 'Missing City in request',
   StreetMissing: 'Missing Street in request',
   PostalCodeMissing: 'Missing PostalCode in request',
-}, AddressError));
+}, ContactError));
 Object.assign(PaymentDataError, createErrorsList({
   GuaranteeMissing: 'Missing Guarantee',
   CvvMissing: 'Missing CVV',
+  CvvInvalid: 'Invalid CVV',
   ExpDateMissing: 'Missing ExpDate',
   CardNumberMissing: 'Missing CardNumber',
   CardTypeMissing: 'Missing CardType',
+  CardTypeInvalid: 'Invalid CardType',
   CardHolderMissing: 'Missing CardHolder',
 }, PaymentDataError));
 

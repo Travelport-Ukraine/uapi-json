@@ -5,7 +5,7 @@ import {
 
 function currencyConvertParse(json) {
   try {
-    json = json['util:CurrencyConversionRsp'][0]['util:CurrencyConversion'].map((curr) => ({
+    json = json['util:CurrencyConversionRsp'][0]['util:CurrencyConversion'].map(curr => ({
       from: curr.$.From,
       to: curr.$.To,
       rate: curr.$.BankSellingRate,

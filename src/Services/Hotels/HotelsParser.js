@@ -1,5 +1,4 @@
 import {
-  HotelsValidationError,
   HotelsParsingError,
   HotelsRuntimeError,
 } from './HotelsErrors';
