@@ -25,7 +25,11 @@
     "node",
     "travelport"
   ],
-  "author": "Mark",
+  "author": "Mark Orel <mail.ormark@gmail.com>",
+  "constributors": [
+    "Dmitry Chertousov <d.chertousov@gmail.com>",
+    "Artem Pylypchuk <articicejuice@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "async": "^1.5.2",
