@@ -1,5 +1,6 @@
-const airServiceInternal = require('./AirServiceInternal');
-const moment = require('moment');
+import moment from 'moment';
+import airServiceInternal from './AirServiceInternal';
+import { AirRuntimeError } from './AirErrors';
 
 module.exports = (settings) => {
   const { auth, debug, production } = settings;
@@ -25,7 +26,7 @@ module.exports = (settings) => {
           ActionStatusType: 'TAW',
         }, data);
         return AirService.createReservation(bookingParams).catch((err) => {
-          if (err.errno === 1501) {
+          if (err instanceof AirRuntimeError.SegmentBookingFailed) {
             const code = err.details['universal:UniversalRecord'].LocatorCode;
             return AirService.cancelUR({
               LocatorCode: code,
@@ -55,13 +56,13 @@ module.exports = (settings) => {
           ReservationLocator: data[0].uapi_reservation_locator,
         });
         return AirService.ticket(ticketParams)
-          .then(result => result, (error) => {
-            if (error.errno === 1503) {
+          .then(result => result, (err) => {
+            if (err instanceof AirRuntimeError.TicketingFoidRequired) {
               return AirService.importPNR(options)
                 .then(booking => AirService.foid(booking[0]))
                 .then(() => AirService.ticket(ticketParams));
             }
-            return Promise.reject(error);
+            return Promise.reject(err);
           });
       });
     },
