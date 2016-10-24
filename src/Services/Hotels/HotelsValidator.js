@@ -80,7 +80,7 @@ Validator.prototype.endDate = function () {
 };
 
 Validator.prototype.hotelChain = function () {
-  if (this.params.HotelChain) {
+  if (this.params.HotelChain === undefined) {
     throw new HotelsValidationError.HotelChainMissing(this.params);
   } else if (this.params.HotelChain.length > 2) {
     throw new HotelsValidationError.HotelChainInvalid(this.params);
@@ -89,10 +89,8 @@ Validator.prototype.hotelChain = function () {
 };
 
 Validator.prototype.hotelCode = function () {
-  if (this.params.HotelCode) {
+  if (this.params.HotelCode === undefined) {
     throw new HotelsValidationError.HotelCodeMissing(this.params);
-  } else if (this.params.HotelCode.length > 2) {
-    throw new HotelsValidationError.HotelCodeInvalid(this.params);
   }
   return this;
 };

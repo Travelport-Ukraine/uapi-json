@@ -41,7 +41,6 @@ Object.assign(HotelsValidationError, createErrorsList({
   HotelChainMissing: 'Missing HotelChain in request',
   HotelChainInvalid: 'Invalid HotelChain in request',
   HotelCodeMissing: 'Missing HotelCode in request',
-  HotelCodeInvalid: 'Invalid HotelCode in request',
   VendorLocationKeyMissing: 'Missing VendorLocationKey in request',
   LocatorCodeMissing: 'Missing LocatorCode in request',
   RatesMissing: 'Missing rates',
