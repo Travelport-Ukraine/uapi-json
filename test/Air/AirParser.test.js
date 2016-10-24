@@ -4,9 +4,9 @@ var sinon  = require('sinon');
 var assert = require('assert');
 var fs = require('fs');
 var _ = require('lodash');
-
-const ParserUapi = require('../../src/uapi-parser');
+const ParserUapi = require('../../src/Request/uapi-parser');
 const xmlFolder = __dirname + '/../FakeResponses/Air';
+
 describe('#AirParser', function () {
   describe('AIR_LOW_FARE_SEARCH()', () => {
     it('should test parsing of low fare search request', () => {

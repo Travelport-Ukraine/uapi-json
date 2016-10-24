@@ -16,7 +16,7 @@ module.exports = (settings) => {
 
     book(options) {
       const AirService = airServiceInternal(auth, debug, production);
-      return AirService.airPricePricingSolutionXML(options).then(data => {
+      return AirService.airPricePricingSolutionXML(options).then((data) => {
         const bookingParams = Object.assign({}, {
           passengers: options.passengers,
           rule: options.rule,
@@ -24,7 +24,7 @@ module.exports = (settings) => {
           ticketDate: moment().add(1, 'day').format(),
           ActionStatusType: 'TAW',
         }, data);
-        return AirService.createReservation(bookingParams).catch(err => {
+        return AirService.createReservation(bookingParams).catch((err) => {
           if (err.errno === 1501) {
             const code = err.details['universal:UniversalRecord'].LocatorCode;
             return AirService.cancelUR({
@@ -50,12 +50,12 @@ module.exports = (settings) => {
 
     ticket(options) {
       const AirService = airServiceInternal(auth, debug, production);
-      return AirService.importPNR(options).then(data => {
+      return AirService.importPNR(options).then((data) => {
         const ticketParams = Object.assign({}, options, {
           ReservationLocator: data[0].uapi_reservation_locator,
         });
         return AirService.ticket(ticketParams)
-          .then(result => result, error => {
+          .then(result => result, (error) => {
             if (error.errno === 1503) {
               return AirService.importPNR(options)
                 .then(booking => AirService.foid(booking[0]))

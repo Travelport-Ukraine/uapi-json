@@ -1,4 +1,6 @@
-const UError = require('../../errors');
+import {
+  UtilsValidationError,
+} from './UtilsErrors';
 
 function Validator(params) {
   this.params = params;
@@ -11,16 +13,16 @@ Validator.prototype.end = function () {
 
 Validator.prototype.currencies = function () {
   if (this.params.currencies === undefined) {
-    throw new UError('MISSING_CURRENCIES', this.params);
+    throw new UtilsValidationError.CurrenciesMissing(this.params);
   }
 
   if (this.params.currencies.length <= 0) {
-    throw new UError('MISSING_CURRENCIES', this.params);
+    throw new UtilsValidationError.CurrenciesMissing(this.params);
   }
 
   this.params.currencies.forEach((currency) => {
     if (!currency.from || !currency.to) {
-      throw new UError('MISSING_CURRENCIES', this.params);
+      throw new UtilsValidationError.CurrenciesMissing(this.params);
     }
   });
 

@@ -1,59 +1,55 @@
-var assert = require('assert');
-var proxy  = require('proxyquire');
-var uAPI = require('../src/uapi-request');
-var config = require('../src/config');
-var auth = require('./testconfig');
-var path = require('path');
+const assert = require('assert');
+const errors = require('../src').errors;
+const uAPI = require('../src/Request/uapi-request');
+const config = require('../src/config');
+const auth = require('./testconfig');
+const path = require('path');
 
-var hotelsSearchReqeustPath = `${path.join(__dirname, '../src/Services/Hotels/templates/HOTELS_SEARCH_REQUEST.xml')}`;
+const hotelsSearchReqeustPath = `${path.join(__dirname, '../src/Services/Hotels/templates/HOTELS_SEARCH_REQUEST.xml')}`;
 
-var auth = {
-  username: '123',
-  password: '123'
-};
+describe('uapiRequest tests', () => {
+  it('should return error request file not exists', () => {
+    const missedFile = 'im the best missing filename';
+    try {
+      uAPI(config().HotelsService.url, auth, missedFile);
+    } catch (err) {
+      assert(err instanceof errors.Request.RequestRuntimeError.TemplateFileMissing);
+    }
+  });
 
-
-describe('uapiRequest tests', function () {
-    it('should return error request file not exists', function () {
-        var missedFile = 'im the best missing filename';
-        try {
-          var someSerivce = uAPI(config().HotelsService.url, auth, missedFile);
-        } catch(e) {
-          assert(e.errno == 8, 'Not resolved error number.');
-        }
+  it('should give empty data error', () => {
+    const someService = uAPI(
+      config().HotelsService.url, auth, hotelsSearchReqeustPath,
+      null, null, null, () => {}
+    );
+    someService().then(() => {
+      throw new Error('Error should be thrown');
+    }, (err) => {
+      assert(err instanceof errors.Request.RequestValidationError.ParamsMissing);
     });
+  });
 
-    it('should give empty data error', function () {
-        var someSerivce = uAPI(config().HotelsService.url, auth, hotelsSearchReqeustPath, null, null, null, function() {});
+  it('should give undefined request error', () => {
+    try {
+      uAPI(config().HotelsService.url, auth, undefined);
+    } catch (err) {
+      assert(err instanceof errors.Request.RequestValidationError.RequestTypeUndefined);
+    }
+  });
 
-        return someSerivce().then(function(msg){}, function(err){
-            assert(err.errno == 5);
-        });
-    });
+  it('should give auth data error', () => {
+    try {
+      uAPI(config().HotelsService.url, {}, undefined);
+    } catch (err) {
+      assert(err instanceof errors.Request.RequestValidationError.AuthDataMissing);
+    }
+  });
 
-    it('should give undefined request error', function () {
-        try{
-            var someSerivce = uAPI(config().HotelsService.url, auth, undefined);
-        }catch(e){
-            assert(e.errno == 7);
-        }
-    });
-
-    it('should give auth data error', function () {
-        try{
-            var someSerivce = uAPI(config().HotelsService.url, {}, undefined);
-        }catch(e){
-            assert(e.errno == 3);
-        }
-    });
-
-    it('should give auth service url not provided error', function () {
-
-        try{
-
-            var someSerivce = uAPI('', auth, undefined);
-        }catch(e){
-            assert(e.errno == 2);
-        }
-    });
+  it('should give auth service url not provided error', () => {
+    try {
+      uAPI(null, auth, undefined);
+    } catch (err) {
+      assert(err instanceof errors.Request.RequestValidationError.ServiceUrlMissing);
+    }
+  });
 });

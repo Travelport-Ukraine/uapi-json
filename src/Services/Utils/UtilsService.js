@@ -1,7 +1,6 @@
-const uApiRequest = require('../../uapi-request');
+const uApiRequest = require('../../Request/uapi-request');
 const UtilsParser = require('./UtilsParser');
 const UtilsValidator = require('./UtilsValidator');
-const UtilsErrors = require('./UtilsErrors');
 const getConfig = require('../../config');
 
 const templatesDir = `${__dirname}/templates`;
@@ -16,7 +15,7 @@ module.exports = function (settings) {
       `${templatesDir}/UTILS_CURRENCY_CONVERSION.xml`,
       null,
       UtilsValidator.CURRENCY_CONVERSION,
-      UtilsErrors,
+      UtilsParser.UTILS_ERROR,
       UtilsParser.CURRENCY_CONVERSION,
       debug
     ),

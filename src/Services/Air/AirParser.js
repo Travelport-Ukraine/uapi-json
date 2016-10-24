@@ -1,10 +1,14 @@
-const UError = require('../../errors');
-const _ = require('lodash');
-const async = require('async');
-const xml2js = require('xml2js');
-const utils = require('../../utils');
-const format = require('./AirFormat');
-const moment = require('moment');
+import _ from 'lodash';
+import async from 'async';
+import xml2js from 'xml2js';
+import moment from 'moment';
+import utils from '../../utils';
+import format from './AirFormat';
+import {
+  AirParsingError,
+  AirRuntimeError,
+  GdsRuntimeError,
+} from './AirErrors';
 
 /*
  * take air:AirSegment list and return Directions
@@ -37,7 +41,7 @@ const searchLowFaresValidate = (obj) => {
   rootArrays.forEach((name) => {
     const airName = 'air:' + name + 'List';
     if (!_.isObject(obj[airName])) {
-      throw new UError('PARSING_AIR_WRONG_TYPE', obj[airName]);
+      throw new AirParsingError.ResponseDataMissing({ missing: airName });
     }
   });
 
@@ -57,11 +61,11 @@ const countHistogram = (arr) => {
   }
 
   arr.sort();
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i += 1) {
     if (arr[i] !== prev) {
       a[arr[i]] = 1;
     } else {
-      a[arr[i]]++;
+      a[arr[i]] += 1;
     }
     prev = arr[i];
   }
@@ -84,14 +88,14 @@ const ticketParse = (obj) => {
   if (obj['air:TicketFailureInfo']) {
     const msg = obj['air:TicketFailureInfo'].Message;
     if (/VALID\sFORM\sOF\sID\s\sFOID\s\sREQUIRED/.exec(msg)) {
-      throw new UError('TICKETING_FOID_REQUIRED');
+      throw new AirRuntimeError.TicketingFoidRequired();
     }
-    throw new UError('TICKETING_ERROR', obj);
+    throw new AirRuntimeError.TicketingFailed();
   }
 
   if (obj['common_v33_0:ResponseMessage']) {
     const responseMessage = obj['common_v33_0:ResponseMessage'];
-    responseMessage.forEach(msg => {
+    responseMessage.forEach((msg) => {
       if (msg._ === 'OK:Ticket issued') {
         checkResponseMessage = true;
       }
@@ -99,7 +103,7 @@ const ticketParse = (obj) => {
   }
 
   if (checkResponseMessage === false) {
-    throw new UError('PARSING_AIR_TICKET_NO_RESPONSE_MESSAGE', obj);
+    throw new AirRuntimeError.TicketingResponseMissing(obj);
   }
 
   if (obj['air:ETR']) {
@@ -110,16 +114,15 @@ const ticketParse = (obj) => {
       }, true);
     } catch (e) {
       console.log(e);
-      throw new UError('PARSING_AIR_TICKET_NO_TICKETS', obj);
+      throw new AirRuntimeError.TicketingTicketsMissing(obj);
     }
   }
 
   return checkResponseMessage && checkTickets;
 };
 
-const ticketRequest = (obj) => ticketParse(obj);
-
-const nullParsing = (obj) => obj;
+const ticketRequest = obj => ticketParse(obj);
+const nullParsing = obj => obj;
 
 
 function getPassengers(list, BookingTraveler) {
@@ -164,7 +167,7 @@ function getPassengers(list, BookingTraveler) {
 
 const extractFareRulesLong = (obj) => {
   const result = obj['air:FareRule'];
-  return _.map(result, item => {
+  return _.map(result, (item) => {
     utils.renameProperty(item, 'air:FareRuleLong', 'Rules');
     return item;
   });
@@ -358,7 +361,7 @@ function airPriceRspPricingSolutionXML(obj) {
       const item = elem;
       const ageCategory = passenger.ageCategory;
       if (item[ageCategory] > 0) {
-        item[ageCategory]--;
+        item[ageCategory] -= 1;
         return true;
       }
       return false;
@@ -378,7 +381,7 @@ function airPriceRspPricingSolutionXML(obj) {
   pricingSolution['air:AirPricingInfo'] = pricingInfos;
   const resultXml = {};
 
-  ['air:AirSegment', 'air:AirPricingInfo', 'air:FareNote'].forEach(root => {
+  ['air:AirSegment', 'air:AirPricingInfo', 'air:FareNote'].forEach((root) => {
     const builder = new xml2js.Builder({
       headless: true,
       rootName: root,
@@ -411,12 +414,12 @@ const AirErrorHandler = function (obj) {
   if (errData) {
     switch (errData['common_v33_0:Code']) {
       case '3037': // No availability on chosen flights, unable to fare quote
-        throw new UError('EMPTY_RESULTS', obj); // TODO replace with custom error
+        throw new AirRuntimeError.NoResultsFound(obj);
       default:
-        throw new UError('UNHANDLED_ERROR', obj); // TODO replace with custom error
+        throw new AirRuntimeError(obj); // TODO replace with custom error
     }
   }
-  throw new UError('PARSING_ERROR', obj);
+  throw new AirParsingError(obj);
 };
 
 function extractBookings(obj) {
@@ -424,16 +427,14 @@ function extractBookings(obj) {
   const record = obj['universal:UniversalRecord'];
 
   if (!record['air:AirReservation'] || record['air:AirReservation'].length === 0) {
-    throw new UError('PARSING_NO_BOOKINGS_ERROR');
+    throw new AirParsingError.ReservationsMissing();
   }
 
   if (obj['air:AirSegmentSellFailureInfo']) {
-    throw new UError('AIR_SEGMENT_FAILURE', obj);
+    throw new AirRuntimeError.AirRuntimeErrorSegmentBookingFailed(obj);
   }
 
   const bookings = [];
-  // var uapi_locators = _.pluck(record['air:AirReservation'], 'LocatorCode');
-
   const travellers = record['common_' + this.uapi_version + ':BookingTraveler'];
   const reservations = record['universal:ProviderReservationInfo'];
 
@@ -536,13 +537,13 @@ function gdsQueue(req) {
   try {
     data = req['common_v36_0:ResponseMessage'][0];
   } catch (e) {
-    throw new UError('GDS_PLACE_QUEUE_ERROR', req); // TODO replace with custom error
+    throw new GdsRuntimeError.PlacingInQueueError(req);
   }
 
   // TODO check if there can be several messages
   const message = data._;
   if (message.match(/^Booking successfully placed/) === null) {
-    throw new Error(message); // TODO replace with custom error
+    throw new GdsRuntimeError.PlacingInQueueMessageMissing(message);
   }
 
   return true;
@@ -550,7 +551,6 @@ function gdsQueue(req) {
 
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: lowFaresSearchRequest,
-  AIR_AVAILABILITY_REQUEST: nullParsing, // TODO
   AIR_PRICE_REQUEST: airPriceRsp,
   AIR_PRICE_REQUEST_PRICING_SOLUTION_XML: airPriceRspPricingSolutionXML,
   AIR_CREATE_RESERVATION_REQUEST: extractBookings,

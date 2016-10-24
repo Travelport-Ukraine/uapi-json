@@ -1,15 +1,9 @@
-/**
- * Created by juice on 2/9/16.
- */
-// const moment = require('moment');
 const _ = require('lodash');
 const utils = require('../../utils');
 
-const firstFlightDetails = (obj) => (
-    _.isObject(utils.firstInObj(obj))
-      ? utils.firstInObj(obj)
-      : {}
-  );
+const firstFlightDetails = obj => (
+  _.isObject(utils.firstInObj(obj)) ? utils.firstInObj(obj) : {}
+);
 
 function getBaggage(trip, obj) {
   let add = null;
@@ -86,9 +80,9 @@ function formatTrip(segment, list, fareInfo, flightDetails) {
   if (!_.isEmpty(details)) {
     trip.plane = _.pluck(segment['air:FlightDetails'], 'Equipment');
     trip.duration = _.pluck(segment['air:FlightDetails'], 'FlightTime');
-    stops = Object.keys(details).map((key) => details[key].Origin);
+    stops = Object.keys(details).map(key => details[key].Origin);
   } else if (_.isObject(flightDetails) && _.size(segment['air:FlightDetailsRef']) > 1) {
-    stops = segment['air:FlightDetailsRef'].map((ref) => flightDetails[ref].Origin);
+    stops = segment['air:FlightDetailsRef'].map(ref => flightDetails[ref].Origin);
   }
 
 
@@ -116,7 +110,7 @@ function getTripsFromBooking(option, fareInfos, segments, flightDetails) {
   }
 
   // get trips(per leg)
-  const booking = option['air:BookingInfo'].map(bookingInfo => {
+  const booking = option['air:BookingInfo'].map((bookingInfo) => {
     const list = bookingInfo;
     const fareInfo = fareInfos[list.FareInfoRef];
     const segment = segments[list.SegmentRef];
@@ -170,7 +164,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
     let platingCarrier = false;
     const airPricingInfo = price['air:AirPricingInfo'];
 
-    const allPltCrr = _.map(airPricingInfo, priceInfo => {
+    const allPltCrr = _.map(airPricingInfo, (priceInfo) => {
       const newPltCrr = priceInfo.PlatingCarrier;
       if (!platingCarrier) platingCarrier = newPltCrr;
       if (!platingCarrier === newPltCrr) {
@@ -191,7 +185,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
     const thisFare = price['air:AirPricingInfo'][firstKey]; // get trips from first reservation
 
     const directions = _.map(thisFare['air:FlightOptionsList'], direction =>
-      _.map(direction['air:Option'], option => {
+      _.map(direction['air:Option'], (option) => {
         const trips = getTripsFromBooking(option, fareInfos, segments, flightDetails);
         return {
           from: direction.Origin,
@@ -260,7 +254,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
       ],
       passenger_fares: _.mapValues(
         passengerCategories,
-        (item) => _.pick(item, ['TotalPrice', 'BasePrice', 'Taxes'])
+        item => _.pick(item, ['TotalPrice', 'BasePrice', 'Taxes'])
       ),
       passenger_counts: passengerCounts,
     };

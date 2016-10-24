@@ -1,10 +1,9 @@
-/**
- * Created by juice on 6/10/16.
- */
+import _ from 'lodash';
+import Promise from 'promise';
+import {
+  RequestSoapError,
+} from './RequestErrors';
 
-const _ = require('lodash');
-const Promise = require('promise');
-const UError = require('./errors');
 const parseString = Promise.denodeify(require('xml2js').parseString);
 
 // common func for all XML keyed
@@ -125,11 +124,11 @@ Parser.prototype.mapArrayKeys = function mapArrayKeys(array, name) {
   let hasAllKeys = true;
 
   if (this.config.dropKeys.indexOf(name) === -1) {
-    _.forEach(array, (value) => {
-      hasAllKeys &= !!(getItemEmbKey(value));
+    array.forEach((value) => {
+      hasAllKeys = hasAllKeys && !!(getItemEmbKey(value));
     });
   } else {
-    _.forEach(array, (value) => {
+    array.forEach((value) => {
       if (value.$) {
         delete (value.$.Key);
         if (Object.keys(value.$).length === 0) {
@@ -216,16 +215,16 @@ Parser.prototype.parseXML = function parseXML(xml) {
       return res['SOAP:Envelope']['SOAP:Body'][0];
     }
     // TODO replace with custom error, parse other SOAP errors?
-    throw new UError('PARSING_ERROR', res);
+    throw new RequestSoapError.SoapParsingError(res);
   }, (err) => {
-    throw new UError('PARSING_ERROR', err); // TODO replace with custom error
+    throw new RequestSoapError.SoapServerError(null, err);
   });
 };
 
 Parser.prototype.parse = function (xml) {
   const self = this;
 
-  return this.parseXML(xml).then(obj => {
+  return this.parseXML(xml).then((obj) => {
     const start = new Date();
 
     if (!self.rootObject) {
@@ -239,7 +238,7 @@ Parser.prototype.parse = function (xml) {
       if (data['SOAP:Fault']) {
         return data;
       }
-      throw new UError('PARSING_ERROR', obj); // TODO replace with custom error
+      throw new RequestSoapError.SoapParsingError(obj);
     }
 
     const end = new Date() - start;
@@ -247,7 +246,7 @@ Parser.prototype.parse = function (xml) {
 
     return data[self.rootObject];
   }, (err) => {
-    throw new UError('PARSING_ERROR', err);
+    throw new RequestSoapError.SoapParsingError(null, err);
   });
 };
 
