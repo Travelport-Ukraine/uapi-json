@@ -9,7 +9,7 @@ module.exports = function (auth, debug, production) {
   const config = getConfig(auth.region, production);
   return {
     searchLowFares: uApiRequest(
-      config(auth.region, production).AirService.url,
+      config.AirService.url,
       auth,
       `${templatesDir}/AIR_LOW_FARE_SEARCH_REQUEST.xml`,
       'air:LowFareSearchRsp',
@@ -19,7 +19,7 @@ module.exports = function (auth, debug, production) {
       debug
     ),
     airPrice: uApiRequest(
-      config(auth.region, production).AirService.url,
+      config.AirService.url,
       auth,
       `${templatesDir}/AIR_PRICE_REQ.xml`,
       'air:airPriceRsp',
@@ -29,7 +29,7 @@ module.exports = function (auth, debug, production) {
       debug
     ),
     airPricePricingSolutionXML: uApiRequest(
-      config(auth.region, production).AirService.url,
+      config.AirService.url,
       auth,
       `${templatesDir}/AIR_PRICE_REQ.xml`,
       null, // intentionally, no parsing; we need raw XML
@@ -39,7 +39,7 @@ module.exports = function (auth, debug, production) {
       debug
     ),
     airPriceManual: uApiRequest(
-      config(auth.region, production).AirService.url,
+      config.AirService.url,
       auth,
       `${templatesDir}/AIR_PRICE_REQ_MANUAL.xml`,
       'air:airPriceRsp',
@@ -48,7 +48,7 @@ module.exports = function (auth, debug, production) {
       AirParser.AIR_PRICE_REQUEST
     ),
     createReservation: uApiRequest(
-      config(auth.region, production).AirService.url,
+      config.AirService.url,
       auth,
       `${templatesDir}/AIR_CREATE_RESERVATION_REQUEST.xml`,
       'universal:AirCreateReservationRsp',
@@ -58,7 +58,7 @@ module.exports = function (auth, debug, production) {
       debug
     ),
     ticket: uApiRequest(
-      config(auth.region, production).AirService.url,
+      config.AirService.url,
       auth,
       `${templatesDir}/AIR_TICKET_REQUEST.xml`,
       'air:AirTicketingRsp',
@@ -68,7 +68,7 @@ module.exports = function (auth, debug, production) {
       debug
     ),
     importPNR: uApiRequest(
-      config(auth.region, production).UniversalRecord.url,
+      config.UniversalRecord.url,
       auth,
       `${templatesDir}/UNIVERSAL_RECORD_IMPORT_REQUEST.xml`,
       'universal:UniversalRecordImportRsp',
@@ -78,7 +78,7 @@ module.exports = function (auth, debug, production) {
       debug
     ),
     fareRulesBooked: uApiRequest(
-      config(auth.region, production).AirService.url,
+      config.AirService.url,
       auth,
       `${templatesDir}/AIR_PRICING_FARE_RULES.xml`,
       'air:airPriceRsp',
@@ -87,7 +87,7 @@ module.exports = function (auth, debug, production) {
       AirParser.AIR_PRICE_FARE_RULES
     ),
     fareRulesTripsTravellerRefs: uApiRequest(
-      config(auth.region, production).AirService.url,
+      config.AirService.url,
       auth,
       `${templatesDir}/AIR_PRICING_FARE_RULES.xml`,
       'air:airPriceRsp',
@@ -96,7 +96,7 @@ module.exports = function (auth, debug, production) {
       AirParser.AIR_PRICE_FARE_RULES
     ),
     fareRulesUnbooked: uApiRequest(
-      config(auth.region, production).AirService.url,
+      config.AirService.url,
       auth,
       `${templatesDir}/AIR_PRICING_FARE_RULES.xml`,
       'air:airPriceRsp',
@@ -105,7 +105,7 @@ module.exports = function (auth, debug, production) {
       AirParser.AIR_PRICE_FARE_RULES
     ),
     fareRulesUnbooked_uAPI: uApiRequest(
-      config(auth.region, production).AirService.url,
+      config.AirService.url,
       auth,
       `${templatesDir}/AIR_FARE_RULES_REQUEST.xml`,
       'air:AirFareRulesRsp',
@@ -114,7 +114,7 @@ module.exports = function (auth, debug, production) {
       AirParser.FARE_RULES_RESPONSE
     ),
     gdsQueue: uApiRequest(
-      config(auth.region, production).GdsQueueService.url,
+      config.GdsQueueService.url,
       auth,
       `${templatesDir}/GDS_QUEUE_PLACE.xml`,
       'gdsQueue:GdsQueuePlaceRsp', // TODO rewrite into uAPI parser
@@ -124,7 +124,7 @@ module.exports = function (auth, debug, production) {
       debug
     ),
     foid: uApiRequest(
-      config(auth.region, production).UniversalRecord.url,
+      config.UniversalRecord.url,
       auth,
       `${templatesDir}/UNIVERSAL_RECORD_FOID.xml`,
       'universal:UniversalRecordModifyRsp',
@@ -134,7 +134,7 @@ module.exports = function (auth, debug, production) {
       debug
     ),
     cancelUR: uApiRequest(
-      config(auth.region, production).UniversalRecord.url,
+      config.UniversalRecord.url,
       auth,
       `${templatesDir}/UNIVERSAL_RECORD_CANCEL_UR.xml`,
       null, // TODO rewrite into uAPI parser
