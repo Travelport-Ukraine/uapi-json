@@ -107,7 +107,7 @@ module.exports = function (service, auth, reqType, rootObject,
     };
 
     // create a v36 uAPI parser with default params and request data in env
-    const uParser = new UapiParser(rootObject, 'v36_0', params);
+    const uParser = new UapiParser(rootObject, 'v36_0', params, debugMode);
 
     const parseResponse = function (response) {
       // if there are web server or HTTP auth errors, uAPI returns a JSON
