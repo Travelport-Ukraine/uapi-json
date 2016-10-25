@@ -27,7 +27,7 @@ module.exports = (settings) => {
         }, data);
         return AirService.createReservation(bookingParams).catch((err) => {
           if (err instanceof AirRuntimeError.SegmentBookingFailed) {
-            const code = err.details['universal:UniversalRecord'].LocatorCode;
+            const code = err.data['universal:UniversalRecord'].LocatorCode;
             return AirService.cancelUR({
               LocatorCode: code,
             }).then(() => {
