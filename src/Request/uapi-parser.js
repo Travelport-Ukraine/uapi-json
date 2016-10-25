@@ -107,7 +107,8 @@ function defaultConfig(ver) {
 }
 
 
-function Parser(root, uapiVersion, env, config) {
+function Parser(root, uapiVersion, env, debug, config) {
+  this.debug = debug;
   if (!config) {
     this.config = defaultConfig(uapiVersion);
   } else {
@@ -232,17 +233,33 @@ Parser.prototype.parse = function (xml) {
       return obj;
     }
 
+    if (obj['SOAP:Fault']) {
+      return obj;
+    }
+
+    // trying to redefine version based on response;
+    try {
+      const soapName = self.rootObject.split(':')[0];
+      const rootProps = obj[self.rootObject][0].$;
+      const version = rootProps[`xmlns:${soapName}`].split(`${soapName}_`).pop();
+
+      self.config = defaultConfig(version);
+    } catch (e) {
+      if (self.debug > 2) {
+        console.log('Error during automatic resolving version');
+      }
+    }
+
     const data = self.mergeLeafRecursive(obj, self.rootObject);
 
     if (!data[self.rootObject]) {
-      if (data['SOAP:Fault']) {
-        return data;
-      }
       throw new RequestSoapError.SoapParsingError(obj);
     }
 
     const end = new Date() - start;
-    console.info('uAPI_Parse execution time: %dms', end);
+    if (this.debug > 1) {
+      console.info('uAPI_Parse execution time: %dms', end);
+    }
 
     return data[self.rootObject];
   }, (err) => {
