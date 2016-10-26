@@ -40,6 +40,13 @@ function defaultConfig(ver) {
         'common_' + ver + ':ResponseMessage',
         'air:BaggageAllowanceInfo',
         'air:CarryOnAllowanceInfo',
+        'hotel:RateInfo',
+        'hotel:HotelSearchResult',
+        // 'hotel:Amenities',
+        'hotel:Amenity',
+        'hotel:HotelDetailItem',
+        'hotel:AggregatorHotelDetails',
+        'common_' + ver + ':MediaItem',
     ];
 
   // Non-single field objects don't get collapsed
