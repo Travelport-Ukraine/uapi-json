@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ter="http://www.travelport.com/schema/terminal_v33_0" xmlns:com="http://www.travelport.com/schema/common_v33_0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ter:TerminalReq TraceId="?" TokenId="?" AuthorizedBy="?" TargetBranch="?" OverrideLogging="?" LanguageCode="?" RetrieveProviderReservationDetails="false">
+         <com:BillingPointOfSaleInfo OriginApplication="?" CIDBNumber="?"/>
+         <!--Zero or more repetitions:-->
+         <com:AgentIDOverride SupplierCode="?" ProviderCode="?" AgentID="?"/>
+         <!--Optional:-->
+         <com:TerminalSessionInfo>?</com:TerminalSessionInfo>
+         <!--Optional:-->
+         <com:OverridePCC ProviderCode="?" PseudoCityCode="?"/>
+         <com:HostToken Host="1G" Key="?">?</com:HostToken>
+         <ter:TerminalCommand>?</ter:TerminalCommand>
+      </ter:TerminalReq>
+   </soapenv:Body>
+</soapenv:Envelope>
