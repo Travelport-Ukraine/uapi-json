@@ -22,8 +22,8 @@ module.exports = (settings) => {
           passengers: options.passengers,
           rule: options.rule,
           ticketingPcc: auth.pcc.toUpperCase(),
-          ticketDate: moment().add(1, 'day').format(),
-          ActionStatusType: 'TAW',
+          ticketDate: moment().format(),
+          ActionStatusType: 'TAU',
         }, data);
         return AirService.createReservation(bookingParams).catch((err) => {
           if (err instanceof AirRuntimeError.SegmentBookingFailed) {
