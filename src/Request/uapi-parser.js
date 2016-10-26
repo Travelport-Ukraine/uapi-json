@@ -244,6 +244,7 @@ Parser.prototype.parse = function (xml) {
       const version = rootProps[`xmlns:${soapName}`].split(`${soapName}_`).pop();
 
       self.config = defaultConfig(version);
+      self.uapi_version = version;
     } catch (e) {
       if (self.debug > 2) {
         console.log('Error during automatic resolving version');
