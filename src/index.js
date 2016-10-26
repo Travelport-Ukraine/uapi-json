@@ -1,22 +1,22 @@
-const hotelsService = require('./Hotels/HotelsService');
-const airService = require('./Air/AirService');
-const utilsService = require('./Utils/UtilsService');
+const createHotelService = require('./Services/Hotels/HotelsService');
+const createAirService = require('./Services/Air/AirService');
+const createUtilsService = require('./Services/Utils/UtilsService');
+const commonErrors = require('./error-types');
+const requestErrors = require('./Request/RequestErrors');
+const airErrors = require('./Services/Air/AirErrors');
+const hotelsErrors = require('./Services/Hotels/HotelsErrors');
+const utilsErrors = require('./Services/Utils/UtilsErrors');
 
 const uAPI = {
-  createUtilsService(settings) {
-    return utilsService(settings);
-  },
-
-  createHotelService(settings) {
-    return hotelsService(settings);
-  },
-
-  createAirService(settings) {
-    return airService(settings);
-  },
-
-  createUniversalService(settings) {
-    return airService(settings); // TODO: move
+  createUtilsService,
+  createHotelService,
+  createAirService,
+  errors: {
+    Common: commonErrors,
+    Request: requestErrors,
+    Air: airErrors,
+    Hotels: hotelsErrors,
+    Utils: utilsErrors,
   },
 };
 

@@ -9,7 +9,9 @@ const Utils = {
     };
   },
   beautifyName(string) {
-    return string.split(' ').map((name) => name[0] + name.slice(1).toLowerCase()).join(' ');
+    return string.split(' ').map(name => (
+      name[0] + name.slice(1).toLowerCase()
+    )).join(' ');
   },
 
   firstInObj(obj) {
