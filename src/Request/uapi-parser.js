@@ -40,6 +40,13 @@ function defaultConfig(ver) {
         'common_' + ver + ':ResponseMessage',
         'air:BaggageAllowanceInfo',
         'air:CarryOnAllowanceInfo',
+        'hotel:RateInfo',
+        'hotel:HotelSearchResult',
+        // 'hotel:Amenities',
+        'hotel:Amenity',
+        'hotel:HotelDetailItem',
+        'hotel:AggregatorHotelDetails',
+        'common_' + ver + ':MediaItem',
     ];
 
   // Non-single field objects don't get collapsed
@@ -244,6 +251,7 @@ Parser.prototype.parse = function (xml) {
       const version = rootProps[`xmlns:${soapName}`].split(`${soapName}_`).pop();
 
       self.config = defaultConfig(version);
+      self.uapi_version = version;
     } catch (e) {
       if (self.debug > 2) {
         console.log('Error during automatic resolving version');

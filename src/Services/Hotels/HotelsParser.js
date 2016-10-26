@@ -7,37 +7,37 @@ const amenties = require('./amenties');
 const Utils = require('../../utils');
 
 
-const getNextResult = (obj) => {
-  const ref = obj['common_v34_0:NextResultReference'];
-  return (ref && ref[0] && ref[0]._) || null;
+const getNextResult = (version, obj) => {
+  const ref = obj[`common_${version}:NextResultReference`];
+  return (ref && ref._) || null;
 };
 
-const getHostToken = (obj) => {
-  const token = obj['common_v34_0:HostToken'];
-  return (token && token[0] && token[0]._) || null;
+const getHostToken = (version, obj) => {
+  const token = obj[`common_${version}:HostToken`];
+  return (token && token._) || null;
 };
 
 const getAmenties = (property) => {
   if (property && property['hotel:Amenities']) {
-    return property['hotel:Amenities'][0]['hotel:Amenity'].map(e => ({
-      [e.$.Code]: amenties[e.$.Code],
+    return property['hotel:Amenities']['hotel:Amenity'].map(e => ({
+      [e.Code]: amenties[e.Code],
     }));
   }
   return [];
 };
 
-const getIcon = (elem) => {
-  if (elem && elem['common_v34_0:MediaItem']) {
-    return elem['common_v34_0:MediaItem'][0].$.url;
+const getIcon = (version, elem) => {
+  if (elem && elem[`common_${version}:MediaItem`]) {
+    return elem[`common_${version}:MediaItem`].url;
   }
   return null;
 };
 
-const getMedia = (rate) => {
-  if (rate['common_v34_0:MediaItem']) {
-    return rate['common_v34_0:MediaItem']
-      .filter(elem => elem.$.type !== 'Gallery')
-      .map(elem => elem.$);
+const getMedia = (version, rate) => {
+  if (rate[`common_${version}:MediaItem`]) {
+    return rate[`common_${version}:MediaItem`]
+      .filter(elem => elem.type !== 'Gallery')
+      .map(elem => elem);
   }
   return [];
 };
@@ -59,6 +59,7 @@ const getComments = (rsp) => {
   return [];
 };
 
+// TODO: rewrite or delete.
 const searchParse1G = function (obj) {
   const result = {
     hotels: [],
@@ -99,79 +100,70 @@ const searchParse1G = function (obj) {
   return result;
 };
 
-const searchParse = function (obj) {
+const searchParse = function (rsp) {
+  const self = this;
   const result = {};
 
-  if (!obj['hotel:HotelSearchAvailabilityRsp']) {
-    throw new HotelsParsingError.SearchParsingError(obj);
-  }
-
-  const rsp = obj['hotel:HotelSearchAvailabilityRsp'][0];
-  result.nextResult = getNextResult(rsp);
-  result.HostToken = getHostToken(rsp);
+  result.nextResult = getNextResult(self.uapi_version, rsp);
+  result.HostToken = getHostToken(self.uapi_version, rsp);
 
   if (rsp['hotel:HotelSearchResult']) {
-    if (rsp['hotel:HotelSearchResult'][0]) {
-      result.hotels = rsp['hotel:HotelSearchResult'].map((elem) => {
-        const hotel = {};
-        const property = elem['hotel:HotelProperty'][0];
-        hotel.Name = Utils.beautifyName(property.$.Name);
-        hotel.Address = property['hotel:PropertyAddress'][0]['hotel:Address'][0];
-        hotel.HotelCode = property.$.HotelCode;
-        hotel.HotelChain = property.$.HotelChain;
-        hotel.VendorLocationKey = property.$.VendorLocationKey;
-        hotel.Description = elem['hotel:PropertyDescription'][0]._;
-        hotel.Icon = getIcon(elem);
-        hotel.HotelRating = property['hotel:HotelRating'][0]['hotel:Rating'] * 1;
-        hotel.Rates = elem['hotel:RateInfo'].map(rate => ({
-          RateSupplier: rate.$.RateSupplier,
-          RateSupplierLogo: rate.$.RateSupplierLogo,
-          PaymentType: rate.$.PaymentType,
-          ApproximateMinimumStayAmount: Utils.price(rate.$.ApproximateMinimumStayAmount),
-        }));
-        hotel.Suppliers = hotel.Rates.map(rate => rate.RateSupplier);
-        hotel.Amenties = getAmenties(property);
-        hotel.Location = {
-          lat: property['common_v34_0:CoordinateLocation'][0].$.latitude,
-          lng: property['common_v34_0:CoordinateLocation'][0].$.longitude,
-        };
+    result.hotels = rsp['hotel:HotelSearchResult'].map((elem) => {
+      const hotel = {};
+      const property = elem['hotel:HotelProperty'];
+      hotel.Name = Utils.beautifyName(property.Name);
+      hotel.Address = property['hotel:PropertyAddress']['hotel:Address'];
+      hotel.HotelCode = property.HotelCode;
+      hotel.HotelChain = property.HotelChain;
+      hotel.VendorLocationKey = property.VendorLocationKey;
+      hotel.Description = elem['hotel:PropertyDescription']._;
+      hotel.Icon = getIcon(self.uapi_version, elem);
+      hotel.HotelRating = property['hotel:HotelRating']['hotel:Rating'] * 1;
+      hotel.Rates = elem['hotel:RateInfo'].map(rate => ({
+        RateSupplier: rate.RateSupplier,
+        RateSupplierLogo: rate.RateSupplierLogo,
+        PaymentType: rate.PaymentType,
+        ApproximateMinimumStayAmount: Utils.price(rate.ApproximateMinimumStayAmount),
+      }));
+      hotel.Suppliers = hotel.Rates.map(rate => rate.RateSupplier);
+      hotel.Amenties = getAmenties(property);
+      hotel.Location = {
+        lat: property[`common_${self.uapi_version}:CoordinateLocation`].latitude,
+        lng: property[`common_${self.uapi_version}:CoordinateLocation`].longitude,
+      };
 
-        return hotel;
-      });
-    }
+      return hotel;
+    });
   }
   return result;
 };
 
-const rateParse = function (obj) {
-  if (!obj['hotel:HotelDetailsRsp']) {
-    throw new HotelsParsingError.RateParsingError(obj);
-  }
-  const rsp = obj['hotel:HotelDetailsRsp'][0];
+const rateParse = function (rsp) {
   const rateobj = rsp;
   const result = {};
+  const self = this;
 
-  result.HostToken = getHostToken(rsp);
-  result.Comments = getComments(rsp);
+  result.HostToken = getHostToken(self.uapi_version, rsp);
+  result.Comments = getComments(self.uapi_version, rsp);
 
 
   result.Agregators = rateobj['hotel:AggregatorHotelDetails'].map((rate) => {
     const agregator = {
-      media: getMedia(rate),
+      media: getMedia(self.uapi_version, rate),
       DetailItem: [],
       RateDetail: [],
     };
 
     if (rate['hotel:HotelProperty']) {
       agregator.hotel = {};
-      const property = rate['hotel:HotelProperty'][0];
-      agregator.hotel.HotelCode = property.$.HotelCode;
-      agregator.hotel.HotelChain = property.$.HotelChain;
-      agregator.hotel.VendorLocationKey = property.$.VendorLocationKey;
-      agregator.hotel.Name = Utils.beautifyName(property.$.Name);
-      agregator.hotel.Address = property['hotel:PropertyAddress'][0]['hotel:Address'];
+      const property = rate['hotel:HotelProperty'];
+      agregator.hotel.HotelCode = property.HotelCode;
+      agregator.hotel.HotelChain = property.HotelChain;
+      agregator.hotel.VendorLocationKey = property.VendorLocationKey;
+      agregator.hotel.Name = Utils.beautifyName(property.Name);
+      agregator.hotel.Address = property['hotel:PropertyAddress']['hotel:Address'];
     } else {
-      throw new HotelsParsingError.MediaParsingError(obj);
+      throw new HotelsParsingError.MediaParsingError(rsp);
     }
 
     if (rate['hotel:HotelDetailItem']) {
@@ -181,7 +173,7 @@ const rateParse = function (obj) {
         if (detail['hotel:Text'].length === 1) {
           detail['hotel:Text'] = detail['hotel:Text'].join('');
         }
-        const name = detail.$.Name.split(' ').join('');
+        const name = detail.Name.split(' ').join('');
         detailItem[name] = detail['hotel:Text'];
       });
 
@@ -196,32 +188,30 @@ const rateParse = function (obj) {
           if (roomrate['hotel:Text'].length === 1) {
             roomrate['hotel:Text'] = roomrate['hotel:Text'].join('');
           }
-          const name = roomrate.$.Name.split(' ').join('');
+          const name = roomrate.Name.split(' ').join('');
           roomRate[name] = roomrate['hotel:Text'];
         });
 
-        const cancelInfo = (detail['hotel:CancelInfo'] && detail['hotel:CancelInfo'][0]) || null;
-        const cancelPolicy = (cancelInfo && cancelInfo['hotel:CancellationPolicy'][0]) || null;
-        const guar = (detail['hotel:GuaranteeInfo'] && detail['hotel:GuaranteeInfo'][0]) || null;
+        const cancelInfo = detail['hotel:CancelInfo'] || null;
+        const cancelPolicy = (cancelInfo && cancelInfo['hotel:CancellationPolicy']) || null;
+        const guar = detail['hotel:GuaranteeInfo'] || null;
 
         return {
-          RatePlanType: detail.$.RatePlanType,
-          Base: Utils.price(detail.$.Base),
-          Tax: Utils.price(detail.$.Tax),
-          Total: Utils.price(detail.$.Total),
-          Surcharge: Utils.price(detail.$.Surcharge),
-          RateSupplier: detail.$.RateSupplier,
-          RateOfferId: detail.$.RateOfferId,
-          BookableQuantity: detail.$.BookableQuantity,
-          Capacity: detail['hotel:RoomCapacity'][0]['hotel:Capacity'],
-          IsPackage: JSON.parse(detail['hotel:RoomCapacity'][0].$.IsPackage),
+          RatePlanType: detail.RatePlanType,
+          Base: Utils.price(detail.Base),
+          Tax: Utils.price(detail.Tax),
+          Total: Utils.price(detail.Total),
+          Surcharge: Utils.price(detail.Surcharge),
+          RateSupplier: detail.RateSupplier,
+          RateOfferId: detail.RateOfferId,
+          BookableQuantity: detail.BookableQuantity,
+          Capacity: detail['hotel:RoomCapacity']['hotel:Capacity'],
+          IsPackage: JSON.parse(detail['hotel:RoomCapacity'].IsPackage),
           CancelInfo: cancelPolicy.replace(/<P>|<B>|<\/P>|<\/B>/g, ''),
           GuaranteeInfo: {
-            type: (guar.$)
-              ? guar.$.GuaranteeType
-              : null,
+            type: (guar && guar.GuaranteeType) || null,
             amount: (guar['hotel:DepositAmount'])
-              ? Utils.price(guar['hotel:DepositAmount'][0].$.Amount)
+              ? Utils.price(guar['hotel:DepositAmount'].Amount)
               : null,
           },
           RoomRateDescription: roomRate,
@@ -235,58 +225,50 @@ const rateParse = function (obj) {
   return result;
 };
 
-const bookParse = function (obj) {
+const bookParse = function (rsp) {
   const result = {};
-  if (!obj['universal:HotelCreateReservationRsp']) {
-    throw new HotelsParsingError.BookingParsingError(obj);
-  }
-  const rsp = obj['universal:HotelCreateReservationRsp'][0];
-  const msg = rsp['common_v34_0:ResponseMessage'] || [];
+  const self = this;
+
+  const msg = rsp[`common_${self.uapi_version}:ResponseMessage`] || [];
 
   result.ResponseMessages = msg.map(elem =>
     ({
-      type: elem.$.Type,
+      type: elem.Type,
       text: elem._,
     })
   );
 
-  const univrec = rsp['universal:UniversalRecord'][0];
+  const univrec = rsp['universal:UniversalRecord'];
 
-  result.LocatorCode = univrec.$.LocatorCode;
-  result.Status = univrec.$.Status;
+  result.LocatorCode = univrec.LocatorCode;
+  result.Status = univrec.Status;
 
+  const providerInfoKey = Object.keys(univrec['universal:ProviderReservationInfo']);
+  const firstProvider = providerInfoKey[0];
   result.ProviderReservationInfo = {
-    ProviderCode: univrec['universal:ProviderReservationInfo'][0].$.ProviderCode,
-    LocatorCode: univrec['universal:ProviderReservationInfo'][0].$.LocatorCode,
-    CreateDate: univrec['universal:ProviderReservationInfo'][0].$.CreateDate,
+    ProviderCode: univrec['universal:ProviderReservationInfo'][firstProvider].ProviderCode,
+    LocatorCode: univrec['universal:ProviderReservationInfo'][firstProvider].LocatorCode,
+    CreateDate: univrec['universal:ProviderReservationInfo'][firstProvider].CreateDate,
   };
 
   result.HotelReservation = {
-    Status: univrec['hotel:HotelReservation'][0].$.Status,
-    AggregatorBookingStatus: univrec['hotel:HotelReservation'][0].$.AggregatorBookingStatus,
-    BookingConfirmation: univrec['hotel:HotelReservation'][0].$.BookingConfirmation,
-    LocatorCode: univrec['hotel:HotelReservation'][0].$.LocatorCode,
-    CreateDate: univrec['hotel:HotelReservation'][0].$.CreateDate,
+    Status: univrec['hotel:HotelReservation'].Status,
+    AggregatorBookingStatus: univrec['hotel:HotelReservation'].AggregatorBookingStatus,
+    BookingConfirmation: univrec['hotel:HotelReservation'].BookingConfirmation,
+    LocatorCode: univrec['hotel:HotelReservation'].LocatorCode,
+    CreateDate: univrec['hotel:HotelReservation'].CreateDate,
   };
   return result;
 };
 
 const cancelBookParse = function (obj) {
   const result = {};
-  if (!obj['universal:UniversalRecordCancelRsp']) {
-    throw new HotelsParsingError.CancelBookingParsingError(obj);
-  }
 
-  const univ = (obj['universal:UniversalRecordCancelRsp']
-    && obj['universal:UniversalRecordCancelRsp'][0]) || null;
+  const provider = obj['universal:ProviderReservationStatus'] || null;
 
-  const provider = (univ
-    && univ['universal:ProviderReservationStatus']
-    && univ['universal:ProviderReservationStatus'][0]) || null;
-
-  result.Cancelled = JSON.parse(provider.$.Cancelled);
-  result.CreateDate = provider.$.CreateDate;
-  result.CancelInfo = provider['universal:CancelInfo'][0]._;
+  result.Cancelled = JSON.parse(provider.Cancelled);
+  result.CreateDate = provider.CreateDate;
+  result.CancelInfo = provider['universal:CancelInfo']._;
   return result;
 };
 
