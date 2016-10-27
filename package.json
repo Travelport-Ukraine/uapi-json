@@ -46,6 +46,7 @@
   "devDependencies": {
     "argg": "",
     "babel-cli": "^6.14.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015-node4": "^2.1.0",
     "eslint": "^3.4.0",
     "eslint-config-airbnb": "^12.0.0",
