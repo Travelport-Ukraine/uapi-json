@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import moment from 'moment';
 import errors from './AirErrors';
+
 const { AirValidationError, GdsValidationError } = errors;
 
 function Validator(params) {

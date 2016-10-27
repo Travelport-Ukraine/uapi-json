@@ -1,4 +1,5 @@
 import errors from './HotelsErrors';
+
 const { HotelsParsingError, HotelsRuntimeError } = errors;
 
 const amenties = require('./amenties');

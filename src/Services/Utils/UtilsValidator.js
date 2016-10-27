@@ -1,7 +1,8 @@
 import errors from './UtilsErrors';
+
 const { UtilsValidationError } = errors;
 
-        function Validator(params) {
+function Validator(params) {
   this.params = params;
   this.reg = /^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/;
 }

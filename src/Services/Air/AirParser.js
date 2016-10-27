@@ -425,9 +425,9 @@ function extractBookings(obj) {
   const record = obj['universal:UniversalRecord'];
   const messages = obj['common_v36_0:ResponseMessage'] || [];
 
-  messages.map(message => {
+  messages.forEach((message) => {
     if (/NO VALID FARE FOR INPUT CRITERIA/.exec(message._)) {
-      throw  new AirRuntimeError.NoValidFare(obj);
+      throw new AirRuntimeError.NoValidFare(obj);
     }
   });
 
