@@ -1,4 +1,4 @@
-import { handlebars as Mustache } from 'consolidate';
+import handlebars from 'handlebars';
 import _ from 'lodash';
 import fs from 'fs';
 import request from 'request';
@@ -60,7 +60,7 @@ module.exports = function (service, auth, reqType, rootObject,
       params.TargetBranch = auth.targetBranch;
       params.Username = auth.username;
       params.pcc = auth.pcc;
-      const renderedObj = Mustache.render(data.toString(), params);
+      const renderedObj = handlebars.render(data.toString(), params);
       return renderedObj;
     };
 
