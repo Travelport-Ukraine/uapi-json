@@ -1,6 +1,8 @@
 import moment from 'moment';
 import airServiceInternal from './AirServiceInternal';
-import { AirRuntimeError } from './AirErrors';
+import errors from './AirErrors';
+
+const { AirRuntimeError } = errors;
 
 module.exports = (settings) => {
   const { auth, debug, production } = settings;
@@ -26,7 +28,8 @@ module.exports = (settings) => {
           ActionStatusType: 'TAU',
         }, data);
         return AirService.createReservation(bookingParams).catch((err) => {
-          if (err instanceof AirRuntimeError.SegmentBookingFailed) {
+          if (err instanceof AirRuntimeError.SegmentBookingFailed
+              || err instanceof AirRuntimeError.NoValidFare) {
             const code = err.data['universal:UniversalRecord'].LocatorCode;
             return AirService.cancelUR({
               LocatorCode: code,

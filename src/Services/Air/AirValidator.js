@@ -1,9 +1,8 @@
 import _ from 'lodash';
 import moment from 'moment';
-import {
-  AirValidationError,
-  GdsValidationError,
-} from './AirErrors';
+import errors from './AirErrors';
+
+const { AirValidationError, GdsValidationError } = errors;
 
 function Validator(params) {
   this.params = params;

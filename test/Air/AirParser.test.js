@@ -1,4 +1,6 @@
 var airParser = require('../../src/Services/Air/AirParser');
+const airErrors = require('../../src/Services/Air/AirErrors');
+
 var proxy  = require('proxyquire');
 var sinon  = require('sinon');
 var assert = require('assert');
@@ -240,17 +242,33 @@ describe('#AirParser', function () {
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
 
-    it('should test parsing of reservation with segment failure', () => {
+    it('should test parsing of reservation with no valid fare error', () => {
       const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.SegmentFailure.xml`).toString();
       return uParser.parse(xml).then(json => {
         const jsonResult = parseFunction.call(uParser, json);
-        assert(false, 'There should be error');
+        assert(false, 'Should be SegmentBookingFailed error.');
       }).catch(err => {
         assert(err, 'No error returner');
+        assert(err instanceof airErrors.AirRuntimeError.SegmentBookingFailed, 'Should be SegmentBookingFailed error.');
       });
     });
+
+    it('should test parsing of reservation with segment failure', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.NOVALIDFARE.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(false, 'Should be NoValidFare error.');
+      }).catch(err => {
+        assert(err, 'No error returner');
+        assert(err instanceof airErrors.AirRuntimeError.NoValidFare, 'Should be NoValidFare error.');
+      });
+    });
+
+
   });
 
   describe('AIR_TICKET_REQUEST', () => {

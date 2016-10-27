@@ -5,7 +5,7 @@ import {
 import errorTypes from '../../error-types';
 
 // Validation errors
-export const HotelsValidationError = createErrorClass(
+const HotelsValidationError = createErrorClass(
   'HotelsValidationError',
   'Hotels service validation error',
   errorTypes.ValidationError
@@ -87,7 +87,7 @@ Object.assign(PaymentDataError, createErrorsList({
 }, PaymentDataError));
 
 // Parsing errors
-export const HotelsParsingError = createErrorClass(
+const HotelsParsingError = createErrorClass(
   'HotelsParsingError',
   'Hotels service parsing error',
   errorTypes.ParsingError
@@ -101,7 +101,7 @@ Object.assign(HotelsParsingError, createErrorsList({
 }, HotelsParsingError));
 
 // Runtime errors
-export const HotelsRuntimeError = createErrorClass(
+const HotelsRuntimeError = createErrorClass(
   'HotelsRuntimeError',
   'Hotels service runtime error',
   errorTypes.RuntimeError
