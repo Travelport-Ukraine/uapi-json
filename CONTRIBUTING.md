@@ -10,6 +10,7 @@ We love pull requests from everyone.
 To start working with code first visit [issue tracker](https://github.com/Travelport-Ukraine/uapi-json/issues) and after that tell us what are you going to do (maybe we are currently working on it).
 
 Than follow next steps
+
 1. Fork the repo:
 
         git clone git@github.com:your-username/uapi-json.git
