@@ -80,6 +80,7 @@ After searching for air segments and fares, air bookings are created using the r
 
 Each search response has `Directions` array which represents different variations of the same trip (with same price), but with the different flight options. Each index of `Directions` array represents leg index. For example if you have IEV-PAR-IEV roundtrip search request it will have IEV-PAR, PAR-IEV legs. And `Directions` array will have length 2. Under `Directions[0]` and `Directions[1]` will be different options for the flight.
 So under `Directions[0][1]` you will find `Segments` array. This segments are used for booking.
+Please specify `transfer` field to mark connection segment.
 
 `Segment` object sample.
 ```json
@@ -94,6 +95,7 @@ So under `Directions[0][1]` you will find `Segments` array. This segments are us
     "serviceClass": "Economy",
     "plane": "E90",
     "fareBasisCode": "GSRUA",
+    "transfer": false
 }
 ```
 
