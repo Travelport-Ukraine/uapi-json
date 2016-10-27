@@ -1,6 +1,6 @@
 {
   "name": "uapi-json",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Travelport Universal API",
   "main": "build/",
   "files": [
@@ -37,7 +37,7 @@
     "handlebars": "^4.0.5",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
-    "node-errors-helpers": "^0.1.1",
+    "node-errors-helpers": "^0.1.2",
     "object-assign": "^4.0.1",
     "promise": "^7.0.3",
     "request": "^2.60.0",
