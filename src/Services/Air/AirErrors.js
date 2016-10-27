@@ -5,7 +5,7 @@ import {
 import errorTypes from '../../error-types';
 
 // Validation errors
-export const AirValidationError = createErrorClass(
+const AirValidationError = createErrorClass(
   'AirValidationError',
   'Air service validation error',
   errorTypes.ValidationError
@@ -18,7 +18,7 @@ Object.assign(AirValidationError, createErrorsList({
   LegsInvalidType: 'Invalid type for legs in request',
   LegsInvalidStructure: 'Leg in leg array foes not all required fields',
 }, AirValidationError));
-export const GdsValidationError = createErrorClass(
+const GdsValidationError = createErrorClass(
   'GdsValidationError',
   'Gds service validation error',
   errorTypes.ValidationError
@@ -30,7 +30,7 @@ Object.assign(GdsValidationError, createErrorsList({
 }, GdsValidationError));
 
 // Parsing errors
-export const AirParsingError = createErrorClass(
+const AirParsingError = createErrorClass(
   'AirParsingError',
   'Air service parsing error',
   errorTypes.ParsingError
@@ -43,12 +43,12 @@ Object.assign(AirParsingError, createErrorsList({
 }, AirParsingError));
 
 // Runtime errors
-export const AirRuntimeError = createErrorClass(
+const AirRuntimeError = createErrorClass(
   'AirRuntimeError',
   'Air service runtime error',
   errorTypes.RuntimeError
 );
-export const GdsRuntimeError = createErrorClass(
+const GdsRuntimeError = createErrorClass(
   'GdsRuntimeError',
   'Gds service runtime error',
   errorTypes.RuntimeError
@@ -58,7 +58,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   TicketingFailed: 'Ticketing failed',
   TicketingFoidRequired: 'FOID required for the PC selected',
   NoResultsFound: 'No results found',
-  NoValidFare: 'No valid fare for input criteria.'
+  NoValidFare: 'No valid fare for input criteria.',
 }, AirRuntimeError));
 Object.assign(GdsRuntimeError, createErrorsList({
   PlacingInQueueMessageMissing: 'Placing success message missing',
