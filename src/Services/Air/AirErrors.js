@@ -58,6 +58,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   TicketingFailed: 'Ticketing failed',
   TicketingFoidRequired: 'FOID required for the PC selected',
   NoResultsFound: 'No results found',
+  NoValidFare: 'No valid fare for input criteria.'
 }, AirRuntimeError));
 Object.assign(GdsRuntimeError, createErrorsList({
   PlacingInQueueMessageMissing: 'Placing success message missing',

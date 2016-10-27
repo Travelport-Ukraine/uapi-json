@@ -423,13 +423,20 @@ const AirErrorHandler = function (obj) {
 function extractBookings(obj) {
   const self = this;
   const record = obj['universal:UniversalRecord'];
+  const messages = obj['common_v36_0:ResponseMessage'] || [];
+
+  messages.map(message => {
+    if (/NO VALID FARE FOR INPUT CRITERIA/.exec(message._)) {
+      throw  new AirRuntimeError.NoValidFare(obj);
+    }
+  });
 
   if (!record['air:AirReservation'] || record['air:AirReservation'].length === 0) {
     throw new AirParsingError.ReservationsMissing();
   }
 
   if (obj['air:AirSegmentSellFailureInfo']) {
-    throw new AirRuntimeError.AirRuntimeErrorSegmentBookingFailed(obj);
+    throw new AirRuntimeError.SegmentBookingFailed(obj);
   }
 
   const bookings = [];
