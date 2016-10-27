@@ -4,11 +4,9 @@ import xml2js from 'xml2js';
 import moment from 'moment';
 import utils from '../../utils';
 import format from './AirFormat';
-import {
-  AirParsingError,
-  AirRuntimeError,
-  GdsRuntimeError,
-} from './AirErrors';
+import errors from './AirErrors';
+
+const { AirParsingError, AirRuntimeError, GdsRuntimeError } = errors;
 
 /*
  * take air:AirSegment list and return Directions

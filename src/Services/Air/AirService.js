@@ -1,6 +1,7 @@
 import moment from 'moment';
 import airServiceInternal from './AirServiceInternal';
-import { AirRuntimeError } from './AirErrors';
+import errors from './AirErrors';
+const { AirRuntimeError } = errors;
 
 module.exports = (settings) => {
   const { auth, debug, production } = settings;

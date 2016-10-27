@@ -1,7 +1,5 @@
-import {
-  HotelsParsingError,
-  HotelsRuntimeError,
-} from './HotelsErrors';
+import errors from './HotelsErrors';
+const { HotelsParsingError, HotelsRuntimeError } = errors;
 
 const amenties = require('./amenties');
 const Utils = require('../../utils');
