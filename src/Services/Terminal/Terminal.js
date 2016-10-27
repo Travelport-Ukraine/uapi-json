@@ -13,7 +13,7 @@ module.exports = function (settings) {
       Object.assign(state, {
         sessionToken,
       });
-      return sessionToken;
+      return resolve(sessionToken);
     });
   });
   return {
