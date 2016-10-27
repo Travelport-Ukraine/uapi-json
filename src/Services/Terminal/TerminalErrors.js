@@ -17,6 +17,10 @@ export const TerminalParsingError = createErrorClass(
   'Terminal service parsing error',
   errorTypes.ParsingError
 );
+Object.assign(TerminalParsingError, createErrorsList({
+  TerminalSessionTokenMissing: 'Terminal session token is missing in service response',
+  TerminalResponseMissing: 'Terminal response is missing in service response',
+}, TerminalParsingError));
 
 // Runtime errors
 export const TerminalRuntimeError = createErrorClass(
@@ -24,6 +28,10 @@ export const TerminalRuntimeError = createErrorClass(
   'Terminal service runtime error',
   errorTypes.RuntimeError
 );
+Object.assign(TerminalRuntimeError, createErrorsList({
+  TerminalEmulationFailed: 'Terminal emulation failed',
+  TerminalCloseSessionFailed: 'Failed to close terminal session',
+}, TerminalRuntimeError));
 
 export default {
   TerminalValidationError,

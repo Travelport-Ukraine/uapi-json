@@ -14,7 +14,7 @@ module.exports = function (settings) {
       config.TerminalService.url,
       auth,
       `${templatesDir}/TERMINAL_CREATE_SESSION.xml`,
-      null,
+      'terminal:CreateTerminalSessionRsp',
       TerminalValidator.CREATE_SESSION,
       TerminalParser.TERMINAL_ERROR,
       TerminalParser.CREATE_SESSION,
@@ -24,10 +24,20 @@ module.exports = function (settings) {
       config.TerminalService.url,
       auth,
       `${templatesDir}/TERMINAL_REQUEST.xml`,
-      null,
+      'terminal:TerminalRsp',
       TerminalValidator.TERMINAL_REQUEST,
       TerminalParser.TERMINAL_ERROR,
       TerminalParser.TERMINAL_REQUEST,
+      debug
+    ),
+    closeSession: uApiRequest(
+      config.TerminalService.url,
+      auth,
+      `${templatesDir}/TERMINAL_CLOSE_SESSION.xml`,
+      'terminal:EndTerminalSessionRsp',
+      TerminalValidator.CLOSE_SESSION,
+      TerminalParser.TERMINAL_ERROR,
+      TerminalParser.CLOSE_SESSION,
       debug
     ),
   };

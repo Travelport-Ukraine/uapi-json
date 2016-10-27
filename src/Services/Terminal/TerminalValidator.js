@@ -15,4 +15,8 @@ module.exports = {
     return new Validator(params)
       .end();
   },
+  CLOSE_SESSION(params) {
+    return new Validator(params)
+      .end();
+  },
 };

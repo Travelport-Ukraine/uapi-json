@@ -3,9 +3,6 @@
    <soapenv:Body>
       <ter:CreateTerminalSessionReq Host="1G" TargetBranch="{{TargetBranch}}" {{#if timeout}}SessionTimeout="{{timeout}}"{{/if}}>
          <com:BillingPointOfSaleInfo OriginApplication="uAPI" />
-         {{#if emulatePcc}}
-         <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
-         {{/if}}
       </ter:CreateTerminalSessionReq>
    </soapenv:Body>
 </soapenv:Envelope>

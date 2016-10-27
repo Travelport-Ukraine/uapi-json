@@ -50,11 +50,7 @@ module.exports = function (service, auth, reqType, rootObject,
       console.log('Input params ', params);
     }
 
-    const validateInput = (resolve, reject) => {
-      if (_.isEmpty(params)) {
-        reject(new RequestValidationError.ParamsMissing());
-        return;
-      }
+    const validateInput = (resolve) => {
       params = validateFunction(params);
       resolve(reqType);
     };
@@ -70,6 +66,7 @@ module.exports = function (service, auth, reqType, rootObject,
 
     const sendRequest = function (xml) {
       if (debugMode) {
+        console.log('Request URL: ', service);
         console.log('Request XML: ', xml);
       }
       return new Promise((resolve, reject) => {

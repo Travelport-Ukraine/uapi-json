@@ -20,7 +20,7 @@ function urls(region, production = true) {
       url: `${url}/GdsQueueService`,
     },
     TerminalService: {
-      url: `${url}/GdsQueueService`,
+      url: `${url}/TerminalService`,
     },
   };
 }
