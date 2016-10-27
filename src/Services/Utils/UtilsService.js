@@ -10,10 +10,10 @@ module.exports = function (settings) {
   const config = getConfig(auth.region, production);
   return {
     currencyConvert: uApiRequest(
-      config(auth.region, production).CurrencyConversion.url,
+      config.CurrencyConversion.url,
       auth,
       `${templatesDir}/UTILS_CURRENCY_CONVERSION.xml`,
-      null,
+      'util:CurrencyConversionRsp',
       UtilsValidator.CURRENCY_CONVERSION,
       UtilsParser.UTILS_ERROR,
       UtilsParser.CURRENCY_CONVERSION,

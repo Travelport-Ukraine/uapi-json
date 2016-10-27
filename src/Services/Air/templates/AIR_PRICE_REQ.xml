@@ -25,6 +25,9 @@
                                 Key="{{@index}}"
                                 Group="0">
                 </air:AirSegment>
+                {{#if transfer}}
+                <air:Connection/>
+                {{/if}}
                 {{/segments}}
             </air:AirItinerary>
             {{#if business}}

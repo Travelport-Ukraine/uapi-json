@@ -1,17 +1,14 @@
-import {
-  UtilsParsingError,
-  UtilsRuntimeError,
-} from './UtilsErrors';
+import errors from './UtilsErrors';
 
 function currencyConvertParse(json) {
   try {
-    json = json['util:CurrencyConversionRsp'][0]['util:CurrencyConversion'].map(curr => ({
-      from: curr.$.From,
-      to: curr.$.To,
-      rate: curr.$.BankSellingRate,
+    json = json['util:CurrencyConversion'].map(curr => ({
+      from: curr.From,
+      to: curr.To,
+      rate: curr.BankSellingRate,
     }));
   } catch (e) {
-    throw new UtilsParsingError(json);
+    throw new errors.UtilsParsingError(json);
   }
 
   return json;
@@ -27,7 +24,7 @@ const errorHandler = (err) => {
 
   switch (errno * 1) {
     default:
-      throw new UtilsRuntimeError(err);
+      throw new errors.UtilsRuntimeError(err);
   }
 };
 

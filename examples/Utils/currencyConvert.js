@@ -1,7 +1,7 @@
 const uAPI = require('../../index');
 const config = require('../../test/testconfig');
 
-const UtilsService = uAPI.createUniversalService(
+const UtilsService = uAPI.createUtilsService(
   {
     auth: config,
     debug: 2,
