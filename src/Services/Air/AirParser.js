@@ -123,7 +123,7 @@ const nullParsing = obj => obj;
 
 
 function getPassengers(list, BookingTraveler) {
-  return Object.keys(list).reduce((passengers, key) => {
+  return list.reduce((passengers, key) => {
     const traveler = BookingTraveler[key];
 
     if (!traveler) {
