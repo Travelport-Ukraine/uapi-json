@@ -32,7 +32,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "async": "^2.1.2",
     "galileo-screen": "^1.0.2",
     "handlebars": "^4.0.5",
     "lodash": "^3.10.1",
