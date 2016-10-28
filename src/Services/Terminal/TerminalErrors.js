@@ -10,6 +10,14 @@ export const TerminalValidationError = createErrorClass(
   'Terminal service validation error',
   errorTypes.ValidationError
 );
+Object.assign(TerminalValidationError, createErrorsList({
+  CommandMissing: 'Command is missing',
+  CommandInvalid: 'Command is invalid',
+  SessionTokenMissing: 'Session token is missing',
+  SessionTokenInvalid: 'Session token is invalid',
+  SessionTimeoutInvalid: 'Session timeout value is invalid',
+  SessionTimeoutTooLow: 'Timeout value must be positive integer',
+}, TerminalValidationError));
 
 // Parsing errors
 export const TerminalParsingError = createErrorClass(
