@@ -1,5 +1,4 @@
 import handlebars from 'handlebars';
-import _ from 'lodash';
 import fs from 'fs';
 import request from 'request';
 import Promise from 'promise';
@@ -55,12 +54,12 @@ module.exports = function (service, auth, reqType, rootObject,
       resolve(reqType);
     };
 
-    const prepareRequest = function (data) {
+    const prepareRequest = function (template) {
       // adding target branch param from auth variable and render xml
       params.TargetBranch = auth.targetBranch;
       params.Username = auth.username;
       params.pcc = auth.pcc;
-      const renderedObj = handlebars.render(data.toString(), params);
+      const renderedObj = template(params);
       return renderedObj;
     };
 
@@ -142,6 +141,8 @@ module.exports = function (service, auth, reqType, rootObject,
 
     return new Promise(validateInput)
       .then(readFile)
+      .then(buffer => buffer.toString())
+      .then(handlebars.compile)
       .then(prepareRequest)
       .then(sendRequest)
       .then(parseResponse)
