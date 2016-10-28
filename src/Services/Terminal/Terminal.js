@@ -1,7 +1,10 @@
+import { lib as screenLib } from 'galileo-screen';
 import {
   TerminalRuntimeError,
 } from './TerminalErrors';
 import terminalService from './TerminalService';
+
+const responseHasMoreData = response => (response.slice(-1).join('') === ')><');
 
 module.exports = function (settings) {
   const service = terminalService(settings);
@@ -9,6 +12,21 @@ module.exports = function (settings) {
   const timeout = settings.timeout || false;
   const state = {
     sessionToken: null,
+  };
+  const processResponse = (response, previousResponse = []) => {
+    const processedResponse = screenLib.mergeLastLinesAtIntersection(
+      previousResponse.slice(0, -1),
+      response
+    );
+    if (!responseHasMoreData(response)) {
+      return processedResponse.join('\n');
+    }
+    return service.executeCommand({
+      sessionToken: state.sessionToken,
+      command: 'MD',
+    }).then(
+      mdResponse => processResponse(mdResponse, processedResponse)
+    );
   };
   const getSessionToken = () => new Promise((resolve, reject) => {
     // Return token if already obtained
@@ -44,17 +62,12 @@ module.exports = function (settings) {
   });
   return {
     executeCommand: command => getSessionToken().then(
-      (sessionToken) => {
-        const results = [];
-        results.push(null);
-        return service.executeCommand({
-          command,
-          sessionToken,
-        }).then((response) => {
-          console.log(response);
-          return response;
-        });
-      }
+      sessionToken => service.executeCommand({
+        command,
+        sessionToken,
+      }).then(
+        response => processResponse(response)
+      )
     ),
     closeSession: () => getSessionToken().then(
       sessionToken => service.closeSession({
