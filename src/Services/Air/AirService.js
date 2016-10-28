@@ -24,7 +24,7 @@ module.exports = (settings) => {
           passengers: options.passengers,
           rule: options.rule,
           ticketingPcc: auth.pcc.toUpperCase(),
-          ticketDate: moment().add(1, 'hours').format(),
+          ticketDate: moment().format(),
           ActionStatusType: 'TAU',
         }, data);
         return AirService.createReservation(bookingParams).catch((err) => {

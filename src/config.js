@@ -1,27 +1,26 @@
 function urls(region, production = true) {
   const prefix = production ? '' : 'pp.';
   const timeout = production ? 100000 : 200000;
+  const url = `https://${region}.universal-api.${prefix}travelport.com/B2BGateway/connect/uAPI`;
   return {
     timeout,
     HotelsService: {
-      url: 'https://' + region + '.universal-api.'
-            + prefix + 'travelport.com/B2BGateway/connect/uAPI/HotelService',
+      url: `${url}/HotelService`,
     },
     AirService: {
-      url: 'https://' + region + '.universal-api.'
-            + prefix + 'travelport.com/B2BGateway/connect/uAPI/AirService',
+      url: `${url}/AirService`,
     },
     UniversalRecord: {
-      url: 'https://' + region + '.universal-api.'
-            + prefix + 'travelport.com/B2BGateway/connect/uAPI/UniversalRecordService',
+      url: `${url}/UniversalRecordService`,
     },
     CurrencyConversion: {
-      url: 'https://' + region + '.universal-api.'
-            + prefix + 'travelport.com/B2BGateway/connect/uAPI/CurrencyConversionService',
+      url: `${url}/CurrencyConversionService`,
     },
     GdsQueueService: {
-      url: 'https://' + region + '.universal-api.'
-            + prefix + 'travelport.com/B2BGateway/connect/uAPI/GdsQueueService',
+      url: `${url}/GdsQueueService`,
+    },
+    TerminalService: {
+      url: `${url}/TerminalService`,
     },
   };
 }
