@@ -10,7 +10,7 @@ module.exports = function (settings) {
   const state = {
     sessionToken: null,
   };
-  const getSessionToken = new Promise((resolve, reject) => {
+  const getSessionToken = () => new Promise((resolve, reject) => {
     // Return token if already obtained
     if (state.sessionToken !== null) {
       resolve(state.sessionToken);
@@ -43,12 +43,20 @@ module.exports = function (settings) {
     }).catch(reject);
   });
   return {
-    executeCommand: options => getSessionToken.then(
-      sessionToken => service.executeCommand(Object.assign(options, {
-        sessionToken,
-      }))
+    executeCommand: command => getSessionToken().then(
+      (sessionToken) => {
+        const results = [];
+        results.push(null);
+        return service.executeCommand({
+          command,
+          sessionToken,
+        }).then((response) => {
+          console.log(response);
+          return response;
+        });
+      }
     ),
-    closeSession: () => getSessionToken.then(
+    closeSession: () => getSessionToken().then(
       sessionToken => service.closeSession({
         sessionToken,
       })
