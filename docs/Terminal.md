@@ -13,7 +13,7 @@ or to use `emulatePcc` option to run commands on behalf of other PC using your o
 * [`.closeSession()`](#close_session) ⇒ `Promise`
 
 ## Methods
-### .closeSession(command)
+### .executeCommand(command)
 <a name="execute_command"></a>
 Executes a command in terminal and returns its terminal response
 
