@@ -31,23 +31,25 @@ function mergeLeaf(item) {
 
 function defaultConfig(ver) {
   // do not collapse arrays with single objects or objects with single keys if they have this name
-  const noCollapseList = ['air:BookingInfo', 'air:FareRule',
-        // there's one SSR per each airline (per each passenger), they are usually identical
-        'common_' + ver + ':SSR',
-        'air:AirReservation',
-        'air:PassengerType',
-        'air:TicketInfo',
-        'common_' + ver + ':ResponseMessage',
-        'air:BaggageAllowanceInfo',
-        'air:CarryOnAllowanceInfo',
-        'hotel:RateInfo',
-        'hotel:HotelSearchResult',
-        // 'hotel:Amenities',
-        'hotel:Amenity',
-        'hotel:HotelDetailItem',
-        'hotel:AggregatorHotelDetails',
-        'common_' + ver + ':MediaItem',
-    ];
+  const noCollapseList = [
+    'air:BookingInfo',
+    'air:FareRule',
+    // there's one SSR per each airline (per each passenger), they are usually identical
+    'common_' + ver + ':SSR',
+    'air:AirReservation',
+    'air:PassengerType',
+    'air:TicketInfo',
+    'common_' + ver + ':ResponseMessage',
+    'air:BaggageAllowanceInfo',
+    'air:CarryOnAllowanceInfo',
+    'hotel:RateInfo',
+    'hotel:HotelSearchResult',
+    // 'hotel:Amenities',
+    'hotel:Amenity',
+    'hotel:HotelDetailItem',
+    'hotel:AggregatorHotelDetails',
+    'common_' + ver + ':MediaItem',
+  ];
 
   // Non-single field objects don't get collapsed
   //  from single item arrays into objects automatically, e.g.

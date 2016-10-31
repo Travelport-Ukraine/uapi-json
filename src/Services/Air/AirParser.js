@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import async from 'async';
 import xml2js from 'xml2js';
 import moment from 'moment';
 import utils from '../../utils';
@@ -124,24 +123,19 @@ const nullParsing = obj => obj;
 
 
 function getPassengers(list, BookingTraveler) {
-  const passengers = [];
-
-  async.forEachOf(list, (key) => {
+  return list.reduce((passengers, key) => {
     const traveler = BookingTraveler[key];
 
     if (!traveler) {
-      throw new Error('Not all BookingTravelers present in list or wrong lookup keys provided');
+      throw new AirRuntimeError.TravelersListError();
     }
 
-    const name = traveler['common_' + this.uapi_version + ':BookingTravelerName'];
+    const name = traveler[`common_${this.uapi_version}:BookingTravelerName`];
 
-        // SSR DOC parsing of passport data http://gitlab.travel-swift.com/galileo/galileocommand/blob/master/lib/command/booking.js#L84
-        // TODO safety checks
-    const firstTraveler = utils.firstInObj(traveler['common_' + this.uapi_version + ':SSR']);
-    let ssr = [];
-    if (firstTraveler) {
-      ssr = firstTraveler.FreeText.split('/');
-    }
+    // SSR DOC parsing of passport data http://gitlab.travel-swift.com/galileo/galileocommand/blob/master/lib/command/booking.js#L84
+    // TODO safety checks
+    const firstTraveler = utils.firstInObj(traveler[`common_${this.uapi_version}:SSR`]);
+    const ssr = firstTraveler ? firstTraveler.FreeText.split('/') : [];
 
     // TODO try to parse Swift XI from common_v36_0:AccountingRemark first
 
@@ -156,11 +150,9 @@ function getPassengers(list, BookingTraveler) {
       uapi_ref_key: key,
     };
 
-
-    passengers.push(passenger); // TODO error handling
-  });
-
-  return passengers;
+    passengers.push(passenger);
+    return passengers;
+  }, []);
 }
 
 const extractFareRulesLong = (obj) => {

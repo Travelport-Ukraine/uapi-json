@@ -1,8 +1,6 @@
 var airParser = require('../../src/Services/Air/AirParser');
 const airErrors = require('../../src/Services/Air/AirErrors');
 
-var proxy  = require('proxyquire');
-var sinon  = require('sinon');
 var assert = require('assert');
 var fs = require('fs');
 var _ = require('lodash');

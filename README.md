@@ -31,6 +31,7 @@ const uAPI = rqeuire('uapi-json');
 const AirService = uAPI.createAirService(settings);
 const HotelService = uAPI.createHotelService(settings);
 const UtilsService = uAPI.createUtilsService(settings);
+const TerminalService = uAPI.createTerminalService(settings);
 ```
 
 It also exports a set of error classes that help to check errors against them
@@ -62,17 +63,20 @@ It also has several useful helpers to handle errors.
 <a name="settings"></a>
 
 ## uAPI
-* .**createAirService**(settings) ⇒ [`AirService`](docs/Air.md)
-* .**createHotelService**(settings)  ⇒ [`HotelService`](docs/Hotels.md)
-* .**createUtilsService**(settings) ⇒ [`UtilsService`](docs/Utils.md)
+* `.createAirService(settings)` ⇒ [`AirService`](docs/Air.md)
+* `.createHotelService(settings)`  ⇒ [`HotelService`](docs/Hotels.md)
+* `.createUtilsService(settings)` ⇒ [`UtilsService`](docs/Utils.md)
+* `.createTerminalService(settings)` ⇒ [`TerminalService`](docs/Terminal.md)
 
 ### Settings object
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | auth | `Object <username, password, targetBranch>` | - | See `auth` description [below](#auth). |
-| debug | `Number` | 0 | Can be 0, 1, or 2. |
-| production | `Boolean` | true | Production variable is connected with production and pre-production environment. Can be true for production and false for pre-production. For more information read docs. . |
+| debug | `Number` | `0` | Can be `0`, `1`, or `2`. |
+| production | `Boolean` | `true` | Production variable is connected with production and pre-production environment. Can be true for production and false for pre-production. For more information read docs. |
+| emulatePcc | `String` | - | Optional. Used for `TerminalService` only. See [`TerminalService`](docs/Terminal.md) |
+| timeout | `Number` | - | Optional. Used for `TerminalService` only. See [`TerminalService`](docs/Terminal.md) |
 
 ### Auth object
 <a name="auth"></a>
@@ -90,7 +94,7 @@ See the following services pages to take a detailed view
 * [`AirService`](docs/Air.md)
 * [`HotelService`](docs/Hotels.md)
 * [`UtilsService`](docs/Utils.md)
-
+* [`TerminalService`](docs/Terminal.md)
 
 
 # Contributing

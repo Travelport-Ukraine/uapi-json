@@ -59,6 +59,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   TicketingFoidRequired: 'FOID required for the PC selected',
   NoResultsFound: 'No results found',
   NoValidFare: 'No valid fare for input criteria.',
+  TravelersListError: 'Not all BookingTravelers present in list or wrong lookup keys provided',
 }, AirRuntimeError));
 Object.assign(GdsRuntimeError, createErrorsList({
   PlacingInQueueMessageMissing: 'Placing success message missing',

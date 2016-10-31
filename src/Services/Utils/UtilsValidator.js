@@ -4,7 +4,7 @@ const { UtilsValidationError } = errors;
 
 function Validator(params) {
   this.params = params;
-  this.reg = /^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/;
+  this.reg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 }
 
 Validator.prototype.end = function () {
