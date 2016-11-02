@@ -3,11 +3,11 @@ import {
   TerminalParsingError,
 } from './TerminalErrors';
 
-const errorHandler = (rsp) => {
+function errorHandler(rsp) {
   throw new TerminalRuntimeError(rsp);
-};
+}
 
-const createSession = (rsp) => {
+function createSession(rsp) {
   if (
     !rsp[`common_${this.uapi_version}:HostToken`] ||
     !rsp[`common_${this.uapi_version}:HostToken`]._
@@ -15,9 +15,9 @@ const createSession = (rsp) => {
     throw new TerminalParsingError.TerminalSessionTokenMissing();
   }
   return rsp[`common_${this.uapi_version}:HostToken`]._;
-};
+}
 
-const terminalRequest = (rsp) => {
+function terminalRequest(rsp) {
   if (
     !rsp['terminal:TerminalCommandResponse'] ||
     !rsp['terminal:TerminalCommandResponse']['terminal:Text']
@@ -25,9 +25,9 @@ const terminalRequest = (rsp) => {
     throw new TerminalParsingError.TerminalResponseMissing();
   }
   return rsp['terminal:TerminalCommandResponse']['terminal:Text'];
-};
+}
 
-const closeSession = (rsp) => {
+function closeSession(rsp) {
   if (
     !rsp[`common_${this.uapi_version}:ResponseMessage`] ||
     !rsp[`common_${this.uapi_version}:ResponseMessage`][0] ||
@@ -37,7 +37,7 @@ const closeSession = (rsp) => {
     throw new TerminalRuntimeError.TerminalCloseSessionFailed();
   }
   return true;
-};
+}
 
 module.exports = {
   TERMINAL_ERROR: errorHandler,
