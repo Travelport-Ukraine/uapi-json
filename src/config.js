@@ -10,6 +10,9 @@ function urls(region, production = true) {
     AirService: {
       url: `${url}/AirService`,
     },
+    FlightService: {
+      url: `${url}/FlightService`,
+    },
     UniversalRecord: {
       url: `${url}/UniversalRecordService`,
     },
