@@ -1,6 +1,5 @@
 const createHotelService = require('./Services/Hotels/HotelsService');
 const createAirService = require('./Services/Air/AirService');
-const createFlightService = require('./Services/Air/FlightService');
 const createUtilsService = require('./Services/Utils/UtilsService');
 const createTerminalService = require('./Services/Terminal/Terminal');
 const commonErrors = require('./error-types');
@@ -15,7 +14,6 @@ const uAPI = {
   createHotelService,
   createAirService,
   createTerminalService,
-  createFlightService,
   errors: {
     Common: commonErrors,
     Request: requestErrors,
