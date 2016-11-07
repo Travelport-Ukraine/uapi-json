@@ -81,7 +81,7 @@ Object.assign(AirFlightInfoRuntimeError, createErrorsList({
   FlightNotFound: 'Flight not found',
   AirlineNotSupported: 'Airline not supported',
   InvalidFlightNumber: 'Invalid flight number',
-}, AirRuntimeError));
+}, AirFlightInfoRuntimeError));
 Object.assign(GdsRuntimeError, createErrorsList({
   PlacingInQueueMessageMissing: 'Placing success message missing',
   PlacingInQueueError: 'Error during placing in queue request',
