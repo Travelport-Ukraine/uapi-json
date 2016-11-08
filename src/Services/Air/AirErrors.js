@@ -37,7 +37,6 @@ Object.assign(AirFlightInfoValidationError, createErrorsList({
   AirlineMissing: 'Airline is missing in request',
   FlightNumberMissing: 'Flight number is missing in request',
   DepartureMissing: 'Departure is missing in request',
-  KeyMissing: 'Key is missing in request',
 }, AirFlightInfoValidationError));
 
 // Parsing errors

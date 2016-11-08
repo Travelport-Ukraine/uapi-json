@@ -292,6 +292,20 @@ function airPriceRsp(obj) {
   };
 }
 
+function fillAirFlightInfoResponseItem(data) {
+  const item = data['air:FlightInfoDetail'];
+  return {
+    from: item.Origin || '',
+    to: item.Destination || '',
+    departure: item.ScheduledDepartureTime || '',
+    arrival: item.ScheduledArrivalTime || '',
+    duration: item.TravelTime || '',
+    plane: item.Equipment || '',
+    fromTerminal: item.OriginTerminal || '',
+    toTerminal: item.DestinationTerminal || '',
+  };
+}
+
 function airFlightInfoRsp(obj) {
   const data = this.mergeLeafRecursive(obj, 'air:FlightInformationRsp')['air:FlightInfo'];
 
@@ -308,16 +322,15 @@ function airFlightInfoRsp(obj) {
     }
   }
 
-  return {
-    from: data['air:FlightInfoDetail'].Origin || '',
-    to: data['air:FlightInfoDetail'].Destination || '',
-    departure: data['air:FlightInfoDetail'].ScheduledDepartureTime || '',
-    arrival: data['air:FlightInfoDetail'].ScheduledArrivalTime || '',
-    duration: data['air:FlightInfoDetail'].TravelTime || '',
-    plane: data['air:FlightInfoDetail'].Equipment || '',
-    fromTerminal: data['air:FlightInfoDetail'].OriginTerminal || '',
-    toTerminal: data['air:FlightInfoDetail'].DestinationTerminal || '',
-  };
+  if (typeof data.Carrier === 'undefined') {
+    const response = [];
+    data.forEach((item) => {
+      response.push(fillAirFlightInfoResponseItem(item));
+    });
+    return response;
+  }
+
+  return fillAirFlightInfoResponseItem(data);
 }
 
 /*

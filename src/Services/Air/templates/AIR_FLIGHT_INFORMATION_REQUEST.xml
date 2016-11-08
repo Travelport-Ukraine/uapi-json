@@ -6,12 +6,14 @@
     <soapenv:Body>
         <air:FlightInformationReq TargetBranch="{{TargetBranch}}">
             <com:BillingPointOfSaleInfo OriginApplication="uAPI"/>
+            {{#flightInfoCriteria}}
             <air:FlightInfoCriteria
                 Carrier="{{airline}}"
                 DepartureDate="{{departure}}"
                 FlightNumber="{{flightNumber}}"
-                Key="{{key}}"
+                Key=""
             />
+            {{/flightInfoCriteria}}
         </air:FlightInformationReq>
     </soapenv:Body>
 </soapenv:Envelope>

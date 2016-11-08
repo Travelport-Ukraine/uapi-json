@@ -182,21 +182,25 @@ Validator.prototype.hasFareBasisCodes = function () {
   return this;
 };
 
+Validator.prototype.flightInfoItem = function (item) {
+  if (!item.airline) {
+    throw new AirFlightInfoValidationError.AirlineMissing(item);
+  }
+
+  if (!item.flightNumber) {
+    throw new AirFlightInfoValidationError.FlightNumberMissing(item);
+  }
+
+  if (!item.departure) {
+    throw new AirFlightInfoValidationError.DepartureMissing(item);
+  }
+};
+
 Validator.prototype.flightInfo = function () {
-  if (!this.params.airline) {
-    throw new AirFlightInfoValidationError.AirlineMissing(this.params);
-  }
-
-  if (!this.params.flightNumber) {
-    throw new AirFlightInfoValidationError.FlightNumberMissing(this.params);
-  }
-
-  if (!this.params.departure) {
-    throw new AirFlightInfoValidationError.DepartureMissing(this.params);
-  }
-
-  if (!this.params.key) {
-    throw new AirFlightInfoValidationError.KeyMissing(this.params);
+  if (Array.isArray(this.params.flightInfoCriteria)) {
+    this.params.flightInfoCriteria.forEach(this.flightInfoItem);
+  } else {
+    this.flightInfoItem(this.params.flightInfoCriteria);
   }
 
   return this;
