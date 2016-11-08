@@ -192,6 +192,5 @@ Request for the flight information.
 | airline | <code>string</code> | The marketing carrier for the segment. |
 | departure | <code>string</code> | The departure date; either the current date or a date in the future, not include the time zone which is derived from the origin location. |
 | flightNumber | <code>string</code> | The flight number for the segment |
-| key | <code>string</code> | The base-64 encoded UUID identifier that links the Flight Information responses to the request criteria. The value that is sent is returned in the resulting FlightInfo(s) elements. |
 
 **See: <a href="../examples/Air/flightInfo1.js">FlightInfo basic example</a>**, **<a href="../examples/Air/flightInfo2.js">FlightInfo multiple items example</a>**
