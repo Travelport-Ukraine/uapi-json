@@ -5,7 +5,7 @@ import utils from '../../utils';
 import format from './AirFormat';
 import errors from './AirErrors';
 
-const { AirParsingError, AirRuntimeError, GdsRuntimeError } = errors;
+const { AirParsingError, AirRuntimeError, AirFlightInfoRuntimeError, GdsRuntimeError } = errors;
 
 /*
  * take air:AirSegment list and return Directions
@@ -292,6 +292,47 @@ function airPriceRsp(obj) {
   };
 }
 
+function fillAirFlightInfoResponseItem(data) {
+  const item = data['air:FlightInfoDetail'];
+  return {
+    from: item.Origin || '',
+    to: item.Destination || '',
+    departure: item.ScheduledDepartureTime || '',
+    arrival: item.ScheduledArrivalTime || '',
+    duration: item.TravelTime || '',
+    plane: item.Equipment || '',
+    fromTerminal: item.OriginTerminal || '',
+    toTerminal: item.DestinationTerminal || '',
+  };
+}
+
+function airFlightInfoRsp(obj) {
+  const data = this.mergeLeafRecursive(obj, 'air:FlightInformationRsp')['air:FlightInfo'];
+
+  if (typeof data['air:FlightInfoErrorMessage'] !== 'undefined') {
+    switch (data['air:FlightInfoErrorMessage']._) {
+      case 'Airline not supported':
+        throw new AirFlightInfoRuntimeError.AirlineNotSupported(obj);
+      case 'Flight not found':
+        throw new AirFlightInfoRuntimeError.FlightNotFound(obj);
+      case 'Invalid Flight Number field':
+        throw new AirFlightInfoRuntimeError.InvalidFlightNumber(obj);
+      default:
+        throw new AirFlightInfoRuntimeError(obj);
+    }
+  }
+
+  if (typeof data.Carrier === 'undefined') {
+    const response = [];
+    data.forEach((item) => {
+      response.push(fillAirFlightInfoResponseItem(item));
+    });
+    return response;
+  }
+
+  return fillAirFlightInfoResponseItem(data);
+}
+
 /*
  * returns keys of reservations (AirPricingInfos) with their corresponding passenger
  * category types and counts for an AirPricingSolution
@@ -559,4 +600,5 @@ module.exports = {
   AIR_CANCEL_UR: nullParsing,
   UNIVERSAL_RECORD_FOID: nullParsing,
   AIR_ERRORS: AirErrorHandler, // errors handling
+  AIR_FLIGHT_INFORMATION: airFlightInfoRsp,
 };

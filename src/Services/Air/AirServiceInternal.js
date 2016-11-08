@@ -143,5 +143,15 @@ module.exports = function (auth, debug, production) {
       AirParser.AIR_CANCEL_UR,
       debug
     ),
+    flightInfo: uApiRequest(
+      config.FlightService.url,
+      auth,
+      `${templatesDir}/AIR_FLIGHT_INFORMATION_REQUEST.xml`,
+      'air:FlightInformationRsp',
+      AirValidator.AIR_FLIGHT_INFORMATION,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_FLIGHT_INFORMATION,
+      debug
+    ),
   };
 };

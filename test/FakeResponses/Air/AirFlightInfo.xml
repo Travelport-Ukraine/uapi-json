@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:FlightInformationRsp xmlns:air="http://www.travelport.com/schema/air_v35_0" TransactionId="7B31C3F60A076477032D7D02CE985973" ResponseTime="66">
+            <air:FlightInfo CriteriaKey="KQHHjdEaSkSoWDq0ZU1+CQ==" Carrier="VS" FlightNumber="45" Origin="LHR" Destination="JFK" DepartureDate="2016-10-21">
+                <air:FlightInfoDetail Origin="LHR" Destination="JFK" ScheduledDepartureTime="2016-10-21T14:00:00.000+01:00" ScheduledArrivalTime="2016-10-21T16:40:00.000-04:00" TravelTime="460" ETicketability="Yes" Equipment="789" OriginTerminal="3" DestinationTerminal="4">
+                    <air:InFlightServices>Non-smoking</air:InFlightServices>
+                </air:FlightInfoDetail>
+            </air:FlightInfo>
+        </air:FlightInformationRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

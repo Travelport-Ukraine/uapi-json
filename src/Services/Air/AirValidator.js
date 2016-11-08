@@ -2,7 +2,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import errors from './AirErrors';
 
-const { AirValidationError, GdsValidationError } = errors;
+const { AirValidationError, AirFlightInfoValidationError, GdsValidationError } = errors;
 
 function Validator(params) {
   this.params = params;
@@ -182,6 +182,30 @@ Validator.prototype.hasFareBasisCodes = function () {
   return this;
 };
 
+Validator.prototype.flightInfoItem = function (item) {
+  if (!item.airline) {
+    throw new AirFlightInfoValidationError.AirlineMissing(item);
+  }
+
+  if (!item.flightNumber) {
+    throw new AirFlightInfoValidationError.FlightNumberMissing(item);
+  }
+
+  if (!item.departure) {
+    throw new AirFlightInfoValidationError.DepartureMissing(item);
+  }
+};
+
+Validator.prototype.flightInfo = function () {
+  if (Array.isArray(this.params.flightInfoCriteria)) {
+    this.params.flightInfoCriteria.forEach(this.flightInfoItem);
+  } else {
+    this.flightInfoItem(this.params.flightInfoCriteria);
+  }
+
+  return this;
+};
+
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST(params) {
     return new Validator(params)
@@ -271,5 +295,12 @@ module.exports = {
   UNIVERSAL_RECORD_FOID(params) {
     return new Validator(params)
             .end();
+  },
+
+
+  AIR_FLIGHT_INFORMATION(params) {
+    return new Validator(params)
+      .flightInfo()
+      .end();
   },
 };

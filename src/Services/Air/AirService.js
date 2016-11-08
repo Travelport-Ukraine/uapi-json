@@ -69,5 +69,20 @@ module.exports = (settings) => {
           });
       });
     },
+
+    flightInfo(options) {
+      const parameters = {
+        flightInfoCriteria: (typeof options === 'object') ? options : [options],
+      };
+      const AirService = airServiceInternal(auth, debug, production);
+      return AirService.flightInfo(parameters)
+        .then(data => data)
+        .catch((err) => {
+          if (debug > 0) {
+            console.log('Cant get flightInfo', err);
+          }
+          Promise.reject(err);
+        });
+    },
   };
 };

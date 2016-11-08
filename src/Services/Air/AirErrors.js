@@ -28,6 +28,16 @@ Object.assign(GdsValidationError, createErrorsList({
   QueueMissing: 'Queue is missing in request',
   PccMissing: 'Pcc is missing in request',
 }, GdsValidationError));
+const AirFlightInfoValidationError = createErrorClass(
+  'AirFlightInfoValidationError',
+  'Air FlightInfo service validation error',
+  errorTypes.ValidationError
+);
+Object.assign(AirFlightInfoValidationError, createErrorsList({
+  AirlineMissing: 'Airline is missing in request',
+  FlightNumberMissing: 'Flight number is missing in request',
+  DepartureMissing: 'Departure is missing in request',
+}, AirFlightInfoValidationError));
 
 // Parsing errors
 const AirParsingError = createErrorClass(
@@ -48,6 +58,11 @@ const AirRuntimeError = createErrorClass(
   'Air service runtime error',
   errorTypes.RuntimeError
 );
+const AirFlightInfoRuntimeError = createErrorClass(
+  'AirFlightInfoRuntimeError',
+  'Air flight info service runtime error',
+  errorTypes.RuntimeError
+);
 const GdsRuntimeError = createErrorClass(
   'GdsRuntimeError',
   'Gds service runtime error',
@@ -61,6 +76,11 @@ Object.assign(AirRuntimeError, createErrorsList({
   NoValidFare: 'No valid fare for input criteria.',
   TravelersListError: 'Not all BookingTravelers present in list or wrong lookup keys provided',
 }, AirRuntimeError));
+Object.assign(AirFlightInfoRuntimeError, createErrorsList({
+  FlightNotFound: 'Flight not found',
+  AirlineNotSupported: 'Airline not supported',
+  InvalidFlightNumber: 'Invalid flight number',
+}, AirFlightInfoRuntimeError));
 Object.assign(GdsRuntimeError, createErrorsList({
   PlacingInQueueMessageMissing: 'Placing success message missing',
   PlacingInQueueError: 'Error during placing in queue request',
@@ -68,8 +88,10 @@ Object.assign(GdsRuntimeError, createErrorsList({
 
 export default {
   AirValidationError,
+  AirFlightInfoValidationError,
   GdsValidationError,
   AirParsingError,
+  AirFlightInfoRuntimeError,
   AirRuntimeError,
   GdsRuntimeError,
 };

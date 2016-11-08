@@ -334,4 +334,46 @@ describe('#AirParser', function () {
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
   });
+
+  describe('FLIGHT_INFORMATION', () => {
+    it('should parse flight info', () => {
+      const uParser = new ParserUapi('air:FlightInformationRsp', 'v35_0', { });
+      const parseFunction = airParser.AIR_FLIGHT_INFORMATION;
+      const xml = fs.readFileSync(`${xmlFolder}/AirFlightInfo.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(jsonResult);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should return `Flight not found` error from flight info', () => {
+      const uParser = new ParserUapi('air:FlightInformationRsp', 'v35_0', { });
+      const parseFunction = airParser.AIR_FLIGHT_INFORMATION;
+      const xml = fs.readFileSync(`${xmlFolder}/AirFlightInfoError1.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(false, 'Should be FlightNotFound error.');
+      }).catch(err => assert(err instanceof airErrors.AirFlightInfoRuntimeError.FlightNotFound, 'Should be FlightNotFound error.'));
+    });
+
+    it('should return `Airline not supported` error from flight info', () => {
+      const uParser = new ParserUapi('air:FlightInformationRsp', 'v35_0', { });
+      const parseFunction = airParser.AIR_FLIGHT_INFORMATION;
+      const xml = fs.readFileSync(`${xmlFolder}/AirFlightInfoError2.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(false, 'Should be AirlineNotSupported error.');
+      }).catch(err => assert(err instanceof airErrors.AirFlightInfoRuntimeError.AirlineNotSupported, 'Should be AirlineNotSupported error.'));
+    });
+
+    it('should return `Invalid flight number` error from flight info', () => {
+      const uParser = new ParserUapi('air:FlightInformationRsp', 'v35_0', { });
+      const parseFunction = airParser.AIR_FLIGHT_INFORMATION;
+      const xml = fs.readFileSync(`${xmlFolder}/AirFlightInfoError3.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(false, 'Should be InvalidFlightNumber error.');
+      }).catch(err => assert(err instanceof airErrors.AirFlightInfoRuntimeError.InvalidFlightNumber, 'Should be InvalidFlightNumber error.'));
+    });
+  });
 });
