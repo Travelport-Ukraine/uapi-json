@@ -15,6 +15,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
     * .void(params) ⇒ <code>Promise</code>
     * [.toQueue(params)](#toQueue) ⇒ <code>Promise</code>
     * [.importPNR(params)](#importPNR) ⇒ <code>Promise</code>
+    * [flightInfo(params)](#flightInfo) ⇒ <code>Promise</code>
 
 <a name="shop"></a>
 ### .shop(params)
@@ -177,3 +178,20 @@ If the Universal Record locator code is known, a Universal Record can be retriev
 | pnr | <code>String</code> | 1G PNR. |
 
 **See: <a href="../examples/Air/import.js">Import example</a>**
+
+
+<a name="flightInfo"></a>
+### .flightInfo(params)
+Request for the flight information.
+
+**Returns**: <code>Promise</code>
+**See**: [Flight Information](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Flight_Information/Flight_Information.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| airline | <code>string</code> | The marketing carrier for the segment. |
+| departure | <code>string</code> | The departure date; either the current date or a date in the future, not include the time zone which is derived from the origin location. |
+| flightNumber | <code>string</code> | The flight number for the segment |
+| key | <code>string</code> | The base-64 encoded UUID identifier that links the Flight Information responses to the request criteria. The value that is sent is returned in the resulting FlightInfo(s) elements. |
+
+**See: <a href="../examples/Air/flightInfo1.js">FlightInfo basic example</a>**, **<a href="../examples/Air/flightInfo2.js">FlightInfo multiple items example</a>**
