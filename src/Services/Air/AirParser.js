@@ -3,9 +3,12 @@ import xml2js from 'xml2js';
 import moment from 'moment';
 import utils from '../../utils';
 import format from './AirFormat';
-import errors from './AirErrors';
-
-const { AirParsingError, AirRuntimeError, AirFlightInfoRuntimeError, GdsRuntimeError } = errors;
+import {
+  AirParsingError,
+  AirRuntimeError,
+  AirFlightInfoRuntimeError,
+  GdsRuntimeError,
+} from './AirErrors';
 
 /*
  * take air:AirSegment list and return Directions
@@ -50,7 +53,7 @@ const countHistogram = (arr) => {
   let prev = null;
 
   if (!_.isArray(arr)) {
-    throw new Error('argument should be an array');
+    throw new AirParsingError.HistogramTypeInvalid();
   }
 
   if (_.isObject(arr[0])) {
@@ -178,28 +181,6 @@ function FareRules(obj) {
   return extractFareRulesLong(obj);
 }
 
-/* not used now
-const parsePenalty = function (obj, name) {
-  if (!_.isObject(obj)) {
-    throw new new Error('DataProcessingException');
-  }
-
-  if (obj['air:Percentage']) {
-    return {
-      type: 'percent',
-      amount: parseFloat(obj['air:Percentage']),
-    };
-  } else if (obj['air:Amount']) {
-    return {
-      type: 'absolute',
-      amount: obj['air:Amount'],
-    };
-  }
-
-  throw new Error('Unknown ' + name + ' types ' + JSON.stringify(Object.keys(obj))); // TODO
-};
-*/
-
 /*
  * The flagship function for parsing reservations in
  * AirPriceReq (multiple passengers per
@@ -276,11 +257,11 @@ function airPriceRsp(obj) {
   const priceKeys = Object.keys(prices);
 
   if (priceKeys.length > 1) {
-    throw new Error('Expected only one pricing solution, need to clarify search?'); // FIXME
+    throw new AirParsingError.MultiplePricingSolutionsNotAllowed();
   }
 
   if (priceKeys.length === 0) {
-    throw new Error('Not found');
+    throw new AirParsingError.PricingSolutionNotFound();
   }
 
   // TODO move to separate function e.g. get_reservation_options
@@ -481,7 +462,7 @@ function extractBookings(obj) {
     const providerInfo = reservations[booking[resKey]];
 
     if (!providerInfo) {
-      throw new Error("Can't find provider information about reservation");
+      throw new AirParsingError.ReservationProviderInfoMissing();
     }
 
     // we usually have one plating carrier across all per-passenger reservations
