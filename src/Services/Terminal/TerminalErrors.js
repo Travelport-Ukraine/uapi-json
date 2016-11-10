@@ -40,6 +40,7 @@ Object.assign(TerminalRuntimeError, createErrorsList({
   TerminalEmulationFailed: 'Terminal emulation failed',
   TerminalCloseSessionFailed: 'Failed to close terminal session',
   TerminalIsBusy: 'Terminal is busy',
+  TerminalIsClosed: 'Terminal is closed',
 }, TerminalRuntimeError));
 
 export default {

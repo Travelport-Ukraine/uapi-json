@@ -42,6 +42,9 @@ module.exports = function (settings) {
     if (state.terminalState === TERMINAL_STATE_BUSY) {
       throw new TerminalRuntimeError.TerminalIsBusy();
     }
+    if (state.terminalState === TERMINAL_STATE_CLOSED) {
+      throw new TerminalRuntimeError.TerminalIsClosed();
+    }
     // Return token if already obtained
     if (state.sessionToken !== null) {
       resolve(state.sessionToken);
