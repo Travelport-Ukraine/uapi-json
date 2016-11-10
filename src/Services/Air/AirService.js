@@ -1,4 +1,5 @@
 import moment from 'moment';
+import _ from 'lodash';
 import airServiceInternal from './AirServiceInternal';
 import errors from './AirErrors';
 
@@ -72,7 +73,7 @@ module.exports = (settings) => {
 
     flightInfo(options) {
       const parameters = {
-        flightInfoCriteria: (typeof options === 'object') ? options : [options],
+        flightInfoCriteria: _.isArray(options) ? options : [options],
       };
       const AirService = airServiceInternal(auth, debug, production);
       return AirService.flightInfo(parameters)

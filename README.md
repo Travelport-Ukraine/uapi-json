@@ -96,7 +96,6 @@ See the following services pages to take a detailed view
 * [`HotelService`](docs/Hotels.md)
 * [`UtilsService`](docs/Utils.md)
 * [`TerminalService`](docs/Terminal.md)
-* [`FlightService`](docs/FlightService.md)
 
 
 # Contributing
