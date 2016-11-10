@@ -5,7 +5,7 @@ import {
 import errorTypes from '../../error-types';
 
 // Validation errors
-const AirValidationError = createErrorClass(
+export const AirValidationError = createErrorClass(
   'AirValidationError',
   'Air service validation error',
   errorTypes.ValidationError
@@ -17,8 +17,11 @@ Object.assign(AirValidationError, createErrorsList({
   LegsMissing: 'Missing legs in request',
   LegsInvalidType: 'Invalid type for legs in request',
   LegsInvalidStructure: 'Leg in leg array foes not all required fields',
+  AirPricingSolutionInvalidType: 'air:AirPricingSolution array is expected',
+  BirthDateInvalid: 'Invalid birth date',
 }, AirValidationError));
-const GdsValidationError = createErrorClass(
+
+export const GdsValidationError = createErrorClass(
   'GdsValidationError',
   'Gds service validation error',
   errorTypes.ValidationError
@@ -28,7 +31,8 @@ Object.assign(GdsValidationError, createErrorsList({
   QueueMissing: 'Queue is missing in request',
   PccMissing: 'Pcc is missing in request',
 }, GdsValidationError));
-const AirFlightInfoValidationError = createErrorClass(
+
+export const AirFlightInfoValidationError = createErrorClass(
   'AirFlightInfoValidationError',
   'Air FlightInfo service validation error',
   errorTypes.ValidationError
@@ -40,7 +44,7 @@ Object.assign(AirFlightInfoValidationError, createErrorsList({
 }, AirFlightInfoValidationError));
 
 // Parsing errors
-const AirParsingError = createErrorClass(
+export const AirParsingError = createErrorClass(
   'AirParsingError',
   'Air service parsing error',
   errorTypes.ParsingError
@@ -50,20 +54,30 @@ Object.assign(AirParsingError, createErrorsList({
   TicketingResponseMissing: 'Response message text doesn\'t contain OK:Ticket issued',
   TicketingTicketsMissing: 'Tickets not found in ticketing response',
   ReservationsMissing: 'Reservations missing in response',
+  BookingInfoError: 'air:BookingInfo should be an array',
+  PlatingCarriersError: 'Plating carriers do not coincide across all passenger reservations',
+  PTCIsNotSet: 'Code is not set for PassengerTypeCode item',
+  PTCTypeInvalid: 'PassengerTypeCode is supposed to be a string or array of PassengerTypeCode items',
+  HistogramTypeInvalid: 'PassengerType is supposed to be an array',
+  MultiplePricingSolutionsNotAllowed: 'Expected only one pricing solution, need to clarify search?',
+  PricingSolutionNotFound: 'Pricing solution not found',
+  ReservationProviderInfoMissing: 'Can\'t find provider information about reservation',
 }, AirParsingError));
 
 // Runtime errors
-const AirRuntimeError = createErrorClass(
+export const AirRuntimeError = createErrorClass(
   'AirRuntimeError',
   'Air service runtime error',
   errorTypes.RuntimeError
 );
-const AirFlightInfoRuntimeError = createErrorClass(
+
+export const AirFlightInfoRuntimeError = createErrorClass(
   'AirFlightInfoRuntimeError',
   'Air flight info service runtime error',
   errorTypes.RuntimeError
 );
-const GdsRuntimeError = createErrorClass(
+
+export const GdsRuntimeError = createErrorClass(
   'GdsRuntimeError',
   'Gds service runtime error',
   errorTypes.RuntimeError

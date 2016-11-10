@@ -1,5 +1,6 @@
-const _ = require('lodash');
-const utils = require('../../utils');
+import _ from 'lodash';
+import utils from '../../utils';
+import { AirParsingError } from './AirErrors';
 
 const firstFlightDetails = obj => (
   _.isObject(utils.firstInObj(obj)) ? utils.firstInObj(obj) : {}
@@ -106,7 +107,7 @@ function getTripsFromBooking(option, fareInfos, segments, flightDetails) {
   // const travelTime = moment.duration(option.TravelTime);
 
   if (!_.isArray(option['air:BookingInfo'])) {
-    throw new Error('Parser error: air:BookingInfo should be an array');
+    throw new AirParsingError.BookingInfoError();
   }
 
   // get trips(per leg)
@@ -168,10 +169,10 @@ function formatLowFaresSearch(searchRequest, searchResult) {
       const newPltCrr = priceInfo.PlatingCarrier;
       if (!platingCarrier) platingCarrier = newPltCrr;
       if (!platingCarrier === newPltCrr) {
-        throw new Error(
-          'Assert: Plating carriers do not coincide across all passenger reservations, old: '
-          + platingCarrier + ', new: ' + newPltCrr
-        );
+        throw new AirParsingError.PlatingCarriersError({
+          old: platingCarrier,
+          new: newPltCrr,
+        });
       }
       return newPltCrr;
     });
@@ -217,7 +218,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
             // but there is Age or other info, except Code
             return item.Code;
           }
-          throw new Error('Code is not set for PassengerTypeCode item');
+          throw new AirParsingError.PTCIsNotSet();
         }));
 
         code = list[0];
@@ -227,8 +228,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
         }
         passengerCounts[code] = count;
       } else {
-        throw new Error('PassengerTypeCode is supposed to be a string or array' +
-          'of PassengerTypeCode items'); // TODO
+        throw new AirParsingError.PTCTypeInvalid();
       }
 
       return code;

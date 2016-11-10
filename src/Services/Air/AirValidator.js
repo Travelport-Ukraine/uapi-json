@@ -1,8 +1,10 @@
 import _ from 'lodash';
 import moment from 'moment';
-import errors from './AirErrors';
-
-const { AirValidationError, AirFlightInfoValidationError, GdsValidationError } = errors;
+import {
+  AirValidationError,
+  AirFlightInfoValidationError,
+  GdsValidationError,
+} from './AirErrors';
 
 function Validator(params) {
   this.params = params;
@@ -130,9 +132,10 @@ Validator.prototype.uapi_fare_rule_key = function () {
 };
 
 Validator.prototype.pricingSolutionXML = function () {
-  if (!this.params['air:AirPricingSolution']
-    || typeof (this.params['air:AirPricingSolution']) !== 'object') {
-    throw new Error('air:AirPricingSolution array is expected');
+  if (
+    !Array.isArray(this.params['air:AirPricingSolution'])
+  ) {
+    throw new AirValidationError.AirPricingSolutionInvalidType();
   }
 
   return this;
@@ -144,7 +147,7 @@ Validator.prototype.passengerBirthDates = function () {
     const birthSSR = moment(item.birthDate.toUpperCase(), 'YYYYMMDD');
 
     if (!birthSSR.isValid()) {
-      throw new Error('Invalid birth date');
+      throw new AirValidationError.BirthDateInvalid();
     }
     const { passCountry: country,
             passNumber: num,
