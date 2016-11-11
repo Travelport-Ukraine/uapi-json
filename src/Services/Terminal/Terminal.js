@@ -120,13 +120,15 @@ module.exports = function (settings) {
         if (state.terminalState === TERMINAL_STATE_BUSY) {
           util.log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
         }
-        util.log('UAPI-JSON WARNING: Process left TerminalService session open');
-        util.log('UAPI-JSON WARNING: Session closing');
-        terminal.closeSession().then(
-          () => util.log('UAPI-JSON WARNING: Session closed')
-        ).catch(
-          () => util.log('UAPI-JSON WARNING: Error closing session')
-        );
+        if (state.sessionToken !== null) {
+          util.log('UAPI-JSON WARNING: Process left TerminalService session open');
+          util.log('UAPI-JSON WARNING: Session closing');
+          terminal.closeSession().then(
+            () => util.log('UAPI-JSON WARNING: Session closed')
+          ).catch(
+            () => util.log('UAPI-JSON WARNING: Error closing session')
+          );
+        }
         break;
       default:
         break;
@@ -140,7 +142,9 @@ module.exports = function (settings) {
         if (state.terminalState === TERMINAL_STATE_BUSY) {
           util.log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
         }
-        util.log('UAPI-JSON WARNING: Process left TerminalService session open');
+        if (state.sessionToken !== null) {
+          util.log('UAPI-JSON WARNING: Process left TerminalService session open');
+        }
         break;
       default:
         break;
