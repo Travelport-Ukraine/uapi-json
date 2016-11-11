@@ -77,38 +77,51 @@ module.exports = function (settings) {
       });
     }).then(
       resolve
-    ).catch((err) => {
-      Object.assign(state, {
-        terminalState: TERMINAL_STATE_ERROR,
-      });
-      reject(err);
-    });
+    ).catch(
+      reject
+    );
   });
 
   const terminal = {
-    executeCommand: command => getSessionToken().then(
-      sessionToken => service.executeCommand({
-        command,
-        sessionToken,
-      }).then((response) => {
-        Object.assign(state, {
-          terminalState: TERMINAL_STATE_READY,
-        });
-        return response;
-      }).then(
+    executeCommand: command => getSessionToken()
+      .then(
+        sessionToken => service.executeCommand({
+          command,
+          sessionToken,
+        })
+      )
+      .then(
+        (response) => {
+          Object.assign(state, {
+            terminalState: TERMINAL_STATE_READY,
+          });
+          return response;
+        }
+      )
+      .then(
         response => processResponse(response)
       )
-    ),
-    closeSession: () => getSessionToken().then(
-      sessionToken => service.closeSession({
-        sessionToken,
-      })
-    ).then((response) => {
-      Object.assign(state, {
-        terminalState: TERMINAL_STATE_CLOSED,
-      });
-      return response;
-    }),
+      .catch(
+        (err) => {
+          Object.assign(state, {
+            terminalState: TERMINAL_STATE_ERROR,
+          });
+          throw err;
+        }
+      ),
+    closeSession: () => getSessionToken()
+      .then(
+        sessionToken => service.closeSession({
+          sessionToken,
+        })
+      ).then(
+        (response) => {
+          Object.assign(state, {
+            terminalState: TERMINAL_STATE_CLOSED,
+          });
+          return response;
+        }
+      ),
   };
 
   // Adding event handler on beforeExit and exit process events
@@ -126,7 +139,10 @@ module.exports = function (settings) {
           terminal.closeSession().then(
             () => util.log('UAPI-JSON WARNING: Session closed')
           ).catch(
-            () => util.log('UAPI-JSON WARNING: Error closing session')
+            () => {
+              util.log('UAPI-JSON WARNING: Error closing session');
+              process.exit(1);
+            }
           );
         }
         break;
