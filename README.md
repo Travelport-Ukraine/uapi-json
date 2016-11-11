@@ -67,7 +67,6 @@ It also has several useful helpers to handle errors.
 * `.createHotelService(settings)`  ⇒ [`HotelService`](docs/Hotels.md)
 * `.createUtilsService(settings)` ⇒ [`UtilsService`](docs/Utils.md)
 * `.createTerminalService(settings)` ⇒ [`TerminalService`](docs/Terminal.md)
-* `.createFlightService(settings)` ⇒ [`FlightService`](docs/FlightService.md)
 
 ### Settings object
 
