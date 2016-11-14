@@ -10,6 +10,16 @@ Validator.prototype.end = function () {
   return this.params;
 };
 
+Validator.prototype.paramsIsObject = function () {
+  if (!this.params) {
+    throw new TerminalValidationError.ParamsMissing(this.params);
+  }
+  if ((typeof this.params) !== 'object') {
+    throw new TerminalValidationError.ParamsInvalidType(this.params);
+  }
+  return this;
+};
+
 Validator.prototype.command = function () {
   if (!this.params.command) {
     throw new TerminalValidationError.CommandMissing(this.params);
@@ -31,7 +41,7 @@ Validator.prototype.sessionToken = function () {
 };
 
 Validator.prototype.timeout = function () {
-  if (this.params.timeout) {
+  if ((typeof this.params.timeout) !== 'undefined') {
     if ((typeof this.params.timeout) !== 'number') {
       throw new TerminalValidationError.SessionTimeoutInvalid(this.params);
     }
@@ -45,17 +55,20 @@ Validator.prototype.timeout = function () {
 module.exports = {
   CREATE_SESSION(params) {
     return new Validator(params)
+      .paramsIsObject()
       .timeout()
       .end();
   },
   TERMINAL_REQUEST(params) {
     return new Validator(params)
+      .paramsIsObject()
       .sessionToken()
       .command()
       .end();
   },
   CLOSE_SESSION(params) {
     return new Validator(params)
+      .paramsIsObject()
       .sessionToken()
       .end();
   },
