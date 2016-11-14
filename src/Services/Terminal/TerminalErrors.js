@@ -11,6 +11,8 @@ export const TerminalValidationError = createErrorClass(
   errorTypes.ValidationError
 );
 Object.assign(TerminalValidationError, createErrorsList({
+  ParamsMissing: 'Params are missing',
+  ParamsInvalidType: 'Params should be passed as object',
   CommandMissing: 'Command is missing',
   CommandInvalid: 'Command is invalid',
   SessionTokenMissing: 'Session token is missing',
