@@ -10,7 +10,7 @@ import terminalParser from '../../src/Services/Terminal/TerminalParser';
 
 const xmlFolder = `${__dirname}/MockResponses`;
 
-describe('#terminalParser', () => {
+describe('#TerminalParser', () => {
   describe('createSession()', () => {
     it('should throw an error when credentials are wrong', () => {
       const uParser = new ParserUapi('terminal:CreateTerminalSessionRsp', 'v36_0', {});
