@@ -52,6 +52,10 @@
 
             <com:ActionStatus Type="{{ActionStatusType}}" TicketDate="{{ticketDate}}" ProviderCode="1G" PseudoCityCode="{{ticketingPcc}}"/>
 
+            {{#if overridePcc}}
+            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{overridePcc}}"/>
+            {{/if}}
+
         </univ:AirCreateReservationReq>
     </soap:Body>
 </soap:Envelope>
