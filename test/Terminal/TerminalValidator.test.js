@@ -15,8 +15,12 @@ describe('#TerminalValidator', () => {
       const fn = () => TerminalValidator.CREATE_SESSION('PARAMS');
       expect(fn).to.throw(uAPI.errors.Terminal.TerminalValidationError.ParamsInvalidType);
     });
-    it('should be ok when no timeout provided in params', () => {
+    it('should fail when no timeout provided in params', () => {
       const fn = () => TerminalValidator.CREATE_SESSION({ SOME: 'PARAMS' });
+      expect(fn).to.throw(uAPI.errors.Terminal.TerminalValidationError.SessionTimeoutInvalid);
+    });
+    it('should be ok when timeout = false provided in params', () => {
+      const fn = () => TerminalValidator.CREATE_SESSION({ timeout: false });
       expect(fn).not.to.throw(Error);
     });
     it('should fail when wrong timeout type is provided', () => {
