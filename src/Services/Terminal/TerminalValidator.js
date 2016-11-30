@@ -41,7 +41,7 @@ Validator.prototype.sessionToken = function () {
 };
 
 Validator.prototype.timeout = function () {
-  if ((typeof this.params.timeout) !== 'undefined') {
+  if (this.params.timeout !== false) {
     if ((typeof this.params.timeout) !== 'number') {
       throw new TerminalValidationError.SessionTimeoutInvalid(this.params);
     }
