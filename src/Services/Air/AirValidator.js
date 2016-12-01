@@ -169,7 +169,7 @@ Validator.prototype.passengerBirthDates = function () {
 
     item.ssr = {
       type: 'DOCS',
-      text: `P/${country}/${num}/${country}/${birth}/${gender}/${due}/${first}/${last}`,
+      text: `P/${country}/${num}/${country}/${birth}/${gender}/${due}/${last}/${first}`,
     };
     item.DOB = birthSSR.format('YYYY-MM-DD');
   });
