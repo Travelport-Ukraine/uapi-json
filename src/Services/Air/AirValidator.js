@@ -185,6 +185,17 @@ Validator.prototype.hasFareBasisCodes = function () {
   return this;
 };
 
+Validator.prototype.segmentsGroups = function () {
+  let group = 0;
+  for (let i = 0; i < this.params.segments.length; i += 1) {
+    this.params.segments[i].Group = group;
+    if (this.params.segments[i].transfer === false) {
+      group += 1;
+    }
+  }
+  return this;
+};
+
 Validator.prototype.flightInfoItem = function (item) {
   if (!item.airline) {
     throw new AirFlightInfoValidationError.AirlineMissing(item);
@@ -227,6 +238,7 @@ module.exports = {
   AIR_PRICE(params) {
     return new Validator(params)
       .bookedPassengers()
+      .segmentsGroups()
       .hasFareBasisCodes()
       .end();
   },

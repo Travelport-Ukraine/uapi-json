@@ -23,7 +23,7 @@
                                 PolledAvailabilityOption="Polled avail exists"
                                 ProviderCode="1G"
                                 Key="{{@index}}"
-                                Group="0">
+                                Group="{{Group}}">
                 </air:AirSegment>
                 {{#if transfer}}
                 <air:Connection/>
@@ -31,9 +31,11 @@
                 {{/segments}}
             </air:AirItinerary>
             <air:AirPricingModifiers InventoryRequestType="Direct">
+                {{#if business}}
                 <air:PermittedCabins>
-                    <com:CabinClass Type="{{#if business}}Business{{else}}Economy{{/if}}" xmlns:com="http://www.travelport.com/schema/common_v36_0" />
+                    <com:CabinClass Type="Business" xmlns:com="http://www.travelport.com/schema/common_v36_0" />
                 </air:PermittedCabins>
+                {{/if}}
             </air:AirPricingModifiers>
         {{#passengers}}
             <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}" Age="{{Age}}" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
