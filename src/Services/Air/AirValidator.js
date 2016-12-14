@@ -187,7 +187,7 @@ Validator.prototype.hasFareBasisCodes = function () {
 
 Validator.prototype.segmentsGroups = function () {
   let group = 0;
-  for (let i = 0; i < this.params.segments.length; i++) {
+  for (let i = 0; i < this.params.segments.length; i += 1) {
     this.params.segments[i].Group = group;
     if (this.params.segments[i].transfer === false) {
       group += 1;
