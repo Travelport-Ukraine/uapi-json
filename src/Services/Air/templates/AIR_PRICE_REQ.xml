@@ -30,13 +30,15 @@
                 {{/if}}
                 {{/segments}}
             </air:AirItinerary>
+            {{#if business}}
             <air:AirPricingModifiers InventoryRequestType="Direct">
-                {{#if business}}
                 <air:PermittedCabins>
                     <com:CabinClass Type="Business" xmlns:com="http://www.travelport.com/schema/common_v36_0" />
                 </air:PermittedCabins>
-                {{/if}}
             </air:AirPricingModifiers>
+            {{else}}
+            <air:AirPricingModifiers InventoryRequestType="Direct"/>
+            {{/if}}
         {{#passengers}}
             <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}" Age="{{Age}}" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
             {{/passengers}}

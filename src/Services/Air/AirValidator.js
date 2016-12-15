@@ -132,9 +132,7 @@ Validator.prototype.uapi_fare_rule_key = function () {
 };
 
 Validator.prototype.pricingSolutionXML = function () {
-  if (
-    !Array.isArray(this.params['air:AirPricingSolution'])
-  ) {
+  if (Array.isArray(this.params['air:AirPricingSolution'])) {
     throw new AirValidationError.AirPricingSolutionInvalidType();
   }
 
