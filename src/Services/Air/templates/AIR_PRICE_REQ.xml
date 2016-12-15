@@ -24,10 +24,10 @@
                                 ProviderCode="1G"
                                 Key="{{@index}}"
                                 Group="{{Group}}">
+                    {{#if transfer}}
+                    <air:Connection/>
+                    {{/if}}
                 </air:AirSegment>
-                {{#if transfer}}
-                <air:Connection/>
-                {{/if}}
                 {{/segments}}
             </air:AirItinerary>
             {{#if business}}
