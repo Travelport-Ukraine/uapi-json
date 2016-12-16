@@ -28,7 +28,7 @@
             {{/legs}}
             <air:AirSearchModifiers>
                 <air:PreferredProviders>
-                    <com:Provider Code="1G" xmlns:com="http://www.travelport.com/schema/common_v33_0"/>
+                    <com:Provider Code="1V" xmlns:com="http://www.travelport.com/schema/common_v33_0"/>
                 </air:PreferredProviders>
             </air:AirSearchModifiers>
             {{#passengers}}
