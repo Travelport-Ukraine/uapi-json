@@ -7,6 +7,9 @@
             {{#each provider_cmds}}
             <air:AirFareDisplayRuleKey ProviderCode="1G">{{this}}</air:AirFareDisplayRuleKey>
             {{/each}}
+            {{#if overridePcc}}
+            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{overridePcc}}"/>
+            {{/if}}
         </air:AirFareRulesReq>
     </soapenv:Body>
 </soapenv:Envelope>

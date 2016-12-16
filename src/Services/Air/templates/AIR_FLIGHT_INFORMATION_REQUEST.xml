@@ -14,6 +14,9 @@
                 Key=""
             />
             {{/flightInfoCriteria}}
+            {{#if overridePcc}}
+            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{overridePcc}}"/>
+            {{/if}}
         </air:FlightInformationReq>
     </soapenv:Body>
 </soapenv:Envelope>
