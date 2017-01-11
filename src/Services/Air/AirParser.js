@@ -421,10 +421,10 @@ function airPriceRspPricingSolutionXML(obj) {
 }
 
 const AirErrorHandler = function (obj) {
-  const errData = (obj.detail && obj.detail['common_v33_0:ErrorInfo']) || null;
+  const errData = (obj.detail && obj.detail[`common_${this.uapi_version}:ErrorInfo`]) || null;
   // FIXME collapse versions using a regexp search in ParserUapi
   if (errData) {
-    switch (errData['common_v33_0:Code']) {
+    switch (errData[`common_${this.uapi_version}:Code`]) {
       case '3037': // No availability on chosen flights, unable to fare quote
         throw new AirRuntimeError.NoResultsFound(obj);
       default:
