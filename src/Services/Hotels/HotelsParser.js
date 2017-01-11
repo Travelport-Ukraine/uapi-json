@@ -274,7 +274,7 @@ const cancelBookParse = function (obj) {
 const errorHandler = function (err) {
   let errno = 0;
   try {
-    errno = err[0].detail[0]['common_v34_0:ErrorInfo'][0]['common_v34_0:Code'][0];
+    errno = err.detail[`common_${this.uapi_version}:ErrorInfo`][`common_${this.uapi_version}:Code`];
   } catch (e) {
     console.log('Error not parsed');
   }
