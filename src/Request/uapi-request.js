@@ -124,7 +124,7 @@ module.exports = function (service, auth, reqType, rootObject,
           console.log('Parsed error response', JSON.stringify(parsedXML));
         }
         const errData = uParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
-        return errorHandler.call(this, errData);
+        return errorHandler.call(uParser, errData);
       } else if (debugMode > 1) {
         console.log('Parsed response', JSON.stringify(parsedXML));
       }
@@ -147,7 +147,7 @@ module.exports = function (service, auth, reqType, rootObject,
       .then(prepareRequest)
       .then(sendRequest)
       .then(parseResponse)
-      .then(validateSOAP.bind(uParser))
+      .then(validateSOAP)
       .then(parseFunction.bind(uParser))// TODO merge Hotels
       .then(handleSuccess);
   };
