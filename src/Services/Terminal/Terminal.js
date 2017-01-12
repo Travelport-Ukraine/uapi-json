@@ -15,7 +15,7 @@ const responseHasMoreData = response => (response.slice(-1).join('') === ')><');
 
 module.exports = function (settings) {
   const service = terminalService(settings);
-  const emulatePcc = settings.emulatePcc || false;
+  const emulatePcc = settings.auth.emulatePcc || false;
   const timeout = settings.timeout || false;
   const state = {
     terminalState: TERMINAL_STATE_NONE,
