@@ -24,6 +24,11 @@
             {{#each passengers}}
             <com:SearchPassenger Key="P_{{@index}}" Code="{{ageType}}" />
             {{/each}}
+            {{#if overridePcc}}
+            <air:PCC>
+                <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{overridePcc}}"/>
+            </air:PCC>
+            {{/if}}
         </air:AirPriceReq>
     </soapenv:Body>
 </soapenv:Envelope>

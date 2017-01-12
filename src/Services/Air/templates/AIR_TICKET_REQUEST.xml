@@ -21,6 +21,9 @@
                 <com:FormOfPayment xmlns:com="http://www.travelport.com/schema/common_v33_0" Type="{{fop.type}}" />
                 <!--<com:FormOfPayment>-->
             </air:AirTicketingModifiers>
+            {{#if overridePcc}}
+            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{overridePcc}}"/>
+            {{/if}}
         </air:AirTicketingReq>
     </soap:Body>
 </soap:Envelope>

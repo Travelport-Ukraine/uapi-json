@@ -59,6 +59,7 @@ module.exports = function (service, auth, reqType, rootObject,
       params.TargetBranch = auth.targetBranch;
       params.Username = auth.username;
       params.pcc = auth.pcc;
+      params.overridePcc = auth.overridePcc || false;
       const renderedObj = template(params);
       return renderedObj;
     };
