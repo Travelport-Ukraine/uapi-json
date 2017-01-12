@@ -73,8 +73,11 @@ describe('#Terminal', function terminalTest() {
       closeSession.reset();
 
       const emulatePcc = '7j8i';
+      const emulateConfig = Object.assign({}, config, {
+        emulatePcc,
+      });
       const uAPITerminal = terminal({
-        auth: config,
+        auth: emulateConfig,
         emulatePcc,
       });
 
