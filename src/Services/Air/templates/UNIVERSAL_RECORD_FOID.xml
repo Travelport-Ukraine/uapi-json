@@ -11,8 +11,8 @@
                 </univ:AirAdd>
             </univ:UniversalModifyCmd>
             {{/each}}
-            {{#if overridePcc}}
-            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{overridePcc}}"/>
+            {{#if emulatePcc}}
+            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
             {{/if}}
         </univ:UniversalRecordModifyReq>
     </soapenv:Body>

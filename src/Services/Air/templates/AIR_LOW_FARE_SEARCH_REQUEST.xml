@@ -34,9 +34,9 @@
             {{#passengers}}
             <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v33_0"/>
             {{/passengers}}
-            {{#if overridePcc}}
+            {{#if emulatePcc}}
             <air:PCC>
-                <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{overridePcc}}"/>
+                <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
             </air:PCC>
             {{/if}}
         </air:LowFareSearchReq>
