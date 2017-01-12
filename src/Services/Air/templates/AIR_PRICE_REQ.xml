@@ -49,9 +49,9 @@
                 {{/segments}}
             </air:AirPricingCommand>
             {{/if}}
-            {{#if overridePcc}}
+            {{#if emulatePcc}}
             <air:PCC>
-                <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{overridePcc}}"/>
+                <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
             </air:PCC>
             {{/if}}
         </air:AirPriceReq>

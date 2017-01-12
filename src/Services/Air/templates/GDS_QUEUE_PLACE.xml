@@ -4,8 +4,8 @@
         <gds:GdsQueuePlaceReq TargetBranch="{{TargetBranch}}" RetrieveProviderReservationDetails="true" PseudoCityCode="{{pcc}}" ProviderCode="1G" ProviderLocatorCode="{{pnr}}">
             <com:BillingPointOfSaleInfo OriginApplication="uAPI" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
             <com:QueueSelector Queue="{{queue}}" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
-            {{#if overridePcc}}
-            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{overridePcc}}"/>
+            {{#if emulatePcc}}
+            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
             {{/if}}
         </gds:GdsQueuePlaceReq>
     </soapenv:Body>
