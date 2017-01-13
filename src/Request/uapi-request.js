@@ -58,7 +58,6 @@ module.exports = function (service, auth, reqType, rootObject,
       // adding target branch param from auth variable and render xml
       params.TargetBranch = auth.targetBranch;
       params.Username = auth.username;
-      params.pcc = auth.pcc;
       params.emulatePcc = auth.emulatePcc || false;
       const renderedObj = template(params);
       return renderedObj;

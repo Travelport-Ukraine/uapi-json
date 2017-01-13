@@ -148,8 +148,6 @@ function getTripsFromBooking(option, fareInfos, segments, flightDetails) {
 function formatLowFaresSearch(searchRequest, searchResult) {
   const start = new Date();
 
-  const pcc = searchRequest.pcc;
-
   const pricesList = searchResult['air:AirPricePointList'];
   const fareInfos = searchResult['air:FareInfoList'];
   const segments = searchResult['air:AirSegmentList'];
@@ -245,7 +243,6 @@ function formatLowFaresSearch(searchRequest, searchResult) {
       Directions: directions,
       BookingComponents: [
         {
-          PCC: pcc,
           TotalPrice: price.TotalPrice,
           BasePrice: price.BasePrice,
           Taxes: price.Taxes,

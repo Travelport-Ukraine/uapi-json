@@ -22,7 +22,6 @@ module.exports = (settings) => {
         const bookingParams = Object.assign({}, {
           passengers: options.passengers,
           rule: options.rule,
-          ticketingPcc: auth.pcc.toUpperCase(),
           ticketDate: moment().format(),
           ActionStatusType: 'TAU',
         }, data);

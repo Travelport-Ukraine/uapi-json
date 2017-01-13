@@ -75,7 +75,6 @@ const countHistogram = (arr) => {
 
 function lowFaresSearchRequest(obj) {
   return format.formatLowFaresSearch({
-    pcc: this.env.pcc,
     debug: false,
   }, searchLowFaresValidate.call(this, obj));
 }
@@ -479,7 +478,6 @@ function extractBookings(obj) {
     const newBooking = {
       type: 'uAPI',
       pnr: providerInfo.LocatorCode,
-            // pcc: this.env.pcc, //TODO remove search PCC from format?
       version: record.Version,
       uapi_ur_locator: record.LocatorCode,
       uapi_reservation_locator: booking.LocatorCode,
