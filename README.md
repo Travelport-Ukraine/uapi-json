@@ -79,7 +79,7 @@ It also has several useful helpers to handle errors.
 
 ### Auth object
 <a name="auth"></a>
-`username`, `password`, `targetBranch` and `pcc` should be set in `auth` object and are provided by Travelport.
+`username`, `password` and `targetBranch` should be set in `auth` object and are provided by Travelport.
 Optional `emulatePcc` is a PCC on behalf of which transactions are executed.
 This PCC needs to have set SVCB field in the AAT profile.
 
