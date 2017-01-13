@@ -72,15 +72,16 @@ It also has several useful helpers to handle errors.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| auth | `Object <username, password, targetBranch>` | - | See `auth` description [below](#auth). |
+| auth | `Object <username, password, targetBranch, pcc, emulatePcc>` | - | See `auth` description [below](#auth). |
 | debug | `Number` | `0` | Can be `0`, `1`, or `2`. |
 | production | `Boolean` | `true` | Production variable is connected with production and pre-production environment. Can be true for production and false for pre-production. For more information read docs. |
-| emulatePcc | `String` | - | Optional. Used for `TerminalService` only. See [`TerminalService`](docs/Terminal.md) |
 | timeout | `Number` | - | Optional. Used for `TerminalService` only. See [`TerminalService`](docs/Terminal.md) |
 
 ### Auth object
 <a name="auth"></a>
-`username`, `password` and `targetBranch` should be set in `auth` object and provided by Travelport.
+`username`, `password`, `targetBranch` and `pcc` should be set in `auth` object and are provided by Travelport.
+Optional `emulatePcc` is a PCC on behalf of which transactions are executed.
+This PCC needs to have set SVCB field in the AAT profile.
 
 There are 3 types of `debug` mode:
 

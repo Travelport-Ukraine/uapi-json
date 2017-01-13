@@ -4,7 +4,8 @@ Terminal service provides an interface to run terminal commands
 for terminal-enabled uAPI credentials.
 
 You can use Terminal service to run commands on behalf of your own PCC
-or to use `emulatePcc` option to run commands on behalf of other PC using your own Service bureau.
+or to use `emulatePcc` option from `auth` to run commands on behalf of other PCC
+using your own Service bureau.
 
 ## API
 

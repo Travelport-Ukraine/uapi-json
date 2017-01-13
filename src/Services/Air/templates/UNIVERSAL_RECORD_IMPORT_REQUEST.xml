@@ -4,6 +4,9 @@
     <soap:Body>
         <univ:UniversalRecordImportReq AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}" xmlns:univ="http://www.travelport.com/schema/universal_v36_0" ProviderCode="1G" ProviderLocatorCode="{{pnr}}"> {{! TODO support multiple providers, add optional fields }}
             <com:BillingPointOfSaleInfo OriginApplication="uAPI" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
+            {{#if emulatePcc}}
+            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
+            {{/if}}
         </univ:UniversalRecordImportReq>
     </soap:Body>
 </soap:Envelope>
