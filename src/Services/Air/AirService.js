@@ -22,7 +22,7 @@ module.exports = (settings) => {
         const bookingParams = Object.assign({}, {
           passengers: options.passengers,
           rule: options.rule,
-          ticketDate: moment().format(),
+          ticketDate: moment().add(3, 'hours').format(),
           ActionStatusType: 'TAU',
         }, data);
         return AirService.createReservation(bookingParams).catch((err) => {
