@@ -123,7 +123,8 @@ module.exports = function (service, auth, reqType, rootObject,
         if (debugMode) {
           console.log('Parsed error response', JSON.stringify(parsedXML));
         }
-        return errorHandler(parsedXML['SOAP:Fault']);
+        const errData = uParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
+        return errorHandler.call(uParser, errData);
       } else if (debugMode > 1) {
         console.log('Parsed response', JSON.stringify(parsedXML));
       }
