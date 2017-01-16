@@ -221,16 +221,16 @@ Validator.prototype.flightInfo = function () {
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST(params) {
     return new Validator(params)
-            .passengers()
-            .legs()
-            .requestId()
-            .setSearchPassengers()
-            .end();
+      .passengers()
+      .legs()
+      .requestId()
+      .setSearchPassengers()
+      .end();
   },
 
   AIR_AVAILABILITY_REQ(params) {
     return new Validator(params)
-            .end();
+      .end();
   },
 
   AIR_PRICE(params) {
@@ -243,71 +243,71 @@ module.exports = {
 
   AIR_PRICE_MANUAL(params) {
     return new Validator(params)
-            .bookedPassengers() // TODO change into pre-booked?
-            // .trips()
-            .end();
+      .bookedPassengers() // TODO change into pre-booked?
+      // .trips()
+      .end();
   },
 
   AIR_CREATE_RESERVATION_REQUEST(params) {
     return new Validator(params)
-            .pricingSolutionXML()
-            .passengerBirthDates()
-            .end();
+      .pricingSolutionXML()
+      .passengerBirthDates()
+      .end();
   },
 
   AIR_REQUEST_BY_PNR(params) {
     return new Validator(params)
-            .pnr()
-            .end();
+      .pnr()
+      .end();
   },
 
   FARE_RULES_BOOKED(params) {
     return new Validator(params)
-            .workaroundPassengers()
-            // .bookedPassengers() //TODO implement validation
-            // .trips()
-            .end();
+      .workaroundPassengers()
+      // .bookedPassengers() //TODO implement validation
+      // .trips()
+      .end();
   },
 
   FARE_RULES_TRIPS_TRAVELER_REFS(params) {
     return new Validator(params)
-            // .trips()  //TODO implement validation
-            // .uapi_traveler_refs
-            .removePassengers()
-            .end();
+      // .trips()  //TODO implement validation
+      // .uapi_traveler_refs
+      .removePassengers()
+      .end();
   },
 
   FARE_RULES_UNBOOKED(params) {
     return new Validator(params)
-        .passengers()
-        .setSearchPassengers()
-        // .bookedPassengers() //TODO implement validation
-        // .trips()
-        .end();
+      .passengers()
+      .setSearchPassengers()
+      // .bookedPassengers() //TODO implement validation
+      // .trips()
+      .end();
   },
 
   FARE_RULES_UAPI(params) {
     return new Validator(params)
-            .uapi_fare_rule_key()
-            .end();
+      .uapi_fare_rule_key()
+      .end();
   },
 
   GDS_QUEUE_PLACE(params) {
     return new Validator(params)
-            .queue()
-            .pnr()
-            .pcc()
-            .end();
+      .queue()
+      .pnr()
+      .pcc()
+      .end();
   },
 
   AIR_CANCEL_UR(params) {
     return new Validator(params)
-            .end();
+      .end();
   },
 
   UNIVERSAL_RECORD_FOID(params) {
     return new Validator(params)
-            .end();
+      .end();
   },
 
 

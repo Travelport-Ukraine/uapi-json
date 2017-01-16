@@ -9,7 +9,6 @@ const TerminalService = uAPI.createTerminalService({
   auth: config,
   debug: 2,
   production: true,
-  emulatePcc: '7j8j',
 });
 
 TerminalService

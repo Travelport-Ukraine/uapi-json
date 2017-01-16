@@ -35,22 +35,13 @@
             </com:BookingTraveler>
             {{/passengers}}
 
-            {{#if bookingPcc}}
-            <com:QueuePlace>
-                <!--Optional:-->
-                <com:PseudoCityCode>{{bookingPcc}}</com:PseudoCityCode>
-                <!--Zero or more repetitions:-->
-                <com:QueueSelector Queue="50"/>
-            </com:QueuePlace>
-            {{/if}}
-
             <air:AirPricingSolution {{#each air:AirPricingSolution}}{{@key}}="{{{this}}}" {{/each}}>
                 {{{air:AirPricingSolution_XML.air:AirSegment_XML}}}
                 {{{air:AirPricingSolution_XML.air:AirPricingInfo_XML}}}
                 {{{air:AirPricingSolution_XML.air:FareNote_XML}}}
             </air:AirPricingSolution>
 
-            <com:ActionStatus Type="{{ActionStatusType}}" TicketDate="{{ticketDate}}" ProviderCode="1G" PseudoCityCode="{{ticketingPcc}}"/>
+            <com:ActionStatus Type="{{ActionStatusType}}" TicketDate="{{ticketDate}}" ProviderCode="1G" />
 
             {{#if emulatePcc}}
             <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
