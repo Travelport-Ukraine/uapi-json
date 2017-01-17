@@ -6,7 +6,16 @@
         <univ:SupportedVersions airVersion="air_v36_0"/>
     </soap:Header>
     <soap:Body>
-        <univ:AirCreateReservationReq AuthorizedBy="user" {{#if rule}}RuleName="{{rule}}"{{/if}} RetainReservation="Both" TargetBranch="{{TargetBranch}}" TraceId="{{requestId}}" xmlns:univ="http://www.travelport.com/schema/universal_v36_0" {{#if UniversalRecordLocatorCode}} UniversalRecordLocatorCode="{{UniversalRecordLocatorCode}}" {{/if}} xmlns:com="http://www.travelport.com/schema/common_v36_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0">
+        <univ:AirCreateReservationReq
+            AuthorizedBy="user" TraceId="{{requestId}}"
+            RetainReservation="Both" TargetBranch="{{TargetBranch}}"
+            {{#if rule}}RuleName="{{rule}}"{{/if}}
+            {{#if UniversalRecordLocatorCode}} UniversalRecordLocatorCode="{{UniversalRecordLocatorCode}}" {{/if}}
+            xmlns:univ="http://www.travelport.com/schema/universal_v36_0"
+            xmlns:com="http://www.travelport.com/schema/common_v36_0"
+            xmlns:air="http://www.travelport.com/schema/air_v36_0"
+            xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0"
+            >
             <com:BillingPointOfSaleInfo OriginApplication="uAPI" />
             {{#passengers}}
             <com:BookingTraveler Key="P_{{@index}}" Age="{{Age}}" DOB="{{DOB}}" Gender="{{gender}}" TravelerType="{{ageCategory}}">
