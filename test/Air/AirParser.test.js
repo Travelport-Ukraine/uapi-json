@@ -10,7 +10,7 @@ const xmlFolder = __dirname + '/../FakeResponses/Air';
 describe('#AirParser', function () {
   describe('AIR_LOW_FARE_SEARCH()', () => {
     it('should test parsing of low fare search request', () => {
-      const uParser = new ParserUapi('air:LowFareSearchRsp', 'v_33_0', {});
+      const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
       const parseFunction = airParser.AIR_LOW_FARE_SEARCH_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.xml`).toString();
 
@@ -44,7 +44,7 @@ describe('#AirParser', function () {
     });
 
     it('should compare xml with parsed json', () => {
-      const uParser = new ParserUapi('air:LowFareSearchRsp', 'v_33_0', {});
+      const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
       const parseFunction = airParser.AIR_LOW_FARE_SEARCH_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.xml`).toString();
       const jsonResult = require('../FakeResponses/Air/LowFaresSearch.2ADT1CNNIEVBKK.json');
@@ -55,7 +55,7 @@ describe('#AirParser', function () {
     });
 
     it('should compare xml with parsed json', () => {
-      const uParser = new ParserUapi('air:LowFareSearchRsp', 'v_33_0', {});
+      const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
       const parseFunction = airParser.AIR_LOW_FARE_SEARCH_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.1ADTIEVPAR.xml`).toString();
       const jsonResult = require('../FakeResponses/Air/LowFaresSearch.1ADTIEVPAR.json');
@@ -111,7 +111,7 @@ describe('#AirParser', function () {
         ageCategory: 'ADT',
       }];
 
-      const uParser = new ParserUapi(null, 'v_36_0', { passengers });
+      const uParser = new ParserUapi(null, 'v36_0', { passengers });
       const parseFunction = airParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
       const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.xml`).toString();
       const jsonSaved = require('../FakeResponses/Air/AirPricingSolution.IEVPAR.json');
@@ -134,7 +134,7 @@ describe('#AirParser', function () {
         ageCategory: 'ADT',
       }];
 
-      const uParser = new ParserUapi(null, 'v_36_0', { passengers });
+      const uParser = new ParserUapi(null, 'v36_0', { passengers });
       const parseFunction = airParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
       const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.2ADT1CNN.xml`).toString();
       const jsonSaved = require('../FakeResponses/Air/AirPricingSolution.IEVPAR.2ADT1CNN.json');
@@ -157,7 +157,7 @@ describe('#AirParser', function () {
         ageCategory: 'ADT',
       }];
 
-      const uParser = new ParserUapi(null, 'v_36_0', { passengers });
+      const uParser = new ParserUapi(null, 'v36_0', { passengers });
       const parseFunction = airParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
       const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.2AirPrice.xml`).toString();
       // const jsonSaved = require('../FakeResponses/Air/AirPricingSolution.2AirPrice.xml.json');
