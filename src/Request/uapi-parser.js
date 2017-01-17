@@ -2,6 +2,7 @@ import _ from 'lodash';
 import Promise from 'promise';
 import {
   RequestSoapError,
+  RequestRuntimeError,
 } from './RequestErrors';
 
 const parseString = Promise.denodeify(require('xml2js').parseString);
@@ -243,6 +244,22 @@ Parser.prototype.parse = function (xml) {
     }
 
     if (obj['SOAP:Fault']) {
+      let withVersionProp = null;
+      try {
+        const detail = obj['SOAP:Fault'][0]['detail'][0];
+        const detailKeys = Object.keys(detail);
+        withVersionProp = detailKeys.map(
+          key => (/^[a-zA-Z]+_(v[0-9]{2}_[0-9]):[a-zA-Z]+$/ig).exec(key)
+        ).filter(key => key !== null);
+      } catch (e) {
+        throw new RequestRuntimeError.VersionParsingError(obj, e);
+      }
+
+      if (withVersionProp) {
+        this.uapi_version = withVersionProp[0][1];
+      } else {
+        throw new RequestRuntimeError.VersionParsingError(obj);
+      }
       return obj;
     }
 
@@ -258,6 +275,7 @@ Parser.prototype.parse = function (xml) {
       if (self.debug > 2) {
         console.log('Error during automatic resolving version');
       }
+      throw new RequestRuntimeError.VersionParsingError(obj, e);
     }
 
     const data = self.mergeLeafRecursive(obj, self.rootObject);
