@@ -5,7 +5,8 @@
     <soap:Header/>
     <soap:Body>
         <air:AirPriceReq AuthorizedBy="user" CheckFlightDetails="true" TargetBranch="{{TargetBranch}}" TraceId="{{requestId}}"
-                         xmlns:air="http://www.travelport.com/schema/air_v36_0">
+                         xmlns:air="http://www.travelport.com/schema/air_v36_0"
+                         xmlns:com="http://www.travelport.com/schema/common_v36_0">
             <com:BillingPointOfSaleInfo OriginApplication="UAPI" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
             <air:AirItinerary>
                 {{#segments}}
@@ -39,7 +40,7 @@
             {{else}}
             <air:AirPricingModifiers InventoryRequestType="Direct"/>
             {{/if}}
-        {{#passengers}}
+            {{#passengers}}
             <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}" Age="{{Age}}" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
             {{/passengers}}
             {{#if hasFareBasis}}
