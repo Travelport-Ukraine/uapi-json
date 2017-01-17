@@ -4,7 +4,12 @@
 <!--Air Low Fare Search For Galileo(1G) Request-->
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
     <soap:Body>
-        <air:LowFareSearchReq AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}" ReturnUpsellFare="true" xmlns:air="http://www.travelport.com/schema/air_v33_0" xmlns:com="http://www.travelport.com/schema/common_v33_0">
+        <air:LowFareSearchReq
+            AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}"
+            ReturnUpsellFare="true"
+            xmlns:air="http://www.travelport.com/schema/air_v33_0"
+            xmlns:com="http://www.travelport.com/schema/common_v33_0"
+            >
             <com:BillingPointOfSaleInfo OriginApplication="uAPI"/>
             {{#legs}}
             <air:SearchAirLeg>
