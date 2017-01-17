@@ -64,6 +64,23 @@ describe('#AirParser', function () {
         assert(JSON.stringify(result) === JSON.stringify(jsonResult), 'Results are not equal.');
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
+
+    it('should throw AirRuntimeError.NoResultsFound error', () => {
+      const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
+      const parseFunction = airParser.AIR_ERRORS;
+      const xml = fs.readFileSync(`${xmlFolder}/../Other/UnableToFareQuoteError.xml`).toString();
+      const errors = require('../../src/Services/Air/AirErrors');
+      return uParser.parse(xml).then(json => {
+        try {
+          const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]); // parse error data
+          const result = parseFunction.call(uParser, errData);
+        } catch (e) {
+          assert(e instanceof errors.AirRuntimeError.NoResultsFound, 'Incorrect error thrown');
+          return;
+        }
+        assert(false, 'Incorrect logic of unable to fare quote parsing');
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
   });
 
   describe('AIR_PRICE_REQ_XML()', () => {
