@@ -26,7 +26,7 @@ Install package with `npm install --save uapi-json`.
 This package exports an object with three service constructors.
 
 ```javascript
-const uAPI = rqeuire('uapi-json');
+const uAPI = require('uapi-json');
 
 const AirService = uAPI.createAirService(settings);
 const HotelService = uAPI.createHotelService(settings);
