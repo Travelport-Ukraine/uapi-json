@@ -17,6 +17,9 @@
             xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0"
             >
             <com:BillingPointOfSaleInfo OriginApplication="uAPI" />
+            {{#if emulatePcc}}
+            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
+            {{/if}}
             {{#passengers}}
             <com:BookingTraveler Key="P_{{@index}}" Age="{{Age}}" DOB="{{DOB}}" Gender="{{gender}}" TravelerType="{{ageCategory}}">
                 <com:BookingTravelerName First="{{firstName}}" Last="{{lastName}}" {{#if Prefix}}Prefix="{{title}}"{{/if}}/>
@@ -51,10 +54,6 @@
             </air:AirPricingSolution>
 
             <com:ActionStatus Type="{{ActionStatusType}}" TicketDate="{{ticketDate}}" ProviderCode="1G" />
-
-            {{#if emulatePcc}}
-            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
-            {{/if}}
 
         </univ:AirCreateReservationReq>
     </soap:Body>
