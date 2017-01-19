@@ -80,7 +80,7 @@ function lowFaresSearchRequest(obj) {
 }
 
 
-const ticketParse = (obj) => {
+function ticketRequest(obj) {
   let checkResponseMessage = false;
   let checkTickets = false;
 
@@ -92,8 +92,8 @@ const ticketParse = (obj) => {
     throw new AirRuntimeError.TicketingFailed();
   }
 
-  if (obj['common_v33_0:ResponseMessage']) {
-    const responseMessage = obj['common_v33_0:ResponseMessage'];
+  if (obj[`common_${this.uapi_version}:ResponseMessage`]) {
+    const responseMessage = obj[`common_${this.uapi_version}:ResponseMessage`];
     responseMessage.forEach((msg) => {
       if (msg._ === 'OK:Ticket issued') {
         checkResponseMessage = true;
@@ -118,11 +118,9 @@ const ticketParse = (obj) => {
   }
 
   return checkResponseMessage && checkTickets;
-};
+}
 
-const ticketRequest = obj => ticketParse(obj);
 const nullParsing = obj => obj;
-
 
 function getPassengers(list, BookingTraveler) {
   return list.reduce((passengers, key) => {
