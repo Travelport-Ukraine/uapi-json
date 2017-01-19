@@ -62,7 +62,7 @@ module.exports = function (auth, debug, production) {
       auth,
       `${templatesDir}/AIR_TICKET_REQUEST.xml`,
       'air:AirTicketingRsp',
-      AirValidator.AIR_REQUEST_BY_PNR, // checks for PNR
+      AirValidator.AIR_TICKET, // checks for PNR
       AirParser.AIR_ERRORS,
       AirParser.AIR_TICKET_REQUEST,
       debug

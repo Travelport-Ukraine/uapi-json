@@ -208,6 +208,16 @@ Validator.prototype.flightInfoItem = function (item) {
   }
 };
 
+Validator.prototype.fop = function () {
+  if (!this.params.fop) {
+    throw new AirValidationError.FopMissing();
+  }
+  if ((typeof this.params.fop) !== 'object' || this.params.fop.type !== 'Cash') {
+    throw new AirValidationError.FopTypeUnsupported();
+  }
+  return this;
+};
+
 Validator.prototype.flightInfo = function () {
   if (Array.isArray(this.params.flightInfoCriteria)) {
     this.params.flightInfoCriteria.forEach(this.flightInfoItem);
