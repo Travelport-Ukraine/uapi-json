@@ -76,5 +76,9 @@ module.exports = (settings) => {
           Promise.reject(err);
         });
     },
+
+    getTicket(options) {
+      return service.getTicket(options);
+    },
   };
 };

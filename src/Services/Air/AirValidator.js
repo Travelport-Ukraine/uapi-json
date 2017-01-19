@@ -218,6 +218,16 @@ Validator.prototype.fop = function () {
   return this;
 };
 
+Validator.prototype.ticketNumber = function () {
+  if (!this.params.ticketNumber) {
+    throw new AirValidationError.TicketNumberMissing();
+  }
+  if (!this.params.ticketNumber.match(/^\d{13}/)) {
+    throw new AirValidationError.TicketNumberInvalid();
+  }
+  return this;
+};
+
 Validator.prototype.flightInfo = function () {
   if (Array.isArray(this.params.flightInfoCriteria)) {
     this.params.flightInfoCriteria.forEach(this.flightInfoItem);
@@ -331,6 +341,12 @@ module.exports = {
   AIR_FLIGHT_INFORMATION(params) {
     return new Validator(params)
       .flightInfo()
+      .end();
+  },
+
+  AIR_GET_TICKET(params) {
+    return new Validator(params)
+      .ticketNumber()
       .end();
   },
 };

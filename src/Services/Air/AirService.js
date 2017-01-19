@@ -159,7 +159,7 @@ module.exports = function (settings) {
       config.AirService.url,
       auth,
       `${templatesDir}/AirRetrieveDocument.xml`,
-      'air:FlightInformationRsp',
+      'air:AirRetrieveDocumentRsp',
       AirValidator.AIR_GET_TICKET,
       AirParser.AIR_ERRORS,
       AirParser.AIR_GET_TICKET,

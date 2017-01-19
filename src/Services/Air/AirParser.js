@@ -431,6 +431,26 @@ const AirErrorHandler = function (obj) {
   throw new AirParsingError(obj);
 };
 
+const airGetTicket = function (obj) {
+  const passengersList = obj['air:ETR'][`common_${this.uapi_version}:BookingTraveler`];
+  const passengers = Object.keys(passengersList).map(
+    passengerKey => ({
+      key: passengerKey,
+      firstName: passengersList[passengerKey][`common_${this.uapi_version}:BookingTravelerName`].First,
+      lastName: passengersList[passengerKey][`common_${this.uapi_version}:BookingTravelerName`].Last,
+    })
+  );
+  const response = {
+    type: 'airTicket',
+    uapi_ur_locator: obj.UniversalRecordLocatorCode,
+    uapi_reservation_locator: obj['air:ETR']['air:AirReservationLocatorCode'],
+    pnr: obj['air:ETR'].ProviderLocatorCode,
+    passengers,
+  };
+
+  return response;
+};
+
 function extractBookings(obj) {
   const self = this;
   const record = obj['universal:UniversalRecord'];
@@ -578,4 +598,5 @@ module.exports = {
   UNIVERSAL_RECORD_FOID: nullParsing,
   AIR_ERRORS: AirErrorHandler, // errors handling
   AIR_FLIGHT_INFORMATION: airFlightInfoRsp,
+  AIR_GET_TICKET: airGetTicket,
 };

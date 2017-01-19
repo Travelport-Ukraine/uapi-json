@@ -21,6 +21,8 @@ Object.assign(AirValidationError, createErrorsList({
   BirthDateInvalid: 'Invalid birth date',
   FopMissing: 'Form of payment missing',
   FopTypeUnsupported: 'Form of payment type is unsupported',
+  TicketNumberMissing: 'Ticket number missing',
+  TicketNumberInvalid: 'Ticket number invalid',
 }, AirValidationError));
 
 export const GdsValidationError = createErrorClass(
