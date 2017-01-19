@@ -153,5 +153,15 @@ module.exports = function (auth, debug, production) {
       AirParser.AIR_FLIGHT_INFORMATION,
       debug
     ),
+    getTicket: uApiRequest(
+      config.AirService.url,
+      auth,
+      `${templatesDir}/AirRetrieveDocument.xml`,
+      'air:FlightInformationRsp',
+      AirValidator.AIR_GET_TICKET,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_GET_TICKET,
+      debug
+    ),
   };
 };
