@@ -8,6 +8,9 @@
             xmlns:com="http://www.travelport.com/schema/common_v36_0"
             >
             <com:BillingPointOfSaleInfo OriginApplication="uAPI" xmlns:com="http://www.travelport.com/schema/common_v33_0"/>
+            {{#if emulatePcc}}
+            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
+            {{/if}}
             <air:AirReservationLocatorCode>{{ReservationLocator}}</air:AirReservationLocatorCode>
             {{#refs}}
             <air:AirPricingInfoRef Key="{{key}}"/>
@@ -25,9 +28,6 @@
                 <com:FormOfPayment xmlns:com="http://www.travelport.com/schema/common_v33_0" Type="{{fop.type}}" />
                 <!--<com:FormOfPayment>-->
             </air:AirTicketingModifiers>
-            {{#if emulatePcc}}
-            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
-            {{/if}}
         </air:AirTicketingReq>
     </soap:Body>
 </soap:Envelope>
