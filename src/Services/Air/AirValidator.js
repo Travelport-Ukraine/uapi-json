@@ -265,6 +265,13 @@ module.exports = {
       .end();
   },
 
+  AIR_TICKET(params) {
+    return new Validator(params)
+      .pnr()
+      .fop()
+      .end();
+  },
+
   AIR_REQUEST_BY_PNR(params) {
     return new Validator(params)
       .pnr()
