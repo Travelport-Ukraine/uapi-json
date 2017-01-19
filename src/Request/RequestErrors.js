@@ -19,7 +19,7 @@ Object.assign(RequestValidationError, createErrorsList({
 
 // Runtime errors
 export const RequestRuntimeError = createErrorClass(
-  'ParserRuntimeError',
+  'RequestRuntimeError',
   'Request runtime error',
   errorTypes.RuntimeError
 );

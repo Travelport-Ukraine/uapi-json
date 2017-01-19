@@ -281,9 +281,6 @@ Parser.prototype.parse = function (xml) {
       self.config = defaultConfig(version);
       self.uapi_version = version;
     } catch (e) {
-      if (self.debug > 2) {
-        console.log('Error during automatic resolving version');
-      }
       throw new RequestRuntimeError.VersionParsingError(obj, e);
     }
 
