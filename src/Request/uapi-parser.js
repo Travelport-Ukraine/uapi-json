@@ -1,10 +1,20 @@
 import _ from 'lodash';
-import Promise from 'promise';
+import xml2js from 'xml2js';
+
 import {
   RequestSoapError,
+  RequestRuntimeError,
 } from './RequestErrors';
 
-const parseString = Promise.denodeify(require('xml2js').parseString);
+const parseString = xml => new Promise((resolve, reject) => {
+  xml2js.parseString(xml, (err, json) => {
+    if (err) {
+      reject(err);
+      return;
+    }
+    resolve(json);
+  });
+});
 
 // common func for all XML keyed
 // air:*List types (FlightDetailsList, AirSegmentList, FareInfoList, RouteList, AirPricePointList)
@@ -243,6 +253,22 @@ Parser.prototype.parse = function (xml) {
     }
 
     if (obj['SOAP:Fault']) {
+      let withVersionProp = null;
+      try {
+        const detail = obj['SOAP:Fault'][0].detail[0];
+        const detailKeys = Object.keys(detail);
+        withVersionProp = detailKeys.map(
+          key => (/^[a-zA-Z]+_(v[0-9]{2}_[0-9]):[a-zA-Z]+$/ig).exec(key)
+        ).filter(key => key !== null);
+      } catch (e) {
+        throw new RequestRuntimeError.VersionParsingError(obj, e);
+      }
+
+      if (withVersionProp) {
+        this.uapi_version = withVersionProp[0][1];
+      } else {
+        throw new RequestRuntimeError.VersionParsingError(obj);
+      }
       return obj;
     }
 
@@ -255,9 +281,7 @@ Parser.prototype.parse = function (xml) {
       self.config = defaultConfig(version);
       self.uapi_version = version;
     } catch (e) {
-      if (self.debug > 2) {
-        console.log('Error during automatic resolving version');
-      }
+      throw new RequestRuntimeError.VersionParsingError(obj, e);
     }
 
     const data = self.mergeLeafRecursive(obj, self.rootObject);
