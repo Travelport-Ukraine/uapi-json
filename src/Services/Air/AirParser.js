@@ -455,7 +455,7 @@ function extractBookings(obj) {
   const reservations = record['universal:ProviderReservationInfo'];
 
   record['air:AirReservation'].forEach((booking) => {
-    const resKey = 'common_' + this.uapi_version + ':ProviderReservationInfoRef';
+    const resKey = `common_${this.uapi_version}:ProviderReservationInfoRef`;
     const providerInfo = reservations[booking[resKey]];
 
     if (!providerInfo) {
@@ -467,11 +467,11 @@ function extractBookings(obj) {
 
     const passengers = getPassengers.call(
       this,
-      booking['common_' + self.uapi_version + ':BookingTravelerRef'],
+      booking[`common_${self.uapi_version}:BookingTravelerRef`],
       travellers
     );
 
-    const supplierLocator = booking['common_' + this.uapi_version + ':SupplierLocator'] || {};
+    const supplierLocator = booking[`common_${self.uapi_version}:SupplierLocator`] || {};
 
     const newBooking = {
       type: 'uAPI',
