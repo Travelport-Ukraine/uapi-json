@@ -1,7 +1,6 @@
 import handlebars from 'handlebars';
 import fs from 'fs';
 import request from 'request';
-import Promise from 'promise';
 import {
   RequestValidationError,
   RequestRuntimeError,
@@ -11,7 +10,15 @@ import UapiParser from './uapi-parser';
 import configInit from '../config';
 
 // making default functions work with promises
-const readFile = Promise.denodeify(fs.readFile);
+const readFile = file => new Promise((resolve, reject) => {
+  fs.readFile(file, (err, content) => {
+    if (err) {
+      reject(err);
+      return;
+    }
+    resolve(content);
+  });
+});
 
 /**
  * basic function for requests/responses
