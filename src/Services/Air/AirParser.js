@@ -80,7 +80,7 @@ function lowFaresSearchRequest(obj) {
 }
 
 
-const ticketParse = (obj) => {
+function ticketRequest(obj) {
   let checkResponseMessage = false;
   let checkTickets = false;
 
@@ -92,8 +92,8 @@ const ticketParse = (obj) => {
     throw new AirRuntimeError.TicketingFailed();
   }
 
-  if (obj['common_v33_0:ResponseMessage']) {
-    const responseMessage = obj['common_v33_0:ResponseMessage'];
+  if (obj[`common_${this.uapi_version}:ResponseMessage`]) {
+    const responseMessage = obj[`common_${this.uapi_version}:ResponseMessage`];
     responseMessage.forEach((msg) => {
       if (msg._ === 'OK:Ticket issued') {
         checkResponseMessage = true;
@@ -118,11 +118,9 @@ const ticketParse = (obj) => {
   }
 
   return checkResponseMessage && checkTickets;
-};
+}
 
-const ticketRequest = obj => ticketParse(obj);
 const nullParsing = obj => obj;
-
 
 function getPassengers(list, BookingTraveler) {
   return list.reduce((passengers, key) => {
@@ -433,6 +431,26 @@ const AirErrorHandler = function (obj) {
   throw new AirParsingError(obj);
 };
 
+const airGetTicket = function (obj) {
+  const passengersList = obj['air:ETR'][`common_${this.uapi_version}:BookingTraveler`];
+  const passengers = Object.keys(passengersList).map(
+    passengerKey => ({
+      key: passengerKey,
+      firstName: passengersList[passengerKey][`common_${this.uapi_version}:BookingTravelerName`].First,
+      lastName: passengersList[passengerKey][`common_${this.uapi_version}:BookingTravelerName`].Last,
+    })
+  );
+  const response = {
+    type: 'airTicket',
+    uapi_ur_locator: obj.UniversalRecordLocatorCode,
+    uapi_reservation_locator: obj['air:ETR']['air:AirReservationLocatorCode'],
+    pnr: obj['air:ETR'].ProviderLocatorCode,
+    passengers,
+  };
+
+  return response;
+};
+
 function extractBookings(obj) {
   const self = this;
   const record = obj['universal:UniversalRecord'];
@@ -457,7 +475,7 @@ function extractBookings(obj) {
   const reservations = record['universal:ProviderReservationInfo'];
 
   record['air:AirReservation'].forEach((booking) => {
-    const resKey = 'common_' + this.uapi_version + ':ProviderReservationInfoRef';
+    const resKey = `common_${this.uapi_version}:ProviderReservationInfoRef`;
     const providerInfo = reservations[booking[resKey]];
 
     if (!providerInfo) {
@@ -469,11 +487,11 @@ function extractBookings(obj) {
 
     const passengers = getPassengers.call(
       this,
-      booking['common_' + self.uapi_version + ':BookingTravelerRef'],
+      booking[`common_${self.uapi_version}:BookingTravelerRef`],
       travellers
     );
 
-    const supplierLocator = booking['common_' + this.uapi_version + ':SupplierLocator'] || {};
+    const supplierLocator = booking[`common_${self.uapi_version}:SupplierLocator`] || {};
 
     const newBooking = {
       type: 'uAPI',
@@ -580,4 +598,5 @@ module.exports = {
   UNIVERSAL_RECORD_FOID: nullParsing,
   AIR_ERRORS: AirErrorHandler, // errors handling
   AIR_FLIGHT_INFORMATION: airFlightInfoRsp,
+  AIR_GET_TICKET: airGetTicket,
 };

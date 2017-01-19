@@ -1,5 +1,5 @@
 const createHotelService = require('./Services/Hotels/HotelsService');
-const createAirService = require('./Services/Air/AirService');
+const createAirService = require('./Services/Air/Air');
 const createUtilsService = require('./Services/Utils/UtilsService');
 const createTerminalService = require('./Services/Terminal/Terminal');
 const commonErrors = require('./error-types');

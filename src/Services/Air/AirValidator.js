@@ -208,6 +208,26 @@ Validator.prototype.flightInfoItem = function (item) {
   }
 };
 
+Validator.prototype.fop = function () {
+  if (!this.params.fop) {
+    throw new AirValidationError.FopMissing();
+  }
+  if ((typeof this.params.fop) !== 'object' || this.params.fop.type !== 'Cash') {
+    throw new AirValidationError.FopTypeUnsupported();
+  }
+  return this;
+};
+
+Validator.prototype.ticketNumber = function () {
+  if (!this.params.ticketNumber) {
+    throw new AirValidationError.TicketNumberMissing();
+  }
+  if (!this.params.ticketNumber.match(/^\d{13}/)) {
+    throw new AirValidationError.TicketNumberInvalid();
+  }
+  return this;
+};
+
 Validator.prototype.flightInfo = function () {
   if (Array.isArray(this.params.flightInfoCriteria)) {
     this.params.flightInfoCriteria.forEach(this.flightInfoItem);
@@ -252,6 +272,13 @@ module.exports = {
     return new Validator(params)
       .pricingSolutionXML()
       .passengerBirthDates()
+      .end();
+  },
+
+  AIR_TICKET(params) {
+    return new Validator(params)
+      .pnr()
+      .fop()
       .end();
   },
 
@@ -314,6 +341,12 @@ module.exports = {
   AIR_FLIGHT_INFORMATION(params) {
     return new Validator(params)
       .flightInfo()
+      .end();
+  },
+
+  AIR_GET_TICKET(params) {
+    return new Validator(params)
+      .ticketNumber()
       .end();
   },
 };
