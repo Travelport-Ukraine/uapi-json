@@ -5,8 +5,10 @@ const getConfig = require('../../config');
 
 const templatesDir = `${__dirname}/templates`;
 
-module.exports = function (auth, debug, production) {
+module.exports = function (settings) {
+  const { auth, debug, production } = settings;
   const config = getConfig(auth.region, production);
+
   return {
     searchLowFares: uApiRequest(
       config.AirService.url,
