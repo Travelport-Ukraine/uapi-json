@@ -436,7 +436,6 @@ const airGetTicket = function (obj) {
   const passengersList = etr[`common_${this.uapi_version}:BookingTraveler`];
   const passengers = Object.keys(passengersList).map(
     passengerKey => ({
-      key: passengerKey,
       firstName: passengersList[passengerKey][`common_${this.uapi_version}:BookingTravelerName`].First,
       lastName: passengersList[passengerKey][`common_${this.uapi_version}:BookingTravelerName`].Last,
     })
@@ -451,13 +450,11 @@ const airGetTicket = function (obj) {
     (ticketKey) => {
       const ticket = ticketsList[ticketKey];
       return {
-        key: ticketKey,
         ticketNumber: ticket.TicketNumber,
         coupons: Object.keys(ticket['air:Coupon']).map(
           (couponKey) => {
             const coupon = ticket['air:Coupon'][couponKey];
             const couponInfo = {
-              key: couponKey,
               couponNumber: coupon.CouponNumber,
               from: coupon.Origin,
               to: coupon.Destination,
