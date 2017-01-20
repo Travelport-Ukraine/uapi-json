@@ -1,4 +1,9 @@
-# Description [![Build Status](https://travis-ci.org/Travelport-Ukraine/uapi-json.svg?branch=master)](https://travis-ci.org/Travelport-Ukraine/uapi-json)
+# Description 
+[![Build Status](https://travis-ci.org/Travelport-Ukraine/uapi-json.svg?branch=master)](https://travis-ci.org/Travelport-Ukraine/uapi-json)
+[![Coverage](https://img.shields.io/codecov/c/github/Travelport-Ukraine/uapi-json/stable.svg)](https://codecov.io/gh/Travelport-Ukraine/uapi-json/branch/stable)
+[![NPM](https://img.shields.io/npm/dt/uapi-json.svg)](https://www.npmjs.com/package/uapi-json)
+[![Tag](https://img.shields.io/github/tag/Travelport-Ukraine/uapi-json.svg)](https://travis-ci.org/Travelport-Ukraine/uapi-json)
+
 Best Travelport Universal API wrapper ever :airplane: :mountain_railway: :hotel:
 
 Wrapper for [Travelport Universal API](https://developer.travelport.com/app/developer-network/universal-api).
