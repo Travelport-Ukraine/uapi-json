@@ -1,6 +1,6 @@
 {
   "name": "uapi-json",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Travelport Universal API",
   "main": "build/",
   "files": [
@@ -12,7 +12,7 @@
   "scripts": {
     "test": "mocha --compilers js:babel-register --recursive",
     "cover": "babel-node ./node_modules/.bin/isparta cover _mocha -- --recursive",
-    "coveralls": "cat coverage/*/lcov.info | codecov",
+    "coveralls": "cat ./coverage/lcov.info | codecov",
     "fix": "eslint --fix src/",
     "lint": "eslint src/",
     "build": "babel --copy-files src/ -d build/",
