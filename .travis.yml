@@ -4,6 +4,5 @@ node_js:
 script:
   - npm run lint
   - npm run cover
-  - npm run build
-after_script:
   - npm run coveralls
+  - npm run build
