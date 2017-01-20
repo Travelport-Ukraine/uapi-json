@@ -5,3 +5,5 @@ script:
   - npm run lint
   - npm run test
   - npm run build
+after_script:
+  - npm run coveralls
