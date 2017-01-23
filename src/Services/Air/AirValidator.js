@@ -231,6 +231,16 @@ Validator.prototype.ticketNumber = function () {
   return this;
 };
 
+Validator.prototype.paramsIsObject = function () {
+  if (!this.params) {
+    throw new AirValidationError.ParamsMissing(this.params);
+  }
+  if (Object.prototype.toString.call(this.params) !== '[object Object]') {
+    throw new AirValidationError.ParamsInvalidType(this.params);
+  }
+  return this;
+};
+
 Validator.prototype.flightInfo = function () {
   if (Array.isArray(this.params.flightInfoCriteria)) {
     this.params.flightInfoCriteria.forEach(this.flightInfoItem);
@@ -280,6 +290,7 @@ module.exports = {
 
   AIR_TICKET(params) {
     return new Validator(params)
+      .paramsIsObject()
       .pnr()
       .fop()
       .end();
@@ -349,6 +360,7 @@ module.exports = {
 
   AIR_GET_TICKET(params) {
     return new Validator(params)
+      .paramsIsObject()
       .ticketNumber()
       .end();
   },

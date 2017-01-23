@@ -11,6 +11,8 @@ export const AirValidationError = createErrorClass(
   errorTypes.ValidationError
 );
 Object.assign(AirValidationError, createErrorsList({
+  ParamsMissing: 'Params are missing',
+  ParamsInvalidType: 'Params should be passed as object',
   PassengersHashMissing: 'Passengers hash of passenger types is missing',
   PassengersCategoryInvalid: 'Passengers hash contains invalid passenger',
   PassengersCountInvalid: 'Passengers category has wrong passegners number',
