@@ -489,7 +489,7 @@ const airGetTicket = function (obj) {
     uapi_reservation_locator: etr['air:AirReservationLocatorCode'],
     pnr: etr.ProviderLocatorCode,
     platingCarrier: etr.PlatingCarrier,
-    pcc: etr.PseudoCityCode,
+    ticketingPcc: etr.PseudoCityCode,
     issuedAt: etr.IssuedDate,
     fareCalculation: etr['air:FareCalc'],
     priceInfo: {
