@@ -212,7 +212,10 @@ Validator.prototype.fop = function () {
   if (!this.params.fop) {
     throw new AirValidationError.FopMissing();
   }
-  if ((typeof this.params.fop) !== 'object' || this.params.fop.type !== 'Cash') {
+  if (
+    Object.prototype.toString.call(this.params.fop) !== '[object Object]' ||
+    this.params.fop.type !== 'Cash'
+  ) {
     throw new AirValidationError.FopTypeUnsupported();
   }
   return this;
