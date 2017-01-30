@@ -80,5 +80,16 @@ module.exports = (settings) => {
     getTicket(options) {
       return service.getTicket(options);
     },
+
+    getTickets(options) {
+      return service.importPNR(options)
+        .then(
+           pnrData => Promise.all(
+             pnrData[0].tickets.map(
+               ticket => service.getTicket({ ticketNumber: ticket.number })
+             )
+           )
+        );
+    },
   };
 };
