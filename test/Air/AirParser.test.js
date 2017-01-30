@@ -52,7 +52,9 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
       const parseFunction = airParser.AIR_LOW_FARE_SEARCH_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.xml`).toString();
-      const jsonResult = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.json`).toString();
+      const jsonResult = JSON.parse(
+        fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.json`).toString()
+      );
       return uParser.parse(xml).then((json) => {
         const result = parseFunction.call(uParser, json);
         assert(JSON.stringify(result) === JSON.stringify(jsonResult), 'Results are not equal.');
@@ -63,7 +65,9 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
       const parseFunction = airParser.AIR_LOW_FARE_SEARCH_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.1ADTIEVPAR.xml`).toString();
-      const jsonResult = fs.readFileSync(`${xmlFolder}/LowFaresSearch.1ADTIEVPAR.json`).toString();
+      const jsonResult = JSON.parse(
+        fs.readFileSync(`${xmlFolder}/LowFaresSearch.1ADTIEVPAR.json`).toString()
+      );
       return uParser.parse(xml).then((json) => {
         const result = parseFunction.call(uParser, json);
         assert(JSON.stringify(result) === JSON.stringify(jsonResult), 'Results are not equal.');
@@ -118,7 +122,9 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi(null, 'v36_0', { passengers });
       const parseFunction = airParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
       const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.xml`).toString();
-      const jsonSaved = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.json`).toString();
+      const jsonSaved = JSON.parse(
+        fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.json`).toString()
+      );
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         test(jsonResult);
@@ -141,7 +147,9 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi(null, 'v36_0', { passengers });
       const parseFunction = airParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
       const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.2ADT1CNN.xml`).toString();
-      const jsonSaved = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.2ADT1CNN.json`).toString();
+      const jsonSaved = JSON.parse(
+        fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.2ADT1CNN.json`).toString()
+      );
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         test(jsonResult);
