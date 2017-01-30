@@ -73,7 +73,7 @@ module.exports = (settings) => {
           if (settings.debug > 0) {
             console.log('Cant get flightInfo', err);
           }
-          Promise.reject(err);
+          return Promise.reject(err);
         });
     },
 
