@@ -89,6 +89,9 @@ module.exports = (settings) => {
                ticket => service.getTicket({ ticketNumber: ticket.number })
              )
            )
+        )
+        .catch(
+          err => Promise.reject(new AirRuntimeError.UnableToRetrieveTickets(options, err))
         );
     },
   };

@@ -1,0 +1,42 @@
+{
+  "type": "airTicketDocument",
+  "uapi_ur_locator": "DQP1VD",
+  "uapi_reservation_locator": "SV2Y9A",
+  "pnr": "XDQTZ4",
+  "platingCarrier": "OK",
+  "ticketingPcc": "7J8J",
+  "issuedAt": "2017-01-30T00:00:00.000+01:00",
+  "fareCalculation": "IEV OK PRG 39.00 NUC39.00END ROE1.0 XT 463YK1163YQ",
+  "priceInfo": {
+    "TotalPrice": "UAH2851",
+    "BasePrice": "USD39.00",
+    "EquivalentBasePrice": "UAH1061",
+    "Taxes": "UAH1790",
+    "TaxesInfo": []
+  },
+  "passengers": [
+    {
+      "firstName": "DMYTROMR",
+      "lastName": "CHERTOUSOV"
+    }
+  ],
+  "tickets": [
+    {
+      "ticketNumber": "0649902789371",
+      "coupons": [
+        {
+          "couponNumber": "1",
+          "from": "KBP",
+          "to": "PRG",
+          "departure": "2017-10-21T04:05:00.000+03:00",
+          "airline": "OK",
+          "flightNumber": "977",
+          "fareBasisCode": "Q0BAGG",
+          "status": "V",
+          "notValidBefore": "2017-10-21",
+          "notValidAfter": "2017-10-21"
+        }
+      ]
+    }
+  ]
+}

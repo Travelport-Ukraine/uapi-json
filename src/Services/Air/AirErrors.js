@@ -83,6 +83,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   NoResultsFound: 'No results found',
   NoValidFare: 'No valid fare for input criteria.',
   TravelersListError: 'Not all BookingTravelers present in list or wrong lookup keys provided',
+  UnableToRetrieveTickets: 'Unable to retrieve tickets list',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(
