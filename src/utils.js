@@ -1,4 +1,10 @@
+let log = console.log;
+
 const Utils = {
+  setLog: (fn) => {
+    log = fn;
+  },
+  log: (data, message) => log(data, message),
   price(string) {
     if (string === undefined || string === null) {
       return null;
