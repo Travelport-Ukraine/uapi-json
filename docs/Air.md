@@ -15,7 +15,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
     * [.toQueue(params)](#toQueue) ⇒ <code>Promise</code>
     * [.importPNR(params)](#importPNR) ⇒ <code>Promise</code>
     * [.flightInfo(params)](#flightInfo) ⇒ <code>Promise</code>
-    * [.getTicket(params)](#getTciket) ⇒ <code>Promise</code>
+    * [.getTicket(params)](#getTicket) ⇒ <code>Promise</code>
 
 <a name="shop"></a>
 ### .shop(params)
@@ -195,7 +195,7 @@ Request for the flight information.
 
 **See: <a href="../examples/Air/flightInfo1.js">FlightInfo basic example</a>**, **<a href="../examples/Air/flightInfo2.js">FlightInfo multiple items example</a>**
 
-<a name="getTciket"></a>
+<a name="getTicket"></a>
 ### .getTicket(params)
 Request for the ticket information.
 
