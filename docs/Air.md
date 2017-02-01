@@ -16,6 +16,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
     * [.importPNR(params)](#importPNR) ⇒ <code>Promise</code>
     * [.flightInfo(params)](#flightInfo) ⇒ <code>Promise</code>
     * [.getTicket(params)](#getTicket) ⇒ <code>Promise</code>
+    * [.getTickets(params)](#getTickets) ⇒ <code>Promise</code>
 
 <a name="shop"></a>
 ### .shop(params)
@@ -206,6 +207,23 @@ Request for the ticket information.
 | --- | --- | --- |
 | ticketNumber | <code>string</code> | The number of the ticket. |
 
-**Please note**, that in order to display some extended information from ticket like detailed taxes information and booking and service classes for segments, PNR should be imported first using [.importPNR(params)](#importPNR) method.
+**Important note**
+
+If PNR with ticket was not yet imported into uAPI, some extended information from the ticket like detailed taxes information, booking and service classes could not be extracted.
+
+In order to extract it `uapi-json` uses its own [TerminalService](Terminal.md), therefore Terminal access should be enabled for your account.
 
 **See: <a href="../examples/Air/getTicket.js">GetTicket example</a>**
+
+<a name="getTickets"></a>
+### .getTickets(params)
+Request for the ticket information for all tickets in PNR.
+
+**Returns**: <code>Promise</code>
+**See**: [Ticket Information](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Air_Ticketing/Displaying_Ticket_Information.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pnr | <code>String</code> | 1G PNR. |
+
+**See: <a href="../examples/Air/getTickets.js">GetTickets example</a>**
