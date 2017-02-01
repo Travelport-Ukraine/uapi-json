@@ -12,10 +12,10 @@ The Air workflow allows you to do what most travel agents did in the past and wh
     * [.shop(params)](#shop) ⇒ <code>Promise</code>
     * [.book(params)](#book) ⇒ <code>Promise</code>
     * [.ticket(params)](#ticket) ⇒ <code>Promise</code>
-    * .void(params) ⇒ <code>Promise</code>
     * [.toQueue(params)](#toQueue) ⇒ <code>Promise</code>
     * [.importPNR(params)](#importPNR) ⇒ <code>Promise</code>
-    * [flightInfo(params)](#flightInfo) ⇒ <code>Promise</code>
+    * [.flightInfo(params)](#flightInfo) ⇒ <code>Promise</code>
+    * [.getTicket(params)](#getTciket) ⇒ <code>Promise</code>
 
 <a name="shop"></a>
 ### .shop(params)
@@ -194,3 +194,18 @@ Request for the flight information.
 | flightNumber | <code>string</code> | The flight number for the segment |
 
 **See: <a href="../examples/Air/flightInfo1.js">FlightInfo basic example</a>**, **<a href="../examples/Air/flightInfo2.js">FlightInfo multiple items example</a>**
+
+<a name="getTciket"></a>
+### .getTicket(params)
+Request for the ticket information.
+
+**Returns**: <code>Promise</code>
+**See**: [Ticket Information](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Air_Ticketing/Displaying_Ticket_Information.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ticketNumber | <code>string</code> | The number of the ticket. |
+
+**Please note**, that in order to display some extended information from ticket like detailed taxes information and booking and service classes for segments, PNR should be imported first using [.importPNR(params)](#importPNR) method.
+
+**See: <a href="../examples/Air/getTicket.js">GetTicket example</a>**
