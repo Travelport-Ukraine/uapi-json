@@ -19,10 +19,81 @@ const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:
 
 describe('#AirParser', () => {
   describe('getTicket', () => {
-    it('should parse VOID ticket', () => {
+    it('should parse imported ticket', () => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
-      const xml = fs.readFileSync(`${xmlFolder}/getTicket_VOID.xml`).toString();
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_IMPORTED.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          expect(result).to.be.an('object');
+          expect(result).to.have.all.keys([
+            'type', 'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'platingCarrier',
+            'ticketingPcc', 'issuedAt', 'fareCalculation', 'priceInfo', 'passengers', 'tickets',
+          ]);
+          expect(result.type).to.equal('airTicketDocument');
+          expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
+          expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
+          expect(result.pnr).to.match(/^[A-Z0-9]{6}$/i);
+          expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
+          expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
+          expect(result.issuedAt).to.match(timestampRegexp);
+          expect(result.fareCalculation).to.have.length.above(0);
+          // Price info
+          const priceInfo = result.priceInfo;
+          expect(priceInfo).to.be.an('object');
+          expect(priceInfo).to.have.all.keys([
+            'TotalPrice', 'BasePrice', 'Taxes', 'TaxesInfo', 'EquivalentBasePrice',
+          ]);
+          expect(priceInfo.TotalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.BasePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.Taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.TaxesInfo).to.be.an('array');
+          expect(priceInfo.TaxesInfo).to.have.length.above(0);
+          // Passengers
+          expect(result.passengers).to.be.an('array');
+          expect(result.passengers).to.have.length.above(0);
+          result.passengers.forEach((passenger) => {
+            expect(passenger).to.be.an('object');
+            expect(passenger).to.have.all.keys(['firstName', 'lastName']);
+          });
+          // Tickets
+          expect(result.tickets).to.be.an('array');
+          expect(result.tickets).to.have.length.above(0);
+          result.tickets.forEach((ticket) => {
+            expect(ticket).to.be.an('object');
+            expect(ticket).to.have.all.keys(['ticketNumber', 'coupons']);
+            expect(ticket.ticketNumber).to.match(/\d{13}/i);
+            expect(ticket.coupons).to.be.an('array');
+            expect(ticket.coupons).to.have.length.above(0);
+            ticket.coupons.forEach((coupon) => {
+              expect(coupon).to.be.an('object');
+              expect(coupon).to.have.all.keys([
+                'couponNumber', 'from', 'to', 'departure', 'airline', 'flightNumber',
+                'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter',
+                'bookingClass', 'serviceClass',
+              ]);
+              expect(coupon.couponNumber).to.match(/\d+/i);
+              expect(coupon.from).to.match(/[A-Z]{3}/i);
+              expect(coupon.from).to.match(/[A-Z]{3}/i);
+              expect(coupon.departure).to.match(timestampRegexp);
+              expect(coupon.airline).to.match(/[A-Z0-9]{2}/i);
+              expect(coupon.flightNumber).to.match(/\d+/i);
+              expect(coupon.fareBasisCode).to.match(/[A-Z0-9]+/i);
+              expect(coupon.status).to.be.oneOf([
+                'A', 'C', 'F', 'L', 'O', 'P', 'R', 'E', 'V', 'Z', 'U', 'S', 'I', 'D', 'X',
+              ]);
+              expect(coupon.notValidBefore).to.match(/\d{4}-\d{2}-\d{2}/i);
+              expect(coupon.notValidAfter).to.match(/\d{4}-\d{2}-\d{2}/i);
+            });
+          });
+        });
+    });
+    it('should parse not imported ticket', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_NOT_IMPORTED.xml`).toString();
 
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
