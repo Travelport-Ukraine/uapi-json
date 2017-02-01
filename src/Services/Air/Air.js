@@ -1,6 +1,7 @@
 import moment from 'moment';
 import _ from 'lodash';
 import airService from './AirService';
+import createTerminalService from '../Terminal/Terminal';
 import { AirRuntimeError } from './AirErrors';
 
 module.exports = (settings) => {
@@ -79,6 +80,32 @@ module.exports = (settings) => {
 
     getTicket(options) {
       return service.getTicket(options);
+    },
+
+    getPNRByTicketNumber(options) {
+      const terminal = createTerminalService(settings);
+      const memo = {};
+      return terminal.executeCommand(`*TE/${options.ticketNumber}`)
+        .then(
+          (response) => {
+            memo.response = response;
+          }
+        )
+        .then(
+          () => terminal.closeSession()
+        )
+        .then(
+          () => {
+            try {
+              return memo.response.match(/RLOC [^\s]{2} ([^\s]{6})/)[1];
+            } catch (err) {
+              throw new AirRuntimeError.PnrParseError(memo.response);
+            }
+          }
+        )
+        .catch(
+          err => Promise.reject(new AirRuntimeError.GetPnrError(options, err))
+        );
     },
   };
 };
