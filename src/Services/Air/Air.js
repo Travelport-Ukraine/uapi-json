@@ -91,9 +91,7 @@ module.exports = (settings) => {
             memo.response = response;
           }
         )
-        .then(
-          () => terminal.closeSession()
-        )
+        .then(terminal.closeSession)
         .then(
           () => {
             try {
