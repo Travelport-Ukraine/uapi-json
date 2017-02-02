@@ -83,6 +83,8 @@ Object.assign(AirRuntimeError, createErrorsList({
   NoResultsFound: 'No results found',
   NoValidFare: 'No valid fare for input criteria.',
   TravelersListError: 'Not all BookingTravelers present in list or wrong lookup keys provided',
+  PnrParseError: 'Failed to parse PNR from ticket information request response',
+  GetPnrError: 'Failed to obtain PNR from ticket information',
   UnableToRetrieveTickets: 'Unable to retrieve tickets list',
 }, AirRuntimeError));
 
