@@ -1,5 +1,6 @@
 const assert = require('assert');
 const fs = require('fs');
+const errors = require('../../src/').errors.Utils;
 const ParserUapi = require('../../src/Request/uapi-parser');
 const utilsParser = require('../../src/Services/Utils/UtilsParser');
 
@@ -21,6 +22,31 @@ describe('#utilsParser', () => {
           assert.notEqual(c.rate, undefined, 'No rate');
         });
       });
+    });
+
+    it('should throw parsing error', () => {
+      const parseFunction = utilsParser.CURRENCY_CONVERSION;
+      try {
+        parseFunction({});
+      } catch (e) {
+        assert(e instanceof errors.UtilsParsingError, 'Incorrect error thrown');
+      }
+    });
+
+    it('should test error handling', () => {
+      const parseFunction = utilsParser.UTILS_ERROR;
+      const uParser = new ParserUapi('util:CurrencyConversionRsp', 'v_33_0', {});
+      const xml = fs.readFileSync(`${xmlFolder}/../Other/UnableToFareQuoteError.xml`).toString(); // any error
+      return uParser
+        .parse(xml)
+        .then((json) => {
+          const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]);
+          return parseFunction.call(uParser, errData);
+        })
+        .then(() => assert(false, 'Error should be thrown'))
+        .catch(e => {
+          assert(e instanceof errors.UtilsRuntimeError);
+        });
     });
   });
 });
