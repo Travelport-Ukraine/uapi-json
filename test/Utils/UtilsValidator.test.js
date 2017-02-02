@@ -40,7 +40,7 @@ describe('#UtilsValidator', () => {
       const params = UtilsValidator.CURRENCY_CONVERSION(
         { currencies: [{ from: 'UAR', to: 'EUR'}] }
       );
-      expect(params).not.equal(null);
+      expect(params).not.equal(undefined);
     });
   });
 });
