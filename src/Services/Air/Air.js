@@ -74,7 +74,7 @@ module.exports = (settings) => {
           if (settings.debug > 0) {
             console.log('Cant get flightInfo', err);
           }
-          Promise.reject(err);
+          return Promise.reject(err);
         });
     },
 
@@ -105,6 +105,20 @@ module.exports = (settings) => {
         )
         .catch(
           err => Promise.reject(new AirRuntimeError.GetPnrError(options, err))
+        );
+    },
+
+    getTickets(options) {
+      return service.importPNR(options)
+        .then(
+           pnrData => Promise.all(
+             pnrData[0].tickets.map(
+               ticket => service.getTicket({ ticketNumber: ticket.number })
+             )
+           )
+        )
+        .catch(
+          err => Promise.reject(new AirRuntimeError.UnableToRetrieveTickets(options, err))
         );
     },
   };
