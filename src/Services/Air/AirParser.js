@@ -424,6 +424,9 @@ const AirErrorHandler = function (obj) {
   // FIXME collapse versions using a regexp search in ParserUapi
   if (errData) {
     switch (errData[`common_${this.uapi_version}:Code`]) {
+      case '3003':
+        throw new AirRuntimeError.InvalidRequestData(obj);
+      case '2602': // No Solutions in the response.
       case '3037': // No availability on chosen flights, unable to fare quote
         throw new AirRuntimeError.NoResultsFound(obj);
       default:

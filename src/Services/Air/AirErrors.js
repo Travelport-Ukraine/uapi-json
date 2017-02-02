@@ -87,6 +87,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   TicketingFailed: 'Ticketing failed',
   TicketingFoidRequired: 'FOID required for the PC selected',
   NoResultsFound: 'No results found',
+  InvalidRequestData: 'Request data is invalid',
   NoValidFare: 'No valid fare for input criteria.',
   TravelersListError: 'Not all BookingTravelers present in list or wrong lookup keys provided',
 }, AirRuntimeError));
