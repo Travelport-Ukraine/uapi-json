@@ -81,6 +81,20 @@ describe('#AirParser', function () {
         assert(false, 'Incorrect logic of unable to fare quote parsing');
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
+
+    it('should throw AirRuntimeError.NoResultsFound error2', () => {
+      const uParser = new ParserUapi('SOAP:Fault', 'v33_0', {});
+      const parseFunction = airParser.AIR_ERRORS.bind(uParser);
+      const errors = require('../../src/Services/Air/AirErrors');
+      const json = fs.readFileSync(`${xmlFolder}/../Air/LowFaresSearch.NoSolutions.Parsed.error.json`).toString();
+      try {
+        parseFunction(JSON.parse(json));
+      } catch (e) {
+        assert(e instanceof errors.AirRuntimeError.NoResultsFound, 'Incorrect error class');
+        return;
+      }
+      assert(false, 'No error thrown');
+    });
   });
 
   describe('AIR_PRICE_REQ_XML()', () => {
