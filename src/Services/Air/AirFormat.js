@@ -8,20 +8,22 @@ const firstFlightDetails = obj => (
 
 function getBaggage(trip, obj) {
   let add = null;
-  if (obj['air:NumberOfPieces'] !== undefined) {
-    add = { units: 'piece', amount: obj['air:NumberOfPieces'] * 1 };
-  }
-  const weight = obj['air:MaxWeight'];
-  if (_.isObject(weight)) {
-    add = { units: weight.Unit.toLowerCase(), amount: weight.Value * 1 };
+  if (obj !== null && obj !== undefined) {
+    if (obj['air:NumberOfPieces'] !== undefined) {
+      add = { units: 'piece', amount: obj['air:NumberOfPieces'] * 1 };
+    }
+    const weight = obj['air:MaxWeight'];
+    if (_.isObject(weight)) {
+      add = { units: weight.Unit.toLowerCase(), amount: weight.Value * 1 };
+    }
   }
 
   if (add === null) {
     console.warn('Baggage information is not number and is not weight!', JSON.stringify(obj));
-    add = { units: 'pieces', amount: 0 };
+    add = { units: 'piece', amount: 0 };
   }
 
-  if (trip.baggage === undefined || trip.baggage === null) {
+  if (!_.isObject(trip) || !_.isArray(trip.baggage)) {
     return [add];
   }
 
