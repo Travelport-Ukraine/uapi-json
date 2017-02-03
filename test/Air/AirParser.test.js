@@ -19,6 +19,18 @@ const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:
 
 describe('#AirParser', () => {
   describe('getTicket', () => {
+    it('should return error when not available to return ticket', (done) => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_FAILED.xml`).toString();
+      uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then(() => done(new Error('Error has not occured')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.TicketRetrieveError);
+          done();
+        });
+    });
     it('should parse imported ticket', () => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;

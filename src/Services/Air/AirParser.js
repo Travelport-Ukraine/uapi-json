@@ -433,6 +433,12 @@ const AirErrorHandler = function (obj) {
 
 const airGetTicket = function (obj) {
   const etr = obj['air:ETR'];
+  if (!etr) {
+    const message = obj[`common_${this.uapi_version}:ResponseMessage`] ? (
+      { message: obj[`common_${this.uapi_version}:ResponseMessage`][0]._ }
+    ) : null;
+    throw new AirRuntimeError.TicketRetrieveError(message);
+  }
   const passengersList = etr[`common_${this.uapi_version}:BookingTraveler`];
   const passengers = Object.keys(passengersList).map(
     passengerKey => ({
