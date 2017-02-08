@@ -325,6 +325,16 @@ describe('#AirParser', function () {
       });
     });
 
+    it('should auto detect version and parse 36 version', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v33_0', { });
+      const parseFunction = airParser.AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing36.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(jsonResult, true, 'Ticketing is not true');
+      });
+    });
+
     it('should test parsing ticketing response', () => {
       const uParser = new ParserUapi('air:AirTicketingRsp', 'v33_0', { });
       const parseFunction = airParser.AIR_TICKET_REQUEST;

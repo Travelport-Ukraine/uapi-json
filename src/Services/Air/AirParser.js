@@ -80,7 +80,7 @@ function lowFaresSearchRequest(obj) {
 }
 
 
-const ticketParse = (obj) => {
+const ticketParse = function(obj) {
   let checkResponseMessage = false;
   let checkTickets = false;
 
@@ -92,8 +92,8 @@ const ticketParse = (obj) => {
     throw new AirRuntimeError.TicketingFailed(obj);
   }
 
-  if (obj['common_v33_0:ResponseMessage']) {
-    const responseMessage = obj['common_v33_0:ResponseMessage'];
+  if (obj[`common_${this.uapi_version}:ResponseMessage`]) {
+    const responseMessage = obj[`common_${this.uapi_version}:ResponseMessage`];
     responseMessage.forEach((msg) => {
       if (msg._ === 'OK:Ticket issued') {
         checkResponseMessage = true;
@@ -120,7 +120,6 @@ const ticketParse = (obj) => {
   return checkResponseMessage && checkTickets;
 };
 
-const ticketRequest = obj => ticketParse(obj);
 const nullParsing = obj => obj;
 
 
@@ -574,7 +573,7 @@ module.exports = {
   AIR_PRICE_REQUEST: airPriceRsp,
   AIR_PRICE_REQUEST_PRICING_SOLUTION_XML: airPriceRspPricingSolutionXML,
   AIR_CREATE_RESERVATION_REQUEST: extractBookings,
-  AIR_TICKET_REQUEST: ticketRequest,
+  AIR_TICKET_REQUEST: ticketParse,
   AIR_IMPORT_REQUEST: importRequest,
   AIR_PRICE_FARE_RULES: AirPriceFareRules,
   FARE_RULES_RESPONSE: FareRules,
