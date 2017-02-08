@@ -87,9 +87,9 @@ const ticketParse = (obj) => {
   if (obj['air:TicketFailureInfo']) {
     const msg = obj['air:TicketFailureInfo'].Message;
     if (/VALID\sFORM\sOF\sID\s\sFOID\s\sREQUIRED/.exec(msg)) {
-      throw new AirRuntimeError.TicketingFoidRequired();
+      throw new AirRuntimeError.TicketingFoidRequired(obj);
     }
-    throw new AirRuntimeError.TicketingFailed();
+    throw new AirRuntimeError.TicketingFailed(obj);
   }
 
   if (obj['common_v33_0:ResponseMessage']) {
