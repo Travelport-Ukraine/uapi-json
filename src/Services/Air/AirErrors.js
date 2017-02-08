@@ -87,6 +87,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   GetPnrError: 'Failed to obtain PNR from ticket information',
   UnableToRetrieveTickets: 'Unable to retrieve tickets list',
   TicketRetrieveError: 'Unable to retrieve ticket',
+  TicketInfoIncomplete: 'Ticket information is incomplete',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(

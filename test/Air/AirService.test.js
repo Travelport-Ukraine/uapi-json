@@ -17,6 +17,24 @@ const auth = {
 
 
 describe('#AirService', () => {
+  describe('getTicket', () => {
+    it('should fail when no itinerary present to import', (done) => {
+      const AirService = () => ({
+        getTicket: () => Promise.reject(new AirRuntimeError.TicketInfoIncomplete()),
+        importPNR: () => Promise.reject(new AirRuntimeError()),
+      });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': AirService,
+      });
+      const service = createAirService({ auth });
+      service.getTicket({ ticketNumber: '0649902789376' })
+        .then(() => done(new Error('Error has not occured')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError);
+          done();
+        });
+    });
+  });
   describe('getPNRByTicketNumber', () => {
     it('should fail when ticket data not available by ticket number', (done) => {
       const response = fs.readFileSync(
@@ -58,12 +76,9 @@ describe('#AirService', () => {
         });
     });
     it('should fail when something fails in closeSession', (done) => {
-      const response = fs.readFileSync(
-        path.join(terminalResponsesDir, 'getTicketNotExists.txt')
-      ).toString();
       const createTerminalService = () => ({
         // The only command is executed, no analyze needed
-        executeCommand: () => Promise.resolve(response),
+        executeCommand: () => Promise.resolve(true),
         closeSession: () => Promise.reject(new Error('Some error')),
       });
       const createAirService = proxyquire('../../src/Services/Air/Air', {
@@ -73,8 +88,7 @@ describe('#AirService', () => {
       service.getPNRByTicketNumber({ ticketNumber: '0649902789000' })
         .then(() => done(new Error('Error has not occured')))
         .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.GetPnrError);
-          expect(err.causedBy).to.be.an.instanceof(Error);
+          expect(err).to.be.an.instanceof(Error);
           done();
         });
     });

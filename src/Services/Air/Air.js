@@ -79,7 +79,17 @@ module.exports = (settings) => {
     },
 
     getTicket(options) {
-      return service.getTicket(options);
+      return service.getTicket(options)
+        .catch((err) => {
+          if (!(err instanceof AirRuntimeError.TicketInfoIncomplete)) {
+            throw err;
+          }
+          return this.getPNRByTicketNumber({
+            ticketNumber: options.ticketNumber,
+          })
+            .then(pnr => this.importPNR({ pnr }))
+            .then(() => service.getTicket(options));
+        });
     },
 
     getPNRByTicketNumber(options) {
