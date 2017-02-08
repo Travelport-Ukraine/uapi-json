@@ -80,7 +80,7 @@ function lowFaresSearchRequest(obj) {
 }
 
 
-const ticketParse = function(obj) {
+const ticketParse = function (obj) {
   let checkResponseMessage = false;
   let checkTickets = false;
 
