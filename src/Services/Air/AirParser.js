@@ -80,7 +80,7 @@ function lowFaresSearchRequest(obj) {
 }
 
 
-function ticketRequest(obj) {
+const ticketParse = function (obj) {
   let checkResponseMessage = false;
   let checkTickets = false;
 
@@ -655,7 +655,7 @@ module.exports = {
   AIR_PRICE_REQUEST: airPriceRsp,
   AIR_PRICE_REQUEST_PRICING_SOLUTION_XML: airPriceRspPricingSolutionXML,
   AIR_CREATE_RESERVATION_REQUEST: extractBookings,
-  AIR_TICKET_REQUEST: ticketRequest,
+  AIR_TICKET_REQUEST: ticketParse,
   AIR_IMPORT_REQUEST: importRequest,
   AIR_PRICE_FARE_RULES: AirPriceFareRules,
   FARE_RULES_RESPONSE: FareRules,
