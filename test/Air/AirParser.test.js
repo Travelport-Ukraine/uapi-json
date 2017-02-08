@@ -334,6 +334,18 @@ describe('#AirParser', function () {
         assert(jsonResult, true, 'Ticketing is not true');
       });
     });
+
+    it('should throw parsing error TicketingResponseMissing', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v33_0', { });
+      const parseFunction = airParser.AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing.NOT-OK.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(false, 'Should not return response.');
+      }).catch((e) => {
+        assert(e instanceof airErrors.AirParsingError.TicketingResponseMissing);
+      });
+    });
   });
 
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
