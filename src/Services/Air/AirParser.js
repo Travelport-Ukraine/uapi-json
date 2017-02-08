@@ -118,7 +118,7 @@ const ticketParse = function (obj) {
   }
 
   return checkResponseMessage && checkTickets;
-}
+};
 
 const nullParsing = obj => obj;
 
