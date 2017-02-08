@@ -456,7 +456,7 @@ describe('#AirParser', () => {
         const jsonResult = parseFunction.call(uParser, json);
         assert(false, 'Should not return response.');
       }).catch((e) => {
-        assert(e instanceof airErrors.AirParsingError.TicketingResponseMissing);
+        assert(e instanceof AirRuntimeError.TicketingResponseMissing);
       });
     });
   });

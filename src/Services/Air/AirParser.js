@@ -102,7 +102,7 @@ function ticketRequest(obj) {
   }
 
   if (checkResponseMessage === false) {
-    throw new AirParsingError.TicketingResponseMissing(obj);
+    throw new AirRuntimeError.TicketingResponseMissing(obj);
   }
 
   if (obj['air:ETR']) {
