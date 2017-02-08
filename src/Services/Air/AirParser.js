@@ -87,9 +87,9 @@ function ticketRequest(obj) {
   if (obj['air:TicketFailureInfo']) {
     const msg = obj['air:TicketFailureInfo'].Message;
     if (/VALID\sFORM\sOF\sID\s\sFOID\s\sREQUIRED/.exec(msg)) {
-      throw new AirRuntimeError.TicketingFoidRequired();
+      throw new AirRuntimeError.TicketingFoidRequired(obj);
     }
-    throw new AirRuntimeError.TicketingFailed();
+    throw new AirRuntimeError.TicketingFailed(obj);
   }
 
   if (obj[`common_${this.uapi_version}:ResponseMessage`]) {
@@ -102,7 +102,7 @@ function ticketRequest(obj) {
   }
 
   if (checkResponseMessage === false) {
-    throw new AirRuntimeError.TicketingResponseMissing(obj);
+    throw new AirParsingError.TicketingResponseMissing(obj);
   }
 
   if (obj['air:ETR']) {
@@ -422,6 +422,9 @@ const AirErrorHandler = function (obj) {
   // FIXME collapse versions using a regexp search in ParserUapi
   if (errData) {
     switch (errData[`common_${this.uapi_version}:Code`]) {
+      case '3003':
+        throw new AirRuntimeError.InvalidRequestData(obj);
+      case '2602': // No Solutions in the response.
       case '3037': // No availability on chosen flights, unable to fare quote
         throw new AirRuntimeError.NoResultsFound(obj);
       default:

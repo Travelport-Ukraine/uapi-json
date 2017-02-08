@@ -1,5 +1,5 @@
 import util from 'util';
-import { lib as screenLib } from 'galileo-screen';
+import screenLib from 'galileo-screen';
 import {
   TerminalRuntimeError,
 } from './TerminalErrors';
@@ -11,7 +11,7 @@ export const TERMINAL_STATE_READY = 'TERMINAL_STATE_READY';
 export const TERMINAL_STATE_CLOSED = 'TERMINAL_STATE_CLOSED';
 export const TERMINAL_STATE_ERROR = 'TERMINAL_STATE_ERROR';
 
-const responseHasMoreData = response => (response.slice(-1).join('') === ')><');
+const screenFunctions = screenLib({ cursor: '><' });
 
 module.exports = function (settings) {
   const service = terminalService(settings);
@@ -22,13 +22,15 @@ module.exports = function (settings) {
     sessionToken: null,
   };
   // Processing response with MD commands
-  const processResponse = (response, previousResponse = []) => {
-    const processedResponse = screenLib.mergeLastLinesAtIntersection(
-      previousResponse.slice(0, -1),
-      response
-    );
-    if (!responseHasMoreData(response)) {
-      return processedResponse.join('\n');
+  const processResponse = (response, previousResponse = null) => {
+    const processedResponse = previousResponse
+      ? screenFunctions.mergeResponse(
+        previousResponse,
+        response.join('\n')
+      )
+      : response.join('\n');
+    if (!screenFunctions.hasMore(processedResponse)) {
+      return processedResponse;
     }
     return service.executeCommand({
       sessionToken: state.sessionToken,

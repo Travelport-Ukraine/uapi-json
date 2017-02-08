@@ -1,0 +1,21 @@
+{
+  "detail": {
+    "common_v33_0:ErrorInfo": {
+      "common_v33_0:Auxdata": {
+        "common_v33_0:Entry": {
+          "common_v33_0:Description": "SearchAirLeg.DepTimes",
+          "common_v33_0:Reason": "element"
+        }
+      },
+      "common_v33_0:Code": "3003",
+      "common_v33_0:Description": "Preferred date-time is before the current departure city date-time.",
+      "common_v33_0:Service": "AIRSEARCH_SERVICE",
+      "common_v33_0:TraceId": "0fb9f82e-672d-29dd-67b1-ca40ec36efd0",
+      "common_v33_0:TransactionId": "F5A926460A074258BACEB18FBC781778",
+      "common_v33_0:Type": "ValidationException",
+      "xmlns:common_v33_0": "http://www.travelport.com/schema/common_v33_0"
+    }
+  },
+  "faultcode": "Server.ValidationException",
+  "faultstring": "Preferred date-time is before the current departure city date-time."
+}

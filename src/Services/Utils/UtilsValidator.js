@@ -12,7 +12,7 @@ Validator.prototype.end = function () {
 };
 
 Validator.prototype.currencies = function () {
-  if (this.params.currencies === undefined) {
+  if (Object.prototype.toString.call(this.params.currencies) !== '[object Array]') {
     throw new UtilsValidationError.CurrenciesMissing(this.params);
   }
 

@@ -17,18 +17,6 @@ describe('uapiRequest tests', () => {
     }
   });
 
-  it('should give empty data error', () => {
-    const someService = uAPI(
-      config().HotelsService.url, auth, hotelsSearchReqeustPath,
-      null, null, null, () => {}
-    );
-    someService().then(() => {
-      throw new Error('Error should be thrown');
-    }, (err) => {
-      assert(err instanceof errors.Request.RequestValidationError.ParamsMissing);
-    });
-  });
-
   it('should give undefined request error', () => {
     try {
       uAPI(config().HotelsService.url, auth, undefined);

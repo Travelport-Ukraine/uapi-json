@@ -81,6 +81,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   TicketingResponseMissing: 'Response message text doesn\'t contain OK:Ticket issued',
   TicketingTicketsMissing: 'Tickets not found in ticketing response',
   NoResultsFound: 'No results found',
+  InvalidRequestData: 'Request data is invalid',
   NoValidFare: 'No valid fare for input criteria.',
   TravelersListError: 'Not all BookingTravelers present in list or wrong lookup keys provided',
   PnrParseError: 'Failed to parse PNR from ticket information request response',

@@ -192,6 +192,34 @@ describe('#AirParser', () => {
         assert(false, 'Incorrect logic of unable to fare quote parsing');
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
+
+    it('should throw AirRuntimeError.NoResultsFound error2', () => {
+      const uParser = new ParserUapi('SOAP:Fault', 'v33_0', {});
+      const parseFunction = airParser.AIR_ERRORS.bind(uParser);
+      const errors = require('../../src/Services/Air/AirErrors');
+      const json = fs.readFileSync(`${xmlFolder}/../Air/LowFaresSearch.NoSolutions.Parsed.error.json`).toString();
+      try {
+        parseFunction(JSON.parse(json));
+      } catch (e) {
+        assert(e instanceof errors.AirRuntimeError.NoResultsFound, 'Incorrect error class');
+        return;
+      }
+      assert(false, 'No error thrown');
+    });
+
+    it('should throw AirRuntimeError.NoResultsFound error3', () => {
+      const uParser = new ParserUapi('SOAP:Fault', 'v33_0', {});
+      const parseFunction = airParser.AIR_ERRORS.bind(uParser);
+      const errors = require('../../src/Services/Air/AirErrors');
+      const json = fs.readFileSync(`${xmlFolder}/../Air/LowFaresSearch.date-time-in-past.Parsed.error.json`).toString();
+      try {
+        parseFunction(JSON.parse(json));
+      } catch (e) {
+        assert(e instanceof errors.AirRuntimeError.InvalidRequestData, 'Incorrect error class');
+        return;
+      }
+      assert(false, 'No error thrown');
+    });
   });
 
   describe('AIR_PRICE_REQ_XML()', () => {
@@ -417,6 +445,18 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         assert(jsonResult, true, 'Ticketing is not true');
+      });
+    });
+
+    it('should throw parsing error TicketingResponseMissing', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v33_0', { });
+      const parseFunction = airParser.AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing.NOT-OK.xml`).toString();
+      return uParser.parse(xml).then(json => {
+        const jsonResult = parseFunction.call(uParser, json);
+        assert(false, 'Should not return response.');
+      }).catch((e) => {
+        assert(e instanceof airErrors.AirParsingError.TicketingResponseMissing);
       });
     });
   });
