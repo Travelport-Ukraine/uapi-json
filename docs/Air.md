@@ -208,6 +208,8 @@ This function executes terminal command to get PNR from `*TE` command response.
 | --- | --- | --- |
 | ticketNumber | `String` | The number of the ticket. |
 
+**See: <a href="../examples/Air/getPNRByTicketNumber.js">getPNRByTicketNumber example</a>**
+
 <a name="getTicket"></a>
 ### .getTicket(params)
 Request for the ticket information.
@@ -225,7 +227,7 @@ If PNR with ticket was not yet imported into uAPI, some extended information fro
 
 In order to extract it `uapi-json` uses its own [TerminalService](Terminal.md), therefore Terminal access should be enabled for your account.
 
-**See: <a href="../examples/Air/getTicket.js">GetTicket example</a>**
+**See: <a href="../examples/Air/getTicket.js">getTicket example</a>**
 
 <a name="getTickets"></a>
 ### .getTickets(params)
@@ -238,4 +240,4 @@ Request for the ticket information for all tickets in PNR.
 | --- | --- | --- |
 | pnr | `String` | 1G PNR. |
 
-**See: <a href="../examples/Air/getTickets.js">GetTickets example</a>**
+**See: <a href="../examples/Air/getTickets.js">getTickets example</a>**
