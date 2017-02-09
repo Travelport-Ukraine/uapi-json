@@ -41,10 +41,9 @@ describe('#AirParser', () => {
         .then((result) => {
           expect(result).to.be.an('object');
           expect(result).to.have.all.keys([
-            'type', 'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'platingCarrier',
+            'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'platingCarrier',
             'ticketingPcc', 'issuedAt', 'fareCalculation', 'priceInfo', 'passengers', 'tickets',
           ]);
-          expect(result.type).to.equal('airTicketDocument');
           expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
           expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
           expect(result.pnr).to.match(/^[A-Z0-9]{6}$/i);
