@@ -49,7 +49,10 @@ function defaultConfig(ver) {
     'air:AirReservation',
     'air:PassengerType',
     'air:TicketInfo',
+    'air:Ticket',
+    'air:Coupon',
     'common_' + ver + ':ResponseMessage',
+    'common_' + ver + ':BookingTraveler',
     'air:BaggageAllowanceInfo',
     'air:CarryOnAllowanceInfo',
     'hotel:RateInfo',
@@ -73,12 +76,13 @@ function defaultConfig(ver) {
   // NOTE: if such array name ends in list, e.g. FlightOptionsList (with FlightOption item),
   //  they will not get collapsed
   const fullCollapseListObj = [
+    'air:ETR',
     'air:FareTicketDesignator',
-    'common_' + ver + ':Address',
-    'common_' + ver + ':Email',
-    'common_' + ver + ':ShippingAddress',
-    'common_' + ver + ':PhoneNumber',
-    'common_' + ver + ':ProviderReservationInfoRef', // TODO check if can be collapsed
+    `common_${ver}:Address`,
+    `common_${ver}:Email`,
+    `common_${ver}:ShippingAddress`,
+    `common_${ver}:PhoneNumber`,
+    `common_${ver}:ProviderReservationInfoRef`, // TODO check if can be collapsed
     /*
       Collapses into array of codes, e.g.
       in airPriceRsp/AirPriceResult/AirPricingSolution/AirPricingInfo
