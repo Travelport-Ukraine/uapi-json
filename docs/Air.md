@@ -12,10 +12,12 @@ The Air workflow allows you to do what most travel agents did in the past and wh
     * [.shop(params)](#shop) ⇒ <code>Promise</code>
     * [.book(params)](#book) ⇒ <code>Promise</code>
     * [.ticket(params)](#ticket) ⇒ <code>Promise</code>
-    * .void(params) ⇒ <code>Promise</code>
     * [.toQueue(params)](#toQueue) ⇒ <code>Promise</code>
     * [.importPNR(params)](#importPNR) ⇒ <code>Promise</code>
-    * [flightInfo(params)](#flightInfo) ⇒ <code>Promise</code>
+    * [.flightInfo(params)](#flightInfo) ⇒ <code>Promise</code>
+    * [.getPNRByTicketNumber(params)](#getPNRByTicketNumber) ⇒ <code>Promise</code>
+    * [.getTicket(params)](#getTicket) ⇒ <code>Promise</code>
+    * [.getTickets(params)](#getTickets) ⇒ <code>Promise</code>
 
 <a name="shop"></a>
 ### .shop(params)
@@ -194,3 +196,46 @@ Request for the flight information.
 | flightNumber | <code>string</code> | The flight number for the segment |
 
 **See: <a href="../examples/Air/flightInfo1.js">FlightInfo basic example</a>**, **<a href="../examples/Air/flightInfo2.js">FlightInfo multiple items example</a>**
+
+<a name="getPNRByTicketNumber"></a>
+### .getPNRByTicketNumber(params)
+> Requires Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
+Request for the ticket information.
+
+**Returns**: `Promise`, which is fullfilled with PNR as `String`
+
+This function executes terminal command to get PNR from `*TE` command response.
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ticketNumber | `String` | The number of the ticket. |
+
+**See: <a href="../examples/Air/getPNRByTicketNumber.js">getPNRByTicketNumber example</a>**
+
+<a name="getTicket"></a>
+### .getTicket(params)
+> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
+Request for the ticket information.
+
+**Returns**: `Promise`
+**See**: [Ticket Information](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Air_Ticketing/Displaying_Ticket_Information.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ticketNumber | `String` | The number of the ticket. |
+
+**See: <a href="../examples/Air/getTicket.js">getTicket example</a>**
+
+<a name="getTickets"></a>
+### .getTickets(params)
+> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
+Request for the ticket information for all tickets in PNR.
+
+**Returns**: `Promise`
+**See**: [Ticket Information](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Air_Ticketing/Displaying_Ticket_Information.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pnr | `String` | 1G PNR. |
+
+**See: <a href="../examples/Air/getTickets.js">getTickets example</a>**

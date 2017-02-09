@@ -208,6 +208,39 @@ Validator.prototype.flightInfoItem = function (item) {
   }
 };
 
+Validator.prototype.fop = function () {
+  if (!this.params.fop) {
+    throw new AirValidationError.FopMissing();
+  }
+  if (
+    Object.prototype.toString.call(this.params.fop) !== '[object Object]' ||
+    this.params.fop.type !== 'Cash'
+  ) {
+    throw new AirValidationError.FopTypeUnsupported();
+  }
+  return this;
+};
+
+Validator.prototype.ticketNumber = function () {
+  if (!this.params.ticketNumber) {
+    throw new AirValidationError.TicketNumberMissing();
+  }
+  if (!String(this.params.ticketNumber).match(/^\d{13}/)) {
+    throw new AirValidationError.TicketNumberInvalid();
+  }
+  return this;
+};
+
+Validator.prototype.paramsIsObject = function () {
+  if (!this.params) {
+    throw new AirValidationError.ParamsMissing(this.params);
+  }
+  if (Object.prototype.toString.call(this.params) !== '[object Object]') {
+    throw new AirValidationError.ParamsInvalidType(this.params);
+  }
+  return this;
+};
+
 Validator.prototype.flightInfo = function () {
   if (Array.isArray(this.params.flightInfoCriteria)) {
     this.params.flightInfoCriteria.forEach(this.flightInfoItem);
@@ -252,6 +285,14 @@ module.exports = {
     return new Validator(params)
       .pricingSolutionXML()
       .passengerBirthDates()
+      .end();
+  },
+
+  AIR_TICKET(params) {
+    return new Validator(params)
+      .paramsIsObject()
+      .pnr()
+      .fop()
       .end();
   },
 
@@ -314,6 +355,13 @@ module.exports = {
   AIR_FLIGHT_INFORMATION(params) {
     return new Validator(params)
       .flightInfo()
+      .end();
+  },
+
+  AIR_GET_TICKET(params) {
+    return new Validator(params)
+      .paramsIsObject()
+      .ticketNumber()
       .end();
   },
 };
