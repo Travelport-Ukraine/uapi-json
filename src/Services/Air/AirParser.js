@@ -437,10 +437,7 @@ const AirErrorHandler = function (obj) {
 const airGetTicket = function (obj) {
   const etr = obj['air:ETR'];
   if (!etr) {
-    const message = obj[`common_${this.uapi_version}:ResponseMessage`] ? (
-      { message: obj[`common_${this.uapi_version}:ResponseMessage`][0]._ }
-    ) : null;
-    throw new AirRuntimeError.TicketRetrieveError(message);
+    throw new AirRuntimeError.TicketRetrieveError(obj);
   }
   const passengersList = etr[`common_${this.uapi_version}:BookingTraveler`];
   const passengers = Object.keys(passengersList).map(
@@ -495,7 +492,6 @@ const airGetTicket = function (obj) {
     })
   );
   const response = {
-    type: 'airTicketDocument',
     uapi_ur_locator: obj.UniversalRecordLocatorCode,
     uapi_reservation_locator: etr['air:AirReservationLocatorCode'],
     pnr: etr.ProviderLocatorCode,

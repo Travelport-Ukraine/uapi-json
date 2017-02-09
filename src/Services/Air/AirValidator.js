@@ -225,7 +225,7 @@ Validator.prototype.ticketNumber = function () {
   if (!this.params.ticketNumber) {
     throw new AirValidationError.TicketNumberMissing();
   }
-  if (!this.params.ticketNumber.match(/^\d{13}/)) {
+  if (!String(this.params.ticketNumber).match(/^\d{13}/)) {
     throw new AirValidationError.TicketNumberInvalid();
   }
   return this;
