@@ -15,6 +15,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
     * [.toQueue(params)](#toQueue) ⇒ <code>Promise</code>
     * [.importPNR(params)](#importPNR) ⇒ <code>Promise</code>
     * [.flightInfo(params)](#flightInfo) ⇒ <code>Promise</code>
+    * [.getPNRByTicketNumber(params)](#getPNRByTicketNumber) ⇒ <code>Promise</code>
     * [.getTicket(params)](#getTicket) ⇒ <code>Promise</code>
     * [.getTickets(params)](#getTickets) ⇒ <code>Promise</code>
 
@@ -198,6 +199,7 @@ Request for the flight information.
 
 <a name="getPNRByTicketNumber"></a>
 ### .getPNRByTicketNumber(params)
+> Requires Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 Request for the ticket information.
 
 **Returns**: `Promise`, which is fullfilled with PNR as `String`
@@ -212,6 +214,7 @@ This function executes terminal command to get PNR from `*TE` command response.
 
 <a name="getTicket"></a>
 ### .getTicket(params)
+> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 Request for the ticket information.
 
 **Returns**: `Promise`
@@ -221,16 +224,11 @@ Request for the ticket information.
 | --- | --- | --- |
 | ticketNumber | `String` | The number of the ticket. |
 
-**Important note**
-
-If PNR with ticket was not yet imported into uAPI, some extended information from the ticket like detailed taxes information, booking and service classes could not be extracted.
-
-In order to extract it `uapi-json` uses its own [TerminalService](Terminal.md), therefore Terminal access should be enabled for your account.
-
 **See: <a href="../examples/Air/getTicket.js">getTicket example</a>**
 
 <a name="getTickets"></a>
 ### .getTickets(params)
+> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 Request for the ticket information for all tickets in PNR.
 
 **Returns**: `Promise`
