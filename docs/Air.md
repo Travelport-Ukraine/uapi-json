@@ -196,16 +196,28 @@ Request for the flight information.
 
 **See: <a href="../examples/Air/flightInfo1.js">FlightInfo basic example</a>**, **<a href="../examples/Air/flightInfo2.js">FlightInfo multiple items example</a>**
 
+<a name="getPNRByTicketNumber"></a>
+### .getPNRByTicketNumber(params)
+Request for the ticket information.
+
+**Returns**: `Promise`, which is fullfilled with PNR as `String`
+
+This function executes terminal command to get PNR from `*TE` command response.
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ticketNumber | `String` | The number of the ticket. |
+
 <a name="getTicket"></a>
 ### .getTicket(params)
 Request for the ticket information.
 
-**Returns**: <code>Promise</code>
+**Returns**: `Promise`
 **See**: [Ticket Information](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Air_Ticketing/Displaying_Ticket_Information.htm)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| ticketNumber | <code>string</code> | The number of the ticket. |
+| ticketNumber | `String` | The number of the ticket. |
 
 **Important note**
 
@@ -219,11 +231,11 @@ In order to extract it `uapi-json` uses its own [TerminalService](Terminal.md), 
 ### .getTickets(params)
 Request for the ticket information for all tickets in PNR.
 
-**Returns**: <code>Promise</code>
+**Returns**: `Promise`
 **See**: [Ticket Information](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Air_Ticketing/Displaying_Ticket_Information.htm)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| pnr | <code>String</code> | 1G PNR. |
+| pnr | `String` | 1G PNR. |
 
 **See: <a href="../examples/Air/getTickets.js">GetTickets example</a>**
