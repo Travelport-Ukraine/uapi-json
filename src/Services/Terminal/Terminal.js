@@ -149,6 +149,7 @@ module.exports = function (settings) {
         break;
     }
   });
+  /* istanbul ignore next */
   process.on('exit', () => {
     switch (state.terminalState) {
       case TERMINAL_STATE_BUSY:
