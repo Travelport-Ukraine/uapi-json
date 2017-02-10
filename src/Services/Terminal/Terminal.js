@@ -140,8 +140,7 @@ module.exports = function (settings) {
             () => util.log('UAPI-JSON WARNING: Session closed')
           ).catch(
             () => {
-              util.log('UAPI-JSON WARNING: Error closing session');
-              process.exit(1);
+              throw new TerminalRuntimeError.ErrorClosingSession();
             }
           );
         }

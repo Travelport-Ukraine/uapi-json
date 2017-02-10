@@ -9,6 +9,12 @@ import config from '../testconfig';
 import uAPI from '../../src';
 
 const TerminalError = uAPI.errors.Terminal;
+const TerminalRuntimeError = TerminalError.TerminalRuntimeError;
+
+const DumbErrorClosingSession = sinon.spy(() => true);
+const ModifiedTerminalRuntimeError = Object.assign({}, TerminalRuntimeError, {
+  ErrorClosingSession: DumbErrorClosingSession,
+});
 
 // Token const
 const token = 'TOKEN';
@@ -62,6 +68,7 @@ const executeCommandEmulationFailed = sinon.spy((params) => {
   }
 });
 const closeSession = sinon.spy(() => Promise.resolve(true));
+const closeSessionError = sinon.spy(() => Promise.reject(new Error('Error closing session')));
 
 // Service function
 const terminalServiceSlow = () => ({
@@ -74,10 +81,21 @@ const terminalServiceOk = () => ({
   executeCommand: executeCommandOk,
   closeSession,
 });
+const terminalServiceCloseSessionError = () => ({
+  getSessionToken,
+  executeCommand: executeCommandOk,
+  closeSession: closeSessionError,
+});
 const terminalServiceEmulationFailed = () => ({
   getSessionToken,
   executeCommand: executeCommandEmulationFailed,
   closeSession,
+});
+const terminalCloseSessionError = proxyquire('../../src/Services/Terminal/Terminal', {
+  './TerminalService': terminalServiceCloseSessionError,
+  './TerminalErrors': {
+    TerminalRuntimeError: ModifiedTerminalRuntimeError,
+  },
 });
 const terminalSlow = proxyquire('../../src/Services/Terminal/Terminal', {
   './TerminalService': terminalServiceSlow,
@@ -107,7 +125,26 @@ describe('#Terminal', function terminalTest() {
         done();
       }, 100);
     });
-    it('should handle beforeExit for terminal with READY state', (done) => {
+    it('should throw an error when failed to close session', (done) => {
+      // Resetting spies
+      closeSessionError.reset();
+
+      const uAPITerminal = terminalCloseSessionError({
+        auth: config,
+      });
+
+      uAPITerminal.executeCommand('I')
+        .then(() => {
+          expect(closeSession.callCount).to.equal(0);
+          process.emit('beforeExit');
+          setTimeout(() => {
+            expect(closeSessionError.callCount).to.equal(1);
+            expect(DumbErrorClosingSession.callCount).to.equal(1);
+            done();
+          }, 100);
+        });
+    });
+    it('should throw an error for terminal with READY state', (done) => {
       // Resetting spies
       closeSession.reset();
 
@@ -146,7 +183,7 @@ describe('#Terminal', function terminalTest() {
           expect(getSessionToken.callCount).to.equal(1);
           expect(executeCommandOk.callCount).to.equal(0);
           expect(err).to.be.an.instanceof(
-            TerminalError.TerminalRuntimeError.TerminalIsClosed
+            TerminalRuntimeError.TerminalIsClosed
           );
         });
     });
@@ -167,7 +204,7 @@ describe('#Terminal', function terminalTest() {
           expect(getSessionToken.callCount).to.equal(1);
           expect(executeCommandSlow.callCount).to.equal(2);
           expect(err).to.be.an.instanceof(
-            TerminalError.TerminalRuntimeError.TerminalIsBusy
+            TerminalRuntimeError.TerminalIsBusy
           );
         });
     });
@@ -222,7 +259,7 @@ describe('#Terminal', function terminalTest() {
           expect(executeCommandEmulationFailed.getCall(0).args[0].sessionToken).to.equal(token);
           expect(executeCommandEmulationFailed.getCall(0).args[0].command).to.equal(`SEM/${emulatePcc}/AG`);
           expect(err).to.be.an.instanceof(
-            TerminalError.TerminalRuntimeError.TerminalEmulationFailed
+            TerminalRuntimeError.TerminalEmulationFailed
           );
         });
     });

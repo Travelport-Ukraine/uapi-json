@@ -43,6 +43,7 @@ Object.assign(TerminalRuntimeError, createErrorsList({
   TerminalCloseSessionFailed: 'Failed to close terminal session',
   TerminalIsBusy: 'Terminal is busy',
   TerminalIsClosed: 'Terminal is closed',
+  ErrorClosingSession: 'Error closing session',
 }, TerminalRuntimeError));
 
 export default {
