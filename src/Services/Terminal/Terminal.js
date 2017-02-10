@@ -92,6 +92,7 @@ module.exports = function (settings) {
           sessionToken,
         })
       )
+      .then(processResponse)
       .then(
         (response) => {
           Object.assign(state, {
@@ -99,9 +100,6 @@ module.exports = function (settings) {
           });
           return response;
         }
-      )
-      .then(
-        response => processResponse(response)
       )
       .catch(
         (err) => {
