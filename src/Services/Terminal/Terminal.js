@@ -47,14 +47,14 @@ module.exports = function (settings) {
     if (state.terminalState === TERMINAL_STATE_CLOSED) {
       throw new TerminalRuntimeError.TerminalIsClosed();
     }
+    Object.assign(state, {
+      terminalState: TERMINAL_STATE_BUSY,
+    });
     // Return token if already obtained
     if (state.sessionToken !== null) {
       resolve(state.sessionToken);
       return;
     }
-    Object.assign(state, {
-      terminalState: TERMINAL_STATE_BUSY,
-    });
     // Getting token
     service.getSessionToken({
       timeout,
