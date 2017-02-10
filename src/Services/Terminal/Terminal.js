@@ -47,14 +47,14 @@ module.exports = function (settings) {
     if (state.terminalState === TERMINAL_STATE_CLOSED) {
       throw new TerminalRuntimeError.TerminalIsClosed();
     }
+    Object.assign(state, {
+      terminalState: TERMINAL_STATE_BUSY,
+    });
     // Return token if already obtained
     if (state.sessionToken !== null) {
       resolve(state.sessionToken);
       return;
     }
-    Object.assign(state, {
-      terminalState: TERMINAL_STATE_BUSY,
-    });
     // Getting token
     service.getSessionToken({
       timeout,
@@ -92,6 +92,7 @@ module.exports = function (settings) {
           sessionToken,
         })
       )
+      .then(processResponse)
       .then(
         (response) => {
           Object.assign(state, {
@@ -99,9 +100,6 @@ module.exports = function (settings) {
           });
           return response;
         }
-      )
-      .then(
-        response => processResponse(response)
       )
       .catch(
         (err) => {
@@ -142,8 +140,7 @@ module.exports = function (settings) {
             () => util.log('UAPI-JSON WARNING: Session closed')
           ).catch(
             () => {
-              util.log('UAPI-JSON WARNING: Error closing session');
-              process.exit(1);
+              throw new TerminalRuntimeError.ErrorClosingSession();
             }
           );
         }
@@ -152,6 +149,7 @@ module.exports = function (settings) {
         break;
     }
   });
+  /* istanbul ignore next */
   process.on('exit', () => {
     switch (state.terminalState) {
       case TERMINAL_STATE_BUSY:

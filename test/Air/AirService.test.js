@@ -92,10 +92,7 @@ describe('#AirService', () => {
           done();
         });
     });
-    it('should fail when no TerminalService enabled for uAPI credentials', (done) => {
-      // @TODO: add test here, simulating TerminalService response when no access is allowed
-      done();
-    });
+    it('should fail when no TerminalService enabled for uAPI credentials');
     it('should return PNR when response is OK', (done) => {
       const response = fs.readFileSync(
         path.join(terminalResponsesDir, 'getTicketVoid.txt')
