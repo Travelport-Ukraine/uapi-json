@@ -46,6 +46,40 @@ const executeCommandOk = sinon.spy((params) => {
   switch (params.command) {
     case 'I':
       return Promise.resolve(['IGNORED']);
+    case 'TE':
+      return Promise.resolve([
+        'TKT: 064 9902 789263     NAME: CHERTOUSOV/DMYTROMR             ',
+        '                                                               ',
+        'ISSUED: 11JAN17          FOP:CASH                              ',
+        'PSEUDO: 7J8J  PLATING CARRIER: OK  ISO: UA  IATA: 99999992     ',
+        '   USE  CR FLT  CLS  DATE BRDOFF TIME  ST F/B        FARE   CPN',
+        '   RFND OK  917  Q  15MAY KBPPRG  0505 OK Q0BAGG             1 ',
+        '                                          NVB15MAY NVA15MAY    ',
+        '   RFND OK  630  P  15MAY PRGBRU  0655 OK P0BAGG             2 ',
+        '                                          NVB15MAY NVA15MAY    ',
+        '                                                               ',
+        'FARE USD    41.00 TAX      109UA TAX       55UD TAX     2075XT ',
+        'TOTAL UAH     3357                                             ',
+        'EQUIV UAH     1118                                             ',
+        ')><',
+      ]);
+    case 'MD':
+      return Promise.resolve([
+        '                                          NVB15MAY NVA15MAY    ',
+        '   RFND OK  630  P  15MAY PRGBRU  0655 OK P0BAGG             2 ',
+        '                                          NVB15MAY NVA15MAY    ',
+        '                                                               ',
+        'FARE USD    41.00 TAX      109UA TAX       55UD TAX     2075XT ',
+        'TOTAL UAH     3357                                             ',
+        'EQUIV UAH     1118                                             ',
+        '   FARE RESTRICTIONS APPLY                                     ',
+        '                                                               ',
+        'IEV OK PRG 39.00 OK BRU 2.17 NUC41.17END ROE1.0 XT             ',
+        '464YK231CZ1380YQ                                               ',
+        'RLOC 1G BGQF5K    1A ZWWJYF                                    ',
+        '                                                               ',
+        '><',
+      ]);
     default:
       if (params.command.match(/^SEM/)) {
         return Promise.resolve(['PROCEED']);
@@ -234,6 +268,53 @@ describe('#Terminal', function terminalTest() {
           expect(executeCommandOk.getCall(0).args[0].command).to.equal('I');
         });
     });
+    it('should concatenate command output with MD', () => {
+      // Resetting spies
+      getSessionToken.reset();
+      executeCommandOk.reset();
+      closeSession.reset();
+
+      const uAPITerminal = terminalOk({
+        auth: config,
+      });
+
+      return uAPITerminal
+        .executeCommand('TE')
+        .then((response) => {
+          const expectedResponse = [
+            'TKT: 064 9902 789263     NAME: CHERTOUSOV/DMYTROMR             ',
+            '                                                               ',
+            'ISSUED: 11JAN17          FOP:CASH                              ',
+            'PSEUDO: 7J8J  PLATING CARRIER: OK  ISO: UA  IATA: 99999992     ',
+            '   USE  CR FLT  CLS  DATE BRDOFF TIME  ST F/B        FARE   CPN',
+            '   RFND OK  917  Q  15MAY KBPPRG  0505 OK Q0BAGG             1 ',
+            '                                          NVB15MAY NVA15MAY    ',
+            '   RFND OK  630  P  15MAY PRGBRU  0655 OK P0BAGG             2 ',
+            '                                          NVB15MAY NVA15MAY    ',
+            '                                                               ',
+            'FARE USD    41.00 TAX      109UA TAX       55UD TAX     2075XT ',
+            'TOTAL UAH     3357                                             ',
+            'EQUIV UAH     1118                                             ',
+            '   FARE RESTRICTIONS APPLY                                     ',
+            '                                                               ',
+            'IEV OK PRG 39.00 OK BRU 2.17 NUC41.17END ROE1.0 XT             ',
+            '464YK231CZ1380YQ                                               ',
+            'RLOC 1G BGQF5K    1A ZWWJYF                                    ',
+            '                                                               ',
+            '><',
+          ].join('\n');
+          expect(response).to.equal(expectedResponse);
+        })
+        .then(() => uAPITerminal.closeSession())
+        .then(() => {
+          expect(getSessionToken.callCount).to.equal(1);
+          expect(executeCommandOk.callCount).to.equal(2);
+          expect(closeSession.callCount).to.equal(1);
+          expect(executeCommandOk.getCall(0).args[0].sessionToken).to.equal(token);
+          expect(executeCommandOk.getCall(0).args[0].command).to.equal('TE');
+          expect(executeCommandOk.getCall(1).args[0].command).to.equal('MD');
+        });
+    });
   });
   describe('Working with emulation', () => {
     it('Should fail if emulation failed', () => {
@@ -261,6 +342,7 @@ describe('#Terminal', function terminalTest() {
           expect(err).to.be.an.instanceof(
             TerminalRuntimeError.TerminalEmulationFailed
           );
+          return uAPITerminal.closeSession();
         });
     });
     it('Should emulate pcc', () => {
