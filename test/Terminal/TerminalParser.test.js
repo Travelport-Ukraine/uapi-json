@@ -8,9 +8,18 @@ import uAPI from '../../src';
 import ParserUapi from '../../src/Request/uapi-parser';
 import terminalParser from '../../src/Services/Terminal/TerminalParser';
 
+const TerminalError = uAPI.errors.Terminal;
+const RequestError = uAPI.errors.Request;
 const xmlFolder = `${__dirname}/MockResponses`;
 
 describe('#TerminalParser', () => {
+  describe('errorHandler()', () => {
+    it('should throw an error in case of SOAP:Fault', () => {
+      expect(terminalParser.TERMINAL_ERROR).to.throw(
+        TerminalError.TerminalRuntimeError
+      );
+    });
+  });
   describe('createSession()', () => {
     it('should throw an error when credentials are wrong', () => {
       const uParser = new ParserUapi('terminal:CreateTerminalSessionRsp', 'v36_0', {});
@@ -18,7 +27,9 @@ describe('#TerminalParser', () => {
       return uParser.parse(xml).then(() => {
         throw new Error('Successfully parsed error result');
       }).catch((err) => {
-        expect(err).to.be.an.instanceof(uAPI.errors.Request.RequestSoapError.SoapParsingError);
+        expect(err).to.be.an.instanceof(
+          RequestError.RequestSoapError.SoapParsingError
+        );
       });
     });
     it('should throw an error when no host token in response', () => {
@@ -30,7 +41,7 @@ describe('#TerminalParser', () => {
         throw new Error('Successfully parsed error result');
       }).catch((err) => {
         expect(err).to.be.an.instanceof(
-          uAPI.errors.Terminal.TerminalParsingError.TerminalSessionTokenMissing
+          TerminalError.TerminalParsingError.TerminalSessionTokenMissing
         );
       });
     });
@@ -54,7 +65,7 @@ describe('#TerminalParser', () => {
         throw new Error('Successfully parsed error result');
       }).catch((err) => {
         expect(err).to.be.an.instanceof(
-          uAPI.errors.Terminal.TerminalParsingError.TerminalResponseMissing
+          TerminalError.TerminalParsingError.TerminalResponseMissing
         );
       });
     });
@@ -67,7 +78,7 @@ describe('#TerminalParser', () => {
         throw new Error('Successfully parsed error result');
       }).catch((err) => {
         expect(err).to.be.an.instanceof(
-          uAPI.errors.Terminal.TerminalParsingError.TerminalResponseMissing
+          TerminalError.TerminalParsingError.TerminalResponseMissing
         );
       });
     });
@@ -94,7 +105,7 @@ describe('#TerminalParser', () => {
         throw new Error('Successfully parsed error result');
       }).catch((err) => {
         expect(err).to.be.an.instanceof(
-          uAPI.errors.Terminal.TerminalRuntimeError.TerminalCloseSessionFailed
+          TerminalError.TerminalRuntimeError.TerminalCloseSessionFailed
         );
       });
     });
@@ -107,7 +118,7 @@ describe('#TerminalParser', () => {
         throw new Error('Successfully parsed error result');
       }).catch((err) => {
         expect(err).to.be.an.instanceof(
-          uAPI.errors.Terminal.TerminalRuntimeError.TerminalCloseSessionFailed
+          TerminalError.TerminalRuntimeError.TerminalCloseSessionFailed
         );
       });
     });
