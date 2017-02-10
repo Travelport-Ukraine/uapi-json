@@ -92,6 +92,40 @@ const terminalEmulationFailed = proxyquire('../../src/Services/Terminal/Terminal
 // Tests
 describe('#Terminal', function terminalTest() {
   this.timeout(5000);
+  describe('Exit handlers', () => {
+    it('should not close session in beforeExit for terminal with NONE state', (done) => {
+      // Resetting spies
+      closeSession.reset();
+
+      terminalOk({
+        auth: config,
+      });
+
+      process.emit('beforeExit');
+      setTimeout(() => {
+        expect(closeSession.callCount).to.equal(0);
+        done();
+      }, 100);
+    });
+    it('should handle beforeExit for terminal with READY state', (done) => {
+      // Resetting spies
+      closeSession.reset();
+
+      const uAPITerminal = terminalOk({
+        auth: config,
+      });
+
+      uAPITerminal.executeCommand('I')
+        .then(() => {
+          expect(closeSession.callCount).to.equal(0);
+          process.emit('beforeExit');
+          setTimeout(() => {
+            expect(closeSession.callCount).to.equal(1);
+            done();
+          }, 100);
+        });
+    });
+  });
   describe('Working with states', () => {
     it('Should return error when executing command on closed terminal', () => {
       // Resetting spies
