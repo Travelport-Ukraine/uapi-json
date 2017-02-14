@@ -110,5 +110,25 @@ module.exports = function (settings) {
       AirParser.AIR_GET_TICKET,
       debug
     ),
+    cancelTicket: uApiRequest(
+      config.AirService.url,
+      auth,
+      `${templatesDir}/AirVoidDocument.xml`,
+      'air:AirVoidDocumentRsp',
+      AirValidator.AIR_CANCEL_TICKET,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_CANCEL_TICKET,
+      debug
+    ),
+    cancelPNR: uApiRequest(
+      config.UniversalRecord.url,
+      auth,
+      `${templatesDir}/AirCancel.xml`,
+      'univ:AirCancelResp',
+      AirValidator.AIR_CANCEL_PNR,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_CANCEL_PNR,
+      debug
+    ),
   };
 };

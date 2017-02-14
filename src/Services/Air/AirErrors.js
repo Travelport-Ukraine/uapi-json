@@ -91,6 +91,11 @@ Object.assign(AirRuntimeError, createErrorsList({
   TicketInfoIncomplete: 'Ticket information is incomplete',
   RequestInconsistency: 'Request faced race condition. Please retry again',
   MissingPaxListAndBooking: 'Cant find anything for your request. List and booking are missing',
+  TicketCancelResultUnknown: 'Ticket cancel result is unknown',
+  FailedToCancelPnr: 'Failed to cancel PNR',
+  FailedToCancelTicket: 'Failed to cancel ticket',
+  UnableToCancelTicketStatusNotOpen: 'Unable to cancel ticket with status not OPEN',
+  PNRHasOpenTickets: 'Selected PNR has tickets. Please use `cancelTickets` option or cancel tickets manually',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(

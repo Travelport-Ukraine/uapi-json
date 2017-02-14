@@ -297,4 +297,19 @@ module.exports = {
       .ticketNumber()
       .end();
   },
+
+  AIR_CANCEL_TICKET(params) {
+    return new Validator(params)
+      .paramsIsObject()
+      .pnr()
+      .ticketNumber()
+      .end();
+  },
+
+  AIR_CANCEL_PNR(params) {
+    return new Validator(params)
+      .paramsIsObject()
+      .pnr()
+      .end();
+  },
 };
