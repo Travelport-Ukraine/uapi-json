@@ -345,9 +345,8 @@ const airGetTicket = function (obj) {
     BasePrice: etr.BasePrice,
     EquivalentBasePrice: etr.EquivalentBasePrice,
     Taxes: etr.Taxes,
-    TaxesInfo: taxes,
   }, taxes !== null ? {
-    Taxes: taxes,
+    TaxesInfo: taxes,
   } : null);
   const response = {
     uapi_ur_locator: obj.UniversalRecordLocatorCode,
