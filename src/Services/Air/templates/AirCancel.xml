@@ -22,6 +22,9 @@
       <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
       {{/if}}
       <air:AirReservationLocatorCode>{{pnr}}</air:AirReservationLocatorCode>
+      {{#segments}}
+      <air:AirSegmentRef Key="{{uapi_ref_key}}"/>
+      {{/segments}}
     </univ:AirCancelReq>
   </soapenv:Body>
 </soapenv:Envelope>

@@ -218,7 +218,7 @@ describe('#AirParser', () => {
           });
         });
     });
-    it('should fail if ticket info is incomplete', () => {
+    it('should parse incomplete data', () => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_NOT_IMPORTED.xml`).toString();
