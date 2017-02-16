@@ -123,36 +123,40 @@ const ticketParse = function (obj) {
 const nullParsing = obj => obj;
 
 function getPassengers(list, BookingTraveler) {
-  return list.reduce((passengers, key) => {
-    const traveler = BookingTraveler[key];
-
+  return list.map(key => BookingTraveler[key]).map((traveler) => {
     if (!traveler) {
       throw new AirRuntimeError.TravelersListError();
     }
-
     const name = traveler[`common_${this.uapi_version}:BookingTravelerName`];
 
     // SSR DOC parsing of passport data http://gitlab.travel-swift.com/galileo/galileocommand/blob/master/lib/command/booking.js#L84
     // TODO safety checks
     const firstTraveler = utils.firstInObj(traveler[`common_${this.uapi_version}:SSR`]);
-    const ssr = firstTraveler ? firstTraveler.FreeText.split('/') : [];
+    const ssr = firstTraveler ? firstTraveler.FreeText.split('/') : null;
 
     // TODO try to parse Swift XI from common_v36_0:AccountingRemark first
 
-    const passenger = {
-      lastName: name.Last,
-      firstName: name.First,
-      passCountry: ssr[1], // also in ssr[3]
-      passNumber: ssr[2],
-      birthDate: moment(traveler.DOB).format('DDMMMYY'),
-      ageType: traveler.TravelerType,
-      gender: traveler.Gender,
-      uapi_ref_key: key,
-    };
-
-    passengers.push(passenger);
-    return passengers;
-  }, []);
+    return Object.assign(
+      {
+        lastName: name.Last,
+        firstName: name.First,
+        uapi_ref_key: traveler.Key,
+      },
+      ssr ? {
+        passCountry: ssr[1], // also in ssr[3]
+        passNumber: ssr[2],
+      } : null,
+      traveler.DOB ? {
+        birthDate: moment(traveler.DOB).format('DDMMMYY'),
+      } : null,
+      traveler.TravelerType ? {
+        ageType: traveler.TravelerType,
+      } : null,
+      traveler.Gender ? {
+        gender: traveler.Gender,
+      } : null,
+    );
+  });
 }
 
 const extractFareRulesLong = (obj) => {
@@ -545,7 +549,7 @@ function extractBookings(obj) {
     }
 
     // we usually have one plating carrier across all per-passenger reservations
-    const platingCarriers = getPlatingCarrier(booking);
+    const platingCarrier = getPlatingCarrier(booking);
 
     const passengers = getPassengers.call(
       this,
@@ -554,6 +558,23 @@ function extractBookings(obj) {
     );
 
     const supplierLocator = booking[`common_${self.uapi_version}:SupplierLocator`] || {};
+    const trips = Object.keys(booking['air:AirSegment']).map(
+      (key) => {
+        const segment = booking['air:AirSegment'][key];
+        return {
+          from: segment.Origin,
+          to: segment.Destination,
+          bookingClass: segment.ClassOfService,
+          departure: segment.DepartureTime,
+          arrival: segment.ArrivalTime,
+          airline: segment.Carrier,
+          flightNumber: segment.FlightNumber,
+          serviceClass: segment.CabinClass,
+          status: segment.Status,
+          uapi_SegmentRef: segment.ProviderReservationInfoRef,
+        };
+      }
+    );
 
     const newBooking = {
       type: 'uAPI',
@@ -563,11 +584,11 @@ function extractBookings(obj) {
       uapi_reservation_locator: booking.LocatorCode,
       uapi_airline_locator: supplierLocator.SupplierLocatorCode || null,
       pnrList: [providerInfo.LocatorCode],
-      platingCarrier: platingCarriers,
+      platingCarrier,
       createdAt: providerInfo.CreateDate,
       modifiedAt: providerInfo.ModifiedDate,
       reservations: [],
-      trips: [],
+      trips,
       passengers,
       bookingPCC: providerInfo.OwningPCC,
     };
@@ -592,17 +613,17 @@ function extractBookings(obj) {
       }
       newBooking.reservations.push(reservation);
 
-      const trips = format.getTripsFromBooking(
-        pricing,
-        pricing['air:FareInfo'],
-        booking['air:AirSegment']
-      );
+      // const trips = format.getTripsFromBooking(
+      //   pricing,
+      //   pricing['air:FareInfo'],
+      //   booking['air:AirSegment']
+      // );
 
-      // recalculating baggage based on reservations
-      newBooking.trips = trips.map((trip, key) => {
-        trip.baggage = newBooking.reservations.map(reserv => reserv.baggage[key][0]);
-        return trip;
-      });
+      // // recalculating baggage based on reservations
+      // newBooking.trips = trips.map((trip, key) => {
+      //   trip.baggage = newBooking.reservations.map(reserv => reserv.baggage[key][0]);
+      //   return trip;
+      // });
     });
 
     if (booking['air:DocumentInfo'] && booking['air:DocumentInfo']['air:TicketInfo']) {
