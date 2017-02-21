@@ -140,7 +140,7 @@ function getPassengers(list, BookingTraveler) {
       {
         lastName: name.Last,
         firstName: name.First,
-        uapi_ref_key: traveler.Key,
+        uapi_passenger_ref: traveler.Key,
       },
       ssr ? {
         passCountry: ssr[1], // also in ssr[3]
