@@ -561,6 +561,12 @@ function extractBookings(obj) {
     const trips = Object.keys(booking['air:AirSegment']).map(
       (key) => {
         const segment = booking['air:AirSegment'][key];
+        const flightDetails = Object.keys(segment['air:FlightDetails']).map(
+          detailsKey => segment['air:FlightDetails'][detailsKey]
+        );
+        const plane = flightDetails.map(details => details.Equipment);
+        const duration = flightDetails.map(details => details.FlightTime);
+        const techStops = flightDetails.slice(1).map(details => details.Origin);
         return {
           from: segment.Origin,
           to: segment.Destination,
@@ -571,6 +577,9 @@ function extractBookings(obj) {
           flightNumber: segment.FlightNumber,
           serviceClass: segment.CabinClass,
           status: segment.Status,
+          plane,
+          duration,
+          techStops,
           uapi_SegmentRef: segment.ProviderReservationInfoRef,
         };
       }
