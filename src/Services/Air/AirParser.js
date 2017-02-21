@@ -518,7 +518,6 @@ const airGetTicket = function (obj) {
 };
 
 function extractBookings(obj) {
-  const self = this;
   const record = obj['universal:UniversalRecord'];
   const messages = obj['common_v36_0:ResponseMessage'] || [];
 
@@ -536,13 +535,12 @@ function extractBookings(obj) {
     throw new AirRuntimeError.SegmentBookingFailed(obj);
   }
 
-  const bookings = [];
   const travellers = record['common_' + this.uapi_version + ':BookingTraveler'];
-  const reservations = record['universal:ProviderReservationInfo'];
+  const reservationInfo = record['universal:ProviderReservationInfo'];
 
-  record['air:AirReservation'].forEach((booking) => {
+  return record['air:AirReservation'].map((booking) => {
     const resKey = `common_${this.uapi_version}:ProviderReservationInfoRef`;
-    const providerInfo = reservations[booking[resKey]];
+    const providerInfo = reservationInfo[booking[resKey]];
 
     if (!providerInfo) {
       throw new AirParsingError.ReservationProviderInfoMissing();
@@ -553,11 +551,11 @@ function extractBookings(obj) {
 
     const passengers = getPassengers.call(
       this,
-      booking[`common_${self.uapi_version}:BookingTravelerRef`],
+      booking[`common_${this.uapi_version}:BookingTravelerRef`],
       travellers
     );
 
-    const supplierLocator = booking[`common_${self.uapi_version}:SupplierLocator`] || {};
+    const supplierLocator = booking[`common_${this.uapi_version}:SupplierLocator`] || {};
     const trips = Object.keys(booking['air:AirSegment']).map(
       (key) => {
         const segment = booking['air:AirSegment'][key];
@@ -580,12 +578,75 @@ function extractBookings(obj) {
           plane,
           duration,
           techStops,
-          uapi_SegmentRef: segment.ProviderReservationInfoRef,
+          uapi_segment_ref: segment.ProviderReservationInfoRef,
         };
       }
     );
 
-    const newBooking = {
+    const reservations = Object.keys(booking['air:AirPricingInfo']).map(
+      (key) => {
+        const reservation = booking['air:AirPricingInfo'][key];
+        const uapiSegmentRefs = reservation['air:BookingInfo'].map(
+          segment => segment.SegmentRef
+        );
+        const uapiPassengerRefs = reservation[`common_${this.uapi_version}:BookingTravelerRef`];
+        const fareInfo = reservation['air:FareInfo'];
+        const baggage = Object.keys(fareInfo).map(
+          (fareLegKey) => {
+            const baggageAllowance = fareInfo[fareLegKey]['air:BaggageAllowance'];
+            if (
+              !baggageAllowance ||
+              !baggageAllowance['air:NumberOfPieces'] ||
+              !baggageAllowance['air:MaxWeight']
+            ) {
+              console.warn('Baggage information is not number and is not weight!', JSON.stringify(obj));
+              return { units: 'piece', amount: 0 };
+            } else if (baggageAllowance['air:MaxWeight']) {
+              return {
+                units: baggageAllowance['air:MaxWeight'].Unit.toLowerCase(),
+                amount: Number(baggageAllowance['air:MaxWeight'].Value),
+              };
+            }
+            return {
+              units: 'piece',
+              amount: Number(baggageAllowance['air:NumberOfPieces']),
+            };
+          }
+        );
+        const passengersCount = reservation['air:PassengerType'].reduce(
+          (memo, data) => Object.assign(memo, {
+            [data.Code]: Object.prototype.toString.call(data.BookingTravelerRef) === '[object Array]' ? (
+              data.BookingTravelerRef.length
+            ) : 1,
+          }), {}
+        );
+        const taxesInfo = Object.keys(reservation['air:TaxInfo']).map(
+          taxKey => ({
+            value: reservation['air:TaxInfo'][taxKey].Amount,
+            type: reservation['air:TaxInfo'][taxKey].Category,
+          })
+        );
+        const priceInfo = {
+          totalPrice: reservation.TotalPrice,
+          basePrice: reservation.BasePrice,
+          equivalentBasePrice: reservation.BasePrice,
+          taxes: reservation.Taxes,
+          passengersCount,
+          taxesInfo,
+        };
+        return {
+          status: reservation.Ticketed ? 'Ticketed' : 'Reserved',
+          fareCalculation: reservation['air:FareCalc'],
+          priceInfo,
+          baggage,
+          timeToReprice: reservation.LatestTicketingTime,
+          uapi_segment_refs: uapiSegmentRefs,
+          uapi_passenger_refs: uapiPassengerRefs,
+        };
+      }
+    );
+
+    return {
       type: 'uAPI',
       pnr: providerInfo.LocatorCode,
       version: record.Version,
@@ -596,58 +657,12 @@ function extractBookings(obj) {
       platingCarrier,
       createdAt: providerInfo.CreateDate,
       modifiedAt: providerInfo.ModifiedDate,
-      reservations: [],
+      reservations,
       trips,
       passengers,
       bookingPCC: providerInfo.OwningPCC,
     };
-
-        // var passegnerType = pricing['air:PassengerType']['Code'];
-
-    _.forEach(booking['air:AirPricingInfo'], (pricing) => {
-      const passengerRefs = _.pluck(pricing['air:PassengerType'], 'BookingTravelerRef');
-
-      // generate a "fare" object for parseReservation
-      //  (no separation here in air:AirReservation/air:AirPricingInfo)
-      // overwrite air:PassengerType so it matches one expected by parseReservation
-      const fare = _.clone(pricing);
-      fare['air:PassengerType'] = _.pluck(pricing['air:PassengerType'], 'Code');
-
-      const reservation = parseReservation(fare, pricing);
-      reservation.uapi_passenger_refs = passengerRefs;
-      reservation.status = 'Reserved';
-
-      if (!!fare.Ticketed === true) {
-        reservation.status = 'Ticketed';
-      }
-      newBooking.reservations.push(reservation);
-
-      // const trips = format.getTripsFromBooking(
-      //   pricing,
-      //   pricing['air:FareInfo'],
-      //   booking['air:AirSegment']
-      // );
-
-      // // recalculating baggage based on reservations
-      // newBooking.trips = trips.map((trip, key) => {
-      //   trip.baggage = newBooking.reservations.map(reserv => reserv.baggage[key][0]);
-      //   return trip;
-      // });
-    });
-
-    if (booking['air:DocumentInfo'] && booking['air:DocumentInfo']['air:TicketInfo']) {
-      newBooking.tickets = booking['air:DocumentInfo']['air:TicketInfo'].map(ticket =>
-        ({
-          number: ticket.Number,
-          uapi_passenger_ref: ticket.BookingTravelerRef,
-        })
-      );
-    }
-
-    bookings.push(newBooking);
   });
-
-  return bookings;
 }
 
 function importRequest(data) {
