@@ -591,8 +591,10 @@ function extractBookings(obj) {
             const baggageAllowance = fareInfo[fareLegKey]['air:BaggageAllowance'];
             if (
               !baggageAllowance ||
-              !baggageAllowance['air:NumberOfPieces'] ||
-              !baggageAllowance['air:MaxWeight']
+              (
+                !baggageAllowance['air:NumberOfPieces'] &&
+                !baggageAllowance['air:MaxWeight']
+              )
             ) {
               console.warn('Baggage information is not number and is not weight!', JSON.stringify(obj));
               return { units: 'piece', amount: 0 };
@@ -641,7 +643,16 @@ function extractBookings(obj) {
       }
     );
 
-    return {
+    const tickets = (booking['air:DocumentInfo'] && booking['air:DocumentInfo']['air:TicketInfo']) ? (
+      booking['air:DocumentInfo']['air:TicketInfo'].map(
+        ticket => ({
+          number: ticket.Number,
+          uapi_passenger_ref: ticket.BookingTravelerRef,
+        })
+      )
+    ) : null;
+
+    return Object.assign({
       type: 'uAPI',
       pnr: providerInfo.LocatorCode,
       version: record.Version,
@@ -656,7 +667,7 @@ function extractBookings(obj) {
       trips,
       passengers,
       bookingPCC: providerInfo.OwningPCC,
-    };
+    }, tickets ? { tickets } : null);
   });
 }
 
