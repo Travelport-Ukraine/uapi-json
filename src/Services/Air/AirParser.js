@@ -122,43 +122,6 @@ const ticketParse = function (obj) {
 
 const nullParsing = obj => obj;
 
-function getPassengers(list, BookingTraveler) {
-  return list.map(key => BookingTraveler[key]).map((traveler) => {
-    if (!traveler) {
-      throw new AirRuntimeError.TravelersListError();
-    }
-    const name = traveler[`common_${this.uapi_version}:BookingTravelerName`];
-
-    // SSR DOC parsing of passport data http://gitlab.travel-swift.com/galileo/galileocommand/blob/master/lib/command/booking.js#L84
-    // TODO safety checks
-    const firstTraveler = utils.firstInObj(traveler[`common_${this.uapi_version}:SSR`]);
-    const ssr = firstTraveler ? firstTraveler.FreeText.split('/') : null;
-
-    // TODO try to parse Swift XI from common_v36_0:AccountingRemark first
-
-    return Object.assign(
-      {
-        lastName: name.Last,
-        firstName: name.First,
-        uapi_passenger_ref: traveler.Key,
-      },
-      ssr ? {
-        passCountry: ssr[1], // also in ssr[3]
-        passNumber: ssr[2],
-      } : null,
-      traveler.DOB ? {
-        birthDate: moment(traveler.DOB).format('DDMMMYY'),
-      } : null,
-      traveler.TravelerType ? {
-        ageType: traveler.TravelerType,
-      } : null,
-      traveler.Gender ? {
-        gender: traveler.Gender,
-      } : null,
-    );
-  });
-}
-
 const extractFareRulesLong = (obj) => {
   const result = obj['air:FareRule'];
   return _.map(result, (item) => {
@@ -535,7 +498,7 @@ function extractBookings(obj) {
     throw new AirRuntimeError.SegmentBookingFailed(obj);
   }
 
-  const travellers = record['common_' + this.uapi_version + ':BookingTraveler'];
+  const travelers = record['common_' + this.uapi_version + ':BookingTraveler'];
   const reservationInfo = record['universal:ProviderReservationInfo'];
 
   return record['air:AirReservation'].map((booking) => {
@@ -549,10 +512,42 @@ function extractBookings(obj) {
     // we usually have one plating carrier across all per-passenger reservations
     const platingCarrier = getPlatingCarrier(booking);
 
-    const passengers = getPassengers.call(
-      this,
-      booking[`common_${this.uapi_version}:BookingTravelerRef`],
-      travellers
+    const passengers = booking[`common_${this.uapi_version}:BookingTravelerRef`].map(
+      (travellerRef) => {
+        const traveler = travelers[travellerRef];
+        if (!traveler) {
+          throw new AirRuntimeError.TravelersListError();
+        }
+        const name = traveler[`common_${this.uapi_version}:BookingTravelerName`];
+
+        // SSR DOC parsing of passport data http://gitlab.travel-swift.com/galileo/galileocommand/blob/master/lib/command/booking.js#L84
+        // TODO safety checks
+        const firstTraveler = utils.firstInObj(traveler[`common_${this.uapi_version}:SSR`]);
+        const ssr = firstTraveler ? firstTraveler.FreeText.split('/') : null;
+
+        // TODO try to parse Swift XI from common_v36_0:AccountingRemark first
+
+        return Object.assign(
+          {
+            lastName: name.Last,
+            firstName: name.First,
+            uapi_passenger_ref: traveler.Key,
+          },
+          ssr ? {
+            passCountry: ssr[1], // also in ssr[3]
+            passNumber: ssr[2],
+          } : null,
+          traveler.DOB ? {
+            birthDate: moment(traveler.DOB).format('DDMMMYY'),
+          } : null,
+          traveler.TravelerType ? {
+            ageType: traveler.TravelerType,
+          } : null,
+          traveler.Gender ? {
+            gender: traveler.Gender,
+          } : null,
+        );
+      }
     );
 
     const supplierLocator = booking[`common_${this.uapi_version}:SupplierLocator`] || {};
