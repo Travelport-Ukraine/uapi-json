@@ -1,158 +1,40 @@
-/*
-  eslint-disable import/no-extraneous-dependencies
-*/
-import fs from 'fs';
-import path from 'path';
-import { expect } from 'chai';
 import proxyquire from 'proxyquire';
-import { AirRuntimeError } from '../../src/Services/Air/AirErrors';
-
-const responsesDir = path.join(__dirname, '..', 'FakeResponses', 'Air');
-const terminalResponsesDir = path.join(__dirname, '..', 'FakeResponses', 'Terminal');
-const auth = {
-  username: 'USERNAME',
-  password: 'PASSWORD',
-  targetBranch: 'BRANCH',
-};
-
+import sinon from 'sinon';
+import { expect } from 'chai';
+import fs from 'fs';
 
 describe('#AirService', () => {
-  describe('getTicket', () => {
-    it('should fail when no itinerary present to import', (done) => {
-      const AirService = () => ({
-        getTicket: () => Promise.reject(new AirRuntimeError.TicketInfoIncomplete()),
-        importPNR: () => Promise.reject(new AirRuntimeError()),
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': AirService,
-      });
-      const service = createAirService({ auth });
-      service.getTicket({ ticketNumber: '0649902789376' })
-        .then(() => done(new Error('Error has not occured')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError);
-          done();
-        });
+  it('should test that all function created correctly', () => {
+    const params = {
+      auth: {},
+      debug: 0,
+      production: true,
+    };
+
+    const r = sinon.spy(function(
+      url,
+      auth,
+      template,
+      root,
+      validator,
+      error,
+      parser,
+      debug
+    ) {
+      expect(url.match(/.*.pp.*/)).to.be.equal(null);
+      expect(auth).to.be.equal(params.auth);
+      expect(fs.existsSync(template)).to.be.equal(true);
+      expect(validator).to.be.a('function');
+      expect(parser).to.be.a('function');
+      expect(error).to.be.a('function');
+      expect(debug).to.be.equal(params.debug);
     });
-  });
-  describe('getPNRByTicketNumber', () => {
-    it('should fail when ticket data not available by ticket number', (done) => {
-      const response = fs.readFileSync(
-        path.join(terminalResponsesDir, 'getTicketNotExists.txt')
-      ).toString();
-      const createTerminalService = () => ({
-        // The only command is executed, no analyze needed
-        executeCommand: () => Promise.resolve(response),
-        closeSession: () => Promise.resolve(true),
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        '../Terminal/Terminal': createTerminalService,
-      });
-      const service = createAirService({ auth });
-      service.getPNRByTicketNumber({ ticketNumber: '0649902789000' })
-        .then(() => done(new Error('Error has not occured')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.GetPnrError);
-          expect(err.causedBy).to.be.an.instanceof(AirRuntimeError.PnrParseError);
-          done();
-        });
+
+    const createAirService = proxyquire('../../src/Services/Air/AirService', {
+      '../../Request/uapi-request': r,
     });
-    it('should fail when something fails in executeCommand', (done) => {
-      const createTerminalService = () => ({
-        // The only command is executed, no analyze needed
-        executeCommand: () => Promise.reject(new Error('Some error')),
-        closeSession: () => Promise.resolve(true),
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        '../Terminal/Terminal': createTerminalService,
-      });
-      const service = createAirService({ auth });
-      service.getPNRByTicketNumber({ ticketNumber: '0649902789000' })
-        .then(() => done(new Error('Error has not occured')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.GetPnrError);
-          expect(err.causedBy).to.be.an.instanceof(Error);
-          done();
-        });
-    });
-    it('should fail when something fails in closeSession', (done) => {
-      const createTerminalService = () => ({
-        // The only command is executed, no analyze needed
-        executeCommand: () => Promise.resolve(true),
-        closeSession: () => Promise.reject(new Error('Some error')),
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        '../Terminal/Terminal': createTerminalService,
-      });
-      const service = createAirService({ auth });
-      service.getPNRByTicketNumber({ ticketNumber: '0649902789000' })
-        .then(() => done(new Error('Error has not occured')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(Error);
-          done();
-        });
-    });
-    it('should fail when no TerminalService enabled for uAPI credentials');
-    it('should return PNR when response is OK', (done) => {
-      const response = fs.readFileSync(
-        path.join(terminalResponsesDir, 'getTicketVoid.txt')
-      ).toString();
-      const createTerminalService = () => ({
-        // The only command is executed, no analyze needed
-        executeCommand: () => Promise.resolve(response),
-        closeSession: () => Promise.resolve(true),
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        '../Terminal/Terminal': createTerminalService,
-      });
-      const service = createAirService({ auth });
-      service.getPNRByTicketNumber({ ticketNumber: '0649902789376' })
-        .then((pnr) => {
-          expect(pnr).to.equal('8167L2');
-          done();
-        })
-        .catch(err => done(err));
-    });
-  });
-  describe('getTickets', () => {
-    it('should throw an error when some function fails', (done) => {
-      const AirService = () => ({
-        importPNR: () => Promise.reject(new Error('Some error')),
-        getTicket: () => Promise.reject(new Error('Some error')),
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': AirService,
-      });
-      const service = createAirService({ auth });
-      service.getTickets({ pnr: 'PNR001' })
-        .then(() => done(new Error('Error has not occured')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieveTickets);
-          expect(err.causedBy).to.be.an.instanceof(Error);
-          done();
-        });
-    });
-    it('should work with right responses', (done) => {
-      const importPNRVoidResponse = JSON.parse(
-        fs.readFileSync(path.join(responsesDir, 'importPNR_VOID.json')).toString()
-      );
-      const getTicketVoidResponse = JSON.parse(
-        fs.readFileSync(path.join(responsesDir, 'getTicket_VOID.json')).toString()
-      );
-      const AirService = () => ({
-        importPNR: () => Promise.resolve(importPNRVoidResponse),
-        getTicket: () => Promise.resolve(getTicketVoidResponse),
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': AirService,
-      });
-      const service = createAirService({ auth });
-      service.getTickets({ pnr: 'PNR001' })
-        .then((response) => {
-          expect(response).to.be.an('array');
-        })
-        .then(done)
-        .catch(err => done(err.causedBy));
-    });
+
+    createAirService(params);
+
   });
 });
