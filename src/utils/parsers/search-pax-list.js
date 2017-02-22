@@ -1,5 +1,7 @@
-import beautify from '../beautify-name';
 import moment from 'moment';
+
+import beautify from '../beautify-name';
+
 const parse = (screen) => {
   const listPattern = /0*([0-9]+)\s+[0-9]{2}([^\s]+)\s*(X?)\s([0-9]{2}[A-Z]{3}\d*)/g;
   const list = screen.match(listPattern);

@@ -10,7 +10,13 @@
     "func-names": 0,
     "no-param-reassign": 0,
     "prefer-template": 0,
-    "max-len": ["error", { "ignoreRegExpLiterals": true }],
+    "max-len": ["error", 100, 2, {
+      "ignoreRegExpLiterals": true,
+      "ignoreUrls": true,
+      "ignoreComments": false,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true
+    }],
     "no-unused-vars": ["error",
       { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
     ],
