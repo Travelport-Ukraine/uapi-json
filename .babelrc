@@ -1,6 +1,7 @@
 {
   "presets": ["es2015-node4"],
   "plugins": [
-    "add-module-exports"
+    "add-module-exports",
+    "transform-object-rest-spread"
   ]
 }
