@@ -311,49 +311,142 @@ describe('#AirParser', () => {
   });
 
   function testBooking(jsonResult, platingCarrier = true, tickets = false) {
-    assert(_.isArray(jsonResult), 'result not array');
+    const bookingKeys = [
+      'version', 'uapi_ur_locator', 'uapi_reservation_locator',
+      'uapi_airline_locator', 'bookingPCC', 'platingCarrier',
+      'passengers', 'pnr', 'pnrList', 'reservations', 'trips',
+      'createdAt', 'modifiedAt', 'type',
+    ].concat(tickets ? 'tickets' : []);
+    expect(jsonResult).to.be.an('array');
     jsonResult.forEach((result) => {
-      assert(result.version, 'no version');
-      assert(result.uapi_ur_locator, 'no ur locator');
-      assert(result.uapi_reservation_locator, 'no reservation locator');
-      assert(result.uapi_airline_locator, 'no airline locator');
-      assert(result.bookingPCC, 'no booking pcc');
-      assert(result.platingCarrier, 'no PC');
-      assert(_.isArray(result.passengers), 'passengers is not array');
-      assert(result.passengers.length);
-      assert(result.pnr, 'no pnr');
-      assert(_.isArray(result.pnrList), 'no pnrList');
-      assert(_.isArray(result.reservations), 'no reservations');
-      assert(result.reservations.length);
-      assert(_.isArray(result.trips), 'no trips');
-      result.trips.forEach((trip) => {
-        assert(_.isArray(trip.baggage), 'No baggage in trips');
+      expect(result).to.be.an('object');
+      // Checking object keys
+      expect(result).to.have.all.keys(bookingKeys);
+      expect(result.version).to.be.at.least(0);
+      expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/);
+      expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/);
+      expect(result.uapi_airline_locator).to.match(/^[A-Z0-9]{6}$/);
+      expect(result.bookingPCC).to.match(/^[A-Z0-9]{3,4}$/);
+      expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
+      expect(result.pnr).to.match(/^[A-Z0-9]{6}$/);
+      expect(new Date(result.createdAt)).to.be.an.instanceof(Date);
+      expect(new Date(result.modifiedAt)).to.be.an.instanceof(Date);
+      expect(result.type).to.equal('uAPI');
+      // Checking passengers format
+      expect(result.passengers).to.be.an('array');
+      expect(result.passengers).to.have.length.above(0);
+      result.passengers.forEach((passenger) => {
+        expect(passenger).to.be.an('object');
+        expect(passenger).to.include.keys([
+          'lastName', 'firstName', 'uapi_passenger_ref',
+        ]);
       });
-
+      // Checking pnrList format
+      expect(result.pnrList).to.be.an('array');
+      expect(result.pnrList).to.have.length.above(0);
+      result.pnrList.forEach((pnr) => {
+        expect(pnr).to.match(/^[A-Z0-9]{6}$/);
+      });
+      // Checking reservations format
+      expect(result.reservations).to.be.an('array');
+      expect(result.reservations).to.have.length.above(0);
       result.reservations.forEach((reservation) => {
-        let status = 'Reserved';
-        if (tickets) {
-          status = 'Ticketed';
+        expect(reservation).to.be.an('object');
+        expect(reservation).to.have.all.keys([
+          'status', 'fareCalculation', 'priceInfo', 'baggage', 'timeToReprice',
+          'uapi_segment_refs', 'uapi_passenger_refs',
+        ]);
+        expect(reservation.status).to.be.oneOf(['Reserved', 'Ticketed']);
+        expect(reservation.fareCalculation).to.be.a('string');
+        expect(reservation.fareCalculation).to.have.length.above(0);
+        expect(new Date(reservation.timeToReprice)).to.be.an.instanceof(Date);
+        // Checking Price info
+        expect(reservation.priceInfo).to.be.an('object');
+        expect(reservation.priceInfo).to.include.keys([
+          'totalPrice', 'basePrice', 'equivalentBasePrice', 'taxes', 'passengersCount',
+        ]);
+        expect(reservation.priceInfo.passengersCount).to.be.an('object');
+        Object.keys(reservation.priceInfo.passengersCount).forEach(
+          ptc => expect(reservation.priceInfo.passengersCount[ptc]).to.be.a('number')
+        );
+        if (reservation.priceInfo.taxesInfo) {
+          expect(reservation.priceInfo.taxesInfo).to.be.an('array');
+          expect(reservation.priceInfo.taxesInfo).to.have.length.above(0);
+          reservation.priceInfo.taxesInfo.forEach(
+            (tax) => {
+              expect(tax).to.be.an('object');
+              expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
+              expect(tax.type).to.match(/^[A-Z]{2}$/);
+            }
+          );
         }
-        assert(reservation.status === status);
-        assert(!_.isEmpty(reservation.priceInfo), 'no price info');
-        assert(_.isEqual(
-          Object.keys(reservation.priceInfo),
-          ['TotalPrice', 'BasePrice', 'Taxes', 'passengersCount', 'TaxesInfo']
-        ), 'no required fields');
+        // Checking baggage
+        expect(reservation.baggage).to.be.an('array');
+        reservation.baggage.forEach(
+          (baggage) => {
+            expect(baggage).to.be.an('object');
+            expect(baggage).to.have.all.keys(['units', 'amount']);
+            expect(baggage.units).to.be.a('string');
+            expect(baggage.amount).to.be.a('number');
+          }
+        );
+        // Segment references
+        expect(reservation.uapi_segment_refs).to.be.an('array');
+        expect(reservation.uapi_segment_refs).to.have.length.above(0);
+        reservation.uapi_segment_refs.forEach(
+          reference => expect(reference).to.be.a('string')
+        );
+        // Passenger references
+        expect(reservation.uapi_passenger_refs).to.be.an('array');
+        expect(reservation.uapi_passenger_refs).to.have.length.above(0);
+        reservation.uapi_passenger_refs.forEach(
+          reference => expect(reference).to.be.a('string')
+        );
       });
+      // Checking reservations format
+      expect(result.trips).to.be.an('array');
+      expect(result.trips).to.have.length.above(0);
+      result.trips.forEach(
+        (trip) => {
+          expect(trip).to.be.an('object');
+          expect(trip).to.have.all.keys([
+            'from', 'to', 'bookingClass', 'departure', 'arrival', 'airline',
+            'flightNumber', 'serviceClass', 'status', 'plane', 'duration',
+            'techStops', 'uapi_segment_ref',
+          ]);
+          expect(trip.from).to.match(/^[A-Z]{3}$/);
+          expect(trip.to).to.match(/^[A-Z]{3}$/);
+          expect(trip.bookingClass).to.match(/^[A-Z]{1}$/);
+          expect(new Date(trip.departure)).to.be.an.instanceof(Date);
+          expect(new Date(trip.arrival)).to.be.an.instanceof(Date);
+          expect(trip.airline).to.match(/^[A-Z0-9]{2}$/);
+          expect(trip.flightNumber).to.match(/^\d+$/);
+          expect(trip.serviceClass).to.be.oneOf([
+            'Economy', 'Business', 'First',
+          ]);
+          expect(trip.status).to.match(/^[A-Z]{2}$/);
+          expect(trip.plane).to.be.an('array').and.to.have.length.above(0);
+          trip.plane.forEach(plane => expect(plane).to.be.a('string'));
+          expect(trip.duration).to.be.an('array').and.to.have.length.above(0);
+          trip.duration.forEach(duration => expect(duration).to.match(/^\d+$/));
+          expect(trip.techStops).to.be.an('array');
+          trip.techStops.forEach(stop => expect(stop).to.match(/^[A-Z]{3}$/));
+          expect(trip.uapi_segment_ref).to.be.a('string');
+        }
+      );
 
-      if (tickets) {
-        assert(_.isArray(result.tickets), 'No tickets in result');
-        assert(result.tickets.length === result.passengers.length, 'tickets should be for each passenger');
-        result.tickets.forEach((ticket) => {
-          assert(!_.isEmpty(ticket.number), 'No ticket number');
-          assert(!_.isEmpty(ticket.uapi_passenger_ref), 'No passenger_ref in tickets');
-        });
-      }
-
-      if (platingCarrier) {
-        assert(!_.isEmpty(result.platingCarrier), 'no plating carrier');
+      if (result.tickets) {
+        console.log(result.tickets);
+        expect(result.tickets).to.be.an('array').and.to.have.length.above(0);
+        result.tickets.forEach(
+          (ticket) => {
+            expect(ticket).to.be.an('object').and.to.have.all.keys([
+              'number', 'uapi_passenger_ref',
+            ]);
+            expect(ticket.number).to.match(/\d{13}/);
+            expect(ticket.uapi_passenger_ref).to.be.a('string');
+          }
+        );
       }
     });
   }
