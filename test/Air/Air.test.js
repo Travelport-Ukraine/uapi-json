@@ -493,14 +493,143 @@ describe('#AirService', () => {
   });
 
   describe('searchBookingsByPassengerName', () => {
-    it('should check if correct function from service is called', () => {
-      const importPNR = sinon.spy(() => {});
-      const service = () => ({ importPNR });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
+    it('should check if list correctly parsed', () => {
+      const returnList = sinon.spy(() => {
+        return Promise.resolve('listscreen');
       });
-      createAirService({ auth }).importPNR({});
-      expect(importPNR.calledOnce).to.be.equal(true);
+
+      const returnBooking = sinon.spy(() => {
+        return Promise.resolve('pnrscreen');
+      });
+
+      const executeCommand = sinon.spy((command) => {
+        expect(command).to.be.a('string');
+        expect(command.match(/\*-?.*/)).to.be.not.equal(null);
+        if (command[1] === '-') {
+          return returnList();
+        }
+        return returnBooking();
+      });
+
+      const closeSession = sinon.spy(() => Promise.resolve());
+
+      const bookingPnr = sinon.spy(
+        (screen) => (screen === 'pnrscreen') ? '123QWE' : null
+      );
+
+      const searchPaxList = sinon.spy(
+        (screen) => (screen === 'listscreen')
+          ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
+          : null,
+      );
+
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        '../../utils': {
+          parsers: {
+            bookingPnr,
+            searchPaxList,
+          },
+        },
+        '../Terminal/Terminal': () => ({
+          executeCommand,
+          closeSession,
+        }),
+      });
+
+      return createAirService({ auth })
+        .searchBookingsByPassengerName({ searchPhrase: 'OK' })
+        .then(res => {
+          expect(res.type).to.be.equal('list');
+          expect(res.data.length).to.be.equal(2);
+          expect(res.data[0].pnr).to.be.equal('123QWE');
+          expect(res.data[0].name).to.be.equal('first');
+          expect(returnList.callCount).to.be.equal(3);
+          expect(bookingPnr.callCount).to.be.equal(2);
+          expect(searchPaxList.callCount).to.be.equal(1);
+          expect(returnBooking.calledTwice).to.be.equal(true);
+          expect(executeCommand.callCount).to.be.equal(5);
+          expect(closeSession.callCount).to.be.equal(3);
+        });
+
+    });
+
+    it('should check if pnr parsed when list is null', () => {
+      const returnBooking = sinon.spy(() => {
+        return Promise.resolve('pnrscreen');
+      });
+
+      const executeCommand = sinon.spy((command) => {
+        return returnBooking();
+      });
+
+      const bookingPnr = sinon.spy(
+        (screen) => (screen === 'pnrscreen') ? '123QWE' : null
+      );
+
+      const searchPaxList = sinon.spy(
+        (screen) => (screen === 'listscreen')
+          ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
+          : null,
+      );
+
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        '../../utils': {
+          parsers: {
+            bookingPnr,
+            searchPaxList,
+          },
+        },
+        '../Terminal/Terminal': () => ({
+          executeCommand,
+          closeSession: () => Promise.resolve(),
+        }),
+      });
+
+      return createAirService({ auth })
+        .searchBookingsByPassengerName({ searchPhrase: 'OK' })
+        .then(res => {
+          expect(res.type).to.be.equal('pnr');
+          expect(res.data).to.be.equal('123QWE');
+          expect(bookingPnr.callCount).to.be.equal(1);
+          expect(searchPaxList.callCount).to.be.equal(1);
+          expect(returnBooking.calledOnce).to.be.equal(true);
+          expect(executeCommand.calledOnce).to.be.equal(true);
+        });
+    });
+
+    it('should check if pnr parsed when list is null', () => {
+      const returnList = sinon.spy(() => {
+        return Promise.resolve({});
+      });
+
+      const executeCommand = sinon.spy((command) => {
+        return returnList();
+      });
+
+      const parseAny = () => [{ id: 1, name: 'first' }, { id: 2, name: 'last' }];
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        '../../utils': {
+          parsers: {
+            bookingPnr: parseAny,
+            searchPaxList: parseAny,
+          },
+        },
+        '../Terminal/Terminal': () => ({
+          executeCommand,
+          closeSession: () => Promise.resolve(),
+        }),
+      });
+
+      return createAirService({ auth })
+        .searchBookingsByPassengerName({ searchPhrase: 'OK' })
+        .then(res => Promise.reject(new Error('Cant be answer.')))
+        .catch(err => {
+          expect(err instanceof AirRuntimeError.RequestInconsistency)
+            .to.be.equal(true);
+        });
     });
   });
 });
