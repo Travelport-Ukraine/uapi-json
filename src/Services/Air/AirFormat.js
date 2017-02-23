@@ -64,6 +64,9 @@ function formatLowFaresSearch(searchRequest, searchResult) {
   _.forEach(pricesList, (price, fareKey) => {
     const firstKey = _.first(Object.keys(price['air:AirPricingInfo']));
     const thisFare = price['air:AirPricingInfo'][firstKey]; // get trips from first reservation
+    if (!thisFare.PlatingCarrier) {
+      return;
+    }
 
     const directions = _.map(thisFare['air:FlightOptionsList'], direction =>
       _.map(direction['air:Option'], (option) => {
@@ -86,7 +89,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
               {
                 serviceClass: segmentInfo.CabinClass,
                 bookingClass: segmentInfo.BookingCode,
-                baggage: getBaggage(fareInfo['air:BaggageAllowance']),
+                baggage: [getBaggage(fareInfo['air:BaggageAllowance'])],
               },
               seatsAvailable ? { seatsAvailable } : null,
             );
@@ -98,7 +101,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
           // duration
           // TODO get overnight stops, etc from connection
           platingCarrier: thisFare.PlatingCarrier,
-          Segments: trips,
+          segments: trips,
         };
       })
     );
@@ -142,30 +145,37 @@ function formatLowFaresSearch(searchRequest, searchResult) {
       console.log('Warning: duplicate categories in passengerCategories map for fare ' + fareKey);
     }
 
+    const passengerFares = Object.keys(passengerCategories).reduce(
+      (memo, ptc) => Object.assign(memo, {
+        [ptc]: {
+          totalPrice: passengerCategories[ptc].TotalPrice,
+          basePrice: passengerCategories[ptc].BasePrice,
+          taxes: passengerCategories[ptc].Taxes,
+        },
+      }), {}
+    );
+
     const result = {
-      TotalPrice: price.TotalPrice,
-      BasePrice: price.BasePrice,
-      Taxes: price.Taxes,
-      Directions: directions,
-      BookingComponents: [
+      totalPrice: price.TotalPrice,
+      basePrice: price.BasePrice,
+      taxes: price.Taxes,
+      directions,
+      bookingComponents: [
         {
-          TotalPrice: price.TotalPrice,
-          BasePrice: price.BasePrice,
-          Taxes: price.Taxes,
-          uapi_ref_key: fareKey, // TODO
+          totalPrice: price.TotalPrice,
+          basePrice: price.BasePrice,
+          taxes: price.Taxes,
+          uapi_fare_reference: fareKey, // TODO
         },
       ],
-      passenger_fares: _.mapValues(
-        passengerCategories,
-        item => _.pick(item, ['TotalPrice', 'BasePrice', 'Taxes'])
-      ),
-      passenger_counts: passengerCounts,
+      passengerFares,
+      passengerCounts,
     };
 
     fares.push(result);
   });
 
-  fares.sort((a, b) => parseFloat(a.TotalPrice.substr(3)) - parseFloat(b.TotalPrice.substr(3)));
+  fares.sort((a, b) => parseFloat(a.totalPrice.substr(3)) - parseFloat(b.totalPrice.substr(3)));
 
   return fares;
 }
