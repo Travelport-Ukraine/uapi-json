@@ -517,7 +517,7 @@ describe('#AirService', () => {
         (screen) => (screen === 'pnrscreen') ? '123QWE' : null
       );
 
-      const searchPaxList = sinon.spy(
+      const searchPassengersList = sinon.spy(
         (screen) => (screen === 'listscreen')
           ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
           : null,
@@ -528,7 +528,7 @@ describe('#AirService', () => {
         '../../utils': {
           parsers: {
             bookingPnr,
-            searchPaxList,
+            searchPassengersList,
           },
         },
         '../Terminal/Terminal': () => ({
@@ -546,7 +546,7 @@ describe('#AirService', () => {
           expect(res.data[0].name).to.be.equal('first');
           expect(returnList.callCount).to.be.equal(3);
           expect(bookingPnr.callCount).to.be.equal(2);
-          expect(searchPaxList.callCount).to.be.equal(1);
+          expect(searchPassengersList.callCount).to.be.equal(1);
           expect(returnBooking.calledTwice).to.be.equal(true);
           expect(executeCommand.callCount).to.be.equal(5);
           expect(closeSession.callCount).to.be.equal(3);
@@ -567,7 +567,7 @@ describe('#AirService', () => {
         (screen) => (screen === 'pnrscreen') ? '123QWE' : null
       );
 
-      const searchPaxList = sinon.spy(
+      const searchPassengersList = sinon.spy(
         (screen) => (screen === 'listscreen')
           ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
           : null,
@@ -578,7 +578,7 @@ describe('#AirService', () => {
         '../../utils': {
           parsers: {
             bookingPnr,
-            searchPaxList,
+            searchPassengersList,
           },
         },
         '../Terminal/Terminal': () => ({
@@ -593,7 +593,7 @@ describe('#AirService', () => {
           expect(res.type).to.be.equal('pnr');
           expect(res.data).to.be.equal('123QWE');
           expect(bookingPnr.callCount).to.be.equal(1);
-          expect(searchPaxList.callCount).to.be.equal(1);
+          expect(searchPassengersList.callCount).to.be.equal(1);
           expect(returnBooking.calledOnce).to.be.equal(true);
           expect(executeCommand.calledOnce).to.be.equal(true);
         });
@@ -614,7 +614,7 @@ describe('#AirService', () => {
         '../../utils': {
           parsers: {
             bookingPnr: parseAny,
-            searchPaxList: parseAny,
+            searchPassengersList: parseAny,
           },
         },
         '../Terminal/Terminal': () => ({

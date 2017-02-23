@@ -122,7 +122,7 @@ module.exports = (settings) => {
       const terminal = createTerminalService(settings);
       return terminal.executeCommand(`*-${options.searchPhrase}`)
         .then((firstScreen) => {
-          const list = parsers.searchPaxList(firstScreen);
+          const list = parsers.searchPassengersList(firstScreen);
           if (list) {
             return Promise
               .all(list.map((line) => {

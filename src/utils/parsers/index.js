@@ -1,7 +1,7 @@
 import bookingPnr from './booking-pnr';
-import searchPaxList from './search-pax-list';
+import searchPassengersList from './search-passengers-list';
 
 export default {
   bookingPnr,
-  searchPaxList,
+  searchPassengersList,
 };

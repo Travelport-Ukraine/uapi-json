@@ -69,10 +69,10 @@ describe('#Utils', () => {
       return file;
     };
 
-    describe('.searchPaxList', () => {
+    describe('.searchPassengersList', () => {
       it('should test for correct parsing', () => {
-        const file = getFile('searchPaxList');
-        const parsed = utils.parsers.searchPaxList(file);
+        const file = getFile('searchPassengersList');
+        const parsed = utils.parsers.searchPassengersList(file);
         expect(parsed.length).to.be.equal(22);
         const count = parsed.reduce((acc, x) => acc + Number(x.isCancelled), 0);
         expect(count).to.be.equal(16);
@@ -89,7 +89,7 @@ describe('#Utils', () => {
 
       it('should return null if not parsed', () => {
         const screen = 'some string';
-        const parsed = utils.parsers.searchPaxList(screen);
+        const parsed = utils.parsers.searchPassengersList(screen);
         expect(parsed).to.be.equal(null);
       });
     });
