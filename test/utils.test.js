@@ -1,4 +1,7 @@
 import { expect } from 'chai';
+import fs from 'fs';
+import path from 'path';
+
 import utils from '../src/utils';
 
 describe('#Utils', () => {
@@ -50,6 +53,63 @@ describe('#Utils', () => {
       const obj = { a: 1 };
       const res = utils.renameProperty(obj, 'a', 'b');
       expect(res).to.deep.equal({ b: 1 });
+    });
+  });
+
+  describe('#parsers', () => {
+    const getFile = (name) => {
+      const screen = path.join(
+        __dirname,
+        `./FakeResponses/Terminal/${name}.txt`
+      );
+
+      const file = fs
+        .readFileSync(screen)
+        .toString();
+      return file;
+    };
+
+    describe('.searchPassengersList', () => {
+      it('should test for correct parsing', () => {
+        const file = getFile('searchPassengersList');
+        const parsed = utils.parsers.searchPassengersList(file);
+        expect(parsed.length).to.be.equal(22);
+        const count = parsed.reduce((acc, x) => acc + Number(x.isCancelled), 0);
+        expect(count).to.be.equal(16);
+        parsed.forEach((line) => {
+          expect(line).to.have.all.keys(
+            'id',
+            'firstName',
+            'lastName',
+            'isCancelled',
+            'date'
+          );
+        });
+      });
+
+      it('should return null if not parsed', () => {
+        const screen = 'some string';
+        const parsed = utils.parsers.searchPassengersList(screen);
+        expect(parsed).to.be.equal(null);
+      });
+    });
+
+    describe('.bookingPnr', () => {
+      it('should return pnr for booking screen', () => {
+        const file = getFile('bookingInUse');
+        const parsed = utils.parsers.bookingPnr(file);
+        expect(parsed).to.be.equal('KSD38G');
+      });
+
+      it('should return pnr for booking screen', () => {
+        const file = getFile('bookingInUse2');
+        const parsed = utils.parsers.bookingPnr(file);
+        expect(parsed).to.be.equal('KS2814');
+      });
+
+      it('should return null if cannot parse', () => {
+        expect(utils.parsers.bookingPnr('sdad')).to.be.equal(null);
+      });
     });
   });
 });

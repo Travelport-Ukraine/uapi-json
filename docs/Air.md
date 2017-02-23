@@ -239,3 +239,32 @@ Request for the ticket information for all tickets in PNR.
 | pnr | `String` | 1G PNR. |
 
 **See: <a href="../examples/Air/getTickets.js">getTickets example</a>**
+
+
+<a name="searchBookingsByPassengerName"></a>
+### .searchBookingsByPassengerName(params)
+> Requires Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
+Request for the ticket information.
+
+**Returns**: `Promise` with next shape `{ type: 'list' | 'pnr', data: Array | String }`
+
+This function executes terminal command to get PAX LIST from `*-NAME` command response.
+
+| Param | Type | Description |
+| --- | --- | --- |
+| searchPhrase | `String` | Last name to look for. |
+
+While function returns object with type `list` it means that `Array` is returned.
+Example: 
+```
+    {
+        type: 'list',
+        data: [ 
+            { id: 1, firstName: 'Donald', lastName: 'Trump', pnr: 'GREAT1', date, isCancelled},
+            { id: 2, firstName: 'Hillary', lastName: 'Clinton', pnr: 'STRTGH', date, isCancelled },
+        ]
+```
+
+When `type` equals `pnr` than data fields contains pnr string.
+
+**See: <a href="../examples/Air/searchBookingsByPassengerName.js">getPNRByTicketNumber example</a>**
