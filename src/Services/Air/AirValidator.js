@@ -74,11 +74,6 @@ Validator.prototype.passengers = function () {
   return this;
 };
 
-Validator.prototype.requestId = function () {
-    // FIXME STUB (move to a common method?)
-  return this;
-};
-
 Validator.prototype.pnr = function () {
   if (!this.params.pnr) {
     throw new GdsValidationError.PnrMissing(this.params);
@@ -111,23 +106,6 @@ Validator.prototype.bookedPassengers = function () {
     passenger.Age = moment().diff(birth, 'years');
     return passenger;
   });
-  return this;
-};
-
-Validator.prototype.removePassengers = function () {
-  delete (this.params.passengers);
-  return this;
-};
-
-Validator.prototype.workaroundPassengers = function () {
-  _.forEach(this.params.passengers, (item) => {
-    item.ageType = 'ADT';
-  });
-  return this;
-};
-
-Validator.prototype.uapi_fare_rule_key = function () {
-    // TODO check key set
   return this;
 };
 
@@ -256,13 +234,7 @@ module.exports = {
     return new Validator(params)
       .passengers()
       .legs()
-      .requestId()
       .setSearchPassengers()
-      .end();
-  },
-
-  AIR_AVAILABILITY_REQ(params) {
-    return new Validator(params)
       .end();
   },
 
@@ -295,15 +267,6 @@ module.exports = {
       .end();
   },
 
-  FARE_RULES_UNBOOKED(params) {
-    return new Validator(params)
-      .passengers()
-      .setSearchPassengers()
-      // .bookedPassengers() //TODO implement validation
-      // .trips()
-      .end();
-  },
-
   GDS_QUEUE_PLACE(params) {
     return new Validator(params)
       .queue()
@@ -321,7 +284,6 @@ module.exports = {
     return new Validator(params)
       .end();
   },
-
 
   AIR_FLIGHT_INFORMATION(params) {
     return new Validator(params)
