@@ -89,6 +89,8 @@ Object.assign(AirRuntimeError, createErrorsList({
   UnableToRetrieveTickets: 'Unable to retrieve tickets list',
   TicketRetrieveError: 'Unable to retrieve ticket',
   TicketInfoIncomplete: 'Ticket information is incomplete',
+  RequestInconsistency: 'Request faced race condition. Please retry again',
+  MissingPaxListAndBooking: 'Cant find anything for your request. List and booking are missing',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(

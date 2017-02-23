@@ -1,5 +1,7 @@
 import moment from 'moment';
 import _ from 'lodash';
+
+import { parsers } from '../../utils';
 import airService from './AirService';
 import createTerminalService from '../Terminal/Terminal';
 import { AirRuntimeError } from './AirErrors';
@@ -29,16 +31,9 @@ module.exports = (settings) => {
             const code = err.data['universal:UniversalRecord'].LocatorCode;
             return service.cancelUR({
               LocatorCode: code,
-            }).then(() => {
-              throw err;
-            }).catch(() => {
-              if (settings.debug > 0) {
-                console.log('Cant cancel booking with UR', code);
-              }
-              throw err;
-            });
+            }).then(() => Promise.reject(err));
           }
-          throw err;
+          return Promise.reject(err);
         });
       });
     },
@@ -68,21 +63,14 @@ module.exports = (settings) => {
       const parameters = {
         flightInfoCriteria: _.isArray(options) ? options : [options],
       };
-      return service.flightInfo(parameters)
-        .then(data => data)
-        .catch((err) => {
-          if (settings.debug > 0) {
-            console.log('Cant get flightInfo', err);
-          }
-          return Promise.reject(err);
-        });
+      return service.flightInfo(parameters);
     },
 
     getTicket(options) {
       return service.getTicket(options)
         .catch((err) => {
           if (!(err instanceof AirRuntimeError.TicketInfoIncomplete)) {
-            throw err;
+            return Promise.reject(err);
           }
           return this.getPNRByTicketNumber({
             ticketNumber: options.ticketNumber,
@@ -127,6 +115,56 @@ module.exports = (settings) => {
         )
         .catch(
           err => Promise.reject(new AirRuntimeError.UnableToRetrieveTickets(options, err))
+        );
+    },
+
+    searchBookingsByPassengerName(options) {
+      const terminal = createTerminalService(settings);
+      return terminal.executeCommand(`*-${options.searchPhrase}`)
+        .then((firstScreen) => {
+          const list = parsers.searchPassengersList(firstScreen);
+          if (list) {
+            return Promise
+              .all(list.map((line) => {
+                const localTerminal = createTerminalService(settings);
+                return localTerminal
+                  .executeCommand(`*-${options.searchPhrase}`)
+                  .then((firstScreenAgain) => {
+                    if (firstScreenAgain !== firstScreen) {
+                      return Promise.reject(
+                        new AirRuntimeError.RequestInconsistency({
+                          firstScreen,
+                          firstScreenAgain,
+                        })
+                      );
+                    }
+
+                    return localTerminal.executeCommand(`*${line.id}`);
+                  })
+                  .then(parsers.bookingPnr)
+                  .then(pnr => localTerminal.closeSession()
+                    .then(() => ({ ...line, pnr }))
+                  );
+              }))
+              .then(data => ({ type: 'list', data }));
+          }
+
+          const pnr = parsers.bookingPnr(firstScreen);
+          if (pnr) {
+            return {
+              type: 'pnr',
+              data: pnr,
+            };
+          }
+
+          return Promise.reject(
+            new AirRuntimeError.MissingPaxListAndBooking(firstScreen)
+          );
+        })
+        .then(results =>
+          terminal.closeSession()
+            .then(() => results)
+            .catch(() => results)
         );
     },
   };
