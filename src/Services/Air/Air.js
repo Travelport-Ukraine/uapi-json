@@ -29,16 +29,9 @@ module.exports = (settings) => {
             const code = err.data['universal:UniversalRecord'].LocatorCode;
             return service.cancelUR({
               LocatorCode: code,
-            }).then(() => {
-              throw err;
-            }).catch(() => {
-              if (settings.debug > 0) {
-                console.log('Cant cancel booking with UR', code);
-              }
-              throw err;
-            });
+            }).then(() => Promise.reject(err));
           }
-          throw err;
+          return Promise.reject(err);
         });
       });
     },
@@ -68,21 +61,14 @@ module.exports = (settings) => {
       const parameters = {
         flightInfoCriteria: _.isArray(options) ? options : [options],
       };
-      return service.flightInfo(parameters)
-        .then(data => data)
-        .catch((err) => {
-          if (settings.debug > 0) {
-            console.log('Cant get flightInfo', err);
-          }
-          return Promise.reject(err);
-        });
+      return service.flightInfo(parameters);
     },
 
     getTicket(options) {
       return service.getTicket(options)
         .catch((err) => {
           if (!(err instanceof AirRuntimeError.TicketInfoIncomplete)) {
-            throw err;
+            return Promise.reject(err);
           }
           return this.getPNRByTicketNumber({
             ticketNumber: options.ticketNumber,

@@ -35,6 +35,6 @@ describe('#AirService', () => {
     });
 
     createAirService(params);
-
+    expect(r.called).to.be.equal(true);
   });
 });
