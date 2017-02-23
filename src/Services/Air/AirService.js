@@ -20,16 +20,6 @@ module.exports = function (settings) {
       AirParser.AIR_LOW_FARE_SEARCH_REQUEST,
       debug
     ),
-    airPrice: uApiRequest(
-      config.AirService.url,
-      auth,
-      `${templatesDir}/AIR_PRICE_REQ.xml`,
-      'air:airPriceRsp',
-      AirValidator.FARE_RULES_TRIPS_TRAVELER_REFS,
-      null,
-      AirParser.AIR_PRICE_REQUEST,
-      debug
-    ),
     airPricePricingSolutionXML: uApiRequest(
       config.AirService.url,
       auth,
@@ -39,15 +29,6 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML,
       debug
-    ),
-    airPriceManual: uApiRequest(
-      config.AirService.url,
-      auth,
-      `${templatesDir}/AIR_PRICE_REQ_MANUAL.xml`,
-      'air:airPriceRsp',
-      AirValidator.AIR_PRICE_MANUAL,
-      null,
-      AirParser.AIR_PRICE_REQUEST
     ),
     createReservation: uApiRequest(
       config.AirService.url,
@@ -78,42 +59,6 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_IMPORT_REQUEST,
       debug
-    ),
-    fareRulesBooked: uApiRequest(
-      config.AirService.url,
-      auth,
-      `${templatesDir}/AIR_PRICING_FARE_RULES.xml`,
-      'air:airPriceRsp',
-      AirValidator.FARE_RULES_BOOKED,
-      null,
-      AirParser.AIR_PRICE_FARE_RULES
-    ),
-    fareRulesTripsTravellerRefs: uApiRequest(
-      config.AirService.url,
-      auth,
-      `${templatesDir}/AIR_PRICING_FARE_RULES.xml`,
-      'air:airPriceRsp',
-      AirValidator.FARE_RULES_TRIPS_TRAVELER_REFS,
-      null,
-      AirParser.AIR_PRICE_FARE_RULES
-    ),
-    fareRulesUnbooked: uApiRequest(
-      config.AirService.url,
-      auth,
-      `${templatesDir}/AIR_PRICING_FARE_RULES.xml`,
-      'air:airPriceRsp',
-      AirValidator.FARE_RULES_BOOKED,
-      null,
-      AirParser.AIR_PRICE_FARE_RULES
-    ),
-    fareRulesUnbooked_uAPI: uApiRequest(
-      config.AirService.url,
-      auth,
-      `${templatesDir}/AIR_FARE_RULES_REQUEST.xml`,
-      'air:AirFareRulesRsp',
-      AirValidator.FARE_RULES_UAPI,
-      null,
-      AirParser.FARE_RULES_RESPONSE
     ),
     gdsQueue: uApiRequest(
       config.GdsQueueService.url,

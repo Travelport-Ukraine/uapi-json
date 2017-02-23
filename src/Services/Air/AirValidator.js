@@ -274,13 +274,6 @@ module.exports = {
       .end();
   },
 
-  AIR_PRICE_MANUAL(params) {
-    return new Validator(params)
-      .bookedPassengers() // TODO change into pre-booked?
-      // .trips()
-      .end();
-  },
-
   AIR_CREATE_RESERVATION_REQUEST(params) {
     return new Validator(params)
       .pricingSolutionXML()
@@ -302,34 +295,12 @@ module.exports = {
       .end();
   },
 
-  FARE_RULES_BOOKED(params) {
-    return new Validator(params)
-      .workaroundPassengers()
-      // .bookedPassengers() //TODO implement validation
-      // .trips()
-      .end();
-  },
-
-  FARE_RULES_TRIPS_TRAVELER_REFS(params) {
-    return new Validator(params)
-      // .trips()  //TODO implement validation
-      // .uapi_traveler_refs
-      .removePassengers()
-      .end();
-  },
-
   FARE_RULES_UNBOOKED(params) {
     return new Validator(params)
       .passengers()
       .setSearchPassengers()
       // .bookedPassengers() //TODO implement validation
       // .trips()
-      .end();
-  },
-
-  FARE_RULES_UAPI(params) {
-    return new Validator(params)
-      .uapi_fare_rule_key()
       .end();
   },
 

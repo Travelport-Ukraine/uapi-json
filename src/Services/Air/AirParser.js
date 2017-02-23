@@ -10,17 +10,6 @@ import {
   GdsRuntimeError,
 } from './AirErrors';
 
-/*
- * take air:AirSegment list and return Directions
- */
-// TODO integrate into format.getTripsFromBooking
-const groupSegmentsByLegs = (segments) => {
-  const legs = _.toArray(_.groupBy(segments, 'Group'));
-  const mapper = legsSegments => _.map(legsSegments, segment => format.formatTrip(segment, {}));
-  const result = _.map(legs, legsSegments => mapper(legsSegments));
-  return result;
-};
-
 const getPlatingCarrier = (booking) => {
   let platingCarriers = _.pluck(booking['air:AirPricingInfo'], 'PlatingCarrier').filter(pc => pc);
 
@@ -121,121 +110,6 @@ const ticketParse = function (obj) {
 };
 
 const nullParsing = obj => obj;
-
-const extractFareRulesLong = (obj) => {
-  const result = obj['air:FareRule'];
-  return _.map(result, (item) => {
-    utils.renameProperty(item, 'air:FareRuleLong', 'Rules');
-    return item;
-  });
-};
-
-const AirPriceFareRules = (obj) => {
-  const rules = _.extend(
-    extractFareRulesLong(obj['air:AirPriceResult'], {
-      // NOTE provider is given for native uAPI request by FareRuleKey, but not here, add it
-      // FIXME fixed provider code
-      ProviderCode: '1G',
-    })
-  );
-  return rules;
-};
-
-function FareRules(obj) {
-  return extractFareRulesLong(obj);
-}
-
-/*
- * The flagship function for parsing reservations in
- * AirPriceReq (multiple passengers per
- *  air:AirPriceResult/air:AirPricingSolution/air:AirPricingInfo, no air:BookingInfo inside)
- *
- * AirCreateReservationReq/UniversalRecordImportReq - air:AirReservation/air:AirPricingInfo
- *  (one passenger per air:AirPricingInfo, booking exists)
- *
- * NOTES:
- * - air:PassengerType in fare should be an array of passenger
- *   type codes (transform it if necessary)
- */
-function parseReservation(fare, pricing) {
-  const reservation = {
-    priceInfo: {
-      TotalPrice: pricing.TotalPrice,
-      BasePrice: pricing.BasePrice,
-      Taxes: pricing.Taxes,
-      passengersCount: countHistogram(fare['air:PassengerType']),
-      TaxesInfo: _.map(
-          fare['air:TaxInfo'],
-          item => ({ value: item.Amount, type: item.Category })
-        ),
-    },
-
-    fare_str: fare['air:FareCalc'],
-    // fares: [], TODO
-    // uapi_fare_rule_keys:
-    // TODO add dropLeafs option type to parser, use air:FareRuleKey as array of strings
-    // TODO add baggage
-  };
-
-    // only in booked reservations
-  if (fare.LatestTicketingTime) {
-    reservation.timeToReprice = fare.LatestTicketingTime;
-    // TODO check if pricing['PricingMethod'] == Guaranteed
-  }
-
-  if (_.isObject(fare['air:FareInfo'])) {
-    reservation.baggage = _.map(fare['air:FareInfo'], info =>
-      format.getBaggage({}, info['air:BaggageAllowance'])
-    );
-  }
-
-  return reservation;
-}
-
-const getPricingOptions = (prices) => {
-  const result = _.map(prices, (pricing) => {
-    const reservations = _.map(pricing['air:AirPricingInfo'], (fare) => {
-      const reservation = parseReservation(fare, pricing);
-      reservation.status = 'Pricing';
-      return reservation;
-    });
-
-    return reservations;
-  });
-
-  return result;
-};
-
-
-function airPriceRsp(obj) {
-  // TODO check root object
-  const data = this.mergeLeafRecursive(obj, 'air:AirPriceRsp')['air:AirPriceRsp'];
-
-  const itinerary = data['air:AirItinerary']; // TODO checks
-  const segments = itinerary['air:AirSegment']; // TODO checks
-
-  const legs = groupSegmentsByLegs(segments);
-
-  const priceResult = data['air:AirPriceResult'];
-  const prices = priceResult['air:AirPricingSolution'];
-  const priceKeys = Object.keys(prices);
-
-  if (priceKeys.length > 1) {
-    throw new AirParsingError.MultiplePricingSolutionsNotAllowed();
-  }
-
-  if (priceKeys.length === 0) {
-    throw new AirParsingError.PricingSolutionNotFound();
-  }
-
-  // TODO move to separate function e.g. get_reservation_options
-  const pricingOptions = getPricingOptions(prices);
-
-  return {
-    reservations: pricingOptions[0],
-    Directions: legs,
-  };
-}
 
 function fillAirFlightInfoResponseItem(data) {
   const item = data['air:FlightInfoDetail'];
@@ -554,27 +428,14 @@ function extractBookings(obj) {
     const trips = Object.keys(booking['air:AirSegment']).map(
       (key) => {
         const segment = booking['air:AirSegment'][key];
-        const flightDetails = Object.keys(segment['air:FlightDetails']).map(
-          detailsKey => segment['air:FlightDetails'][detailsKey]
+        return Object.assign(
+          format.formatTrip(segment, segment['air:FlightDetails']),
+          {
+            status: segment.Status,
+            serviceClass: segment.CabinClass,
+            bookingClass: segment.ClassOfService,
+          }
         );
-        const plane = flightDetails.map(details => details.Equipment);
-        const duration = flightDetails.map(details => details.FlightTime);
-        const techStops = flightDetails.slice(1).map(details => details.Origin);
-        return {
-          from: segment.Origin,
-          to: segment.Destination,
-          bookingClass: segment.ClassOfService,
-          departure: segment.DepartureTime,
-          arrival: segment.ArrivalTime,
-          airline: segment.Carrier,
-          flightNumber: segment.FlightNumber,
-          serviceClass: segment.CabinClass,
-          status: segment.Status,
-          plane,
-          duration,
-          techStops,
-          uapi_segment_ref: segment.ProviderReservationInfoRef,
-        };
       }
     );
 
@@ -587,28 +448,7 @@ function extractBookings(obj) {
         const uapiPassengerRefs = reservation[`common_${this.uapi_version}:BookingTravelerRef`];
         const fareInfo = reservation['air:FareInfo'];
         const baggage = Object.keys(fareInfo).map(
-          (fareLegKey) => {
-            const baggageAllowance = fareInfo[fareLegKey]['air:BaggageAllowance'];
-            if (
-              !baggageAllowance ||
-              (
-                !baggageAllowance['air:NumberOfPieces'] &&
-                !baggageAllowance['air:MaxWeight']
-              )
-            ) {
-              console.warn('Baggage information is not number and is not weight!', JSON.stringify(obj));
-              return { units: 'piece', amount: 0 };
-            } else if (baggageAllowance['air:MaxWeight']) {
-              return {
-                units: baggageAllowance['air:MaxWeight'].Unit.toLowerCase(),
-                amount: Number(baggageAllowance['air:MaxWeight'].Value),
-              };
-            }
-            return {
-              units: 'piece',
-              amount: Number(baggageAllowance['air:NumberOfPieces']),
-            };
-          }
+          fareLegKey => format.getBaggage(fareInfo[fareLegKey]['air:BaggageAllowance'])
         );
         const passengersCount = reservation['air:PassengerType'].reduce(
           (memo, data) => Object.assign(memo, {
@@ -699,13 +539,10 @@ function gdsQueue(req) {
 
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: lowFaresSearchRequest,
-  AIR_PRICE_REQUEST: airPriceRsp,
   AIR_PRICE_REQUEST_PRICING_SOLUTION_XML: airPriceRspPricingSolutionXML,
   AIR_CREATE_RESERVATION_REQUEST: extractBookings,
   AIR_TICKET_REQUEST: ticketParse,
   AIR_IMPORT_REQUEST: importRequest,
-  AIR_PRICE_FARE_RULES: AirPriceFareRules,
-  FARE_RULES_RESPONSE: FareRules,
   GDS_QUEUE_PLACE_RESPONSE: gdsQueue,
   AIR_CANCEL_UR: nullParsing,
   UNIVERSAL_RECORD_FOID: nullParsing,

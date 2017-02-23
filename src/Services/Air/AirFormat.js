@@ -1,155 +1,55 @@
 import _ from 'lodash';
-import utils from '../../utils';
 import { AirParsingError } from './AirErrors';
 
-const firstFlightDetails = obj => (
-  _.isObject(utils.firstInObj(obj)) ? utils.firstInObj(obj) : {}
-);
-
-function getBaggage(trip, obj) {
-  let add = null;
-  if (obj !== null && obj !== undefined) {
-    if (obj['air:NumberOfPieces'] !== undefined) {
-      add = { units: 'piece', amount: obj['air:NumberOfPieces'] * 1 };
-    }
-    const weight = obj['air:MaxWeight'];
-    if (_.isObject(weight)) {
-      add = { units: weight.Unit.toLowerCase(), amount: weight.Value * 1 };
-    }
+function getBaggage(baggageAllowance) {
+  // Checking for allowance
+  if (
+    !baggageAllowance ||
+    (
+      !baggageAllowance['air:NumberOfPieces'] &&
+      !baggageAllowance['air:MaxWeight']
+    )
+  ) {
+    console.warn('Baggage information is not number and is not weight!', JSON.stringify(baggageAllowance));
+    return { units: 'piece', amount: 0 };
   }
-
-  if (add === null) {
-    console.warn('Baggage information is not number and is not weight!', JSON.stringify(obj));
-    add = { units: 'piece', amount: 0 };
+  // Checking for max weight
+  if (baggageAllowance['air:MaxWeight']) {
+    return {
+      units: baggageAllowance['air:MaxWeight'].Unit.toLowerCase(),
+      amount: Number(baggageAllowance['air:MaxWeight'].Value),
+    };
   }
-
-  if (!_.isObject(trip) || !_.isArray(trip.baggage)) {
-    return [add];
-  }
-
-  return trip.baggage.concat([add]);
+  // Returning pieces
+  return {
+    units: 'piece',
+    amount: Number(baggageAllowance['air:NumberOfPieces']),
+  };
 }
 
-function formatTrip(segment, list, fareInfo, flightDetails) {
-  const trip = {
+function formatTrip(segment, flightDetails) {
+  const flightInfo = Object.keys(flightDetails).map(
+    detailsKey => flightDetails[detailsKey]
+  );
+  const plane = flightInfo.map(details => details.Equipment);
+  const duration = flightInfo.map(details => details.FlightTime);
+  const techStops = flightInfo.slice(1).map(details => details.Origin);
+  return {
     from: segment.Origin,
     to: segment.Destination,
-    bookingClass: segment.ClassOfService || list.BookingCode, // detailed letter, like K, etc.
     departure: segment.DepartureTime,
     arrival: segment.ArrivalTime,
-    airline: segment.Carrier, // FIXME
+    airline: segment.Carrier,
     flightNumber: segment.FlightNumber,
-    baggage: [],
-    // departureTerminal
-    // arrivalTerminal
-    // MarketingCarrier, OperatingCarrier
-    // MarriedToNextSegment
-    // SegmentRef: segment['Key']
+    serviceClass: segment.CabinClass,
+    plane,
+    duration,
+    techStops,
+    uapi_segment_ref: segment.ProviderReservationInfoRef || segment.Key,
   };
-  trip.baggage = getBaggage(trip, fareInfo['air:BaggageAllowance']);
-
-  // serviceClass: Economy, Business, etc.
-  // NOTE: unavailable at airPriceRsp/AirItinerary because trips are
-  //       the same for all passengers, but classes aren't
-
-  trip.serviceClass = segment.CabinClass || list.CabinClass; // reservation or search
-  trip.plane = segment.Equipment
-    || firstFlightDetails(segment['air:FlightDetails']).Equipment
-    || null;
-
-  trip.duration = segment.FlightTime
-    || firstFlightDetails(segment['air:FlightDetails']).FlightTime
-    || null;
-
-  // fare basis is not available in airPriceRsp/AirItinerary/AirSegment
-  if (fareInfo && fareInfo.FareBasis) {
-    trip.fareBasisCode = fareInfo.FareBasis;
-  }
-
-
-  if (list && list.classesAvail) {
-    trip.seatsAvailable = list.classesAvail[trip.bookingClass];
-  }
-
-
-  if (list && list.SegmentRef) {
-    trip.uapi_SegmentRef = list.SegmentRef;
-  }
-
-  // fetch tech stops data by included list or by refs
-  const details = segment['air:FlightDetails'];
-  let stops = [];
-
-  if (!_.isEmpty(details)) {
-    trip.plane = _.pluck(segment['air:FlightDetails'], 'Equipment');
-    trip.duration = _.pluck(segment['air:FlightDetails'], 'FlightTime');
-    stops = Object.keys(details).map(key => details[key].Origin);
-  } else if (_.isObject(flightDetails) && _.size(segment['air:FlightDetailsRef']) > 1) {
-    stops = segment['air:FlightDetailsRef'].map(ref => flightDetails[ref].Origin);
-  }
-
-
-  if (_.size(stops) > 0) {
-    stops.shift(); // drop first place of take off
-    if (_.size(stops) > 0) {
-      console.log('yaay, we have tech stops at', JSON.stringify(stops));
-    }
-    trip.techStops = stops;
-  }
-
-  // for booked segments
-  if (segment.Status) {
-    trip.status = segment.Status;
-  }
-
-  return trip;
-}
-
-function getTripsFromBooking(option, fareInfos, segments, flightDetails) {
-  // const travelTime = moment.duration(option.TravelTime);
-
-  if (!_.isArray(option['air:BookingInfo'])) {
-    throw new AirParsingError.BookingInfoError();
-  }
-
-  // get trips(per leg)
-  const booking = option['air:BookingInfo'].map((bookingInfo) => {
-    const list = bookingInfo;
-    const fareInfo = fareInfos[list.FareInfoRef];
-    const segment = segments[list.SegmentRef];
-
-    // per-class seat availability exists only at search
-    const classesAvail = {};
-
-    if (segment['air:AirAvailInfo'] && segment['air:AirAvailInfo'].ProviderCode === '1G') {
-      const regex = /([A-Z])([0-9]|[CLRS])/;
-      const countsString = segment['air:AirAvailInfo']['air:BookingCodeInfo'].BookingCounts;
-
-      countsString
-        .split('|')
-        .forEach((seats, index) => {
-          const tuple = seats.match(regex);
-          if (tuple && tuple[1] && tuple[2]) {
-            classesAvail[tuple[1]] = tuple[2];
-          } else {
-            console.log('ERR: error parsing Galileo seat availability, input: ', seats,
-              ' index: ', index,
-              ' string: ', countsString
-            );
-          }
-        });
-      list.classesAvail = classesAvail;
-    }
-
-    return formatTrip(segment, list, fareInfo, flightDetails);
-  });
-
-  return booking;
 }
 
 function formatLowFaresSearch(searchRequest, searchResult) {
-  const start = new Date();
-
   const pricesList = searchResult['air:AirPricePointList'];
   const fareInfos = searchResult['air:FareInfoList'];
   const segments = searchResult['air:AirSegmentList'];
@@ -162,32 +62,36 @@ function formatLowFaresSearch(searchRequest, searchResult) {
   const fares = [];
 
   _.forEach(pricesList, (price, fareKey) => {
-    let platingCarrier = false;
-    const airPricingInfo = price['air:AirPricingInfo'];
-
-    const allPltCrr = _.map(airPricingInfo, (priceInfo) => {
-      const newPltCrr = priceInfo.PlatingCarrier;
-      if (!platingCarrier) platingCarrier = newPltCrr;
-      if (!platingCarrier === newPltCrr) {
-        throw new AirParsingError.PlatingCarriersError({
-          old: platingCarrier,
-          new: newPltCrr,
-        });
-      }
-      return newPltCrr;
-    });
-
-    if (searchRequest.debug) {
-      console.log('List of plating carriers for fare ' + fareKey + ': '
-        + JSON.stringify(allPltCrr));
-    }
-
     const firstKey = _.first(Object.keys(price['air:AirPricingInfo']));
     const thisFare = price['air:AirPricingInfo'][firstKey]; // get trips from first reservation
 
     const directions = _.map(thisFare['air:FlightOptionsList'], direction =>
       _.map(direction['air:Option'], (option) => {
-        const trips = getTripsFromBooking(option, fareInfos, segments, flightDetails);
+        const trips = option['air:BookingInfo'].map(
+          (segmentInfo) => {
+            const fareInfo = fareInfos[segmentInfo.FareInfoRef];
+            const segment = segments[segmentInfo.SegmentRef];
+            const tripFlightDetails = segment['air:FlightDetailsRef'].map(
+              flightDetailsRef => flightDetails[flightDetailsRef]
+            );
+            const seatsAvailable = (
+              segment['air:AirAvailInfo'] &&
+              segment['air:AirAvailInfo'].ProviderCode === '1G'
+            ) ? (Number(
+              segment['air:AirAvailInfo']['air:BookingCodeInfo'].BookingCounts
+                .match(new RegExp(`${segmentInfo.BookingCode}(\\d+)`))[1]
+            )) : null;
+            return Object.assign(
+              formatTrip(segment, tripFlightDetails),
+              {
+                serviceClass: segmentInfo.CabinClass,
+                bookingClass: segmentInfo.BookingCode,
+                baggage: getBaggage(fareInfo['air:BaggageAllowance']),
+              },
+              seatsAvailable ? { seatsAvailable } : null,
+            );
+          }
+        );
         return {
           from: direction.Origin,
           to: direction.Destination,
@@ -263,12 +167,6 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 
   fares.sort((a, b) => parseFloat(a.TotalPrice.substr(3)) - parseFloat(b.TotalPrice.substr(3)));
 
-  const end = new Date() - start;
-
-  if (searchRequest.debug) {
-    console.info('AirFormat execution time: %dms', end);
-  }
-
   return fares;
 }
 
@@ -276,5 +174,4 @@ module.exports = {
   formatLowFaresSearch,
   formatTrip,
   getBaggage,
-  getTripsFromBooking,
 };
