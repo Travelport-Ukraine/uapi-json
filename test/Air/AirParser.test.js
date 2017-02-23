@@ -133,8 +133,7 @@ const checkLowSearchFareXml = (filename) => {
   });
 };
 
-describe('#AirParser', function () {
-  this.timeout(20000);
+describe('#AirParser', () => {
   describe('getTicket', () => {
     it('should return error when not available to return ticket', (done) => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
