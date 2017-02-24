@@ -18,9 +18,7 @@ const errorHandler = function (err) {
   let errno = 0;
   try {
     errno = err.detail[`common_${this.uapi_version}:ErrorInfo`][`common_${this.uapi_version}:Code`];
-  } catch (e) {
-    console.log('cant parse error');
-  }
+  } catch (e) {}
 
   switch (errno * 1) {
     default:
