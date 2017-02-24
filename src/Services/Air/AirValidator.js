@@ -6,72 +6,16 @@ import {
   GdsValidationError,
 } from './AirErrors';
 
+import { validate, transform, compose } from '../../utils';
+import validators from './validators';
+import transformers from './transformers';
+
 function Validator(params) {
   this.params = params;
 }
 
 Validator.prototype.end = function () {
   return this.params;
-};
-
-Validator.prototype.setSearchPassengers = function () {
-  const list = [];
-  const self = this;
-
-  Object.keys(this.params.passengers).forEach((ageCategory) => {
-    const number = self.params.passengers[ageCategory];
-    if (number) {
-      for (let i = 0; i < number; i += 1) {
-        list.push({
-          ageCategory,
-          child: (ageCategory === 'CNN'), // quickfix
-        });
-      }
-    }
-  });
-
-  this.params.passengers = list;
-
-  return this;
-};
-
-Validator.prototype.legs = function () {
-  if (!this.params.legs) {
-    throw new AirValidationError.LegsMissing(this.params);
-  }
-  if (!_.isArray(this.params.legs)) {
-    throw new AirValidationError.LegsInvalidType(this.params);
-  }
-
-  this.params.legs.forEach((leg, index) => {
-    ['from', 'to', 'departureDate'].forEach((key) => {
-      if (!leg[key]) {
-        throw new AirValidationError.LegsInvalidStructure({ missing: key, index, leg });
-      }
-    });
-
-    // TODO validate departureDate as a date type or valid date string in required format
-  });
-
-  return this;
-};
-
-Validator.prototype.passengers = function () {
-  const self = this;
-  if (typeof (this.params.passengers) !== 'object') {
-    throw new AirValidationError.PassengersHashMissing(this.params);
-  }
-
-  Object.keys(this.params.passengers).forEach((ageCategory) => {
-    const number = self.params.passengers[ageCategory];
-    if ((typeof ageCategory) !== 'string') {
-      throw new AirValidationError.PassengersCategoryInvalid(this.params);
-    } else if ((typeof number) !== 'number') {
-      throw new AirValidationError.PassengersCountInvalid(this.params);
-    }
-  });
-
-  return this;
 };
 
 Validator.prototype.pnr = function () {
@@ -230,13 +174,15 @@ Validator.prototype.flightInfo = function () {
 };
 
 module.exports = {
-  AIR_LOW_FARE_SEARCH_REQUEST(params) {
-    return new Validator(params)
-      .passengers()
-      .legs()
-      .setSearchPassengers()
-      .end();
-  },
+  AIR_LOW_FARE_SEARCH_REQUEST: compose(
+    validate(
+      validators.passengers,
+      validators.legs
+    ),
+    transform(
+      transformers.convertPassengersObjectToArray
+    )
+  ),
 
   AIR_PRICE(params) {
     return new Validator(params)
