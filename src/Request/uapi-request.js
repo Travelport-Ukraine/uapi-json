@@ -115,7 +115,7 @@ module.exports = function (service, auth, reqType, rootObject,
       }
 
       // TODO parse JSON errors
-      throw new RequestSoapError.SoapServerError(data); // TODO change into UAPI_SERVER_ERROR, etc
+      return Promise.reject(new RequestSoapError.SoapServerError(data));
     };
 
     const validateSOAP = function (parsedXML) {
