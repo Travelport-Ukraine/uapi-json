@@ -43,7 +43,7 @@ AirService.shop(params)
           firstName: 'SKYWALKER',
           passCountry: 'UA',
           passNumber: 'ES221731',
-          birthDate: '19680725',
+          birthDate: '1968-07-25',
           gender: 'M',
           ageCategory: 'ADT',
         }, {
@@ -51,7 +51,7 @@ AirService.shop(params)
           firstName: 'VAIDER',
           passCountry: 'UA',
           passNumber: 'ES221731',
-          birthDate: '19660725',
+          birthDate: '1966-07-25',
           gender: 'M',
           ageCategory: 'ADT',
         }, {
@@ -59,7 +59,7 @@ AirService.shop(params)
           firstName: 'SKYWALKER',
           passCountry: 'UA',
           passNumber: 'ES221731',
-          birthDate: '20050725',
+          birthDate: '2005-07-25',
           gender: 'M',
           ageCategory: 'CNN',
         }],

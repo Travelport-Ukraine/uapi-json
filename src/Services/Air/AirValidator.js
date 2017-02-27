@@ -54,7 +54,7 @@ Validator.prototype.pricingSolutionXML = function () {
 // convert all passenger birth dates from DDmmmYY into YYYY-MM-DD
 Validator.prototype.passengerBirthDates = function () {
   this.params.passengers.forEach((item) => {
-    const birthSSR = moment(item.birthDate.toUpperCase(), 'YYYYMMDD');
+    const birthSSR = moment(item.birthDate.toUpperCase(), 'YYYY-MM-DD');
 
     if (!birthSSR.isValid()) {
       throw new AirValidationError.BirthDateInvalid();

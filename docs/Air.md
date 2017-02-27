@@ -109,7 +109,7 @@ Please specify `transfer` field to mark connection segment.
 | --- | --- | --- |
 | lastName | <code>String</code> | Passenger last name. |
 | firstName | <code>String</code> | Passenger first name. |
-| birthDate | <code>String</code> | Birth date in format `YYYYMMDD`. |
+| birthDate | <code>String</code> | Birth date in format `YYYY-MM-DD`. |
 | gender | <code>String</code> | One of `['M', 'F']`. |
 | ageCategory | <code>String</code> | One of `['ADT', 'CNN', 'INF']`. Or [other types](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Shared_Air_Topics/Passenger_Type_Codes.htm) |
 | passNumber| <code>String</code> | Pass number. |

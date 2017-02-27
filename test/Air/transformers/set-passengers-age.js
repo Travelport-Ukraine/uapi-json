@@ -9,11 +9,11 @@ describe('Air.validators.setBusinessFlag', () => {
     const checkAges = ages.concat([]);
     const params = {
       passengers: [
-        { birthDate: moment().subtract(ages.pop(), 'years').format('YYYYMMDD') },
-        { birthDate: moment().subtract(ages.pop(), 'years').format('YYYYMMDD') },
-        { birthDate: moment().subtract(ages.pop(), 'years').format('YYYYMMDD') },
-        { birthDate: moment().subtract(ages.pop(), 'years').format('YYYYMMDD') },
-        { birthDate: moment().subtract(ages.pop(), 'years').format('YYYYMMDD') },
+        { birthDate: moment().subtract(ages.pop(), 'years').format('YYYY-MM-DD') },
+        { birthDate: moment().subtract(ages.pop(), 'years').format('YYYY-MM-DD') },
+        { birthDate: moment().subtract(ages.pop(), 'years').format('YYYY-MM-DD') },
+        { birthDate: moment().subtract(ages.pop(), 'years').format('YYYY-MM-DD') },
+        { birthDate: moment().subtract(ages.pop(), 'years').format('YYYY-MM-DD') },
       ],
     };
     const converted = convert(params);
