@@ -57,7 +57,7 @@ const checkLowSearchFareXml = (filename) => {
                     expect(segment).to.have.all.keys([
                       'from', 'to', 'departure', 'arrival', 'airline', 'flightNumber', 'serviceClass',
                       'plane', 'duration', 'techStops', 'bookingClass', 'baggage', 'seatsAvailable',
-                      'uapi_segment_ref',
+                      'fareBasisCode', 'uapi_segment_ref',
                     ]);
                     expect(segment.from).to.match(/^[A-Z]{3}$/);
                     expect(segment.to).to.match(/^[A-Z]{3}$/);
