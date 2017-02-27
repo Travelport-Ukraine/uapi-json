@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import convert from '../../../src/Services/Air/transformers/convertPassengersObjectToArray';
+import convert from '../../../src/Services/Air/transformers/convert-passengers-object-to-array';
 
 describe('Air.validators.passenger', () => {
   it('should correclty convert passengers', () => {

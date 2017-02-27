@@ -42,16 +42,6 @@ Validator.prototype.pcc = function () {
   return this;
 };
 
-Validator.prototype.bookedPassengers = function () {
-    // TODO check passengers list
-  this.params.business = (this.params.segments[0].serviceClass === 'Business');
-  this.params.passengers = this.params.passengers.map((passenger) => {
-    const birth = moment(passenger.birthDate.toUpperCase(), 'YYYYMMDD');
-    passenger.Age = moment().diff(birth, 'years');
-    return passenger;
-  });
-  return this;
-};
 
 Validator.prototype.pricingSolutionXML = function () {
   if (Array.isArray(this.params['air:AirPricingSolution'])) {
@@ -94,25 +84,6 @@ Validator.prototype.passengerBirthDates = function () {
     item.DOB = birthSSR.format('YYYY-MM-DD');
   });
 
-  return this;
-};
-
-Validator.prototype.hasFareBasisCodes = function () {
-  const firstBasis = this.params.segments
-    && this.params.segments[0]
-    && this.params.segments[0].fareBasisCode;
-  this.params.hasFareBasis = !_.isEmpty(firstBasis);
-  return this;
-};
-
-Validator.prototype.segmentsGroups = function () {
-  let group = 0;
-  for (let i = 0; i < this.params.segments.length; i += 1) {
-    this.params.segments[i].Group = group;
-    if (this.params.segments[i].transfer === false) {
-      group += 1;
-    }
-  }
   return this;
 };
 
@@ -184,13 +155,15 @@ module.exports = {
     )
   ),
 
-  AIR_PRICE(params) {
-    return new Validator(params)
-      .bookedPassengers()
-      .segmentsGroups()
-      .hasFareBasisCodes()
-      .end();
-  },
+  AIR_PRICE: compose(
+    validate(),
+    transform(
+      transformers.setBusinessFlag,
+      transformers.setPassengersAge,
+      transformers.setGroupsForSegments,
+      transformers.setHasFareBasisFlag,
+    )
+  ),
 
   AIR_CREATE_RESERVATION_REQUEST(params) {
     return new Validator(params)
