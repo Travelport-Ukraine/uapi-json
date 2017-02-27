@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import moment from 'moment';
 import {
   AirValidationError,
   AirFlightInfoValidationError,
@@ -38,51 +37,6 @@ Validator.prototype.pcc = function () {
   if (!this.params.pcc) {
     throw new GdsValidationError.PccMissing(this.params);
   }
-
-  return this;
-};
-
-
-Validator.prototype.pricingSolutionXML = function () {
-  if (Array.isArray(this.params['air:AirPricingSolution'])) {
-    throw new AirValidationError.AirPricingSolutionInvalidType();
-  }
-
-  return this;
-};
-
-// convert all passenger birth dates from DDmmmYY into YYYY-MM-DD
-Validator.prototype.passengerBirthDates = function () {
-  this.params.passengers.forEach((item) => {
-    const birthSSR = moment(item.birthDate.toUpperCase(), 'YYYY-MM-DD');
-
-    if (!birthSSR.isValid()) {
-      throw new AirValidationError.BirthDateInvalid();
-    }
-    const { passCountry: country,
-            passNumber: num,
-            firstName: first,
-            lastName: last,
-            gender } = item;
-    const due = moment().add(12, 'month').format('DDMMMYY');
-    const birth = birthSSR.format('DDMMMYY');
-    item.age = parseInt(moment().diff(birthSSR, 'years'), 10);
-
-    if (item.ageCategory === 'CNN') {
-      item.isChild = true;
-      if (item.Age < 10) {
-        item.ageCategory = `C0${item.Age}`;
-      } else {
-        item.ageCategory = `C${item.Age}`;
-      }
-    }
-
-    item.ssr = {
-      type: 'DOCS',
-      text: `P/${country}/${num}/${country}/${birth}/${gender}/${due}/${last}/${first}`,
-    };
-    item.DOB = birthSSR.format('YYYY-MM-DD');
-  });
 
   return this;
 };
@@ -165,12 +119,15 @@ module.exports = {
     )
   ),
 
-  AIR_CREATE_RESERVATION_REQUEST(params) {
-    return new Validator(params)
-      .pricingSolutionXML()
-      .passengerBirthDates()
-      .end();
-  },
+  AIR_CREATE_RESERVATION_REQUEST: compose(
+    validate(
+      validators.pricingSolutionXml,
+    ),
+    transform(
+      transformers.setPassengersAge,
+      transformers.addMetaPassengersBooking
+    )
+  ),
 
   AIR_TICKET(params) {
     return new Validator(params)
