@@ -38,7 +38,6 @@ export const RequestSoapError = createErrorClass(
 );
 Object.assign(RequestSoapError, createErrorsList({
   SoapRequestError: 'Error during request to SOAP API. Check url validity',
-  SoapRequestTimeout: 'SOAP response timeout',
   SoapParsingError: 'SOAP response parsing failed',
   SoapServerError: 'SOAP server error. Check auth and other data',
 }, RequestSoapError));
