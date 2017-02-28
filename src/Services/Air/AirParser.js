@@ -371,7 +371,7 @@ function airCancelPnr(obj) {
   ) {
     return true;
   }
-  throw new Error(new AirParsingError.CancelResponseNotFound());
+  throw new AirParsingError.CancelResponseNotFound();
 }
 
 function extractBookings(obj) {

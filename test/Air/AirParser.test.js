@@ -7,6 +7,7 @@ import airParser from '../../src/Services/Air/AirParser';
 import {
   AirFlightInfoRuntimeError,
   AirRuntimeError,
+  AirParsingError,
 } from '../../src/Services/Air/AirErrors';
 import ParserUapi from '../../src/Request/uapi-parser';
 
@@ -131,6 +132,58 @@ const checkLowSearchFareXml = (filename) => {
 };
 
 describe('#AirParser', () => {
+  describe('AIR_CANCEL_TICKET', () => {
+    it('should return error when no VoidResultInfo available', () => {
+      const check = () => airParser.AIR_CANCEL_TICKET({});
+      expect(check).to.throw(AirRuntimeError.TicketCancelResultUnknown);
+    });
+    it('should return error when no VoidResultInfo Result type is not Success', () => {
+      const check = () => airParser.AIR_CANCEL_TICKET({
+        'air:VoidResultInfo': {
+          ResultType: 'Fail',
+        },
+      });
+      expect(check).to.throw(AirRuntimeError.TicketCancelResultUnknown);
+    });
+    it('should return true if everything is ok', () => {
+      const check = () => airParser.AIR_CANCEL_TICKET({
+        'air:VoidResultInfo': {
+          ResultType: 'Success',
+        },
+      });
+      expect(check).not.to.throw(Error);
+    });
+  });
+  describe('AIR_CANCEL_PNR', () => {
+    it('should return error when no messages available', () => {
+      const check = () => airParser.AIR_CANCEL_PNR.call({
+        uapi_version: 'v36_0',
+      }, {});
+      expect(check).to.throw(AirParsingError.CancelResponseNotFound);
+    });
+    it('should return error when message do not contain Success message', () => {
+      const check = () => airParser.AIR_CANCEL_PNR.call({
+        uapi_version: 'v36_0',
+      }, {
+        'common_v36_0:ResponseMessage': [{
+          _: 'Some message',
+        }, {
+          _: 'Another message',
+        }],
+      });
+      expect(check).to.throw(AirParsingError.CancelResponseNotFound);
+    });
+    it('should return true if everything is ok', () => {
+      const check = () => airParser.AIR_CANCEL_PNR.call({
+        uapi_version: 'v36_0',
+      }, {
+        'common_v36_0:ResponseMessage': [{
+          _: 'Itinerary Cancelled',
+        }],
+      });
+      expect(check).not.to.throw(Error);
+    });
+  });
   describe('getTicket', () => {
     it('should return error when not available to return ticket', (done) => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
