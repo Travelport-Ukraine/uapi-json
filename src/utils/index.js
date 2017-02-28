@@ -6,6 +6,7 @@ import validate from './validate';
 import parsers from './parsers';
 import transform from './transform';
 import compose from './compose';
+import hasAllFields from './has-all-required-fields';
 
 const utils = {
   renameProperty,
@@ -16,6 +17,7 @@ const utils = {
   transform,
   compose,
   parsers,
+  hasAllFields,
 };
 
 export default utils;

@@ -23,17 +23,43 @@
             {{#passengers}}
             <com:BookingTraveler Key="P_{{@index}}" Age="{{Age}}" DOB="{{DOB}}" Gender="{{gender}}" TravelerType="{{ageCategory}}">
                 <com:BookingTravelerName First="{{firstName}}" Last="{{lastName}}" {{#if Prefix}}Prefix="{{title}}"{{/if}}/>
+                {{#if ../deliveryInformation}}
                 <com:DeliveryInfo>
                     <com:ShippingAddress>
-                        <com:AddressName>Agency</com:AddressName>
-                        <com:Street>Mezhygirska St. 1</com:Street>
-                        <com:City>Kyiv</com:City>
-                        <com:PostalCode>123456</com:PostalCode>
-                        <com:Country>UA</com:Country>
+                        <com:AddressName>
+                            {{ ../deliveryInformation.name}}
+                        </com:AddressName>
+                        <com:Street>
+                            {{ ../deliveryInformation.street}}
+                        </com:Street>
+                        <com:City>
+                            {{ ../deliveryInformation.city}}
+                        </com:City>
+                        <com:PostalCode>
+                            {{ ../deliveryInformation.zip}}
+                        </com:PostalCode>
+                        <com:Country>
+                            {{ ../deliveryInformation.country}}
+                        </com:Country>
                     </com:ShippingAddress>
                 </com:DeliveryInfo>
-                <com:PhoneNumber CountryCode="38" Location="IEV" Number="0445857777" Type="Other"/>
-                <com:Email EmailID="avia@711.ua" Type="Other"/>
+                {{/if}}
+
+                {{#if ../phone}}
+                    <com:PhoneNumber
+                            CountryCode="{{../phone.country}}"
+                            Location="{{../phone.location}}"
+                            Number="{{../phone.number}}"
+                            Type="Other"
+                    />
+                {{/if}}
+
+                {{#if ../email}}
+                    <com:Email
+                            EmailID="{{../email}}"
+                            Type="Other"
+                    />
+                {{/if}}
                 {{#ssr}}
                 <com:SSR Type="{{type}}" FreeText="{{text}}"/>
                 <!--<com:SSR Carrier="F9" FreeText="P/IN/F1234567/IN/05Jan85/M/13Dec14/Jones/Stephen"-->

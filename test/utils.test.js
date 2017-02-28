@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import sinon from 'sinon';
 
+import errors from '../src/error-types';
 import utils from '../src/utils';
 
 describe('#Utils', () => {
@@ -181,6 +182,30 @@ describe('#Utils', () => {
 
       it('should return null if cannot parse', () => {
         expect(utils.parsers.bookingPnr('sdad')).to.be.equal(null);
+      });
+    });
+
+    describe('.hasAllFields', () => {
+      it('should pass', () => {
+        const fields = ['foo', 'bar'];
+        const object = { foo: 123, bar: 456 };
+        const fn = () => utils.hasAllFields(object, fields, Error);
+        expect(fn).to.not.throw(Error);
+      });
+
+      it('should throw error', () => {
+        const fields = ['foo', 'bar'];
+        const object = { foo: 456 };
+        const fn = () => utils.hasAllFields(object, fields);
+        try {
+          fn();
+        } catch (e) {
+          expect(e instanceof errors.ValidationError).to.be.equal(true);
+          expect(e.data.required).to.be.deep.equal(['foo', 'bar']);
+          expect(e.data.missing).to.be.deep.equal('bar');
+          return;
+        }
+        throw Error('Should throw an Error');
       });
     });
   });

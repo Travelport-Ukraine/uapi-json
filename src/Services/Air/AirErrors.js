@@ -25,6 +25,9 @@ Object.assign(AirValidationError, createErrorsList({
   FopTypeUnsupported: 'Form of payment type is unsupported',
   TicketNumberMissing: 'Ticket number missing',
   TicketNumberInvalid: 'Ticket number invalid',
+  IncorrectEmail: 'Email is in incorrect format',
+  IncorrectPhoneFormat: 'Incorrect phone format. Missing required fields. See data.',
+  DeliveryInformation: 'Missing of delivery information fields. See data.',
 }, AirValidationError));
 
 export const GdsValidationError = createErrorClass(
