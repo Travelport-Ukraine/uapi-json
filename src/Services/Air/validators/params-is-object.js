@@ -1,7 +1,7 @@
 import { AirValidationError } from '../AirErrors';
 
 export default (params) => {
-  if (params) {
+  if (!params) {
     throw new AirValidationError.ParamsMissing(params);
   }
   if (Object.prototype.toString.call(params) !== '[object Object]') {

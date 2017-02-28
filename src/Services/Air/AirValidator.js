@@ -58,8 +58,8 @@ module.exports = {
     transform()
   ),
 
-  AIR_CANCEL_UR: (params) => params,
-  UNIVERSAL_RECORD_FOID: (params) => params,
+  AIR_CANCEL_UR: params => params,
+  UNIVERSAL_RECORD_FOID: params => params,
 
   AIR_FLIGHT_INFORMATION: compose(
     validate(

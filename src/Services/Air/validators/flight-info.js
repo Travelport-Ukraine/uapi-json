@@ -12,7 +12,7 @@ export function validateItem(item) {
   if (!item.departure) {
     throw new AirFlightInfoValidationError.DepartureMissing(item);
   }
-};
+}
 
 
 export default (params) => {

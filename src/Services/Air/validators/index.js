@@ -19,5 +19,5 @@ export default {
   pcc,
   queue,
   ticketNumber,
-  flightInfo
+  flightInfo,
 };
