@@ -8,6 +8,9 @@ import pcc from './pcc';
 import queue from './queue';
 import ticketNumber from './ticket-number';
 import flightInfo from './flight-info';
+import emailOptional from './email-optional';
+import phoneOptional from './phone-optional';
+import deliveryInfoOptional from './delivery-info-optional';
 
 export default {
   legs,
@@ -20,4 +23,7 @@ export default {
   queue,
   ticketNumber,
   flightInfo,
+  emailOptional,
+  phoneOptional,
+  deliveryInfoOptional,
 };

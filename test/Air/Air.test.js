@@ -316,7 +316,7 @@ describe('#AirService', () => {
   });
 
   describe('getTicket', () => {
-    it('should fail when no itinerary present to import', (done) => {
+    it('should fail when no itinerary present to import', () => {
       const AirService = () => ({
         getTicket: () => Promise.reject(new AirRuntimeError.TicketInfoIncomplete()),
         importPNR: () => Promise.reject(new AirRuntimeError()),
@@ -331,10 +331,9 @@ describe('#AirService', () => {
       });
       const service = createAirService({ auth });
       service.getTicket({ ticketNumber: '0649902789376' })
-        .then(() => done(new Error('Error has not occured')))
+        .then(() => Promise.reject(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError);
-          done();
         });
     });
 
