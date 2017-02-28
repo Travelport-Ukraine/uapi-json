@@ -10,9 +10,7 @@ describe('Air.validators.pnr', () => {
   });
 
   it('should pass', () => {
-    it('should throw error when pnr is not set', () => {
-      const fn = () => pnr({ pnr: '123' });
-      expect(fn).to.not.throw(GdsValidationError.PnrMissing);
-    });
+    const fn = () => pnr({ pnr: '123' });
+    expect(fn).to.not.throw(Error);
   });
 });

@@ -10,9 +10,7 @@ describe('Air.validators.queue', () => {
   });
 
   it('should pass', () => {
-    it('should throw error when queue is not set', () => {
-      const fn = () => queue({ queue: '123' });
-      expect(fn).to.not.throw(GdsValidationError.QueueMissing);
-    });
+    const fn = () => queue({ queue: '123' });
+    expect(fn).to.not.throw(Error);
   });
 });
