@@ -1,6 +1,3 @@
-/*
-  eslint-disable import/no-extraneous-dependencies
-*/
 import fs from 'fs';
 import path from 'path';
 import { expect } from 'chai';
@@ -34,7 +31,6 @@ describe('#AirService', () => {
     it('should check if correct function from service is called', () => {
       const gdsQueue = sinon.spy(() => {});
       const service = () => ({ gdsQueue });
-      const auth = {};
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': service,
       });
@@ -79,11 +75,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy((options) => {
-        return Promise.reject(new AirRuntimeError.NoValidFare({
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.NoValidFare({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        }));
-      });
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -102,11 +98,13 @@ describe('#AirService', () => {
         expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
         expect(createReservation.calledOnce).to.be.equal(true);
         expect(cancelUR.calledOnce).to.be.equal(true);
-      }).then(res => {
-        throw new Error('Cant be success.');
-      }).catch(err => {
-        expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
-      });
+      })
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
+        });
     });
 
     it('should call cancel ur if segment booking failed', () => {
@@ -114,11 +112,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy((options) => {
-        return Promise.reject(new AirRuntimeError.SegmentBookingFailed({
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.SegmentBookingFailed({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        }));
-      });
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -137,11 +135,13 @@ describe('#AirService', () => {
         expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
         expect(createReservation.calledOnce).to.be.equal(true);
         expect(cancelUR.calledOnce).to.be.equal(true);
-      }).then(res => {
-        throw new Error('Cant be success.');
-      }).catch(err => {
-        expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
-      });
+      })
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
+        });
     });
 
     it('should not call cancel ur if other error', () => {
@@ -149,11 +149,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy((options) => {
-        return Promise.reject(new AirRuntimeError.TicketingFailed({
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.TicketingFailed({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        }));
-      });
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -172,11 +172,13 @@ describe('#AirService', () => {
         expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
         expect(createReservation.calledOnce).to.be.equal(true);
         expect(cancelUR.calledOnce).to.be.equal(true);
-      }).then(res => {
-        throw new Error('Cant be success.');
-      }).catch(err => {
-        expect(err).to.be.instanceof(AirRuntimeError.TicketingFailed);
-      });
+      })
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.TicketingFailed);
+        });
     });
   });
 
@@ -242,7 +244,7 @@ describe('#AirService', () => {
 
       return createAirService({ auth }).ticket(params).then(() => {
         throw new Error('Cant be successfull');
-      }).catch(err => {
+      }).catch(() => {
         expect(importPNR.calledTwice).to.be.equal(true);
         expect(ticket.calledTwice).to.be.equal(true);
         expect(foid.calledOnce).to.be.equal(true);
@@ -273,7 +275,7 @@ describe('#AirService', () => {
 
       return createAirService({ auth }).ticket(params).then(() => {
         throw new Error('Cant be successfull');
-      }).catch(err => {
+      }).catch(() => {
         expect(importPNR.calledOnce).to.be.equal(true);
         expect(ticket.calledOnce).to.be.equal(true);
         expect(foid.calledOnce).to.be.equal(false);
@@ -340,9 +342,7 @@ describe('#AirService', () => {
         Promise.reject(new AirRuntimeError.TicketInfoIncomplete()),
       ];
 
-      const getTicket = sinon.spy(() => {
-        return getTicketResults.pop();
-      });
+      const getTicket = sinon.spy(() => getTicketResults.pop());
 
       const getPNRByTicketNumber = sinon.spy((options) => {
         expect(options.ticketNumber).to.be.equal(123);
@@ -371,7 +371,6 @@ describe('#AirService', () => {
         expect(getPNRByTicketNumber.calledOnce).to.be.equal(true);
         expect(importPNR.calledOnce).to.be.equal(true);
       });
-
     });
   });
 
@@ -499,13 +498,8 @@ describe('#AirService', () => {
 
   describe('searchBookingsByPassengerName', () => {
     it('should check if list correctly parsed', () => {
-      const returnList = sinon.spy(() => {
-        return Promise.resolve('listscreen');
-      });
-
-      const returnBooking = sinon.spy(() => {
-        return Promise.resolve('pnrscreen');
-      });
+      const returnList = sinon.spy(() => Promise.resolve('listscreen'));
+      const returnBooking = sinon.spy(() => Promise.resolve('pnrscreen'));
 
       const executeCommand = sinon.spy((command) => {
         expect(command).to.be.a('string');
@@ -519,13 +513,15 @@ describe('#AirService', () => {
       const closeSession = sinon.spy(() => Promise.resolve());
 
       const bookingPnr = sinon.spy(
-        (screen) => (screen === 'pnrscreen') ? '123QWE' : null
+        screen => ((screen === 'pnrscreen') ? '123QWE' : null)
       );
 
       const searchPassengersList = sinon.spy(
-        (screen) => (screen === 'listscreen')
+        screen => (
+          (screen === 'listscreen')
           ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
-          : null,
+          : null
+        ),
       );
 
 
@@ -544,7 +540,7 @@ describe('#AirService', () => {
 
       return createAirService({ auth })
         .searchBookingsByPassengerName({ searchPhrase: 'OK' })
-        .then(res => {
+        .then((res) => {
           expect(res.type).to.be.equal('list');
           expect(res.data.length).to.be.equal(2);
           expect(res.data[0].pnr).to.be.equal('123QWE');
@@ -556,26 +552,22 @@ describe('#AirService', () => {
           expect(executeCommand.callCount).to.be.equal(5);
           expect(closeSession.callCount).to.be.equal(3);
         });
-
     });
 
     it('should check if pnr parsed when list is null', () => {
-      const returnBooking = sinon.spy(() => {
-        return Promise.resolve('pnrscreen');
-      });
-
-      const executeCommand = sinon.spy((command) => {
-        return returnBooking();
-      });
+      const returnBooking = sinon.spy(() => Promise.resolve('pnrscreen'));
+      const executeCommand = sinon.spy(() => returnBooking());
 
       const bookingPnr = sinon.spy(
-        (screen) => (screen === 'pnrscreen') ? '123QWE' : null
+        screen => ((screen === 'pnrscreen') ? '123QWE' : null)
       );
 
       const searchPassengersList = sinon.spy(
-        (screen) => (screen === 'listscreen')
+        screen => (
+          (screen === 'listscreen')
           ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
-          : null,
+          : null
+        ),
       );
 
 
@@ -594,7 +586,7 @@ describe('#AirService', () => {
 
       return createAirService({ auth })
         .searchBookingsByPassengerName({ searchPhrase: 'OK' })
-        .then(res => {
+        .then((res) => {
           expect(res.type).to.be.equal('pnr');
           expect(res.data).to.be.equal('123QWE');
           expect(bookingPnr.callCount).to.be.equal(1);
@@ -605,13 +597,8 @@ describe('#AirService', () => {
     });
 
     it('should check if pnr parsed when list is null', () => {
-      const returnList = sinon.spy(() => {
-        return Promise.resolve({});
-      });
-
-      const executeCommand = sinon.spy((command) => {
-        return returnList();
-      });
+      const returnList = sinon.spy(() => Promise.resolve({}));
+      const executeCommand = sinon.spy(() => returnList());
 
       const parseAny = () => [{ id: 1, name: 'first' }, { id: 2, name: 'last' }];
 
@@ -630,10 +617,9 @@ describe('#AirService', () => {
 
       return createAirService({ auth })
         .searchBookingsByPassengerName({ searchPhrase: 'OK' })
-        .then(res => Promise.reject(new Error('Cant be answer.')))
-        .catch(err => {
-          expect(err instanceof AirRuntimeError.RequestInconsistency)
-            .to.be.equal(true);
+        .then(() => Promise.reject(new Error('Cant be answer.')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.RequestInconsistency);
         });
     });
   });

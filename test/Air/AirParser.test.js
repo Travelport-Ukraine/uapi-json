@@ -1,6 +1,3 @@
-/*
-  eslint-disable import/no-extraneous-dependencies
-*/
 import { expect } from 'chai';
 import assert from 'assert';
 import fs from 'fs';
