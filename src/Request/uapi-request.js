@@ -1,6 +1,6 @@
 import handlebars from 'handlebars';
 import fs from 'fs';
-import request from 'request';
+import axios from 'axios';
 import {
   RequestValidationError,
   RequestRuntimeError,
@@ -79,51 +79,44 @@ module.exports = function (service, auth, reqType, rootObject,
         console.log('Request URL: ', service);
         console.log('Request XML: ', xml);
       }
-      return new Promise((resolve, reject) => {
-        request({
-          url: service, // URL to hit
-          method: 'POST',
-          timeout: config.timeout || 5000,
-          gzip: true,
-          auth: {
-            user: auth.username,
-            pass: auth.password,
-            sendImmediately: true,
-          },
-          body: xml,
-        }, (error, response) => {
-          // Error handling
-          if (error) {
-            if (debugMode) {
-              console.log('Error Response SOAP: ', JSON.stringify(error));
-            }
-            if (error.code === 'ETIMEDOUT') {
-              reject(new RequestSoapError.SoapRequestTimeout());
-            } else {
-              reject(new RequestSoapError.SoapRequestError());
-            }
-            return;
-          }
-          // Response handling
+      return axios.request({
+        url: service,
+        method: 'POST',
+        timeout: config.timeout || 5000,
+        auth: {
+          username: auth.username,
+          password: auth.password,
+        },
+        headers: {
+          'Accept-Encoding': 'gzip',
+        },
+        data: xml,
+      })
+        .then((response) => {
           if (debugMode > 1) {
-            console.log('Response SOAP: ', response.body);
+            console.log('Response SOAP: ', response.data);
           }
-          resolve(response);
+          return response.data;
+        })
+        .catch((err) => {
+          if (debugMode) {
+            console.log('Error Response SOAP: ', JSON.stringify(err));
+          }
+          return Promise.reject(new RequestSoapError.SoapRequestError(null, err));
         });
-      });
     };
 
     const parseResponse = function (response) {
       // if there are web server or HTTP auth errors, uAPI returns a JSON
       let data = null;
       try {
-        data = JSON.parse(response.body);
+        data = JSON.parse(response);
       } catch (err) {
-        return uParser.parse(response.body);
+        return uParser.parse(response);
       }
 
       // TODO parse JSON errors
-      throw new RequestSoapError.SoapServerError(data); // TODO change into UAPI_SERVER_ERROR, etc
+      return Promise.reject(new RequestSoapError.SoapServerError(data));
     };
 
     const validateSOAP = function (parsedXML) {

@@ -90,6 +90,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
                 serviceClass: segmentInfo.CabinClass,
                 bookingClass: segmentInfo.BookingCode,
                 baggage: [getBaggage(fareInfo['air:BaggageAllowance'])],
+                fareBasisCode: fareInfo.FareBasis,
               },
               seatsAvailable ? { seatsAvailable } : null,
             );
