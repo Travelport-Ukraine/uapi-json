@@ -315,8 +315,13 @@ describe('#AirService', () => {
         getTicket: () => Promise.reject(new AirRuntimeError.TicketInfoIncomplete()),
         importPNR: () => Promise.reject(new AirRuntimeError()),
       });
+      const createTerminalService = () => ({
+        executeCommand: () => Promise.resolve('RLOC G1 PNR001'),
+        closeSession: () => Promise.resolve(true),
+      });
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': AirService,
+        '../Terminal/Terminal': createTerminalService,
       });
       const service = createAirService({ auth });
       service.getTicket({ ticketNumber: '0649902789376' })
