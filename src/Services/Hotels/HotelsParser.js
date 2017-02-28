@@ -58,47 +58,6 @@ const getComments = (rsp) => {
   return [];
 };
 
-// TODO: rewrite or delete.
-const searchParse1G = function (obj) {
-  const result = {
-    hotels: [],
-    nextResult: null,
-  };
-
-  if (!obj['hotel:HotelSearchAvailabilityRsp']) {
-    throw new HotelsParsingError.SearchParsingError(obj);
-  }
-
-  const rsp = obj['hotel:HotelSearchAvailabilityRsp'][0];
-
-  result.nextResult = getNextResult(rsp);
-
-  if (rsp['hotel:HotelSearchResult'] && rsp['hotel:HotelSearchResult'][0]) {
-    result.hotels = rsp['hotel:HotelSearchResult'].map((elem) => {
-      const hotel = {};
-      const property = elem['hotel:HotelProperty'][0];
-
-      hotel.Name = Utils.beautifyName(property.$.Name);
-      hotel.Address = property['hotel:PropertyAddress'][0]['hotel:Address'][0];
-      hotel.HotelCode = property.$.HotelCode;
-      hotel.HotelChain = property.$.HotelChain;
-      hotel.VendorLocationKey = property.$.VendorLocationKey;
-      hotel.Icon = getIcon(elem);
-      hotel.Amenties = getAmenties(property);
-
-      hotel.Rates = elem['hotel:RateInfo'].map(rate => ({
-        RateSupplier: '1G',
-        PaymentType: 'Post Pay',
-        ApproximateMinimumStayAmount: Utils.price(rate.$.MinimumAmount),
-      }));
-
-      return hotel;
-    });
-  }
-
-  return result;
-};
-
 const searchParse = function (rsp) {
   const self = this;
   const result = {};
@@ -291,7 +250,6 @@ const errorHandler = function (err) {
 
 module.exports = {
   HOTELS_ERROR: errorHandler,
-  HOTELS_SEARCH_GALILEO_REQUEST: searchParse1G,
   HOTELS_SEARCH_REQUEST: searchParse,
   HOTELS_RATE_REQUEST: rateParse,
   HOTELS_BOOK_REQUEST: bookParse,

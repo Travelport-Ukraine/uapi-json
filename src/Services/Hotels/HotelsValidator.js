@@ -239,15 +239,6 @@ module.exports = {
             .rooms()
             .end();
   },
-  HOTELS_SEARCH_GALILEO_REQUEST(params) {
-    return new Validator(params)
-            .location()
-            .startDate()
-            .endDate()
-            // TODO: set here validation for adutls number
-            // children number and rooms number
-            .end();
-  },
   HOTELS_RATE_REQUEST(params) {
     return new Validator(params)
             .hotelChain()

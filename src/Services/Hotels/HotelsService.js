@@ -19,16 +19,6 @@ module.exports = function (settings) {
       HotelsParser.HOTELS_SEARCH_REQUEST,
       debug
     ),
-    searchGalileo: uApiRequest(
-      config.HotelsService.url,
-      auth,
-      `${templatesDir}/HOTELS_SEARCH_GALILEO_REQUEST.xml`,
-      null,
-      HotelsValidator.HOTELS_SEARCH_GALILEO_REQUEST,
-      HotelsParser.HOTELS_ERROR,
-      HotelsParser.HOTELS_SEARCH_GALILEO_REQUEST,
-      debug
-    ),
     rates: uApiRequest(
       config.HotelsService.url,
       auth,

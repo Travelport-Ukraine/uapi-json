@@ -1,315 +1,78 @@
-import _ from 'lodash';
-import moment from 'moment';
-import {
-  AirValidationError,
-  AirFlightInfoValidationError,
-  GdsValidationError,
-} from './AirErrors';
-
-function Validator(params) {
-  this.params = params;
-}
-
-Validator.prototype.end = function () {
-  return this.params;
-};
-
-Validator.prototype.setSearchPassengers = function () {
-  const list = [];
-  const self = this;
-
-  Object.keys(this.params.passengers).forEach((ageCategory) => {
-    const number = self.params.passengers[ageCategory];
-    if (number) {
-      for (let i = 0; i < number; i += 1) {
-        list.push({
-          ageCategory,
-          child: (ageCategory === 'CNN'), // quickfix
-        });
-      }
-    }
-  });
-
-  this.params.passengers = list;
-
-  return this;
-};
-
-Validator.prototype.legs = function () {
-  if (!this.params.legs) {
-    throw new AirValidationError.LegsMissing(this.params);
-  }
-  if (!_.isArray(this.params.legs)) {
-    throw new AirValidationError.LegsInvalidType(this.params);
-  }
-
-  this.params.legs.forEach((leg, index) => {
-    ['from', 'to', 'departureDate'].forEach((key) => {
-      if (!leg[key]) {
-        throw new AirValidationError.LegsInvalidStructure({ missing: key, index, leg });
-      }
-    });
-
-    // TODO validate departureDate as a date type or valid date string in required format
-  });
-
-  return this;
-};
-
-Validator.prototype.passengers = function () {
-  const self = this;
-  if (typeof (this.params.passengers) !== 'object') {
-    throw new AirValidationError.PassengersHashMissing(this.params);
-  }
-
-  Object.keys(this.params.passengers).forEach((ageCategory) => {
-    const number = self.params.passengers[ageCategory];
-    if ((typeof ageCategory) !== 'string') {
-      throw new AirValidationError.PassengersCategoryInvalid(this.params);
-    } else if ((typeof number) !== 'number') {
-      throw new AirValidationError.PassengersCountInvalid(this.params);
-    }
-  });
-
-  return this;
-};
-
-Validator.prototype.pnr = function () {
-  if (!this.params.pnr) {
-    throw new GdsValidationError.PnrMissing(this.params);
-  }
-
-  return this;
-};
-
-Validator.prototype.queue = function () {
-  if (!this.params.queue) {
-    throw new GdsValidationError.QueueMissing(this.params);
-  }
-
-  return this;
-};
-
-Validator.prototype.pcc = function () {
-  if (!this.params.pcc) {
-    throw new GdsValidationError.PccMissing(this.params);
-  }
-
-  return this;
-};
-
-Validator.prototype.bookedPassengers = function () {
-    // TODO check passengers list
-  this.params.business = (this.params.segments[0].serviceClass === 'Business');
-  this.params.passengers = this.params.passengers.map((passenger) => {
-    const birth = moment(passenger.birthDate.toUpperCase(), 'YYYYMMDD');
-    passenger.Age = moment().diff(birth, 'years');
-    return passenger;
-  });
-  return this;
-};
-
-Validator.prototype.pricingSolutionXML = function () {
-  if (Array.isArray(this.params['air:AirPricingSolution'])) {
-    throw new AirValidationError.AirPricingSolutionInvalidType();
-  }
-
-  return this;
-};
-
-// convert all passenger birth dates from DDmmmYY into YYYY-MM-DD
-Validator.prototype.passengerBirthDates = function () {
-  this.params.passengers.forEach((item) => {
-    const birthSSR = moment(item.birthDate.toUpperCase(), 'YYYYMMDD');
-
-    if (!birthSSR.isValid()) {
-      throw new AirValidationError.BirthDateInvalid();
-    }
-    const { passCountry: country,
-            passNumber: num,
-            firstName: first,
-            lastName: last,
-            gender } = item;
-    const due = moment().add(12, 'month').format('DDMMMYY');
-    const birth = birthSSR.format('DDMMMYY');
-    item.age = parseInt(moment().diff(birthSSR, 'years'), 10);
-
-    if (item.ageCategory === 'CNN') {
-      item.isChild = true;
-      if (item.Age < 10) {
-        item.ageCategory = `C0${item.Age}`;
-      } else {
-        item.ageCategory = `C${item.Age}`;
-      }
-    }
-
-    item.ssr = {
-      type: 'DOCS',
-      text: `P/${country}/${num}/${country}/${birth}/${gender}/${due}/${last}/${first}`,
-    };
-    item.DOB = birthSSR.format('YYYY-MM-DD');
-  });
-
-  return this;
-};
-
-Validator.prototype.hasFareBasisCodes = function () {
-  const firstBasis = this.params.segments
-    && this.params.segments[0]
-    && this.params.segments[0].fareBasisCode;
-  this.params.hasFareBasis = !_.isEmpty(firstBasis);
-  return this;
-};
-
-Validator.prototype.segmentsGroups = function () {
-  let group = 0;
-  for (let i = 0; i < this.params.segments.length; i += 1) {
-    this.params.segments[i].Group = group;
-    if (this.params.segments[i].transfer === false) {
-      group += 1;
-    }
-  }
-  return this;
-};
-
-Validator.prototype.flightInfoItem = function (item) {
-  if (!item.airline) {
-    throw new AirFlightInfoValidationError.AirlineMissing(item);
-  }
-
-  if (!item.flightNumber) {
-    throw new AirFlightInfoValidationError.FlightNumberMissing(item);
-  }
-
-  if (!item.departure) {
-    throw new AirFlightInfoValidationError.DepartureMissing(item);
-  }
-};
-
-Validator.prototype.fop = function () {
-  if (!this.params.fop) {
-    throw new AirValidationError.FopMissing();
-  }
-  if (
-    Object.prototype.toString.call(this.params.fop) !== '[object Object]' ||
-    this.params.fop.type !== 'Cash'
-  ) {
-    throw new AirValidationError.FopTypeUnsupported();
-  }
-  return this;
-};
-
-Validator.prototype.ticketNumber = function () {
-  if (!this.params.ticketNumber) {
-    throw new AirValidationError.TicketNumberMissing();
-  }
-  if (!String(this.params.ticketNumber).match(/^\d{13}/)) {
-    throw new AirValidationError.TicketNumberInvalid();
-  }
-  return this;
-};
-
-Validator.prototype.paramsIsObject = function () {
-  if (!this.params) {
-    throw new AirValidationError.ParamsMissing(this.params);
-  }
-  if (Object.prototype.toString.call(this.params) !== '[object Object]') {
-    throw new AirValidationError.ParamsInvalidType(this.params);
-  }
-  return this;
-};
-
-Validator.prototype.flightInfo = function () {
-  if (Array.isArray(this.params.flightInfoCriteria)) {
-    this.params.flightInfoCriteria.forEach(this.flightInfoItem);
-  } else {
-    this.flightInfoItem(this.params.flightInfoCriteria);
-  }
-
-  return this;
-};
+import { validate, transform, compose } from '../../utils';
+import validators from './validators';
+import transformers from './transformers';
 
 module.exports = {
-  AIR_LOW_FARE_SEARCH_REQUEST(params) {
-    return new Validator(params)
-      .passengers()
-      .legs()
-      .setSearchPassengers()
-      .end();
-  },
+  AIR_LOW_FARE_SEARCH_REQUEST: compose(
+    validate(
+      validators.passengers,
+      validators.legs,
+    ),
+    transform(
+      transformers.convertPassengersObjectToArray,
+    )
+  ),
 
-  AIR_PRICE(params) {
-    return new Validator(params)
-      .bookedPassengers()
-      .segmentsGroups()
-      .hasFareBasisCodes()
-      .end();
-  },
+  AIR_PRICE: compose(
+    validate(),
+    transform(
+      transformers.setBusinessFlag,
+      transformers.setPassengersAge,
+      transformers.setGroupsForSegments,
+      transformers.setHasFareBasisFlag,
+    )
+  ),
 
-  AIR_CREATE_RESERVATION_REQUEST(params) {
-    return new Validator(params)
-      .pricingSolutionXML()
-      .passengerBirthDates()
-      .end();
-  },
+  AIR_CREATE_RESERVATION_REQUEST: compose(
+    validate(
+      validators.pricingSolutionXml,
+    ),
+    transform(
+      transformers.setPassengersAge,
+      transformers.addMetaPassengersBooking,
+    )
+  ),
 
-  AIR_TICKET(params) {
-    return new Validator(params)
-      .paramsIsObject()
-      .pnr()
-      .fop()
-      .end();
-  },
+  AIR_TICKET: compose(
+    validate(
+      validators.paramsIsObject,
+      validators.fop,
+      validators.pnr,
+    ),
+    transform(),
+  ),
 
-  AIR_REQUEST_BY_PNR(params) {
-    return new Validator(params)
-      .pnr()
-      .end();
-  },
+  AIR_REQUEST_BY_PNR: compose(
+    validate(
+      validators.pnr,
+    ),
+    transform()
+  ),
 
-  GDS_QUEUE_PLACE(params) {
-    return new Validator(params)
-      .queue()
-      .pnr()
-      .pcc()
-      .end();
-  },
+  GDS_QUEUE_PLACE: compose(
+    validate(
+      validators.pnr,
+      validators.pcc,
+      validators.queue,
+    ),
+    transform()
+  ),
 
-  AIR_CANCEL_UR(params) {
-    return new Validator(params)
-      .end();
-  },
+  AIR_CANCEL_UR: params => params,
+  UNIVERSAL_RECORD_FOID: params => params,
 
-  UNIVERSAL_RECORD_FOID(params) {
-    return new Validator(params)
-      .end();
-  },
+  AIR_FLIGHT_INFORMATION: compose(
+    validate(
+      validators.flightInfo,
+    ),
+    transform(),
+  ),
 
-  AIR_FLIGHT_INFORMATION(params) {
-    return new Validator(params)
-      .flightInfo()
-      .end();
-  },
-
-  AIR_GET_TICKET(params) {
-    return new Validator(params)
-      .paramsIsObject()
-      .ticketNumber()
-      .end();
-  },
-
-  AIR_CANCEL_TICKET(params) {
-    return new Validator(params)
-      .paramsIsObject()
-      .pnr()
-      .ticketNumber()
-      .end();
-  },
-
-  AIR_CANCEL_PNR(params) {
-    return new Validator(params)
-      .paramsIsObject()
-      .pnr()
-      .end();
-  },
+  AIR_GET_TICKET: compose(
+    validate(
+      validators.paramsIsObject,
+      validators.ticketNumber,
+    ),
+    transform(),
+  ),
 };
