@@ -75,4 +75,20 @@ module.exports = {
     ),
     transform(),
   ),
+
+  AIR_CANCEL_TICKET: compose(
+    validate(
+      validators.paramsIsObject,
+      validators.pnr,
+      validators.ticketNumber,
+    ),
+    transform()
+  ),
+
+  AIR_CANCEL_PNR: compose(
+    validate(
+      validators.paramsIsObject,
+      validators.pnr,
+    )
+  ),
 };

@@ -21,7 +21,7 @@
       { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
     ],
     "import/no-extraneous-dependencies": ["error",
-      {"devDependencies": ["**/*.test.js", "**/*.spec.js"]}
+      {"devDependencies": ["**/*.test.js", "**/*.spec.js", "**/*.mock.js"]}
     ]
   }
 }
