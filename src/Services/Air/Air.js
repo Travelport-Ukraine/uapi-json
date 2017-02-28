@@ -207,15 +207,16 @@ module.exports = (settings) => {
               if (allTicketsVoid) {
                 return Promise.resolve(true);
               }
-              // Check for not OPEN segments
-              const hasNotOpenSegment = ticketData.tickets.some(
-                ticket => ticket.coupons.some(
-                  coupon => coupon.status !== 'O'
-                )
-              );
+              // Check for cancelTicket option
               if (options.cancelTickets !== true) {
                 return Promise.reject(new AirRuntimeError.PNRHasOpenTickets());
               }
+              // Check for not OPEN/VOID segments
+              const hasNotOpenSegment = ticketData.tickets.some(
+                ticket => ticket.coupons.some(
+                  coupon => 'OV'.indexOf(coupon.status) === -1
+                )
+              );
               if (hasNotOpenSegment) {
                 return Promise.reject(new AirRuntimeError.UnableToCancelTicketStatusNotOpen());
               }
