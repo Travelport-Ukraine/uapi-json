@@ -1,4 +1,4 @@
-const createErrorClass = require('node-errors-helpers').createErrorClass;
+import { createErrorClass } from 'node-errors-helpers';
 
 const errors = {
   RuntimeError: createErrorClass('RuntimeError', 'Runtime error occured'),
@@ -7,4 +7,4 @@ const errors = {
   SoapError: createErrorClass('SoapError', 'Error occurred while executing SOAP call'),
 };
 
-module.exports = errors;
+export default errors;

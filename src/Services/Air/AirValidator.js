@@ -25,6 +25,9 @@ module.exports = {
 
   AIR_CREATE_RESERVATION_REQUEST: compose(
     validate(
+      validators.emailOptional,
+      validators.phoneOptional,
+      validators.deliveryInfoOptional,
       validators.pricingSolutionXml,
     ),
     transform(
