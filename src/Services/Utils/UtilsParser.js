@@ -19,7 +19,7 @@ const errorHandler = function (err) {
   try {
     errno = err.detail[`common_${this.uapi_version}:ErrorInfo`][`common_${this.uapi_version}:Code`];
   } catch (e) {
-    console.log('cant parse error');
+    throw new errors.UtilsRuntimeError(err);
   }
 
   switch (errno * 1) {

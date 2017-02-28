@@ -412,7 +412,7 @@ function extractBookings(obj) {
             passNumber: ssr[2],
           } : null,
           traveler.DOB ? {
-            birthDate: moment(traveler.DOB).format('DDMMMYY'),
+            birthDate: moment(traveler.DOB).format('YYYY-MM-DD'),
           } : null,
           traveler.TravelerType ? {
             ageType: traveler.TravelerType,

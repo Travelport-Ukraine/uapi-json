@@ -56,8 +56,12 @@ module.exports = function (service, auth, reqType, rootObject,
       console.log('Input params ', params);
     }
 
+    // create a v36 uAPI parser with default params and request data in env
+    const uParser = new UapiParser(rootObject, 'v36_0', params, debugMode);
+
     const validateInput = (resolve) => {
       params = validateFunction(params);
+      uParser.env = params;
       resolve(reqType);
     };
 
@@ -101,9 +105,6 @@ module.exports = function (service, auth, reqType, rootObject,
           return Promise.reject(new RequestSoapError.SoapRequestError(null, err));
         });
     };
-
-    // create a v36 uAPI parser with default params and request data in env
-    const uParser = new UapiParser(rootObject, 'v36_0', params, debugMode);
 
     const parseResponse = function (response) {
       // if there are web server or HTTP auth errors, uAPI returns a JSON

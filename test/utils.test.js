@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import fs from 'fs';
 import path from 'path';
+import sinon from 'sinon';
 
 import utils from '../src/utils';
 
@@ -53,6 +54,77 @@ describe('#Utils', () => {
       const obj = { a: 1 };
       const res = utils.renameProperty(obj, 'a', 'b');
       expect(res).to.deep.equal({ b: 1 });
+    });
+  });
+
+  describe('.validate', () => {
+    it('should check if all functions are called', () => {
+      const f1 = sinon.spy(() => {});
+      const f2 = sinon.spy(() => {});
+      const f3 = sinon.spy(() => {});
+
+      const validate = utils.validate(f1, f2, f3);
+      const params = { foo: '123', bar: 123 };
+      const res = validate(params);
+
+      expect(res).to.deep.equal(params);
+      expect(f1.calledOnce).to.be.equal(true);
+      expect(f2.calledOnce).to.be.equal(true);
+      expect(f3.calledOnce).to.be.equal(true);
+    });
+
+    it('should check if error is not missing', () => {
+      const f1 = sinon.spy(() => { throw new Error('Error'); });
+
+      const validate = utils.validate(f1);
+      const params = { foo: '123', bar: 123 };
+      try {
+        validate(params);
+      } catch (e) {
+        expect(e instanceof Error).to.be.equal(true);
+        expect(e.message).to.be.equal('Error');
+      }
+
+      expect(f1.calledOnce).to.be.equal(true);
+    });
+
+    it('should work well without any params', () => {
+      const validate = utils.validate();
+      const params = { foo: '123', bar: 123 };
+      const res = validate(params);
+      expect(res).to.deep.equal(params);
+    });
+  });
+
+  describe('.transform', () => {
+    it('should transform data and dont mutate input', () => {
+      const params = { me: 'you' };
+      const t1 = sinon.spy((params) => { params.me = 'me'; return params; });
+      const transform = utils.transform(t1);
+      const res = transform(params);
+      expect(params).to.be.not.deep.equal(res);
+      expect(params).to.not.be.equal(res);
+      expect(res.me).to.be.equal('me');
+      expect(t1.calledOnce).to.be.true;
+    });
+
+    it('should correctly work without any transformers', () => {
+      const params = { me: 'you' };
+      const transform = utils.transform();
+      const res = transform(params);
+      expect(params).to.be.deep.equal(res);
+      expect(params).to.not.be.equal(res);
+    });
+  });
+
+  describe('.compose', () => {
+    it('should compose two functions', () => {
+      const add1 = (a) => a + 1;
+      const mul2 = (a) => a * 2;
+
+      const addMul = utils.compose(add1, mul2);
+      const res = addMul(5);
+      expect(res).to.be.equal(12);
     });
   });
 

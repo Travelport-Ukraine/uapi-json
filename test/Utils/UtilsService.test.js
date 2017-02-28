@@ -2,7 +2,7 @@ import proxyquire from 'proxyquire';
 import { expect } from 'chai';
 import createMock from '../uapi-request.mock';
 
-describe('#AirService', () => {
+describe('#UtilsService', () => {
   it('should test that all function created correctly', () => {
     const params = {
       auth: {},
@@ -11,11 +11,11 @@ describe('#AirService', () => {
     };
     const r = createMock(params);
 
-    const createAirService = proxyquire('../../src/Services/Air/AirService', {
+    const createUtilsService = proxyquire('../../src/Services/Utils/UtilsService', {
       '../../Request/uapi-request': r,
     });
 
-    createAirService(params);
+    createUtilsService(params);
     expect(r.called).to.be.equal(true);
   });
 });
