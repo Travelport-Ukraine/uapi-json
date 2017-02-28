@@ -225,14 +225,15 @@ module.exports = (settings) => {
                     ticket.coupons[0].status !== 'V' ? service.cancelTicket({
                       pnr: options.pnr,
                       ticketNumber: ticket.ticketNumber,
-                    }) : true
+                    }) : Promise.resolve(true)
                   )
                 )
               );
             }
           ))
         )
-        .then(() => service.cancelPNR(options))
+        .then(() => this.importPNR(options))
+        .then(pnrData => service.cancelPNR(pnrData[0]))
         .catch(
           err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
         );

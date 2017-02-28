@@ -45,7 +45,7 @@ function formatTrip(segment, flightDetails) {
     plane,
     duration,
     techStops,
-    uapi_segment_ref: segment.ProviderReservationInfoRef || segment.Key,
+    uapi_segment_ref: segment.Key,
   };
 }
 

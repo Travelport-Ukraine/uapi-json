@@ -121,10 +121,10 @@ module.exports = function (settings) {
       debug
     ),
     cancelPNR: uApiRequest(
-      config.UniversalRecord.url,
+      config.AirService.url,
       auth,
       `${templatesDir}/AirCancel.xml`,
-      'univ:AirCancelResp',
+      'universal:AirCancelRsp',
       AirValidator.AIR_CANCEL_PNR,
       AirParser.AIR_ERRORS,
       AirParser.AIR_CANCEL_PNR,

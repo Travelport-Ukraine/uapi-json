@@ -66,6 +66,7 @@ Object.assign(AirParsingError, createErrorsList({
   MultiplePricingSolutionsNotAllowed: 'Expected only one pricing solution, need to clarify search?',
   PricingSolutionNotFound: 'Pricing solution not found',
   ReservationProviderInfoMissing: 'Can\'t find provider information about reservation',
+  CancelResponseNotFound: 'Cancel response not found',
 }, AirParsingError));
 
 // Runtime errors
