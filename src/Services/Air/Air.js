@@ -169,19 +169,7 @@ module.exports = (settings) => {
     },
 
     cancelTicket(options) {
-      return service.getTicket(options)
-        .catch(
-          (err) => {
-            if (!(err instanceof AirRuntimeError.TicketInfoIncomplete)) {
-              throw err;
-            }
-            return this.getPNRByTicketNumber({
-              ticketNumber: options.ticketNumber,
-            })
-              .then(pnr => this.importPNR({ pnr }))
-              .then(() => service.getTicket(options));
-          }
-        )
+      return this.getTicket(options)
         .then(
           ticketData => service.cancelTicket({
             pnr: ticketData.pnr,
