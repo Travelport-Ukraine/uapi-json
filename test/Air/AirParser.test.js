@@ -551,7 +551,6 @@ describe('#AirParser', () => {
       });
       // Checking reservations format
       expect(result.reservations).to.be.an('array');
-      expect(result.reservations).to.have.length.above(0);
       result.reservations.forEach((reservation) => {
         expect(reservation).to.be.an('object');
         expect(reservation).to.include.all.keys([
@@ -610,7 +609,6 @@ describe('#AirParser', () => {
       });
       // Checking reservations format
       expect(result.trips).to.be.an('array');
-      expect(result.trips).to.have.length.above(0);
       result.trips.forEach(
         (trip) => {
           expect(trip).to.be.an('object');
@@ -776,6 +774,16 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_IMPORT_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false);
+      });
+    });
+
+    it('should parse pnr without segments', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', {});
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/importPNR.noSegments.xml`).toString();
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult, false);
