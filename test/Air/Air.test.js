@@ -4,6 +4,7 @@ import chai from 'chai';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
+import moment from 'moment';
 import { AirRuntimeError } from '../../src/Services/Air/AirErrors';
 
 const expect = chai.expect;
@@ -187,14 +188,281 @@ describe('#AirService', () => {
   });
 
   describe('importPNR', () => {
+    const params = {
+      pnr: 'PNR001',
+    };
+    const segment = {
+      date: moment().add(42, 'days').format('DDMMM'),
+      airline: 'OK',
+      from: 'DOH',
+      to: 'ODM',
+      comment: 'NO1',
+      class: 'Y',
+    };
+    const pnrString = `${params.pnr}/`;
+    const segmentResult = (
+      `1. ${segment.airline} OPEN ${segment.class}  ${segment.date} ${segment.from}${segment.to} ${segment.comment}`
+    ).toUpperCase();
+
     it('should check if correct function from service is called', () => {
       const importPNR = sinon.spy(() => Promise.resolve({}));
-      const service = () => ({ importPNR });
+      const airService = () => ({ importPNR });
       const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
+        './AirService': airService,
       });
-      createAirService({ auth }).importPNR({});
-      expect(importPNR.calledOnce).to.be.equal(true);
+      return createAirService({ auth })
+        .importPNR(params)
+        .then(() => {
+          expect(importPNR).to.have.callCount(1);
+        });
+    });
+    it('should throw an error when something is wrong in parser', () => {
+      const error = new Error('Some error');
+      const importPNR = sinon.spy(() => Promise.reject(error));
+
+      const airService = () => ({ importPNR });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+      return createAirService({ auth })
+        .importPNR(params)
+        .catch((importError) => {
+          expect(importError).to.equal(error);
+        });
+    });
+    it('should throw an error when it is unable to open PNR in rerminal', () => {
+      const importPNR = sinon.spy(() => Promise.reject(new AirRuntimeError({
+        faultstring: 'No provider reservation to import.',
+      })));
+      const executeCommand = sinon.stub();
+      executeCommand.onCall(0).returns(
+        Promise.resolve('FINISH OR IGNORE')
+      );
+      const closeSession = sinon.spy(
+        () => Promise.resolve(true)
+      );
+
+      // Services
+      const airService = () => ({
+        importPNR,
+      });
+      const terminalService = () => ({
+        executeCommand,
+        closeSession,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+        '../Terminal/Terminal': terminalService,
+      });
+
+      return createAirService()
+        .importPNR(params)
+        .catch((error) => {
+          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
+          expect(error.causedBy).to.be.an.instanceOf(AirRuntimeError.UnableToOpenPNRInTerminal);
+          expect(importPNR).to.have.callCount(1);
+          expect(executeCommand).to.have.callCount(1);
+          expect(closeSession).to.have.callCount(1);
+        });
+    });
+    it('should throw an error when it is unable to add an extra segment', () => {
+      const importPNR = sinon.spy(() => Promise.reject(new AirRuntimeError({
+        faultstring: 'No provider reservation to import.',
+      })));
+      const executeCommand = sinon.stub();
+      executeCommand.onCall(0).returns(
+        Promise.resolve(pnrString)
+      );
+      executeCommand.onCall(1).returns(
+        Promise.resolve('ERR: FORMAT')
+      );
+      const closeSession = sinon.spy(
+        () => Promise.resolve(true)
+      );
+
+      // Services
+      const airService = () => ({
+        importPNR,
+      });
+      const terminalService = () => ({
+        executeCommand,
+        closeSession,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+        '../Terminal/Terminal': terminalService,
+      });
+
+      return createAirService().importPNR(params)
+        .catch((error) => {
+          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
+          expect(error.causedBy).to.be.an.instanceOf(AirRuntimeError.UnableToAddExtraSegment);
+          expect(importPNR).to.have.callCount(1);
+          expect(executeCommand).to.have.callCount(2);
+          expect(closeSession).to.have.callCount(1);
+        });
+    });
+    it('should throw an error when it is unable to add an extra segment (no segment added)', () => {
+      const importPNR = sinon.spy(() => Promise.reject(new AirRuntimeError({
+        faultstring: 'No provider reservation to import.',
+      })));
+      const executeCommand = sinon.stub();
+      executeCommand.onCall(0).returns(
+        Promise.resolve(pnrString)
+      );
+      executeCommand.onCall(1).returns(
+        Promise.resolve(segmentResult)
+      );
+      executeCommand.onCall(2).returns(
+        Promise.resolve(true)
+      );
+      executeCommand.onCall(3).returns(
+        Promise.resolve(true)
+      );
+      executeCommand.onCall(4).returns(
+        Promise.resolve([
+          pnrString,
+        ].join('\n'))
+      );
+      const closeSession = sinon.spy(
+        () => Promise.resolve(true)
+      );
+
+      // Services
+      const airService = () => ({
+        importPNR,
+      });
+      const terminalService = () => ({
+        executeCommand,
+        closeSession,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+        '../Terminal/Terminal': terminalService,
+      });
+
+      return createAirService().importPNR(params)
+        .catch((error) => {
+          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
+          expect(error.causedBy).to.be.an.instanceOf(
+            AirRuntimeError.UnableToSaveBookingWithExtraSegment
+          );
+          expect(importPNR).to.have.callCount(1);
+          expect(executeCommand).to.have.callCount(5);
+          expect(closeSession).to.have.callCount(1);
+        });
+    });
+    it('should throw an error when it is unable to add an extra segment (no PNR parsed)', () => {
+      const importPNR = sinon.spy(() => Promise.reject(new AirRuntimeError({
+        faultstring: 'No provider reservation to import.',
+      })));
+      const executeCommand = sinon.stub();
+      executeCommand.onCall(0).returns(
+        Promise.resolve(pnrString)
+      );
+      executeCommand.onCall(1).returns(
+        Promise.resolve(segmentResult)
+      );
+      executeCommand.onCall(2).returns(
+        Promise.resolve(true)
+      );
+      executeCommand.onCall(3).returns(
+        Promise.resolve(true)
+      );
+      executeCommand.onCall(4).returns(
+        Promise.resolve([
+          segmentResult,
+        ].join('\n'))
+      );
+      const closeSession = sinon.spy(
+        () => Promise.resolve(true)
+      );
+
+      // Services
+      const airService = () => ({
+        importPNR,
+      });
+      const terminalService = () => ({
+        executeCommand,
+        closeSession,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+        '../Terminal/Terminal': terminalService,
+      });
+
+      return createAirService().importPNR(params)
+        .catch((error) => {
+          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
+          expect(error.causedBy).to.be.an.instanceOf(
+            AirRuntimeError.UnableToSaveBookingWithExtraSegment
+          );
+          expect(importPNR).to.have.callCount(1);
+          expect(executeCommand).to.have.callCount(5);
+          expect(closeSession).to.have.callCount(1);
+        });
+    });
+
+    it('should run to the end if everything is OK', () => {
+      const importPNR = sinon.stub();
+      importPNR.onCall(0).returns(Promise.reject(new AirRuntimeError({
+        faultstring: 'No provider reservation to import.',
+      })));
+      importPNR.onCall(1).returns(Promise.resolve([true]));
+      importPNR.onCall(2).returns(Promise.resolve([true]));
+      const cancelPNR = sinon.spy(() => Promise.resolve(true));
+      const executeCommand = sinon.stub();
+      executeCommand.onCall(0).returns(
+        Promise.resolve(pnrString)
+      );
+      executeCommand.onCall(1).returns(
+        Promise.resolve(segmentResult)
+      );
+      executeCommand.onCall(2).returns(
+        Promise.resolve(true)
+      );
+      executeCommand.onCall(3).returns(
+        Promise.resolve(true)
+      );
+      executeCommand.onCall(4).returns(
+        Promise.resolve([
+          pnrString,
+          segmentResult,
+        ].join('\n'))
+      );
+      const closeSession = sinon.spy(
+        () => Promise.resolve(true)
+      );
+
+      // Services
+      const airService = () => ({
+        importPNR,
+        cancelPNR,
+      });
+      const terminalService = () => ({
+        executeCommand,
+        closeSession,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+        '../Terminal/Terminal': terminalService,
+      });
+
+      return createAirService().importPNR(params)
+        .catch((error) => {
+          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
+          expect(error.causedBy).to.be.an.instanceOf(
+            AirRuntimeError.UnableToSaveBookingWithExtraSegment
+          );
+          expect(importPNR).to.have.callCount(1);
+          expect(executeCommand).to.have.callCount(5);
+          expect(closeSession).to.have.callCount(1);
+        });
     });
   });
 

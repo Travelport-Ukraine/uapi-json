@@ -75,8 +75,6 @@ module.exports = (settings) => {
             .then(() => terminal.executeCommand(segmentCommand))
             .then((response) => {
               if (response.indexOf(segmentResult) === -1) {
-                console.log(response);
-                console.log(segmentResult);
                 return Promise.reject(new AirRuntimeError.UnableToAddExtraSegment());
               }
               return Promise.resolve();
