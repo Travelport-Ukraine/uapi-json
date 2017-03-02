@@ -443,19 +443,21 @@ function extractBookings(obj) {
     );
 
     const supplierLocator = booking[`common_${this.uapi_version}:SupplierLocator`] || {};
-    const trips = Object.keys(booking['air:AirSegment']).map(
-      (key) => {
-        const segment = booking['air:AirSegment'][key];
-        return Object.assign(
-          format.formatTrip(segment, segment['air:FlightDetails']),
-          {
-            status: segment.Status,
-            serviceClass: segment.CabinClass,
-            bookingClass: segment.ClassOfService,
-          }
-        );
-      }
-    );
+    const trips = booking['air:AirSegment']
+      ? Object.keys(booking['air:AirSegment']).map(
+        (key) => {
+          const segment = booking['air:AirSegment'][key];
+          return Object.assign(
+            format.formatTrip(segment, segment['air:FlightDetails']),
+            {
+              status: segment.Status,
+              serviceClass: segment.CabinClass,
+              bookingClass: segment.ClassOfService,
+            }
+          );
+        }
+      )
+      : [];
 
     const reservations = !booking['air:AirPricingInfo']
       ? []

@@ -188,7 +188,7 @@ describe('#AirService', () => {
 
   describe('importPNR', () => {
     it('should check if correct function from service is called', () => {
-      const importPNR = sinon.spy(() => {});
+      const importPNR = sinon.spy(() => Promise.resolve({}));
       const service = () => ({ importPNR });
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': service,
