@@ -1,12 +1,13 @@
-/*
-  eslint-disable import/no-extraneous-dependencies
-*/
 import fs from 'fs';
 import path from 'path';
-import { expect } from 'chai';
+import chai from 'chai';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 import { AirRuntimeError } from '../../src/Services/Air/AirErrors';
+
+const expect = chai.expect;
+chai.use(sinonChai);
 
 const responsesDir = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const terminalResponsesDir = path.join(__dirname, '..', 'FakeResponses', 'Terminal');
@@ -34,7 +35,6 @@ describe('#AirService', () => {
     it('should check if correct function from service is called', () => {
       const gdsQueue = sinon.spy(() => {});
       const service = () => ({ gdsQueue });
-      const auth = {};
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': service,
       });
@@ -79,11 +79,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy((options) => {
-        return Promise.reject(new AirRuntimeError.NoValidFare({
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.NoValidFare({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        }));
-      });
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -102,11 +102,13 @@ describe('#AirService', () => {
         expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
         expect(createReservation.calledOnce).to.be.equal(true);
         expect(cancelUR.calledOnce).to.be.equal(true);
-      }).then(res => {
-        throw new Error('Cant be success.');
-      }).catch(err => {
-        expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
-      });
+      })
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
+        });
     });
 
     it('should call cancel ur if segment booking failed', () => {
@@ -114,11 +116,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy((options) => {
-        return Promise.reject(new AirRuntimeError.SegmentBookingFailed({
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.SegmentBookingFailed({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        }));
-      });
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -137,11 +139,13 @@ describe('#AirService', () => {
         expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
         expect(createReservation.calledOnce).to.be.equal(true);
         expect(cancelUR.calledOnce).to.be.equal(true);
-      }).then(res => {
-        throw new Error('Cant be success.');
-      }).catch(err => {
-        expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
-      });
+      })
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
+        });
     });
 
     it('should not call cancel ur if other error', () => {
@@ -149,11 +153,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy((options) => {
-        return Promise.reject(new AirRuntimeError.TicketingFailed({
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.TicketingFailed({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        }));
-      });
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -172,11 +176,13 @@ describe('#AirService', () => {
         expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
         expect(createReservation.calledOnce).to.be.equal(true);
         expect(cancelUR.calledOnce).to.be.equal(true);
-      }).then(res => {
-        throw new Error('Cant be success.');
-      }).catch(err => {
-        expect(err).to.be.instanceof(AirRuntimeError.TicketingFailed);
-      });
+      })
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.TicketingFailed);
+        });
     });
   });
 
@@ -242,7 +248,7 @@ describe('#AirService', () => {
 
       return createAirService({ auth }).ticket(params).then(() => {
         throw new Error('Cant be successfull');
-      }).catch(err => {
+      }).catch(() => {
         expect(importPNR.calledTwice).to.be.equal(true);
         expect(ticket.calledTwice).to.be.equal(true);
         expect(foid.calledOnce).to.be.equal(true);
@@ -273,7 +279,7 @@ describe('#AirService', () => {
 
       return createAirService({ auth }).ticket(params).then(() => {
         throw new Error('Cant be successfull');
-      }).catch(err => {
+      }).catch(() => {
         expect(importPNR.calledOnce).to.be.equal(true);
         expect(ticket.calledOnce).to.be.equal(true);
         expect(foid.calledOnce).to.be.equal(false);
@@ -313,16 +319,18 @@ describe('#AirService', () => {
     it('should fail when no itinerary present to import', () => {
       const AirService = () => ({
         getTicket: () => Promise.reject(new AirRuntimeError.TicketInfoIncomplete()),
+        importPNR: () => Promise.reject(new AirRuntimeError()),
+      });
+      const createTerminalService = () => ({
+        executeCommand: () => Promise.resolve('RLOC 1G PNR001'),
+        closeSession: () => Promise.resolve(true),
       });
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': AirService,
+        '../Terminal/Terminal': createTerminalService,
       });
       const service = createAirService({ auth });
-
-      service.importPNR = () => Promise.reject(new AirRuntimeError());
-      service.getPNRByTicketNumber = () => Promise.resolve();
-
-      return service.getTicket({ ticketNumber: '0649902789376' })
+      service.getTicket({ ticketNumber: '0649902789376' })
         .then(() => Promise.reject(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError);
@@ -337,9 +345,7 @@ describe('#AirService', () => {
         Promise.reject(new AirRuntimeError.TicketInfoIncomplete()),
       ];
 
-      const getTicket = sinon.spy(() => {
-        return getTicketResults.pop();
-      });
+      const getTicket = sinon.spy(() => getTicketResults.pop());
 
       const getPNRByTicketNumber = sinon.spy((options) => {
         expect(options.ticketNumber).to.be.equal(123);
@@ -368,7 +374,6 @@ describe('#AirService', () => {
         expect(getPNRByTicketNumber.calledOnce).to.be.equal(true);
         expect(importPNR.calledOnce).to.be.equal(true);
       });
-
     });
   });
 
@@ -496,13 +501,8 @@ describe('#AirService', () => {
 
   describe('searchBookingsByPassengerName', () => {
     it('should check if list correctly parsed', () => {
-      const returnList = sinon.spy(() => {
-        return Promise.resolve('listscreen');
-      });
-
-      const returnBooking = sinon.spy(() => {
-        return Promise.resolve('pnrscreen');
-      });
+      const returnList = sinon.spy(() => Promise.resolve('listscreen'));
+      const returnBooking = sinon.spy(() => Promise.resolve('pnrscreen'));
 
       const executeCommand = sinon.spy((command) => {
         expect(command).to.be.a('string');
@@ -516,13 +516,15 @@ describe('#AirService', () => {
       const closeSession = sinon.spy(() => Promise.resolve());
 
       const bookingPnr = sinon.spy(
-        (screen) => (screen === 'pnrscreen') ? '123QWE' : null
+        screen => ((screen === 'pnrscreen') ? '123QWE' : null)
       );
 
       const searchPassengersList = sinon.spy(
-        (screen) => (screen === 'listscreen')
+        screen => (
+          (screen === 'listscreen')
           ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
-          : null,
+          : null
+        ),
       );
 
 
@@ -541,7 +543,7 @@ describe('#AirService', () => {
 
       return createAirService({ auth })
         .searchBookingsByPassengerName({ searchPhrase: 'OK' })
-        .then(res => {
+        .then((res) => {
           expect(res.type).to.be.equal('list');
           expect(res.data.length).to.be.equal(2);
           expect(res.data[0].pnr).to.be.equal('123QWE');
@@ -553,26 +555,22 @@ describe('#AirService', () => {
           expect(executeCommand.callCount).to.be.equal(5);
           expect(closeSession.callCount).to.be.equal(3);
         });
-
     });
 
     it('should check if pnr parsed when list is null', () => {
-      const returnBooking = sinon.spy(() => {
-        return Promise.resolve('pnrscreen');
-      });
-
-      const executeCommand = sinon.spy((command) => {
-        return returnBooking();
-      });
+      const returnBooking = sinon.spy(() => Promise.resolve('pnrscreen'));
+      const executeCommand = sinon.spy(() => returnBooking());
 
       const bookingPnr = sinon.spy(
-        (screen) => (screen === 'pnrscreen') ? '123QWE' : null
+        screen => ((screen === 'pnrscreen') ? '123QWE' : null)
       );
 
       const searchPassengersList = sinon.spy(
-        (screen) => (screen === 'listscreen')
+        screen => (
+          (screen === 'listscreen')
           ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
-          : null,
+          : null
+        ),
       );
 
 
@@ -591,7 +589,7 @@ describe('#AirService', () => {
 
       return createAirService({ auth })
         .searchBookingsByPassengerName({ searchPhrase: 'OK' })
-        .then(res => {
+        .then((res) => {
           expect(res.type).to.be.equal('pnr');
           expect(res.data).to.be.equal('123QWE');
           expect(bookingPnr.callCount).to.be.equal(1);
@@ -602,13 +600,8 @@ describe('#AirService', () => {
     });
 
     it('should check if pnr parsed when list is null', () => {
-      const returnList = sinon.spy(() => {
-        return Promise.resolve({});
-      });
-
-      const executeCommand = sinon.spy((command) => {
-        return returnList();
-      });
+      const returnList = sinon.spy(() => Promise.resolve({}));
+      const executeCommand = sinon.spy(() => returnList());
 
       const parseAny = () => [{ id: 1, name: 'first' }, { id: 2, name: 'last' }];
 
@@ -627,10 +620,354 @@ describe('#AirService', () => {
 
       return createAirService({ auth })
         .searchBookingsByPassengerName({ searchPhrase: 'OK' })
-        .then(res => Promise.reject(new Error('Cant be answer.')))
-        .catch(err => {
-          expect(err instanceof AirRuntimeError.RequestInconsistency)
-            .to.be.equal(true);
+        .then(() => Promise.reject(new Error('Cant be answer.')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.RequestInconsistency);
+        });
+    });
+  });
+
+  describe('cancelTicket', () => {
+    it('should throw a general error', () => {
+      const service = () => ({
+        getTicket: () => Promise.reject(new Error('Some error')),
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService().cancelTicket()
+        .then(() => Promise.reject(new Error('Error has not occured')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelTicket);
+          expect(err.causedBy).to.be.an.instanceof(Error);
+        });
+    });
+    it('should cancel ticket if info is complete', () => {
+      // Spies
+      const getTicket = sinon.spy(() => Promise.resolve({
+        pnr: 'PNR001',
+        ticketNumber: '1234567890123',
+      }));
+      const cancelTicket = sinon.spy(() => Promise.resolve(true));
+      // Services
+      const airService = () => ({
+        getTicket,
+        cancelTicket,
+      });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      const service = createAirService();
+
+      return service.cancelTicket({
+        ticketNumber: '1234567890123',
+      })
+        .then(() => {
+          expect(getTicket).to.have.callCount(1);
+          expect(cancelTicket).to.have.callCount(1);
+        });
+    });
+    it('should get ticket data if incomplete and be OK', () => {
+      // Get ticket stub to return 2 different values on different calls
+      const getTicket = sinon.stub();
+      getTicket.onCall(0).returns(
+        Promise.reject(new AirRuntimeError.TicketInfoIncomplete())
+      );
+      getTicket.onCall(1).returns(
+        Promise.resolve({
+          pnr: 'PNR001',
+          ticketNumber: '1234567890123',
+        })
+      );
+      // Spies
+      const cancelTicket = sinon.spy(() => Promise.resolve(true));
+      const importPNR = sinon.spy(() => Promise.resolve(true));
+      const executeCommand = sinon.spy(() => Promise.resolve('RLOC 1G PNR001'));
+      const closeSession = sinon.spy(() => Promise.resolve(true));
+      // Services
+      const airService = () => ({
+        getTicket,
+        cancelTicket,
+        importPNR,
+      });
+      const terminalService = () => ({
+        executeCommand,
+        closeSession,
+      });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+        '../Terminal/Terminal': terminalService,
+      });
+
+      const service = createAirService();
+
+      return service.cancelTicket({
+        ticketNumber: '1234567890123',
+      })
+        .then(() => {
+          expect(getTicket).to.have.callCount(2);
+          expect(cancelTicket).to.have.callCount(1);
+          expect(importPNR).to.have.callCount(1);
+          expect(executeCommand).to.have.callCount(1);
+          expect(closeSession).to.have.callCount(1);
+        });
+    });
+  });
+  describe('cancelPNR', () => {
+    it('should throw general error', () => {
+      const airService = () => ({
+        importPNR: () => Promise.reject(new Error('Some error')),
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      return createAirService().cancelPNR({
+        pnr: 'PNR001',
+      })
+        .then(() => Promise.reject(new Error('Error has not occured')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
+          expect(err.causedBy).to.be.an.instanceof(Error);
+        });
+    });
+    it('should cancel PNR if no tickets available', () => {
+      // Spies
+      const importPNR = sinon.spy(() => Promise.resolve([{
+        tickets: [],
+      }]));
+      const cancelPNR = sinon.spy(() => Promise.resolve(true));
+      const getTicket = sinon.spy(() => Promise.resolve({
+        coupons: [],
+      }));
+
+      // Services
+      const airService = () => ({
+        importPNR,
+        getTicket,
+        cancelPNR,
+      });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      return createAirService().cancelPNR({
+        pnr: 'PNR001',
+      })
+        .then(() => {
+          expect(importPNR).to.have.callCount(2);
+          expect(getTicket).to.have.callCount(0);
+          expect(cancelPNR).to.have.callCount(1);
+        });
+    });
+    it('should cancel PNR if tickets have only VOID coupons', () => {
+      // Spies
+      const importPNR = sinon.spy(() => Promise.resolve([{
+        tickets: [
+          '1234567890123',
+        ],
+      }]));
+      const cancelPNR = sinon.spy(() => Promise.resolve(true));
+      const getTicket = sinon.spy(() => Promise.resolve({
+        tickets: [{
+          coupons: [{
+            status: 'V',
+          }, {
+            status: 'V',
+          }],
+        }],
+      }));
+
+      // Services
+      const airService = () => ({
+        importPNR,
+        getTicket,
+        cancelPNR,
+      });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      return createAirService().cancelPNR({
+        pnr: 'PNR001',
+      })
+        .then(() => {
+          expect(importPNR).to.have.callCount(2);
+          expect(getTicket).to.have.callCount(1);
+          expect(cancelPNR).to.have.callCount(1);
+        })
+        .catch(console.error);
+    });
+    it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have OPEN coupons and no cancelTicket option', () => {
+      // Spies
+      const importPNR = sinon.spy(() => Promise.resolve([{
+        tickets: [{
+          number: '1234567890123',
+        }, {
+          number: '1234567890456',
+        }],
+      }]));
+      const cancelPNR = sinon.spy(() => Promise.resolve(true));
+      const getTicket = sinon.spy(options =>
+        Promise.resolve({
+          1234567890123: {
+            tickets: [{
+              coupons: [{
+                status: 'V',
+              }, {
+                status: 'V',
+              }],
+            }],
+          },
+          1234567890456: {
+            tickets: [{
+              coupons: [{
+                status: 'O',
+              }, {
+                status: 'O',
+              }],
+            }],
+          },
+        }[options.ticketNumber])
+      );
+
+      // Services
+      const airService = () => ({
+        importPNR,
+        getTicket,
+        cancelPNR,
+      });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      return createAirService().cancelPNR({
+        pnr: 'PNR001',
+      })
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
+          expect(err.causedBy).to.be.an.instanceof(AirRuntimeError.PNRHasOpenTickets);
+          expect(importPNR).to.have.callCount(1);
+          expect(getTicket).to.have.callCount(2);
+          expect(cancelPNR).to.have.callCount(0);
+        });
+    });
+    it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have coupons other than OPEN', () => {
+      // Spies
+      const importPNR = sinon.spy(() => Promise.resolve([{
+        tickets: [{
+          number: '1234567890123',
+        }, {
+          number: '1234567890456',
+        }],
+      }]));
+      const cancelPNR = sinon.spy(() => Promise.resolve(true));
+      const getTicket = sinon.spy(options =>
+        Promise.resolve({
+          1234567890123: {
+            tickets: [{
+              coupons: [{
+                status: 'V',
+              }, {
+                status: 'V',
+              }],
+            }],
+          },
+          1234567890456: {
+            tickets: [{
+              coupons: [{
+                status: 'F',
+              }, {
+                status: 'A',
+              }],
+            }],
+          },
+        }[options.ticketNumber])
+      );
+
+      // Services
+      const airService = () => ({
+        importPNR,
+        getTicket,
+        cancelPNR,
+      });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      return createAirService().cancelPNR({
+        pnr: 'PNR001',
+        cancelTickets: true,
+      })
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
+          expect(err.causedBy).to.be.an.instanceof(
+            AirRuntimeError.UnableToCancelTicketStatusNotOpen
+          );
+          expect(importPNR).to.have.callCount(1);
+          expect(getTicket).to.have.callCount(2);
+          expect(cancelPNR).to.have.callCount(0);
+        });
+    });
+    it('should cancel tickets and PNR if no errors occured', () => {
+      // Spies
+      const importPNR = sinon.spy(() => Promise.resolve([{
+        tickets: [{
+          number: '1234567890123',
+        }, {
+          number: '1234567890456',
+        }],
+      }]));
+      const cancelTicket = sinon.spy(() => Promise.resolve(true));
+      const cancelPNR = sinon.spy(() => Promise.resolve(true));
+      const getTicket = sinon.spy(options =>
+        Promise.resolve({
+          1234567890123: {
+            tickets: [{
+              coupons: [{
+                status: 'V',
+              }, {
+                status: 'V',
+              }],
+            }],
+          },
+          1234567890456: {
+            tickets: [{
+              coupons: [{
+                status: 'O',
+              }, {
+                status: 'O',
+              }],
+            }],
+          },
+        }[options.ticketNumber])
+      );
+
+      // Services
+      const airService = () => ({
+        importPNR,
+        getTicket,
+        cancelPNR,
+        cancelTicket,
+      });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      return createAirService().cancelPNR({
+        pnr: 'PNR001',
+        cancelTickets: true,
+      })
+        .then((result) => {
+          expect(result).to.equal(true);
+          expect(importPNR).to.have.callCount(2);
+          expect(getTicket).to.have.callCount(2);
+          expect(cancelTicket).to.have.callCount(1);
+          expect(cancelPNR).to.have.callCount(1);
         });
     });
   });

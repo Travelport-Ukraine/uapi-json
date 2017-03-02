@@ -1,6 +1,3 @@
-/*
-  eslint-disable import/no-extraneous-dependencies
-*/
 import { expect } from 'chai';
 import uAPI from '../../src';
 import AirValidator from '../../src/Services/Air/AirValidator';

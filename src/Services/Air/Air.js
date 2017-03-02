@@ -43,14 +43,14 @@ module.exports = (settings) => {
     },
 
     ticket(options) {
-      return service.importPNR(options).then((data) => {
+      return this.importPNR(options).then((data) => {
         const ticketParams = Object.assign({}, options, {
           ReservationLocator: data[0].uapi_reservation_locator,
         });
         return service.ticket(ticketParams)
           .then(result => result, (err) => {
             if (err instanceof AirRuntimeError.TicketingFoidRequired) {
-              return service.importPNR(options)
+              return this.importPNR(options)
                 .then(booking => service.foid(booking[0]))
                 .then(() => service.ticket(ticketParams));
             }
@@ -105,7 +105,7 @@ module.exports = (settings) => {
     },
 
     getTickets(options) {
-      return service.importPNR(options)
+      return this.importPNR(options)
         .then(
            pnrData => Promise.all(
              pnrData[0].tickets.map(
@@ -165,6 +165,66 @@ module.exports = (settings) => {
           terminal.closeSession()
             .then(() => results)
             .catch(() => results)
+        );
+    },
+
+    cancelTicket(options) {
+      return this.getTicket(options)
+        .then(
+          ticketData => service.cancelTicket({
+            pnr: ticketData.pnr,
+            ticketNumber: options.ticketNumber,
+          })
+        )
+        .catch(
+          err => Promise.reject(new AirRuntimeError.FailedToCancelTicket(options, err))
+        );
+    },
+
+    cancelPNR(options) {
+      return this.getTickets(options)
+        .then(
+          tickets => Promise.all(tickets.map(
+            (ticketData) => {
+              // Check for VOID
+              const allTicketsVoid = ticketData.tickets.every(
+                ticket => ticket.coupons.every(
+                  coupon => coupon.status === 'V'
+                )
+              );
+              if (allTicketsVoid) {
+                return Promise.resolve(true);
+              }
+              // Check for cancelTicket option
+              if (options.cancelTickets !== true) {
+                return Promise.reject(new AirRuntimeError.PNRHasOpenTickets());
+              }
+              // Check for not OPEN/VOID segments
+              const hasNotOpenSegment = ticketData.tickets.some(
+                ticket => ticket.coupons.some(
+                  coupon => 'OV'.indexOf(coupon.status) === -1
+                )
+              );
+              if (hasNotOpenSegment) {
+                return Promise.reject(new AirRuntimeError.UnableToCancelTicketStatusNotOpen());
+              }
+              return Promise.all(
+                ticketData.tickets.map(
+                  ticket => (
+                    ticket.coupons[0].status !== 'V' ? service.cancelTicket({
+                      pnr: options.pnr,
+                      ticketNumber: ticket.ticketNumber,
+                    }) : Promise.resolve(true)
+                  )
+                )
+              );
+            }
+          ))
+        )
+        .then(() => this.importPNR(options))
+        .then(pnrData => service.cancelPNR(pnrData[0]))
+        .catch(
+          err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
         );
     },
   };

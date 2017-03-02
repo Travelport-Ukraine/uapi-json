@@ -1,6 +1,3 @@
-/*
-  eslint-disable import/no-extraneous-dependencies
-*/
 import { expect } from 'chai';
 import assert from 'assert';
 import fs from 'fs';
@@ -10,6 +7,7 @@ import airParser from '../../src/Services/Air/AirParser';
 import {
   AirFlightInfoRuntimeError,
   AirRuntimeError,
+  AirParsingError,
 } from '../../src/Services/Air/AirErrors';
 import ParserUapi from '../../src/Request/uapi-parser';
 
@@ -134,6 +132,58 @@ const checkLowSearchFareXml = (filename) => {
 };
 
 describe('#AirParser', () => {
+  describe('AIR_CANCEL_TICKET', () => {
+    it('should return error when no VoidResultInfo available', () => {
+      const check = () => airParser.AIR_CANCEL_TICKET({});
+      expect(check).to.throw(AirRuntimeError.TicketCancelResultUnknown);
+    });
+    it('should return error when no VoidResultInfo Result type is not Success', () => {
+      const check = () => airParser.AIR_CANCEL_TICKET({
+        'air:VoidResultInfo': {
+          ResultType: 'Fail',
+        },
+      });
+      expect(check).to.throw(AirRuntimeError.TicketCancelResultUnknown);
+    });
+    it('should return true if everything is ok', () => {
+      const check = () => airParser.AIR_CANCEL_TICKET({
+        'air:VoidResultInfo': {
+          ResultType: 'Success',
+        },
+      });
+      expect(check).not.to.throw(Error);
+    });
+  });
+  describe('AIR_CANCEL_PNR', () => {
+    it('should return error when no messages available', () => {
+      const check = () => airParser.AIR_CANCEL_PNR.call({
+        uapi_version: 'v36_0',
+      }, {});
+      expect(check).to.throw(AirParsingError.CancelResponseNotFound);
+    });
+    it('should return error when message do not contain Success message', () => {
+      const check = () => airParser.AIR_CANCEL_PNR.call({
+        uapi_version: 'v36_0',
+      }, {
+        'common_v36_0:ResponseMessage': [{
+          _: 'Some message',
+        }, {
+          _: 'Another message',
+        }],
+      });
+      expect(check).to.throw(AirParsingError.CancelResponseNotFound);
+    });
+    it('should return true if everything is ok', () => {
+      const check = () => airParser.AIR_CANCEL_PNR.call({
+        uapi_version: 'v36_0',
+      }, {
+        'common_v36_0:ResponseMessage': [{
+          _: 'Itinerary Cancelled',
+        }],
+      });
+      expect(check).not.to.throw(Error);
+    });
+  });
   describe('getTicket', () => {
     it('should return error when not available to return ticket', (done) => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
@@ -157,8 +207,8 @@ describe('#AirParser', () => {
         .then((result) => {
           expect(result).to.be.an('object');
           expect(result).to.have.all.keys([
-            'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'platingCarrier',
-            'ticketingPcc', 'issuedAt', 'fareCalculation', 'priceInfo', 'passengers', 'tickets',
+            'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'platingCarrier', 'ticketingPcc',
+            'issuedAt', 'fareCalculation', 'priceInfoDetailsAvailable', 'priceInfo', 'passengers', 'tickets',
           ]);
           expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
           expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
@@ -168,6 +218,7 @@ describe('#AirParser', () => {
           expect(result.issuedAt).to.match(timestampRegexp);
           expect(result.fareCalculation).to.have.length.above(0);
           // Price info
+          expect(result.priceInfoDetailsAvailable).to.equal(true);
           const priceInfo = result.priceInfo;
           expect(priceInfo).to.be.an('object');
           expect(priceInfo).to.have.all.keys([
@@ -217,17 +268,72 @@ describe('#AirParser', () => {
           });
         });
     });
-    it('should fail if ticket info is incomplete', (done) => {
+    it('should parse incomplete data', () => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_NOT_IMPORTED.xml`).toString();
 
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
-        .then(() => done(new Error('Error has not occured')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.TicketInfoIncomplete);
-          done();
+        .then((result) => {
+          expect(result).to.be.an('object');
+          expect(result).to.have.all.keys([
+            'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'platingCarrier', 'ticketingPcc',
+            'issuedAt', 'fareCalculation', 'priceInfoDetailsAvailable', 'priceInfo', 'passengers', 'tickets',
+          ]);
+          expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
+          expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
+          expect(result.pnr).to.match(/^[A-Z0-9]{6}$/i);
+          expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
+          expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
+          expect(result.issuedAt).to.match(timestampRegexp);
+          expect(result.fareCalculation).to.have.length.above(0);
+          // Price info
+          expect(result.priceInfoDetailsAvailable).to.equal(false);
+          const priceInfo = result.priceInfo;
+          expect(priceInfo).to.be.an('object');
+          expect(priceInfo).to.have.all.keys([
+            'TotalPrice', 'BasePrice', 'Taxes', 'EquivalentBasePrice',
+          ]);
+          expect(priceInfo.TotalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.BasePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.Taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          // Passengers
+          expect(result.passengers).to.be.an('array');
+          expect(result.passengers).to.have.length.above(0);
+          result.passengers.forEach((passenger) => {
+            expect(passenger).to.be.an('object');
+            expect(passenger).to.have.all.keys(['firstName', 'lastName']);
+          });
+          // Tickets
+          expect(result.tickets).to.be.an('array');
+          expect(result.tickets).to.have.length.above(0);
+          result.tickets.forEach((ticket) => {
+            expect(ticket).to.be.an('object');
+            expect(ticket).to.have.all.keys(['ticketNumber', 'coupons']);
+            expect(ticket.ticketNumber).to.match(/\d{13}/i);
+            expect(ticket.coupons).to.be.an('array');
+            expect(ticket.coupons).to.have.length.above(0);
+            ticket.coupons.forEach((coupon) => {
+              expect(coupon).to.be.an('object');
+              expect(coupon).to.have.all.keys([
+                'couponNumber', 'from', 'to', 'departure', 'airline', 'flightNumber',
+                'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter',
+              ]);
+              expect(coupon.couponNumber).to.match(/\d+/i);
+              expect(coupon.from).to.match(/[A-Z]{3}/i);
+              expect(coupon.from).to.match(/[A-Z]{3}/i);
+              expect(coupon.departure).to.match(timestampRegexp);
+              expect(coupon.airline).to.match(/[A-Z0-9]{2}/i);
+              expect(coupon.flightNumber).to.match(/\d+/i);
+              expect(coupon.fareBasisCode).to.match(/[A-Z0-9]+/i);
+              expect(coupon.status).to.be.oneOf([
+                'A', 'C', 'F', 'L', 'O', 'P', 'R', 'E', 'V', 'Z', 'U', 'S', 'I', 'D', 'X',
+              ]);
+              expect(coupon.notValidBefore).to.match(/\d{4}-\d{2}-\d{2}/i);
+              expect(coupon.notValidAfter).to.match(/\d{4}-\d{2}-\d{2}/i);
+            });
+          });
         });
     });
   });
@@ -410,23 +516,20 @@ describe('#AirParser', () => {
   });
 
   function testBooking(jsonResult, platingCarrier = true, tickets = false) {
-    const bookingKeys = [
-      'version', 'uapi_ur_locator', 'uapi_reservation_locator',
-      'uapi_airline_locator', 'bookingPCC', 'platingCarrier',
-      'passengers', 'pnr', 'pnrList', 'reservations', 'trips',
-      'createdAt', 'modifiedAt', 'type',
-    ].concat(tickets ? 'tickets' : []);
     expect(jsonResult).to.be.an('array');
     jsonResult.forEach((result) => {
       expect(result).to.be.an('object');
       // Checking object keys
-      expect(result).to.have.all.keys(bookingKeys);
+      expect(result).to.have.all.keys([
+        'version', 'uapi_ur_locator', 'uapi_reservation_locator',
+        'uapi_airline_locator', 'bookingPCC', 'passengers', 'pnr', 'pnrList',
+        'reservations', 'trips', 'createdAt', 'modifiedAt', 'type', 'tickets',
+      ]);
       expect(result.version).to.be.at.least(0);
       expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/);
       expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/);
       expect(result.uapi_airline_locator).to.match(/^[A-Z0-9]{6}$/);
       expect(result.bookingPCC).to.match(/^[A-Z0-9]{3,4}$/);
-      expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
       expect(result.pnr).to.match(/^[A-Z0-9]{6}$/);
       expect(new Date(result.createdAt)).to.be.an.instanceof(Date);
       expect(new Date(result.modifiedAt)).to.be.an.instanceof(Date);
@@ -451,10 +554,13 @@ describe('#AirParser', () => {
       expect(result.reservations).to.have.length.above(0);
       result.reservations.forEach((reservation) => {
         expect(reservation).to.be.an('object');
-        expect(reservation).to.have.all.keys([
+        expect(reservation).to.include.all.keys([
           'status', 'fareCalculation', 'priceInfo', 'baggage', 'timeToReprice',
           'uapi_segment_refs', 'uapi_passenger_refs',
         ]);
+        if (reservation.platingCarrier) {
+          expect(reservation.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
+        }
         expect(reservation.status).to.be.oneOf(['Reserved', 'Ticketed']);
         expect(reservation.fareCalculation).to.be.a('string');
         expect(reservation.fareCalculation).to.have.length.above(0);
@@ -537,9 +643,9 @@ describe('#AirParser', () => {
           expect(trip.uapi_segment_ref).to.be.a('string');
         }
       );
-
-      if (result.tickets) {
-        expect(result.tickets).to.be.an('array').and.to.have.length.above(0);
+      // Checking tickets
+      expect(result.tickets).to.be.an('array');
+      if (result.tickets.length > 0) {
         result.tickets.forEach(
           (ticket) => {
             expect(ticket).to.be.an('object').and.to.have.all.keys([

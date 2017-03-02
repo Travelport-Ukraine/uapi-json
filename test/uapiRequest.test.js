@@ -5,8 +5,6 @@ const config = require('../src/config');
 const auth = require('./testconfig');
 const path = require('path');
 
-const hotelsSearchReqeustPath = `${path.join(__dirname, '../src/Services/Hotels/templates/HOTELS_SEARCH_REQUEST.xml')}`;
-
 describe('uapiRequest tests', () => {
   it('should return error request file not exists', () => {
     const missedFile = 'im the best missing filename';
