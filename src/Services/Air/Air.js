@@ -82,22 +82,11 @@ module.exports = (settings) => {
 
     getPNRByTicketNumber(options) {
       const terminal = createTerminalService(settings);
-      const memo = {};
       return terminal.executeCommand(`*TE/${options.ticketNumber}`)
         .then(
-          (response) => {
-            memo.response = response;
-          }
-        )
-        .then(terminal.closeSession)
-        .then(
-          () => {
-            try {
-              return memo.response.match(/RLOC [^\s]{2} ([^\s]{6})/)[1];
-            } catch (err) {
-              throw new AirRuntimeError.PnrParseError(memo.response);
-            }
-          }
+          response => terminal.closeSession()
+            .then(() => response.match(/RLOC [^\s]{2} ([^\s]{6})/)[1])
+            .catch(() => Promise.reject(new AirRuntimeError.PnrParseError(response)))
         )
         .catch(
           err => Promise.reject(new AirRuntimeError.GetPnrError(options, err))
