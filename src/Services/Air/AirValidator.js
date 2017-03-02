@@ -92,6 +92,7 @@ module.exports = {
     validate(
       validators.paramsIsObject,
       validators.pnr,
-    )
+    ),
+    transform()
   ),
 };
