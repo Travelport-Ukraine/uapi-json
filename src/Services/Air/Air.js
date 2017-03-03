@@ -42,10 +42,7 @@ module.exports = (settings) => {
       return service.importPNR(options)
         .catch((err) => {
           // Checking for error type
-          if (
-              !(err instanceof AirRuntimeError) ||
-              (err.data.faultstring !== 'No provider reservation to import.')
-          ) {
+          if (!(err instanceof AirRuntimeError.NoReservationToImport)) {
             return Promise.reject(err);
           }
           // Creating passive segment to import PNR

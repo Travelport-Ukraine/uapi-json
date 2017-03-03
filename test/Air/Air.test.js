@@ -231,9 +231,9 @@ describe('#AirService', () => {
         });
     });
     it('should throw an error when it is unable to open PNR in rerminal', () => {
-      const importPNR = sinon.spy(() => Promise.reject(new AirRuntimeError({
-        faultstring: 'No provider reservation to import.',
-      })));
+      const importPNR = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.NoReservationToImport())
+      );
       const executeCommand = sinon.stub();
       executeCommand.onCall(0).returns(
         Promise.resolve('FINISH OR IGNORE')
@@ -267,9 +267,9 @@ describe('#AirService', () => {
         });
     });
     it('should throw an error when it is unable to add an extra segment', () => {
-      const importPNR = sinon.spy(() => Promise.reject(new AirRuntimeError({
-        faultstring: 'No provider reservation to import.',
-      })));
+      const importPNR = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.NoReservationToImport())
+      );
       const executeCommand = sinon.stub();
       executeCommand.onCall(0).returns(
         Promise.resolve(pnrString)
@@ -305,9 +305,9 @@ describe('#AirService', () => {
         });
     });
     it('should throw an error when it is unable to add an extra segment (no segment added)', () => {
-      const importPNR = sinon.spy(() => Promise.reject(new AirRuntimeError({
-        faultstring: 'No provider reservation to import.',
-      })));
+      const importPNR = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.NoReservationToImport())
+      );
       const executeCommand = sinon.stub();
       executeCommand.onCall(0).returns(
         Promise.resolve(pnrString)
@@ -356,9 +356,9 @@ describe('#AirService', () => {
         });
     });
     it('should throw an error when it is unable to add an extra segment (no PNR parsed)', () => {
-      const importPNR = sinon.spy(() => Promise.reject(new AirRuntimeError({
-        faultstring: 'No provider reservation to import.',
-      })));
+      const importPNR = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.NoReservationToImport())
+      );
       const executeCommand = sinon.stub();
       executeCommand.onCall(0).returns(
         Promise.resolve(pnrString)
@@ -409,9 +409,7 @@ describe('#AirService', () => {
 
     it('should run to the end if everything is OK', () => {
       const importPNR = sinon.stub();
-      importPNR.onCall(0).returns(Promise.reject(new AirRuntimeError({
-        faultstring: 'No provider reservation to import.',
-      })));
+      importPNR.onCall(0).returns(Promise.reject(new AirRuntimeError.NoReservationToImport()));
       importPNR.onCall(1).returns(Promise.resolve([true]));
       importPNR.onCall(2).returns(Promise.resolve([true]));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
