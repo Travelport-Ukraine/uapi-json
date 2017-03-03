@@ -250,16 +250,18 @@ const AirErrorHandler = function (obj) {
   // FIXME collapse versions using a regexp search in ParserUapi
   if (errData) {
     switch (errData[`common_${this.uapi_version}:Code`]) {
+      case '13003':
+        return Promise.reject(new AirRuntimeError.NoReservationToImport(obj));
       case '3003':
-        throw new AirRuntimeError.InvalidRequestData(obj);
+        return Promise.reject(new AirRuntimeError.InvalidRequestData(obj));
       case '2602': // No Solutions in the response.
       case '3037': // No availability on chosen flights, unable to fare quote
-        throw new AirRuntimeError.NoResultsFound(obj);
+        return Promise.reject(new AirRuntimeError.NoResultsFound(obj));
       default:
-        throw new AirRuntimeError(obj); // TODO replace with custom error
+        return Promise.reject(new AirRuntimeError(obj)); // TODO replace with custom error
     }
   }
-  throw new AirParsingError(obj);
+  return Promise.reject(new AirParsingError(obj));
 };
 
 const airGetTicket = function (obj) {

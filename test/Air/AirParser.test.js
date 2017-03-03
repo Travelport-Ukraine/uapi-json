@@ -387,42 +387,32 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
       const parseFunction = airParser.AIR_ERRORS;
       const xml = fs.readFileSync(`${xmlFolder}/../Other/UnableToFareQuoteError.xml`).toString();
-      return uParser.parse(xml).then((json) => {
-        try {
-          const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]); // parse error data
-          parseFunction.call(uParser, errData);
-        } catch (e) {
-          assert(e instanceof AirRuntimeError.NoResultsFound, 'Incorrect error thrown');
-          return;
-        }
-        assert(false, 'Incorrect logic of unable to fare quote parsing');
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      return uParser.parse(xml)
+        .then(
+          (json) => {
+            const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]); // parse error data
+            return parseFunction.call(uParser, errData);
+          }
+        )
+        .catch(
+          err => expect(err).to.be.an.instanceof(AirRuntimeError.NoResultsFound)
+        );
     });
 
     it('should throw AirRuntimeError.NoResultsFound error2', () => {
       const uParser = new ParserUapi('SOAP:Fault', 'v33_0', {});
       const parseFunction = airParser.AIR_ERRORS.bind(uParser);
       const json = fs.readFileSync(`${xmlFolder}/../Air/LowFaresSearch.NoSolutions.Parsed.error.json`).toString();
-      try {
-        parseFunction(JSON.parse(json));
-      } catch (e) {
-        assert(e instanceof AirRuntimeError.NoResultsFound, 'Incorrect error class');
-        return;
-      }
-      assert(false, 'No error thrown');
+      return parseFunction(JSON.parse(json))
+        .catch(err => expect(err).to.be.an.instanceof(AirRuntimeError.NoResultsFound));
     });
 
     it('should throw AirRuntimeError.NoResultsFound error3', () => {
       const uParser = new ParserUapi('SOAP:Fault', 'v33_0', {});
       const parseFunction = airParser.AIR_ERRORS.bind(uParser);
       const json = fs.readFileSync(`${xmlFolder}/../Air/LowFaresSearch.date-time-in-past.Parsed.error.json`).toString();
-      try {
-        parseFunction(JSON.parse(json));
-      } catch (e) {
-        assert(e instanceof AirRuntimeError.InvalidRequestData, 'Incorrect error class');
-        return;
-      }
-      assert(false, 'No error thrown');
+      return parseFunction(JSON.parse(json))
+        .catch(err => expect(err).to.be.an.instanceof(AirRuntimeError.InvalidRequestData));
     });
   });
 
@@ -515,7 +505,7 @@ describe('#AirParser', () => {
     });
   });
 
-  function testBooking(jsonResult, platingCarrier = true, tickets = false) {
+  function testBooking(jsonResult) {
     expect(jsonResult).to.be.an('array');
     jsonResult.forEach((result) => {
       expect(result).to.be.an('object');

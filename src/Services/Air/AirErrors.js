@@ -100,6 +100,11 @@ Object.assign(AirRuntimeError, createErrorsList({
   FailedToCancelTicket: 'Failed to cancel ticket',
   UnableToCancelTicketStatusNotOpen: 'Unable to cancel ticket with status not OPEN',
   PNRHasOpenTickets: 'Selected PNR has tickets. Please use `cancelTickets` option or cancel tickets manually',
+  NoReservationToImport: 'No reservation to import',
+  UnableToImportPnr: 'Unable to import requested PNR',
+  UnableToOpenPNRInTerminal: 'Unable to open requested PNR in Terminal',
+  UnableToAddExtraSegment: 'Unable to add extra segment to PNR',
+  UnableToSaveBookingWithExtraSegment: 'Unable to save booking with extra segment',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(

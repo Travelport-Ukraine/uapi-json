@@ -39,7 +39,71 @@ module.exports = (settings) => {
     },
 
     importPNR(options) {
-      return service.importPNR(options);
+      return service.importPNR(options)
+        .catch((err) => {
+          // Checking for error type
+          if (!(err instanceof AirRuntimeError.NoReservationToImport)) {
+            return Promise.reject(err);
+          }
+          // Creating passive segment to import PNR
+          const terminal = createTerminalService(settings);
+          const segment = {
+            date: moment().add(42, 'days').format('DDMMM'),
+            airline: 'OK',
+            from: 'DOH',
+            to: 'ODM',
+            comment: 'NO1',
+            class: 'Y',
+          };
+          const segmentCommand = (
+            `0${segment.airline}OPEN${segment.class}${segment.date}${segment.from}${segment.to}${segment.comment}`
+          ).toUpperCase();
+          const segmentResult = (
+            `1. ${segment.airline} OPEN ${segment.class}  ${segment.date} ${segment.from}${segment.to} ${segment.comment}`
+          ).toUpperCase();
+          const pnrRegExp = new RegExp(`^(?:\\*\\* THIS BF IS CURRENTLY IN USE \\*\\*\\s*)?${options.pnr}`);
+          return terminal.executeCommand(`*${options.pnr}`)
+            .then((response) => {
+              if (!response.match(pnrRegExp)) {
+                return Promise.reject(new AirRuntimeError.UnableToOpenPNRInTerminal());
+              }
+              return Promise.resolve();
+            })
+            .then(() => terminal.executeCommand(segmentCommand))
+            .then((response) => {
+              if (response.indexOf(segmentResult) === -1) {
+                return Promise.reject(new AirRuntimeError.UnableToAddExtraSegment());
+              }
+              return Promise.resolve();
+            })
+            .then(() => {
+              const ticketingDate = moment().add(10, 'days').format('DDMMM');
+              const command = `T.TAU/${ticketingDate}`;
+              return terminal.executeCommand(command)
+                .then(() => terminal.executeCommand('R.UAPI+ER'))
+                .then(() => terminal.executeCommand('ER'));
+            })
+            .then((response) => {
+              if (
+                (!response.match(pnrRegExp)) ||
+                (response.indexOf(segmentResult) === -1)
+              ) {
+                return Promise.reject(new AirRuntimeError.UnableToSaveBookingWithExtraSegment());
+              }
+              return Promise.resolve();
+            })
+            .catch(
+              importErr => terminal.closeSession().then(
+                () => Promise.reject(
+                  new AirRuntimeError.UnableToImportPnr(options, importErr)
+                )
+              )
+            )
+            .then(() => terminal.closeSession())
+            .then(() => service.importPNR(options))
+            .then(pnrData => service.cancelPNR(pnrData[0]))
+            .then(() => service.importPNR(options));
+        });
     },
 
     ticket(options) {
@@ -82,22 +146,11 @@ module.exports = (settings) => {
 
     getPNRByTicketNumber(options) {
       const terminal = createTerminalService(settings);
-      const memo = {};
       return terminal.executeCommand(`*TE/${options.ticketNumber}`)
         .then(
-          (response) => {
-            memo.response = response;
-          }
-        )
-        .then(terminal.closeSession)
-        .then(
-          () => {
-            try {
-              return memo.response.match(/RLOC [^\s]{2} ([^\s]{6})/)[1];
-            } catch (err) {
-              throw new AirRuntimeError.PnrParseError(memo.response);
-            }
-          }
+          response => terminal.closeSession()
+            .then(() => response.match(/RLOC [^\s]{2} ([^\s]{6})/)[1])
+            .catch(() => Promise.reject(new AirRuntimeError.PnrParseError(response)))
         )
         .catch(
           err => Promise.reject(new AirRuntimeError.GetPnrError(options, err))
