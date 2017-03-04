@@ -14,7 +14,9 @@ module.exports = {
   ),
 
   AIR_PRICE: compose(
-    validate(),
+    validate(
+      validators.segments,
+    ),
     transform(
       transformers.setBusinessFlag,
       transformers.setPassengersAge,
