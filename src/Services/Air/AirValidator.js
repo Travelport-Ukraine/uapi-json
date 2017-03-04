@@ -95,4 +95,12 @@ module.exports = {
     ),
     transform()
   ),
+
+  AIR_EXCHANGE_QUOTE: compose(
+    validate(
+      validators.segments,
+      validators.pnr,
+    ),
+    transform()
+  ),
 };
