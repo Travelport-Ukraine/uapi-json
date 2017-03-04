@@ -435,7 +435,7 @@ function extractBookings(obj) {
             birthDate: moment(traveler.DOB).format('YYYY-MM-DD'),
           } : null,
           traveler.TravelerType ? {
-            ageType: traveler.TravelerType,
+            ageCategory: traveler.TravelerType,
           } : null,
           traveler.Gender ? {
             gender: traveler.Gender,
