@@ -38,7 +38,7 @@ Synchronous Hotel Search returns a list of available hotel property offers that 
 | location | `String` | IATA Code of City/Airport to search hotels. |
 | startDate | `String` | Check-in date in format `YYYY-MM-DD`. |
 | endDate | `String` | Check-in date in format `YYYY-MM-DD`. |
-| rooms | `Array\<Room\>` | Array of `Room` objects. See below. |
+| rooms | `Array<Room>` | Array of `Room` objects. See below. |
 | _[MaxWait]_ | `Number` | Max wait for results. |
 | _[MaxProperties]_ | `Number` | Max properties to return. |
 | _[currency]_ | `String` | Preferred currecny. |
@@ -51,7 +51,7 @@ Each room contains next object:
 | Param | Type | Description |
 | --- | --- | --- |
 | adults | `Number` | Number of adults. |
-| children | `Array\<Number>` | Each element === one child. Number - child age. Ex. `[10, 12]` means two children 10 and 12 years old.|
+| children | `Array<Number>` | Each element === one child. Number - child age. Ex. `[10, 12]` means two children 10 and 12 years old.|
 
 **See: <a href="../examples/Hotels/search">Search example</a>**
 
@@ -86,10 +86,10 @@ After a hotel property and rate is selected in the Hotel Rate and Rule Search re
 
 | Param | Type | Description |
 | --- | --- | --- |
-| people | `Arrat\<People>` | People array. [See below](#people) |
+| people | `Arrat<People>` | People array. [See below](#people) |
 | Guarantee | `Object` | Credit Card information. [See below](#guarantee)   |
-| rates | `Array\<Rate>` | Selected rates for booking. [See below](#rates-obj)  |
-| roomsRefs | `Array\<RoomRef>` | Array of linked people to rooms. [See below](#refs)  |
+| rates | `Array<Rate>` | Selected rates for booking. [See below](#rates-obj)  |
+| roomsRefs | `Array<RoomRef>` | Array of linked people to rooms. [See below](#refs)  |
 | HotelChain | `String` | Chain from search response. |
 | HotelCode | `String` | Hotel code from search response. |
 | startDate | `String` | Check-in date in format `YYYY-MM-DD`. |
