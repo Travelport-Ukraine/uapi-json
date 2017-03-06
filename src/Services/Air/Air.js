@@ -20,11 +20,9 @@ module.exports = (settings) => {
     book(options) {
       return service.airPricePricingSolutionXML(options).then((data) => {
         const bookingParams = Object.assign({}, {
-          passengers: options.passengers,
-          rule: options.rule,
           ticketDate: moment().add(3, 'hours').format(),
           ActionStatusType: 'TAU',
-        }, data);
+        }, data, options);
         return service.createReservation(bookingParams).catch((err) => {
           if (err instanceof AirRuntimeError.SegmentBookingFailed
               || err instanceof AirRuntimeError.NoValidFare) {

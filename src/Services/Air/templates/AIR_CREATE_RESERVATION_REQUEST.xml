@@ -20,7 +20,7 @@
             {{#if emulatePcc}}
             <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
             {{/if}}
-            {{#passengers}}
+            {{#each passengers}}
             <com:BookingTraveler Key="P_{{@index}}" Age="{{Age}}" DOB="{{DOB}}" Gender="{{gender}}" TravelerType="{{ageCategory}}">
                 <com:BookingTravelerName First="{{firstName}}" Last="{{lastName}}" {{#if Prefix}}Prefix="{{title}}"{{/if}}/>
                 {{#if ../deliveryInformation}}
@@ -47,7 +47,7 @@
 
                 {{#if ../phone}}
                     <com:PhoneNumber
-                            CountryCode="{{../phone.country}}"
+                            CountryCode="{{../phone.countryCode}}"
                             Location="{{../phone.location}}"
                             Number="{{../phone.number}}"
                             Type="Other"
@@ -71,7 +71,7 @@
                 </com:NameRemark>
                 {{/if}}
             </com:BookingTraveler>
-            {{/passengers}}
+            {{/each}}
 
             <air:AirPricingSolution {{#each air:AirPricingSolution}}{{@key}}="{{{this}}}" {{/each}}>
                 {{{air:AirPricingSolution_XML.air:AirSegment_XML}}}
