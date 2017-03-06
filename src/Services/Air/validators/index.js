@@ -9,7 +9,7 @@ import queue from './queue';
 import ticketNumber from './ticket-number';
 import flightInfo from './flight-info';
 import emailOptional from './email-optional';
-import phoneOptional from './phone-optional';
+import phone from './phone';
 import deliveryInfoOptional from './delivery-info-optional';
 
 export default {
@@ -24,6 +24,6 @@ export default {
   ticketNumber,
   flightInfo,
   emailOptional,
-  phoneOptional,
+  phone,
   deliveryInfoOptional,
 };

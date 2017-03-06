@@ -26,6 +26,7 @@ Object.assign(AirValidationError, createErrorsList({
   TicketNumberMissing: 'Ticket number missing',
   TicketNumberInvalid: 'Ticket number invalid',
   IncorrectEmail: 'Email is in incorrect format',
+  PhoneMissing: 'Missing phone in book request',
   IncorrectPhoneFormat: 'Incorrect phone format. Missing required fields. See data.',
   DeliveryInformation: 'Missing of delivery information fields. See data.',
 }, AirValidationError));

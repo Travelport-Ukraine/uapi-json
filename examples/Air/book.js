@@ -46,23 +46,19 @@ AirService.shop(params)
           birthDate: '1968-07-25',
           gender: 'M',
           ageCategory: 'ADT',
-        }, {
-          lastName: 'DARTH',
-          firstName: 'VAIDER',
-          passCountry: 'UA',
-          passNumber: 'ES221731',
-          birthDate: '1966-07-25',
-          gender: 'M',
-          ageCategory: 'ADT',
-        }, {
-          lastName: 'ANAKINJR',
-          firstName: 'SKYWALKER',
-          passCountry: 'UA',
-          passNumber: 'ES221731',
-          birthDate: '2005-07-25',
-          gender: 'M',
-          ageCategory: 'CNN',
         }],
+        phone: {
+          countryCode: '38',
+          location: 'IEV',
+          number: '0660419905',
+        },
+        deliveryInformation: {
+          name: 'Anakin Skywalker',
+          street: 'Sands street, 42',
+          zip: '42042',
+          country: 'Galactic Empire',
+          city: 'Mos Eisley',
+        },
       };
 
       return AirService.book(book).then(
