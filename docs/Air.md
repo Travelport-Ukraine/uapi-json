@@ -48,6 +48,7 @@ Each leg represents one part of the journey. For example, a typical roundtrip IE
 
 ### Search Passengers object
 <a name="passengers"></a>
+
 | Param | Type | Description |
 | --- | --- | --- |
 | ADT | `Number` | Adults count. |
@@ -69,7 +70,6 @@ After searching for air segments and fares, air bookings are created using the r
 
 **Returns**: `Promise`
 **See**: [Create Air Booking](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Air_Booking/Create_Air_Booking/Creating_Air_Bookings.htm%3FTocPath%3DAir%7CAir%2520Shopping%2520and%2520Booking%7CAir%2520Booking%7CCreating%2520Air%2520Bookings%7C_____0)
-
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -147,7 +147,6 @@ Ticketing function returns `true` if the process is finished with success or `Er
 **Returns**: `Promise(true | Error)`.
 **See**: [Air Ticketing](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Air_Ticketing/Air_Ticketing.htm%3FTocPath%3DAir%7CAir%2520Shopping%2520and%2520Booking%7CAir%2520Ticketing%2520(Document%2520Production)%7C_____0)
 
-
 | Param | Type | Description |
 | --- | --- | --- |
 | comission | `Object{amount\| percent}` | If amount is passed than it should be provided with currency. Ex: `{ comission: { amount: 'UAH10' }}`. If percent - it should be string with float number |
@@ -175,7 +174,6 @@ The Queue Place functionality adds a specific booking (PNR) to a queue in the pr
 **Returns**: `Promise(true | Error)`.
 **See**: [Queue managment](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Queues/queue_management.htm%3FTocPath%3DUniversal%2520Records%2520and%2520Bookings%7CQueue%2520Management%7C_____0)
 
-
 | Param | Type | Description |
 | --- | --- | --- |
 | pcc| `String` | PCC to place booking. |
@@ -196,7 +194,6 @@ using `TerminalService`, importing PNR and then removing created segment.
 
 **Returns**: `Promise`. - All Information for requested PNR.
 **See**: [Importing PNR](https://support.travelport.com/webhelp/uapi/uAPI.htm#Booking/UniversalRecord/Importing_PNRs.htm)
-
 
 | Param | Type | Description |
 | --- | --- | --- |

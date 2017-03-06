@@ -32,7 +32,6 @@ Synchronous Hotel Search returns a list of available hotel property offers that 
 **Returns**: `Promise`
 **See**: [Synchronous Hotel Search](https://support.travelport.com/webhelp/uapi/uAPI.htm#Hotel/Hotel_TRM/TRM_Synchronous_Hotel_Search_15-4.htm%3FTocPath%3DHotel%7CTravelport%2520Rooms%2520and%2520More%2520via%2520Universal%2520API%7CTravelport%2520Rooms%2520and%2520More%2520Workflow%7CHotel%2520Search%7CSynchronous%2520Hotel%2520Search%7C_____2)
 
-
 | Param | Type | Description |
 | --- | --- | --- |
 | location | `String` | IATA Code of City/Airport to search hotels. |
@@ -62,7 +61,6 @@ A Hotel Rate and Rule Search, also known as a Complete Hotel Availability, retur
 **Returns**: `Promise`
 **See**: [Stand-Alone Hotel Rate and Rule Search](https://support.travelport.com/webhelp/uapi/uAPI.htm#Hotel/Hotel_TRM/TRM_StandAlone_HotelRateAndRuleSearch.htm%3FTocPath%3DHotel%7CTravelport%2520Rooms%2520and%2520More%2520via%2520Universal%2520API%7CTravelport%2520Rooms%2520and%2520More%2520Workflow%7CHotel%2520Rate%2520and%2520Rule%2520Search%7C_____2)
 
-
 | Param | Type | Description |
 | --- | --- | --- |
 | HotelChain | `String` | Chain from search response. |
@@ -82,7 +80,6 @@ After a hotel property and rate is selected in the Hotel Rate and Rule Search re
 
 **Returns**: `Promise`
 **See**: [Creating Hotel Bookings](https://support.travelport.com/webhelp/uapi/uAPI.htm#Hotel/Hotel_TRM/TRM_Create_Booking.htm%3FTocPath%3DHotel%7CTravelport%2520Rooms%2520and%2520More%2520via%2520Universal%2520API%7CTravelport%2520Rooms%2520and%2520More%2520Workflow%7CHotel%2520Booking%7CCreating%2520Bookings%7C_____1)
-
 
 | Param | Type | Description |
 | --- | --- | --- |
