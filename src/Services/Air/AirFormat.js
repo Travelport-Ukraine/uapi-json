@@ -37,6 +37,7 @@ function formatTrip(segment, flightDetails) {
   return {
     from: segment.Origin,
     to: segment.Destination,
+    group: Number(segment.Group),
     departure: segment.DepartureTime,
     arrival: segment.ArrivalTime,
     airline: segment.Carrier,

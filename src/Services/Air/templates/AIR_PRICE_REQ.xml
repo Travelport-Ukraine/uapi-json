@@ -26,7 +26,7 @@
                                 PolledAvailabilityOption="Polled avail exists"
                                 ProviderCode="1G"
                                 Key="{{@index}}"
-                                Group="{{Group}}">
+                                Group="{{group}}">
                     {{#if transfer}}
                     <air:Connection/>
                     {{/if}}
