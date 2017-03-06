@@ -13,8 +13,6 @@ describe('Air.validators.setGroupsForSegments', () => {
       ],
     };
     const converted = convert(params);
-    console.log(converted);
-    process.exit();
     expect(converted.segments[0].transfer).to.be.equal(true);
     expect(converted.segments[1].transfer).to.be.equal(false);
     expect(converted.segments[2].transfer).to.be.equal(false);
