@@ -31,7 +31,7 @@ Low Fare Shop functionality combines air availability and a fare quote request t
 
 | Param | Type | Description |
 | --- | --- | --- |
-| legs | `Array\<Leg\>` | See `Leg` description [below](#leg). |
+| legs | `Array\<Leg>` | See `Leg` description [below](#leg). |
 | passengers | `Search Passengers` | See `Search Passengers` description [below](#passengers). |
 | cabins | `Cabins array` | See `Cabins array` description [below](#cabins). |
 | requestId | `string` | Trace id of this request. |
@@ -73,7 +73,7 @@ After searching for air segments and fares, air bookings are created using the r
 
 | Param | Type | Description |
 | --- | --- | --- |
-| segments | `Array\<Segment\>` | See `Segment` description [below](#segment). |
+| segments | `Array\<Segment>` | See `Segment` description [below](#segment). |
 | passengers | `Book Passengers` | See `Book Passengers` description [below](#book-passengers). |
 | phone | `Phone`  | Booking agency/traveller phone. See `Phone` description [below](#phone). |
 | deliveryInformation | `Delivery Information` | Optional param. See `Delivery Information` description [below](#delivery-info). |

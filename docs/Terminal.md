@@ -7,14 +7,14 @@ You can use Terminal service to run commands on behalf of your own PCC
 or to use `emulatePcc` option from `auth` to run commands on behalf of other PCC
 using your own Service bureau.
 
-## API
+# API
 
 **TerminalService**
-* [`.executeCommand()`](#execute_command) ⇒ `Promise`
-* [`.closeSession()`](#close_session) ⇒ `Promise`
+* [`.executeCommand()`](#execute_command)
+* [`.closeSession()`](#close_session)
 
-## Methods
-### .executeCommand(command)
+
+## .executeCommand(command)
 <a name="execute_command"></a>
 Executes a command in terminal and returns its terminal response
 
@@ -24,7 +24,7 @@ Executes a command in terminal and returns its terminal response
 | --- | --- | --- |
 | command | `String` | String representation of the command you want to execute |
 
-### .closeSession()
+## .closeSession()
 <a name="close_session"></a>
 When you have finished command execution it's necessary to close terminal connection
 to free up space in the terminal pool. Takes no parameters
