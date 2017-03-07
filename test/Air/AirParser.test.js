@@ -855,4 +855,17 @@ describe('#AirParser', () => {
       }).catch(err => assert(err instanceof AirFlightInfoRuntimeError.InvalidFlightNumber, 'Should be InvalidFlightNumber error.'));
     });
   });
+
+  describe('AIR_EXCHANGE_QUOTE', () => {
+    it('should', () => {
+      const uParser = new ParserUapi(null, 'v36_0', { });
+      const parseFunction = airParser.AIR_EXCHANGE_QUOTE;
+      const xml = fs.readFileSync(`${xmlFolder}/AirExchangeQuote-2.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        return parseFunction.call(uParser, json);
+      }).then(jsonResult => {
+        console.log(JSON.stringify(jsonResult));
+      });
+    });
+  });
 });

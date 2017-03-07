@@ -20,6 +20,7 @@ Object.assign(AirValidationError, createErrorsList({
   LegsInvalidType: 'Invalid type for legs in request',
   LegsInvalidStructure: 'Leg in leg array foes not all required fields',
   AirPricingSolutionInvalidType: 'air:AirPricingSolution array is expected',
+  SegmentsMissing: 'Segments missing in request. See data.',
   BirthDateInvalid: 'Invalid birth date',
   FopMissing: 'Form of payment missing',
   FopTypeUnsupported: 'Form of payment type is unsupported',

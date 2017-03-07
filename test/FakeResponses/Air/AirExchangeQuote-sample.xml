@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Version Dated as of 15/Apr/2015 11:24:11-->
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AirExchangeQuoteRsp xmlns:air="http://www.travelport.com/schema/air_v30_0" xmlns:common_v30_0="http://www.travelport.com/schema/common_v30_0" ResponseTime="10683" TraceId="trace" TransactionId="B2FD350F0A07761EE952461C41F2DE6C">
+            <air:AirPricingSolution BasePrice="GBP572.00" Key="pBVRw0TxRAe/ABryHhTn6Q==" Taxes="GBP0.00" TotalPrice="GBP572.00">
+                <air:AirSegment ArrivalTime="2015-06-17T22:39:00.000-06:00" Carrier="AA" ClassOfService="N" DepartureTime="2015-06-17T09:45:00.000+01:00" Destination="DEN" FlightNumber="57" Group="0" Key="XbNRf53GT6WinnaGea4G3A==" OptionalServicesIndicator="false" Origin="LHR">
+                    <air:CodeshareInfo OperatingCarrier="AA" OperatingFlightNumber="57"/>
+                </air:AirSegment>
+                <air:AirSegment ArrivalTime="2015-06-25T09:15:00.000+01:00" Carrier="AA" ClassOfService="N" DepartureTime="2015-06-24T09:46:00.000-06:00" Destination="LHR" FlightNumber="56" Group="1" Key="cvPZLTGZTMKY67J/P9JNSw==" OptionalServicesIndicator="false" Origin="DEN">
+                    <air:CodeshareInfo OperatingCarrier="AA" OperatingFlightNumber="56"/>
+                </air:AirSegment>
+                <air:AirPricingInfo BasePrice="GBP572.00" Key="azSeqJPtTs2Xe5gRSbQ/cA==" PricingMethod="Guaranteed" Taxes="GBP0.00" TotalPrice="GBP572.00">
+                    <air:FareInfo Amount="NUC434.21" Destination="DEN" EffectiveDate="2015-04-13T13:34:51.610+00:00" FareBasis="NKXUKJB" Key="kCc4Y1WdSpOna+Y1FeLxyA==" Origin="LHR" PassengerTypeCode="ADT"/>
+                    <air:FareInfo Amount="NUC434.21" Destination="LHR" EffectiveDate="2015-04-13T13:34:51.613+00:00" FareBasis="NKXUKJB" Key="j4J/euZ8TUefsqSUkAcVJQ==" Origin="DEN" PassengerTypeCode="ADT"/>
+                    <air:BookingInfo BookingCode="N" CabinClass="Economy" FareInfoRef="kCc4Y1WdSpOna+Y1FeLxyA==" SegmentRef="XbNRf53GT6WinnaGea4G3A=="/>
+                    <air:BookingInfo BookingCode="N" CabinClass="Economy" FareInfoRef="j4J/euZ8TUefsqSUkAcVJQ==" SegmentRef="cvPZLTGZTMKY67J/P9JNSw=="/>
+                    <air:TaxInfo Amount="GBP-1.80" Category="YC" Key="fPY96xPfRiyUzcnVGxdggg=="/>
+                    <air:TaxInfo Amount="GBP-2.30" Category="XY" Key="hN3ukluOTdeSgYSJoB1/cg=="/>
+                    <air:TaxInfo Amount="GBP-11.30" Category="US" Key="lnAB20pKQaG264m7XOi97w=="/>
+                    <air:TaxInfo Amount="GBP-1.60" Category="XA" Key="6deP2uv7Tj2PYT7Np6uimQ=="/>
+                    <air:TaxInfo Amount="GBP-1.80" Category="AY" Key="E7nw/09mSj6sQWxcgkFHCg=="/>
+                    <air:TaxInfo Amount="GBP-34.10" Category="GB" Key="pheSgei4TpGoGNEcdPt4wg=="/>
+                    <air:TaxInfo Amount="GBP-20.20" Category="UB" Key="MTvj4va1SaCUZJdb3Dbhww=="/>
+                    <air:TaxInfo Amount="GBP-100.20" Category="YR" Key="6KH6MjeHSbuh1teWXFvRCQ=="/>
+                    <air:TaxInfo Amount="GBP-1.50" Category="XF" Key="wXM9ZYfcTce0OSyJlVxL8g==">
+                        <common_v30_0:TaxDetail Amount="USD4.50" OriginAirport="DEN"/>
+                    </air:TaxInfo>
+                    <air:FareCalc>ADT LON AA DEN 434.21AA LON 434.21NUC868.42END ROE.658662 AA XF DEN4.5</air:FareCalc>
+                    <air:PassengerType Code="ADT"/>
+                    <air:BaggageAllowances>
+                        <air:BaggageAllowanceInfo Carrier="AA" Destination="DEN" Origin="LHR" TravelerType="ADT">
+                            <air:URLInfo>
+                                <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSAA.BAGG</air:URL>
+                            </air:URLInfo>
+                            <air:TextInfo>
+                                <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                            </air:TextInfo>
+                            <air:TextInfo>
+                                <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                            </air:TextInfo>
+                            <air:TextInfo>
+                                <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                            </air:TextInfo>
+                            <air:BagDetails ApplicableBags="1stChecked" TotalPrice="GBP0.00"/>
+                            <air:BagDetails ApplicableBags="2ndChecked" TotalPrice="GBP65.00"/>
+                        </air:BaggageAllowanceInfo>
+                        <air:BaggageAllowanceInfo Carrier="AA" Destination="LHR" Origin="DEN" TravelerType="ADT">
+                            <air:URLInfo>
+                                <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSAA.BAGG</air:URL>
+                            </air:URLInfo>
+                            <air:TextInfo>
+                                <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                            </air:TextInfo>
+                            <air:TextInfo>
+                                <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                            </air:TextInfo>
+                            <air:TextInfo>
+                                <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                            </air:TextInfo>
+                            <air:BagDetails ApplicableBags="1stChecked" TotalPrice="GBP0.00"/>
+                            <air:BagDetails ApplicableBags="2ndChecked" TotalPrice="GBP65.00"/>
+                        </air:BaggageAllowanceInfo>
+                        <air:CarryOnAllowanceInfo Carrier="AA" Destination="DEN" Origin="LHR">
+                            <air:CarryOnDetails TotalPrice="GBP0.00"/>
+                            <air:CarryOnDetails TotalPrice="GBP0.00"/>
+                        </air:CarryOnAllowanceInfo>
+                        <air:CarryOnAllowanceInfo Carrier="AA" Destination="LHR" Origin="DEN">
+                            <air:CarryOnDetails TotalPrice="GBP0.00"/>
+                            <air:CarryOnDetails TotalPrice="GBP0.00"/>
+                        </air:CarryOnAllowanceInfo>
+                        <air:EmbargoInfo Carrier="AA" Destination="DEN" Origin="LHR">
+                            <air:URLInfo>
+                                <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSAA.BAGG</air:URL>
+                            </air:URLInfo>
+                        </air:EmbargoInfo>
+                        <air:EmbargoInfo Carrier="AA" Destination="LHR" Origin="DEN">
+                            <air:URLInfo>
+                                <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSAA.BAGG</air:URL>
+                            </air:URLInfo>
+                        </air:EmbargoInfo>
+                    </air:BaggageAllowances>
+                </air:AirPricingInfo>
+                <air:PricingDetails ConversionRate="0.0" DiscountApplies="false" ForTicketingOnDate="2015-04-13" ItineraryType="International" LastDateToTicket="2015-06-10" LowFareFound="false" LowFarePricing="false" OriginalTicketCurrency="AUD" PenaltyApplies="true" PricingType="ClassBooked" RateOfExchange="0.658662" ValidatingVendorCode="AA">
+                    <air:AdvisoryMessage>* PRICING RULES VALIDATING CARRIER DEFAULT AA</air:AdvisoryMessage>
+                    <air:AdvisoryMessage>* ELECTRONIC TICKETING REQUIRED - CK SLS RULE</air:AdvisoryMessage>
+                    <air:AdvisoryMessage>* FARE MAY CHANGE UNLESS TICKETED *</air:AdvisoryMessage>
+                </air:PricingDetails>
+            </air:AirPricingSolution>
+            <air:AirExchangeBundleTotal>
+                <common_v30_0:AirExchangeInfo AddCollection="GBP0.00" ChangeFee="GBP100.00" ExchangeAmount="GBP0.00" PricingTag="E" Refund="GBP174.80"/>
+            </air:AirExchangeBundleTotal>
+            <air:AirExchangeBundle>
+                <common_v30_0:AirExchangeInfo AddCollection="GBP0.00" ChangeFee="GBP100.00" ExchangeAmount="GBP0.00" Refund="GBP174.80">
+                    <common_v30_0:PaidTax Amount="GBP7.10" Code="YC"/>
+                    <common_v30_0:PaidTax Amount="GBP9.00" Code="XY"/>
+                    <common_v30_0:PaidTax Amount="GBP46.20" Code="US"/>
+                    <common_v30_0:PaidTax Amount="GBP6.50" Code="XA"/>
+                    <common_v30_0:PaidTax Amount="GBP7.30" Code="AY"/>
+                    <common_v30_0:PaidTax Amount="GBP136.60" Code="GB"/>
+                    <common_v30_0:PaidTax Amount="GBP81.00" Code="UB"/>
+                    <common_v30_0:PaidTax Amount="GBP402.10" Code="YR"/>
+                    <common_v30_0:PaidTax Amount="GBP5.80" Code="XF"/>
+                </common_v30_0:AirExchangeInfo>
+                <air:AirPricingInfoRef Key="azSeqJPtTs2Xe5gRSbQ/cA=="/>
+            </air:AirExchangeBundle>
+            <common_v30_0:HostToken>H4sIAAAAAAAAAFvzloG1hMEw1DHAM941wtnD0c/dNd7bNdLJyM3F2NTAzcDRwNzczNDV1dLUyMTM0NnE0M3IxdXMGQDiuG1dOAAAAA==</common_v30_0:HostToken>
+        </air:AirExchangeQuoteRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

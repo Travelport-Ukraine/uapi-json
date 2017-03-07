@@ -278,5 +278,14 @@ module.exports = (settings) => {
           err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
         );
     },
+
+
+    getExchangeInformation(options) {
+      return this.importPNR(options)
+        .then(() => service.exchangeQuote({
+          ...options,
+        }));
+    },
+
   };
 };
