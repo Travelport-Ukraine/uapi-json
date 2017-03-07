@@ -208,5 +208,14 @@ describe('#Utils', () => {
         throw Error('Should throw an Error');
       });
     });
+
+    describe('.inflate/.deflate', () => {
+      it('should return string same before and after', () => {
+        const original = 'somestring';
+        return utils.deflate(original).then(utils.inflate).then(res => {
+          expect(res).to.be.equal(original);
+        });
+      });
+    });
   });
 });
