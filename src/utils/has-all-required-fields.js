@@ -1,4 +1,4 @@
-import errors from '../../src/error-types';
+import errors from '../error-types';
 
 export default (object, fields, ErrorClass = errors.ValidationError) => {
   fields.forEach((field) => {
