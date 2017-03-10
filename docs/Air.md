@@ -16,6 +16,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.importPNR(params)](#importPNR)
 * [.flightInfo(params)](#flightInfo)
 * [.getPNRByTicketNumber(params)](#getPNRByTicketNumber)
+* [.searchBookingsByPassengerName(params)](#searchBookingsByPassengerName)
 * [.getTicket(params)](#getTicket)
 * [.getTickets(params)](#getTickets)
 * [.cancelTicket(params)](#cancelTicket)
