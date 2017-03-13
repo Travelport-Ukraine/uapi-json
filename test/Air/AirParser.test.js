@@ -953,7 +953,7 @@ describe('#AirParser', () => {
           'basePrice',
           'bookingInfo',
           'equivalentBasePrice',
-          'fareCalc',
+          'fareCalculation',
           'taxes',
           'totalPrice',
           'uapi_pricing_info_ref',

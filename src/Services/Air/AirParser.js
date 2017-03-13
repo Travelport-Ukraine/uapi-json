@@ -647,7 +647,7 @@ function exchangeQuote(req) {
             ...format.formatPrices(pricing),
             bookingInfo,
             uapi_pricing_info_ref: pricing.Key,
-            fareCalc: pricing['air:FareCalc'],
+            fareCalculation: pricing['air:FareCalc'],
           };
         });
 
@@ -668,7 +668,7 @@ function exchangeQuote(req) {
           rateOfExchange: parseFloat(airPricingDetails.RateOfExchange || 1),
           validatingVendor: airPricingDetails.ValidatingVendorCode,
         },
-        pricingSolution: { ...format.formatPrices(solution) },
+        pricingSolution: format.formatPrices(solution),
         exchangeTotal: {
           ...format.formatAirExchangeBundle(totalBundle),
           pricingTag: totalBundle.PricingTag,
