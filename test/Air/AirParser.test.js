@@ -857,15 +857,184 @@ describe('#AirParser', () => {
   });
 
   describe('AIR_EXCHANGE_QUOTE', () => {
-    it('should', () => {
+    const testExchangeFormat = (result) => {
+      expect(result).to.have.all.keys([
+        'exchangeDetails',
+        'exchangeToken',
+        'exchangeTotal',
+        'pricingDetails',
+        'pricingInfo',
+        'pricingSolution',
+        'segments',
+      ]);
+
+      expect(result.exchangeDetails).to.be.an('array')
+        .and.to.have.length.above(0);
+      result.exchangeDetails.forEach((detail) => {
+        expect(detail).to.have.all.keys([
+          'addCollection',
+          'changeFee',
+          'exchangeAmount',
+          'refund',
+          'taxes',
+          'uapi_pricing_info_ref',
+        ]);
+        expect(detail.taxes).to.be.an('array');
+        detail.taxes.forEach(tax => {
+          expect(tax).to.have.all.keys(['type', 'value']);
+          expect(tax.type).to.match(/[A-Z0-9]{2}/);
+        });
+      });
+
+      expect(result.exchangeTotal).to.have.all.key([
+        'addCollection',
+        'changeFee',
+        'exchangeAmount',
+        'refund',
+        'pricingTag',
+      ]);
+
+      expect(result.pricingDetails).to.have.all.key([
+        'conversionRate',
+        'discountApplies',
+        'lowFareFound',
+        'lowFarePricing',
+        'penaltyApplies',
+        'pricingType',
+        'rateOfExchange',
+        'validatingVendor',
+      ]);
+
+      expect(result.pricingDetails.conversionRate).to.be.a('number');
+      expect(result.pricingDetails.rateOfExchange).to.be.a('number');
+      expect(result.pricingDetails.discountApplies).to.be.a('boolean');
+      expect(result.pricingDetails.lowFareFound).to.be.a('boolean');
+      expect(result.pricingDetails.lowFarePricing).to.be.a('boolean');
+      expect(result.pricingDetails.penaltyApplies).to.be.a('boolean');
+
+      expect(result.pricingSolution).to.have.all.key([
+        'basePrice',
+        'equivalentBasePrice',
+        'taxes',
+        'totalPrice',
+      ]);
+
+      expect(result.segments).to.be.an('array').and.have.length.above(0);
+      result.segments.forEach((segment) => {
+        expect(segment).to.be.an('object');
+        expect(segment).to.have.all.keys([
+          'airline',
+          'arrival',
+          'bookingClass',
+          'departure',
+          'flightNumber',
+          'from',
+          'group',
+          'serviceClass',
+          'to',
+          'uapi_segment_ref',
+        ]);
+        expect(segment.from).to.match(/^[A-Z]{3}$/);
+        expect(segment.to).to.match(/^[A-Z]{3}$/);
+        expect(segment.group).to.be.a('number');
+        expect(new Date(segment.departure)).to.be.an.instanceof(Date);
+        expect(new Date(segment.arrival)).to.be.an.instanceof(Date);
+        expect(segment.airline).to.match(/^[A-Z0-9]{2}$/);
+        expect(segment.flightNumber).to.match(/^\d+$/);
+        expect(segment.serviceClass).to.be.oneOf([
+          'Economy', 'Business', 'First', 'PremiumEconomy',
+        ]);
+        expect(segment.bookingClass).to.match(/^[A-Z]{1}$/);
+      });
+
+      expect(result.pricingInfo).to.be.an('array').and.have.length.above(0);
+      result.pricingInfo.forEach((pricing) => {
+        expect(pricing).to.have.all.keys([
+          'basePrice',
+          'bookingInfo',
+          'equivalentBasePrice',
+          'fareCalc',
+          'taxes',
+          'totalPrice',
+          'uapi_pricing_info_ref',
+        ]);
+        expect(pricing.bookingInfo).to.be.an('array').and.have.length.above(0);
+        pricing.bookingInfo.forEach((info) => {
+          expect(info).to.have.all.keys([
+            'baggage',
+            'bookingCode',
+            'cabinClass',
+            'fareBasis',
+            'from',
+            'to',
+            'uapi_segment_ref',
+          ]);
+          expect(info.baggage).to.be.an('object');
+          expect(info.baggage).to.have.all.keys([
+            'amount',
+            'units',
+          ]);
+        });
+      });
+    };
+    it('should test format', () => {
+      const uParser = new ParserUapi(null, 'v36_0', { });
+      const parseFunction = airParser.AIR_EXCHANGE_QUOTE;
+      const xml = fs.readFileSync(`${xmlFolder}/AirExchangeQuote-1.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        return parseFunction.call(uParser, json);
+      }).then(result => {
+        testExchangeFormat(result);
+      });
+    });
+
+    it('should test format2', () => {
       const uParser = new ParserUapi(null, 'v36_0', { });
       const parseFunction = airParser.AIR_EXCHANGE_QUOTE;
       const xml = fs.readFileSync(`${xmlFolder}/AirExchangeQuote-2.xml`).toString();
       return uParser.parse(xml).then((json) => {
         return parseFunction.call(uParser, json);
-      }).then(jsonResult => {
-        console.log(JSON.stringify(jsonResult));
+      }).then(result => {
+        testExchangeFormat(result);
       });
+    });
+
+    it('should throw correct error if no residual value returned', () => {
+      const uParser = new ParserUapi('SOAP:Fault', 'v36_0', { });
+
+      const parseFunction = airParser.AIR_ERRORS.bind(uParser);
+
+      const xml = fs
+        .readFileSync(`${xmlFolder}/AirExchangeQuote-error-no-residual-value.xml`)
+        .toString();
+
+      return uParser.parse(xml)
+        .then((json) => {
+          const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]);
+          return parseFunction.call(uParser, errData);
+        })
+        .catch(err => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.NoResidualValue);
+        });
+    });
+
+    it('should throw correct error if no tickets exists', () => {
+      const uParser = new ParserUapi('SOAP:Fault', 'v36_0', { });
+
+      const parseFunction = airParser.AIR_ERRORS.bind(uParser);
+
+      const xml = fs
+        .readFileSync(`${xmlFolder}/AirExchangeQuote-error-no-tickets.xml`)
+        .toString();
+
+      return uParser.parse(xml)
+        .then((json) => {
+          const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]);
+          return parseFunction.call(uParser, errData);
+        })
+        .catch(err => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.TicketsNotIssued);
+        });
     });
   });
 });

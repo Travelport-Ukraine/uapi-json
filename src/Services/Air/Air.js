@@ -282,9 +282,13 @@ module.exports = (settings) => {
 
     getExchangeInformation(options) {
       return this.importPNR(options)
-        .then(() => service.exchangeQuote({
-          ...options,
-        }));
+        .then((importResponse) => {
+          const [booking] = importResponse;
+          return service.exchangeQuote({
+            ...options,
+            bookingDate: moment(booking.createdAt).format('YYYY-MM-DD'),
+          });
+        });
     },
 
   };

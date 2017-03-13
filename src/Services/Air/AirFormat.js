@@ -44,10 +44,10 @@ function formatSegment(segment) {
 
 function formatPrices(prices) {
   return {
-    basePrice: utils.price(prices.BasePrice),
-    taxes: utils.price(prices.Taxes),
-    equivalentBasePrice: utils.price(prices.EquivalentBasePrice),
-    totalPrice: utils.price(prices.TotalPrice),
+    basePrice: prices.BasePrice,
+    taxes: prices.Taxes,
+    equivalentBasePrice: prices.EquivalentBasePrice,
+    totalPrice: prices.TotalPrice,
   };
 }
 
@@ -69,10 +69,10 @@ function formatTrip(segment, flightDetails) {
 
 function formatAirExchangeBundle(bundle) {
   return {
-    addCollection: utils.price(bundle.AddCollection),
-    changeFee: utils.price(bundle.ChangeFee),
-    exchangeAmount: utils.price(bundle.ExchangeAmount),
-    refund: utils.price(bundle.Refund),
+    addCollection: bundle.AddCollection,
+    changeFee: bundle.ChangeFee,
+    exchangeAmount: bundle.ExchangeAmount,
+    refund: bundle.Refund,
   };
 }
 

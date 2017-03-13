@@ -55,12 +55,12 @@
 
             <air:RepricingModifiers
                     BulkTicket="false"
-                    CreateDate="2017-03-04"
+                    CreateDate="{{bookingDate}}"
                     PriceClassOfService="ClassBooked">
             </air:RepricingModifiers>
             <air:OriginalItineraryDetails
                     BulkTicket="false"
-                    TicketingDate="2017-03-04">
+                    TicketingDate="{{bookingDate}}">
             </air:OriginalItineraryDetails>
         </air:AirExchangeQuoteReq>
     </soap:Body>

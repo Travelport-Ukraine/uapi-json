@@ -107,6 +107,8 @@ Object.assign(AirRuntimeError, createErrorsList({
   UnableToOpenPNRInTerminal: 'Unable to open requested PNR in Terminal',
   UnableToAddExtraSegment: 'Unable to add extra segment to PNR',
   UnableToSaveBookingWithExtraSegment: 'Unable to save booking with extra segment',
+  NoResidualValue: 'Original ticket has no residual value for this specific itinerary. Issue a new ticket using current fares.',
+  TicketsNotIssued: 'Host error during ticket retrieve.',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(
