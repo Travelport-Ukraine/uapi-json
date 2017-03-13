@@ -1237,4 +1237,35 @@ describe('#AirService', () => {
         });
     });
   });
+
+  describe('getExchangeInformation', () => {
+    it('should check functions to be called', () => {
+      const d = moment();
+      const importPNR = sinon.spy(
+        () => Promise.resolve([{ createdAt: d }])
+      );
+
+      const exchange = sinon.spy(({ bookingDate }) => {
+        expect(bookingDate).to.be.equal(d.format('YYYY-MM-DD'));
+      });
+
+      const airService = () => ({
+        exchangeQuote: exchange,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      const service = createAirService();
+      service.importPNR = importPNR;
+
+      return service.getExchangeInformation({
+        pnr: 'PNR001',
+      }).then(() => {
+        expect(importPNR).to.have.callCount(1)
+        expect(exchange).to.have.callCount(1);
+      });
+    });
+  });
 });

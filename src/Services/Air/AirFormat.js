@@ -27,13 +27,7 @@ function getBaggage(baggageAllowance) {
   };
 }
 
-function formatTrip(segment, flightDetails) {
-  const flightInfo = Object.keys(flightDetails).map(
-    detailsKey => flightDetails[detailsKey]
-  );
-  const plane = flightInfo.map(details => details.Equipment);
-  const duration = flightInfo.map(details => details.FlightTime);
-  const techStops = flightInfo.slice(1).map(details => details.Origin);
+function formatSegment(segment) {
   return {
     from: segment.Origin,
     to: segment.Destination,
@@ -43,10 +37,41 @@ function formatTrip(segment, flightDetails) {
     airline: segment.Carrier,
     flightNumber: segment.FlightNumber,
     serviceClass: segment.CabinClass,
+    uapi_segment_ref: segment.Key,
+  };
+}
+
+function formatPrices(prices) {
+  return {
+    basePrice: prices.BasePrice,
+    taxes: prices.Taxes,
+    equivalentBasePrice: prices.EquivalentBasePrice,
+    totalPrice: prices.TotalPrice,
+  };
+}
+
+
+function formatTrip(segment, flightDetails) {
+  const flightInfo = Object.keys(flightDetails).map(
+    detailsKey => flightDetails[detailsKey]
+  );
+  const plane = flightInfo.map(details => details.Equipment);
+  const duration = flightInfo.map(details => details.FlightTime);
+  const techStops = flightInfo.slice(1).map(details => details.Origin);
+  return {
+    ...formatSegment(segment),
     plane,
     duration,
     techStops,
-    uapi_segment_ref: segment.Key,
+  };
+}
+
+function formatAirExchangeBundle(bundle) {
+  return {
+    addCollection: bundle.AddCollection,
+    changeFee: bundle.ChangeFee,
+    exchangeAmount: bundle.ExchangeAmount,
+    refund: bundle.Refund,
   };
 }
 
@@ -185,5 +210,8 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 module.exports = {
   formatLowFaresSearch,
   formatTrip,
+  formatSegment,
+  formatAirExchangeBundle,
+  formatPrices,
   getBaggage,
 };

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AirExchangeQuoteRsp xmlns:air="http://www.travelport.com/schema/air_v36_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0" TraceId="" TransactionId="9A7A8F3E0A0759CD8644D727F86EEA93" ResponseTime="5390">
+            <air:AirPricingSolution Key="l5s9spBAAA/B+HmPXLAAAA==" TotalPrice="CZK11910" BasePrice="AED1700" EquivalentBasePrice="CZK11910" Taxes="CZK0">
+                <air:AirSegment Key="l5s9spBAAA/B9HmPXLAAAA==" Group="0" Carrier="EK" CabinClass="Economy" FlightNumber="418" Origin="DXB" Destination="BKK" DepartureTime="2017-08-25T08:45:00.000+04:00" ArrivalTime="2017-08-25T18:10:00.000+07:00" ClassOfService="U" OptionalServicesIndicator="false">
+                    <air:CodeshareInfo OperatingCarrier="EK" OperatingFlightNumber="418"/>
+                </air:AirSegment>
+                <air:AirPricingInfo Key="l5s9spBAAA/B5HmPXLAAAA==" TotalPrice="CZK11910" BasePrice="AED1700" EquivalentBasePrice="CZK11910" Taxes="CZK0" PricingMethod="Guaranteed" FareCalculationInd="G">
+                    <air:FareInfo Key="l5s9spBAAA/B6HmPXLAAAA==" FareBasis="ULSOSAE1" PassengerTypeCode="ADT" Origin="DXB" Destination="BKK" EffectiveDate="2017-03-04T18:00:13.062+00:00" Amount="NUC462.83" NotValidBefore="2017-08-25" NotValidAfter="2017-08-25">
+                        <common_v36_0:Endorsement Value="NON-REFUNDABLE/NON-END/FLEX 2452 CZK"/>
+                        <air:BaggageAllowance>
+                            <air:MaxWeight Value="30" Unit="Kilograms"/>
+                        </air:BaggageAllowance>
+                    </air:FareInfo>
+                    <air:BookingInfo BookingCode="U" CabinClass="Economy" FareInfoRef="l5s9spBAAA/B6HmPXLAAAA==" SegmentRef="l5s9spBAAA/B9HmPXLAAAA=="/>
+                    <air:FareCalc>ADT DXB EK BKK 462.83NUC462.83END ROE3.67303 EK</air:FareCalc>
+                    <air:PassengerType Code="ADT"/>
+                    <air:BaggageAllowances>
+                        <air:BaggageAllowanceInfo TravelerType="ADT" Origin="DXB" Destination="BKK" Carrier="EK">
+                            <air:URLInfo>
+                                <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSEK.BAGG</air:URL>
+                            </air:URLInfo>
+                            <air:TextInfo>
+                                <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                            </air:TextInfo>
+                            <air:TextInfo>
+                                <air:Text>CHGS MAY APPLY IF BAGS EXCEED TTL WT ALLOWANCE</air:Text>
+                            </air:TextInfo>
+                            <air:TextInfo>
+                                <air:Text>CHGS MAY APPLY IF BAGS EXCEED TTL WT ALLOWANCE</air:Text>
+                            </air:TextInfo>
+                            <air:BagDetails ApplicableBags="1stChecked" TotalPrice="CZK0"/>
+                            <air:BagDetails ApplicableBags="2ndChecked" TotalPrice="CZK0"/>
+                        </air:BaggageAllowanceInfo>
+                        <air:CarryOnAllowanceInfo Origin="DXB" Destination="BKK" Carrier="EK">
+                            <air:TextInfo>
+                                <air:Text>CARRY ON HAND BAGGAGE ALLOWANCE</air:Text>
+                            </air:TextInfo>
+                            <air:CarryOnDetails TotalPrice="CZK0"/>
+                        </air:CarryOnAllowanceInfo>
+                    </air:BaggageAllowances>
+                </air:AirPricingInfo>
+                <air:PricingDetails LowFarePricing="false" LowFareFound="false" PenaltyApplies="true" DiscountApplies="false" ItineraryType="International" ValidatingVendorCode="EK" ForTicketingOnDate="2017-03-04" LastDateToTicket="2017-07-06" PricingType="ClassBooked" ConversionRate="7.005613" RateOfExchange="3.67303" OriginalTicketCurrency="UAH">
+                    <air:AdvisoryMessage>* PRICING RULES VALIDATING CARRIER DEFAULT EK</air:AdvisoryMessage>
+                    <air:AdvisoryMessage>* FARE MAY CHANGE UNLESS TICKETED *</air:AdvisoryMessage>
+                    <air:EndorsementText>NON-REFUNDABLE/NON-END/FLEX 2452 CZK</air:EndorsementText>
+                </air:PricingDetails>
+            </air:AirPricingSolution>
+            <air:AirExchangeBundleTotal>
+                <common_v36_0:AirExchangeInfo ExchangeAmount="CZK0" ChangeFee="CZK2102" PricingTag="A" AddCollection="CZK0" Refund="CZK0"/>
+            </air:AirExchangeBundleTotal>
+            <air:AirExchangeBundle>
+                <common_v36_0:AirExchangeInfo ExchangeAmount="CZK0" ChangeFee="CZK2102" AddCollection="CZK0" Refund="CZK0">
+                    <common_v36_0:PaidTax Amount="CZK552" Code="AE"/>
+                    <common_v36_0:PaidTax Amount="CZK258" Code="F6"/>
+                    <common_v36_0:PaidTax Amount="CZK37" Code="TP"/>
+                    <common_v36_0:PaidTax Amount="CZK27" Code="E7"/>
+                    <common_v36_0:PaidTax Amount="CZK12" Code="G8"/>
+                    <common_v36_0:PaidTax Amount="CZK4925" Code="YQ"/>
+                </common_v36_0:AirExchangeInfo>
+                <air:AirPricingInfoRef Key="l5s9spBAAA/B5HmPXLAAAA=="/>
+            </air:AirExchangeBundle>
+            <common_v36_0:HostToken>H4sIAAAAAAAAAFvzloG1hMEw1DHAM941wtnD0c/dNd7bNdLS0dzRws3Y1cDRwNzU0tnFwszExMXcyNzNwszV1dHSGACR1hvnOAAAAA==</common_v36_0:HostToken>
+        </air:AirExchangeQuoteRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

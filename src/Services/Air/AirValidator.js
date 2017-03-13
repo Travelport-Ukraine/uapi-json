@@ -14,7 +14,9 @@ module.exports = {
   ),
 
   AIR_PRICE: compose(
-    validate(),
+    validate(
+      validators.segments,
+    ),
     transform(
       transformers.setBusinessFlag,
       transformers.setPassengersAge,
@@ -91,6 +93,14 @@ module.exports = {
   AIR_CANCEL_PNR: compose(
     validate(
       validators.paramsIsObject,
+      validators.pnr,
+    ),
+    transform()
+  ),
+
+  AIR_EXCHANGE_QUOTE: compose(
+    validate(
+      validators.segments,
       validators.pnr,
     ),
     transform()

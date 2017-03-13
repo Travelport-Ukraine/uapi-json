@@ -278,5 +278,18 @@ module.exports = (settings) => {
           err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
         );
     },
+
+
+    getExchangeInformation(options) {
+      return this.importPNR(options)
+        .then((importResponse) => {
+          const [booking] = importResponse;
+          return service.exchangeQuote({
+            ...options,
+            bookingDate: moment(booking.createdAt).format('YYYY-MM-DD'),
+          });
+        });
+    },
+
   };
 };

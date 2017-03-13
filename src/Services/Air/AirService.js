@@ -130,5 +130,17 @@ module.exports = function (settings) {
       AirParser.AIR_CANCEL_PNR,
       debug
     ),
+
+    exchangeQuote: uApiRequest(
+      config.AirService.url,
+      auth,
+      `${templatesDir}/AIR_EXCHANGE_QUOTE.xml`,
+      null,
+      AirValidator.AIR_EXCHANGE_QUOTE,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_EXCHANGE_QUOTE,
+      debug
+    ),
+
   };
 };

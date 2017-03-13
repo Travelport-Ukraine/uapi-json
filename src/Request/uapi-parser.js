@@ -51,6 +51,7 @@ function defaultConfig(ver) {
     'air:TicketInfo',
     'air:Ticket',
     'air:Coupon',
+    'air:AirExchangeBundle',
     'common_' + ver + ':ResponseMessage',
     'common_' + ver + ':BookingTraveler',
     'air:BaggageAllowanceInfo',

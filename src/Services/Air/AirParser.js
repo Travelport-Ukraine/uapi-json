@@ -250,6 +250,10 @@ const AirErrorHandler = function (obj) {
   // FIXME collapse versions using a regexp search in ParserUapi
   if (errData) {
     switch (errData[`common_${this.uapi_version}:Code`]) {
+      case '4454':
+        return Promise.reject(new AirRuntimeError.NoResidualValue(obj));
+      case '12009':
+        return Promise.reject(new AirRuntimeError.TicketsNotIssued(obj));
       case '13003':
         return Promise.reject(new AirRuntimeError.NoReservationToImport(obj));
       case '3003':
@@ -435,7 +439,7 @@ function extractBookings(obj) {
             birthDate: moment(traveler.DOB).format('YYYY-MM-DD'),
           } : null,
           traveler.TravelerType ? {
-            ageType: traveler.TravelerType,
+            ageCategory: traveler.TravelerType,
           } : null,
           traveler.Gender ? {
             gender: traveler.Gender,
@@ -576,6 +580,103 @@ function gdsQueue(req) {
   return true;
 }
 
+function exchangeQuote(req) {
+  const root = 'air:AirExchangeQuoteRsp';
+  const xml = req[root][0];
+  const tokenRoot = `common_${this.uapi_version}:HostToken`;
+
+  const token = {
+    'air:AirExchangeBundle': xml['air:AirExchangeBundle'],
+    'air:AirPricingSolution': xml['air:AirPricingSolution'],
+    [tokenRoot]: xml[tokenRoot],
+  };
+
+  return utils.deflate(JSON.stringify(token))
+    .then((zippedToken) => {
+      const json = this.mergeLeafRecursive(req, root)['air:AirExchangeQuoteRsp'];
+
+      const exchangeInfoRoot = `common_${this.uapi_version}:AirExchangeInfo`;
+
+      const exchangeBundleTotal = json['air:AirExchangeBundleTotal'];
+      const totalBundle = exchangeBundleTotal
+        && exchangeBundleTotal[exchangeInfoRoot];
+
+      const exchangeDetails = json['air:AirExchangeBundle'].map((bundle) => {
+        const exchange = bundle[exchangeInfoRoot];
+        const taxes = exchange[`common_${this.uapi_version}:PaidTax`]
+          .map(tax => ({ type: tax.Code, value: tax.Amount }));
+
+        return {
+          ...format.formatAirExchangeBundle(exchange),
+          taxes,
+          uapi_pricing_info_ref: Object.keys(bundle['air:AirPricingInfoRef'])[0],
+        };
+      });
+
+      const solution = utils.firstInObj(json['air:AirPricingSolution']);
+      const segments = Object.keys(solution['air:AirSegment']).map((key) => {
+        const segment = solution['air:AirSegment'][key];
+        return {
+          ...format.formatSegment(segment),
+          serviceClass: segment.CabinClass,
+          bookingClass: segment.ClassOfService,
+        };
+      });
+
+      const pricingInfo = Object.keys(solution['air:AirPricingInfo'])
+        .map((key) => {
+          const pricing = solution['air:AirPricingInfo'][key];
+
+          const bookingInfo = Object.keys(pricing['air:BookingInfo'])
+            .map((bookingInfoKey) => {
+              const info = pricing['air:BookingInfo'][bookingInfoKey];
+              const fare = pricing['air:FareInfo'][info.FareInfoRef];
+
+              return {
+                bookingCode: info.BookingCode,
+                cabinClass: info.CabinClass,
+                baggage: format.getBaggage(fare['air:BaggageAllowance']),
+                fareBasis: fare.FareBasis,
+                from: fare.Origin,
+                to: fare.Destination,
+                uapi_segment_ref: info.SegmentRef,
+              };
+            });
+
+          return {
+            ...format.formatPrices(pricing),
+            bookingInfo,
+            uapi_pricing_info_ref: pricing.Key,
+            fareCalculation: pricing['air:FareCalc'],
+          };
+        });
+
+      const airPricingDetails = solution['air:PricingDetails'];
+
+      return {
+        exchangeToken: zippedToken,
+        exchangeDetails,
+        segments,
+        pricingInfo,
+        pricingDetails: {
+          pricingType: airPricingDetails.PricingType,
+          lowFareFound: airPricingDetails.LowFareFound === 'true',
+          lowFarePricing: airPricingDetails.LowFarePricing === 'true',
+          discountApplies: airPricingDetails.DiscountApplies === 'true',
+          penaltyApplies: airPricingDetails.DiscountApplies === 'true',
+          conversionRate: parseFloat(airPricingDetails.ConversionRate || 1),
+          rateOfExchange: parseFloat(airPricingDetails.RateOfExchange || 1),
+          validatingVendor: airPricingDetails.ValidatingVendorCode,
+        },
+        pricingSolution: format.formatPrices(solution),
+        exchangeTotal: {
+          ...format.formatAirExchangeBundle(totalBundle),
+          pricingTag: totalBundle.PricingTag,
+        },
+      };
+    });
+}
+
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: lowFaresSearchRequest,
   AIR_PRICE_REQUEST_PRICING_SOLUTION_XML: airPriceRspPricingSolutionXML,
@@ -590,4 +691,5 @@ module.exports = {
   AIR_GET_TICKET: airGetTicket,
   AIR_CANCEL_TICKET: airCancelTicket,
   AIR_CANCEL_PNR: airCancelPnr,
+  AIR_EXCHANGE_QUOTE: exchangeQuote,
 };

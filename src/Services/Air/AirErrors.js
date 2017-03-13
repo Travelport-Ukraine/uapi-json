@@ -20,6 +20,7 @@ Object.assign(AirValidationError, createErrorsList({
   LegsInvalidType: 'Invalid type for legs in request',
   LegsInvalidStructure: 'Leg in leg array foes not all required fields',
   AirPricingSolutionInvalidType: 'air:AirPricingSolution array is expected',
+  SegmentsMissing: 'Segments missing in request. See data.',
   BirthDateInvalid: 'Invalid birth date',
   FopMissing: 'Form of payment missing',
   FopTypeUnsupported: 'Form of payment type is unsupported',
@@ -106,6 +107,8 @@ Object.assign(AirRuntimeError, createErrorsList({
   UnableToOpenPNRInTerminal: 'Unable to open requested PNR in Terminal',
   UnableToAddExtraSegment: 'Unable to add extra segment to PNR',
   UnableToSaveBookingWithExtraSegment: 'Unable to save booking with extra segment',
+  NoResidualValue: 'Original ticket has no residual value for this specific itinerary. Issue a new ticket using current fares.',
+  TicketsNotIssued: 'Host error during ticket retrieve.',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(

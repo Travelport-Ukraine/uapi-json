@@ -7,6 +7,8 @@ import parsers from './parsers';
 import transform from './transform';
 import compose from './compose';
 import hasAllFields from './has-all-required-fields';
+import inflate from './inflate-promise';
+import deflate from './deflate-promise';
 
 const utils = {
   renameProperty,
@@ -18,6 +20,8 @@ const utils = {
   compose,
   parsers,
   hasAllFields,
+  inflate,
+  deflate,
 };
 
 export default utils;

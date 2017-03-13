@@ -11,6 +11,7 @@ import flightInfo from './flight-info';
 import emailOptional from './email-optional';
 import phone from './phone';
 import deliveryInfoOptional from './delivery-info-optional';
+import segments from './segments';
 
 export default {
   legs,
@@ -26,4 +27,5 @@ export default {
   emailOptional,
   phone,
   deliveryInfoOptional,
+  segments,
 };
