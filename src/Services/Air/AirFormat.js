@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import utils from '../../utils';
 import { AirParsingError } from './AirErrors';
 
 function getBaggage(baggageAllowance) {
