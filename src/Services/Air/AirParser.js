@@ -485,12 +485,14 @@ function extractBookings(obj) {
               ) : 1,
             }), {}
           );
-          const taxesInfo = Object.keys(reservation['air:TaxInfo']).map(
-            taxKey => ({
-              value: reservation['air:TaxInfo'][taxKey].Amount,
-              type: reservation['air:TaxInfo'][taxKey].Category,
-            })
-          );
+          const taxesInfo = reservation['air:TaxInfo']
+            ? Object.keys(reservation['air:TaxInfo']).map(
+              taxKey => ({
+                value: reservation['air:TaxInfo'][taxKey].Amount,
+                type: reservation['air:TaxInfo'][taxKey].Category,
+              })
+            )
+            : [];
           const modifierKey = reservation['air:TicketingModifiersRef']
             ? Object.keys(reservation['air:TicketingModifiersRef'])[0]
             : null;

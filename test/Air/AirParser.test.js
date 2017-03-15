@@ -559,22 +559,20 @@ describe('#AirParser', () => {
         expect(reservation.priceInfo).to.be.an('object');
         expect(reservation.priceInfo).to.include.keys([
           'totalPrice', 'basePrice', 'equivalentBasePrice', 'taxes', 'passengersCount',
+          'taxesInfo',
         ]);
         expect(reservation.priceInfo.passengersCount).to.be.an('object');
         Object.keys(reservation.priceInfo.passengersCount).forEach(
           ptc => expect(reservation.priceInfo.passengersCount[ptc]).to.be.a('number')
         );
-        if (reservation.priceInfo.taxesInfo) {
-          expect(reservation.priceInfo.taxesInfo).to.be.an('array');
-          expect(reservation.priceInfo.taxesInfo).to.have.length.above(0);
-          reservation.priceInfo.taxesInfo.forEach(
-            (tax) => {
-              expect(tax).to.be.an('object');
-              expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
-              expect(tax.type).to.match(/^[A-Z]{2}$/);
-            }
-          );
-        }
+        expect(reservation.priceInfo.taxesInfo).to.be.an('array');
+        reservation.priceInfo.taxesInfo.forEach(
+          (tax) => {
+            expect(tax).to.be.an('object');
+            expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
+            expect(tax.type).to.match(/^[A-Z]{2}$/);
+          }
+        );
         // Checking baggage
         expect(reservation.baggage).to.be.an('array');
         reservation.baggage.forEach(
@@ -775,6 +773,16 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', {});
       const parseFunction = airParser.AIR_IMPORT_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/importPNR.noSegments.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false);
+      });
+    });
+
+    it('should parse pnr having fare quotes without taxes', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', {});
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/importPNR.fq.noTaxes.xml`).toString();
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult, false);
