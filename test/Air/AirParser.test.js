@@ -199,6 +199,19 @@ describe('#AirParser', () => {
         });
     });
 
+    it('should return default error if failure and code is not detected', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_UNKNOWN_FAILURE.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then(() => Promise.reject(new Error('Error has not occured')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.TicketRetrieveError);
+        });
+    });
+
     it('should return error when not available to return ticket', (done) => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
