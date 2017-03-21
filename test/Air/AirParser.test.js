@@ -320,11 +320,12 @@ describe('#AirParser', () => {
           const priceInfo = result.priceInfo;
           expect(priceInfo).to.be.an('object');
           expect(priceInfo).to.have.all.keys([
-            'TotalPrice', 'BasePrice', 'Taxes', 'EquivalentBasePrice',
+            'TotalPrice', 'BasePrice', 'Taxes', 'EquivalentBasePrice', 'TaxesInfo',
           ]);
           expect(priceInfo.TotalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
           expect(priceInfo.BasePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
           expect(priceInfo.Taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.TaxesInfo).to.be.an('array').and.to.have.lengthOf(0);
           // Passengers
           expect(result.passengers).to.be.an('array');
           expect(result.passengers).to.have.length.above(0);

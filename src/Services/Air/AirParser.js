@@ -333,22 +333,21 @@ const airGetTicket = function (obj) {
       };
     }
   );
-  const taxes = airPricingInfo
+  const taxes = (airPricingInfo && airPricingInfo['air:TaxInfo'])
     ? Object.keys(airPricingInfo['air:TaxInfo']).map(
         taxKey => ({
           type: airPricingInfo['air:TaxInfo'][taxKey].Category,
           value: airPricingInfo['air:TaxInfo'][taxKey].Amount,
         })
       )
-    : null;
-  const priceInfo = Object.assign({
+    : [];
+  const priceInfo = {
     TotalPrice: etr.TotalPrice,
     BasePrice: etr.BasePrice,
     EquivalentBasePrice: etr.EquivalentBasePrice,
     Taxes: etr.Taxes,
-  }, taxes !== null ? {
     TaxesInfo: taxes,
-  } : null);
+  };
   const response = {
     uapi_ur_locator: obj.UniversalRecordLocatorCode,
     uapi_reservation_locator: etr['air:AirReservationLocatorCode'],
