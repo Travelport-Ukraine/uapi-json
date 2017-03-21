@@ -160,6 +160,12 @@ describe('#Utils', () => {
         });
       });
 
+      it('should test for correct parse empty list', () => {
+        const file = getFile('searchPassengersList_empty');
+        const parsed = utils.parsers.searchPassengersList(file);
+        expect(parsed.length).to.be.equal(0);
+      });
+
       it('should return null if not parsed', () => {
         const screen = 'some string';
         const parsed = utils.parsers.searchPassengersList(screen);
