@@ -249,13 +249,13 @@ describe('#AirParser', () => {
           const priceInfo = result.priceInfo;
           expect(priceInfo).to.be.an('object');
           expect(priceInfo).to.have.all.keys([
-            'TotalPrice', 'BasePrice', 'Taxes', 'TaxesInfo', 'EquivalentBasePrice',
+            'totalPrice', 'basePrice', 'taxes', 'taxesInfo', 'equivalentBasePrice',
           ]);
-          expect(priceInfo.TotalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.BasePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.Taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.TaxesInfo).to.be.an('array');
-          expect(priceInfo.TaxesInfo).to.have.length.above(0);
+          expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.taxesInfo).to.be.an('array');
+          expect(priceInfo.taxesInfo).to.have.length.above(0);
           // Passengers
           expect(result.passengers).to.be.an('array');
           expect(result.passengers).to.have.length.above(0);
@@ -320,12 +320,12 @@ describe('#AirParser', () => {
           const priceInfo = result.priceInfo;
           expect(priceInfo).to.be.an('object');
           expect(priceInfo).to.have.all.keys([
-            'TotalPrice', 'BasePrice', 'Taxes', 'EquivalentBasePrice', 'TaxesInfo',
+            'totalPrice', 'basePrice', 'taxes', 'equivalentBasePrice', 'taxesInfo',
           ]);
-          expect(priceInfo.TotalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.BasePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.Taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.TaxesInfo).to.be.an('array').and.to.have.lengthOf(0);
+          expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.taxesInfo).to.be.an('array').and.to.have.lengthOf(0);
           // Passengers
           expect(result.passengers).to.be.an('array');
           expect(result.passengers).to.have.length.above(0);
