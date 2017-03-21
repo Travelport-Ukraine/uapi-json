@@ -168,7 +168,7 @@ module.exports = (settings) => {
                ticket => this.getTicket({
                  pnr: pnrData[0].pnr,
                  uapi_ur_locator: pnrData[0].uapi_ur_locator,
-                 ticketNumber: ticket.number
+                 ticketNumber: ticket.number,
                })
              )
            )
