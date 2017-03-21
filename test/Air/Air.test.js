@@ -620,7 +620,7 @@ describe('#AirService', () => {
 
       const importPNR = sinon.spy((options) => {
         expect(options.pnr).to.be.equal('PNR');
-        return Promise.resolve(params);
+        return Promise.resolve([params]);
       });
 
       const service = () => ({
@@ -634,6 +634,7 @@ describe('#AirService', () => {
 
       const AirService = createAirService({ auth });
       AirService.getPNRByTicketNumber = getPNRByTicketNumber.bind(AirService);
+      AirService.importPNR = importPNR.bind(AirService);
 
       return AirService.getTicket(params).then(() => {
         expect(getTicket.calledTwice).to.be.equal(true);
@@ -950,7 +951,7 @@ describe('#AirService', () => {
       );
       // Spies
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
-      const importPNR = sinon.spy(() => Promise.resolve(true));
+      const importPNR = sinon.spy(() => Promise.resolve([{}]));
       const executeCommand = sinon.spy(() => Promise.resolve('RLOC 1G PNR001'));
       const closeSession = sinon.spy(() => Promise.resolve(true));
       // Services

@@ -131,14 +131,19 @@ module.exports = (settings) => {
     getTicket(options) {
       return service.getTicket(options)
         .catch((err) => {
-          if (!(err instanceof AirRuntimeError.TicketInfoIncomplete)) {
+          if (!(err instanceof AirRuntimeError.TicketInfoIncomplete)
+            && !(err instanceof AirRuntimeError.DuplicateTicketFound)) {
             return Promise.reject(err);
           }
           return this.getPNRByTicketNumber({
             ticketNumber: options.ticketNumber,
           })
             .then(pnr => this.importPNR({ pnr }))
-            .then(() => service.getTicket(options));
+            .then(ur => service.getTicket({
+              ...options,
+              pnr: ur[0].pnr,
+              uapi_ur_locator: ur[0].uapi_ur_locator,
+            }));
         });
     },
 
