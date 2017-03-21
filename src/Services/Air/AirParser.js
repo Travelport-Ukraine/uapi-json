@@ -511,7 +511,7 @@ function extractBookings(obj) {
             {
               totalPrice: reservation.TotalPrice,
               basePrice: reservation.BasePrice,
-              equivalentBasePrice: reservation.BasePrice,
+              equivalentBasePrice: reservation.EquivalentBasePrice,
               taxes: reservation.Taxes,
               passengersCount,
               taxesInfo,
