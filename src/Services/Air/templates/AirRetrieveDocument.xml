@@ -6,9 +6,19 @@
   <soap:Header/>
   <soap:Body>
     <air:AirRetrieveDocumentReq
-      AuthorizedBy="user" TargetBranch="{{TargetBranch}}" RetrieveProviderReservationDetails="true"
-      ReturnRestrictions="true" ReturnPricing="true" RetrieveMCO="false" ProviderCode="1G"
-      >
+            AuthorizedBy="user"
+            TargetBranch="{{TargetBranch}}"
+            RetrieveProviderReservationDetails="true"
+            ReturnRestrictions="true"
+            ReturnPricing="true" RetrieveMCO="false"
+            ProviderCode="1G"
+            {{#if uapi_ur_locator}}
+                UniversalRecordLocatorCode="{{uapi_ur_locator}}"
+            {{/if}}
+            {{#if pnr}}
+                ProviderLocatorCode="{{pnr}}"
+            {{/if}}
+    >
       <com:BillingPointOfSaleInfo OriginApplication="uAPI"/>
       {{#if emulatePcc}}
       <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>

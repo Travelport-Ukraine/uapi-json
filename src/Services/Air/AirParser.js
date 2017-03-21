@@ -269,6 +269,14 @@ const AirErrorHandler = function (obj) {
 };
 
 const airGetTicket = function (obj) {
+  const failure = obj['air:DocumentFailureInfo'];
+  if (failure) {
+    if (failure.Code === '3273') {
+      throw new AirRuntimeError.DuplicateTicketFound(obj);
+    }
+    throw new AirRuntimeError.TicketRetrieveError(obj);
+  }
+
   const etr = obj['air:ETR'];
   if (!etr) {
     throw new AirRuntimeError.TicketRetrieveError(obj);

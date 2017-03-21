@@ -109,6 +109,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   UnableToSaveBookingWithExtraSegment: 'Unable to save booking with extra segment',
   NoResidualValue: 'Original ticket has no residual value for this specific itinerary. Issue a new ticket using current fares.',
   TicketsNotIssued: 'Host error during ticket retrieve.',
+  DuplicateTicketFound: 'Duplicate ticket number found. Provide PNR, UR locator',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(
