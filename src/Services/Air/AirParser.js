@@ -541,6 +541,9 @@ function extractBookings(obj) {
         ticket => ({
           number: ticket.Number,
           uapi_passenger_ref: ticket.BookingTravelerRef,
+          uapi_pricing_info_ref: (ticket.AirPricingInfoRef)
+            ? ticket.AirPricingInfoRef
+            : null,
         })
       )
     ) : [];
