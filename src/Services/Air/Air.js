@@ -165,7 +165,11 @@ module.exports = (settings) => {
         .then(
            pnrData => Promise.all(
              pnrData[0].tickets.map(
-               ticket => service.getTicket({ ticketNumber: ticket.number })
+               ticket => this.getTicket({
+                 pnr: pnrData[0].pnr,
+                 uapi_ur_locator: pnrData[0].uapi_ur_locator,
+                 ticketNumber: ticket.number
+               })
              )
            )
         )
