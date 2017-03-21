@@ -522,6 +522,7 @@ function extractBookings(obj) {
           );
 
           return {
+            uapi_pricing_info_ref: key,
             status: reservation.Ticketed
               ? 'Ticketed'
               : 'Reserved',

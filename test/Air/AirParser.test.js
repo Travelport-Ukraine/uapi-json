@@ -573,7 +573,7 @@ describe('#AirParser', () => {
         expect(reservation).to.be.an('object');
         expect(reservation).to.include.all.keys([
           'status', 'fareCalculation', 'priceInfo', 'baggage', 'timeToReprice',
-          'uapi_segment_refs', 'uapi_passenger_refs',
+          'uapi_segment_refs', 'uapi_passenger_refs','uapi_pricing_info_ref'
         ]);
         if (reservation.platingCarrier) {
           expect(reservation.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
