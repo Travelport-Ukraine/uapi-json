@@ -4,7 +4,7 @@ import setPassengersAge from './set-passengers-age';
 import setHasFareBasisFlag from './set-has-farebasis-flag';
 import setGroupsForSegments from './set-groups-for-segments';
 import addMetaPassengersBooking from './add-meta-passengers-booking';
-import decodeExchangeToken from './decode-exchange-token-and-build';
+import decodeExchangeToken from './decode-exchange-token';
 
 export default {
   convertPassengersObjectToArray,
