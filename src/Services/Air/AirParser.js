@@ -679,6 +679,13 @@ function exchangeQuote(req) {
     });
 }
 
+function exchange(rsp) {
+  if (rsp['air:AirReservation']) {
+    return true;
+  }
+  throw new AirRuntimeError.CantDetectExchangeReponse(rsp);
+}
+
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: lowFaresSearchRequest,
   AIR_PRICE_REQUEST_PRICING_SOLUTION_XML: airPriceRspPricingSolutionXML,
@@ -694,4 +701,5 @@ module.exports = {
   AIR_CANCEL_TICKET: airCancelTicket,
   AIR_CANCEL_PNR: airCancelPnr,
   AIR_EXCHANGE_QUOTE: exchangeQuote,
+  AIR_EXCHANGE: exchange,
 };

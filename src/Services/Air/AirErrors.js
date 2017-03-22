@@ -30,6 +30,8 @@ Object.assign(AirValidationError, createErrorsList({
   PhoneMissing: 'Missing phone in book request',
   IncorrectPhoneFormat: 'Incorrect phone format. Missing required fields. See data.',
   DeliveryInformation: 'Missing of delivery information fields. See data.',
+  ReservationLocator: 'Missing uapi_reservation_locator in request. See data.',
+  ExchangeToken: 'Missing exchangeToken in request. See data.',
 }, AirValidationError));
 
 export const GdsValidationError = createErrorClass(
@@ -109,6 +111,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   UnableToSaveBookingWithExtraSegment: 'Unable to save booking with extra segment',
   NoResidualValue: 'Original ticket has no residual value for this specific itinerary. Issue a new ticket using current fares.',
   TicketsNotIssued: 'Host error during ticket retrieve.',
+  CantDetectExchangeReponse: 'Exchange response is unknown.',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(

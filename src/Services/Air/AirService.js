@@ -142,5 +142,16 @@ module.exports = function (settings) {
       debug
     ),
 
+    exchangeBooking: uApiRequest(
+      config.AirService.url,
+      auth,
+      `${templatesDir}/AIR_EXCHANGE.xml`,
+      'air:AirExchangeRsp',
+      AirValidator.AIR_EXCHANGE,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_EXCHANGE,
+      debug
+    ),
+
   };
 };

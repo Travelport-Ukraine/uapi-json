@@ -291,5 +291,15 @@ module.exports = (settings) => {
         });
     },
 
+    exchangeBooking(options) {
+      return this.importPNR(options)
+        .then((importResponse) => {
+          const [booking] = importResponse;
+          return service.exchangeBooking({
+            ...options,
+            uapi_reservation_locator: booking.uapi_reservation_locator,
+          });
+        });
+    },
   };
 };
