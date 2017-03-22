@@ -105,4 +105,15 @@ module.exports = {
     ),
     transform()
   ),
+
+  AIR_EXCHANGE: compose(
+    validate(
+      validators.pnr,
+      validators.reservationLocator,
+      validators.exchangeToken,
+    ),
+    transform(
+      transformers.decodeExchangeToken,
+    )
+  ),
 };

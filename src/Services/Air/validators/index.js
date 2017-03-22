@@ -12,6 +12,8 @@ import emailOptional from './email-optional';
 import phone from './phone';
 import deliveryInfoOptional from './delivery-info-optional';
 import segments from './segments';
+import reservationLocator from './reservation-locator';
+import exchangeToken from './exchange-token';
 
 export default {
   legs,
@@ -28,4 +30,6 @@ export default {
   phone,
   deliveryInfoOptional,
   segments,
+  reservationLocator,
+  exchangeToken,
 };
