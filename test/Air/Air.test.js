@@ -1269,4 +1269,38 @@ describe('#AirService', () => {
       });
     });
   });
+
+  describe('exchangeBooking', () => {
+    it('should check functions to be called', () => {
+      const importPNR = sinon.spy(
+        () => Promise.resolve([{
+          pnr: 111,
+          uapi_reservation_locator: 123,
+        }])
+      );
+
+      const exchange = sinon.spy(({ exchangeToken, uapi_reservation_locator  }) => {
+        expect(exchangeToken).to.be.equal('token');
+        expect(uapi_reservation_locator).to.be.equal(123);
+      });
+
+      const airService = () => ({
+        exchangeBooking: exchange,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      const service = createAirService();
+      service.importPNR = importPNR;
+
+      return service.exchangeBooking({
+        exchangeToken: 'token',
+      }).then(() => {
+        expect(importPNR).to.have.callCount(1);
+        expect(exchange).to.have.callCount(1);
+      });
+    });
+  });
 });

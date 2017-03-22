@@ -102,19 +102,21 @@ describe('#Utils', () => {
       const params = { me: 'you' };
       const t1 = sinon.spy((params) => { params.me = 'me'; return params; });
       const transform = utils.transform(t1);
-      const res = transform(params);
-      expect(params).to.be.not.deep.equal(res);
-      expect(params).to.not.be.equal(res);
-      expect(res.me).to.be.equal('me');
-      expect(t1.calledOnce).to.be.true;
+      return transform(params).then(res => {
+        expect(params).to.be.not.deep.equal(res);
+        expect(params).to.not.be.equal(res);
+        expect(res.me).to.be.equal('me');
+        expect(t1.calledOnce).to.be.true;
+      });
     });
 
     it('should correctly work without any transformers', () => {
       const params = { me: 'you' };
       const transform = utils.transform();
-      const res = transform(params);
-      expect(params).to.be.deep.equal(res);
-      expect(params).to.not.be.equal(res);
+      return transform(params).then(res => {
+        expect(params).to.be.deep.equal(res);
+        expect(params).to.not.be.equal(res);
+      })
     });
   });
 
@@ -220,6 +222,24 @@ describe('#Utils', () => {
         const original = 'somestring';
         return utils.deflate(original).then(utils.inflate).then(res => {
           expect(res).to.be.equal(original);
+        });
+      });
+
+      it('should return error on incorrect inflate', () => {
+        const original = 'somestring';
+        return utils.inflate(original).then(res => {
+          throw new Error('Cant be response')
+        }).catch(e => {
+          expect(e.message).not.equal('Cant be response');
+        });
+      });
+
+      it('should return error if cant deflate', () => {
+        const original = 123;
+        return utils.deflate(original).then(res => {
+          throw new Error('Cant be response');
+        }).catch(e => {
+          expect(e.message).not.equal('Cant be response');
         });
       });
     });

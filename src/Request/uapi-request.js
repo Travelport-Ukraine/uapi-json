@@ -59,11 +59,14 @@ module.exports = function (service, auth, reqType, rootObject,
     // create a v36 uAPI parser with default params and request data in env
     const uParser = new UapiParser(rootObject, 'v36_0', params, debugMode);
 
-    const validateInput = (resolve) => {
-      params = validateFunction(params);
-      uParser.env = params;
-      resolve(reqType);
-    };
+    const validateInput = () =>
+      Promise.resolve(params)
+        .then(validateFunction)
+        .then((validatedParams) => {
+          params = validatedParams;
+          uParser.env = validatedParams;
+          return reqType;
+        });
 
     const prepareRequest = function (template) {
       // adding target branch param from auth variable and render xml
@@ -141,7 +144,7 @@ module.exports = function (service, auth, reqType, rootObject,
     };
 
 
-    return new Promise(validateInput)
+    return validateInput()
       .then(readFile)
       .then(buffer => buffer.toString())
       .then(handlebars.compile)

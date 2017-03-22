@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { AirValidationError } from '../../../src/Services/Air/AirErrors';
 import validate from '../../../src/Services/Air/validators/segments';
 
-describe('Air.validators.phoneOptional', () => {
+describe('Air.validators.segments', () => {
   it('should pass', () => {
     const segments = [{
       arrival: '123',

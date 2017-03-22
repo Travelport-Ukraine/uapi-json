@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import convert from '../../../src/Services/Air/transformers/set-groups-for-segments';
 
-describe('Air.validators.setGroupsForSegments', () => {
+describe('Air.transformers.setGroupsForSegments', () => {
   it('should add transfer info for segments', () => {
     const params = {
       segments: [

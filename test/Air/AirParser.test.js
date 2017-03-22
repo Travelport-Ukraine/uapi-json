@@ -1072,4 +1072,30 @@ describe('#AirParser', () => {
         });
     });
   });
+
+  describe('AIR_EXCHANGE', () => {
+    it('should check if true returned in normal response', () => {
+      const uParser = new ParserUapi('air:AirExchangeRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_EXCHANGE;
+      const xml = fs.readFileSync(`${xmlFolder}/AirExchange-1pas-1ticket.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        return parseFunction.call(uParser, json);
+      }).then(result => {
+        expect(result).to.be.equal(true);
+      });
+    });
+
+    it('should thow error for unknown response type', () => {
+      const uParser = new ParserUapi('air:AirExchangeRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_EXCHANGE;
+      const xml = fs.readFileSync(`${xmlFolder}/AirExchange-1pas-1ticket.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        return parseFunction.call(uParser, {});
+      }).then(result => {
+        throw new Error('Cant return result');
+      }).catch(e => {
+        expect(e).to.be.instanceof(AirRuntimeError.CantDetectExchangeReponse);
+      });
+    });
+  });
 });

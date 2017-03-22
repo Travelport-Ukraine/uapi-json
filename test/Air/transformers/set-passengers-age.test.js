@@ -3,8 +3,8 @@ import moment from 'moment';
 
 import convert from '../../../src/Services/Air/transformers/set-passengers-age';
 
-describe('Air.validators.setBusinessFlag', () => {
-  it('should add two groups for segments', () => {
+describe('Air.transformers.setPassengersAge', () => {
+  it('should add age of passsengers', () => {
     const ages = [48, 47, 10, 5, 1];
     const checkAges = ages.concat([]);
     const params = {
