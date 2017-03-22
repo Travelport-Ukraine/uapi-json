@@ -10,9 +10,8 @@ describe('Air.validators.exchangeToken', () => {
   });
 
   it('should pass', () => {
-    it('should throw error when check is not set', () => {
-      const fn = () => check({ exchangeToken: '123' });
-      expect(fn).to.not.throw(AirValidationError.ExchangeToken);
-    });
+    const t = new Buffer('123').toString('base64');
+    const fn = () => check({ exchangeToken: t });
+    expect(fn).to.not.throw(AirValidationError.ExchangeToken);
   });
 });

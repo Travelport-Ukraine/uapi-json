@@ -112,7 +112,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   NoResidualValue: 'Original ticket has no residual value for this specific itinerary. Issue a new ticket using current fares.',
   TicketsNotIssued: 'Host error during ticket retrieve.',
   CantDetectExchangeReponse: 'Exchange response is unknown.',
-  ExchangeTokenIncorrect: 'Cant parse exchange token. Please resolve it again.',
+  ExchangeTokenIncorrect: 'Can\'t parse exchange token. Please resolve it again.',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(
