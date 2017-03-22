@@ -1,8 +1,8 @@
 import { AirValidationError } from '../AirErrors';
 
 export default (params) => {
-  if (params.uapi_reservation_locator === undefined
-    || params.uapi_reservation_locator === null) {
+  if (Object.prototype.toString
+      .call((params.uapi_reservation_locator) !== '[object String]')) {
     throw new AirValidationError.ReservationLocator(params);
   }
 };
