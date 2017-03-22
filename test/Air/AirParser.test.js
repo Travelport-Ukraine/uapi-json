@@ -186,6 +186,32 @@ describe('#AirParser', () => {
     });
   });
   describe('getTicket', () => {
+    it('should return correct error for duplicate ticket number', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_DUPLICATE_TICKET.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then(() => Promise.reject(new Error('Error has not occured')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.DuplicateTicketFound);
+        });
+    });
+
+    it('should return default error if failure and code is not detected', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_UNKNOWN_FAILURE.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then(() => Promise.reject(new Error('Error has not occured')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.TicketRetrieveError);
+        });
+    });
+
     it('should return error when not available to return ticket', (done) => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
@@ -223,13 +249,13 @@ describe('#AirParser', () => {
           const priceInfo = result.priceInfo;
           expect(priceInfo).to.be.an('object');
           expect(priceInfo).to.have.all.keys([
-            'TotalPrice', 'BasePrice', 'Taxes', 'TaxesInfo', 'EquivalentBasePrice',
+            'totalPrice', 'basePrice', 'taxes', 'taxesInfo', 'equivalentBasePrice',
           ]);
-          expect(priceInfo.TotalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.BasePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.Taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.TaxesInfo).to.be.an('array');
-          expect(priceInfo.TaxesInfo).to.have.length.above(0);
+          expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.taxesInfo).to.be.an('array');
+          expect(priceInfo.taxesInfo).to.have.length.above(0);
           // Passengers
           expect(result.passengers).to.be.an('array');
           expect(result.passengers).to.have.length.above(0);
@@ -294,11 +320,12 @@ describe('#AirParser', () => {
           const priceInfo = result.priceInfo;
           expect(priceInfo).to.be.an('object');
           expect(priceInfo).to.have.all.keys([
-            'TotalPrice', 'BasePrice', 'Taxes', 'EquivalentBasePrice',
+            'totalPrice', 'basePrice', 'taxes', 'equivalentBasePrice', 'taxesInfo',
           ]);
-          expect(priceInfo.TotalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.BasePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.Taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(priceInfo.taxesInfo).to.be.an('array').and.to.have.lengthOf(0);
           // Passengers
           expect(result.passengers).to.be.an('array');
           expect(result.passengers).to.have.length.above(0);
@@ -546,7 +573,7 @@ describe('#AirParser', () => {
         expect(reservation).to.be.an('object');
         expect(reservation).to.include.all.keys([
           'status', 'fareCalculation', 'priceInfo', 'baggage', 'timeToReprice',
-          'uapi_segment_refs', 'uapi_passenger_refs',
+          'uapi_segment_refs', 'uapi_passenger_refs','uapi_pricing_info_ref'
         ]);
         if (reservation.platingCarrier) {
           expect(reservation.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
@@ -636,7 +663,7 @@ describe('#AirParser', () => {
         result.tickets.forEach(
           (ticket) => {
             expect(ticket).to.be.an('object').and.to.have.all.keys([
-              'number', 'uapi_passenger_ref',
+              'number', 'uapi_passenger_ref', 'uapi_pricing_info_ref'
             ]);
             expect(ticket.number).to.match(/\d{13}/);
             expect(ticket.uapi_passenger_ref).to.be.a('string');

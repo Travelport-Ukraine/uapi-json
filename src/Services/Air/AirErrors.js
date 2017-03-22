@@ -113,6 +113,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   TicketsNotIssued: 'Host error during ticket retrieve.',
   CantDetectExchangeReponse: 'Exchange response is unknown.',
   ExchangeTokenIncorrect: 'Can\'t parse exchange token. Please resolve it again.',
+  DuplicateTicketFound: 'Duplicate ticket number found. Provide PNR, UR locator',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(

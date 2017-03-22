@@ -269,6 +269,14 @@ const AirErrorHandler = function (obj) {
 };
 
 const airGetTicket = function (obj) {
+  const failure = obj['air:DocumentFailureInfo'];
+  if (failure) {
+    if (failure.Code === '3273') {
+      throw new AirRuntimeError.DuplicateTicketFound(obj);
+    }
+    throw new AirRuntimeError.TicketRetrieveError(obj);
+  }
+
   const etr = obj['air:ETR'];
   if (!etr) {
     throw new AirRuntimeError.TicketRetrieveError(obj);
@@ -325,22 +333,21 @@ const airGetTicket = function (obj) {
       };
     }
   );
-  const taxes = airPricingInfo
+  const taxes = (airPricingInfo && airPricingInfo['air:TaxInfo'])
     ? Object.keys(airPricingInfo['air:TaxInfo']).map(
         taxKey => ({
           type: airPricingInfo['air:TaxInfo'][taxKey].Category,
           value: airPricingInfo['air:TaxInfo'][taxKey].Amount,
         })
       )
-    : null;
-  const priceInfo = Object.assign({
-    TotalPrice: etr.TotalPrice,
-    BasePrice: etr.BasePrice,
-    EquivalentBasePrice: etr.EquivalentBasePrice,
-    Taxes: etr.Taxes,
-  }, taxes !== null ? {
-    TaxesInfo: taxes,
-  } : null);
+    : [];
+  const priceInfo = {
+    totalPrice: etr.TotalPrice,
+    basePrice: etr.BasePrice,
+    equivalentBasePrice: etr.EquivalentBasePrice,
+    taxes: etr.Taxes,
+    taxesInfo: taxes,
+  };
   const response = {
     uapi_ur_locator: obj.UniversalRecordLocatorCode,
     uapi_reservation_locator: etr['air:AirReservationLocatorCode'],
@@ -504,7 +511,7 @@ function extractBookings(obj) {
             {
               totalPrice: reservation.TotalPrice,
               basePrice: reservation.BasePrice,
-              equivalentBasePrice: reservation.BasePrice,
+              equivalentBasePrice: reservation.EquivalentBasePrice,
               taxes: reservation.Taxes,
               passengersCount,
               taxesInfo,
@@ -515,6 +522,7 @@ function extractBookings(obj) {
           );
 
           return {
+            uapi_pricing_info_ref: key,
             status: reservation.Ticketed
               ? 'Ticketed'
               : 'Reserved',
@@ -533,6 +541,9 @@ function extractBookings(obj) {
         ticket => ({
           number: ticket.Number,
           uapi_passenger_ref: ticket.BookingTravelerRef,
+          uapi_pricing_info_ref: (ticket.AirPricingInfoRef)
+            ? ticket.AirPricingInfoRef
+            : null,
         })
       )
     ) : [];

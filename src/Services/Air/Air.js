@@ -131,14 +131,19 @@ module.exports = (settings) => {
     getTicket(options) {
       return service.getTicket(options)
         .catch((err) => {
-          if (!(err instanceof AirRuntimeError.TicketInfoIncomplete)) {
+          if (!(err instanceof AirRuntimeError.TicketInfoIncomplete)
+            && !(err instanceof AirRuntimeError.DuplicateTicketFound)) {
             return Promise.reject(err);
           }
           return this.getPNRByTicketNumber({
             ticketNumber: options.ticketNumber,
           })
             .then(pnr => this.importPNR({ pnr }))
-            .then(() => service.getTicket(options));
+            .then(ur => service.getTicket({
+              ...options,
+              pnr: ur[0].pnr,
+              uapi_ur_locator: ur[0].uapi_ur_locator,
+            }));
         });
     },
 
@@ -160,7 +165,11 @@ module.exports = (settings) => {
         .then(
            pnrData => Promise.all(
              pnrData[0].tickets.map(
-               ticket => service.getTicket({ ticketNumber: ticket.number })
+               ticket => this.getTicket({
+                 pnr: pnrData[0].pnr,
+                 uapi_ur_locator: pnrData[0].uapi_ur_locator,
+                 ticketNumber: ticket.number,
+               })
              )
            )
         )
