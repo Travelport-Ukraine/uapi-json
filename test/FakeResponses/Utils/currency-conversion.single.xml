@@ -1,0 +1,1 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SOAP:Body><util:CurrencyConversionRsp TransactionId="F6C41F7A0A0759DB0F80FA0687938C6C" ResponseTime="188" xmlns:util="http://www.travelport.com/schema/util_v35_0"><util:CurrencyConversion From="USD" To="UAH" BankSellingRate="26.91"/></util:CurrencyConversionRsp></SOAP:Body></SOAP:Envelope>

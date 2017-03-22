@@ -63,6 +63,7 @@ function defaultConfig(ver) {
     'hotel:HotelDetailItem',
     'hotel:AggregatorHotelDetails',
     'common_' + ver + ':MediaItem',
+    'util:CurrencyConversion',
   ];
 
   // Non-single field objects don't get collapsed
