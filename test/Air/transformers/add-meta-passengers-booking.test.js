@@ -4,8 +4,8 @@ import moment from 'moment';
 import convert from '../../../src/Services/Air/transformers/add-meta-passengers-booking';
 import age from '../../../src/Services/Air/transformers/set-passengers-age';
 
-describe('Air.validators.setBusinessFlag', () => {
-  it('should mutate passengers', () => {
+describe('Air.transformers.setPassengersAge', () => {
+  it('should add age', () => {
     const passengers = [{
       lastName: 'FIRST',
       firstName: 'PAX',

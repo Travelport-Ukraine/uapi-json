@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import convert from '../../../src/Services/Air/transformers/set-has-farebasis-flag';
 
-describe('Air.validators.setBusinessFlag', () => {
+describe('Air.trasnformers.setHasFareBasis', () => {
   it('should set flag = true', () => {
     const params = { segments: [{ fareBasisCode: '123' }] };
     const converted = convert(params);

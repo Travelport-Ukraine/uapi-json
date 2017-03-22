@@ -218,6 +218,24 @@ describe('#Utils', () => {
           expect(res).to.be.equal(original);
         });
       });
+
+      it('should return error on incorrect inflate', () => {
+        const original = 'somestring';
+        return utils.inflate(original).then(res => {
+          throw new Error('Cant be response')
+        }).catch(e => {
+          expect(e.message).not.equal('Cant be response');
+        });
+      });
+
+      it('should return error if cant deflate', () => {
+        const original = 123;
+        return utils.deflate(original).then(res => {
+          throw new Error('Cant be response');
+        }).catch(e => {
+          expect(e.message).not.equal('Cant be response');
+        });
+      });
     });
   });
 });

@@ -1,6 +1,6 @@
 import validate from '../../../src/Services/Air/validators/delivery-info-optional';
 
-describe('Air.validators.phoneOptional', () => {
+describe('Air.validators.deliveryInfoOptional', () => {
   it('should pass', () => {
     const deliveryInformation = {
       name: 123,

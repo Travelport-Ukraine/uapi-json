@@ -1,4 +1,5 @@
 import xml2js from 'xml2js';
+import { AirRuntimeError } from '../AirErrors';
 import { inflate } from '../../../utils';
 
 export default params =>
@@ -27,4 +28,9 @@ export default params =>
       });
       params.xml = resultXml;
       return params;
-    });
+    })
+    .catch(e =>
+      Promise.reject(
+        new AirRuntimeError.ExchangeTokenIncorrect(params, e)
+      )
+    );

@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import convert from '../../../src/Services/Air/transformers/set-business-flag';
 
-describe('Air.validators.setBusinessFlag', () => {
+describe('Air.transformers.setBusinessFlag', () => {
   it('should not modify params', () => {
     const params = { segments: [{ serviceClass: 'Economy' }] };
     const converted = convert(params);
