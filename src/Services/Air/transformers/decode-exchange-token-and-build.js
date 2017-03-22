@@ -1,10 +1,10 @@
 import xml2js from 'xml2js';
 import { inflate } from '../../../utils';
 
-export default (params) => {
-  return inflate(params.exchangeToken)
+export default params =>
+  inflate(params.exchangeToken)
     .then(JSON.parse)
-    .then(token => {
+    .then((token) => {
       const resultXml = {};
       Object.keys(token).forEach((root) => {
         const builder = new xml2js.Builder({
@@ -28,4 +28,3 @@ export default (params) => {
       params.xml = resultXml;
       return params;
     });
-};

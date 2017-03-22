@@ -679,7 +679,7 @@ function exchangeQuote(req) {
     });
 }
 
-function exchange(rsp) {
+function exchangeBooking(rsp) {
   if (rsp['air:AirReservation']) {
     return true;
   }
@@ -701,5 +701,5 @@ module.exports = {
   AIR_CANCEL_TICKET: airCancelTicket,
   AIR_CANCEL_PNR: airCancelPnr,
   AIR_EXCHANGE_QUOTE: exchangeQuote,
-  AIR_EXCHANGE: exchange,
+  AIR_EXCHANGE: exchangeBooking,
 };
