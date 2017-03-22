@@ -60,9 +60,11 @@ module.exports = function (service, auth, reqType, rootObject,
     const uParser = new UapiParser(rootObject, 'v36_0', params, debugMode);
 
     const validateInput = (resolve) => {
-      params = validateFunction(params);
-      uParser.env = params;
-      resolve(reqType);
+      validateFunction(params).then((validatedParams) => {
+        params = validatedParams;
+        uParser.env = validatedParams;
+        resolve(reqType);
+      });
     };
 
     const prepareRequest = function (template) {
