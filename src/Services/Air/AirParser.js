@@ -309,6 +309,9 @@ const airGetTicket = function (obj) {
         coupons: Object.keys(ticket['air:Coupon']).map(
           (couponKey) => {
             const coupon = ticket['air:Coupon'][couponKey];
+            const couponIterator = coupon.SegmentGroup
+              ? segmentIterator
+              : segmentIterator - 1;
             const couponInfo = Object.assign({
               couponNumber: coupon.CouponNumber,
               from: coupon.Origin,
@@ -321,11 +324,13 @@ const airGetTicket = function (obj) {
               notValidBefore: coupon.NotValidBefore,
               notValidAfter: coupon.NotValidAfter,
             }, bookingInfo !== null ? {
-              serviceClass: bookingInfo[segmentIterator].CabinClass,
-              bookingClass: bookingInfo[segmentIterator].BookingCode,
+              serviceClass: bookingInfo[couponIterator].CabinClass,
+              bookingClass: bookingInfo[couponIterator].BookingCode,
             } : null);
             // Incrementing segment index
-            segmentIterator += 1;
+            if (couponIterator === segmentIterator) {
+              segmentIterator += 1;
+            }
             // Returning coupon info
             return couponInfo;
           }
