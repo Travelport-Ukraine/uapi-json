@@ -1,26 +1,33 @@
-const assert = require('assert');
-const fs = require('fs');
-const errors = require('../../src/').errors.Utils;
-const ParserUapi = require('../../src/Request/uapi-parser');
-const utilsParser = require('../../src/Services/Utils/UtilsParser');
+import assert from 'assert';
+import { expect } from 'chai';
+import fs from 'fs';
+import errors from '../../src/Services/Utils/UtilsErrors';
+import ParserUapi from '../../src/Request/uapi-parser';
+import utilsParser from '../../src/Services/Utils/UtilsParser';
 
 const xmlFolder = `${__dirname}/../FakeResponses/Utils`;
 
 describe('#utilsParser', () => {
-
   describe('currencyConvert()', () => {
-    it('give response object', () => {
+    it('should parse single currency pair request', () => {
       const uParser = new ParserUapi('util:CurrencyConversionRsp', 'v_33_0', {});
       const parseFunction = utilsParser.CURRENCY_CONVERSION;
-      const xml = fs.readFileSync(`${xmlFolder}/CURRENCY_CONVERSION.xml`).toString();
+      const xml = fs.readFileSync(`${xmlFolder}/currency-conversion.single.xml`).toString();
       return uParser.parse(xml).then((json) => {
         const result = parseFunction.call(uParser, json);
-        assert.equal(result.length, 2, 'No Cancelled');
-        result.map(c => {
-          assert.notEqual(c.from, undefined, 'No from field');
-          assert.notEqual(c.to, undefined, 'No to field');
-          assert.notEqual(c.rate, undefined, 'No rate');
-        });
+        expect(result).to.be.an('array').and.to.have.lengthOf(1);
+        result.forEach(c => expect(c).to.be.an('object').and.to.have.all.keys(['from', 'to', 'rate']));
+      });
+    });
+
+    it('should parse multi currency pair request', () => {
+      const uParser = new ParserUapi('util:CurrencyConversionRsp', 'v_33_0', {});
+      const parseFunction = utilsParser.CURRENCY_CONVERSION;
+      const xml = fs.readFileSync(`${xmlFolder}/currency-conversion.multi.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const result = parseFunction.call(uParser, json);
+        expect(result).to.be.an('array').and.to.have.lengthOf(2);
+        result.forEach(c => expect(c).to.be.an('object').and.to.have.all.keys(['from', 'to', 'rate']));
       });
     });
 
