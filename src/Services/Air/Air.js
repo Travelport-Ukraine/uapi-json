@@ -2,6 +2,7 @@ import moment from 'moment';
 import _ from 'lodash';
 
 import { parsers } from '../../utils';
+import getBookingFromUr from '../../utils/get-booking-from-ur';
 import airService from './AirService';
 import createTerminalService from '../Terminal/Terminal';
 import { AirRuntimeError } from './AirErrors';
@@ -36,8 +37,21 @@ module.exports = (settings) => {
       });
     },
 
+    getPNR(options) {
+      return this.getUniversalRecordByPNR(options)
+        .then(
+          ur =>
+            getBookingFromUr(ur, options.pnr) ||
+            Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
+        );
+    },
+
     importPNR(options) {
-      return service.importPNR(options)
+      return [this.getPNR(options)];
+    },
+
+    getUniversalRecordByPNR(options) {
+      return service.getUniversalRecordByPNR(options)
         .catch((err) => {
           // Checking for error type
           if (!(err instanceof AirRuntimeError.NoReservationToImport)) {
@@ -98,22 +112,21 @@ module.exports = (settings) => {
               )
             )
             .then(() => terminal.closeSession())
-            .then(() => service.importPNR(options))
-            .then(pnrData => service.cancelPNR(pnrData[0]))
-            .then(() => service.importPNR(options));
+            .then(() => service.getUniversalRecordByPNR(options))
+            .then(ur => service.cancelPNR(getBookingFromUr(ur, options.pnr)))
+            .then(() => service.getUniversalRecordByPNR(options));
         });
     },
 
     ticket(options) {
-      return this.importPNR(options).then((data) => {
+      return this.getPNR(options).then((booking) => {
         const ticketParams = Object.assign({}, options, {
-          ReservationLocator: data[0].uapi_reservation_locator,
+          ReservationLocator: booking.uapi_reservation_locator,
         });
         return service.ticket(ticketParams)
           .then(result => result, (err) => {
             if (err instanceof AirRuntimeError.TicketingFoidRequired) {
-              return this.importPNR(options)
-                .then(booking => service.foid(booking[0]))
+              return service.foid(booking)
                 .then(() => service.ticket(ticketParams));
             }
             return Promise.reject(err);
@@ -138,11 +151,11 @@ module.exports = (settings) => {
           return this.getPNRByTicketNumber({
             ticketNumber: options.ticketNumber,
           })
-            .then(pnr => this.importPNR({ pnr }))
-            .then(ur => service.getTicket({
+            .then(pnr => this.getPNR({ pnr }))
+            .then(booking => service.getTicket({
               ...options,
-              pnr: ur[0].pnr,
-              uapi_ur_locator: ur[0].uapi_ur_locator,
+              pnr: booking.pnr,
+              uapi_ur_locator: booking.uapi_ur_locator,
             }));
         });
     },
@@ -161,13 +174,13 @@ module.exports = (settings) => {
     },
 
     getTickets(options) {
-      return this.importPNR(options)
+      return this.getPNR(options)
         .then(
-           pnrData => Promise.all(
-             pnrData[0].tickets.map(
+           booking => Promise.all(
+             booking.tickets.map(
                ticket => this.getTicket({
-                 pnr: pnrData[0].pnr,
-                 uapi_ur_locator: pnrData[0].uapi_ur_locator,
+                 pnr: booking.pnr,
+                 uapi_ur_locator: booking.uapi_ur_locator,
                  ticketNumber: ticket.number,
                })
              )
@@ -281,34 +294,27 @@ module.exports = (settings) => {
             }
           ))
         )
-        .then(() => this.importPNR(options))
-        .then(pnrData => service.cancelPNR(pnrData[0]))
+        .then(() => this.getPNR(options))
+        .then(booking => service.cancelPNR(booking))
         .catch(
           err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
         );
     },
 
-
     getExchangeInformation(options) {
-      return this.importPNR(options)
-        .then((importResponse) => {
-          const [booking] = importResponse;
-          return service.exchangeQuote({
-            ...options,
-            bookingDate: moment(booking.createdAt).format('YYYY-MM-DD'),
-          });
-        });
+      return this.getPNR(options)
+        .then(booking => service.exchangeQuote({
+          ...options,
+          bookingDate: moment(booking.createdAt).format('YYYY-MM-DD'),
+        }));
     },
 
     exchangeBooking(options) {
-      return this.importPNR(options)
-        .then((importResponse) => {
-          const [booking] = importResponse;
-          return service.exchangeBooking({
-            ...options,
-            uapi_reservation_locator: booking.uapi_reservation_locator,
-          });
-        });
+      return this.getPNR(options)
+        .then(booking => service.exchangeBooking({
+          ...options,
+          uapi_reservation_locator: booking.uapi_reservation_locator,
+        }));
     },
   };
 };

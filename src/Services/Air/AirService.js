@@ -50,7 +50,7 @@ module.exports = function (settings) {
       AirParser.AIR_TICKET_REQUEST,
       debug
     ),
-    importPNR: uApiRequest(
+    getUniversalRecordByPNR: uApiRequest(
       config.UniversalRecord.url,
       auth,
       `${templatesDir}/UNIVERSAL_RECORD_IMPORT_REQUEST.xml`,

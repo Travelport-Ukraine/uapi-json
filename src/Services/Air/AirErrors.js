@@ -114,6 +114,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   CantDetectExchangeReponse: 'Exchange response is unknown.',
   ExchangeTokenIncorrect: 'Can\'t parse exchange token. Please resolve it again.',
   DuplicateTicketFound: 'Duplicate ticket number found. Provide PNR, UR locator',
+  NoPNRFoundInUR: 'No PNR found in Universal record',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(
