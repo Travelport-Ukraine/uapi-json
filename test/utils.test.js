@@ -7,6 +7,19 @@ import errors from '../src/error-types';
 import utils from '../src/utils';
 
 describe('#Utils', () => {
+  describe('.getBookingFromUr', () => {
+    it('should return undefined when ur array is empty', () => {
+      expect(utils.getBookingFromUr([], 'PNR001')).to.equal(undefined);
+    });
+    it('should return undefined when ur array does not contain needed pnr', () => {
+      expect(utils.getBookingFromUr([{ pnr: 'PNR002' }], 'PNR001')).to.equal(undefined);
+    });
+    it('should return undefined when ur array does not contain needed pnr', () => {
+      const x = utils.getBookingFromUr([{ pnr: 'PNR001' }], 'PNR001');
+      expect(x).to.be.an('object');
+      expect(x.pnr).to.equal('PNR001');
+    });
+  });
   describe('.price', () => {
     it('should return test that price return null is not string', () => {
       expect(utils.price(undefined)).equal(null);
