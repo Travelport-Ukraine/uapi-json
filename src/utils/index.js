@@ -9,6 +9,7 @@ import compose from './compose';
 import hasAllFields from './has-all-required-fields';
 import inflate from './inflate-promise';
 import deflate from './deflate-promise';
+import getBookingFromUr from './get-booking-from-ur';
 
 const utils = {
   renameProperty,
@@ -22,6 +23,7 @@ const utils = {
   hasAllFields,
   inflate,
   deflate,
+  getBookingFromUr,
 };
 
 export default utils;

@@ -1,3 +1,4 @@
+module.exports = `
 <!--Release 8.1-->
 <!--Version Dated as of 15/Apr/2015 11:24:06-->
 <!--Air Pricing For Galileo(1G) with LFS CheckFlightDetails Request-->
@@ -60,3 +61,4 @@
         </air:AirPriceReq>
     </soap:Body>
 </soap:Envelope>
+`;

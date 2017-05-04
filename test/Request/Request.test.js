@@ -10,14 +10,14 @@ import {
 const expect = chai.expect;
 chai.use(sinonChai);
 
-const templatesDir = `${path.join(__dirname, '../../src/Services/Air/templates')}`;
+const templates = require('../../src/Services/Air/templates');
 const serviceParams = [
   'URL',
   {
     username: 'USERNAME',
     password: 'PASSWORD',
   },
-  `${templatesDir}/AIR_LOW_FARE_SEARCH_REQUEST.xml`,
+  templates.lowFareSearch,
   null,
   () => ({}),
   () => ({}),

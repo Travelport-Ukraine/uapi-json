@@ -1,3 +1,4 @@
+module.exports = `
 <!--Release 16.1.0.60--><!--Version Dated as of 06/Mar/2016-->
 <soap:Envelope
   xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
@@ -17,3 +18,4 @@
     </univ:UniversalRecordImportReq>
   </soap:Body>
 </soap:Envelope>
+`;

@@ -14,7 +14,7 @@ const r = params => sinon.spy(function(
 ) {
   expect(url.match(/.*.pp.*/)).to.be.equal(null);
   expect(auth).to.be.equal(params.auth);
-  expect(fs.existsSync(template)).to.be.equal(true);
+  expect(template).to.be.a('string');
   expect(validator).to.be.a('function');
   expect(parser).to.be.a('function');
   expect(error).to.be.a('function');

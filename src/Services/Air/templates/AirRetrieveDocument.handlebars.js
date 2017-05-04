@@ -1,3 +1,4 @@
+module.exports = `
 <soap:Envelope
   xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
   xmlns:air="http://www.travelport.com/schema/air_v39_0"
@@ -27,3 +28,4 @@
     </air:AirRetrieveDocumentReq>
   </soap:Body>
 </soap:Envelope>
+`;

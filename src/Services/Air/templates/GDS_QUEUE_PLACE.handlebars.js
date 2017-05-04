@@ -1,3 +1,4 @@
+module.exports = `
 <soapenv:Envelope
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
   xmlns:univ="http://www.travelport.com/schema/universal_v36_0"
@@ -15,3 +16,4 @@
     </gds:GdsQueuePlaceReq>
   </soapenv:Body>
 </soapenv:Envelope>
+`;
