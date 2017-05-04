@@ -1,3 +1,4 @@
+module.exports = `
 <!--Release 8.1--><!--Version Dated as of 15/Apr/2015 11:24:08-->
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Header/>
@@ -29,3 +30,4 @@
     </air:AirTicketingReq>
   </soap:Body>
 </soap:Envelope>
+`;

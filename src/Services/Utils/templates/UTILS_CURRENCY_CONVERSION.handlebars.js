@@ -1,3 +1,4 @@
+module.exports = `
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:util="http://www.travelport.com/schema/util_v35_0" xmlns:com="http://www.travelport.com/schema/common_v35_0">
   <soapenv:Body>
     <util:CurrencyConversionReq TargetBranch="{{TargetBranch}}">
@@ -8,3 +9,4 @@
     </util:CurrencyConversionReq>
   </soapenv:Body>
 </soapenv:Envelope>
+`;

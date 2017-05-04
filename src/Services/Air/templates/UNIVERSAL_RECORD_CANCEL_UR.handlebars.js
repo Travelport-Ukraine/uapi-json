@@ -1,3 +1,4 @@
+module.exports = `
 <soapenv:Envelope
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
   xmlns:com="http://www.travelport.com/schema/common_v36_0"
@@ -13,3 +14,4 @@
     </univ:UniversalRecordCancelReq>
   </soapenv:Body>
 </soapenv:Envelope>
+`;

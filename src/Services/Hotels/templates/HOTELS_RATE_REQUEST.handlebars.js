@@ -1,3 +1,4 @@
+module.exports = `
 <soapenv:Envelope
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
     <soapenv:Header/>
@@ -37,3 +38,4 @@
         </hot:HotelDetailsReq>
     </soapenv:Body>
 </soapenv:Envelope>
+`;

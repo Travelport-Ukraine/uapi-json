@@ -3,7 +3,7 @@ const HotelsParser = require('./HotelsParser');
 const HotelsValidator = require('./HotelsValidator');
 const getConfig = require('../../config');
 
-const templatesDir = `${__dirname}/templates`;
+const templates = require('./templates');
 
 module.exports = function (settings) {
   const { auth, debug, production } = settings;
@@ -12,7 +12,7 @@ module.exports = function (settings) {
     search: uApiRequest(
       config.HotelsService.url,
       auth,
-      `${templatesDir}/HOTELS_SEARCH_REQUEST.xml`,
+      templates.search,
       'hotel:HotelSearchAvailabilityRsp',
       HotelsValidator.HOTELS_SEARCH_REQUEST,
       HotelsParser.HOTELS_ERROR,
@@ -22,7 +22,7 @@ module.exports = function (settings) {
     rates: uApiRequest(
       config.HotelsService.url,
       auth,
-      `${templatesDir}/HOTELS_RATE_REQUEST.xml`,
+      templates.rate,
       'hotel:HotelDetailsRsp',
       HotelsValidator.HOTELS_RATE_REQUEST,
       HotelsParser.HOTELS_ERROR,
@@ -32,7 +32,7 @@ module.exports = function (settings) {
     book: uApiRequest(
       config.HotelsService.url,
       auth,
-      `${templatesDir}/HOTELS_BOOK_REQUEST.xml`,
+      templates.book,
       'universal:HotelCreateReservationRsp',
       HotelsValidator.HOTELS_BOOK_REQUEST,
       HotelsParser.HOTELS_ERROR,
@@ -42,7 +42,7 @@ module.exports = function (settings) {
     cancelBook: uApiRequest(
       config.UniversalRecord.url,
       auth,
-      `${templatesDir}/UNIVERSAL_RECORD_CANCEL_UR.xml`,
+      templates.universalRecordCancelUR,
       'universal:UniversalRecordCancelRsp',
       HotelsValidator.HOTELS_CANCEL_BOOK_REQUEST,
       HotelsParser.HOTELS_ERROR,

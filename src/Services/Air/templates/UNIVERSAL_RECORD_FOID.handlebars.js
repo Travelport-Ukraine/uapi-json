@@ -1,3 +1,4 @@
+module.exports = `
 <soapenv:Envelope
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
   xmlns:air="http://www.travelport.com/schema/air_v36_0"
@@ -22,3 +23,4 @@
     </univ:UniversalRecordModifyReq>
   </soapenv:Body>
 </soapenv:Envelope>
+`;

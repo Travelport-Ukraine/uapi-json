@@ -1,3 +1,4 @@
+module.exports = `
 <!--AirCreateReservationReq-->
 <!--Release 8.1-->
 <!--Version Dated as of 15/Apr/2015 11:24:07-->
@@ -84,3 +85,4 @@
         </univ:AirCreateReservationReq>
     </soap:Body>
 </soap:Envelope>
+`;

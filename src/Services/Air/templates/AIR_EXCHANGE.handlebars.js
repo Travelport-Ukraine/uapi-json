@@ -1,3 +1,4 @@
+module.exports = `
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
     <soap:Body>
         <air:AirExchangeReq
@@ -31,3 +32,4 @@
         </air:AirExchangeReq>
     </soap:Body>
 </soap:Envelope>
+`;
