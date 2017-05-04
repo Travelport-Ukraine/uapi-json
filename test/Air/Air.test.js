@@ -204,6 +204,43 @@ describe('#AirService', () => {
       `1. ${segment.airline} OPEN ${segment.class}  ${segment.date} ${segment.from}${segment.to} ${segment.comment}`
     ).toUpperCase();
 
+    it('should return array of one element', () => {
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
+        pnr: 'PNR002',
+      }, {
+        pnr: 'PNR001',
+      }]));
+      const airService = () => ({ getUniversalRecordByPNR });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+      return createAirService({ auth })
+        .importPNR({ pnr: 'PNR001' })
+        .then((response) => {
+          expect(getUniversalRecordByPNR).to.have.callCount(1);
+          expect(response).to.be.an('array').and.to.have.lengthOf(1);
+          expect(response[0].pnr).to.equal('PNR001');
+        });
+    });
+    it('should throw error when pnr not in list', () => {
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
+        pnr: 'PNR002',
+      }, {
+        pnr: 'PNR001',
+      }]));
+      const airService = () => ({ getUniversalRecordByPNR });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+      return createAirService({ auth })
+        .importPNR({ pnr: 'PNR003' })
+        .then(
+          () => Promise.reject('No error throwned'),
+          (err) => {
+            expect(err).to.be.an.instanceOf(AirRuntimeError.NoPNRFoundInUR);
+          }
+        );
+    });
     it('should check if correct function from service is called', () => {
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve({}));
       const airService = () => ({ getUniversalRecordByPNR });
@@ -606,6 +643,48 @@ describe('#AirService', () => {
         .then(() => Promise.reject(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError);
+        });
+    });
+
+    it('should get ticket data if duplicate ticket found', () => {
+      const getTicket = sinon.stub();
+      getTicket.onCall(0).returns(
+        Promise.reject(new AirRuntimeError.DuplicateTicketFound())
+      );
+      getTicket.onCall(1).returns(
+        Promise.resolve({
+          pnr: 'PNR001',
+          ticketNumber: '1234567890123',
+        })
+      );
+      // Spies
+      const cancelTicket = sinon.spy(() => Promise.resolve(true));
+      const getPNRByTicketNumber = sinon.spy(() => Promise.resolve('PNR001'));
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
+        pnr: 'PNR001',
+        uapi_ur_locator: 'UAPI01',
+      }]));
+      // Services
+      const service = () => ({
+        getTicket,
+        cancelTicket,
+        getUniversalRecordByPNR,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      const AirService = createAirService({ auth });
+      AirService.getPNRByTicketNumber = getPNRByTicketNumber.bind(AirService);
+
+      return AirService.getTicket({ ticketNumber: '0649902789376' })
+        .then((res) => {
+          expect(res).to.be.an('object').and.to.have.property('ticketNumber');
+          expect(res.ticketNumber).to.equal('1234567890123');
+          expect(getTicket.calledTwice).to.be.equal(true);
+          expect(getPNRByTicketNumber.calledOnce).to.be.equal(true);
+          expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
         });
     });
 

@@ -47,7 +47,8 @@ module.exports = (settings) => {
     },
 
     importPNR(options) {
-      return [this.getPNR(options)];
+      return this.getPNR(options)
+        .then(response => [response]);
     },
 
     getUniversalRecordByPNR(options) {
