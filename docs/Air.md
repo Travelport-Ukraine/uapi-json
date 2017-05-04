@@ -13,7 +13,9 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.book(params)](#book)
 * [.ticket(params)](#ticket)
 * [.toQueue(params)](#toQueue)
+* [.getPNR(params)](#getPNR)
 * [.importPNR(params)](#importPNR)
+* [.getUniversalRecordByPNR(params)](#getUniversalRecordByPNR)
 * [.flightInfo(params)](#flightInfo)
 * [.getPNRByTicketNumber(params)](#getPNRByTicketNumber)
 * [.searchBookingsByPassengerName(params)](#searchBookingsByPassengerName)
@@ -141,7 +143,7 @@ Please specify `transfer` field to mark connection segment.
 
 ## .ticket(params)
 <a name="ticket"></a>
-**This library is designed to do `ImportPNR` right after ticketing is finished with success.**
+**This library is designed to do `getPNR` right after ticketing is finished with success.**
 Ticketing is typically included as a follow-on request to an Air Booking response.
 Any number of tickets can be issued from one Stored Fare Quote when a booking has multiple passengers. Tickets can also be issued when there is more than one Stored Fare Quote in the PNR.
 Ticketing function returns `true` if the process is finished with success or `Error`.
@@ -183,15 +185,45 @@ The Queue Place functionality adds a specific booking (PNR) to a queue in the pr
 
 **See: <a href="../examples/Air/queue.js">Queue example</a>**
 
+## .getUniversalRecordByPNR(params)
+<a name="getUniversalRecordByPNR"></a>
+> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
+
+This method returns an array of all PNR objects, which are contained in Universal record, holding the PNR provided. If Universal record does not exists it is being created and PNR is imported into created Universal record.
+
+If the PNR contains no active segments it could not be imported into uAPI. Thus library tries to add `OPEN` segment to he PNR, using [`TerminalService`](Terminal.md), importing PNR and then removing created segment.
+
+**Returns**: `Promise`. - All Information for requested PNR.
+**See**: [Importing PNR](https://support.travelport.com/webhelp/uapi/uAPI.htm#Booking/UniversalRecord/Importing_PNRs.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pnr | `String` | 1G PNR. |
+
+**See: <a href="../examples/Air/getUniversalRecordByPNR.js">Example</a>**
+
+## .getPNR(params)
+<a name="getPNR"></a>
+> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
+
+This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and then returns single PNR object from its output.
+
+**Returns**: `Promise`. - All Information for requested PNR.
+**See**: [Importing PNR](https://support.travelport.com/webhelp/uapi/uAPI.htm#Booking/UniversalRecord/Importing_PNRs.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pnr | `String` | 1G PNR. |
+
+**See: <a href="../examples/Air/getPNR.js">getPNR example</a>**
 
 ## .importPNR(params)
 <a name="importPNR"></a>
 > May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 
-If the Universal Record locator code is known, a Universal Record can be retrieved by using the Universal Record Retrieve request. Whenever possible, any PNR data stored in the Universal Record is validated against the PNR data in the provider's system.
+**This method will be DEPRECATED in version 1.0.0, USE [`getPNR`](#getPNR) instead**
 
-If the PNR contains no active segments it could not be imported into uAPI. Thus we are adding `OPEN` segment to he PNR,
-using `TerminalService`, importing PNR and then removing created segment.
+This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and then returns an array, containing single PNR object.
 
 **Returns**: `Promise`. - All Information for requested PNR.
 **See**: [Importing PNR](https://support.travelport.com/webhelp/uapi/uAPI.htm#Booking/UniversalRecord/Importing_PNRs.htm)
