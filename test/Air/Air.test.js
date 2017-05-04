@@ -980,22 +980,22 @@ describe('#AirService', () => {
   });
 
   describe('cancelTicket', () => {
-    // it('should throw a general error', () => {
-    //   const service = () => ({
-    //     getTicket: () => Promise.reject(new Error('Some error')),
-    //   });
+    it('should throw a general error', () => {
+      const service = () => ({
+        getTicket: () => Promise.reject(new Error('Some error')),
+      });
 
-    //   const createAirService = proxyquire('../../src/Services/Air/Air', {
-    //     './AirService': service,
-    //   });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
 
-    //   return createAirService().cancelTicket()
-    //     .then(() => Promise.reject(new Error('Error has not occured')))
-    //     .catch((err) => {
-    //       expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelTicket);
-    //       expect(err.causedBy).to.be.an.instanceof(Error);
-    //     });
-    // });
+      return createAirService().cancelTicket()
+        .then(() => Promise.reject(new Error('Error has not occured')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelTicket);
+          expect(err.causedBy).to.be.an.instanceof(Error);
+        });
+    });
     it('should cancel ticket if info is complete', () => {
       // Spies
       const getTicket = sinon.spy(() => Promise.resolve({
@@ -1241,6 +1241,12 @@ describe('#AirService', () => {
                 status: 'O',
               }, {
                 status: 'O',
+              }],
+            }, {
+              coupons: [{
+                status: 'V',
+              }, {
+                status: 'V',
               }],
             }],
           },

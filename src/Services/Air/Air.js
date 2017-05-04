@@ -285,10 +285,12 @@ module.exports = (settings) => {
               return Promise.all(
                 ticketData.tickets.map(
                   ticket => (
-                    ticket.coupons[0].status !== 'V' ? service.cancelTicket({
-                      pnr: options.pnr,
-                      ticketNumber: ticket.ticketNumber,
-                    }) : Promise.resolve(true)
+                    ticket.coupons[0].status !== 'V'
+                      ? service.cancelTicket({
+                        pnr: options.pnr,
+                        ticketNumber: ticket.ticketNumber,
+                      })
+                      : Promise.resolve(true)
                   )
                 )
               );
