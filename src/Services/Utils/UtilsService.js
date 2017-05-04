@@ -3,7 +3,7 @@ const UtilsParser = require('./UtilsParser');
 const UtilsValidator = require('./UtilsValidator');
 const getConfig = require('../../config');
 
-const templatesDir = `${__dirname}/templates`;
+const templates = require('./templates');
 
 module.exports = function (settings) {
   const { auth, debug, production } = settings;
@@ -12,7 +12,7 @@ module.exports = function (settings) {
     currencyConvert: uApiRequest(
       config.CurrencyConversion.url,
       auth,
-      `${templatesDir}/UTILS_CURRENCY_CONVERSION.xml`,
+      templates.currencyConversion,
       'util:CurrencyConversionRsp',
       UtilsValidator.CURRENCY_CONVERSION,
       UtilsParser.UTILS_ERROR,

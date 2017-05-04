@@ -1,3 +1,4 @@
+module.exports = `
 <?xml version="1.0" encoding="UTF-8"?>
 <!--Release 33-->
 <!--Version Dated as of 14/Aug/2015 18:47:44-->
@@ -47,3 +48,4 @@
         </air:LowFareSearchReq>
     </soap:Body>
 </soap:Envelope>
+`;

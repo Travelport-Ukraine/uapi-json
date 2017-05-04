@@ -3,8 +3,7 @@ const AirParser = require('./AirParser');
 const AirValidator = require('./AirValidator');
 const getConfig = require('../../config');
 
-const templatesDir = `${__dirname}/templates`;
-
+const templates = require('./templates');
 module.exports = function (settings) {
   const { auth, debug, production } = settings;
   const config = getConfig(auth.region, production);
@@ -13,7 +12,7 @@ module.exports = function (settings) {
     searchLowFares: uApiRequest(
       config.AirService.url,
       auth,
-      `${templatesDir}/AIR_LOW_FARE_SEARCH_REQUEST.xml`,
+      templates.lowFareSearch,
       'air:LowFareSearchRsp',
       AirValidator.AIR_LOW_FARE_SEARCH_REQUEST,
       AirParser.AIR_ERRORS,
@@ -23,7 +22,7 @@ module.exports = function (settings) {
     airPricePricingSolutionXML: uApiRequest(
       config.AirService.url,
       auth,
-      `${templatesDir}/AIR_PRICE_REQ.xml`,
+      templates.price,
       null, // intentionally, no parsing; we need raw XML
       AirValidator.AIR_PRICE,
       AirParser.AIR_ERRORS,
@@ -33,7 +32,7 @@ module.exports = function (settings) {
     createReservation: uApiRequest(
       config.AirService.url,
       auth,
-      `${templatesDir}/AIR_CREATE_RESERVATION_REQUEST.xml`,
+      templates.createReservation,
       'universal:AirCreateReservationRsp',
       AirValidator.AIR_CREATE_RESERVATION_REQUEST,
       AirParser.AIR_ERRORS,
@@ -43,7 +42,7 @@ module.exports = function (settings) {
     ticket: uApiRequest(
       config.AirService.url,
       auth,
-      `${templatesDir}/AIR_TICKET_REQUEST.xml`,
+      templates.ticket,
       'air:AirTicketingRsp',
       AirValidator.AIR_TICKET, // checks for PNR
       AirParser.AIR_ERRORS,
@@ -53,7 +52,7 @@ module.exports = function (settings) {
     getUniversalRecordByPNR: uApiRequest(
       config.UniversalRecord.url,
       auth,
-      `${templatesDir}/UNIVERSAL_RECORD_IMPORT_REQUEST.xml`,
+      templates.universalRecordImport,
       'universal:UniversalRecordImportRsp',
       AirValidator.AIR_REQUEST_BY_PNR, // checks for PNR
       AirParser.AIR_ERRORS,
@@ -63,7 +62,7 @@ module.exports = function (settings) {
     gdsQueue: uApiRequest(
       config.GdsQueueService.url,
       auth,
-      `${templatesDir}/GDS_QUEUE_PLACE.xml`,
+      templates.gdsQueuePlace,
       'gdsQueue:GdsQueuePlaceRsp', // TODO rewrite into uAPI parser
       AirValidator.GDS_QUEUE_PLACE,
       AirParser.AIR_ERRORS,
@@ -73,7 +72,7 @@ module.exports = function (settings) {
     foid: uApiRequest(
       config.UniversalRecord.url,
       auth,
-      `${templatesDir}/UNIVERSAL_RECORD_FOID.xml`,
+      templates.universalRecordFoid,
       'universal:UniversalRecordModifyRsp',
       AirValidator.UNIVERSAL_RECORD_FOID,
       AirParser.AIR_ERRORS,
@@ -83,7 +82,7 @@ module.exports = function (settings) {
     cancelUR: uApiRequest(
       config.UniversalRecord.url,
       auth,
-      `${templatesDir}/UNIVERSAL_RECORD_CANCEL_UR.xml`,
+      templates.universalRecordCancelUr,
       null, // TODO rewrite into uAPI parser
       AirValidator.AIR_CANCEL_UR,
       AirParser.AIR_ERRORS,
@@ -93,7 +92,7 @@ module.exports = function (settings) {
     flightInfo: uApiRequest(
       config.FlightService.url,
       auth,
-      `${templatesDir}/AIR_FLIGHT_INFORMATION_REQUEST.xml`,
+      templates.flightInformation,
       'air:FlightInformationRsp',
       AirValidator.AIR_FLIGHT_INFORMATION,
       AirParser.AIR_ERRORS,
@@ -103,7 +102,7 @@ module.exports = function (settings) {
     getTicket: uApiRequest(
       config.AirService.url,
       auth,
-      `${templatesDir}/AirRetrieveDocument.xml`,
+      templates.retrieveDocument,
       'air:AirRetrieveDocumentRsp',
       AirValidator.AIR_GET_TICKET,
       AirParser.AIR_ERRORS,
@@ -113,7 +112,7 @@ module.exports = function (settings) {
     cancelTicket: uApiRequest(
       config.AirService.url,
       auth,
-      `${templatesDir}/AirVoidDocument.xml`,
+      templates.voidDocument,
       'air:AirVoidDocumentRsp',
       AirValidator.AIR_CANCEL_TICKET,
       AirParser.AIR_ERRORS,
@@ -123,7 +122,7 @@ module.exports = function (settings) {
     cancelPNR: uApiRequest(
       config.AirService.url,
       auth,
-      `${templatesDir}/AirCancel.xml`,
+      templates.cancel,
       'universal:AirCancelRsp',
       AirValidator.AIR_CANCEL_PNR,
       AirParser.AIR_ERRORS,
@@ -134,7 +133,7 @@ module.exports = function (settings) {
     exchangeQuote: uApiRequest(
       config.AirService.url,
       auth,
-      `${templatesDir}/AIR_EXCHANGE_QUOTE.xml`,
+      templates.exchangeQuote,
       null,
       AirValidator.AIR_EXCHANGE_QUOTE,
       AirParser.AIR_ERRORS,
@@ -145,13 +144,12 @@ module.exports = function (settings) {
     exchangeBooking: uApiRequest(
       config.AirService.url,
       auth,
-      `${templatesDir}/AIR_EXCHANGE.xml`,
+      templates.exchange,
       'air:AirExchangeRsp',
       AirValidator.AIR_EXCHANGE,
       AirParser.AIR_ERRORS,
       AirParser.AIR_EXCHANGE,
       debug
     ),
-
   };
 };

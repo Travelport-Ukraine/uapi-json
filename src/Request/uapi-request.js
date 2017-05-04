@@ -9,17 +9,6 @@ import {
 import UapiParser from './uapi-parser';
 import configInit from '../config';
 
-// making default functions work with promises
-const readFile = file => new Promise((resolve, reject) => {
-  fs.readFile(file, (err, content) => {
-    if (err) {
-      reject(err);
-      return;
-    }
-    resolve(content);
-  });
-});
-
 /**
  * basic function for requests/responses
  * @param  {string} service          service url for current response (gateway)
@@ -35,9 +24,9 @@ module.exports = function (service, auth, reqType, rootObject,
   validateFunction, errorHandler, parseFunction, debugMode = false) {
   const config = configInit(auth.region || 'emea');
 
-  // Logging
   if (debugMode > 2) {
-    console.log('Starting working with ', reqType, toString());
+    // Logging
+    console.log('Starting working with request');
   }
 
   // Performing checks
@@ -47,7 +36,7 @@ module.exports = function (service, auth, reqType, rootObject,
     throw new RequestValidationError.AuthDataMissing();
   } else if (reqType === undefined) {
     throw new RequestValidationError.RequestTypeUndefined();
-  } else if (fs.existsSync(reqType) === false) {
+  } else if (Object.prototype.toString.call(reqType) !== '[object String]') {
     throw new RequestRuntimeError.TemplateFileMissing();
   }
 
@@ -145,8 +134,6 @@ module.exports = function (service, auth, reqType, rootObject,
 
 
     return validateInput()
-      .then(readFile)
-      .then(buffer => buffer.toString())
       .then(handlebars.compile)
       .then(prepareRequest)
       .then(sendRequest)

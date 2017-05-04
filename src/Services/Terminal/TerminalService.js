@@ -3,7 +3,7 @@ const TerminalParser = require('./TerminalParser');
 const TerminalValidator = require('./TerminalValidator');
 const getConfig = require('../../config');
 
-const templatesDir = `${__dirname}/templates`;
+const templates = require('./templates');
 
 module.exports = function (settings) {
   const { auth, debug, production } = settings;
@@ -13,7 +13,7 @@ module.exports = function (settings) {
     getSessionToken: uApiRequest(
       config.TerminalService.url,
       auth,
-      `${templatesDir}/TERMINAL_CREATE_SESSION.xml`,
+      templates.createSession,
       'terminal:CreateTerminalSessionRsp',
       TerminalValidator.CREATE_SESSION,
       TerminalParser.TERMINAL_ERROR,
@@ -23,7 +23,7 @@ module.exports = function (settings) {
     executeCommand: uApiRequest(
       config.TerminalService.url,
       auth,
-      `${templatesDir}/TERMINAL_REQUEST.xml`,
+      templates.request,
       'terminal:TerminalRsp',
       TerminalValidator.TERMINAL_REQUEST,
       TerminalParser.TERMINAL_ERROR,
@@ -33,7 +33,7 @@ module.exports = function (settings) {
     closeSession: uApiRequest(
       config.TerminalService.url,
       auth,
-      `${templatesDir}/TERMINAL_CLOSE_SESSION.xml`,
+      templates.closeSession,
       'terminal:EndTerminalSessionRsp',
       TerminalValidator.CLOSE_SESSION,
       TerminalParser.TERMINAL_ERROR,
