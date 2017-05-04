@@ -127,7 +127,8 @@ module.exports = (settings) => {
         return service.ticket(ticketParams)
           .then(result => result, (err) => {
             if (err instanceof AirRuntimeError.TicketingFoidRequired) {
-              return service.foid(booking)
+              return this.getPNR(options)
+                .then(updatedBooking => service.foid(updatedBooking))
                 .then(() => service.ticket(ticketParams));
             }
             return Promise.reject(err);
