@@ -1133,6 +1133,63 @@ describe('#AirService', () => {
           expect(cancelPNR).to.have.callCount(0);
         });
     });
+    it('should succeed when there are OPEN and VOID tickets and cancelTickets = true', () => {
+      // Spies
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
+        pnr: 'PNR001',
+        tickets: [{
+          number: '1234567890123',
+        }, {
+          number: '1234567890456',
+        }],
+      }]));
+      const cancelTicket = sinon.spy(() => Promise.resolve(true));
+      const cancelPNR = sinon.spy(() => Promise.resolve(true));
+      const getTicket = sinon.spy(options =>
+        Promise.resolve({
+          1234567890123: {
+            tickets: [{
+              coupons: [{
+                status: 'V',
+              }, {
+                status: 'V',
+              }],
+            }],
+          },
+          1234567890456: {
+            tickets: [{
+              coupons: [{
+                status: 'O',
+              }, {
+                status: 'O',
+              }],
+            }],
+          },
+        }[options.ticketNumber])
+      );
+
+      // Services
+      const airService = () => ({
+        getUniversalRecordByPNR,
+        getTicket,
+        cancelPNR,
+        cancelTicket,
+      });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      return createAirService().cancelPNR({
+        pnr: 'PNR001',
+        cancelTickets: true,
+      })
+        .then(() => {
+          expect(getUniversalRecordByPNR).to.have.callCount(2);
+          expect(getTicket).to.have.callCount(2);
+          expect(cancelPNR).to.have.callCount(1);
+          expect(cancelTicket).to.have.callCount(1);
+        });
+    });
     it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have coupons other than OPEN', () => {
       // Spies
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
