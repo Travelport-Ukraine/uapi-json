@@ -1,5 +1,4 @@
 import handlebars from 'handlebars';
-import fs from 'fs';
 import axios from 'axios';
 import {
   RequestValidationError,

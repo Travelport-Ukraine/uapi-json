@@ -2,8 +2,8 @@ const uApiRequest = require('../../Request/uapi-request');
 const AirParser = require('./AirParser');
 const AirValidator = require('./AirValidator');
 const getConfig = require('../../config');
-
 const templates = require('./templates');
+
 module.exports = function (settings) {
   const { auth, debug, production } = settings;
   const config = getConfig(auth.region, production);
