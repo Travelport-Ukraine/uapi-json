@@ -17,6 +17,7 @@ module.exports = function (settings) {
   const service = terminalService(settings);
   const emulatePcc = settings.auth.emulatePcc || false;
   const timeout = settings.timeout || false;
+  const debug = settings.debug || 0;
   const state = {
     terminalState: TERMINAL_STATE_NONE,
     sessionToken: null,
@@ -85,7 +86,14 @@ module.exports = function (settings) {
   });
 
   const terminal = {
-    executeCommand: command => getSessionToken()
+    executeCommand: command => Promise.resolve()
+      .then(() => {
+        if (debug) {
+          console.log(`Terminal request:\n ${command}`);
+        }
+        return Promise.resolve();
+      })
+      .then(() => getSessionToken())
       .then(
         sessionToken => service.executeCommand({
           command,
@@ -95,6 +103,9 @@ module.exports = function (settings) {
       .then(processResponse)
       .then(
         (response) => {
+          if (debug) {
+            console.log(`Terminal response:\n ${response}`);
+          }
           Object.assign(state, {
             terminalState: TERMINAL_STATE_READY,
           });
