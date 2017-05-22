@@ -3,10 +3,13 @@
 */
 
 import sinon from 'sinon';
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import sinonChai from 'sinon-chai';
 import proxyquire from 'proxyquire';
 import config from '../testconfig';
 import uAPI from '../../src';
+
+chai.use(sinonChai);
 
 const TerminalError = uAPI.errors.Terminal;
 const TerminalRuntimeError = TerminalError.TerminalRuntimeError;
@@ -144,6 +147,15 @@ const terminalEmulationFailed = proxyquire('../../src/Services/Terminal/Terminal
 // Tests
 describe('#Terminal', function terminalTest() {
   this.timeout(5000);
+
+  beforeEach(() => {
+    sinon.spy(console, 'log');
+  });
+
+  afterEach(() => {
+    console.log.restore();
+  });
+
   describe('Exit handlers', () => {
     it('should not close session in beforeExit for terminal with NONE state', (done) => {
       // Resetting spies
@@ -165,15 +177,17 @@ describe('#Terminal', function terminalTest() {
 
       const uAPITerminal = terminalCloseSessionError({
         auth: config,
+        debug: 1,
       });
 
-      uAPITerminal.executeCommand('I')
+      return uAPITerminal.executeCommand('I')
         .then(() => {
           expect(closeSession.callCount).to.equal(0);
           process.emit('beforeExit');
           setTimeout(() => {
-            expect(closeSessionError.callCount).to.equal(1);
-            expect(DumbErrorClosingSession.callCount).to.equal(1);
+            expect(closeSessionError).to.have.callCount(1);
+            expect(DumbErrorClosingSession).to.have.callCount(1);
+            expect(console.log).to.have.callCount(4);
             done();
           }, 100);
         });
@@ -191,7 +205,7 @@ describe('#Terminal', function terminalTest() {
           expect(closeSession.callCount).to.equal(0);
           process.emit('beforeExit');
           setTimeout(() => {
-            expect(closeSession.callCount).to.equal(1);
+            expect(closeSession).to.have.callCount(1);
             done();
           }, 100);
         });
@@ -206,6 +220,7 @@ describe('#Terminal', function terminalTest() {
 
       const uAPITerminal = terminalOk({
         auth: config,
+        debug: 1,
       });
 
       return uAPITerminal
@@ -219,6 +234,7 @@ describe('#Terminal', function terminalTest() {
           expect(err).to.be.an.instanceof(
             TerminalRuntimeError.TerminalIsClosed
           );
+          expect(console.log).to.have.callCount(1);
         });
     });
     it('Should return error when executing command on busy terminal', () => {
@@ -252,6 +268,7 @@ describe('#Terminal', function terminalTest() {
 
       const uAPITerminal = terminalOk({
         auth: config,
+        debug: 1,
       });
 
       return uAPITerminal
@@ -266,6 +283,7 @@ describe('#Terminal', function terminalTest() {
           expect(closeSession.callCount).to.equal(1);
           expect(executeCommandOk.getCall(0).args[0].sessionToken).to.equal(token);
           expect(executeCommandOk.getCall(0).args[0].command).to.equal('I');
+          expect(console.log).to.have.callCount(2);
         });
     });
     it('should concatenate command output with MD', () => {
