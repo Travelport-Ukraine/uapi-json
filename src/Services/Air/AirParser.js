@@ -374,6 +374,8 @@ const airGetTicket = function (obj) {
     platingCarrier: etr.PlatingCarrier,
     ticketingPcc: etr.PseudoCityCode,
     issuedAt: etr.IssuedDate,
+    farePricingMethod: airPricingInfo ? airPricingInfo.PricingMethod : null,
+    farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
     fareCalculation: etr['air:FareCalc'],
     priceInfoDetailsAvailable: (airPricingInfo !== null),
     priceInfo,
@@ -546,6 +548,8 @@ function extractBookings(obj) {
               ? 'Ticketed'
               : 'Reserved',
             fareCalculation: reservation['air:FareCalc'],
+            farePricingMethod: reservation.PricingMethod,
+            farePricingType: reservation.PricingType,
             priceInfo,
             baggage,
             timeToReprice: reservation.LatestTicketingTime,
