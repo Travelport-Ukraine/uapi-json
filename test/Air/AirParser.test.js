@@ -186,6 +186,83 @@ describe('#AirParser', () => {
     });
   });
   describe('getTicket', () => {
+
+    function testGetTicket(result) {
+      expect(result).to.be.an('object');
+      expect(result).to.have.all.keys([
+        'uapi_ur_locator',
+        'uapi_reservation_locator',
+        'pnr',
+        'platingCarrier',
+        'ticketingPcc',
+        'issuedAt',
+        'fareCalculation',
+        'farePricingMethod',
+        'farePricingType',
+        'priceInfoDetailsAvailable',
+        'priceInfo',
+        'passengers',
+        'tickets',
+      ]);
+      expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
+      expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
+      expect(result.pnr).to.match(/^[A-Z0-9]{6}$/i);
+      expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
+      expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
+      expect(result.issuedAt).to.match(timestampRegexp);
+      expect(result.fareCalculation).to.have.length.above(0);
+      // Price info
+      expect(result.priceInfoDetailsAvailable).to.equal(true);
+      const priceInfo = result.priceInfo;
+      expect(priceInfo).to.be.an('object');
+      expect(priceInfo).to.have.all.keys([
+        'totalPrice', 'basePrice', 'taxes', 'taxesInfo', 'equivalentBasePrice',
+      ]);
+      expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+      expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+      expect(priceInfo.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+      expect(priceInfo.taxesInfo).to.be.an('array');
+      expect(priceInfo.taxesInfo).to.have.length.above(0);
+      // Passengers
+      expect(result.passengers).to.be.an('array');
+      expect(result.passengers).to.have.length.above(0);
+      result.passengers.forEach((passenger) => {
+        expect(passenger).to.be.an('object');
+        expect(passenger).to.have.all.keys(['firstName', 'lastName']);
+      });
+      // Tickets
+      expect(result.tickets).to.be.an('array');
+      expect(result.tickets).to.have.length.above(0);
+      result.tickets.forEach((ticket) => {
+        expect(ticket).to.be.an('object');
+        expect(ticket).to.have.all.keys(['ticketNumber', 'coupons']);
+        expect(ticket.ticketNumber).to.match(/\d{13}/i);
+        expect(ticket.coupons).to.be.an('array');
+        expect(ticket.coupons).to.have.length.above(0);
+        ticket.coupons.forEach((coupon) => {
+          expect(coupon).to.be.an('object');
+          expect(coupon).to.have.all.keys([
+            'couponNumber', 'from', 'to', 'departure', 'airline', 'flightNumber',
+            'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter',
+            'bookingClass', 'serviceClass',
+          ]);
+          expect(coupon.couponNumber).to.match(/\d+/i);
+          expect(coupon.from).to.match(/[A-Z]{3}/i);
+          expect(coupon.from).to.match(/[A-Z]{3}/i);
+          expect(coupon.departure).to.match(timestampRegexp);
+          expect(coupon.bookingClass).to.match(/[A-Z0-9]{1}/i);
+          expect(coupon.airline).to.match(/[A-Z0-9]{2}/i);
+          expect(coupon.flightNumber).to.match(/\d+/i);
+          expect(coupon.fareBasisCode).to.match(/[A-Z0-9]+/i);
+          expect(coupon.status).to.be.oneOf([
+            'A', 'C', 'F', 'L', 'O', 'P', 'R', 'E', 'V', 'Z', 'U', 'S', 'I', 'D', 'X',
+          ]);
+          expect(coupon.notValidBefore).to.match(/\d{4}-\d{2}-\d{2}/i);
+          expect(coupon.notValidAfter).to.match(/\d{4}-\d{2}-\d{2}/i);
+        });
+      });
+    }
+
     it('should return correct error for duplicate ticket number', () => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
@@ -232,69 +309,22 @@ describe('#AirParser', () => {
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
-          expect(result).to.be.an('object');
-          expect(result).to.have.all.keys([
-            'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'platingCarrier', 'ticketingPcc',
-            'issuedAt', 'fareCalculation', 'priceInfoDetailsAvailable', 'priceInfo', 'passengers', 'tickets',
-          ]);
-          expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
-          expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
-          expect(result.pnr).to.match(/^[A-Z0-9]{6}$/i);
-          expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
-          expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
-          expect(result.issuedAt).to.match(timestampRegexp);
-          expect(result.fareCalculation).to.have.length.above(0);
-          // Price info
-          expect(result.priceInfoDetailsAvailable).to.equal(true);
-          const priceInfo = result.priceInfo;
-          expect(priceInfo).to.be.an('object');
-          expect(priceInfo).to.have.all.keys([
-            'totalPrice', 'basePrice', 'taxes', 'taxesInfo', 'equivalentBasePrice',
-          ]);
-          expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.taxesInfo).to.be.an('array');
-          expect(priceInfo.taxesInfo).to.have.length.above(0);
-          // Passengers
-          expect(result.passengers).to.be.an('array');
-          expect(result.passengers).to.have.length.above(0);
-          result.passengers.forEach((passenger) => {
-            expect(passenger).to.be.an('object');
-            expect(passenger).to.have.all.keys(['firstName', 'lastName']);
-          });
-          // Tickets
-          expect(result.tickets).to.be.an('array');
-          expect(result.tickets).to.have.length.above(0);
-          result.tickets.forEach((ticket) => {
-            expect(ticket).to.be.an('object');
-            expect(ticket).to.have.all.keys(['ticketNumber', 'coupons']);
-            expect(ticket.ticketNumber).to.match(/\d{13}/i);
-            expect(ticket.coupons).to.be.an('array');
-            expect(ticket.coupons).to.have.length.above(0);
-            ticket.coupons.forEach((coupon) => {
-              expect(coupon).to.be.an('object');
-              expect(coupon).to.have.all.keys([
-                'couponNumber', 'from', 'to', 'departure', 'airline', 'flightNumber',
-                'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter',
-                'bookingClass', 'serviceClass',
-              ]);
-              expect(coupon.couponNumber).to.match(/\d+/i);
-              expect(coupon.from).to.match(/[A-Z]{3}/i);
-              expect(coupon.from).to.match(/[A-Z]{3}/i);
-              expect(coupon.departure).to.match(timestampRegexp);
-              expect(coupon.airline).to.match(/[A-Z0-9]{2}/i);
-              expect(coupon.flightNumber).to.match(/\d+/i);
-              expect(coupon.fareBasisCode).to.match(/[A-Z0-9]+/i);
-              expect(coupon.status).to.be.oneOf([
-                'A', 'C', 'F', 'L', 'O', 'P', 'R', 'E', 'V', 'Z', 'U', 'S', 'I', 'D', 'X',
-              ]);
-              expect(coupon.notValidBefore).to.match(/\d{4}-\d{2}-\d{2}/i);
-              expect(coupon.notValidAfter).to.match(/\d{4}-\d{2}-\d{2}/i);
-            });
-          });
+          testGetTicket(result);
         });
     });
+
+    it('should parse imported ticket with single cabin class for all coupons', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_ONE_CABIN_CLASS.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testGetTicket(result);
+        });
+    });
+
     it('should parse incomplete data', () => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
@@ -305,8 +335,19 @@ describe('#AirParser', () => {
         .then((result) => {
           expect(result).to.be.an('object');
           expect(result).to.have.all.keys([
-            'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'platingCarrier', 'ticketingPcc',
-            'issuedAt', 'fareCalculation', 'priceInfoDetailsAvailable', 'priceInfo', 'passengers', 'tickets',
+            'uapi_ur_locator',
+            'uapi_reservation_locator',
+            'pnr',
+            'platingCarrier',
+            'ticketingPcc',
+            'issuedAt',
+            'fareCalculation',
+            'farePricingMethod',
+            'farePricingType',
+            'priceInfoDetailsAvailable',
+            'priceInfo',
+            'passengers',
+            'tickets',
           ]);
           expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
           expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
@@ -346,7 +387,7 @@ describe('#AirParser', () => {
               expect(coupon).to.be.an('object');
               expect(coupon).to.have.all.keys([
                 'couponNumber', 'from', 'to', 'departure', 'airline', 'flightNumber',
-                'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter',
+                'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter', 'bookingClass',
               ]);
               expect(coupon.couponNumber).to.match(/\d+/i);
               expect(coupon.from).to.match(/[A-Z]{3}/i);
@@ -572,8 +613,16 @@ describe('#AirParser', () => {
       result.reservations.forEach((reservation) => {
         expect(reservation).to.be.an('object');
         expect(reservation).to.include.all.keys([
-          'status', 'fareCalculation', 'priceInfo', 'baggage', 'timeToReprice',
-          'uapi_segment_refs', 'uapi_passenger_refs','uapi_pricing_info_ref'
+          'status',
+          'fareCalculation',
+          'farePricingMethod',
+          'farePricingType',
+          'priceInfo',
+          'baggage',
+          'timeToReprice',
+          'uapi_segment_refs',
+          'uapi_passenger_refs',
+          'uapi_pricing_info_ref',
         ]);
         if (reservation.platingCarrier) {
           expect(reservation.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
