@@ -263,6 +263,23 @@ describe('#AirParser', () => {
       });
     }
 
+    it('should parse NO ADC ticket', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_NOADC.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          expect(result).to.be.an('object');
+          expect(result).to.include.key('priceInfo');
+          expect(result.priceInfoDetailsAvailable).to.equal(false);
+          expect(result.priceInfo).to.be.an('object');
+          expect(result.priceInfo.noAdc).to.equal(true);
+          expect(result.priceInfo.totalPrice).to.equal(0);
+        });
+    });
+
     it('should return correct error for duplicate ticket number', () => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;

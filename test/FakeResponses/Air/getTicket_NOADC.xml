@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:AirRetrieveDocumentRsp xmlns:air="http://www.travelport.com/schema/air_v39_0" xmlns:common_v39_0="http://www.travelport.com/schema/common_v39_0" TransactionId="3F223A5A0A07425C6210708C84263EB2" ResponseTime="1185" UniversalRecordLocatorCode="XCSM3Y">
+      <air:ETR Key="3C2afwBAAA/B3tqcXGAAAA==" BasePrice="USD78.00" Taxes="UAH3603.00" EquivalentBasePrice="UAH2060" IssuedDate="2017-05-22T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="X3TV3U" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="OK">
+        <air:AirReservationLocatorCode>XWE2ZR</air:AirReservationLocatorCode>
+        <common_v39_0:AgencyInfo>
+          <common_v39_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-05-21T22:00:00.000+00:00" />
+        </common_v39_0:AgencyInfo>
+        <common_v39_0:BookingTraveler Key="V2TUfwBAAA/BfYY/JFAAAA==">
+          <common_v39_0:BookingTravelerName First="DMYTROMR" Last="CHERTOUSOV" />
+          <common_v39_0:SSR Key="V2TUfwBAAA/B6nY/JFAAAA==" SegmentRef="V2TUfwBAAA/B8nY/JFAAAA==" Status="HK" Type="TKNE" FreeText="0649902881726C1" Carrier="OK" ProviderReservationInfoRef="V2TUfwBAAA/BOqR/JFAAAA==" />
+          <common_v39_0:SSR Key="V2TUfwBAAA/B7nY/JFAAAA==" SegmentRef="V2TUfwBAAA/BBoY/JFAAAA==" Status="HK" Type="TKNE" FreeText="0649902881726C2" Carrier="OK" ProviderReservationInfoRef="V2TUfwBAAA/BOqR/JFAAAA==" />
+          <common_v39_0:SSR Key="3C2afwBAAA/BC4hcXGAAAA==" SegmentRef="yN0YfwBAAA/B3qVuHFAAAA==" Status="HK" Type="TKNE" FreeText="0649902881727C1" Carrier="OK" ProviderReservationInfoRef="V2TUfwBAAA/BOqR/JFAAAA==" />
+          <common_v39_0:SSR Key="3C2afwBAAA/BD4hcXGAAAA==" SegmentRef="yN0YfwBAAA/B5qVuHFAAAA==" Status="HK" Type="TKNE" FreeText="0649902881727C2" Carrier="OK" ProviderReservationInfoRef="V2TUfwBAAA/BOqR/JFAAAA==" />
+        </common_v39_0:BookingTraveler>
+        <common_v39_0:SupplierLocator SupplierCode="OK" SupplierLocatorCode="UAWY5E" />
+        <air:FareCalc>IEV OK PRG 39.00Q0BAGG OK IEV 39.00Q0BAGG NUC78.00END ROE1.0 XT PD449YK PD647CZ PD2348YQ</air:FareCalc>
+        <air:Ticket Key="3C2afwBAAA/B7tqcXGAAAA==" TicketNumber="0649902881727" TicketStatus="N">
+          <air:Coupon Key="3C2afwBAAA/B8tqcXGAAAA==" CouponNumber="1" MarketingCarrier="OK" MarketingFlightNumber="917" Origin="KBP" Destination="PRG" DepartureTime="2018-04-20T05:05:00.000+03:00" StopoverCode="true" BookingClass="Q" FareBasis="Q0BAGG" NotValidBefore="2018-04-20" NotValidAfter="2018-04-20" Status="O" SegmentGroup="0" MarriageGroup="0" />
+          <air:Coupon Key="3C2afwBAAA/B9tqcXGAAAA==" CouponNumber="2" MarketingCarrier="OK" MarketingFlightNumber="916" Origin="PRG" Destination="KBP" DepartureTime="2018-04-22T22:10:00.000+02:00" StopoverCode="true" BookingClass="Q" FareBasis="Q0BAGG" NotValidBefore="2018-04-22" NotValidAfter="2018-04-22" Status="O" SegmentGroup="1" MarriageGroup="0" />
+          <air:ExchangedTicketInfo Number="0649902881726" />
+        </air:Ticket>
+        <common_v39_0:Commission Level="Fare" Type="PercentBase" Percentage="0.1" />
+      </air:ETR>
+    </air:AirRetrieveDocumentRsp>
+  </SOAP:Body>
+</SOAP:Envelope>
