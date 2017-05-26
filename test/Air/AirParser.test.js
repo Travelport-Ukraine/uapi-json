@@ -217,6 +217,7 @@ describe('#AirParser', () => {
       expect(priceInfo).to.be.an('object');
       expect(priceInfo).to.have.all.keys([
         'totalPrice', 'basePrice', 'taxes', 'taxesInfo', 'equivalentBasePrice',
+        'noAdc',
       ]);
       expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
       expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
@@ -379,6 +380,7 @@ describe('#AirParser', () => {
           expect(priceInfo).to.be.an('object');
           expect(priceInfo).to.have.all.keys([
             'totalPrice', 'basePrice', 'taxes', 'equivalentBasePrice', 'taxesInfo',
+            'noAdc',
           ]);
           expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
           expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);

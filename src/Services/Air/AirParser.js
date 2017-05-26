@@ -360,18 +360,16 @@ const airGetTicket = function (obj) {
         })
       )
     : [];
-  const priceInfo = Object.assign({
+  const priceInfo = {
+    // Values
     totalPrice: etr.TotalPrice || 0,
     basePrice: etr.BasePrice,
     equivalentBasePrice: etr.EquivalentBasePrice,
     taxes: etr.Taxes,
     taxesInfo: taxes,
-  }, etr.TotalPrice
-    ? null
-    : {
-      noAdc: true,
-    }
-  );
+    // Flags
+    noAdc: !etr.TotalPrice,
+  };
   const response = {
     uapi_ur_locator: obj.UniversalRecordLocatorCode,
     uapi_reservation_locator: etr['air:AirReservationLocatorCode'],
