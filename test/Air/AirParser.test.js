@@ -775,6 +775,33 @@ describe('#AirParser', () => {
   }
 
   describe('AIR_CREATE_RESERVATION()', () => {
+    it('should parse booking with XF and ZP taxes in FQ', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPNR_XF_ZP.xml`).toString();
+      return uParser.parse(xml)
+      .then(json => parseFunction.call(uParser, json))
+      .then((result) => {
+        testBooking(result);
+        const detialedTaxes = result[0].reservations[0].priceInfo.taxesInfo.filter(
+          tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
+        );
+        expect(detialedTaxes).to.have.lengthOf(2);
+        detialedTaxes.forEach(
+          (tax) => {
+            expect(tax.details).to.be.an('array').and.to.have.length.above(0);
+            tax.details.forEach(
+              (detailInfo) => {
+                expect(detailInfo).to.have.all.keys(['airport', 'value']);
+                expect(detailInfo.airport).to.match(/^[A-Z]{3}$/);
+                expect(detailInfo.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
+              }
+            );
+          }
+        );
+      });
+    });
+
     it('should test parsing of create reservation 2ADT1CNN', () => {
       const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
