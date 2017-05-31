@@ -354,10 +354,22 @@ const airGetTicket = function (obj) {
 
   const taxes = (airPricingInfo && airPricingInfo['air:TaxInfo'])
     ? Object.keys(airPricingInfo['air:TaxInfo']).map(
-        taxKey => ({
-          type: airPricingInfo['air:TaxInfo'][taxKey].Category,
-          value: airPricingInfo['air:TaxInfo'][taxKey].Amount,
-        })
+        taxKey => Object.assign(
+          {
+            type: airPricingInfo['air:TaxInfo'][taxKey].Category,
+            value: airPricingInfo['air:TaxInfo'][taxKey].Amount,
+          },
+          airPricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`]
+            ? {
+              details: airPricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`].map(
+                taxDetail => ({
+                  airport: taxDetail.OriginAirport,
+                  value: taxDetail.Amount,
+                })
+              ),
+            }
+            : null,
+        )
       )
     : [];
   const priceInfo = {
