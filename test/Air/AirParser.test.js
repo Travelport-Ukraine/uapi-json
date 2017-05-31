@@ -186,7 +186,6 @@ describe('#AirParser', () => {
     });
   });
   describe('getTicket', () => {
-
     function testGetTicket(result) {
       expect(result).to.be.an('object');
       expect(result).to.have.all.keys([
@@ -224,6 +223,13 @@ describe('#AirParser', () => {
       expect(priceInfo.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
       expect(priceInfo.taxesInfo).to.be.an('array');
       expect(priceInfo.taxesInfo).to.have.length.above(0);
+      priceInfo.taxesInfo.forEach(
+        (tax) => {
+          expect(tax).to.be.an('object');
+          expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
+          expect(tax.type).to.match(/^[A-Z]{2}$/);
+        }
+      );
       // Passengers
       expect(result.passengers).to.be.an('array');
       expect(result.passengers).to.have.length.above(0);
@@ -340,6 +346,33 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testGetTicket(result);
+        });
+    });
+
+    it('should parse ticket with XF and ZP taxes', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_XF_ZP.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testGetTicket(result);
+          const detialedTaxes = result.priceInfo.taxesInfo.filter(
+            tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
+          );
+          expect(detialedTaxes).to.have.lengthOf(2);
+          detialedTaxes.forEach(
+            (tax) => {
+              expect(tax.details).to.be.an('array').and.to.have.length.above(0);
+              tax.details.forEach(
+                (detailInfo) => {
+                  expect(detailInfo).to.have.all.keys(['airport', 'value']);
+                  expect(detailInfo.airport).to.match(/^[A-Z]{3}$/);
+                  expect(detailInfo.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
+                }
+              );
+            }
+          );
         });
     });
 
@@ -742,6 +775,33 @@ describe('#AirParser', () => {
   }
 
   describe('AIR_CREATE_RESERVATION()', () => {
+    it('should parse booking with XF and ZP taxes in FQ', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPNR_XF_ZP.xml`).toString();
+      return uParser.parse(xml)
+      .then(json => parseFunction.call(uParser, json))
+      .then((result) => {
+        testBooking(result);
+        const detialedTaxes = result[0].reservations[0].priceInfo.taxesInfo.filter(
+          tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
+        );
+        expect(detialedTaxes).to.have.lengthOf(2);
+        detialedTaxes.forEach(
+          (tax) => {
+            expect(tax.details).to.be.an('array').and.to.have.length.above(0);
+            tax.details.forEach(
+              (detailInfo) => {
+                expect(detailInfo).to.have.all.keys(['airport', 'value']);
+                expect(detailInfo.airport).to.match(/^[A-Z]{3}$/);
+                expect(detailInfo.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
+              }
+            );
+          }
+        );
+      });
+    });
+
     it('should test parsing of create reservation 2ADT1CNN', () => {
       const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;

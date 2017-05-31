@@ -1,0 +1,160 @@
+<SOAP:Envelope
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:AirRetrieveDocumentRsp TransactionId="5E46A5390A0759BE836F45B9F75CB69F" ResponseTime="714" UniversalRecordLocatorCode="HAB2JQ"
+      xmlns:air="http://www.travelport.com/schema/air_v39_0"
+      xmlns:common_v39_0="http://www.travelport.com/schema/common_v39_0">
+      <air:ETR Key="4EwW8wBAAA/BElrOEKAAAA==" TotalPrice="UAH9944" BasePrice="USD325.16" Taxes="UAH1392" EquivalentBasePrice="UAH8552" Refundable="false" Exchangeable="false" IssuedDate="2017-05-25T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="X6631S" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="AF">
+        <air:AirReservationLocatorCode>4HN6N9</air:AirReservationLocatorCode>
+        <common_v39_0:AgencyInfo>
+          <common_v39_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-05-24T22:00:00.000+00:00"/>
+        </common_v39_0:AgencyInfo>
+        <common_v39_0:BookingTraveler Key="4EwW8wBAAA/B6krOEKAAAA==">
+          <common_v39_0:BookingTravelerName First="FEDIRMR" Last="IVANOV"/>
+          <common_v39_0:SSR Key="4EwW8wBAAA/B7krOEKAAAA==" Status="HK" Type="DOCS" FreeText="P/AA/S12345678/GB/12JUL76/M/23OCT26/IVANOV/FEDIRMR -1IVANOV/FEDIRMR" Carrier="DL" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
+          <common_v39_0:SSR Key="4EwW8wBAAA/B8krOEKAAAA==" Status="HK" Type="DOCS" FreeText="P/AA/S12345678/GB/12JUL76/M/23OCT26/IVANOV/FEDIRMR -1IVANOV/FEDIRMR" Carrier="AA" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
+          <common_v39_0:SSR Key="4EwW8wBAAA/B9krOEKAAAA==" SegmentRef="4EwW8wBAAA/B/krOEKAAAA==" Status="HK" Type="TKNE" FreeText="0579902896660C1" Carrier="AA" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
+          <common_v39_0:SSR Key="4EwW8wBAAA/B+krOEKAAAA==" SegmentRef="4EwW8wBAAA/BBlrOEKAAAA==" Status="HK" Type="TKNE" FreeText="0579902896660C2" Carrier="AA" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
+        </common_v39_0:BookingTraveler>
+        <common_v39_0:FormOfPayment Key="4EwW8wBAAA/BhnrOEKAAAA==" Type="Cash" Reusable="false" ProfileKey="qlbyb/BrQVq9W3wUozVccQ=="/>
+        <common_v39_0:Payment Key="4EwW8wBAAA/BinrOEKAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="4EwW8wBAAA/BhnrOEKAAAA=="/>
+        <common_v39_0:SupplierLocator SupplierCode="AA" SupplierLocatorCode="VLGZLM"/>
+        <air:FareCalc>NYC AA WAS 242.79 AA DTT Q10.74 71.63 USD325.16END ZPLGADCA XT 216ZP238XF LGA4.5DCA4.5</air:FareCalc>
+        <air:Ticket Key="4EwW8wBAAA/BIlrOEKAAAA==" TicketNumber="0579902896659" TicketStatus="X">
+          <air:Coupon Key="4EwW8wBAAA/BUnrOEKAAAA==" CouponNumber="1" MarketingCarrier="AA" MarketingFlightNumber="2115" Origin="LGA" Destination="DCA" DepartureTime="2018-04-02T06:00:00.000-04:00" StopoverCode="true" BookingClass="V" FareBasis="VUAHZNN1" NotValidBefore="2018-04-02" NotValidAfter="2018-04-02" Status="E" SegmentGroup="0" MarriageGroup="0"/>
+          <air:Coupon Key="4EwW8wBAAA/BVnrOEKAAAA==" CouponNumber="2" MarketingCarrier="AA" MarketingFlightNumber="4100" Origin="DCA" Destination="DTW" DepartureTime="2018-04-10T10:07:00.000-04:00" StopoverCode="true" BookingClass="N" FareBasis="NVAIZNN3" NotValidBefore="2018-04-10" NotValidAfter="2018-04-10" Status="E" SegmentGroup="1" MarriageGroup="0"/>
+        </air:Ticket>
+        <air:AirPricingInfo Key="4EwW8wBAAA/BskrOEKAAAA==" TotalPrice="UAH9944" BasePrice="USD325.16" EquivalentBasePrice="UAH8552" Taxes="UAH1392" TrueLastDateToTicket="2017-05-26T23:59:00.000+02:00" PricingMethod="Guaranteed" ETicketability="Yes" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA==" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="G">
+          <air:FareInfo Key="4EwW8wBAAA/BukrOEKAAAA==" FareBasis="VUAHZNN1" PassengerTypeCode="ADT" Origin="LGA" Destination="DCA" EffectiveDate="2017-05-25T00:00:00.000+02:00" NotValidBefore="2018-04-02" NotValidAfter="2018-04-02">
+            <common_v39_0:Endorsement Value="NONREF/SVCCHGPLUSFAREDIF/"/>
+            <common_v39_0:Endorsement Value="CXL BY FLT TIME OR NOVALUE"/>
+            <air:BaggageAllowance>
+              <air:NumberOfPieces>0</air:NumberOfPieces>
+            </air:BaggageAllowance>
+          </air:FareInfo>
+          <air:FareInfo Key="4EwW8wBAAA/BykrOEKAAAA==" FareBasis="NVAIZNN3" PassengerTypeCode="ADT" Origin="DCA" Destination="DTW" EffectiveDate="2017-05-25T00:00:00.000+02:00" NotValidBefore="2018-04-10" NotValidAfter="2018-04-10">
+            <common_v39_0:Endorsement Value="NONREF/SVCCHGPLUSFAREDIF/"/>
+            <common_v39_0:Endorsement Value="CXL BY FLT TIME OR NOVALUE"/>
+            <air:BaggageAllowance>
+              <air:NumberOfPieces>0</air:NumberOfPieces>
+            </air:BaggageAllowance>
+          </air:FareInfo>
+          <air:BookingInfo BookingCode="V" CabinClass="Economy" FareInfoRef="4EwW8wBAAA/BukrOEKAAAA=="/>
+          <air:BookingInfo BookingCode="N" CabinClass="Economy" FareInfoRef="4EwW8wBAAA/BykrOEKAAAA=="/>
+          <air:TaxInfo Category="AY" Amount="UAH296" Key="XlXL8wBAAA/BlKSQLKAAAA=="/>
+          <air:TaxInfo Category="US" Amount="UAH642" Key="XlXL8wBAAA/BmKSQLKAAAA=="/>
+          <air:TaxInfo Category="XF" Amount="UAH238" Key="XlXL8wBAAA/BnKSQLKAAAA==">
+            <common_v39_0:TaxDetail Amount="USD5" OriginAirport="LGA"/>
+            <common_v39_0:TaxDetail Amount="USD5" OriginAirport="DCA"/>
+          </air:TaxInfo>
+          <air:TaxInfo Category="ZP" Amount="UAH216" Key="XlXL8wBAAA/BoKSQLKAAAA==">
+            <common_v39_0:TaxDetail Amount="USD4.10" OriginAirport="LGA"/>
+            <common_v39_0:TaxDetail Amount="USD4.10" OriginAirport="DCA"/>
+          </air:TaxInfo>
+          <air:FareCalc>NYC AA WAS 242.79VUAHZNN1 AA DTT Q10.74 71.63NVAIZNN3 USD325.16END</air:FareCalc>
+          <air:PassengerType Code="ADT" BookingTravelerRef="4EwW8wBAAA/B6krOEKAAAA==">
+            <air:FareGuaranteeInfo GuaranteeType="Guaranteed"/>
+          </air:PassengerType>
+          <common_v39_0:BookingTravelerRef Key="4EwW8wBAAA/B6krOEKAAAA=="/>
+          <air:PaymentRef Key="4EwW8wBAAA/BgnrOEKAAAA=="/>
+        </air:AirPricingInfo>
+        <air:BaggageAllowances>
+          <air:BaggageAllowanceInfo TravelerType="ADT" Origin="NYC" Destination="WAS" Carrier="AA">
+            <air:URLInfo>
+              <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSAA.BAGG</air:URL>
+            </air:URLInfo>
+            <air:TextInfo>
+              <air:Text>0P</air:Text>
+              <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+            </air:TextInfo>
+            <air:BagDetails ApplicableBags="1stChecked" BasePrice="USD25.00" ApproximateBasePrice="CZK592" TotalPrice="USD25.00" ApproximateTotalPrice="CZK592">
+              <air:BaggageRestriction>
+                <air:TextInfo>
+                  <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                </air:TextInfo>
+              </air:BaggageRestriction>
+            </air:BagDetails>
+            <air:BagDetails ApplicableBags="2ndChecked" BasePrice="USD35.00" ApproximateBasePrice="CZK829" TotalPrice="USD35.00" ApproximateTotalPrice="CZK829">
+              <air:BaggageRestriction>
+                <air:TextInfo>
+                  <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                </air:TextInfo>
+              </air:BaggageRestriction>
+            </air:BagDetails>
+          </air:BaggageAllowanceInfo>
+          <air:BaggageAllowanceInfo TravelerType="ADT" Origin="WAS" Destination="DTT" Carrier="AA">
+            <air:URLInfo>
+              <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSAA.BAGG</air:URL>
+            </air:URLInfo>
+            <air:TextInfo>
+              <air:Text>0P</air:Text>
+              <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+            </air:TextInfo>
+            <air:BagDetails ApplicableBags="1stChecked" BasePrice="USD25.00" ApproximateBasePrice="CZK592" TotalPrice="USD25.00" ApproximateTotalPrice="CZK592">
+              <air:BaggageRestriction>
+                <air:TextInfo>
+                  <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                </air:TextInfo>
+              </air:BaggageRestriction>
+            </air:BagDetails>
+            <air:BagDetails ApplicableBags="2ndChecked" BasePrice="USD35.00" ApproximateBasePrice="CZK829" TotalPrice="USD35.00" ApproximateTotalPrice="CZK829">
+              <air:BaggageRestriction>
+                <air:TextInfo>
+                  <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                </air:TextInfo>
+              </air:BaggageRestriction>
+            </air:BagDetails>
+          </air:BaggageAllowanceInfo>
+          <air:CarryOnAllowanceInfo Origin="NYC" Destination="WAS" Carrier="AA">
+            <air:TextInfo>
+              <air:Text>2P</air:Text>
+            </air:TextInfo>
+            <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="USD0.00" TotalPrice="USD0.00">
+              <air:BaggageRestriction>
+                <air:TextInfo>
+                  <air:Text>UPTO45LI/115LCM</air:Text>
+                </air:TextInfo>
+              </air:BaggageRestriction>
+            </air:CarryOnDetails>
+            <air:CarryOnDetails ApplicableCarryOnBags="2" BasePrice="USD0.00" TotalPrice="USD0.00">
+              <air:BaggageRestriction>
+                <air:TextInfo>
+                  <air:Text>CARRYON HAND BAGGAGE ALLOWANCE</air:Text>
+                </air:TextInfo>
+              </air:BaggageRestriction>
+            </air:CarryOnDetails>
+          </air:CarryOnAllowanceInfo>
+          <air:CarryOnAllowanceInfo Origin="WAS" Destination="DTT" Carrier="AA">
+            <air:TextInfo>
+              <air:Text>2P</air:Text>
+            </air:TextInfo>
+            <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="USD0.00" TotalPrice="USD0.00">
+              <air:BaggageRestriction>
+                <air:TextInfo>
+                  <air:Text>UPTO45LI/115LCM</air:Text>
+                </air:TextInfo>
+              </air:BaggageRestriction>
+            </air:CarryOnDetails>
+            <air:CarryOnDetails ApplicableCarryOnBags="2" BasePrice="USD0.00" TotalPrice="USD0.00">
+              <air:BaggageRestriction>
+                <air:TextInfo>
+                  <air:Text>CARRYON HAND BAGGAGE ALLOWANCE</air:Text>
+                </air:TextInfo>
+              </air:BaggageRestriction>
+            </air:CarryOnDetails>
+          </air:CarryOnAllowanceInfo>
+          <air:EmbargoInfo Origin="NYC" Destination="WAS" Carrier="AA">
+            <air:URLInfo>
+              <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSAA.BAGG</air:URL>
+            </air:URLInfo>
+          </air:EmbargoInfo>
+          <air:EmbargoInfo Origin="WAS" Destination="DTT" Carrier="AA">
+            <air:URLInfo>
+              <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSAA.BAGG</air:URL>
+            </air:URLInfo>
+          </air:EmbargoInfo>
+        </air:BaggageAllowances>
+      </air:ETR>
+    </air:AirRetrieveDocumentRsp>
+  </SOAP:Body>
+</SOAP:Envelope>
