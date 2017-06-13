@@ -634,7 +634,7 @@ describe('#AirParser', () => {
       expect(result).to.have.all.keys([
         'version', 'uapi_ur_locator', 'uapi_reservation_locator',
         'uapi_airline_locator', 'bookingPCC', 'passengers', 'pnr', 'pnrList',
-        'reservations', 'trips', 'createdAt', 'modifiedAt', 'type', 'tickets',
+        'reservations', 'trips', 'hostCreatedAt', 'createdAt', 'modifiedAt', 'type', 'tickets',
       ]);
       expect(result.version).to.be.at.least(0);
       expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/);
@@ -642,6 +642,7 @@ describe('#AirParser', () => {
       expect(result.uapi_airline_locator).to.match(/^[A-Z0-9]{6}$/);
       expect(result.bookingPCC).to.match(/^[A-Z0-9]{3,4}$/);
       expect(result.pnr).to.match(/^[A-Z0-9]{6}$/);
+      expect(new Date(result.hostCreatedAt)).to.be.an.instanceof(Date);
       expect(new Date(result.createdAt)).to.be.an.instanceof(Date);
       expect(new Date(result.modifiedAt)).to.be.an.instanceof(Date);
       expect(result.type).to.equal('uAPI');
