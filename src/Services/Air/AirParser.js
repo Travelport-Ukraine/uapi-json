@@ -608,6 +608,7 @@ function extractBookings(obj) {
       uapi_airline_locator: supplierLocator.SupplierLocatorCode || null,
       pnrList: [providerInfo.LocatorCode],
       createdAt: providerInfo.CreateDate,
+      hostCreatedAt: providerInfo.HostCreateDate,
       modifiedAt: providerInfo.ModifiedDate,
       reservations,
       trips,
