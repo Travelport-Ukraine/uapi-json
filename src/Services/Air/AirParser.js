@@ -294,6 +294,8 @@ const airGetTicket = function (obj) {
     })
   );
 
+  const commission = etr[`common_${this.uapi_version}:Commission`] || null;
+
   const airPricingInfo = etr['air:AirPricingInfo']
     ? etr['air:AirPricingInfo'][Object.keys(etr['air:AirPricingInfo'])[0]]
     : null;
@@ -382,6 +384,7 @@ const airGetTicket = function (obj) {
     // Flags
     noAdc: !etr.TotalPrice,
   };
+
   const response = {
     uapi_ur_locator: obj.UniversalRecordLocatorCode,
     uapi_reservation_locator: etr['air:AirReservationLocatorCode'],
@@ -393,6 +396,14 @@ const airGetTicket = function (obj) {
     farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
     fareCalculation: etr['air:FareCalc'],
     priceInfoDetailsAvailable: (airPricingInfo !== null),
+    commission: commission
+      ? {
+        [commission.Type === 'PercentBase' ? 'percent' : 'amount']:
+          commission.Type === 'PercentBase'
+            ? commission.Percentage
+            : commission.Amount,
+      }
+      : null,
     priceInfo,
     passengers,
     tickets,

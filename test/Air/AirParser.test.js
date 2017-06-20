@@ -202,6 +202,7 @@ describe('#AirParser', () => {
         'priceInfo',
         'passengers',
         'tickets',
+        'commission',
       ]);
       expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
       expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
@@ -268,6 +269,13 @@ describe('#AirParser', () => {
           expect(coupon.notValidAfter).to.match(/\d{4}-\d{2}-\d{2}/i);
         });
       });
+      // commission
+      if (result.commission) {
+        expect(Object.keys(result.commission)).to.not.be.empty;
+        expect(['percent', 'amount']).to.have.members(Object.keys(result.commission));
+      } else {
+        expect(result.commission).to.be.null;
+      }
     }
 
     it('should parse NO ADC ticket', () => {
@@ -278,6 +286,13 @@ describe('#AirParser', () => {
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
+          // commission
+          if (result.commission) {
+            expect(Object.keys(result.commission)).to.not.be.empty;
+            expect(['percent', 'amount']).to.include.members(Object.keys(result.commission));
+          } else {
+            expect(result.commission).to.be.null;
+          }
           expect(result).to.be.an('object');
           expect(result).to.include.key('priceInfo');
           expect(result.priceInfoDetailsAvailable).to.equal(false);
@@ -399,6 +414,7 @@ describe('#AirParser', () => {
             'priceInfo',
             'passengers',
             'tickets',
+            'commission'
           ]);
           expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
           expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
