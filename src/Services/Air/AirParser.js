@@ -491,7 +491,7 @@ function extractBookings(obj) {
       }
     );
 
-    const supplierLocator = booking[`common_${this.uapi_version}:SupplierLocator`] || {};
+    const supplierLocator = booking[`common_${this.uapi_version}:SupplierLocator`] || [];
     const trips = booking['air:AirSegment']
       ? Object.keys(booking['air:AirSegment']).map(
         (key) => {
@@ -605,7 +605,11 @@ function extractBookings(obj) {
       version: record.Version,
       uapi_ur_locator: record.LocatorCode,
       uapi_reservation_locator: booking.LocatorCode,
-      uapi_airline_locator: supplierLocator.SupplierLocatorCode || null,
+      airlineLocatorInfo: supplierLocator.map(info => ({
+        createDate: info.CreateDateTime,
+        supplierCode: info.SupplierCode,
+        locatorCode: info.SupplierLocatorCode,
+      })),
       pnrList: [providerInfo.LocatorCode],
       createdAt: providerInfo.CreateDate,
       hostCreatedAt: providerInfo.HostCreateDate,
