@@ -85,6 +85,7 @@ function defaultConfig(ver) {
     `common_${ver}:ShippingAddress`,
     `common_${ver}:PhoneNumber`,
     `common_${ver}:ProviderReservationInfoRef`, // TODO check if can be collapsed
+    `common_${ver}:Commission`,
     /*
       Collapses into array of codes, e.g.
       in airPriceRsp/AirPriceResult/AirPricingSolution/AirPricingInfo
