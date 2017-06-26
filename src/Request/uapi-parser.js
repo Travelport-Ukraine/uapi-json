@@ -65,6 +65,7 @@ function defaultConfig(ver) {
     'common_' + ver + ':MediaItem',
     'util:CurrencyConversion',
     'common_' + ver + ':TaxDetail',
+    'common_' + ver + ':SupplierLocator',
   ];
 
   // Non-single field objects don't get collapsed
