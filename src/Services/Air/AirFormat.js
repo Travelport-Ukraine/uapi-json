@@ -232,7 +232,6 @@ function setIndexesForSegments(
   segmentsObject = null,
   serviceSegmentsObject = null
 ) {
-
   const segments = segmentsObject
     ? Object.keys(segmentsObject).map(k => segmentsObject[k])
     : null;
