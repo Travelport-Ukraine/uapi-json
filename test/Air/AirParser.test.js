@@ -634,7 +634,7 @@ describe('#AirParser', () => {
       expect(result).to.have.all.keys([
         'version', 'uapi_ur_locator', 'uapi_reservation_locator',
         'airlineLocatorInfo', 'bookingPCC', 'passengers', 'pnr', 'pnrList',
-        'reservations', 'trips', 'hostCreatedAt', 'createdAt', 'modifiedAt', 'type', 'tickets',
+        'reservations', 'segments', 'hostCreatedAt', 'createdAt', 'modifiedAt', 'type', 'tickets',
       ]);
       expect(result.version).to.be.at.least(0);
       expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/);
@@ -736,37 +736,37 @@ describe('#AirParser', () => {
         );
       });
       // Checking reservations format
-      expect(result.trips).to.be.an('array');
-      result.trips.forEach(
-        (trip) => {
-          expect(trip).to.be.an('object');
-          expect(trip).to.have.all.keys([
+      expect(result.segments).to.be.an('array');
+      result.segments.forEach(
+        (segment) => {
+          expect(segment).to.be.an('object');
+          expect(segment).to.have.all.keys([
             'from', 'to', 'bookingClass', 'departure', 'arrival', 'airline',
             'flightNumber', 'serviceClass', 'status', 'plane', 'duration',
             'techStops', 'group', 'uapi_segment_ref',
           ]);
-          expect(trip.from).to.match(/^[A-Z]{3}$/);
-          expect(trip.to).to.match(/^[A-Z]{3}$/);
-          expect(trip.bookingClass).to.match(/^[A-Z]{1}$/);
-          expect(new Date(trip.departure)).to.be.an.instanceof(Date);
-          expect(new Date(trip.arrival)).to.be.an.instanceof(Date);
-          expect(trip.airline).to.match(/^[A-Z0-9]{2}$/);
-          expect(trip.flightNumber).to.match(/^\d+$/);
-          expect(trip.serviceClass).to.be.oneOf([
+          expect(segment.from).to.match(/^[A-Z]{3}$/);
+          expect(segment.to).to.match(/^[A-Z]{3}$/);
+          expect(segment.bookingClass).to.match(/^[A-Z]{1}$/);
+          expect(new Date(segment.departure)).to.be.an.instanceof(Date);
+          expect(new Date(segment.arrival)).to.be.an.instanceof(Date);
+          expect(segment.airline).to.match(/^[A-Z0-9]{2}$/);
+          expect(segment.flightNumber).to.match(/^\d+$/);
+          expect(segment.serviceClass).to.be.oneOf([
             'Economy', 'Business', 'First', 'PremiumEconomy',
           ]);
-          expect(trip.status).to.match(/^[A-Z]{2}$/);
+          expect(segment.status).to.match(/^[A-Z]{2}$/);
           // Planes
-          expect(trip.plane).to.be.an('array').and.to.have.length.above(0);
-          trip.plane.forEach(plane => expect(plane).to.be.a('string'));
+          expect(segment.plane).to.be.an('array').and.to.have.length.above(0);
+          segment.plane.forEach(plane => expect(plane).to.be.a('string'));
           // Duration
-          expect(trip.duration).to.be.an('array').and.to.have.length.above(0);
-          trip.duration.forEach(duration => expect(duration).to.match(/^\d+$/));
+          expect(segment.duration).to.be.an('array').and.to.have.length.above(0);
+          segment.duration.forEach(duration => expect(duration).to.match(/^\d+$/));
           // Tech stops
-          expect(trip.techStops).to.be.an('array');
-          trip.techStops.forEach(stop => expect(stop).to.match(/^[A-Z]{3}$/));
+          expect(segment.techStops).to.be.an('array');
+          segment.techStops.forEach(stop => expect(stop).to.match(/^[A-Z]{3}$/));
           // Segment reference
-          expect(trip.uapi_segment_ref).to.be.a('string');
+          expect(segment.uapi_segment_ref).to.be.a('string');
         }
       );
       // Checking tickets
