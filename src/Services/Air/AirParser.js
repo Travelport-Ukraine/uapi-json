@@ -492,7 +492,7 @@ function extractBookings(obj) {
     );
 
     const supplierLocator = booking[`common_${this.uapi_version}:SupplierLocator`] || [];
-    const trips = booking['air:AirSegment']
+    const segments = booking['air:AirSegment']
       ? Object.keys(booking['air:AirSegment']).map(
         (key) => {
           const segment = booking['air:AirSegment'][key];
@@ -615,7 +615,7 @@ function extractBookings(obj) {
       hostCreatedAt: providerInfo.HostCreateDate,
       modifiedAt: providerInfo.ModifiedDate,
       reservations,
-      trips,
+      segments,
       passengers,
       bookingPCC: providerInfo.OwningPCC,
       tickets,
