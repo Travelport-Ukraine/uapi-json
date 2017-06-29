@@ -157,6 +157,23 @@ describe('#Utils', () => {
       return file;
     };
 
+    describe('.serviceSegment', () => {
+      const testStrings = [
+        '-D/993/CHANGE FEE/NM-1KOT/ANNA//100/UAH',
+      ];
+
+      testStrings.forEach((str) => {
+        const parsed = utils.parsers.serviceSegment(str);
+        expect(parsed.rfiCode).to.match(/^[A-Z]$/);
+        expect(parsed.rfiSubcode).to.match(/^[0-9A-Z]{3}$/);
+        expect(parsed.rfiSubcode).to.match(/^[0-9A-Z]{3}$/);
+        expect(parsed.feeDescription).to.be.a('string');
+        expect(parsed.name).to.match(/^[A-Z]+\/[A-Z]+$/);
+        expect(parsed.amount).to.be.a('number');
+        expect(parsed.currency).to.match(/^[A-Z]{3}$/);
+      });
+    });
+
     describe('.searchPassengersList', () => {
       it('should test for correct parsing', () => {
         const file = getFile('searchPassengersList');

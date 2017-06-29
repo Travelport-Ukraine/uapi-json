@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import moment from 'moment';
+import parsers from '../../utils/parsers';
 import { AirParsingError } from './AirErrors';
 
 function getBaggage(baggageAllowance) {
@@ -38,6 +40,16 @@ function formatSegment(segment) {
     flightNumber: segment.FlightNumber,
     serviceClass: segment.CabinClass,
     uapi_segment_ref: segment.Key,
+  };
+}
+
+function formatServiceSegment(segment, remark) {
+  return {
+    ...parsers.serviceSegment(remark['passive:Text']),
+    carrier: segment.SupplierCode,
+    airport: segment.Origin,
+    date: moment(segment.StartDate).format(),
+    index: segment.index,
   };
 }
 
@@ -207,11 +219,100 @@ function formatLowFaresSearch(searchRequest, searchResult) {
   return fares;
 }
 
+/**
+ * This function used to transform segments and service segments objects
+ * to arrays. After that this function try to set indexes with same as in
+ * terminal response order. So it needs to check `TravelOrder` field for that.
+ *
+ * @param segmentsObject
+ * @param serviceSegmentsObject
+ * @return {*}
+ */
+function setIndexesForSegments(
+  segmentsObject = null,
+  serviceSegmentsObject = null
+) {
+
+  const segments = segmentsObject
+    ? Object.keys(segmentsObject).map(k => segmentsObject[k])
+    : null;
+
+  const serviceSegments = serviceSegmentsObject
+    ? Object.keys(serviceSegmentsObject).map(k => serviceSegmentsObject[k])
+    : null;
+
+  if (segments === null && serviceSegments === null) {
+    return { segments, serviceSegments };
+  }
+
+  if (segments !== null && serviceSegments === null) {
+    const segmentsNew = segments.map((segment, key) =>
+      ({
+        ...segment,
+        index: key + 1,
+      })
+    );
+    return { segments: segmentsNew, serviceSegments };
+  }
+
+  if (segments === null && serviceSegments !== null) {
+    const serviceSegmentsNew = serviceSegments.map(
+      (segment, key) =>
+        ({
+          ...segment,
+          index: key + 1,
+        })
+      );
+    return { segments, serviceSegments: serviceSegmentsNew };
+  }
+
+  const maxSegmentsTravelOrder = segments.reduce((acc, x) => {
+    if (x.TravelOrder > acc) {
+      return x.TravelOrder;
+    }
+
+    return acc;
+  }, 0);
+
+  const maxServiceSegmentsTravelOrder = serviceSegments.reduce((acc, x) => {
+    if (x.TravelOrder > acc) {
+      return x.TravelOrder;
+    }
+
+    return acc;
+  }, 0);
+
+  const maxOrder = Math.max(
+    maxSegmentsTravelOrder,
+    maxServiceSegmentsTravelOrder
+  );
+
+  const allSegments = [];
+
+  for (let i = 1; i <= maxOrder; i += 1) {
+    segments.forEach(s =>
+      (Number(s.TravelOrder) === i ? allSegments.push(s) : null)
+    );
+    serviceSegments.forEach(s =>
+      (Number(s.TravelOrder) === i ? allSegments.push(s) : null)
+    );
+  }
+
+  const indexedSegments = allSegments.map((s, k) => ({ ...s, index: k + 1 }));
+
+  return {
+    segments: indexedSegments.filter(s => s.SegmentType !== 'Service'),
+    serviceSegments: indexedSegments.filter(s => s.SegmentType === 'Service'),
+  };
+}
+
 module.exports = {
   formatLowFaresSearch,
   formatTrip,
   formatSegment,
+  formatServiceSegment,
   formatAirExchangeBundle,
   formatPrices,
+  setIndexesForSegments,
   getBaggage,
 };

@@ -634,7 +634,7 @@ describe('#AirParser', () => {
       expect(result).to.have.all.keys([
         'version', 'uapi_ur_locator', 'uapi_reservation_locator',
         'airlineLocatorInfo', 'bookingPCC', 'passengers', 'pnr', 'pnrList',
-        'reservations', 'segments', 'hostCreatedAt', 'createdAt', 'modifiedAt', 'type', 'tickets',
+        'reservations', 'segments', 'serviceSegments', 'hostCreatedAt', 'createdAt', 'modifiedAt', 'type', 'tickets',
       ]);
       expect(result.version).to.be.at.least(0);
       expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/);
@@ -741,10 +741,11 @@ describe('#AirParser', () => {
         (segment) => {
           expect(segment).to.be.an('object');
           expect(segment).to.have.all.keys([
-            'from', 'to', 'bookingClass', 'departure', 'arrival', 'airline',
+            'index', 'from', 'to', 'bookingClass', 'departure', 'arrival', 'airline',
             'flightNumber', 'serviceClass', 'status', 'plane', 'duration',
             'techStops', 'group', 'uapi_segment_ref',
           ]);
+          expect(segment.index).to.be.a('number');
           expect(segment.from).to.match(/^[A-Z]{3}$/);
           expect(segment.to).to.match(/^[A-Z]{3}$/);
           expect(segment.bookingClass).to.match(/^[A-Z]{1}$/);
@@ -769,6 +770,34 @@ describe('#AirParser', () => {
           expect(segment.uapi_segment_ref).to.be.a('string');
         }
       );
+
+      if (result.serviceSegments) {
+        expect(result.serviceSegments).to.be.an('array');
+        const allSegments = [].concat(result.segments).concat(result.serviceSegments);
+        const maxIndex = allSegments.reduce((acc, x) => {
+          if (x.index > acc) {
+            return x.index;
+          }
+          return acc;
+        }, 0);
+        expect(maxIndex).to.be.equal(allSegments.length);
+        result.serviceSegments.forEach((segment) => {
+          expect(segment).to.have.all.keys([
+            'index', 'carrier', 'airport', 'date', 'rfiCode',
+            'rfiSubcode', 'feeDescription', 'name', 'amount', 'currency',
+          ]);
+          expect(segment.carrier).to.match(/^[A-Z0-9]{2}$/);
+          expect(segment.airport).to.match(/^[A-Z]{3}$/);
+          expect(new Date(segment.date)).to.be.instanceof(Date);
+          expect(segment.rfiCode).to.match(/^[A-Z]$/);
+          expect(segment.rfiSubcode).to.match(/^[0-9A-Z]{3}$/);
+          expect(segment.feeDescription).to.be.a('string');
+          expect(segment.name).to.match(/^[A-Z]+\/[A-Z]+$/);
+          expect(segment.amount).to.be.a('number');
+          expect(segment.currency).to.match(/^[A-Z]{3}$/);
+        });
+      }
+
       // Checking tickets
       expect(result.tickets).to.be.an('array');
       if (result.tickets.length > 0) {
@@ -939,6 +968,16 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_IMPORT_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport2.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false);
+      });
+    });
+
+    it('should test parsing of universal record with passive segments', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport-passive-segments.xml`).toString();
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult, false);
