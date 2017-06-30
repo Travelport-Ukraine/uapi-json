@@ -984,6 +984,16 @@ describe('#AirParser', () => {
       });
     });
 
+    it('should test parsing of universal record with only passive segments', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport-only-passive-segments.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false);
+      });
+    });
+
     it('should parse pnr without segments', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', {});
       const parseFunction = airParser.AIR_IMPORT_REQUEST;
