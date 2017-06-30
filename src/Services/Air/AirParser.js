@@ -449,6 +449,12 @@ function extractBookings(obj) {
     const providerInfo = reservationInfo[booking[resKey]];
     const ticketingModifiers = booking['air:TicketingModifiers'];
 
+    const passiveReservation = record['passive:PassiveReservation']
+      ? record['passive:PassiveReservation'].find(res =>
+          res.ProviderReservationInfoRef === providerInfo.Key
+        )
+      : null;
+
     if (!providerInfo) {
       throw new AirParsingError.ReservationProviderInfoMissing();
     }
@@ -491,21 +497,32 @@ function extractBookings(obj) {
       }
     );
 
+    const {
+      segments: indexedSegments,
+      serviceSegments: indexedServiceSegments,
+    } = format.setIndexesForSegments(
+      booking['air:AirSegment'] || null,
+      (passiveReservation && passiveReservation['passive:PassiveSegment']) || null
+    );
+
     const supplierLocator = booking[`common_${this.uapi_version}:SupplierLocator`] || [];
-    const trips = booking['air:AirSegment']
-      ? Object.keys(booking['air:AirSegment']).map(
-        (key) => {
-          const segment = booking['air:AirSegment'][key];
-          return Object.assign(
-            format.formatTrip(segment, segment['air:FlightDetails']),
-            {
-              status: segment.Status,
-              serviceClass: segment.CabinClass,
-              bookingClass: segment.ClassOfService,
-            }
-          );
-        }
-      )
+    const segments = indexedSegments
+      ? indexedSegments.map(segment => ({
+        ...format.formatTrip(segment, segment['air:FlightDetails']),
+        index: segment.index,
+        status: segment.Status,
+        serviceClass: segment.CabinClass,
+        bookingClass: segment.ClassOfService,
+      }))
+      : [];
+
+    const serviceSegments = indexedServiceSegments
+      ? indexedServiceSegments.map((s) => {
+        const remark = passiveReservation['passive:PassiveRemark'].find(
+          r => r.PassiveSegmentRef === s.Key
+        );
+        return format.formatServiceSegment(s, remark);
+      })
       : [];
 
     const reservations = !booking['air:AirPricingInfo']
@@ -615,7 +632,8 @@ function extractBookings(obj) {
       hostCreatedAt: providerInfo.HostCreateDate,
       modifiedAt: providerInfo.ModifiedDate,
       reservations,
-      trips,
+      segments,
+      serviceSegments,
       passengers,
       bookingPCC: providerInfo.OwningPCC,
       tickets,

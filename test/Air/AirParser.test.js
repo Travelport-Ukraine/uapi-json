@@ -634,7 +634,7 @@ describe('#AirParser', () => {
       expect(result).to.have.all.keys([
         'version', 'uapi_ur_locator', 'uapi_reservation_locator',
         'airlineLocatorInfo', 'bookingPCC', 'passengers', 'pnr', 'pnrList',
-        'reservations', 'trips', 'hostCreatedAt', 'createdAt', 'modifiedAt', 'type', 'tickets',
+        'reservations', 'segments', 'serviceSegments', 'hostCreatedAt', 'createdAt', 'modifiedAt', 'type', 'tickets',
       ]);
       expect(result.version).to.be.at.least(0);
       expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/);
@@ -736,39 +736,68 @@ describe('#AirParser', () => {
         );
       });
       // Checking reservations format
-      expect(result.trips).to.be.an('array');
-      result.trips.forEach(
-        (trip) => {
-          expect(trip).to.be.an('object');
-          expect(trip).to.have.all.keys([
-            'from', 'to', 'bookingClass', 'departure', 'arrival', 'airline',
+      expect(result.segments).to.be.an('array');
+      result.segments.forEach(
+        (segment) => {
+          expect(segment).to.be.an('object');
+          expect(segment).to.have.all.keys([
+            'index', 'from', 'to', 'bookingClass', 'departure', 'arrival', 'airline',
             'flightNumber', 'serviceClass', 'status', 'plane', 'duration',
             'techStops', 'group', 'uapi_segment_ref',
           ]);
-          expect(trip.from).to.match(/^[A-Z]{3}$/);
-          expect(trip.to).to.match(/^[A-Z]{3}$/);
-          expect(trip.bookingClass).to.match(/^[A-Z]{1}$/);
-          expect(new Date(trip.departure)).to.be.an.instanceof(Date);
-          expect(new Date(trip.arrival)).to.be.an.instanceof(Date);
-          expect(trip.airline).to.match(/^[A-Z0-9]{2}$/);
-          expect(trip.flightNumber).to.match(/^\d+$/);
-          expect(trip.serviceClass).to.be.oneOf([
+          expect(segment.index).to.be.a('number');
+          expect(segment.from).to.match(/^[A-Z]{3}$/);
+          expect(segment.to).to.match(/^[A-Z]{3}$/);
+          expect(segment.bookingClass).to.match(/^[A-Z]{1}$/);
+          expect(new Date(segment.departure)).to.be.an.instanceof(Date);
+          expect(new Date(segment.arrival)).to.be.an.instanceof(Date);
+          expect(segment.airline).to.match(/^[A-Z0-9]{2}$/);
+          expect(segment.flightNumber).to.match(/^\d+$/);
+          expect(segment.serviceClass).to.be.oneOf([
             'Economy', 'Business', 'First', 'PremiumEconomy',
           ]);
-          expect(trip.status).to.match(/^[A-Z]{2}$/);
+          expect(segment.status).to.match(/^[A-Z]{2}$/);
           // Planes
-          expect(trip.plane).to.be.an('array').and.to.have.length.above(0);
-          trip.plane.forEach(plane => expect(plane).to.be.a('string'));
+          expect(segment.plane).to.be.an('array').and.to.have.length.above(0);
+          segment.plane.forEach(plane => expect(plane).to.be.a('string'));
           // Duration
-          expect(trip.duration).to.be.an('array').and.to.have.length.above(0);
-          trip.duration.forEach(duration => expect(duration).to.match(/^\d+$/));
+          expect(segment.duration).to.be.an('array').and.to.have.length.above(0);
+          segment.duration.forEach(duration => expect(duration).to.match(/^\d+$/));
           // Tech stops
-          expect(trip.techStops).to.be.an('array');
-          trip.techStops.forEach(stop => expect(stop).to.match(/^[A-Z]{3}$/));
+          expect(segment.techStops).to.be.an('array');
+          segment.techStops.forEach(stop => expect(stop).to.match(/^[A-Z]{3}$/));
           // Segment reference
-          expect(trip.uapi_segment_ref).to.be.a('string');
+          expect(segment.uapi_segment_ref).to.be.a('string');
         }
       );
+
+      if (result.serviceSegments) {
+        expect(result.serviceSegments).to.be.an('array');
+        const allSegments = [].concat(result.segments).concat(result.serviceSegments);
+        const maxIndex = allSegments.reduce((acc, x) => {
+          if (x.index > acc) {
+            return x.index;
+          }
+          return acc;
+        }, 0);
+        expect(maxIndex).to.be.equal(allSegments.length);
+        result.serviceSegments.forEach((segment) => {
+          expect(segment).to.have.all.keys([
+            'index', 'carrier', 'airport', 'date', 'rfiCode',
+            'rfiSubcode', 'feeDescription', 'name', 'amount', 'currency',
+          ]);
+          expect(segment.carrier).to.match(/^[A-Z0-9]{2}$/);
+          expect(segment.airport).to.match(/^[A-Z]{3}$/);
+          expect(new Date(segment.date)).to.be.instanceof(Date);
+          expect(segment.rfiCode).to.match(/^[A-Z]$/);
+          expect(segment.rfiSubcode).to.match(/^[0-9A-Z]{3}$/);
+          expect(segment.feeDescription).to.be.a('string');
+          expect(segment.name).to.match(/^[A-Z]+\/[A-Z]+$/);
+          expect(segment.amount).to.be.a('number');
+          expect(segment.currency).to.match(/^[A-Z]{3}$/);
+        });
+      }
+
       // Checking tickets
       expect(result.tickets).to.be.an('array');
       if (result.tickets.length > 0) {
@@ -939,6 +968,26 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_IMPORT_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport2.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false);
+      });
+    });
+
+    it('should test parsing of universal record with passive segments', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport-passive-segments.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false);
+      });
+    });
+
+    it('should test parsing of universal record with only passive segments', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport-only-passive-segments.xml`).toString();
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult, false);

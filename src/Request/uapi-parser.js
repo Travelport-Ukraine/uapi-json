@@ -66,6 +66,8 @@ function defaultConfig(ver) {
     'util:CurrencyConversion',
     'common_' + ver + ':TaxDetail',
     'common_' + ver + ':SupplierLocator',
+    'passive:PassiveReservation',
+    'passive:PassiveSegment',
   ];
 
   // Non-single field objects don't get collapsed
