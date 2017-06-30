@@ -35,13 +35,13 @@ module.exports = `
                 {{/segments}}
             </air:AirItinerary>
             {{#if business}}
-            <air:AirPricingModifiers InventoryRequestType="Direct">
+            <air:AirPricingModifiers InventoryRequestType="DirectAccess">
                 <air:PermittedCabins>
                     <com:CabinClass Type="Business" xmlns:com="http://www.travelport.com/schema/common_v36_0" />
                 </air:PermittedCabins>
             </air:AirPricingModifiers>
             {{else}}
-            <air:AirPricingModifiers InventoryRequestType="Direct"/>
+            <air:AirPricingModifiers InventoryRequestType="DirectAccess"/>
             {{/if}}
             {{#passengers}}
             <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}" Age="{{Age}}" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
