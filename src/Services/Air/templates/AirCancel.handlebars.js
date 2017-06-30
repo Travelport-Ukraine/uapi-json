@@ -16,9 +16,9 @@ module.exports = `
       <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
       {{/if}}
       <air:AirReservationLocatorCode>{{uapi_reservation_locator}}</air:AirReservationLocatorCode>
-      {{#trips}}
+      {{#segments}}
       <air:AirSegmentRef Key="{{{uapi_segment_ref}}}"/>
-      {{/trips}}
+      {{/segments}}
     </univ:AirCancelReq>
   </soapenv:Body>
 </soapenv:Envelope>
