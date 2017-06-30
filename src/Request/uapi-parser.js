@@ -68,6 +68,7 @@ function defaultConfig(ver) {
     'common_' + ver + ':SupplierLocator',
     'passive:PassiveReservation',
     'passive:PassiveSegment',
+    'passive:PassiveRemark',
   ];
 
   // Non-single field objects don't get collapsed
