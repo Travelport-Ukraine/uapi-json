@@ -1,0 +1,25 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <SOAP:Fault>
+            <faultcode>Server.InvalidRequestException</faultcode>
+            <faultstring>[Error] :16:36: cvc-maxLength-valid: Value '
+                Mos Eisley
+                ' with length = '64' is not facet-valid with respect to maxLength '50' for type '#AnonType_CitytypeStructuredAddress'.</faultstring>
+            <detail>
+                <ErrorInfo xmlns="http://www.travelport.com/schema/common_v36_0">
+                    <Code>1000</Code>
+                    <Service>WEBSVC</Service>
+                    <Type>Data</Type>
+                    <Description>Validation failed on request message.</Description>
+                    <TransactionId>1CAE61030A07643CA4F43770F2C9B57E</TransactionId>
+                    <Auxdata>
+                        <Entry>
+                            <Reason>
+                                LastElement</Reason>
+                            <Description>City</Description>
+                        </Entry>
+                    </Auxdata>
+                </ErrorInfo></detail>
+        </SOAP:Fault>
+    </SOAP:Body>
+</SOAP:Envelope>
