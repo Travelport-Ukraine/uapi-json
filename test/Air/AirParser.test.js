@@ -847,7 +847,7 @@ describe('#AirParser', () => {
     it('should parse booking with emails', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
-      const xml = fs.readFileSync(`${xmlFolder}/getPNR_emails.xml`).toString();
+      const xml = fs.readFileSync(`${xmlFolder}/getPnr_emails.xml`).toString();
       return uParser.parse(xml)
       .then(json => parseFunction.call(uParser, json))
       .then((result) => {
