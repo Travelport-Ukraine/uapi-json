@@ -448,6 +448,7 @@ function extractBookings(obj) {
     const resKey = `common_${this.uapi_version}:ProviderReservationInfoRef`;
     const providerInfo = reservationInfo[booking[resKey]];
     const ticketingModifiers = booking['air:TicketingModifiers'];
+    const emails = [];
 
     const passiveReservation = record['passive:PassiveReservation']
       ? record['passive:PassiveReservation'].find(res =>
@@ -466,6 +467,20 @@ function extractBookings(obj) {
           throw new AirRuntimeError.TravelersListError();
         }
         const name = traveler[`common_${this.uapi_version}:BookingTravelerName`];
+        const travelerEmails = traveler[`common_${this.uapi_version}:Email`];
+        if (travelerEmails) {
+          Object.keys(travelerEmails).forEach(
+            (i) => {
+              const email = travelerEmails[i];
+              if (email[`common_${this.uapi_version}:ProviderReservationInfoRef`]) {
+                emails.push({
+                  index: emails.length + 1,
+                  email: email.EmailID.toLowerCase(),
+                });
+              }
+            }
+          );
+        }
 
         // SSR DOC parsing of passport data http://gitlab.travel-swift.com/galileo/galileocommand/blob/master/lib/command/booking.js#L84
         // TODO safety checks
@@ -635,6 +650,7 @@ function extractBookings(obj) {
       segments,
       serviceSegments,
       passengers,
+      emails,
       bookingPCC: providerInfo.OwningPCC,
       tickets,
     };
