@@ -634,12 +634,14 @@ describe('#AirParser', () => {
       expect(result).to.have.all.keys([
         'version', 'uapi_ur_locator', 'uapi_reservation_locator',
         'airlineLocatorInfo', 'bookingPCC', 'passengers', 'pnr', 'pnrList',
-        'reservations', 'segments', 'serviceSegments', 'hostCreatedAt', 'createdAt', 'modifiedAt', 'type', 'tickets',
+        'reservations', 'segments', 'serviceSegments', 'hostCreatedAt',
+        'createdAt', 'modifiedAt', 'type', 'tickets', 'emails',
       ]);
       expect(result.version).to.be.at.least(0);
       expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/);
       expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/);
       expect(result.airlineLocatorInfo).to.be.an('array');
+      expect(result.emails).to.be.an('array');
       result.airlineLocatorInfo.forEach((info) => {
         expect(info).have.all.keys([
           'createDate',
@@ -837,6 +839,25 @@ describe('#AirParser', () => {
                 expect(detailInfo.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
               }
             );
+          }
+        );
+      });
+    });
+
+    it('should parse booking with emails', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPNR_emails.xml`).toString();
+      return uParser.parse(xml)
+      .then(json => parseFunction.call(uParser, json))
+      .then((result) => {
+        testBooking(result);
+        const emails = result[0].emails;
+        expect(emails).to.have.lengthOf(2);
+        emails.forEach(
+          (email, index) => {
+            expect(email.index).to.equal(index + 1);
+            expect(email.email).to.be.a('string');
           }
         );
       });
