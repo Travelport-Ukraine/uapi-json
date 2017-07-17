@@ -69,6 +69,7 @@ function defaultConfig(ver) {
     'passive:PassiveReservation',
     'passive:PassiveSegment',
     'passive:PassiveRemark',
+    `common_${ver}:Email`,
   ];
 
   // Non-single field objects don't get collapsed
@@ -86,7 +87,6 @@ function defaultConfig(ver) {
     'air:ETR',
     'air:FareTicketDesignator',
     `common_${ver}:Address`,
-    `common_${ver}:Email`,
     `common_${ver}:ShippingAddress`,
     `common_${ver}:PhoneNumber`,
     `common_${ver}:ProviderReservationInfoRef`, // TODO check if can be collapsed
