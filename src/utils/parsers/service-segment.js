@@ -27,7 +27,7 @@ const parse = (string) => {
       currency,
     },
     documentNumber !== ''
-      ? { ticketNumber: documentNumber.substr(0, 13) }
+      ? { documentNumber: documentNumber.substr(0, 13) }
       : null
   );
 };
