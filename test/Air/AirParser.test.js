@@ -688,7 +688,13 @@ describe('#AirParser', () => {
           'uapi_segment_refs',
           'uapi_passenger_refs',
           'uapi_pricing_info_ref',
+          'endorsement',
         ]);
+
+        if (reservation.endorsement) {
+          expect(reservation.endorsement).to.match(/^[A-Z0-9]+$/);
+        }
+
         if (reservation.platingCarrier) {
           expect(reservation.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
         }
@@ -1001,6 +1007,17 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport-passive-segments.xml`).toString();
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false);
+      });
+    });
+
+    it('should test parsing of universal record with filled endorsement for 1 fq', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport-endorsement.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+
         testBooking(jsonResult, false);
       });
     });

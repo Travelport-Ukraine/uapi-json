@@ -584,8 +584,15 @@ function extractBookings(obj) {
           const modifierKey = reservation['air:TicketingModifiersRef']
             ? Object.keys(reservation['air:TicketingModifiersRef'])[0]
             : null;
-          const platingCarrier = modifierKey && ticketingModifiers[modifierKey]
-            ? ticketingModifiers[modifierKey].PlatingCarrier
+
+          const modifiers = modifierKey && ticketingModifiers[modifierKey];
+
+          const platingCarrier = modifiers
+            ? modifiers.PlatingCarrier
+            : null;
+
+          const endorsement = modifiers && modifiers['air:TicketEndorsement']
+            ? modifiers['air:TicketEndorsement'].Value
             : null;
 
           const priceInfo = Object.assign(
@@ -610,6 +617,7 @@ function extractBookings(obj) {
             fareCalculation: reservation['air:FareCalc'],
             farePricingMethod: reservation.PricingMethod,
             farePricingType: reservation.PricingType,
+            endorsement,
             priceInfo,
             baggage,
             timeToReprice: reservation.LatestTicketingTime,
