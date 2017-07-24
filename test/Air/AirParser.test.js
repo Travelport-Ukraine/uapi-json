@@ -677,73 +677,80 @@ describe('#AirParser', () => {
       expect(result.reservations).to.be.an('array');
       result.reservations.forEach((reservation) => {
         expect(reservation).to.be.an('object');
-        expect(reservation).to.include.all.keys([
-          'status',
-          'fareCalculation',
-          'farePricingMethod',
-          'farePricingType',
-          'priceInfo',
-          'baggage',
-          'timeToReprice',
-          'uapi_segment_refs',
-          'uapi_passenger_refs',
-          'uapi_pricing_info_ref',
-          'endorsement',
-        ]);
+        expect(reservation).to.include.all.keys(['index', 'pricingInfos']);
+        expect(reservation.index).to.be.a('number');
+        expect(reservation.pricingInfos).to.be.an('array').and.to.have.length.above(0);
+        reservation.pricingInfos.forEach(
+          (pricingInfo) => {
+            expect(pricingInfo).to.include.all.keys([
+              'status',
+              'fareCalculation',
+              'farePricingMethod',
+              'farePricingType',
+              'priceInfo',
+              'baggage',
+              'timeToReprice',
+              'uapi_segment_refs',
+              'uapi_passenger_refs',
+              'uapi_pricing_info_ref',
+              'endorsement',
+            ]);
 
-        if (reservation.endorsement) {
-          expect(reservation.endorsement).to.match(/^[A-Z0-9]+$/);
-        }
+            if (pricingInfo.endorsement) {
+              expect(pricingInfo.endorsement).to.match(/^[A-Z0-9]+$/);
+            }
 
-        if (reservation.platingCarrier) {
-          expect(reservation.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
-        }
-        expect(reservation.status).to.be.oneOf(['Reserved', 'Ticketed']);
-        expect(reservation.fareCalculation).to.be.a('string');
-        expect(reservation.fareCalculation).to.have.length.above(0);
-        expect(new Date(reservation.timeToReprice)).to.be.an.instanceof(Date);
-        // Checking Price info
-        expect(reservation.priceInfo).to.be.an('object');
-        expect(reservation.priceInfo).to.include.keys([
-          'totalPrice', 'basePrice', 'equivalentBasePrice', 'taxes', 'passengersCount',
-          'taxesInfo',
-        ]);
-        expect(reservation.priceInfo.passengersCount).to.be.an('object');
-        Object.keys(reservation.priceInfo.passengersCount).forEach(
-          ptc => expect(reservation.priceInfo.passengersCount[ptc]).to.be.a('number')
-        );
-        expect(reservation.priceInfo.taxesInfo).to.be.an('array');
-        reservation.priceInfo.taxesInfo.forEach(
-          (tax) => {
-            expect(tax).to.be.an('object');
-            expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
-            expect(tax.type).to.match(/^[A-Z]{2}$/);
+            if (pricingInfo.platingCarrier) {
+              expect(pricingInfo.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
+            }
+            expect(pricingInfo.status).to.be.oneOf(['Reserved', 'Ticketed']);
+            expect(pricingInfo.fareCalculation).to.be.a('string');
+            expect(pricingInfo.fareCalculation).to.have.length.above(0);
+            expect(new Date(pricingInfo.timeToReprice)).to.be.an.instanceof(Date);
+            // Checking Price info
+            expect(pricingInfo.priceInfo).to.be.an('object');
+            expect(pricingInfo.priceInfo).to.include.keys([
+              'totalPrice', 'basePrice', 'equivalentBasePrice', 'taxes', 'passengersCount',
+              'taxesInfo',
+            ]);
+            expect(pricingInfo.priceInfo.passengersCount).to.be.an('object');
+            Object.keys(pricingInfo.priceInfo.passengersCount).forEach(
+              ptc => expect(pricingInfo.priceInfo.passengersCount[ptc]).to.be.a('number')
+            );
+            expect(pricingInfo.priceInfo.taxesInfo).to.be.an('array');
+            pricingInfo.priceInfo.taxesInfo.forEach(
+              (tax) => {
+                expect(tax).to.be.an('object');
+                expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
+                expect(tax.type).to.match(/^[A-Z]{2}$/);
+              }
+            );
+            // Checking baggage
+            expect(pricingInfo.baggage).to.be.an('array');
+            pricingInfo.baggage.forEach(
+              (baggage) => {
+                expect(baggage).to.be.an('object');
+                expect(baggage).to.have.all.keys(['units', 'amount']);
+                expect(baggage.units).to.be.a('string');
+                expect(baggage.amount).to.be.a('number');
+              }
+            );
+            // Segment references
+            expect(pricingInfo.uapi_segment_refs).to.be.an('array');
+            expect(pricingInfo.uapi_segment_refs).to.have.length.above(0);
+            pricingInfo.uapi_segment_refs.forEach(
+              reference => expect(reference).to.be.a('string')
+            );
+            // Passenger references
+            expect(pricingInfo.uapi_passenger_refs).to.be.an('array');
+            expect(pricingInfo.uapi_passenger_refs).to.have.length.above(0);
+            pricingInfo.uapi_passenger_refs.forEach(
+              reference => expect(reference).to.be.a('string')
+            );
           }
-        );
-        // Checking baggage
-        expect(reservation.baggage).to.be.an('array');
-        reservation.baggage.forEach(
-          (baggage) => {
-            expect(baggage).to.be.an('object');
-            expect(baggage).to.have.all.keys(['units', 'amount']);
-            expect(baggage.units).to.be.a('string');
-            expect(baggage.amount).to.be.a('number');
-          }
-        );
-        // Segment references
-        expect(reservation.uapi_segment_refs).to.be.an('array');
-        expect(reservation.uapi_segment_refs).to.have.length.above(0);
-        reservation.uapi_segment_refs.forEach(
-          reference => expect(reference).to.be.a('string')
-        );
-        // Passenger references
-        expect(reservation.uapi_passenger_refs).to.be.an('array');
-        expect(reservation.uapi_passenger_refs).to.have.length.above(0);
-        reservation.uapi_passenger_refs.forEach(
-          reference => expect(reference).to.be.a('string')
         );
       });
-      // Checking reservations format
+      // Checking segments format
       expect(result.segments).to.be.an('array');
       result.segments.forEach(
         (segment) => {
@@ -831,7 +838,7 @@ describe('#AirParser', () => {
       .then(json => parseFunction.call(uParser, json))
       .then((result) => {
         testBooking(result);
-        const detialedTaxes = result[0].reservations[0].priceInfo.taxesInfo.filter(
+        const detialedTaxes = result[0].reservations[0].pricingInfos[0].priceInfo.taxesInfo.filter(
           tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
         );
         expect(detialedTaxes).to.have.lengthOf(2);
@@ -1076,7 +1083,8 @@ describe('#AirParser', () => {
         const jsonResult = parseFunction.call(uParser, json);
         // Skipping booking test as it fails for segment info
         // testBooking(jsonResult, false);
-        expect(jsonResult[0].reservations[0].priceInfo.passengersCount.ADT).to.equal(2);
+        expect(jsonResult[0].reservations[0].pricingInfos[0].priceInfo.passengersCount.ADT)
+          .to.equal(2);
       });
     });
 
