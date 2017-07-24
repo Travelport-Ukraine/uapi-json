@@ -633,19 +633,6 @@ function extractBookings(obj) {
     );
 
     const reservations = Object.keys(pricingInfosGrouped)
-      .sort(
-        (a, b) => {
-          const intA = parseInt(a, 10);
-          const intB = parseInt(b, 10);
-          if (intA > intB) {
-            return 1;
-          }
-          if (intA < intB) {
-            return -1;
-          }
-          return 0;
-        }
-      )
       .map((key, index) => ({
         index: index + 1,
         pricingInfos: pricingInfosGrouped[key],
