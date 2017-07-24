@@ -89,7 +89,7 @@ module.exports = function (settings) {
     executeCommand: command => Promise.resolve()
       .then(() => {
         if (debug) {
-          console.log(`Terminal request:\n ${command}`);
+          console.log(`Terminal request:\n${command}`);
         }
         return Promise.resolve();
       })
@@ -104,7 +104,7 @@ module.exports = function (settings) {
       .then(
         (response) => {
           if (debug) {
-            console.log(`Terminal response:\n ${response}`);
+            console.log(`Terminal response:\n${response}`);
           }
           Object.assign(state, {
             terminalState: TERMINAL_STATE_READY,
