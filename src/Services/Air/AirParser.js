@@ -553,13 +553,10 @@ function extractBookings(obj) {
           const baggage = Object.keys(fareInfo).map(
             fareLegKey => format.getBaggage(fareInfo[fareLegKey]['air:BaggageAllowance'])
           );
-          const passengersCount = reservation['air:PassengerType'].reduce(
-            (memo, data) => Object.assign(memo, {
-              [data.Code]: Object.prototype.toString.call(data.BookingTravelerRef) === '[object Array]' ? (
-                data.BookingTravelerRef.length
-              ) : 1,
-            }), {}
-          );
+          const passengersCount = reservation['air:PassengerType']
+            .reduce((acc, data) => Object.assign(acc, {
+              [data.Code]: (acc[data.Code] || 0) + 1,
+            }), {});
           const taxesInfo = reservation['air:TaxInfo']
             ? Object.keys(reservation['air:TaxInfo']).map(
               taxKey => Object.assign(

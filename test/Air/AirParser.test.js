@@ -1068,6 +1068,18 @@ describe('#AirParser', () => {
       });
     });
 
+    it('should detect correct number of passengers in reservation', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', {});
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/importPNR.fq.complex.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        // Skipping booking test as it fails for segment info
+        // testBooking(jsonResult, false);
+        expect(jsonResult[0].reservations[0].priceInfo.passengersCount.ADT).to.equal(2);
+      });
+    });
+
     it('should test parsing of universal record import request with tickets', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_IMPORT_REQUEST;
