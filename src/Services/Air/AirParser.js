@@ -540,7 +540,7 @@ function extractBookings(obj) {
       })
       : [];
 
-    const reservations = !booking['air:AirPricingInfo']
+    const pricingInfos = !booking['air:AirPricingInfo']
       ? []
       : Object.keys(booking['air:AirPricingInfo']).map(
         (key) => {
@@ -608,6 +608,9 @@ function extractBookings(obj) {
 
           return {
             uapi_pricing_info_ref: key,
+            uapi_segment_refs: uapiSegmentRefs,
+            uapi_passenger_refs: uapiPassengerRefs,
+            uapi_pricing_info_group: reservation.AirPricingInfoGroup,
             status: reservation.Ticketed
               ? 'Ticketed'
               : 'Reserved',
@@ -618,11 +621,22 @@ function extractBookings(obj) {
             priceInfo,
             baggage,
             timeToReprice: reservation.LatestTicketingTime,
-            uapi_segment_refs: uapiSegmentRefs,
-            uapi_passenger_refs: uapiPassengerRefs,
           };
         }
       );
+
+    const pricingInfosGrouped = pricingInfos.reduce(
+      (acc, pricingInfo) => Object.assign(acc, {
+        [pricingInfo.uapi_pricing_info_group]: (acc[pricingInfo.uapi_pricing_info_group] || [])
+          .concat(pricingInfo),
+      }), {}
+    );
+
+    const reservations = Object.keys(pricingInfosGrouped)
+      .map((key, index) => ({
+        index: index + 1,
+        pricingInfos: pricingInfosGrouped[key],
+      }));
 
     const tickets = (booking['air:DocumentInfo'] && booking['air:DocumentInfo']['air:TicketInfo']) ? (
       booking['air:DocumentInfo']['air:TicketInfo'].map(
