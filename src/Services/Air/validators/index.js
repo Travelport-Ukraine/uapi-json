@@ -3,6 +3,7 @@ import passengers from './passengers';
 import pricingSolutionXml from './pricing-solution-xml';
 import paramsIsObject from './params-is-object';
 import fop from './fop';
+import fopCreditCard from './fop-credit-card';
 import pnr from './pnr';
 import pcc from './pcc';
 import queue from './queue';
@@ -21,6 +22,7 @@ export default {
   pricingSolutionXml,
   paramsIsObject,
   fop,
+  fopCreditCard,
   pnr,
   pcc,
   queue,

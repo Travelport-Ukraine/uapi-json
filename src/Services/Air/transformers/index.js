@@ -5,6 +5,7 @@ import setHasFareBasisFlag from './set-has-farebasis-flag';
 import setGroupsForSegments from './set-groups-for-segments';
 import addMetaPassengersBooking from './add-meta-passengers-booking';
 import decodeExchangeToken from './decode-exchange-token';
+import fixCardFop from './fix-card-fop';
 
 export default {
   convertPassengersObjectToArray,
@@ -14,4 +15,5 @@ export default {
   setGroupsForSegments,
   addMetaPassengersBooking,
   decodeExchangeToken,
+  fixCardFop,
 };

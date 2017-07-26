@@ -37,6 +37,8 @@
     "axios": "^0.15.3",
     "galileo-screen": "1.0.5",
     "handlebars": "^4.0.5",
+    "handlebars-helper-equal": "^1.0.0",
+    "joi": "^10.6.0",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "node-errors-helpers": "^0.1.2",

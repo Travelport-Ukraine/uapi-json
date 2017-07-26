@@ -8,6 +8,8 @@ import {
 import UapiParser from './uapi-parser';
 import configInit from '../config';
 
+handlebars.registerHelper('equal', require('handlebars-helper-equal'));
+
 /**
  * basic function for requests/responses
  * @param  {string} service          service url for current response (gateway)
