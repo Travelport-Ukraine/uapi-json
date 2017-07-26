@@ -543,35 +543,35 @@ function extractBookings(obj) {
       ? []
       : Object.keys(booking['air:AirPricingInfo']).map(
         (key) => {
-          const fareQuote = booking['air:AirPricingInfo'][key];
+          const pricingInfo = booking['air:AirPricingInfo'][key];
 
-          const uapiSegmentRefs = fareQuote['air:BookingInfo'].map(
+          const uapiSegmentRefs = pricingInfo['air:BookingInfo'].map(
             segment => segment.SegmentRef
           );
 
-          const uapiPassengerRefs = fareQuote[`common_${this.uapi_version}:BookingTravelerRef`];
+          const uapiPassengerRefs = pricingInfo[`common_${this.uapi_version}:BookingTravelerRef`];
 
-          const fareInfo = fareQuote['air:FareInfo'];
+          const fareInfo = pricingInfo['air:FareInfo'];
 
           const baggage = Object.keys(fareInfo).map(
             fareLegKey => format.getBaggage(fareInfo[fareLegKey]['air:BaggageAllowance'])
           );
 
-          const passengersCount = fareQuote['air:PassengerType']
+          const passengersCount = pricingInfo['air:PassengerType']
             .reduce((acc, data) => Object.assign(acc, {
               [data.Code]: (acc[data.Code] || 0) + 1,
             }), {});
 
-          const taxesInfo = fareQuote['air:TaxInfo']
-            ? Object.keys(fareQuote['air:TaxInfo']).map(
+          const taxesInfo = pricingInfo['air:TaxInfo']
+            ? Object.keys(pricingInfo['air:TaxInfo']).map(
               taxKey => Object.assign(
                 {
-                  value: fareQuote['air:TaxInfo'][taxKey].Amount,
-                  type: fareQuote['air:TaxInfo'][taxKey].Category,
+                  value: pricingInfo['air:TaxInfo'][taxKey].Amount,
+                  type: pricingInfo['air:TaxInfo'][taxKey].Category,
                 },
-                fareQuote['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`]
+                pricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`]
                   ? {
-                    details: fareQuote['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`].map(
+                    details: pricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`].map(
                       taxDetail => ({
                         airport: taxDetail.OriginAirport,
                         value: taxDetail.Amount,
@@ -583,8 +583,8 @@ function extractBookings(obj) {
             )
             : [];
 
-          const modifierKey = fareQuote['air:TicketingModifiersRef']
-            ? Object.keys(fareQuote['air:TicketingModifiersRef'])[0]
+          const modifierKey = pricingInfo['air:TicketingModifiersRef']
+            ? Object.keys(pricingInfo['air:TicketingModifiersRef'])[0]
             : null;
 
           const modifiers = modifierKey && ticketingModifiers[modifierKey];
@@ -597,10 +597,10 @@ function extractBookings(obj) {
             ? modifiers['air:TicketEndorsement'].Value
             : null;
 
-          fareQuotesCommon[fareQuote.AirPricingInfoGroup] = Object.assign(
+          fareQuotesCommon[pricingInfo.AirPricingInfoGroup] = Object.assign(
             {
               uapi_segment_refs: uapiSegmentRefs,
-              status: fareQuote.Ticketed
+              status: pricingInfo.Ticketed
                 ? 'Ticketed'
                 : 'Reserved',
               endorsement,
@@ -613,18 +613,18 @@ function extractBookings(obj) {
           return {
             uapi_pricing_info_ref: key,
             uapi_passenger_refs: uapiPassengerRefs,
-            uapi_pricing_info_group: fareQuote.AirPricingInfoGroup,
-            fareCalculation: fareQuote['air:FareCalc'],
-            farePricingMethod: fareQuote.PricingMethod,
-            farePricingType: fareQuote.PricingType,
-            totalPrice: fareQuote.TotalPrice,
-            basePrice: fareQuote.BasePrice,
-            equivalentBasePrice: fareQuote.EquivalentBasePrice,
-            taxes: fareQuote.Taxes,
+            uapi_pricing_info_group: pricingInfo.AirPricingInfoGroup,
+            fareCalculation: pricingInfo['air:FareCalc'],
+            farePricingMethod: pricingInfo.PricingMethod,
+            farePricingType: pricingInfo.PricingType,
+            totalPrice: pricingInfo.TotalPrice,
+            basePrice: pricingInfo.BasePrice,
+            equivalentBasePrice: pricingInfo.EquivalentBasePrice,
+            taxes: pricingInfo.Taxes,
             passengersCount,
             taxesInfo,
             baggage,
-            timeToReprice: fareQuote.LatestTicketingTime,
+            timeToReprice: pricingInfo.LatestTicketingTime,
           };
         }
       );
