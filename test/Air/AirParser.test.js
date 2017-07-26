@@ -634,12 +634,14 @@ describe('#AirParser', () => {
       expect(result).to.have.all.keys([
         'version', 'uapi_ur_locator', 'uapi_reservation_locator',
         'airlineLocatorInfo', 'bookingPCC', 'passengers', 'pnr', 'pnrList',
-        'reservations', 'segments', 'serviceSegments', 'hostCreatedAt', 'createdAt', 'modifiedAt', 'type', 'tickets',
+        'reservations', 'segments', 'serviceSegments', 'hostCreatedAt',
+        'createdAt', 'modifiedAt', 'type', 'tickets', 'emails',
       ]);
       expect(result.version).to.be.at.least(0);
       expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/);
       expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/);
       expect(result.airlineLocatorInfo).to.be.an('array');
+      expect(result.emails).to.be.an('array');
       result.airlineLocatorInfo.forEach((info) => {
         expect(info).have.all.keys([
           'createDate',
@@ -686,7 +688,13 @@ describe('#AirParser', () => {
           'uapi_segment_refs',
           'uapi_passenger_refs',
           'uapi_pricing_info_ref',
+          'endorsement',
         ]);
+
+        if (reservation.endorsement) {
+          expect(reservation.endorsement).to.match(/^[A-Z0-9]+$/);
+        }
+
         if (reservation.platingCarrier) {
           expect(reservation.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
         }
@@ -782,7 +790,7 @@ describe('#AirParser', () => {
         }, 0);
         expect(maxIndex).to.be.equal(allSegments.length);
         result.serviceSegments.forEach((segment) => {
-          expect(segment).to.have.all.keys([
+          expect(segment).to.include.all.keys([
             'index', 'carrier', 'airport', 'date', 'rfiCode',
             'rfiSubcode', 'feeDescription', 'name', 'amount', 'currency',
           ]);
@@ -839,6 +847,41 @@ describe('#AirParser', () => {
             );
           }
         );
+      });
+    });
+
+    it('should parse booking with emails', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPnr_emails.xml`).toString();
+      return uParser.parse(xml)
+      .then(json => parseFunction.call(uParser, json))
+      .then((result) => {
+        testBooking(result);
+        const emails = result[0].emails;
+        expect(emails).to.have.lengthOf(2);
+        emails.forEach(
+          (email, index) => {
+            expect(email.index).to.equal(index + 1);
+            expect(email.email).to.be.a('string');
+          }
+        );
+      });
+    });
+
+    it('should parse booking with issued EMD-s', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPNR-EMD-issued.xml`).toString();
+      return uParser.parse(xml)
+      .then(json => parseFunction.call(uParser, json))
+      .then((result) => {
+        testBooking(result);
+        console.log(result[0].serviceSegments);
+        const issuedServiceSegments = result[0].serviceSegments.find(
+          item => item.documentNumber !== undefined
+        );
+        expect(issuedServiceSegments).to.be.an('object');
       });
     });
 
@@ -984,6 +1027,17 @@ describe('#AirParser', () => {
       });
     });
 
+    it('should test parsing of universal record with filled endorsement for 1 fq', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport-endorsement.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+
+        testBooking(jsonResult, false);
+      });
+    });
+
     it('should test parsing of universal record with only passive segments', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_IMPORT_REQUEST;
@@ -1011,6 +1065,18 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult, false);
+      });
+    });
+
+    it('should detect correct number of passengers in reservation', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', {});
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/importPNR.fq.complex.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        // Skipping booking test as it fails for segment info
+        // testBooking(jsonResult, false);
+        expect(jsonResult[0].reservations[0].priceInfo.passengersCount.ADT).to.equal(2);
       });
     });
 

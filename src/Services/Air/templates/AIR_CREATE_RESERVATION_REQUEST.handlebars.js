@@ -27,21 +27,11 @@ module.exports = `
                 {{#if ../deliveryInformation}}
                 <com:DeliveryInfo>
                     <com:ShippingAddress>
-                        <com:AddressName>
-                            {{ ../deliveryInformation.name}}
-                        </com:AddressName>
-                        <com:Street>
-                            {{ ../deliveryInformation.street}}
-                        </com:Street>
-                        <com:City>
-                            {{ ../deliveryInformation.city}}
-                        </com:City>
-                        <com:PostalCode>
-                            {{ ../deliveryInformation.zip}}
-                        </com:PostalCode>
-                        <com:Country>
-                            {{ ../deliveryInformation.country}}
-                        </com:Country>
+                        <com:AddressName>{{ ../deliveryInformation.name}}</com:AddressName>
+                        <com:Street>{{ ../deliveryInformation.street}}</com:Street>
+                        <com:City>{{ ../deliveryInformation.city}}</com:City>
+                        <com:PostalCode>{{ ../deliveryInformation.zip}}</com:PostalCode>
+                        <com:Country>{{ ../deliveryInformation.country}}</com:Country>
                     </com:ShippingAddress>
                 </com:DeliveryInfo>
                 {{/if}}

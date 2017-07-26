@@ -448,6 +448,7 @@ function extractBookings(obj) {
     const resKey = `common_${this.uapi_version}:ProviderReservationInfoRef`;
     const providerInfo = reservationInfo[booking[resKey]];
     const ticketingModifiers = booking['air:TicketingModifiers'];
+    const emails = [];
 
     const passiveReservation = record['passive:PassiveReservation']
       ? record['passive:PassiveReservation'].find(res =>
@@ -466,6 +467,20 @@ function extractBookings(obj) {
           throw new AirRuntimeError.TravelersListError();
         }
         const name = traveler[`common_${this.uapi_version}:BookingTravelerName`];
+        const travelerEmails = traveler[`common_${this.uapi_version}:Email`];
+        if (travelerEmails) {
+          Object.keys(travelerEmails).forEach(
+            (i) => {
+              const email = travelerEmails[i];
+              if (email[`common_${this.uapi_version}:ProviderReservationInfoRef`]) {
+                emails.push({
+                  index: emails.length + 1,
+                  email: email.EmailID.toLowerCase(),
+                });
+              }
+            }
+          );
+        }
 
         // SSR DOC parsing of passport data http://gitlab.travel-swift.com/galileo/galileocommand/blob/master/lib/command/booking.js#L84
         // TODO safety checks
@@ -538,13 +553,10 @@ function extractBookings(obj) {
           const baggage = Object.keys(fareInfo).map(
             fareLegKey => format.getBaggage(fareInfo[fareLegKey]['air:BaggageAllowance'])
           );
-          const passengersCount = reservation['air:PassengerType'].reduce(
-            (memo, data) => Object.assign(memo, {
-              [data.Code]: Object.prototype.toString.call(data.BookingTravelerRef) === '[object Array]' ? (
-                data.BookingTravelerRef.length
-              ) : 1,
-            }), {}
-          );
+          const passengersCount = reservation['air:PassengerType']
+            .reduce((acc, data) => Object.assign(acc, {
+              [data.Code]: (acc[data.Code] || 0) + 1,
+            }), {});
           const taxesInfo = reservation['air:TaxInfo']
             ? Object.keys(reservation['air:TaxInfo']).map(
               taxKey => Object.assign(
@@ -569,8 +581,15 @@ function extractBookings(obj) {
           const modifierKey = reservation['air:TicketingModifiersRef']
             ? Object.keys(reservation['air:TicketingModifiersRef'])[0]
             : null;
-          const platingCarrier = modifierKey && ticketingModifiers[modifierKey]
-            ? ticketingModifiers[modifierKey].PlatingCarrier
+
+          const modifiers = modifierKey && ticketingModifiers[modifierKey];
+
+          const platingCarrier = modifiers
+            ? modifiers.PlatingCarrier
+            : null;
+
+          const endorsement = modifiers && modifiers['air:TicketEndorsement']
+            ? modifiers['air:TicketEndorsement'].Value
             : null;
 
           const priceInfo = Object.assign(
@@ -595,6 +614,7 @@ function extractBookings(obj) {
             fareCalculation: reservation['air:FareCalc'],
             farePricingMethod: reservation.PricingMethod,
             farePricingType: reservation.PricingType,
+            endorsement,
             priceInfo,
             baggage,
             timeToReprice: reservation.LatestTicketingTime,
@@ -635,6 +655,7 @@ function extractBookings(obj) {
       segments,
       serviceSegments,
       passengers,
+      emails,
       bookingPCC: providerInfo.OwningPCC,
       tickets,
     };

@@ -69,6 +69,7 @@ function defaultConfig(ver) {
     'passive:PassiveReservation',
     'passive:PassiveSegment',
     'passive:PassiveRemark',
+    `common_${ver}:Email`,
   ];
 
   // Non-single field objects don't get collapsed
@@ -86,7 +87,6 @@ function defaultConfig(ver) {
     'air:ETR',
     'air:FareTicketDesignator',
     `common_${ver}:Address`,
-    `common_${ver}:Email`,
     `common_${ver}:ShippingAddress`,
     `common_${ver}:PhoneNumber`,
     `common_${ver}:ProviderReservationInfoRef`, // TODO check if can be collapsed
@@ -252,6 +252,25 @@ Parser.prototype.parseXML = function parseXML(xml) {
   });
 };
 
+Parser.prototype.parseVersion = function (obj) {
+  const detail = obj['SOAP:Fault'][0].detail[0];
+  const parsedVersions = Object.keys(detail)
+    .filter(
+      key => key.match(/ErrorInfo$/i)
+    )
+    .reduce(
+      (acc, key) => acc.concat(
+        Object.keys(detail[key][0].$)
+        .filter(detailKey => detailKey.match(/^xmlns/i))
+        .map(detailKey => detail[key][0].$[detailKey])
+      ),
+      []
+    )
+    .map(xmlns => xmlns.match(/_(v\d+_\d+)$/))
+    .filter(version => version !== null);
+  return parsedVersions[0][1];
+};
+
 Parser.prototype.parse = function (xml) {
   const self = this;
 
@@ -264,21 +283,10 @@ Parser.prototype.parse = function (xml) {
     }
 
     if (obj['SOAP:Fault']) {
-      let withVersionProp = null;
       try {
-        const detail = obj['SOAP:Fault'][0].detail[0];
-        const detailKeys = Object.keys(detail);
-        withVersionProp = detailKeys.map(
-          key => (/^[a-zA-Z]+_(v[0-9]{2}_[0-9]):[a-zA-Z]+$/ig).exec(key)
-        ).filter(key => key !== null);
+        this.uapi_version = this.parseVersion(obj);
       } catch (e) {
         throw new RequestRuntimeError.VersionParsingError(obj, e);
-      }
-
-      if (withVersionProp) {
-        this.uapi_version = withVersionProp[0][1];
-      } else {
-        throw new RequestRuntimeError.VersionParsingError(obj);
       }
       return obj;
     }
