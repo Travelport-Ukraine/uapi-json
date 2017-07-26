@@ -677,33 +677,45 @@ describe('#AirParser', () => {
       expect(result.reservations).to.be.an('array');
       result.reservations.forEach((reservation) => {
         expect(reservation).to.be.an('object');
-        expect(reservation).to.include.all.keys(['index', 'pricingInfos']);
+        expect(reservation).to.include.all.keys([
+          'index',
+          'pricingInfos',
+          'uapi_segment_refs',
+          'endorsement',
+          'status',
+        ]);
         expect(reservation.index).to.be.a('number');
         expect(reservation.pricingInfos).to.be.an('array').and.to.have.length.above(0);
+
+        if (reservation.endorsement) {
+          expect(reservation.endorsement).to.match(/^[A-Z0-9]+$/);
+        }
+
+        if (reservation.platingCarrier) {
+          expect(reservation.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
+        }
+        expect(reservation.status).to.be.oneOf(['Reserved', 'Ticketed']);
+
+        // Segment references
+        expect(reservation.uapi_segment_refs).to.be.an('array');
+        expect(reservation.uapi_segment_refs).to.have.length.above(0);
+        reservation.uapi_segment_refs.forEach(
+          reference => expect(reference).to.be.a('string')
+        );
+
         reservation.pricingInfos.forEach(
           (pricingInfo) => {
             expect(pricingInfo).to.include.all.keys([
-              'status',
               'fareCalculation',
               'farePricingMethod',
               'farePricingType',
               'priceInfo',
               'baggage',
               'timeToReprice',
-              'uapi_segment_refs',
               'uapi_passenger_refs',
               'uapi_pricing_info_ref',
-              'endorsement',
             ]);
 
-            if (pricingInfo.endorsement) {
-              expect(pricingInfo.endorsement).to.match(/^[A-Z0-9]+$/);
-            }
-
-            if (pricingInfo.platingCarrier) {
-              expect(pricingInfo.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
-            }
-            expect(pricingInfo.status).to.be.oneOf(['Reserved', 'Ticketed']);
             expect(pricingInfo.fareCalculation).to.be.a('string');
             expect(pricingInfo.fareCalculation).to.have.length.above(0);
             expect(new Date(pricingInfo.timeToReprice)).to.be.an.instanceof(Date);
@@ -734,12 +746,6 @@ describe('#AirParser', () => {
                 expect(baggage.units).to.be.a('string');
                 expect(baggage.amount).to.be.a('number');
               }
-            );
-            // Segment references
-            expect(pricingInfo.uapi_segment_refs).to.be.an('array');
-            expect(pricingInfo.uapi_segment_refs).to.have.length.above(0);
-            pricingInfo.uapi_segment_refs.forEach(
-              reference => expect(reference).to.be.a('string')
             );
             // Passenger references
             expect(pricingInfo.uapi_passenger_refs).to.be.an('array');
