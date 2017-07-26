@@ -709,28 +709,28 @@ describe('#AirParser', () => {
               'fareCalculation',
               'farePricingMethod',
               'farePricingType',
-              'priceInfo',
               'baggage',
               'timeToReprice',
               'uapi_passenger_refs',
               'uapi_pricing_info_ref',
+              'totalPrice',
+              'basePrice',
+              'equivalentBasePrice',
+              'taxes',
+              'passengersCount',
+              'taxesInfo',
             ]);
 
             expect(pricingInfo.fareCalculation).to.be.a('string');
             expect(pricingInfo.fareCalculation).to.have.length.above(0);
             expect(new Date(pricingInfo.timeToReprice)).to.be.an.instanceof(Date);
-            // Checking Price info
-            expect(pricingInfo.priceInfo).to.be.an('object');
-            expect(pricingInfo.priceInfo).to.include.keys([
-              'totalPrice', 'basePrice', 'equivalentBasePrice', 'taxes', 'passengersCount',
-              'taxesInfo',
-            ]);
-            expect(pricingInfo.priceInfo.passengersCount).to.be.an('object');
-            Object.keys(pricingInfo.priceInfo.passengersCount).forEach(
-              ptc => expect(pricingInfo.priceInfo.passengersCount[ptc]).to.be.a('number')
+
+            expect(pricingInfo.passengersCount).to.be.an('object');
+            Object.keys(pricingInfo.passengersCount).forEach(
+              ptc => expect(pricingInfo.passengersCount[ptc]).to.be.a('number')
             );
-            expect(pricingInfo.priceInfo.taxesInfo).to.be.an('array');
-            pricingInfo.priceInfo.taxesInfo.forEach(
+            expect(pricingInfo.taxesInfo).to.be.an('array');
+            pricingInfo.taxesInfo.forEach(
               (tax) => {
                 expect(tax).to.be.an('object');
                 expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
@@ -844,7 +844,7 @@ describe('#AirParser', () => {
       .then(json => parseFunction.call(uParser, json))
       .then((result) => {
         testBooking(result);
-        const detialedTaxes = result[0].fareQuotes[0].pricingInfos[0].priceInfo.taxesInfo.filter(
+        const detialedTaxes = result[0].fareQuotes[0].pricingInfos[0].taxesInfo.filter(
           tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
         );
         expect(detialedTaxes).to.have.lengthOf(2);
@@ -1089,7 +1089,7 @@ describe('#AirParser', () => {
         const jsonResult = parseFunction.call(uParser, json);
         // Skipping booking test as it fails for segment info
         // testBooking(jsonResult, false);
-        expect(jsonResult[0].fareQuotes[0].pricingInfos[0].priceInfo.passengersCount.ADT)
+        expect(jsonResult[0].fareQuotes[0].pricingInfos[0].passengersCount.ADT)
           .to.equal(2);
       });
     });

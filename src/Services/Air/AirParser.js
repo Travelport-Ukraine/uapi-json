@@ -613,17 +613,6 @@ function extractBookings(obj) {
               : null
           );
 
-          const priceInfo = Object.assign(
-            {
-              totalPrice: fareQuote.TotalPrice,
-              basePrice: fareQuote.BasePrice,
-              equivalentBasePrice: fareQuote.EquivalentBasePrice,
-              taxes: fareQuote.Taxes,
-              passengersCount,
-              taxesInfo,
-            },
-          );
-
           return {
             uapi_pricing_info_ref: key,
             uapi_passenger_refs: uapiPassengerRefs,
@@ -631,7 +620,12 @@ function extractBookings(obj) {
             fareCalculation: fareQuote['air:FareCalc'],
             farePricingMethod: fareQuote.PricingMethod,
             farePricingType: fareQuote.PricingType,
-            priceInfo,
+            totalPrice: fareQuote.TotalPrice,
+            basePrice: fareQuote.BasePrice,
+            equivalentBasePrice: fareQuote.EquivalentBasePrice,
+            taxes: fareQuote.Taxes,
+            passengersCount,
+            taxesInfo,
             baggage,
             timeToReprice: fareQuote.LatestTicketingTime,
           };
