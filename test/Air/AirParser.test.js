@@ -199,7 +199,12 @@ describe('#AirParser', () => {
         'farePricingMethod',
         'farePricingType',
         'priceInfoDetailsAvailable',
-        'priceInfo',
+        'totalPrice',
+        'basePrice',
+        'taxes',
+        'taxesInfo',
+        'equivalentBasePrice',
+        'noAdc',
         'passengers',
         'tickets',
       ]);
@@ -212,18 +217,13 @@ describe('#AirParser', () => {
       expect(result.fareCalculation).to.have.length.above(0);
       // Price info
       expect(result.priceInfoDetailsAvailable).to.equal(true);
-      const priceInfo = result.priceInfo;
-      expect(priceInfo).to.be.an('object');
-      expect(priceInfo).to.have.all.keys([
-        'totalPrice', 'basePrice', 'taxes', 'taxesInfo', 'equivalentBasePrice',
-        'noAdc',
-      ]);
-      expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-      expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-      expect(priceInfo.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-      expect(priceInfo.taxesInfo).to.be.an('array');
-      expect(priceInfo.taxesInfo).to.have.length.above(0);
-      priceInfo.taxesInfo.forEach(
+      expect(result).to.be.an('object');
+      expect(result.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+      expect(result.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+      expect(result.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+      expect(result.taxesInfo).to.be.an('array');
+      expect(result.taxesInfo).to.have.length.above(0);
+      result.taxesInfo.forEach(
         (tax) => {
           expect(tax).to.be.an('object');
           expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
@@ -279,11 +279,9 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           expect(result).to.be.an('object');
-          expect(result).to.include.key('priceInfo');
           expect(result.priceInfoDetailsAvailable).to.equal(false);
-          expect(result.priceInfo).to.be.an('object');
-          expect(result.priceInfo.noAdc).to.equal(true);
-          expect(result.priceInfo.totalPrice).to.equal(0);
+          expect(result.noAdc).to.equal(true);
+          expect(result.totalPrice).to.equal(0);
         });
     });
 
@@ -357,7 +355,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testGetTicket(result);
-          const detialedTaxes = result.priceInfo.taxesInfo.filter(
+          const detialedTaxes = result.taxesInfo.filter(
             tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
           );
           expect(detialedTaxes).to.have.lengthOf(2);
@@ -396,8 +394,13 @@ describe('#AirParser', () => {
             'farePricingMethod',
             'farePricingType',
             'priceInfoDetailsAvailable',
-            'priceInfo',
             'passengers',
+            'totalPrice',
+            'basePrice',
+            'taxes',
+            'taxesInfo',
+            'equivalentBasePrice',
+            'noAdc',
             'tickets',
           ]);
           expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
@@ -409,16 +412,10 @@ describe('#AirParser', () => {
           expect(result.fareCalculation).to.have.length.above(0);
           // Price info
           expect(result.priceInfoDetailsAvailable).to.equal(false);
-          const priceInfo = result.priceInfo;
-          expect(priceInfo).to.be.an('object');
-          expect(priceInfo).to.have.all.keys([
-            'totalPrice', 'basePrice', 'taxes', 'equivalentBasePrice', 'taxesInfo',
-            'noAdc',
-          ]);
-          expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.taxesInfo).to.be.an('array').and.to.have.lengthOf(0);
+          expect(result.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(result.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(result.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(result.taxesInfo).to.be.an('array').and.to.have.lengthOf(0);
           // Passengers
           expect(result.passengers).to.be.an('array');
           expect(result.passengers).to.have.length.above(0);

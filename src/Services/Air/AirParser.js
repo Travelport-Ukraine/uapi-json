@@ -372,16 +372,7 @@ const airGetTicket = function (obj) {
         )
       )
     : [];
-  const priceInfo = {
-    // Values
-    totalPrice: etr.TotalPrice || 0,
-    basePrice: etr.BasePrice,
-    equivalentBasePrice: etr.EquivalentBasePrice,
-    taxes: etr.Taxes,
-    taxesInfo: taxes,
-    // Flags
-    noAdc: !etr.TotalPrice,
-  };
+
   const response = {
     uapi_ur_locator: obj.UniversalRecordLocatorCode,
     uapi_reservation_locator: etr['air:AirReservationLocatorCode'],
@@ -393,7 +384,13 @@ const airGetTicket = function (obj) {
     farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
     fareCalculation: etr['air:FareCalc'],
     priceInfoDetailsAvailable: (airPricingInfo !== null),
-    priceInfo,
+    totalPrice: etr.TotalPrice || 0,
+    basePrice: etr.BasePrice,
+    equivalentBasePrice: etr.EquivalentBasePrice,
+    taxes: etr.Taxes,
+    taxesInfo: taxes,
+    // Flags
+    noAdc: !etr.TotalPrice,
     passengers,
     tickets,
   };
