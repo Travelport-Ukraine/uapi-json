@@ -384,7 +384,8 @@ const airGetTicket = function (obj) {
     farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
     fareCalculation: etr['air:FareCalc'],
     priceInfoDetailsAvailable: (airPricingInfo !== null),
-    totalPrice: etr.TotalPrice || 0,
+    totalPrice: etr.TotalPrice
+      || `${(etr.EquivalentBasePrice || etr.BasePrice).slice(0, 3)}0`,
     basePrice: etr.BasePrice,
     equivalentBasePrice: etr.EquivalentBasePrice,
     taxes: etr.Taxes,
@@ -636,12 +637,17 @@ function extractBookings(obj) {
       }), {}
     );
 
-    const fareQuotes = Object.keys(fareQuotesGrouped)
-      .map((key, index) => ({
+    const fareQuotes = Object.keys(fareQuotesGrouped).map((key, index) => {
+      const fqGroup = fareQuotesGrouped[key];
+      const fqGroupPassengers = fqGroup.map(i => i.uapi_passenger_refs);
+
+      return {
         index: index + 1,
+        pricingInfos: fqGroup,
+        uapi_passenger_refs: [].concat(...fqGroupPassengers),
         ...fareQuotesCommon[key],
-        pricingInfos: fareQuotesGrouped[key],
-      }));
+      };
+    });
 
     const tickets = (booking['air:DocumentInfo'] && booking['air:DocumentInfo']['air:TicketInfo']) ? (
       booking['air:DocumentInfo']['air:TicketInfo'].map(

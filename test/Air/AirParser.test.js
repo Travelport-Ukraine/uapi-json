@@ -281,7 +281,7 @@ describe('#AirParser', () => {
           expect(result).to.be.an('object');
           expect(result.priceInfoDetailsAvailable).to.equal(false);
           expect(result.noAdc).to.equal(true);
-          expect(result.totalPrice).to.equal(0);
+          expect(result.totalPrice).to.equal('UAH0');
         });
     });
 
@@ -678,6 +678,7 @@ describe('#AirParser', () => {
           'index',
           'pricingInfos',
           'uapi_segment_refs',
+          'uapi_passenger_refs',
           'endorsement',
           'status',
         ]);
@@ -692,6 +693,12 @@ describe('#AirParser', () => {
           expect(fareQuote.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
         }
         expect(fareQuote.status).to.be.oneOf(['Reserved', 'Ticketed']);
+
+        expect(fareQuote.uapi_passenger_refs).to.be.an('array');
+        expect(fareQuote.uapi_passenger_refs).to.have.length.above(0);
+        fareQuote.uapi_passenger_refs.forEach(
+          reference => expect(reference).to.be.a('string')
+        );
 
         // Segment references
         expect(fareQuote.uapi_segment_refs).to.be.an('array');
