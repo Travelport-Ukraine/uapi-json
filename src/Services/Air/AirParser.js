@@ -636,12 +636,17 @@ function extractBookings(obj) {
       }), {}
     );
 
-    const fareQuotes = Object.keys(fareQuotesGrouped)
-      .map((key, index) => ({
+    const fareQuotes = Object.keys(fareQuotesGrouped).map((key, index) => {
+      const concreteGroup = fareQuotesGrouped[key];
+      const allPassengers = concreteGroup.map(i => i.uapi_passenger_refs);
+
+      return {
         index: index + 1,
+        pricingInfos: concreteGroup,
+        uapi_passenger_refs: [].concat(...allPassengers),
         ...fareQuotesCommon[key],
-        pricingInfos: fareQuotesGrouped[key],
-      }));
+      };
+    });
 
     const tickets = (booking['air:DocumentInfo'] && booking['air:DocumentInfo']['air:TicketInfo']) ? (
       booking['air:DocumentInfo']['air:TicketInfo'].map(
