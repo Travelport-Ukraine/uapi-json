@@ -384,7 +384,7 @@ const airGetTicket = function (obj) {
     farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
     fareCalculation: etr['air:FareCalc'],
     priceInfoDetailsAvailable: (airPricingInfo !== null),
-    totalPrice: etr.TotalPrice || 0,
+    totalPrice: etr.TotalPrice || `${etr.EquivalentBasePrice.slice(0, 3)}0`,
     basePrice: etr.BasePrice,
     equivalentBasePrice: etr.EquivalentBasePrice,
     taxes: etr.Taxes,

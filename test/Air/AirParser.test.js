@@ -281,7 +281,7 @@ describe('#AirParser', () => {
           expect(result).to.be.an('object');
           expect(result.priceInfoDetailsAvailable).to.equal(false);
           expect(result.noAdc).to.equal(true);
-          expect(result.totalPrice).to.equal(0);
+          expect(result.totalPrice).to.equal('UAH0');
         });
     });
 
