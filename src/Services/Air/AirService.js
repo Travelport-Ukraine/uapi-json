@@ -5,7 +5,7 @@ const getConfig = require('../../config');
 const templates = require('./templates');
 
 module.exports = function (settings) {
-  const { auth, debug, production } = settings;
+  const { auth, debug, production, additionalOptions } = settings;
   const config = getConfig(auth.region, production);
 
   return {
@@ -17,7 +17,8 @@ module.exports = function (settings) {
       AirValidator.AIR_LOW_FARE_SEARCH_REQUEST,
       AirParser.AIR_ERRORS,
       AirParser.AIR_LOW_FARE_SEARCH_REQUEST,
-      debug
+      debug,
+      additionalOptions
     ),
     airPricePricingSolutionXML: uApiRequest(
       config.AirService.url,
@@ -27,7 +28,8 @@ module.exports = function (settings) {
       AirValidator.AIR_PRICE,
       AirParser.AIR_ERRORS,
       AirParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML,
-      debug
+      debug,
+      additionalOptions
     ),
     createReservation: uApiRequest(
       config.AirService.url,
@@ -37,7 +39,8 @@ module.exports = function (settings) {
       AirValidator.AIR_CREATE_RESERVATION_REQUEST,
       AirParser.AIR_ERRORS,
       AirParser.AIR_CREATE_RESERVATION_REQUEST,
-      debug
+      debug,
+      additionalOptions
     ),
     ticket: uApiRequest(
       config.AirService.url,
@@ -47,7 +50,8 @@ module.exports = function (settings) {
       AirValidator.AIR_TICKET, // checks for PNR
       AirParser.AIR_ERRORS,
       AirParser.AIR_TICKET_REQUEST,
-      debug
+      debug,
+      additionalOptions
     ),
     getUniversalRecordByPNR: uApiRequest(
       config.UniversalRecord.url,
@@ -57,7 +61,8 @@ module.exports = function (settings) {
       AirValidator.AIR_REQUEST_BY_PNR, // checks for PNR
       AirParser.AIR_ERRORS,
       AirParser.AIR_IMPORT_REQUEST,
-      debug
+      debug,
+      additionalOptions
     ),
     gdsQueue: uApiRequest(
       config.GdsQueueService.url,
@@ -67,7 +72,8 @@ module.exports = function (settings) {
       AirValidator.GDS_QUEUE_PLACE,
       AirParser.AIR_ERRORS,
       AirParser.GDS_QUEUE_PLACE_RESPONSE,
-      debug
+      debug,
+      additionalOptions
     ),
     foid: uApiRequest(
       config.UniversalRecord.url,
@@ -77,7 +83,8 @@ module.exports = function (settings) {
       AirValidator.UNIVERSAL_RECORD_FOID,
       AirParser.AIR_ERRORS,
       AirParser.UNIVERSAL_RECORD_FOID,
-      debug
+      debug,
+      additionalOptions
     ),
     cancelUR: uApiRequest(
       config.UniversalRecord.url,
@@ -87,7 +94,8 @@ module.exports = function (settings) {
       AirValidator.AIR_CANCEL_UR,
       AirParser.AIR_ERRORS,
       AirParser.AIR_CANCEL_UR,
-      debug
+      debug,
+      additionalOptions
     ),
     flightInfo: uApiRequest(
       config.FlightService.url,
@@ -97,7 +105,8 @@ module.exports = function (settings) {
       AirValidator.AIR_FLIGHT_INFORMATION,
       AirParser.AIR_ERRORS,
       AirParser.AIR_FLIGHT_INFORMATION,
-      debug
+      debug,
+      additionalOptions
     ),
     getTicket: uApiRequest(
       config.AirService.url,
@@ -107,7 +116,8 @@ module.exports = function (settings) {
       AirValidator.AIR_GET_TICKET,
       AirParser.AIR_ERRORS,
       AirParser.AIR_GET_TICKET,
-      debug
+      debug,
+      additionalOptions
     ),
     cancelTicket: uApiRequest(
       config.AirService.url,
@@ -117,7 +127,8 @@ module.exports = function (settings) {
       AirValidator.AIR_CANCEL_TICKET,
       AirParser.AIR_ERRORS,
       AirParser.AIR_CANCEL_TICKET,
-      debug
+      debug,
+      additionalOptions
     ),
     cancelPNR: uApiRequest(
       config.AirService.url,
@@ -127,7 +138,8 @@ module.exports = function (settings) {
       AirValidator.AIR_CANCEL_PNR,
       AirParser.AIR_ERRORS,
       AirParser.AIR_CANCEL_PNR,
-      debug
+      debug,
+      additionalOptions
     ),
 
     exchangeQuote: uApiRequest(
@@ -138,7 +150,8 @@ module.exports = function (settings) {
       AirValidator.AIR_EXCHANGE_QUOTE,
       AirParser.AIR_ERRORS,
       AirParser.AIR_EXCHANGE_QUOTE,
-      debug
+      debug,
+      additionalOptions
     ),
 
     exchangeBooking: uApiRequest(
@@ -149,7 +162,8 @@ module.exports = function (settings) {
       AirValidator.AIR_EXCHANGE,
       AirParser.AIR_ERRORS,
       AirParser.AIR_EXCHANGE,
-      debug
+      debug,
+      additionalOptions
     ),
   };
 };

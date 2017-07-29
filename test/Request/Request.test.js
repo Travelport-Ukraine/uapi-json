@@ -26,7 +26,7 @@ const serviceParams = [
 
 const requestError = proxyquire('../../src/Request/uapi-request', {
   axios: {
-    request: () => Promise.reject(new Error()),
+    request: () => Promise.reject({ response: { status: 300, data: 3 }}),
   },
 });
 const requestJsonResponse = proxyquire('../../src/Request/uapi-request', {
@@ -50,7 +50,9 @@ describe('#Request', () => {
       return request({})
         .catch((err) => {
           expect(err).to.be.an.instanceof(RequestSoapError.SoapRequestError);
-          expect(err.causedBy).to.be.an.instanceof(Error);
+          expect(err.data).to.be.not.null;
+          expect(err.data.status).to.be.equal(300);
+          expect(err.data.data).to.be.equal(3);
           expect(console.log).to.have.callCount(5);
         });
     });
@@ -68,6 +70,21 @@ describe('#Request', () => {
         .then((response) => {
           expect(response).to.equal('PARSED');
           expect(console.log).to.have.callCount(7);
+        });
+    });
+
+    it('should test custom log function', () => {
+      const log = sinon.spy(function(...args) {
+        return;
+      });
+
+      serviceParams.push(3);
+      serviceParams.push({ logFunction: log });
+
+      const request = requestXMLResponse(...serviceParams);
+      return request({})
+        .then(() => {
+          expect(log).to.have.callCount(7);
         });
     });
   });

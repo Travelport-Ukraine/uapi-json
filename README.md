@@ -81,6 +81,12 @@ It also has several useful helpers to handle errors.
 | debug | `Number` | `0` | Can be `0`, `1`, or `2`. |
 | production | `Boolean` | `true` | Production variable is connected with production and pre-production environment. Can be true for production and false for pre-production. For more information read docs. |
 | timeout | `Number` | - | Optional. Used for `TerminalService` only. See [`TerminalService`](docs/Terminal.md) |
+| additionalOptions | `Object` | {} | Optional. User for all services to all additional options like custom log function, etc. See `additionalOptions` description [bellow](#additional-options). |
+
+<a name="additional-options"></a>
+### Additional options 
+
+`logFunction` - set custom logging function that should match next shape `(...args) => {}`. Will receive all requests and responses from uapi/terminal.
 
 ### Auth object
 <a name="auth"></a>

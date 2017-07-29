@@ -15,6 +15,7 @@ const screenFunctions = screenLib({ cursor: '><' });
 
 module.exports = function (settings) {
   const service = terminalService(settings);
+  const log = (settings.additionalOptions || {}).logFunction || console.log;
   const emulatePcc = settings.auth.emulatePcc || false;
   const timeout = settings.timeout || false;
   const debug = settings.debug || 0;
@@ -89,7 +90,7 @@ module.exports = function (settings) {
     executeCommand: command => Promise.resolve()
       .then(() => {
         if (debug) {
-          console.log(`Terminal request:\n${command}`);
+          log(`Terminal request:\n${command}`);
         }
         return Promise.resolve();
       })
@@ -104,7 +105,7 @@ module.exports = function (settings) {
       .then(
         (response) => {
           if (debug) {
-            console.log(`Terminal response:\n${response}`);
+            log(`Terminal response:\n${response}`);
           }
           Object.assign(state, {
             terminalState: TERMINAL_STATE_READY,
