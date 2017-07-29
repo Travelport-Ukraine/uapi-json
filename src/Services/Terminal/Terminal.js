@@ -15,7 +15,7 @@ const screenFunctions = screenLib({ cursor: '><' });
 
 module.exports = function (settings) {
   const service = terminalService(settings);
-  const log = (settings.additionalOptions || {}).logFunction || console.log;
+  const log = (settings.options || {}).logFunction || console.log;
   const emulatePcc = settings.auth.emulatePcc || false;
   const timeout = settings.timeout || false;
   const debug = settings.debug || 0;

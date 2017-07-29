@@ -6,7 +6,7 @@ const getConfig = require('../../config');
 const templates = require('./templates');
 
 module.exports = function (settings) {
-  const { auth, debug, production, additionalOptions } = settings;
+  const { auth, debug, production, options } = settings;
   const config = getConfig(auth.region, production);
 
   return {
@@ -19,7 +19,7 @@ module.exports = function (settings) {
       TerminalParser.TERMINAL_ERROR,
       TerminalParser.CREATE_SESSION,
       debug,
-      additionalOptions
+      options
     ),
     executeCommand: uApiRequest(
       config.TerminalService.url,
@@ -30,7 +30,7 @@ module.exports = function (settings) {
       TerminalParser.TERMINAL_ERROR,
       TerminalParser.TERMINAL_REQUEST,
       debug,
-      additionalOptions
+      options
     ),
     closeSession: uApiRequest(
       config.TerminalService.url,
@@ -41,7 +41,7 @@ module.exports = function (settings) {
       TerminalParser.TERMINAL_ERROR,
       TerminalParser.CLOSE_SESSION,
       debug,
-      additionalOptions
+      options
     ),
   };
 };

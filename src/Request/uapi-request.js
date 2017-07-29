@@ -28,10 +28,10 @@ module.exports = function (
   errorHandler,
   parseFunction,
   debugMode = false,
-  additionalOptions = {},
+  options = {},
 ) {
   const config = configInit(auth.region || 'emea');
-  const log = additionalOptions.logFunction || console.log;
+  const log = options.logFunction || console.log;
 
   if (debugMode > 2) {
     // Logging
