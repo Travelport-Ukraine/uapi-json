@@ -99,6 +99,7 @@ There are 3 types of `debug` mode:
 * `debug=0` - disabled any logs.
 * `debug=1` - logging only request params, request xml and error if it's occurred.
 * `debug=2` - same as 1 but also logging all response xml (due to lot of text to log).
+* `debug=3` - logs everything.
 
 # Services
 <a name="services"></a>
