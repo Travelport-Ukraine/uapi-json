@@ -1,0 +1,52 @@
+<SOAP:Envelope
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:AirRetrieveDocumentRsp TransactionId="94059D890A0759BB1D1C93F6D678CE64" ResponseTime="746" UniversalRecordLocatorCode="N2Z25G"
+      xmlns:air="http://www.travelport.com/schema/air_v39_0"
+      xmlns:common_v39_0="http://www.travelport.com/schema/common_v39_0">
+      <air:ETR Key="Yb5sP2BAAA/BxScyUBAAAA==" TotalPrice="UAH11712" BasePrice="USD581.00" Taxes="UAH10959" EquivalentBasePrice="UAH15054" Refundable="false" Exchangeable="false" IssuedDate="2017-07-28T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="Z1Z70O" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="LH">
+        <air:AirReservationLocatorCode>8YHWDX</air:AirReservationLocatorCode>
+        <common_v39_0:AgencyInfo>
+          <common_v39_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-07-27T22:00:00.000+00:00"/>
+        </common_v39_0:AgencyInfo>
+        <common_v39_0:BookingTraveler Key="Yb5sP2BAAA/BnSXyUBAAAA==">
+          <common_v39_0:BookingTravelerName First="MARK" Last="MART"/>
+          <common_v39_0:SSR Key="Yb5sP2BAAA/BoSXyUBAAAA==" SegmentRef="Yb5sP2BAAA/BqSXyUBAAAA==" Status="HK" Type="TKNE" FreeText="2209902930679C1" Carrier="LH" ProviderReservationInfoRef="Yb5sP2BAAA/BYSXyUBAAAA=="/>
+          <common_v39_0:SSR Key="Yb5sP2BAAA/BpSXyUBAAAA==" SegmentRef="Yb5sP2BAAA/BsSXyUBAAAA==" Status="HK" Type="TKNE" FreeText="2209902930679C2" Carrier="LH" ProviderReservationInfoRef="Yb5sP2BAAA/BYSXyUBAAAA=="/>
+        </common_v39_0:BookingTraveler>
+        <common_v39_0:FormOfPayment Key="Yb5sP2BAAA/BRScyUBAAAA==" Type="Cash" Reusable="false" ProfileKey="/ZQINP03ShGzJ/orOSaoPQ=="/>
+        <common_v39_0:Payment Key="Yb5sP2BAAA/BSScyUBAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="Yb5sP2BAAA/BRScyUBAAAA=="/>
+        <common_v39_0:SupplierLocator SupplierCode="LH" SupplierLocatorCode="LAF7G6"/>
+        <air:FareCalc>IEV LH FRA 523.00Y62LGT0A LH IEV 58.00K37LGT3A NUC581.00END ROE1.0 XT PD1338YK PD852DE PD666OY PD2785RA PD3419YQ PD1425YR</air:FareCalc>
+        <air:Ticket Key="Yb5sP2BAAA/B1ScyUBAAAA==" TicketNumber="2209902930679" TicketStatus="N">
+          <air:Coupon Key="Yb5sP2BAAA/B2ScyUBAAAA==" CouponNumber="1" MarketingCarrier="LH" MarketingFlightNumber="1491" Origin="KBP" Destination="FRA" DepartureTime="2018-02-01T14:05:00.000+02:00" StopoverCode="true" BookingClass="Y" FareBasis="Y62LGT0A" NotValidBefore="2018-02-01" NotValidAfter="2018-02-01" Status="O" SegmentGroup="0" MarriageGroup="0"/>
+          <air:Coupon Key="Yb5sP2BAAA/B3ScyUBAAAA==" CouponNumber="2" MarketingCarrier="LH" MarketingFlightNumber="1492" Origin="FRA" Destination="KBP" DepartureTime="2018-02-11T16:50:00.000+01:00" StopoverCode="true" BookingClass="K" FareBasis="K37LGT3A" NotValidBefore="2018-02-11" NotValidAfter="2018-02-11" Status="O" SegmentGroup="1" MarriageGroup="0"/>
+          <air:ExchangedTicketInfo Number="2209902873017"/>
+          <air:ExchangedTicketInfo Number="2209902930678"/>
+        </air:Ticket>
+        <air:AirPricingInfo Key="Yb5sP2BAAA/BdSXyUBAAAA==" TotalPrice="UAH15054" BasePrice="USD581.00" EquivalentBasePrice="UAH15054" Taxes="UAH0" TrueLastDateToTicket="2017-07-29T23:59:00.000+02:00" PricingMethod="Guaranteed" ETicketability="Yes" ProviderReservationInfoRef="Yb5sP2BAAA/BYSXyUBAAAA==" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="G">
+          <air:FareInfo Key="Yb5sP2BAAA/BhSXyUBAAAA==" FareBasis="Y62LGT0A" PassengerTypeCode="ADT" Origin="KBP" Destination="FRA" EffectiveDate="2017-07-28T00:00:00.000+02:00" NotValidBefore="2018-02-01" NotValidAfter="2018-02-01">
+            <common_v39_0:Endorsement Value="FARE RESTRICTION APPLY"/>
+            <air:BaggageAllowance>
+              <air:NumberOfPieces>0</air:NumberOfPieces>
+            </air:BaggageAllowance>
+          </air:FareInfo>
+          <air:FareInfo Key="Yb5sP2BAAA/BkSXyUBAAAA==" FareBasis="K37LGT3A" PassengerTypeCode="ADT" Origin="FRA" Destination="KBP" EffectiveDate="2017-07-28T00:00:00.000+02:00" NotValidBefore="2018-02-11" NotValidAfter="2018-02-11">
+            <common_v39_0:Endorsement Value="FARE RESTRICTION APPLY"/>
+            <air:BaggageAllowance>
+              <air:NumberOfPieces>0</air:NumberOfPieces>
+            </air:BaggageAllowance>
+          </air:FareInfo>
+          <air:BookingInfo BookingCode="Y" CabinClass="Economy" FareInfoRef="Yb5sP2BAAA/BhSXyUBAAAA=="/>
+          <air:BookingInfo BookingCode="K" CabinClass="Economy" FareInfoRef="Yb5sP2BAAA/BkSXyUBAAAA=="/>
+          <air:FareCalc>IEV LH FRA 523.00Y62LGT0A LH IEV 58.00K37LGT3A NUC581.00END ROE1.0</air:FareCalc>
+          <air:PassengerType Code="ADT" BookingTravelerRef="Yb5sP2BAAA/BnSXyUBAAAA==">
+            <air:FareGuaranteeInfo GuaranteeType="Guaranteed"/>
+          </air:PassengerType>
+          <common_v39_0:BookingTravelerRef Key="Yb5sP2BAAA/BnSXyUBAAAA=="/>
+          <air:PaymentRef Key="Yb5sP2BAAA/BxSXyUBAAAA=="/>
+        </air:AirPricingInfo>
+      </air:ETR>
+    </air:AirRetrieveDocumentRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

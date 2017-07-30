@@ -302,52 +302,62 @@ const airGetTicket = function (obj) {
   const tickets = Object.keys(ticketsList).map(
     (ticketKey) => {
       const ticket = ticketsList[ticketKey];
+      console.log(ticket['air:ExchangedTicketInfo']);
+      const exchangedTickets = ticket['air:ExchangedTicketInfo']
+        ? ticket['air:ExchangedTicketInfo']
+          .map(t => t.Number)
+        : null;
 
-      return {
-        ticketNumber: ticket.TicketNumber,
-        coupons: Object.keys(ticket['air:Coupon']).map(
-          (couponKey) => {
-            const coupon = ticket['air:Coupon'][couponKey];
+      return Object.assign(
+        {
+          ticketNumber: ticket.TicketNumber,
+          coupons: Object.keys(ticket['air:Coupon']).map(
+            (couponKey) => {
+              const coupon = ticket['air:Coupon'][couponKey];
 
-            let bookingInfo = null;
-            // looking for fareInfo by it's fareBasis
-            // and for bookingInfo by correct FareInfoRef
-            if (airPricingInfo && airPricingInfo['air:FareInfo']) {
-              Object.keys(airPricingInfo['air:FareInfo']).forEach(
-                (fareKey) => {
-                  const fare = airPricingInfo['air:FareInfo'][fareKey];
-                  if (fare.FareBasis === coupon.FareBasis) {
-                    const bInfo = airPricingInfo['air:BookingInfo'].find(
-                      info => info.FareInfoRef === fareKey
-                    );
+              let bookingInfo = null;
+              // looking for fareInfo by it's fareBasis
+              // and for bookingInfo by correct FareInfoRef
+              if (airPricingInfo && airPricingInfo['air:FareInfo']) {
+                Object.keys(airPricingInfo['air:FareInfo']).forEach(
+                  (fareKey) => {
+                    const fare = airPricingInfo['air:FareInfo'][fareKey];
+                    if (fare.FareBasis === coupon.FareBasis) {
+                      const bInfo = airPricingInfo['air:BookingInfo'].find(
+                        info => info.FareInfoRef === fareKey
+                      );
 
-                    if (bInfo) {
-                      bookingInfo = bInfo;
+                      if (bInfo) {
+                        bookingInfo = bInfo;
+                      }
                     }
-                  }
-                });
+                  });
+              }
+
+              const couponInfo = Object.assign({
+                couponNumber: coupon.CouponNumber,
+                from: coupon.Origin,
+                to: coupon.Destination,
+                departure: coupon.DepartureTime,
+                airline: coupon.MarketingCarrier,
+                flightNumber: coupon.MarketingFlightNumber,
+                fareBasisCode: coupon.FareBasis,
+                status: coupon.Status,
+                notValidBefore: coupon.NotValidBefore,
+                notValidAfter: coupon.NotValidAfter,
+                bookingClass: coupon.BookingClass,
+              }, bookingInfo !== null ? {
+                serviceClass: bookingInfo.CabinClass,
+              } : null);
+
+              return couponInfo;
             }
-
-            const couponInfo = Object.assign({
-              couponNumber: coupon.CouponNumber,
-              from: coupon.Origin,
-              to: coupon.Destination,
-              departure: coupon.DepartureTime,
-              airline: coupon.MarketingCarrier,
-              flightNumber: coupon.MarketingFlightNumber,
-              fareBasisCode: coupon.FareBasis,
-              status: coupon.Status,
-              notValidBefore: coupon.NotValidBefore,
-              notValidAfter: coupon.NotValidAfter,
-              bookingClass: coupon.BookingClass,
-            }, bookingInfo !== null ? {
-              serviceClass: bookingInfo.CabinClass,
-            } : null);
-
-            return couponInfo;
-          }
-        ),
-      };
+          ),
+        },
+        exchangedTickets
+          ? { exchangedTickets }
+          : null
+      );
     }
   );
 
