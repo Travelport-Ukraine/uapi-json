@@ -63,7 +63,7 @@ describe('#Request', () => {
       return request({})
         .catch((err) => {
           expect(err).to.be.an.instanceof(RequestSoapError.SoapRequestError);
-          expect(err.data).to.be.not.null;
+          expect(err.data).to.not.equal(null);
           expect(err.data.status).to.be.equal(300);
           expect(err.data.data).to.be.equal(3);
           expect(console.log).to.have.callCount(4);
