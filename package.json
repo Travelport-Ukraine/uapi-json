@@ -16,7 +16,7 @@
     "fix": "eslint --fix src/",
     "lint": "eslint src/",
     "build": "babel --copy-files src/ -d build/",
-    "prepublish": "npm run lint && npm run test && npm run build"
+    "prepublishOnly": "npm run lint && npm run test && npm run build"
   },
   "repository": {
     "type": "git",
