@@ -33,7 +33,7 @@ const serviceParams = [
 
 const requestError = proxyquire('../../src/Request/uapi-request', {
   axios: {
-    request: () => Promise.reject({ response: { status: 300, data: 3 }}),
+    request: () => Promise.reject({ response: { status: 300, data: 3 } }),
   },
 });
 const requestJsonResponse = proxyquire('../../src/Request/uapi-request', {
@@ -87,7 +87,7 @@ describe('#Request', () => {
     });
 
     it('should test custom log function with success', () => {
-      const log = sinon.spy(function(...args) {
+      const log = sinon.spy(function (...args) {
         console.log(args);
         return;
       });
@@ -102,7 +102,7 @@ describe('#Request', () => {
     });
 
     it('should test custom log function with error', () => {
-      const log = sinon.spy(function(...args) {
+      const log = sinon.spy(function (...args) {
         console.log(args);
         return;
       });
