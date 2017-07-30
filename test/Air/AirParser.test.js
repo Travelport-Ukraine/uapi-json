@@ -13,6 +13,7 @@ import ParserUapi from '../../src/Request/uapi-parser';
 
 const xmlFolder = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:\d{2}/i;
+const ticketRegExp = /^\d{13}$/;
 
 const checkLowSearchFareXml = (filename) => {
   const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
@@ -715,7 +716,7 @@ describe('#AirParser', () => {
               'farePricingType',
               'baggage',
               'timeToReprice',
-              'uapi_passenger_refs',
+              'passengers',
               'uapi_pricing_info_ref',
               'totalPrice',
               'basePrice',
@@ -724,6 +725,19 @@ describe('#AirParser', () => {
               'passengersCount',
               'taxesInfo',
             ]);
+
+            // Passengers
+            pricingInfo.passengers.forEach(
+              (p) => {
+                expect(p).to.be.an('object');
+                expect(p).to.include.all.keys(['uapi_passenger_ref', 'isTicketed']);
+                expect(p.uapi_passenger_ref).to.be.a('string');
+                expect(p.isTicketed).to.be.a('boolean');
+                if (p.isTicketed) {
+                  expect(p.ticketNumber).to.be.a('string').and.to.match(ticketRegExp);
+                }
+              }
+            );
 
             expect(pricingInfo.fareCalculation).to.be.a('string');
             expect(pricingInfo.fareCalculation).to.have.length.above(0);
@@ -750,12 +764,6 @@ describe('#AirParser', () => {
                 expect(baggage.units).to.be.a('string');
                 expect(baggage.amount).to.be.a('number');
               }
-            );
-            // Passenger references
-            expect(pricingInfo.uapi_passenger_refs).to.be.an('array');
-            expect(pricingInfo.uapi_passenger_refs).to.have.length.above(0);
-            pricingInfo.uapi_passenger_refs.forEach(
-              reference => expect(reference).to.be.a('string')
             );
           }
         );
