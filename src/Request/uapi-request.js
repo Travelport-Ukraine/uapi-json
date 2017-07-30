@@ -1,5 +1,6 @@
 import handlebars from 'handlebars';
 import axios from 'axios';
+import { pd } from 'pretty-data';
 import {
   RequestValidationError,
   RequestRuntimeError,
@@ -19,14 +20,19 @@ import configInit from '../config';
  * @param  {boolean} debugMode        true - log requests, false - dont
  * @return {Promise}                  returning promise for best error handling ever)
  */
-module.exports = function (service, auth, reqType, rootObject,
-  validateFunction, errorHandler, parseFunction, debugMode = false) {
+module.exports = function (
+  service,
+  auth,
+  reqType,
+  rootObject,
+  validateFunction,
+  errorHandler,
+  parseFunction,
+  debugMode = false,
+  options = {},
+) {
   const config = configInit(auth.region || 'emea');
-
-  if (debugMode > 2) {
-    // Logging
-    console.log('Starting working with request');
-  }
+  const log = options.logFunction || console.log;
 
   // Performing checks
   if (!service || service.length <= 0) {
@@ -41,7 +47,7 @@ module.exports = function (service, auth, reqType, rootObject,
 
   return function serviceFunc(params) {
     if (debugMode) {
-      console.log('Input params ', params);
+      log('Input params ', pd.json(params));
     }
 
     // create a v36 uAPI parser with default params and request data in env
@@ -67,8 +73,8 @@ module.exports = function (service, auth, reqType, rootObject,
 
     const sendRequest = function (xml) {
       if (debugMode) {
-        console.log('Request URL: ', service);
-        console.log('Request XML: ', xml);
+        log('Request URL: ', service);
+        log('Request XML: ', pd.xml(xml));
       }
       return axios.request({
         url: service,
@@ -85,15 +91,22 @@ module.exports = function (service, auth, reqType, rootObject,
       })
         .then((response) => {
           if (debugMode > 1) {
-            console.log('Response SOAP: ', response.data);
+            log('Response SOAP: ', pd.xml(response.data));
           }
           return response.data;
         })
-        .catch((err) => {
+        .catch((e) => {
+          const rsp = e.response;
+          const error = {
+            status: rsp.status,
+            data: rsp.data,
+          };
+
           if (debugMode) {
-            console.log('Error Response SOAP: ', JSON.stringify(err));
+            log('Error Response SOAP: ', pd.json(error));
           }
-          return Promise.reject(new RequestSoapError.SoapRequestError(null, err));
+
+          return Promise.reject(new RequestSoapError.SoapRequestError(error));
         });
     };
 
@@ -112,13 +125,13 @@ module.exports = function (service, auth, reqType, rootObject,
 
     const validateSOAP = function (parsedXML) {
       if (parsedXML['SOAP:Fault']) {
-        if (debugMode) {
-          console.log('Parsed error response', JSON.stringify(parsedXML));
+        if (debugMode > 2) {
+          log('Parsed error response', pd.json(parsedXML));
         }
         const errData = uParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
         return errorHandler.call(uParser, errData);
-      } else if (debugMode > 1) {
-        console.log('Parsed response', JSON.stringify(parsedXML));
+      } else if (debugMode > 2) {
+        log('Parsed response', pd.json(parsedXML));
       }
 
       return parsedXML;
@@ -126,7 +139,7 @@ module.exports = function (service, auth, reqType, rootObject,
 
     const handleSuccess = function (result) {
       if (debugMode > 1) {
-        console.log('Returning result', JSON.stringify(result));
+        log('Returning result', pd.json(result));
       }
       return result;
     };

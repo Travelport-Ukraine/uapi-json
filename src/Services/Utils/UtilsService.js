@@ -6,7 +6,7 @@ const getConfig = require('../../config');
 const templates = require('./templates');
 
 module.exports = function (settings) {
-  const { auth, debug, production } = settings;
+  const { auth, debug, production, options } = settings;
   const config = getConfig(auth.region, production);
   return {
     currencyConvert: uApiRequest(
@@ -17,7 +17,8 @@ module.exports = function (settings) {
       UtilsValidator.CURRENCY_CONVERSION,
       UtilsParser.UTILS_ERROR,
       UtilsParser.CURRENCY_CONVERSION,
-      debug
+      debug,
+      options
     ),
   };
 };

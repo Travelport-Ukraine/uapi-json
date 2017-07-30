@@ -88,7 +88,6 @@ const ticketParse = function (obj) {
         return !!(acc && tickets);
       }, true);
     } catch (e) {
-      console.log(e);
       throw new AirRuntimeError.TicketingTicketsMissing(obj);
     }
   }
