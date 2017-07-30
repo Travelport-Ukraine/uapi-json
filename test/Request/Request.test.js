@@ -21,7 +21,7 @@ const serviceParams = [
   null,
   () => ({}),
   () => ({}),
-  () => 'PARSED',
+  () => ({}),
 ];
 
 const requestError = proxyquire('../../src/Request/uapi-request', {
@@ -53,7 +53,7 @@ describe('#Request', () => {
           expect(err.data).to.be.not.null;
           expect(err.data.status).to.be.equal(300);
           expect(err.data.data).to.be.equal(3);
-          expect(console.log).to.have.callCount(5);
+          expect(console.log).to.have.callCount(4);
         });
     });
     it('should throw SoapServerError when JSON received', () => {
@@ -61,15 +61,15 @@ describe('#Request', () => {
       return request({})
         .catch((err) => {
           expect(err).to.be.an.instanceof(RequestSoapError.SoapServerError);
-          expect(console.log).to.have.callCount(5);
+          expect(console.log).to.have.callCount(4);
         });
     });
     it('should call XML parse when XML received', () => {
       const request = requestXMLResponse(...serviceParams.concat(3));
       return request({})
         .then((response) => {
-          expect(response).to.equal('PARSED');
-          expect(console.log).to.have.callCount(7);
+          expect(response).to.deep.equal({});
+          expect(console.log).to.have.callCount(6);
         });
     });
 
@@ -84,7 +84,7 @@ describe('#Request', () => {
       const request = requestXMLResponse(...serviceParams);
       return request({})
         .then(() => {
-          expect(log).to.have.callCount(7);
+          expect(log).to.have.callCount(6);
         });
     });
   });

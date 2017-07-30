@@ -47,7 +47,7 @@ module.exports = function (
 
   return function serviceFunc(params) {
     if (debugMode) {
-      log('Input params ', pd.json(JSON.stringify(params)));
+      log('Input params ', pd.json(params));
     }
 
     // create a v36 uAPI parser with default params and request data in env
@@ -103,7 +103,7 @@ module.exports = function (
           };
 
           if (debugMode) {
-            log('Error Response SOAP: ', pd.json(JSON.stringify(error)));
+            log('Error Response SOAP: ', pd.json(error));
           }
 
           return Promise.reject(new RequestSoapError.SoapRequestError(error));
@@ -126,12 +126,12 @@ module.exports = function (
     const validateSOAP = function (parsedXML) {
       if (parsedXML['SOAP:Fault']) {
         if (debugMode > 2) {
-          log('Parsed error response', pd.json(JSON.stringify(parsedXML)));
+          log('Parsed error response', pd.json(parsedXML));
         }
         const errData = uParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
         return errorHandler.call(uParser, errData);
       } else if (debugMode > 2) {
-        log('Parsed response', pd.json(JSON.stringify(parsedXML)));
+        log('Parsed response', pd.json(parsedXML));
       }
 
       return parsedXML;
@@ -139,7 +139,7 @@ module.exports = function (
 
     const handleSuccess = function (result) {
       if (debugMode > 1) {
-        log('Returning result', pd.json(JSON.stringify(result)));
+        log('Returning result', pd.json(result));
       }
       return result;
     };
