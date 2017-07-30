@@ -44,10 +44,12 @@ module.exports = function (settings) {
   // Getting session token
   const getSessionToken = () => new Promise((resolve, reject) => {
     if (state.terminalState === TERMINAL_STATE_BUSY) {
-      throw new TerminalRuntimeError.TerminalIsBusy();
+      reject(new TerminalRuntimeError.TerminalIsBusy());
+      return;
     }
     if (state.terminalState === TERMINAL_STATE_CLOSED) {
-      throw new TerminalRuntimeError.TerminalIsClosed();
+      reject(new TerminalRuntimeError.TerminalIsClosed());
+      return;
     }
     Object.assign(state, {
       terminalState: TERMINAL_STATE_BUSY,
@@ -58,32 +60,29 @@ module.exports = function (settings) {
       return;
     }
     // Getting token
-    service.getSessionToken({
-      timeout,
-    }).then((sessionToken) => {
-      // Remember sesion token
-      Object.assign(state, {
-        sessionToken,
-      });
-      // Return if no emulation needed
-      if (!emulatePcc) {
-        return sessionToken;
-      }
-      // Emulate pcc
-      return service.executeCommand({
-        sessionToken,
-        command: `SEM/${emulatePcc}/AG`,
-      }).then((response) => {
-        if (!response[0].match(/^PROCEED/)) {
-          throw new TerminalRuntimeError.TerminalEmulationFailed(response);
+    service.getSessionToken({ timeout })
+      .then((sessionToken) => {
+        // Remember sesion token
+        Object.assign(state, {
+          sessionToken,
+        });
+        // Return if no emulation needed
+        if (!emulatePcc) {
+          return sessionToken;
         }
-        return sessionToken;
-      });
-    }).then(
-      resolve
-    ).catch(
-      reject
-    );
+        // Emulate pcc
+        return service.executeCommand({
+          sessionToken,
+          command: `SEM/${emulatePcc}/AG`,
+        }).then((response) => {
+          if (!response[0].match(/^PROCEED/)) {
+            return Promise.reject(new TerminalRuntimeError.TerminalEmulationFailed(response));
+          }
+          return Promise.resolve(sessionToken);
+        });
+      })
+      .then(resolve)
+      .catch(reject);
   });
 
   const terminal = {

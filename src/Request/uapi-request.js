@@ -7,6 +7,7 @@ import {
   RequestSoapError,
 } from './RequestErrors';
 import UapiParser from './uapi-parser';
+import prepareRequest from './prepare-request';
 import configInit from '../config';
 
 /**
@@ -20,7 +21,7 @@ import configInit from '../config';
  * @param  {boolean} debugMode        true - log requests, false - dont
  * @return {Promise}                  returning promise for best error handling ever)
  */
-module.exports = function (
+module.exports = function uapiRequest(
   service,
   auth,
   reqType,
@@ -61,15 +62,6 @@ module.exports = function (
           uParser.env = validatedParams;
           return reqType;
         });
-
-    const prepareRequest = function (template) {
-      // adding target branch param from auth variable and render xml
-      params.TargetBranch = auth.targetBranch;
-      params.Username = auth.username;
-      params.emulatePcc = auth.emulatePcc || false;
-      const renderedObj = template(params);
-      return renderedObj;
-    };
 
     const sendRequest = function (xml) {
       if (debugMode) {
@@ -147,7 +139,7 @@ module.exports = function (
 
     return validateInput()
       .then(handlebars.compile)
-      .then(prepareRequest)
+      .then(template => prepareRequest(template, auth, params))
       .then(sendRequest)
       .then(parseResponse)
       .then(validateSOAP)
