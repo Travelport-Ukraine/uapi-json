@@ -303,7 +303,6 @@ const airGetTicket = function (obj) {
   const tickets = Object.keys(ticketsList).map(
     (ticketKey) => {
       const ticket = ticketsList[ticketKey];
-      console.log(ticket['air:ExchangedTicketInfo']);
       if (ticket['air:ExchangedTicketInfo']) {
         ticket['air:ExchangedTicketInfo'].forEach(
           t => exchangedTickets.push(t.Number)
