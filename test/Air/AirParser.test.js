@@ -894,6 +894,24 @@ describe('#AirParser', () => {
       });
     });
 
+    it('should parse exchanged ticket booking with conjunction', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPnr_EXCHANGE_CONJ.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          // General booking test is skipped as no info about plane is avialable
+          // @todo: add general parsing here
+          // testBooking(result);
+          const fqPassenger = result[0].fareQuotes[0].pricingInfos[0].passengers[0];
+          expect(fqPassenger).to.be.an('object')
+            .and.to.have.all.keys(['uapi_passenger_ref', 'isTicketed', 'ticketNumber']);
+          expect(fqPassenger.isTicketed).to.equal(true);
+          expect(fqPassenger.ticketNumber).to.be.a('string');
+        });
+    });
+
     it('should parse booking with issued EMD-s', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
