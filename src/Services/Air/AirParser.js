@@ -298,66 +298,68 @@ const airGetTicket = function (obj) {
     : null;
 
   const ticketsList = etr['air:Ticket'];
+  const exchangedTickets = [];
 
   const tickets = Object.keys(ticketsList).map(
     (ticketKey) => {
       const ticket = ticketsList[ticketKey];
       console.log(ticket['air:ExchangedTicketInfo']);
-      const exchangedTickets = ticket['air:ExchangedTicketInfo']
-        ? ticket['air:ExchangedTicketInfo']
-          .map(t => t.Number)
-        : null;
+      if (ticket['air:ExchangedTicketInfo']) {
+        ticket['air:ExchangedTicketInfo'].forEach(
+          t => exchangedTickets.push(t.Number)
+        );
+      }
 
-      return Object.assign(
-        {
-          ticketNumber: ticket.TicketNumber,
-          coupons: Object.keys(ticket['air:Coupon']).map(
-            (couponKey) => {
-              const coupon = ticket['air:Coupon'][couponKey];
+      const coupons = Object.keys(ticket['air:Coupon']).map(
+        (couponKey) => {
+          const coupon = ticket['air:Coupon'][couponKey];
 
-              let bookingInfo = null;
-              // looking for fareInfo by it's fareBasis
-              // and for bookingInfo by correct FareInfoRef
-              if (airPricingInfo && airPricingInfo['air:FareInfo']) {
-                Object.keys(airPricingInfo['air:FareInfo']).forEach(
-                  (fareKey) => {
-                    const fare = airPricingInfo['air:FareInfo'][fareKey];
-                    if (fare.FareBasis === coupon.FareBasis) {
-                      const bInfo = airPricingInfo['air:BookingInfo'].find(
-                        info => info.FareInfoRef === fareKey
-                      );
+          let bookingInfo = null;
+          // looking for fareInfo by it's fareBasis
+          // and for bookingInfo by correct FareInfoRef
+          if (airPricingInfo && airPricingInfo['air:FareInfo']) {
+            Object.keys(airPricingInfo['air:FareInfo']).forEach(
+              (fareKey) => {
+                const fare = airPricingInfo['air:FareInfo'][fareKey];
+                if (fare.FareBasis === coupon.FareBasis) {
+                  const bInfo = airPricingInfo['air:BookingInfo'].find(
+                    info => info.FareInfoRef === fareKey
+                  );
 
-                      if (bInfo) {
-                        bookingInfo = bInfo;
-                      }
-                    }
-                  });
-              }
+                  if (bInfo) {
+                    bookingInfo = bInfo;
+                  }
+                }
+              });
+          }
 
-              const couponInfo = Object.assign({
-                couponNumber: coupon.CouponNumber,
-                from: coupon.Origin,
-                to: coupon.Destination,
-                departure: coupon.DepartureTime,
-                airline: coupon.MarketingCarrier,
-                flightNumber: coupon.MarketingFlightNumber,
-                fareBasisCode: coupon.FareBasis,
-                status: coupon.Status,
-                notValidBefore: coupon.NotValidBefore,
-                notValidAfter: coupon.NotValidAfter,
-                bookingClass: coupon.BookingClass,
-              }, bookingInfo !== null ? {
-                serviceClass: bookingInfo.CabinClass,
-              } : null);
+          const couponInfo = Object.assign(
+            {
+              couponNumber: coupon.CouponNumber,
+              from: coupon.Origin,
+              to: coupon.Destination,
+              departure: coupon.DepartureTime,
+              airline: coupon.MarketingCarrier,
+              flightNumber: coupon.MarketingFlightNumber,
+              fareBasisCode: coupon.FareBasis,
+              status: coupon.Status,
+              notValidBefore: coupon.NotValidBefore,
+              notValidAfter: coupon.NotValidAfter,
+              bookingClass: coupon.BookingClass,
+            },
+            bookingInfo !== null
+              ? { serviceClass: bookingInfo.CabinClass }
+              : null
+          );
 
-              return couponInfo;
-            }
-          ),
-        },
-        exchangedTickets
-          ? { exchangedTickets }
-          : null
+          return couponInfo;
+        }
       );
+
+      return {
+        ticketNumber: ticket.TicketNumber,
+        coupons,
+      };
     }
   );
 
@@ -382,28 +384,35 @@ const airGetTicket = function (obj) {
       )
     : [];
 
-  const response = {
-    uapi_ur_locator: obj.UniversalRecordLocatorCode,
-    uapi_reservation_locator: etr['air:AirReservationLocatorCode'],
-    pnr: etr.ProviderLocatorCode,
-    platingCarrier: etr.PlatingCarrier,
-    ticketingPcc: etr.PseudoCityCode,
-    issuedAt: etr.IssuedDate,
-    farePricingMethod: airPricingInfo ? airPricingInfo.PricingMethod : null,
-    farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
-    fareCalculation: etr['air:FareCalc'],
-    priceInfoDetailsAvailable: (airPricingInfo !== null),
-    totalPrice: etr.TotalPrice
-      || `${(etr.EquivalentBasePrice || etr.BasePrice).slice(0, 3)}0`,
-    basePrice: etr.BasePrice,
-    equivalentBasePrice: etr.EquivalentBasePrice,
-    taxes: etr.Taxes,
-    taxesInfo: taxes,
-    // Flags
-    noAdc: !etr.TotalPrice,
-    passengers,
-    tickets,
-  };
+  const response = Object.assign(
+    {
+      uapi_ur_locator: obj.UniversalRecordLocatorCode,
+      uapi_reservation_locator: etr['air:AirReservationLocatorCode'],
+      pnr: etr.ProviderLocatorCode,
+      ticketNumber: tickets[0].ticketNumber,
+      platingCarrier: etr.PlatingCarrier,
+      ticketingPcc: etr.PseudoCityCode,
+      issuedAt: etr.IssuedDate,
+      farePricingMethod: airPricingInfo ? airPricingInfo.PricingMethod : null,
+      farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
+      fareCalculation: etr['air:FareCalc'],
+      priceInfoDetailsAvailable: (airPricingInfo !== null),
+      totalPrice: etr.TotalPrice
+        || `${(etr.EquivalentBasePrice || etr.BasePrice).slice(0, 3)}0`,
+      basePrice: etr.BasePrice,
+      equivalentBasePrice: etr.EquivalentBasePrice,
+      taxes: etr.Taxes,
+      taxesInfo: taxes,
+      passengers,
+      tickets,
+      // Flags
+      noAdc: !etr.TotalPrice,
+      isConjunctionTicket: tickets.length > 1,
+    },
+    exchangedTickets.length > 0
+      ? { exchangedTickets }
+      : null
+  );
 
   return response;
 };

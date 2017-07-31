@@ -14,6 +14,7 @@ import ParserUapi from '../../src/Request/uapi-parser';
 const xmlFolder = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:\d{2}/i;
 const ticketRegExp = /^\d{13}$/;
+const pnrRegExp = /^[A-Z0-9]{6}$/i;
 
 const checkLowSearchFareXml = (filename) => {
   const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
@@ -189,31 +190,30 @@ describe('#AirParser', () => {
   describe('getTicket', () => {
     function testTicket(result) {
       expect(result).to.be.an('object');
-      expect(result).to.have.all.keys([
-        'uapi_ur_locator',
-        'uapi_reservation_locator',
-        'pnr',
-        'platingCarrier',
-        'ticketingPcc',
-        'issuedAt',
-        'fareCalculation',
-        'farePricingMethod',
-        'farePricingType',
+      expect(result).to.include.all.keys([
+        'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'ticketNumber',
+        'platingCarrier', 'ticketingPcc', 'issuedAt',
+        'fareCalculation', 'farePricingMethod', 'farePricingType',
         'priceInfoDetailsAvailable',
-        'totalPrice',
-        'basePrice',
-        'taxes',
-        'taxesInfo',
-        'equivalentBasePrice',
-        'noAdc',
-        'passengers',
-        'tickets',
+        'totalPrice', 'basePrice', 'equivalentBasePrice', 'taxes', 'taxesInfo',
+        'noAdc', 'isConjunctionTicket', 'passengers', 'tickets',
       ]);
+      if (result.exchangedTickets) {
+        expect(result.exchangedTickets).to.be.an('array')
+          .and.to.have.length.above(0);
+        result.exchangedTickets.forEach(
+          (t) => {
+            expect(t).to.match(ticketRegExp);
+          }
+        );
+      }
       expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
       expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
-      expect(result.pnr).to.match(/^[A-Z0-9]{6}$/i);
+      expect(result.pnr).to.match(pnrRegExp);
+      expect(result.ticketNumber).to.match(ticketRegExp);
       expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
       expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
+      expect(result.isConjunctionTicket).to.be.a('boolean');
       expect(result.issuedAt).to.match(timestampRegexp);
       expect(result.fareCalculation).to.have.length.above(0);
       // Price info
@@ -312,7 +312,21 @@ describe('#AirParser', () => {
         .then((result) => {
           testTicket(result);
           expect(result.priceInfoDetailsAvailable).to.equal(true);
-          expect(result.tickets[0].exchangedTickets).to.have.length.above(0);
+          expect(result.exchangedTickets).to.have.length.above(0);
+        });
+    });
+
+    it('should parse exchanged conjunction ticket', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_EXCHANGE_CONJ.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testTicket(result);
+          expect(result.priceInfoDetailsAvailable).to.equal(true);
+          expect(result.exchangedTickets).to.have.length.above(0);
         });
     });
 
@@ -426,10 +440,14 @@ describe('#AirParser', () => {
             'equivalentBasePrice',
             'noAdc',
             'tickets',
+            'isConjunctionTicket',
+            'ticketNumber',
           ]);
           expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
           expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
-          expect(result.pnr).to.match(/^[A-Z0-9]{6}$/i);
+          expect(result.pnr).to.match(pnrRegExp);
+          expect(result.ticketNumber).to.match(ticketRegExp);
+          expect(result.isConjunctionTicket).to.be.a('boolean');
           expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
           expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
           expect(result.issuedAt).to.match(timestampRegexp);
