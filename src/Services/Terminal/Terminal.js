@@ -61,24 +61,22 @@ module.exports = function (settings) {
     }
     // Getting token
     service.getSessionToken({ timeout })
-      .then((sessionToken) => {
+      .then((tokenData) => {
         // Remember sesion token
-        Object.assign(state, {
-          sessionToken,
-        });
+        Object.assign(state, tokenData);
         // Return if no emulation needed
         if (!emulatePcc) {
-          return sessionToken;
+          return tokenData.sessionToken;
         }
         // Emulate pcc
         return service.executeCommand({
-          sessionToken,
+          sessionToken: tokenData.sessionToken,
           command: `SEM/${emulatePcc}/AG`,
         }).then((response) => {
           if (!response[0].match(/^PROCEED/)) {
             return Promise.reject(new TerminalRuntimeError.TerminalEmulationFailed(response));
           }
-          return Promise.resolve(sessionToken);
+          return Promise.resolve(tokenData.sessionToken);
         });
       })
       .then(resolve)
