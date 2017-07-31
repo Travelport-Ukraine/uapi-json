@@ -897,7 +897,7 @@ describe('#AirParser', () => {
     it('should parse exchanged ticket booking with conjunction', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
-      const xml = fs.readFileSync(`${xmlFolder}/getPnr_EXCHANGE_CONJ.xml`).toString();
+      const xml = fs.readFileSync(`${xmlFolder}/getPNR_EXCHANGE_CONJ.xml`).toString();
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
