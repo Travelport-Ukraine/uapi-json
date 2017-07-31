@@ -23,7 +23,7 @@ const ModifiedTerminalRuntimeError = Object.assign({}, TerminalRuntimeError, {
 const token = 'TOKEN';
 
 // Spied functions
-const getSessionToken = sinon.spy(() => Promise.resolve(token));
+const getSessionToken = sinon.spy(() => Promise.resolve({ sessionToken: token }));
 const executeCommandSlow = sinon.spy((params) => {
   expect(params).to.be.an('object');
   expect(params.sessionToken).to.equal(token);
