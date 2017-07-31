@@ -538,6 +538,17 @@ function extractBookings(obj) {
       : [];
 
     const fareQuotesCommon = {};
+    const tickets = (booking['air:DocumentInfo'] && booking['air:DocumentInfo']['air:TicketInfo']) ? (
+      booking['air:DocumentInfo']['air:TicketInfo'].map(
+        ticket => ({
+          number: ticket.Number,
+          uapi_passenger_ref: ticket.BookingTravelerRef,
+          uapi_pricing_info_ref: (ticket.AirPricingInfoRef)
+            ? ticket.AirPricingInfoRef
+            : null,
+        })
+      )
+    ) : [];
 
     const pricingInfos = !booking['air:AirPricingInfo']
       ? []
@@ -610,9 +621,26 @@ function extractBookings(obj) {
               : null
           );
 
+          const pricingInfoPassengers = uapiPassengerRefs.map(
+            (ref) => {
+              const ticket = tickets.find(
+                t => t.uapi_passenger_ref === ref && t.uapi_pricing_info_ref === key
+              );
+              return Object.assign(
+                {
+                  uapi_passenger_ref: ref,
+                  isTicketed: !!ticket,
+                },
+                ticket
+                  ? { ticketNumber: ticket.number }
+                  : null
+              );
+            }
+          );
+
           return {
             uapi_pricing_info_ref: key,
-            uapi_passenger_refs: uapiPassengerRefs,
+            passengers: pricingInfoPassengers,
             uapi_pricing_info_group: pricingInfo.AirPricingInfoGroup,
             fareCalculation: pricingInfo['air:FareCalc'],
             farePricingMethod: pricingInfo.PricingMethod,
@@ -638,27 +666,20 @@ function extractBookings(obj) {
 
     const fareQuotes = Object.keys(fareQuotesGrouped).map((key, index) => {
       const fqGroup = fareQuotesGrouped[key];
-      const fqGroupPassengers = fqGroup.map(i => i.uapi_passenger_refs);
+      const fqGroupPassengers = fqGroup.reduce(
+        (acc, fq) => acc.concat(
+          fq.passengers.map(p => p.uapi_passenger_ref)
+        ),
+        []
+      );
 
       return {
         index: index + 1,
         pricingInfos: fqGroup,
-        uapi_passenger_refs: [].concat(...fqGroupPassengers),
+        uapi_passenger_refs: fqGroupPassengers,
         ...fareQuotesCommon[key],
       };
     });
-
-    const tickets = (booking['air:DocumentInfo'] && booking['air:DocumentInfo']['air:TicketInfo']) ? (
-      booking['air:DocumentInfo']['air:TicketInfo'].map(
-        ticket => ({
-          number: ticket.Number,
-          uapi_passenger_ref: ticket.BookingTravelerRef,
-          uapi_pricing_info_ref: (ticket.AirPricingInfoRef)
-            ? ticket.AirPricingInfoRef
-            : null,
-        })
-      )
-    ) : [];
 
     return {
       type: 'uAPI',
