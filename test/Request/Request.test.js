@@ -31,6 +31,19 @@ const serviceParams = [
   () => ({}),
 ];
 
+const serviceParamsReturningString = [
+  'URL',
+  {
+    username: 'USERNAME',
+    password: 'PASSWORD',
+  },
+  templates.lowFareSearch,
+  null,
+  () => ({}),
+  () => ({}),
+  () => '',
+];
+
 const requestError = proxyquire('../../src/Request/uapi-request', {
   axios: {
     request: () => Promise.reject({ response: { status: 300, data: 3 } }),
@@ -108,6 +121,23 @@ describe('#Request', () => {
       });
 
       const params = serviceParams.concat([3]).concat([{ logFunction: log }]);
+
+      const request = requestXMLError(...params);
+      return request({})
+        .then(() => {
+          expect(log).to.have.callCount(6);
+        });
+    });
+
+    it('should test result of parser as string', () => {
+      const log = sinon.spy(function (...args) {
+        console.log(args);
+        return;
+      });
+
+      const params = serviceParamsReturningString
+        .concat([3])
+        .concat([{ logFunction: log }]);
 
       const request = requestXMLError(...params);
       return request({})
