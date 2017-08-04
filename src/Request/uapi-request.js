@@ -131,7 +131,11 @@ module.exports = function uapiRequest(
 
     const handleSuccess = function (result) {
       if (debugMode > 1) {
-        log('Returning result', pd.json(result));
+        if (typeof result === 'string') {
+          log('Returning result', result);
+        } else {
+          log('Returning result', pd.json(result));
+        }
       }
       return result;
     };
