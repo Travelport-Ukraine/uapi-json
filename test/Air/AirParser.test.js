@@ -196,7 +196,7 @@ describe('#AirParser', () => {
         'fareCalculation', 'farePricingMethod', 'farePricingType',
         'priceInfoDetailsAvailable',
         'totalPrice', 'basePrice', 'equivalentBasePrice', 'taxes', 'taxesInfo',
-        'noAdc', 'isConjunctionTicket', 'passengers', 'tickets',
+        'noAdc', 'isConjunctionTicket', 'passengers', 'tickets', 'commission'
       ]);
       if (result.exchangedTickets) {
         expect(result.exchangedTickets).to.be.an('array')
@@ -273,6 +273,13 @@ describe('#AirParser', () => {
           expect(coupon.notValidAfter).to.match(/\d{4}-\d{2}-\d{2}/i);
         });
       });
+      // commission
+      if (result.commission) {
+        expect(result.commission).to.be.an('object');
+        expect(['percent', 'amount']).to.include.members(Object.keys(result.commission));
+      } else {
+        expect(result.commission).to.equal(null);
+      }
     }
 
     it('should parse NO ADC ticket', () => {
@@ -283,6 +290,13 @@ describe('#AirParser', () => {
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
+          // commission
+          if (result.commission) {
+            expect(result.commission).to.be.an('object');
+            expect(['percent', 'amount']).to.include.members(Object.keys(result.commission));
+          } else {
+            expect(result.commission).to.equal(null);
+          }
           testTicket(result);
           expect(result.priceInfoDetailsAvailable).to.equal(false);
           expect(result.noAdc).to.equal(true);
@@ -442,6 +456,7 @@ describe('#AirParser', () => {
             'tickets',
             'isConjunctionTicket',
             'ticketNumber',
+            'commission',
           ]);
           expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
           expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);

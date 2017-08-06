@@ -293,6 +293,8 @@ const airGetTicket = function (obj) {
     })
   );
 
+  const commission = etr[`common_${this.uapi_version}:Commission`] || null;
+
   const airPricingInfo = etr['air:AirPricingInfo']
     ? etr['air:AirPricingInfo'][Object.keys(etr['air:AirPricingInfo'])[0]]
     : null;
@@ -396,6 +398,14 @@ const airGetTicket = function (obj) {
       farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
       fareCalculation: etr['air:FareCalc'],
       priceInfoDetailsAvailable: (airPricingInfo !== null),
+      commission: commission
+        ? {
+          [commission.Type === 'PercentBase' ? 'percent' : 'amount']:
+            commission.Type === 'PercentBase'
+              ? commission.Percentage
+              : commission.Amount,
+        }
+        : null,
       totalPrice: etr.TotalPrice
         || `${(etr.EquivalentBasePrice || etr.BasePrice).slice(0, 3)}0`,
       basePrice: etr.BasePrice,
