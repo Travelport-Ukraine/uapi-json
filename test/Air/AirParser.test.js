@@ -195,15 +195,8 @@ describe('#AirParser', () => {
         'platingCarrier', 'ticketingPcc', 'issuedAt',
         'fareCalculation', 'farePricingMethod', 'farePricingType',
         'priceInfoDetailsAvailable',
-<<<<<<< HEAD
-        'priceInfo',
-        'passengers',
-        'tickets',
-        'commission',
-=======
         'totalPrice', 'basePrice', 'equivalentBasePrice', 'taxes', 'taxesInfo',
-        'noAdc', 'isConjunctionTicket', 'passengers', 'tickets',
->>>>>>> stable
+        'noAdc', 'isConjunctionTicket', 'passengers', 'tickets', 'commission'
       ]);
       if (result.exchangedTickets) {
         expect(result.exchangedTickets).to.be.an('array')
@@ -282,10 +275,10 @@ describe('#AirParser', () => {
       });
       // commission
       if (result.commission) {
-        expect(Object.keys(result.commission)).to.not.be.empty;
-        expect(['percent', 'amount']).to.have.members(Object.keys(result.commission));
+        expect(result.commission).to.be.an('object');
+        expect(['percent', 'amount']).to.include.members(Object.keys(result.commission));
       } else {
-        expect(result.commission).to.be.null;
+        expect(result.commission).to.equal(null);
       }
     }
 
@@ -299,13 +292,11 @@ describe('#AirParser', () => {
         .then((result) => {
           // commission
           if (result.commission) {
-            expect(Object.keys(result.commission)).to.not.be.empty;
+            expect(result.commission).to.be.an('object');
             expect(['percent', 'amount']).to.include.members(Object.keys(result.commission));
           } else {
-            expect(result.commission).to.be.null;
+            expect(result.commission).to.equal(null);
           }
-          expect(result).to.be.an('object');
-          expect(result).to.include.key('priceInfo');
           testTicket(result);
           expect(result.priceInfoDetailsAvailable).to.equal(false);
           expect(result.noAdc).to.equal(true);
@@ -463,12 +454,9 @@ describe('#AirParser', () => {
             'equivalentBasePrice',
             'noAdc',
             'tickets',
-<<<<<<< HEAD
-            'commission'
-=======
             'isConjunctionTicket',
             'ticketNumber',
->>>>>>> stable
+            'commission',
           ]);
           expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
           expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
