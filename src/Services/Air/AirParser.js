@@ -383,6 +383,7 @@ const airGetTicket = function (obj) {
       )
     : [];
 
+  const priceSource = airPricingInfo || etr;
   const response = Object.assign(
     {
       uapi_ur_locator: obj.UniversalRecordLocatorCode,
@@ -396,11 +397,11 @@ const airGetTicket = function (obj) {
       farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
       fareCalculation: etr['air:FareCalc'],
       priceInfoDetailsAvailable: (airPricingInfo !== null),
-      totalPrice: etr.TotalPrice
-        || `${(etr.EquivalentBasePrice || etr.BasePrice).slice(0, 3)}0`,
-      basePrice: etr.BasePrice,
-      equivalentBasePrice: etr.EquivalentBasePrice,
-      taxes: etr.Taxes,
+      totalPrice: priceSource.TotalPrice
+        || `${(priceSource.EquivalentBasePrice || priceSource.BasePrice).slice(0, 3)}0`,
+      basePrice: priceSource.BasePrice,
+      equivalentBasePrice: priceSource.EquivalentBasePrice,
+      taxes: priceSource.Taxes,
       taxesInfo: taxes,
       passengers,
       tickets,
