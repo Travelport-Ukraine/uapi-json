@@ -7,7 +7,7 @@ export default (params) => {
 
   if (
     Object.prototype.toString.call(params.fop) !== '[object Object]'
-    ||  (
+    || (
          params.fop.type !== 'Cash'
       && params.fop.type !== 'Card'
     )
