@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import assert from 'assert';
 import fs from 'fs';
 import path from 'path';
-import moment from 'moment';
 
 import airParser from '../../src/Services/Air/AirParser';
 import {
@@ -1206,21 +1205,17 @@ describe('#AirParser', () => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult, false, true);
         const [booking] = jsonResult;
-        expect(
-          moment(booking.fareQuotes[0].effectiveDate).format('YYYY-MM-DD')
-        ).to.be.equal('2017-07-11');
+        expect(booking.fareQuotes[0].effectiveDate)
+          .to.be.equal('2017-07-11T00:00:00.000+02:00');
 
-        expect(
-          moment(booking.fareQuotes[1].effectiveDate).format('YYYY-MM-DD')
-        ).to.be.equal('2017-07-17');
+        expect(booking.fareQuotes[1].effectiveDate)
+          .to.be.equal('2017-07-17T00:00:00.000+02:00');
 
-        expect(
-          moment(booking.fareQuotes[2].effectiveDate).format('YYYY-MM-DD')
-        ).to.be.equal('2017-07-29');
+        expect(booking.fareQuotes[2].effectiveDate)
+          .to.be.equal('2017-07-29T00:00:00.000+02:00');
 
-        expect(
-          moment(booking.fareQuotes[3].effectiveDate).format('YYYY-MM-DD')
-        ).to.be.equal('2017-07-30');
+        expect(booking.fareQuotes[3].effectiveDate)
+          .to.be.equal('2017-07-30T00:00:00.000+02:00');
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
   });
