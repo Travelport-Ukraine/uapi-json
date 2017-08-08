@@ -734,6 +734,7 @@ describe('#AirParser', () => {
           'uapi_passenger_refs',
           'endorsement',
           'status',
+          'effectiveDate',
         ]);
         expect(fareQuote.index).to.be.a('number');
         expect(fareQuote.pricingInfos).to.be.an('array').and.to.have.length.above(0);
@@ -1193,6 +1194,28 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult, false, true);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should test for correct fq order in pnr', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport.MDBMCW.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false, true);
+        const [booking] = jsonResult;
+        expect(booking.fareQuotes[0].effectiveDate)
+          .to.be.equal('2017-07-11T00:00:00.000+02:00');
+
+        expect(booking.fareQuotes[1].effectiveDate)
+          .to.be.equal('2017-07-17T00:00:00.000+02:00');
+
+        expect(booking.fareQuotes[2].effectiveDate)
+          .to.be.equal('2017-07-29T00:00:00.000+02:00');
+
+        expect(booking.fareQuotes[3].effectiveDate)
+          .to.be.equal('2017-07-30T00:00:00.000+02:00');
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
   });

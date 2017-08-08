@@ -630,6 +630,7 @@ function extractBookings(obj) {
           fareQuotesCommon[pricingInfo.AirPricingInfoGroup] = Object.assign(
             {
               uapi_segment_refs: uapiSegmentRefs,
+              effectiveDate: utils.firstInObj(fareInfo).EffectiveDate,
               status: pricingInfo.Ticketed
                 ? 'Ticketed'
                 : 'Reserved',
@@ -683,7 +684,7 @@ function extractBookings(obj) {
       }), {}
     );
 
-    const fareQuotes = Object.keys(fareQuotesGrouped).map((key, index) => {
+    const fareQuotes = Object.keys(fareQuotesGrouped).map((key) => {
       const fqGroup = fareQuotesGrouped[key];
       const fqGroupPassengers = fqGroup.reduce(
         (acc, fq) => acc.concat(
@@ -693,12 +694,15 @@ function extractBookings(obj) {
       );
 
       return {
-        index: index + 1,
         pricingInfos: fqGroup,
         uapi_passenger_refs: fqGroupPassengers,
         ...fareQuotesCommon[key],
       };
-    });
+    }).sort(
+      (fq1, fq2) => moment(fq1.effectiveDate) - moment(fq2.effectiveDate)
+    ).map(
+      (fq, index) => ({ ...fq, index: index + 1 })
+    );
 
     return {
       type: 'uAPI',
