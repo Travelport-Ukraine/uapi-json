@@ -14,7 +14,7 @@ export default (params) => {
       expDate: Joi.string().regex(/^[0-9]{2}\/[0-9]{2}$/).required(),
       cvv2: Joi.string().regex(/^[0-9]{3}$/).required(),
       type: Joi.string().valid(['CA', 'VI', 'AX', 'DC', 'JC']).optional(),
-    });
+    }).required();
 
     const result = Joi.validate(params.creditCard, schema);
     if (result.error) {
