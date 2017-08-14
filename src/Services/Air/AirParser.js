@@ -382,8 +382,8 @@ const airGetTicket = function (obj) {
         )
       )
     : [];
-
   const priceSource = airPricingInfo || etr;
+  const priceInfoAvailable = priceSource.BasePrice !== undefined;
   const response = Object.assign(
     {
       uapi_ur_locator: obj.UniversalRecordLocatorCode,
@@ -396,11 +396,8 @@ const airGetTicket = function (obj) {
       farePricingMethod: airPricingInfo ? airPricingInfo.PricingMethod : null,
       farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
       fareCalculation: etr['air:FareCalc'],
+      priceInfoAvailable,
       priceInfoDetailsAvailable: (airPricingInfo !== null),
-      totalPrice: priceSource.TotalPrice
-        || `${(priceSource.EquivalentBasePrice || priceSource.BasePrice).slice(0, 3)}0`,
-      basePrice: priceSource.BasePrice,
-      equivalentBasePrice: priceSource.EquivalentBasePrice,
       taxes: priceSource.Taxes,
       taxesInfo: taxes,
       passengers,
@@ -409,6 +406,14 @@ const airGetTicket = function (obj) {
       noAdc: !etr.TotalPrice,
       isConjunctionTicket: tickets.length > 1,
     },
+    priceInfoAvailable
+      ? {
+        totalPrice: priceSource.TotalPrice
+          || `${(priceSource.EquivalentBasePrice || priceSource.BasePrice).slice(0, 3)}0`,
+        basePrice: priceSource.BasePrice,
+        equivalentBasePrice: priceSource.EquivalentBasePrice,
+      }
+      : null,
     exchangedTickets.length > 0
       ? { exchangedTickets }
       : null
