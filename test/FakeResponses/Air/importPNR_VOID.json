@@ -6,9 +6,6 @@
     "uapi_ur_locator": "DQP1VD",
     "uapi_reservation_locator": "SV2Y9A",
     "uapi_airline_locator": "22UEG9",
-    "pnrList": [
-      "XDQTZ4"
-    ],
     "createdAt": "2017-01-30T08:53:52.212+00:00",
     "modifiedAt": "2017-01-30T12:09:32.278+00:00",
     "reservations": [],
