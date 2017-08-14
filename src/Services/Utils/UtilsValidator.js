@@ -1,6 +1,4 @@
-import errors from './UtilsErrors';
-
-const { UtilsValidationError } = errors;
+import { UtilsValidationError } from './UtilsErrors';
 
 function Validator(params) {
   this.params = params;

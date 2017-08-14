@@ -1,4 +1,4 @@
-import errors from './UtilsErrors';
+import { UtilsParsingError, UtilsRuntimeError } from './UtilsErrors';
 
 function currencyConvertParse(json) {
   try {
@@ -8,7 +8,7 @@ function currencyConvertParse(json) {
       rate: curr.BankSellingRate,
     }));
   } catch (e) {
-    throw new errors.UtilsParsingError(json);
+    throw new UtilsParsingError(json);
   }
 
   return json;
@@ -19,12 +19,12 @@ const errorHandler = function (err) {
   try {
     errno = err.detail[`common_${this.uapi_version}:ErrorInfo`][`common_${this.uapi_version}:Code`];
   } catch (e) {
-    throw new errors.UtilsRuntimeError(err);
+    throw new UtilsRuntimeError(err);
   }
 
   switch (errno * 1) {
     default:
-      throw new errors.UtilsRuntimeError(err);
+      throw new UtilsRuntimeError(err);
   }
 };
 
