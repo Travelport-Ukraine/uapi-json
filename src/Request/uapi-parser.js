@@ -71,6 +71,7 @@ function defaultConfig(ver) {
     'passive:PassiveRemark',
     `common_${ver}:Email`,
     'air:ExchangedTicketInfo',
+    `common_${ver}:GeneralRemark`,
   ];
 
   // Non-single field objects don't get collapsed
