@@ -1,9 +1,8 @@
 import util from 'util';
 import screenLib from 'galileo-screen';
-import {
-  TerminalRuntimeError,
-} from './TerminalErrors';
+import { TerminalRuntimeError } from './TerminalErrors';
 import terminalService from './TerminalService';
+import validateServiceSettings from '../../utils/validate-service-settings';
 
 export const TERMINAL_STATE_NONE = 'TERMINAL_STATE_NONE';
 export const TERMINAL_STATE_BUSY = 'TERMINAL_STATE_BUSY';
@@ -14,7 +13,7 @@ export const TERMINAL_STATE_ERROR = 'TERMINAL_STATE_ERROR';
 const screenFunctions = screenLib({ cursor: '><' });
 
 module.exports = function (settings) {
-  const service = terminalService(settings);
+  const service = terminalService(validateServiceSettings(settings));
   const log = (settings.options || {}).logFunction || console.log;
   const emulatePcc = settings.auth.emulatePcc || false;
   const timeout = settings.timeout || false;

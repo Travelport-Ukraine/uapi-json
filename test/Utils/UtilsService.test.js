@@ -1,11 +1,12 @@
 import proxyquire from 'proxyquire';
 import { expect } from 'chai';
 import createMock from '../uapi-request.mock';
+import auth from '../testconfig';
 
 describe('#UtilsService', () => {
   it('should test that all function created correctly', () => {
     const params = {
-      auth: {},
+      auth,
       debug: 0,
       production: true,
     };
