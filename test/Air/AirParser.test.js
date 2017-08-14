@@ -15,6 +15,7 @@ const xmlFolder = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:\d{2}/i;
 const ticketRegExp = /^\d{13}$/;
 const pnrRegExp = /^[A-Z0-9]{6}$/i;
+const amountRegExp = /[A-Z]{3}(?:\d+\.)?\d+/i;
 
 const checkLowSearchFareXml = (filename) => {
   const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
@@ -194,8 +195,8 @@ describe('#AirParser', () => {
         'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'ticketNumber',
         'platingCarrier', 'ticketingPcc', 'issuedAt',
         'fareCalculation', 'farePricingMethod', 'farePricingType',
-        'priceInfoDetailsAvailable',
-        'totalPrice', 'basePrice', 'equivalentBasePrice', 'taxes', 'taxesInfo',
+        'priceInfoDetailsAvailable', 'priceInfoAvailable',
+        'taxes', 'taxesInfo',
         'noAdc', 'isConjunctionTicket', 'passengers', 'tickets',
       ]);
       if (result.exchangedTickets) {
@@ -207,8 +208,8 @@ describe('#AirParser', () => {
           }
         );
       }
-      expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
-      expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
+      expect(result.uapi_ur_locator).to.match(pnrRegExp);
+      expect(result.uapi_reservation_locator).to.match(pnrRegExp);
       expect(result.pnr).to.match(pnrRegExp);
       expect(result.ticketNumber).to.match(ticketRegExp);
       expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
@@ -217,10 +218,16 @@ describe('#AirParser', () => {
       expect(result.issuedAt).to.match(timestampRegexp);
       expect(result.fareCalculation).to.have.length.above(0);
       // Price info
+      expect(result.priceInfoAvailable).to.be.a('boolean');
       expect(result.priceInfoDetailsAvailable).to.be.a('boolean');
       expect(result).to.be.an('object');
-      expect(result.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-      expect(result.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+      if (result.priceInfoAvailable) {
+        expect(result.totalPrice).to.match(amountRegExp);
+        expect(result.basePrice).to.match(amountRegExp);
+        if (result.equivalentBasePrice) {
+          expect(result.equivalentBasePrice).to.match(amountRegExp);
+        }
+      }
       expect(result.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
       expect(result.taxesInfo).to.be.an('array');
       result.taxesInfo.forEach(
@@ -320,6 +327,17 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_IT.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testTicket(result);
+        });
+    });
+
+    it('should correctly parse IT ticket without FQ', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_IT_noFQ.xml`).toString();
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
@@ -442,6 +460,7 @@ describe('#AirParser', () => {
             'fareCalculation',
             'farePricingMethod',
             'farePricingType',
+            'priceInfoAvailable',
             'priceInfoDetailsAvailable',
             'passengers',
             'totalPrice',
