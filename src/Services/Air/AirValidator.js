@@ -42,9 +42,12 @@ module.exports = {
     validate(
       validators.paramsIsObject,
       validators.fop,
+      validators.fopCreditCard,
       validators.pnr,
     ),
-    transform(),
+    transform(
+      transformers.fixCardFop,
+    ),
   ),
 
   AIR_REQUEST_BY_PNR: compose(

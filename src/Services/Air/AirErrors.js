@@ -32,6 +32,7 @@ Object.assign(AirValidationError, createErrorsList({
   DeliveryInformation: 'Missing of delivery information fields. See data.',
   ReservationLocator: 'Missing uapi_reservation_locator in request. See data.',
   ExchangeToken: 'Missing exchangeToken in request. See data.',
+  CreditCardMissing: 'Missing creditCard in request. See data.',
 }, AirValidationError));
 
 export const GdsValidationError = createErrorClass(

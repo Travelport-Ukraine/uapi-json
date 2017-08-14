@@ -25,7 +25,16 @@ module.exports = `
           {{/if}}
         />
         {{/if}}
-        <com:FormOfPayment Type="{{fop.type}}" />
+        <com:FormOfPayment Type="{{fop.type}}">
+        {{#equal fop.type 'Credit'}}
+          <com:CreditCard {{#if creditCard.type}}Type="{{creditCard.type}}"{{/if}}
+                          Number="{{creditCard.number}}"
+                          ExpDate="{{creditCard.expDate}}"
+                          Name="{{creditCard.name}}"
+                          CVV="{{creditCard.cvv2}}">
+          </com:CreditCard>
+        {{/equal}}
+        </com:FormOfPayment>
       </air:AirTicketingModifiers>
     </air:AirTicketingReq>
   </soap:Body>
