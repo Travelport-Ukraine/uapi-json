@@ -14,7 +14,7 @@ function createSession(rsp) {
   ) {
     throw new TerminalParsingError.TerminalSessionTokenMissing();
   }
-  return rsp[`common_${this.uapi_version}:HostToken`]._;
+  return { sessionToken: rsp[`common_${this.uapi_version}:HostToken`]._ };
 }
 
 function terminalRequest(rsp) {

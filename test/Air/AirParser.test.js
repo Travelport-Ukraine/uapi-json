@@ -13,6 +13,9 @@ import ParserUapi from '../../src/Request/uapi-parser';
 
 const xmlFolder = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:\d{2}/i;
+const ticketRegExp = /^\d{13}$/;
+const pnrRegExp = /^[A-Z0-9]{6}$/i;
+const amountRegExp = /[A-Z]{3}(?:\d+\.)?\d+/i;
 
 const checkLowSearchFareXml = (filename) => {
   const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
@@ -186,44 +189,48 @@ describe('#AirParser', () => {
     });
   });
   describe('getTicket', () => {
-    function testGetTicket(result) {
+    function testTicket(result) {
       expect(result).to.be.an('object');
-      expect(result).to.have.all.keys([
-        'uapi_ur_locator',
-        'uapi_reservation_locator',
-        'pnr',
-        'platingCarrier',
-        'ticketingPcc',
-        'issuedAt',
-        'fareCalculation',
-        'farePricingMethod',
-        'farePricingType',
-        'priceInfoDetailsAvailable',
-        'priceInfo',
-        'passengers',
-        'tickets',
+      expect(result).to.include.all.keys([
+        'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'ticketNumber',
+        'platingCarrier', 'ticketingPcc', 'issuedAt',
+        'fareCalculation', 'farePricingMethod', 'farePricingType',
+        'priceInfoDetailsAvailable', 'priceInfoAvailable',
+        'taxes', 'taxesInfo',
+        'noAdc', 'isConjunctionTicket', 'passengers', 'tickets',
       ]);
-      expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
-      expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
-      expect(result.pnr).to.match(/^[A-Z0-9]{6}$/i);
+      if (result.exchangedTickets) {
+        expect(result.exchangedTickets).to.be.an('array')
+          .and.to.have.length.above(0);
+        result.exchangedTickets.forEach(
+          (t) => {
+            expect(t).to.match(ticketRegExp);
+          }
+        );
+      }
+      expect(result.uapi_ur_locator).to.match(pnrRegExp);
+      expect(result.uapi_reservation_locator).to.match(pnrRegExp);
+      expect(result.pnr).to.match(pnrRegExp);
+      expect(result.ticketNumber).to.match(ticketRegExp);
       expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
       expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
+      expect(result.isConjunctionTicket).to.be.a('boolean');
       expect(result.issuedAt).to.match(timestampRegexp);
       expect(result.fareCalculation).to.have.length.above(0);
       // Price info
-      expect(result.priceInfoDetailsAvailable).to.equal(true);
-      const priceInfo = result.priceInfo;
-      expect(priceInfo).to.be.an('object');
-      expect(priceInfo).to.have.all.keys([
-        'totalPrice', 'basePrice', 'taxes', 'taxesInfo', 'equivalentBasePrice',
-        'noAdc',
-      ]);
-      expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-      expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-      expect(priceInfo.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-      expect(priceInfo.taxesInfo).to.be.an('array');
-      expect(priceInfo.taxesInfo).to.have.length.above(0);
-      priceInfo.taxesInfo.forEach(
+      expect(result.priceInfoAvailable).to.be.a('boolean');
+      expect(result.priceInfoDetailsAvailable).to.be.a('boolean');
+      expect(result).to.be.an('object');
+      if (result.priceInfoAvailable) {
+        expect(result.totalPrice).to.match(amountRegExp);
+        expect(result.basePrice).to.match(amountRegExp);
+        if (result.equivalentBasePrice) {
+          expect(result.equivalentBasePrice).to.match(amountRegExp);
+        }
+      }
+      expect(result.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+      expect(result.taxesInfo).to.be.an('array');
+      result.taxesInfo.forEach(
         (tax) => {
           expect(tax).to.be.an('object');
           expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
@@ -242,16 +249,21 @@ describe('#AirParser', () => {
       expect(result.tickets).to.have.length.above(0);
       result.tickets.forEach((ticket) => {
         expect(ticket).to.be.an('object');
-        expect(ticket).to.have.all.keys(['ticketNumber', 'coupons']);
+        expect(ticket).to.include.all.keys(['ticketNumber', 'coupons']);
+        if (ticket.exchangedTickets) {
+          expect(ticket.exchangedTickets)
+            .to.be.an('array')
+            .and.to.have.length.above(0);
+        }
         expect(ticket.ticketNumber).to.match(/\d{13}/i);
         expect(ticket.coupons).to.be.an('array');
         expect(ticket.coupons).to.have.length.above(0);
         ticket.coupons.forEach((coupon) => {
           expect(coupon).to.be.an('object');
-          expect(coupon).to.have.all.keys([
+          expect(coupon).to.include.all.keys([
             'couponNumber', 'from', 'to', 'departure', 'airline', 'flightNumber',
             'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter',
-            'bookingClass', 'serviceClass',
+            'bookingClass',
           ]);
           expect(coupon.couponNumber).to.match(/\d+/i);
           expect(coupon.from).to.match(/[A-Z]{3}/i);
@@ -278,12 +290,10 @@ describe('#AirParser', () => {
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
-          expect(result).to.be.an('object');
-          expect(result).to.include.key('priceInfo');
+          testTicket(result);
           expect(result.priceInfoDetailsAvailable).to.equal(false);
-          expect(result.priceInfo).to.be.an('object');
-          expect(result.priceInfo.noAdc).to.equal(true);
-          expect(result.priceInfo.totalPrice).to.equal(0);
+          expect(result.noAdc).to.equal(true);
+          expect(result.totalPrice).to.equal('UAH0');
         });
     });
 
@@ -297,6 +307,55 @@ describe('#AirParser', () => {
         .then(() => Promise.reject(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.DuplicateTicketFound);
+        });
+    });
+
+    it('should parse exchangedTicket when available', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_EXCHANGED_TICKET.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testTicket(result);
+          expect(result.priceInfoDetailsAvailable).to.equal(true);
+          expect(result.exchangedTickets).to.have.length.above(0);
+        });
+    });
+
+    it('should correctly parse IT ticket', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_IT.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testTicket(result);
+        });
+    });
+
+    it('should correctly parse IT ticket without FQ', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_IT_noFQ.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testTicket(result);
+        });
+    });
+
+    it('should parse exchanged conjunction ticket', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_EXCHANGE_CONJ.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testTicket(result);
+          expect(result.priceInfoDetailsAvailable).to.equal(true);
+          expect(result.exchangedTickets).to.have.length.above(0);
         });
     });
 
@@ -333,7 +392,9 @@ describe('#AirParser', () => {
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
-          testGetTicket(result);
+          testTicket(result);
+          expect(result.priceInfoDetailsAvailable).to.equal(true);
+          expect(result.taxesInfo).to.have.length.above(0);
         });
     });
 
@@ -345,7 +406,9 @@ describe('#AirParser', () => {
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
-          testGetTicket(result);
+          testTicket(result);
+          expect(result.priceInfoDetailsAvailable).to.equal(true);
+          expect(result.taxesInfo).to.have.length.above(0);
         });
     });
 
@@ -356,8 +419,10 @@ describe('#AirParser', () => {
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
-          testGetTicket(result);
-          const detialedTaxes = result.priceInfo.taxesInfo.filter(
+          testTicket(result);
+          expect(result.priceInfoDetailsAvailable).to.equal(true);
+          expect(result.taxesInfo).to.have.length.above(0);
+          const detialedTaxes = result.taxesInfo.filter(
             tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
           );
           expect(detialedTaxes).to.have.lengthOf(2);
@@ -395,30 +460,34 @@ describe('#AirParser', () => {
             'fareCalculation',
             'farePricingMethod',
             'farePricingType',
+            'priceInfoAvailable',
             'priceInfoDetailsAvailable',
-            'priceInfo',
             'passengers',
+            'totalPrice',
+            'basePrice',
+            'taxes',
+            'taxesInfo',
+            'equivalentBasePrice',
+            'noAdc',
             'tickets',
+            'isConjunctionTicket',
+            'ticketNumber',
           ]);
           expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
           expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
-          expect(result.pnr).to.match(/^[A-Z0-9]{6}$/i);
+          expect(result.pnr).to.match(pnrRegExp);
+          expect(result.ticketNumber).to.match(ticketRegExp);
+          expect(result.isConjunctionTicket).to.be.a('boolean');
           expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
           expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
           expect(result.issuedAt).to.match(timestampRegexp);
           expect(result.fareCalculation).to.have.length.above(0);
           // Price info
           expect(result.priceInfoDetailsAvailable).to.equal(false);
-          const priceInfo = result.priceInfo;
-          expect(priceInfo).to.be.an('object');
-          expect(priceInfo).to.have.all.keys([
-            'totalPrice', 'basePrice', 'taxes', 'equivalentBasePrice', 'taxesInfo',
-            'noAdc',
-          ]);
-          expect(priceInfo.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-          expect(priceInfo.taxesInfo).to.be.an('array').and.to.have.lengthOf(0);
+          expect(result.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(result.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(result.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+          expect(result.taxesInfo).to.be.an('array').and.to.have.lengthOf(0);
           // Passengers
           expect(result.passengers).to.be.an('array');
           expect(result.passengers).to.have.length.above(0);
@@ -634,7 +703,7 @@ describe('#AirParser', () => {
       expect(result).to.have.all.keys([
         'version', 'uapi_ur_locator', 'uapi_reservation_locator',
         'airlineLocatorInfo', 'bookingPCC', 'passengers', 'pnr', 'pnrList',
-        'reservations', 'segments', 'serviceSegments', 'hostCreatedAt',
+        'fareQuotes', 'segments', 'serviceSegments', 'hostCreatedAt',
         'createdAt', 'modifiedAt', 'type', 'tickets', 'emails',
       ]);
       expect(result.version).to.be.at.least(0);
@@ -674,76 +743,104 @@ describe('#AirParser', () => {
         expect(pnr).to.match(/^[A-Z0-9]{6}$/);
       });
       // Checking reservations format
-      expect(result.reservations).to.be.an('array');
-      result.reservations.forEach((reservation) => {
-        expect(reservation).to.be.an('object');
-        expect(reservation).to.include.all.keys([
-          'status',
-          'fareCalculation',
-          'farePricingMethod',
-          'farePricingType',
-          'priceInfo',
-          'baggage',
-          'timeToReprice',
+      expect(result.fareQuotes).to.be.an('array');
+      result.fareQuotes.forEach((fareQuote) => {
+        expect(fareQuote).to.be.an('object');
+        expect(fareQuote).to.include.all.keys([
+          'index',
+          'pricingInfos',
           'uapi_segment_refs',
           'uapi_passenger_refs',
-          'uapi_pricing_info_ref',
           'endorsement',
+          'status',
+          'effectiveDate',
         ]);
+        expect(fareQuote.index).to.be.a('number');
+        expect(fareQuote.pricingInfos).to.be.an('array').and.to.have.length.above(0);
 
-        if (reservation.endorsement) {
-          expect(reservation.endorsement).to.match(/^[A-Z0-9]+$/);
+        if (fareQuote.endorsement) {
+          expect(fareQuote.endorsement).to.match(/^[A-Z0-9]+$/);
         }
 
-        if (reservation.platingCarrier) {
-          expect(reservation.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
+        if (fareQuote.platingCarrier) {
+          expect(fareQuote.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
         }
-        expect(reservation.status).to.be.oneOf(['Reserved', 'Ticketed']);
-        expect(reservation.fareCalculation).to.be.a('string');
-        expect(reservation.fareCalculation).to.have.length.above(0);
-        expect(new Date(reservation.timeToReprice)).to.be.an.instanceof(Date);
-        // Checking Price info
-        expect(reservation.priceInfo).to.be.an('object');
-        expect(reservation.priceInfo).to.include.keys([
-          'totalPrice', 'basePrice', 'equivalentBasePrice', 'taxes', 'passengersCount',
-          'taxesInfo',
-        ]);
-        expect(reservation.priceInfo.passengersCount).to.be.an('object');
-        Object.keys(reservation.priceInfo.passengersCount).forEach(
-          ptc => expect(reservation.priceInfo.passengersCount[ptc]).to.be.a('number')
+        expect(fareQuote.status).to.be.oneOf(['Reserved', 'Ticketed']);
+
+        expect(fareQuote.uapi_passenger_refs).to.be.an('array');
+        expect(fareQuote.uapi_passenger_refs).to.have.length.above(0);
+        fareQuote.uapi_passenger_refs.forEach(
+          reference => expect(reference).to.be.a('string')
         );
-        expect(reservation.priceInfo.taxesInfo).to.be.an('array');
-        reservation.priceInfo.taxesInfo.forEach(
-          (tax) => {
-            expect(tax).to.be.an('object');
-            expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
-            expect(tax.type).to.match(/^[A-Z]{2}$/);
-          }
-        );
-        // Checking baggage
-        expect(reservation.baggage).to.be.an('array');
-        reservation.baggage.forEach(
-          (baggage) => {
-            expect(baggage).to.be.an('object');
-            expect(baggage).to.have.all.keys(['units', 'amount']);
-            expect(baggage.units).to.be.a('string');
-            expect(baggage.amount).to.be.a('number');
-          }
-        );
+
         // Segment references
-        expect(reservation.uapi_segment_refs).to.be.an('array');
-        expect(reservation.uapi_segment_refs).to.have.length.above(0);
-        reservation.uapi_segment_refs.forEach(
+        expect(fareQuote.uapi_segment_refs).to.be.an('array');
+        expect(fareQuote.uapi_segment_refs).to.have.length.above(0);
+        fareQuote.uapi_segment_refs.forEach(
           reference => expect(reference).to.be.a('string')
         );
-        // Passenger references
-        expect(reservation.uapi_passenger_refs).to.be.an('array');
-        expect(reservation.uapi_passenger_refs).to.have.length.above(0);
-        reservation.uapi_passenger_refs.forEach(
-          reference => expect(reference).to.be.a('string')
+
+        fareQuote.pricingInfos.forEach(
+          (pricingInfo) => {
+            expect(pricingInfo).to.include.all.keys([
+              'fareCalculation',
+              'farePricingMethod',
+              'farePricingType',
+              'baggage',
+              'timeToReprice',
+              'passengers',
+              'uapi_pricing_info_ref',
+              'totalPrice',
+              'basePrice',
+              'equivalentBasePrice',
+              'taxes',
+              'passengersCount',
+              'taxesInfo',
+            ]);
+
+            // Passengers
+            pricingInfo.passengers.forEach(
+              (p) => {
+                expect(p).to.be.an('object');
+                expect(p).to.include.all.keys(['uapi_passenger_ref', 'isTicketed']);
+                expect(p.uapi_passenger_ref).to.be.a('string');
+                expect(p.isTicketed).to.be.a('boolean');
+                if (p.isTicketed) {
+                  expect(p.ticketNumber).to.be.a('string').and.to.match(ticketRegExp);
+                }
+              }
+            );
+
+            expect(pricingInfo.fareCalculation).to.be.a('string');
+            expect(pricingInfo.fareCalculation).to.have.length.above(0);
+            expect(new Date(pricingInfo.timeToReprice)).to.be.an.instanceof(Date);
+
+            expect(pricingInfo.passengersCount).to.be.an('object');
+            Object.keys(pricingInfo.passengersCount).forEach(
+              ptc => expect(pricingInfo.passengersCount[ptc]).to.be.a('number')
+            );
+            expect(pricingInfo.taxesInfo).to.be.an('array');
+            pricingInfo.taxesInfo.forEach(
+              (tax) => {
+                expect(tax).to.be.an('object');
+                expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
+                expect(tax.type).to.match(/^[A-Z]{2}$/);
+              }
+            );
+            // Checking baggage
+            expect(pricingInfo.baggage).to.be.an('array');
+            pricingInfo.baggage.forEach(
+              (baggage) => {
+                expect(baggage).to.be.an('object');
+                expect(baggage).to.have.all.keys(['units', 'amount']);
+                expect(baggage.units).to.be.a('string');
+                expect(baggage.amount).to.be.a('number');
+              }
+            );
+          }
         );
       });
-      // Checking reservations format
+      // Checking segments format
       expect(result.segments).to.be.an('array');
       result.segments.forEach(
         (segment) => {
@@ -831,7 +928,7 @@ describe('#AirParser', () => {
       .then(json => parseFunction.call(uParser, json))
       .then((result) => {
         testBooking(result);
-        const detialedTaxes = result[0].reservations[0].priceInfo.taxesInfo.filter(
+        const detialedTaxes = result[0].fareQuotes[0].pricingInfos[0].taxesInfo.filter(
           tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
         );
         expect(detialedTaxes).to.have.lengthOf(2);
@@ -867,6 +964,24 @@ describe('#AirParser', () => {
           }
         );
       });
+    });
+
+    it('should parse exchanged ticket booking with conjunction', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPNR_EXCHANGE_CONJ.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          // General booking test is skipped as no info about plane is avialable
+          // @todo: add general parsing here
+          // testBooking(result);
+          const fqPassenger = result[0].fareQuotes[0].pricingInfos[0].passengers[0];
+          expect(fqPassenger).to.be.an('object')
+            .and.to.have.all.keys(['uapi_passenger_ref', 'isTicketed', 'ticketNumber']);
+          expect(fqPassenger.isTicketed).to.equal(true);
+          expect(fqPassenger.ticketNumber).to.be.a('string');
+        });
     });
 
     it('should parse booking with issued EMD-s', () => {
@@ -1076,7 +1191,8 @@ describe('#AirParser', () => {
         const jsonResult = parseFunction.call(uParser, json);
         // Skipping booking test as it fails for segment info
         // testBooking(jsonResult, false);
-        expect(jsonResult[0].reservations[0].priceInfo.passengersCount.ADT).to.equal(2);
+        expect(jsonResult[0].fareQuotes[0].pricingInfos[0].passengersCount.ADT)
+          .to.equal(2);
       });
     });
 
@@ -1097,6 +1213,28 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult, false, true);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should test for correct fq order in pnr', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport.MDBMCW.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false, true);
+        const [booking] = jsonResult;
+        expect(booking.fareQuotes[0].effectiveDate)
+          .to.be.equal('2017-07-11T00:00:00.000+02:00');
+
+        expect(booking.fareQuotes[1].effectiveDate)
+          .to.be.equal('2017-07-17T00:00:00.000+02:00');
+
+        expect(booking.fareQuotes[2].effectiveDate)
+          .to.be.equal('2017-07-29T00:00:00.000+02:00');
+
+        expect(booking.fareQuotes[3].effectiveDate)
+          .to.be.equal('2017-07-30T00:00:00.000+02:00');
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
   });

@@ -1,12 +1,14 @@
-const assert = require('assert');
-const errors = require('../src').errors;
-const uAPI = require('../src/Request/uapi-request');
-const config = require('../src/config');
-const auth = require('./testconfig');
-const path = require('path');
+import assert from 'assert';
+import { expect } from 'chai';
+import handlebars from 'handlebars';
+import uAPI from '../src/Request/uapi-request';
+import prepareRequest from '../src/Request/prepare-request';
+import { errors } from '../src';
+import config from '../src/config';
+import auth from './testconfig';
 
 describe('uapiRequest tests', () => {
-  it('should return error request file not exists', () => {
+  it('should return error when request file not exists', () => {
     const missedFile = 'im the best missing filename';
     try {
       uAPI(config().HotelsService.url, auth, missedFile);
@@ -37,5 +39,12 @@ describe('uapiRequest tests', () => {
     } catch (err) {
       assert(err instanceof errors.Request.RequestValidationError.ServiceUrlMissing);
     }
+  });
+
+  it('should uppercase provided PCC', () => {
+    const emulatePcc = 'pcc';
+    const template = handlebars.compile('{{#if emulatePcc}}{{emulatePcc}}{{/if}}');
+    const request = prepareRequest(template, { emulatePcc }, {});
+    expect(request).to.equal('PCC');
   });
 });

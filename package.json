@@ -1,6 +1,6 @@
 {
   "name": "uapi-json",
-  "version": "0.12.3",
+  "version": "0.14.5",
   "description": "Travelport Universal API",
   "main": "build/",
   "files": [
@@ -42,6 +42,7 @@
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "node-errors-helpers": "^0.1.2",
+    "pretty-data": "^0.40.0",
     "xml2js": "^0.4.9"
   },
   "devDependencies": {
@@ -59,8 +60,8 @@
     "eslint-plugin-react": "^6.4.1",
     "isparta": "^4.0.0",
     "mocha": "^1.21.5",
-    "proxyquire": "^1.7.11",
-    "sinon": "^1.17.6",
-    "sinon-chai": "^2.8.0"
+    "proxyquire": "^1.8.0",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.12.0"
   }
 }
