@@ -20,6 +20,17 @@ module.exports = function (settings) {
       debug,
       options
     ),
+    lookupFareRules: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.fareRules,
+      'air:AirPriceRsp',
+      AirValidator.AIR_PRICE_FARE_RULES_REQUEST,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_PRICE_FARE_RULES_REQUEST,
+      debug,
+      options
+    ),
     airPricePricingSolutionXML: uApiRequest(
       config.AirService.url,
       auth,

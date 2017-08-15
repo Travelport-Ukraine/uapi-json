@@ -14,6 +14,10 @@ module.exports = (settings) => {
       return service.searchLowFares(options);
     },
 
+    fareRules(options) {
+      return service.lookupFareRules(options);
+    },
+
     toQueue(options) {
       return service.gdsQueue(options);
     },

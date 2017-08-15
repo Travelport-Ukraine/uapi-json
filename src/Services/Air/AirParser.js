@@ -740,6 +740,34 @@ function importRequest(data) {
   return response;
 }
 
+function extractFareRules(obj) {
+  const rulesList = obj['air:FareRule'];
+  _.forEach(rulesList, (item) => {
+    const result = [];
+    const listName = (item['air:FareRuleLong']) ? 'air:FareRuleLong' : 'air:FareRuleShort';
+    _.forEach(item[listName], (rule) => {
+      const ruleCategoryNumber = parseInt(rule.Category, 10);
+      if (rule['air:FareRuleNameValue']) {
+        // for short rules
+        result[ruleCategoryNumber] = rule['air:FareRuleNameValue'];
+      } else {
+        // for long rules
+        result[ruleCategoryNumber] = rule._;
+      }
+    });
+
+    delete item[listName];
+    delete item.FareInfoRef;
+    item.Rules = result;
+  });
+
+  return rulesList;
+}
+
+function airPriceFareRules(data) {
+  return extractFareRules(data['air:AirPriceResult']);
+}
+
 function gdsQueue(req) {
     // TODO implement all major error cases
     // https://support.travelport.com/webhelp/uapi/uAPI.htm#Error_Codes/QUESVC_Service_Error_Codes.htm%3FTocPath%3DError%2520Codes%2520and%2520Messages|_____9
@@ -868,6 +896,7 @@ function exchangeBooking(rsp) {
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: lowFaresSearchRequest,
   AIR_PRICE_REQUEST_PRICING_SOLUTION_XML: airPriceRspPricingSolutionXML,
+  AIR_PRICE_FARE_RULES_REQUEST: airPriceFareRules,
   AIR_CREATE_RESERVATION_REQUEST: extractBookings,
   AIR_TICKET_REQUEST: ticketParse,
   AIR_IMPORT_REQUEST: importRequest,

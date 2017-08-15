@@ -13,6 +13,17 @@ module.exports = {
     )
   ),
 
+  AIR_PRICE_FARE_RULES_REQUEST: compose(
+    validate(
+      validators.segments,
+    ),
+    transform(
+      transformers.setBusinessFlag,
+      // transformers.setGroupsForSegments, <air:Connection/> hack fails validation on pre-prod
+      transformers.setHasFareBasisFlag,
+    )
+  ),
+
   AIR_PRICE: compose(
     validate(
       validators.segments,
