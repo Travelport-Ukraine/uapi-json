@@ -2,7 +2,7 @@ import assert from 'assert';
 import { expect } from 'chai';
 import fs from 'fs';
 import errors from '../../src/Services/Utils/UtilsErrors';
-import ParserUapi from '../../src/Request/uapi-parser';
+import { Parser as ParserUapi } from '../../src/Request/uapi-parser';
 import utilsParser from '../../src/Services/Utils/UtilsParser';
 
 const xmlFolder = `${__dirname}/../FakeResponses/Utils`;

@@ -1,9 +1,10 @@
+import { Parser as UAPIParser } from '../src/Request/uapi-parser';
+
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 
 const errors = require('../src').errors;
-const UAPIParser = require('../src/Request/uapi-parser');
 
 const xmlFolder = path.join(__dirname, '/FakeResponses');
 

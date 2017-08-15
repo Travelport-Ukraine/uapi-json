@@ -85,6 +85,7 @@ export const AirRuntimeError = createErrorClass(
 );
 Object.assign(AirRuntimeError, createErrorsList({
   SegmentBookingFailed: 'Failed to book on or more segments',
+  SegmentWaitlisted: 'One or more segments is waitlisted, not allowed',
   TicketingFailed: 'Ticketing failed',
   TicketingFoidRequired: 'FOID required for the PC selected',
   TicketingResponseMissing: 'Response message text doesn\'t contain OK:Ticket issued',
