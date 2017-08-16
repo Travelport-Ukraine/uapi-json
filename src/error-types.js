@@ -6,7 +6,7 @@ Object.assign(ServiceError, createErrorsList({
   ServiceParamsInvalid: 'Service params invalid',
   ServiceParamsAuthMissing: 'Service params.auth is missing',
   ServiceParamsAuthInvalid: 'Service params.auth is invalid',
-}));
+}, ServiceError));
 
 const errors = {
   RuntimeError: createErrorClass('RuntimeError', 'Runtime error occured'),
