@@ -59,7 +59,7 @@ AirService.shop(params)
           country: 'Galactic Empire',
           city: 'Mos Eisley',
         },
-        restrictWaitlist: true,
+        allowWaitlist: true,
       };
 
       return AirService.book(book).then(
