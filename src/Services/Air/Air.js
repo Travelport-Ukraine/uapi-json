@@ -15,7 +15,17 @@ module.exports = (settings) => {
     },
 
     fareRules(options) {
-      return service.lookupFareRules(options);
+      // add a fake passenger, request fare rules
+      const request = Object.assign(options,
+        {
+          passengers: [{
+            ageCategory: 'ADT',
+            Age: 20,
+          }],
+          fetchFareRules: true,
+        }
+      );
+      return service.lookupFareRules(request);
     },
 
     toQueue(options) {

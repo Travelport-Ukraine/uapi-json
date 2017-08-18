@@ -23,7 +23,7 @@ module.exports = function (settings) {
     lookupFareRules: uApiRequest(
       config.AirService.url,
       auth,
-      templates.fareRules,
+      templates.price,
       'air:AirPriceRsp',
       AirValidator.AIR_PRICE_FARE_RULES_REQUEST,
       AirParser.AIR_ERRORS,
