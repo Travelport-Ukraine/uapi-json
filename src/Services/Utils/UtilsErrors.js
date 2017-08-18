@@ -5,7 +5,7 @@ import {
 import errorTypes from '../../error-types';
 
 // Validation errors
-const UtilsValidationError = createErrorClass(
+export const UtilsValidationError = createErrorClass(
   'UtilsValidationError',
   'Utils service validation error',
   errorTypes.ValidationError
@@ -15,14 +15,14 @@ Object.assign(UtilsValidationError, createErrorsList({
 }, UtilsValidationError));
 
 // Parsing errors
-const UtilsParsingError = createErrorClass(
+export const UtilsParsingError = createErrorClass(
   'UtilsParsingError',
   'Utils service parsing error',
   errorTypes.ParsingError
 );
 
 // Runtime errors
-const UtilsRuntimeError = createErrorClass(
+export const UtilsRuntimeError = createErrorClass(
   'UtilsRuntimeError',
   'Utils service runtime error',
   errorTypes.RuntimeError

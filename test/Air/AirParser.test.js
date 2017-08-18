@@ -731,9 +731,9 @@ describe('#AirParser', () => {
     jsonResult.forEach((result) => {
       expect(result).to.be.an('object');
       // Checking object keys
-      expect(result).to.have.all.keys([
+      expect(result).to.include.all.keys([
         'version', 'uapi_ur_locator', 'uapi_reservation_locator',
-        'airlineLocatorInfo', 'bookingPCC', 'passengers', 'pnr', 'pnrList',
+        'airlineLocatorInfo', 'bookingPCC', 'passengers', 'pnr',
         'fareQuotes', 'segments', 'serviceSegments', 'hostCreatedAt',
         'createdAt', 'modifiedAt', 'type', 'tickets', 'emails',
       ]);
@@ -766,12 +766,6 @@ describe('#AirParser', () => {
         expect(passenger).to.include.keys([
           'lastName', 'firstName', 'uapi_passenger_ref',
         ]);
-      });
-      // Checking pnrList format
-      expect(result.pnrList).to.be.an('array');
-      expect(result.pnrList).to.have.length.above(0);
-      result.pnrList.forEach((pnr) => {
-        expect(pnr).to.match(/^[A-Z0-9]{6}$/);
       });
       // Checking reservations format
       expect(result.fareQuotes).to.be.an('array');
@@ -894,8 +888,10 @@ describe('#AirParser', () => {
           ]);
           expect(segment.status).to.match(/^[A-Z]{2}$/);
           // Planes
-          expect(segment.plane).to.be.an('array').and.to.have.length.above(0);
-          segment.plane.forEach(plane => expect(plane).to.be.a('string'));
+          if (segment.plane) {
+            expect(segment.plane).to.be.an('array').and.to.have.length.above(0);
+            segment.plane.forEach(plane => expect(plane).to.be.a('string'));
+          }
           // Duration
           expect(segment.duration).to.be.an('array').and.to.have.length.above(0);
           segment.duration.forEach(duration => expect(duration).to.match(/^\d+$/));
@@ -978,23 +974,47 @@ describe('#AirParser', () => {
       });
     });
 
+    it('should get flight details from separate requests if not available in importPNR');
+
+    it('should parse split booking child', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0');
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPnr_split_child.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          expect(result[0].splitBookings).to.be.an('array').and.to.have.lengthOf(1);
+        });
+    });
+
+    it('should parse split booking parent', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0');
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPnr_split_parent.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          expect(result[0].splitBookings).to.be.an('array').and.to.have.lengthOf(1);
+        });
+    });
+
     it('should parse booking with emails', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getPnr_emails.xml`).toString();
       return uParser.parse(xml)
-      .then(json => parseFunction.call(uParser, json))
-      .then((result) => {
-        testBooking(result);
-        const emails = result[0].emails;
-        expect(emails).to.have.lengthOf(2);
-        emails.forEach(
-          (email, index) => {
-            expect(email.index).to.equal(index + 1);
-            expect(email.email).to.be.a('string');
-          }
-        );
-      });
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testBooking(result);
+          const emails = result[0].emails;
+          expect(emails).to.have.lengthOf(2);
+          emails.forEach(
+            (email, index) => {
+              expect(email.index).to.equal(index + 1);
+              expect(email.email).to.be.a('string');
+            }
+          );
+        });
     });
 
     it('should parse exchanged ticket booking with conjunction', () => {

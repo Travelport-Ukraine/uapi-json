@@ -6,9 +6,10 @@ import getBookingFromUr from '../../utils/get-booking-from-ur';
 import airService from './AirService';
 import createTerminalService from '../Terminal/Terminal';
 import { AirRuntimeError } from './AirErrors';
+import validateServiceSettings from '../../utils/validate-service-settings';
 
 module.exports = (settings) => {
-  const service = airService(settings);
+  const service = airService(validateServiceSettings(settings));
   return {
     shop(options) {
       return service.searchLowFares(options);
