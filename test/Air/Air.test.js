@@ -5,6 +5,7 @@ import proxyquire from 'proxyquire';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import moment from 'moment';
+import auth from '../testconfig';
 import { AirRuntimeError } from '../../src/Services/Air/AirErrors';
 
 const expect = chai.expect;
@@ -12,11 +13,6 @@ chai.use(sinonChai);
 
 const responsesDir = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const terminalResponsesDir = path.join(__dirname, '..', 'FakeResponses', 'Terminal');
-const auth = {
-  username: 'USERNAME',
-  password: 'PASSWORD',
-  targetBranch: 'BRANCH',
-};
 
 
 describe('#AirService', () => {
@@ -293,7 +289,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      return createAirService()
+      return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
           expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
@@ -332,7 +328,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      return createAirService()
+      return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
           expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
@@ -382,7 +378,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      return createAirService()
+      return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
           expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
@@ -434,7 +430,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      return createAirService()
+      return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
           expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
@@ -493,7 +489,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      return createAirService()
+      return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
           expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
@@ -989,7 +985,8 @@ describe('#AirService', () => {
         './AirService': service,
       });
 
-      return createAirService().cancelTicket()
+      return createAirService({ auth })
+        .cancelTicket()
         .then(() => Promise.reject(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelTicket);
@@ -1012,7 +1009,7 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      const service = createAirService();
+      const service = createAirService({ auth });
 
       return service.cancelTicket({
         ticketNumber: '1234567890123',
@@ -1056,7 +1053,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      const service = createAirService();
+      const service = createAirService({ auth });
 
       return service.cancelTicket({
         ticketNumber: '1234567890123',
@@ -1080,9 +1077,10 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+        })
         .then(() => Promise.reject(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
@@ -1110,9 +1108,10 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+        })
         .then(() => {
           expect(getUniversalRecordByPNR).to.have.callCount(2);
           expect(getTicket).to.have.callCount(0);
@@ -1147,9 +1146,10 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+        })
         .then(() => {
           expect(getUniversalRecordByPNR).to.have.callCount(2);
           expect(getTicket).to.have.callCount(1);
@@ -1201,9 +1201,10 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+        })
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
           expect(err.causedBy).to.be.an.instanceof(AirRuntimeError.PNRHasOpenTickets);
@@ -1264,10 +1265,11 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-        cancelTickets: true,
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+          cancelTickets: true,
+        })
         .then(() => {
           expect(getUniversalRecordByPNR).to.have.callCount(2);
           expect(getTicket).to.have.callCount(2);
@@ -1319,10 +1321,11 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-        cancelTickets: true,
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+          cancelTickets: true,
+        })
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
           expect(err.causedBy).to.be.an.instanceof(
@@ -1379,10 +1382,11 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-        cancelTickets: true,
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+          cancelTickets: true,
+        })
         .then((result) => {
           expect(result).to.equal(true);
           expect(getUniversalRecordByPNR).to.have.callCount(2);
@@ -1416,7 +1420,7 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      const service = createAirService();
+      const service = createAirService({ auth });
 
       return service.getExchangeInformation({
         pnr: 'PNR001',
@@ -1450,7 +1454,7 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      const service = createAirService();
+      const service = createAirService({ auth });
 
       return service.exchangeBooking({
         exchangeToken: 'token',

@@ -5,22 +5,22 @@ import {
 import errorTypes from '../../error-types';
 
 // Validation errors
-const HotelsValidationError = createErrorClass(
+export const HotelsValidationError = createErrorClass(
   'HotelsValidationError',
   'Hotels service validation error',
   errorTypes.ValidationError
 );
-const TravellersError = createErrorClass(
+export const TravellersError = createErrorClass(
   'TravellersError',
   'Travellers information is incorrect',
   HotelsValidationError
 );
-const ContactError = createErrorClass(
+export const ContactError = createErrorClass(
   'AddressError',
   'Address information is incorrect',
   HotelsValidationError
 );
-const PaymentDataError = createErrorClass(
+export const PaymentDataError = createErrorClass(
   'PaymentDataError',
   'Payment information is incorrect',
   HotelsValidationError

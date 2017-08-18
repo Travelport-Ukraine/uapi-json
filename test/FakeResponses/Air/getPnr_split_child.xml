@@ -1,0 +1,88 @@
+<SOAP:Envelope
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <universal:UniversalRecordImportRsp TraceId="" TransactionId="E164D09F0A0759C6569501BB3D0EF00C" ResponseTime="868"
+      xmlns:universal="http://www.travelport.com/schema/universal_v36_0"
+      xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0"
+      xmlns:air="http://www.travelport.com/schema/air_v36_0">
+      <common_v36_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record 5NK3UA</common_v36_0:ResponseMessage>
+      <universal:UniversalRecord LocatorCode="5NK3UA" Version="1" Status="Active">
+        <common_v36_0:BookingTraveler Key="PyaLq2sB0BKAI+m3CPAAAA==">
+          <common_v36_0:BookingTravelerName First="ILLA" Last="STEPAN"/>
+          <common_v36_0:SSR Key="PyaLq2sB0BKAe/m3CPAAAA==" SegmentRef="PyaLq2sB0BKAyGn3CPAAAA==" Status="HK" Type="TKNE" FreeText="0809902930718C1" Carrier="LO" ProviderReservationInfoRef="PyaLq2sB0BKAu5f3CPAAAA=="/>
+          <common_v36_0:SSR Key="PyaLq2sB0BKAwEn3CPAAAA==" SegmentRef="PyaLq2sB0BKAiUn3CPAAAA==" Status="HK" Type="TKNE" FreeText="0809902930718C2" Carrier="LO" ProviderReservationInfoRef="PyaLq2sB0BKAu5f3CPAAAA=="/>
+        </common_v36_0:BookingTraveler>
+        <common_v36_0:ActionStatus Key="PyaLq2sB0BKAl6m3CPAAAA==" Type="ACTIVE" ProviderReservationInfoRef="PyaLq2sB0BKAu5f3CPAAAA==" ProviderCode="1G">
+          <common_v36_0:Remark>IEV 11AUG1107Z 12 AG</common_v36_0:Remark>
+        </common_v36_0:ActionStatus>
+        <universal:ProviderReservationInfo Key="PyaLq2sB0BKAu5f3CPAAAA==" ProviderCode="1G" LocatorCode="ZMV47G" CreateDate="2017-08-14T14:52:10.023+00:00" ModifiedDate="2017-08-14T15:37:47.669+00:00" HostCreateDate="2017-08-11" Imported="true" OwningPCC="7J8J">
+          <universal:ProviderReservationDetails ProviderReservationDetail="false" CustomCheck="true" ProviderProfile="false" DivideDetails="true" EnhancedItinModifiers="false" IntegratedContent="false" Cruise="false" RailSegment="false"/>
+        </universal:ProviderReservationInfo>
+        <air:AirReservation LocatorCode="FYC5V4" CreateDate="2017-08-14T14:52:08.941+00:00" ModifiedDate="2017-08-14T14:57:12.073+00:00">
+          <common_v36_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="OF6DW7" ProviderReservationInfoRef="PyaLq2sB0BKAu5f3CPAAAA==" CreateDateTime="2017-08-11T11:07:00.000+00:00"/>
+          <air:DocumentInfo>
+            <air:TicketInfo Number="0809902930718" Status="N" BookingTravelerRef="PyaLq2sB0BKAI+m3CPAAAA==" AirPricingInfoRef="PyaLq2sB0BKA+8m3CPAAAA==">
+              <common_v36_0:Name First="ILLA" Last="STEPAN"/>
+            </air:TicketInfo>
+          </air:DocumentInfo>
+          <common_v36_0:BookingTravelerRef Key="PyaLq2sB0BKAI+m3CPAAAA=="/>
+          <common_v36_0:ProviderReservationInfoRef Key="PyaLq2sB0BKAu5f3CPAAAA=="/>
+          <air:AirSegment Key="PyaLq2sB0BKAyGn3CPAAAA==" Group="0" Carrier="LO" CabinClass="Economy" FlightNumber="754" ProviderCode="1G" Origin="KBP" Destination="WAW" DepartureTime="2018-04-10T18:00:00.000+03:00" ArrivalTime="2018-04-10T18:35:00.000+02:00" TravelTime="95" ClassOfService="V" ETicketability="Yes" MarriageGroup="1" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="PyaLq2sB0BKAu5f3CPAAAA==" TravelOrder="1" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="PyaLq2sB0BKApMn3CPAAAA==" Origin="KBP" Destination="WAW" DepartureTime="2018-04-10T18:00:00.000+03:00" ArrivalTime="2018-04-10T18:35:00.000+02:00"/>
+            <air:Connection Duration="85"/>
+          </air:AirSegment>
+          <air:AirSegment Key="PyaLq2sB0BKAiUn3CPAAAA==" Group="0" Carrier="LO" CabinClass="Economy" FlightNumber="285" ProviderCode="1G" Origin="WAW" Destination="LHR" DepartureTime="2018-04-10T20:00:00.000+02:00" ArrivalTime="2018-04-10T21:45:00.000+01:00" TravelTime="165" ClassOfService="V" ETicketability="Yes" MarriageGroup="1" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="PyaLq2sB0BKAu5f3CPAAAA==" TravelOrder="2" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="PyaLq2sB0BKAhbn3CPAAAA==" Origin="WAW" Destination="LHR" DepartureTime="2018-04-10T20:00:00.000+02:00" ArrivalTime="2018-04-10T21:45:00.000+01:00"/>
+          </air:AirSegment>
+          <air:AirPricingInfo Key="PyaLq2sB0BKA+8m3CPAAAA==" TotalPrice="UAH4736" BasePrice="USD125.00" ApproximateTotalPrice="CZK4134" ApproximateBasePrice="CZK2806" EquivalentBasePrice="UAH3215" Taxes="UAH1521" LatestTicketingTime="2017-08-14T23:59:00.000+02:00" TrueLastDateToTicket="2017-08-14T23:59:00.000+02:00" PricingMethod="Guaranteed" ETicketability="Yes" ProviderCode="1G" ProviderReservationInfoRef="PyaLq2sB0BKAu5f3CPAAAA==" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="G">
+            <air:FareInfo Key="PyaLq2sB0BKA89m3CPAAAA==" FareBasis="V1SAV7" PassengerTypeCode="ADT" Origin="KBP" Destination="WAW" EffectiveDate="2017-08-11T00:00:00.000+02:00" NotValidBefore="2018-04-10" NotValidAfter="2018-04-10" PseudoCityCode="7J8J">
+              <common_v36_0:Endorsement Value="NONREF/ NO CHNG"/>
+              <air:BaggageAllowance>
+                <air:NumberOfPieces>0</air:NumberOfPieces>
+              </air:BaggageAllowance>
+            </air:FareInfo>
+            <air:FareInfo Key="PyaLq2sB0BKA/9m3CPAAAA==" FareBasis="V1SAV7" PassengerTypeCode="ADT" Origin="WAW" Destination="LHR" EffectiveDate="2017-08-11T00:00:00.000+02:00" NotValidBefore="2018-04-10" NotValidAfter="2018-04-10" PseudoCityCode="7J8J">
+              <common_v36_0:Endorsement Value="NONREF/ NO CHNG"/>
+              <air:BaggageAllowance>
+                <air:NumberOfPieces>0</air:NumberOfPieces>
+              </air:BaggageAllowance>
+            </air:FareInfo>
+            <air:BookingInfo BookingCode="V" CabinClass="Economy" FareInfoRef="PyaLq2sB0BKA89m3CPAAAA==" SegmentRef="PyaLq2sB0BKAyGn3CPAAAA=="/>
+            <air:BookingInfo BookingCode="V" CabinClass="Economy" FareInfoRef="PyaLq2sB0BKA/9m3CPAAAA==" SegmentRef="PyaLq2sB0BKAiUn3CPAAAA=="/>
+            <air:TaxInfo Category="UA" Amount="UAH103" Key="PyaLq2sB0BKAC+m3CPAAAA=="/>
+            <air:TaxInfo Category="UD" Amount="UAH52" Key="PyaLq2sB0BKAD+m3CPAAAA=="/>
+            <air:TaxInfo Category="YK" Amount="UAH335" Key="PyaLq2sB0BKAE+m3CPAAAA=="/>
+            <air:TaxInfo Category="ND" Amount="UAH4" Key="PyaLq2sB0BKAF+m3CPAAAA=="/>
+            <air:TaxInfo Category="XW" Amount="UAH424" Key="PyaLq2sB0BKAG+m3CPAAAA=="/>
+            <air:TaxInfo Category="YQ" Amount="UAH603" Key="PyaLq2sB0BKAH+m3CPAAAA=="/>
+            <air:FareCalc>IEV LO X/WAW LO LON 125.00V1SAV7 NUC125.00END ROE1.0</air:FareCalc>
+            <air:PassengerType Code="ADT" BookingTravelerRef="PyaLq2sB0BKAI+m3CPAAAA==">
+              <air:FareGuaranteeInfo GuaranteeType="Guaranteed"/>
+            </air:PassengerType>
+            <common_v36_0:BookingTravelerRef Key="PyaLq2sB0BKAI+m3CPAAAA=="/>
+            <air:TicketingModifiersRef Key="PyaLq2sB0BKAI9m3CPAAAA=="/>
+          </air:AirPricingInfo>
+          <air:TicketingModifiers PlatingCarrier="LO" Key="PyaLq2sB0BKAI9m3CPAAAA==">
+            <air:DocumentSelect IssueElectronicTicket="true"/>
+          </air:TicketingModifiers>
+        </air:AirReservation>
+        <common_v36_0:GeneralRemark Key="PyaLq2sB0BKAVnn3CPAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="PyaLq2sB0BKAu5f3CPAAAA==" CreateDate="2017-08-11T11:06:00.000+00:00">
+          <common_v36_0:RemarkData>VIEWTRIPITIN</common_v36_0:RemarkData>
+        </common_v36_0:GeneralRemark>
+        <common_v36_0:GeneralRemark Key="PyaLq2sB0BKAbun3CPAAAA==" Category="-S" TypeInGds="Alpha" ProviderReservationInfoRef="PyaLq2sB0BKAu5f3CPAAAA==" CreateDate="2017-08-11T11:07:00.000+00:00">
+          <common_v36_0:RemarkData>SPLIT PTY/11AUG/12AG/IEV/ZNQBQA</common_v36_0:RemarkData>
+        </common_v36_0:GeneralRemark>
+        <common_v36_0:AgencyInfo>
+          <common_v36_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="257f/VZmSaKqfMsUWfwY6Q==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2017-08-14T14:52:08.595+00:00"/>
+          <common_v36_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-08-14T14:57:12.085+00:00"/>
+          <common_v36_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-08-14T14:52:10.019+00:00"/>
+        </common_v36_0:AgencyInfo>
+        <common_v36_0:AgencyContactInfo>
+          <common_v36_0:PhoneNumber Key="PyaLq2sB0BKA88m3CPAAAA==" Type="Agency" Location="IEV" Number="380 44 9999999">
+            <common_v36_0:ProviderReservationInfoRef Key="PyaLq2sB0BKAu5f3CPAAAA=="/>
+          </common_v36_0:PhoneNumber>
+        </common_v36_0:AgencyContactInfo>
+      </universal:UniversalRecord>
+    </universal:UniversalRecordImportRsp>
+  </SOAP:Body>
+</SOAP:Envelope>
