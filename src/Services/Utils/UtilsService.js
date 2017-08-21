@@ -1,3 +1,5 @@
+import validateServiceSettings from '../../utils/validate-service-settings';
+
 const uApiRequest = require('../../Request/uapi-request');
 const UtilsParser = require('./UtilsParser');
 const UtilsValidator = require('./UtilsValidator');
@@ -6,7 +8,7 @@ const getConfig = require('../../config');
 const templates = require('./templates');
 
 module.exports = function (settings) {
-  const { auth, debug, production, options } = settings;
+  const { auth, debug, production, options } = validateServiceSettings(settings);
   const config = getConfig(auth.region, production);
   return {
     currencyConvert: uApiRequest(

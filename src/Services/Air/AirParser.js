@@ -486,16 +486,49 @@ function extractBookings(obj) {
 
   const travelers = record['common_' + this.uapi_version + ':BookingTraveler'];
   const reservationInfo = record['universal:ProviderReservationInfo'];
+  const remarksObj = record[`common_${this.uapi_version}:GeneralRemark`];
+  const remarks = remarksObj
+    ? Object.keys(remarksObj)
+      .reduce(
+        (acc, key) => {
+          const reservationRef = remarksObj[key].ProviderReservationInfoRef;
+          return Object.assign(
+            acc,
+            {
+              [reservationRef]: (acc[reservationRef] || []).concat(remarksObj[key]),
+            }
+          );
+        },
+        {}
+      )
+    : {};
 
   return record['air:AirReservation'].map((booking) => {
     const resKey = `common_${this.uapi_version}:ProviderReservationInfoRef`;
     const providerInfo = reservationInfo[booking[resKey]];
     const ticketingModifiers = booking['air:TicketingModifiers'];
     const emails = [];
+    const providerInfoKey = providerInfo.Key;
+    const resRemarks = remarks[providerInfoKey] || [];
+    const splitBookings = (
+      providerInfo['universal:ProviderReservationDetails'] &&
+      providerInfo['universal:ProviderReservationDetails'].DivideDetails === 'true'
+    )
+      ? resRemarks.reduce(
+        (acc, remark) => {
+          const splitMatch = remark['common_v36_0:RemarkData'].match(/^SPLIT\s.*([A-Z0-9]{6})$/);
+          if (!splitMatch) {
+            return acc;
+          }
+          return acc.concat(splitMatch[1]);
+        },
+        []
+      )
+      : [];
 
     const passiveReservation = record['passive:PassiveReservation']
       ? record['passive:PassiveReservation'].find(res =>
-          res.ProviderReservationInfoRef === providerInfo.Key
+          res.ProviderReservationInfoRef === providerInfoKey
         )
       : null;
 
@@ -731,29 +764,33 @@ function extractBookings(obj) {
       (fq, index) => ({ ...fq, index: index + 1 })
     );
 
-    return {
-      type: 'uAPI',
-      pnr: providerInfo.LocatorCode,
-      version: record.Version,
-      uapi_ur_locator: record.LocatorCode,
-      uapi_reservation_locator: booking.LocatorCode,
-      airlineLocatorInfo: supplierLocator.map(info => ({
-        createDate: info.CreateDateTime,
-        supplierCode: info.SupplierCode,
-        locatorCode: info.SupplierLocatorCode,
-      })),
-      pnrList: [providerInfo.LocatorCode],
-      createdAt: providerInfo.CreateDate,
-      hostCreatedAt: providerInfo.HostCreateDate,
-      modifiedAt: providerInfo.ModifiedDate,
-      fareQuotes,
-      segments,
-      serviceSegments,
-      passengers,
-      emails,
-      bookingPCC: providerInfo.OwningPCC,
-      tickets,
-    };
+    return Object.assign(
+      {
+        type: 'uAPI',
+        pnr: providerInfo.LocatorCode,
+        version: record.Version,
+        uapi_ur_locator: record.LocatorCode,
+        uapi_reservation_locator: booking.LocatorCode,
+        airlineLocatorInfo: supplierLocator.map(info => ({
+          createDate: info.CreateDateTime,
+          supplierCode: info.SupplierCode,
+          locatorCode: info.SupplierLocatorCode,
+        })),
+        createdAt: providerInfo.CreateDate,
+        hostCreatedAt: providerInfo.HostCreateDate,
+        modifiedAt: providerInfo.ModifiedDate,
+        fareQuotes,
+        segments,
+        serviceSegments,
+        passengers,
+        emails,
+        bookingPCC: providerInfo.OwningPCC,
+        tickets,
+      },
+      splitBookings.length > 0
+        ? { splitBookings }
+        : null,
+    );
   });
 }
 

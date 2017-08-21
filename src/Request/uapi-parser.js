@@ -73,6 +73,7 @@ function defaultConfig(ver) {
     'air:ExchangedTicketInfo',
     'air:AirAvailabilityErrorInfo',
     'air:AirSegmentError',
+    `common_${ver}:GeneralRemark`,
   ];
 
   // Non-single field objects don't get collapsed
