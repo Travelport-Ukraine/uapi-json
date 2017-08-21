@@ -1080,6 +1080,21 @@ describe('#AirParser', () => {
         assert(err instanceof AirRuntimeError.SegmentWaitlisted, 'Should be SegmentWaitlisted error.');
       });
     });
+
+    it('should test parsing of a failed reservation (waitlist open, SOAP:Fault)', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { }, false, errorsConfig());
+      const parseFunction = airParser.AIR_ERRORS;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.Waitlist.xml`).toString();
+      return uParser.parseXML(xml).then((obj) => {
+        const json = uParser.mergeLeafRecursive(obj, 'SOAP:Fault')['SOAP:Fault'];
+        return parseFunction.call(uParser, json);
+      }).then(() => {
+        assert(false, 'Should throw an error.');
+      }).catch((err) => {
+        assert(err, 'No error returned');
+        assert(err instanceof AirRuntimeError.SegmentBookingFailed, 'Should be SegmentBookingFailed error.');
+      });
+    });
   });
 
   describe('AIR_TICKET_REQUEST', () => {
