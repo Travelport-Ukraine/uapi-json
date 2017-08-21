@@ -1095,6 +1095,14 @@ describe('#AirParser', () => {
         assert(err instanceof AirRuntimeError.SegmentBookingFailed, 'Should be SegmentBookingFailed error.');
       });
     });
+
+    it('should auto detect version and parse 36 version for a failed reservation', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v33_0', { }, false, errorsConfig());
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.Waitlist.xml`).toString();
+      return uParser.parse(xml).then(() => {
+        assert(uParser.uapi_version === 'v36_0', 'auto-detect correct version');
+      });
+    });
   });
 
   describe('AIR_TICKET_REQUEST', () => {
