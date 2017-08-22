@@ -175,7 +175,7 @@ describe('#AirService', () => {
           expect(err).to.be.instanceof(AirRuntimeError.TicketingFailed);
           expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
           expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR.calledOnce).to.be.equal(true);
+          expect(cancelUR.calledOnce).to.be.equal(false);
         });
     });
 
