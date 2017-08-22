@@ -72,7 +72,7 @@ describe('#AirService', () => {
     });
 
     it('should call cancel ur if no valid fare', () => {
-      const params = { passengers: [], rule: 'RULE', /*allowWaitlist: true*/ };
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -108,7 +108,7 @@ describe('#AirService', () => {
     });
 
     it('should call cancel ur if segment booking failed', () => {
-      const params = { passengers: [], rule: 'RULE', /*allowWaitlist: true*/ };
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -144,7 +144,7 @@ describe('#AirService', () => {
     });
 
     it('should not call cancel ur if other error', () => {
-      const params = { passengers: [], rule: 'RULE', /* allowWaitlist: true */ };
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -167,7 +167,8 @@ describe('#AirService', () => {
         './AirService': service,
       });
 
-      return createAirService({ auth }).book(params).then(() => {
+      return createAirService({ auth }).book(params)
+        .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
