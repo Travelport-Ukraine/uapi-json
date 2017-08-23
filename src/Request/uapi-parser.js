@@ -39,7 +39,7 @@ function mergeLeaf(item) {
  * Default parsing algorithm configuration (for all responses)
  */
 
-function defaultConfig(ver) {
+export function defaultConfig(ver) {
   // do not collapse arrays with single objects or objects with single keys if they have this name
   const noCollapseList = [
     'air:BookingInfo',
@@ -74,6 +74,8 @@ function defaultConfig(ver) {
     'air:AirAvailabilityErrorInfo',
     'air:AirSegmentError',
     `common_${ver}:GeneralRemark`,
+    'air:AirAvailabilityErrorInfo',
+    'air:AirSegmentError',
   ];
 
   // Non-single field objects don't get collapsed
@@ -140,7 +142,7 @@ function defaultConfig(ver) {
   };
 }
 
-function errorsConfig(/* ver */) {
+export function errorsConfig(/* ver */) {
   // get default config and modify it
   const errParserConfig = defaultConfig();
   // 1. If waitlisted with restrictWaitlist=true, reply will be SOAP:Fault,
@@ -158,7 +160,7 @@ function errorsConfig(/* ver */) {
 }
 
 
-function Parser(root, uapiVersion, env, debug, config) {
+export function Parser(root, uapiVersion, env, debug, config) {
   this.debug = debug;
   if (!config) {
     this.config = defaultConfig(uapiVersion);
@@ -341,4 +343,4 @@ Parser.prototype.parse = function (xml) {
   });
 };
 
-module.exports = { Parser, defaultConfig, errorsConfig };
+export default Parser;

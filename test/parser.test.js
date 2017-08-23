@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Parser as UAPIParser, defaultConfig, errorsConfig } from '../src/Request/uapi-parser';
+import UAPIParser, { defaultConfig, errorsConfig } from '../src/Request/uapi-parser';
 
 const assert = require('assert');
 const fs = require('fs');

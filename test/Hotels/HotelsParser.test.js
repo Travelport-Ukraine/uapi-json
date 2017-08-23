@@ -1,4 +1,4 @@
-import { Parser as ParserUapi } from '../../src/Request/uapi-parser';
+import ParserUapi from '../../src/Request/uapi-parser';
 
 const assert = require('assert');
 const fs = require('fs');

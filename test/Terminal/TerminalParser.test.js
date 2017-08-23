@@ -5,7 +5,7 @@
 import fs from 'fs';
 import { expect } from 'chai';
 import uAPI from '../../src';
-import { Parser as ParserUapi } from '../../src/Request/uapi-parser';
+import ParserUapi from '../../src/Request/uapi-parser';
 import terminalParser from '../../src/Services/Terminal/TerminalParser';
 
 const TerminalError = uAPI.errors.Terminal;
