@@ -779,10 +779,10 @@ function importRequest(data) {
 
 function extractFareRules(obj) {
   const rulesList = obj['air:FareRule'];
-  _.forEach(rulesList, (item) => {
+  rulesList.forEach((item) => {
     const result = [];
     const listName = (item['air:FareRuleLong']) ? 'air:FareRuleLong' : 'air:FareRuleShort';
-    _.forEach(item[listName], (rule) => {
+    item[listName].forEach((rule) => {
       const ruleCategoryNumber = parseInt(rule.Category, 10);
       if (rule['air:FareRuleNameValue']) {
         // for short rules
