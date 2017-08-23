@@ -81,6 +81,7 @@ After searching for air segments and fares, air bookings are created using the r
 | phone | `Phone`  | Booking agency/traveller phone. See `Phone` description [below](#phone). |
 | deliveryInformation | `Delivery Information` | Optional param. See `Delivery Information` description [below](#delivery-info). |
 | rule | `String` | Custom check rule. |
+| allowWaitlist | `Boolean` | Allow open waitlisted segments, do not cancel booking. See `allowWaitlist` description [below](#allow-waitlist). |
 
 ### Segment object
 <a name="segment"></a>
@@ -139,6 +140,13 @@ Please specify `transfer` field to mark connection segment.
 | city | `String` | City |
 
 **See: <a href="../examples/Air/book.js">Book example</a>**
+
+### allowWaitlist
+<a name="allow-waitlist"></a>
+
+Default behavior is to cancel the entire Universal Record when part of the booking has failed.
+This includes both open and closed waitlisting and other errors.
+With `allowWaitlist`=true the UR is canceled only for a closed wait list, but open waitlist reservation is kept and returned to user.
 
 
 ## .ticket(params)
