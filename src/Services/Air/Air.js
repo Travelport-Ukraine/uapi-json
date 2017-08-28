@@ -28,10 +28,13 @@ module.exports = (settings) => {
         return service.createReservation(bookingParams).catch((err) => {
           if (err instanceof AirRuntimeError.SegmentBookingFailed
               || err instanceof AirRuntimeError.NoValidFare) {
-            const code = err.data['universal:UniversalRecord'].LocatorCode;
-            return service.cancelUR({
-              LocatorCode: code,
-            }).then(() => Promise.reject(err));
+            if (options.allowWaitlist) { // will not have a UR if waitlisting restricted
+              const code = err.data['universal:UniversalRecord'].LocatorCode;
+              return service.cancelUR({
+                LocatorCode: code,
+              }).then(() => Promise.reject(err));
+            }
+            return Promise.reject(err);
           }
           return Promise.reject(err);
         });

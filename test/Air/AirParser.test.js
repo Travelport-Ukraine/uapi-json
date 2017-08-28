@@ -9,7 +9,7 @@ import {
   AirRuntimeError,
   AirParsingError,
 } from '../../src/Services/Air/AirErrors';
-import ParserUapi from '../../src/Request/uapi-parser';
+import { Parser as ParserUapi, errorsConfig } from '../../src/Request/uapi-parser';
 
 const xmlFolder = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:\d{2}/i;
@@ -1068,7 +1068,7 @@ describe('#AirParser', () => {
         parseFunction.call(uParser, json);
         assert(false, 'Should be SegmentBookingFailed error.');
       }).catch((err) => {
-        assert(err, 'No error returner');
+        assert(err, 'No error returned');
         assert(err instanceof AirRuntimeError.SegmentBookingFailed, 'Should be SegmentBookingFailed error.');
       });
     });
@@ -1081,8 +1081,46 @@ describe('#AirParser', () => {
         parseFunction.call(uParser, json);
         assert(false, 'Should be NoValidFare error.');
       }).catch((err) => {
-        assert(err, 'No error returner');
+        assert(err, 'No error returned');
         assert(err instanceof AirRuntimeError.NoValidFare, 'Should be NoValidFare error.');
+      });
+    });
+
+    it('should test parsing of errors if waitlisted with restrictWaitlist', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { }, false, errorsConfig());
+      const parseFunction = airParser.AIR_ERRORS;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.Waitlisted.xml`).toString();
+      return uParser.parseXML(xml).then((obj) => {
+        const json = uParser.mergeLeafRecursive(obj, 'SOAP:Fault')['SOAP:Fault'];
+        return parseFunction.call(uParser, json);
+      }).then(() => {
+        assert(false, 'Should throw Waitlisted error.');
+      }).catch((err) => {
+        assert(err, 'No error returned');
+        assert(err instanceof AirRuntimeError.SegmentWaitlisted, 'Should be SegmentWaitlisted error.');
+      });
+    });
+
+    it('should test parsing of a failed reservation (waitlist open, SOAP:Fault)', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { }, false, errorsConfig());
+      const parseFunction = airParser.AIR_ERRORS;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.Waitlist.xml`).toString();
+      return uParser.parseXML(xml).then((obj) => {
+        const json = uParser.mergeLeafRecursive(obj, 'SOAP:Fault')['SOAP:Fault'];
+        return parseFunction.call(uParser, json);
+      }).then(() => {
+        assert(false, 'Should throw an error.');
+      }).catch((err) => {
+        assert(err, 'No error returned');
+        assert(err instanceof AirRuntimeError.SegmentBookingFailed, 'Should be SegmentBookingFailed error.');
+      });
+    });
+
+    it('should auto detect version and parse 36 version for a failed reservation', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v33_0', { }, false, errorsConfig());
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.Waitlist.xml`).toString();
+      return uParser.parse(xml).then(() => {
+        assert(uParser.uapi_version === 'v36_0', 'auto-detect correct version');
       });
     });
   });
