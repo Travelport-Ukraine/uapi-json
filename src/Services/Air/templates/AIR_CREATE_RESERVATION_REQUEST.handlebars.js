@@ -12,6 +12,7 @@ module.exports = `
             RetainReservation="Both" TargetBranch="{{TargetBranch}}"
             {{#if rule}}RuleName="{{rule}}"{{/if}}
             {{#if UniversalRecordLocatorCode}} UniversalRecordLocatorCode="{{UniversalRecordLocatorCode}}" {{/if}}
+            {{#if allowWaitlist}}RestrictWaitlist="false"{{else}}RestrictWaitlist="true"{{/if}}
             xmlns:univ="http://www.travelport.com/schema/universal_v36_0"
             xmlns:com="http://www.travelport.com/schema/common_v36_0"
             xmlns:air="http://www.travelport.com/schema/air_v36_0"

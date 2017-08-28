@@ -73,7 +73,7 @@ describe('#AirService', () => {
     });
 
     it('should call cancel ur if no valid fare', () => {
-      const params = { passengers: [], rule: 'RULE' };
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -96,21 +96,20 @@ describe('#AirService', () => {
         './AirService': service,
       });
 
-      return createAirService({ auth }).book(params).then(() => {
-        expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-        expect(createReservation.calledOnce).to.be.equal(true);
-        expect(cancelUR.calledOnce).to.be.equal(true);
-      })
+      return createAirService({ auth }).book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
           expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR.calledOnce).to.be.equal(true);
         });
     });
 
     it('should call cancel ur if segment booking failed', () => {
-      const params = { passengers: [], rule: 'RULE' };
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -133,21 +132,20 @@ describe('#AirService', () => {
         './AirService': service,
       });
 
-      return createAirService({ auth }).book(params).then(() => {
-        expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-        expect(createReservation.calledOnce).to.be.equal(true);
-        expect(cancelUR.calledOnce).to.be.equal(true);
-      })
+      return createAirService({ auth }).book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
           expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR.calledOnce).to.be.equal(true);
         });
     });
 
     it('should not call cancel ur if other error', () => {
-      const params = { passengers: [], rule: 'RULE' };
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -170,16 +168,123 @@ describe('#AirService', () => {
         './AirService': service,
       });
 
-      return createAirService({ auth }).book(params).then(() => {
-        expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-        expect(createReservation.calledOnce).to.be.equal(true);
-        expect(cancelUR.calledOnce).to.be.equal(true);
-      })
+      return createAirService({ auth }).book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
           expect(err).to.be.instanceof(AirRuntimeError.TicketingFailed);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR.calledOnce).to.be.equal(false);
+        });
+    });
+
+    it('should not call cancel ur if segment booking failed with SegmentBookingFailed or NoValidFare but restrictWaitlist=true', () => {
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
+      const airPricePricingSolutionXML = sinon.spy(
+        () => Promise.resolve({ foo: 123 })
+      );
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.SegmentBookingFailed({
+          detail: { },
+        }))
+      );
+      const cancelUR = sinon.spy((options) => {
+        expect(options.LocatorCode).to.be.equal(123);
+        return Promise.resolve();
+      });
+      const service = () => ({
+        airPricePricingSolutionXML,
+        createReservation,
+        cancelUR,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth }).book(params)
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR).to.have.callCount(0);
+        });
+    });
+
+    it('should not call cancel ur if segment booking failed with NoValidFare but restrictWaitlist=true', () => {
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
+      const airPricePricingSolutionXML = sinon.spy(
+        () => Promise.resolve({ foo: 123 })
+      );
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.NoValidFare({
+          detail: { },
+        }))
+      );
+      const cancelUR = sinon.spy((options) => {
+        expect(options.LocatorCode).to.be.equal(123);
+        return Promise.resolve();
+      });
+      const service = () => ({
+        airPricePricingSolutionXML,
+        createReservation,
+        cancelUR,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth }).book(params)
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR).to.have.callCount(0);
+        });
+    });
+
+    it('should not call cancel ur if segment booking failed with other error and restrictWaitlist=true', () => {
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
+      const airPricePricingSolutionXML = sinon.spy(
+        () => Promise.resolve({ foo: 123 })
+      );
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.SegmentWaitlisted({
+          detail: { },
+        }))
+      );
+      const cancelUR = sinon.spy((options) => {
+        expect(options.LocatorCode).to.be.equal(123);
+        return Promise.resolve();
+      });
+      const service = () => ({
+        airPricePricingSolutionXML,
+        createReservation,
+        cancelUR,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth }).book(params)
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.SegmentWaitlisted);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR).to.have.callCount(0);
         });
     });
   });

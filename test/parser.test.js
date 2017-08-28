@@ -1,9 +1,11 @@
+import { expect } from 'chai';
+import UAPIParser, { defaultConfig, errorsConfig } from '../src/Request/uapi-parser';
+
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 
 const errors = require('../src').errors;
-const UAPIParser = require('../src/Request/uapi-parser');
 
 const xmlFolder = path.join(__dirname, '/FakeResponses');
 
@@ -31,5 +33,31 @@ describe('uapi-parser error handling tests', () => {
     const parser = new UAPIParser('someroot', 'v36_0');
     const xml = fs.readFileSync(path.join(xmlFolder, '/Other/validationErrorAddress.xml')).toString();
     return parser.parse(xml);
+  });
+});
+
+describe('uapi-parser config functions tests', () => {
+  it('check defaultConfig export', () => {
+    assert(typeof defaultConfig === 'function');
+    const config = defaultConfig('v_123_45');
+    expect(config).to.have.all.keys(
+      'noCollapseList',
+      'fullCollapseListObj',
+      'fullCollapseSingleKeyedObj',
+      'CollapseKeysOnly',
+      'dropKeys'
+    );
+  });
+
+  it('check errorsConfig export', () => {
+    assert(typeof errorsConfig === 'function');
+    const config = errorsConfig('v_123_45');
+    expect(config).to.have.all.keys(
+      'noCollapseList',
+      'fullCollapseListObj',
+      'fullCollapseSingleKeyedObj',
+      'CollapseKeysOnly',
+      'dropKeys'
+    );
   });
 });

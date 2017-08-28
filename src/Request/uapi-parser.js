@@ -39,7 +39,7 @@ function mergeLeaf(item) {
  * Default parsing algorithm configuration (for all responses)
  */
 
-function defaultConfig(ver) {
+export function defaultConfig(ver) {
   // do not collapse arrays with single objects or objects with single keys if they have this name
   const noCollapseList = [
     'air:BookingInfo',
@@ -71,7 +71,11 @@ function defaultConfig(ver) {
     'passive:PassiveRemark',
     `common_${ver}:Email`,
     'air:ExchangedTicketInfo',
+    'air:AirAvailabilityErrorInfo',
+    'air:AirSegmentError',
     `common_${ver}:GeneralRemark`,
+    'air:AirAvailabilityErrorInfo',
+    'air:AirSegmentError',
   ];
 
   // Non-single field objects don't get collapsed
@@ -138,8 +142,25 @@ function defaultConfig(ver) {
   };
 }
 
+export function errorsConfig(/* ver */) {
+  // get default config and modify it
+  const errParserConfig = defaultConfig();
+  // 1. If waitlisted with restrictWaitlist=true, reply will be SOAP:Fault,
+  // this error reply will contain <air:AvailabilityErrorInfo> / <air:AirSegmentError>
+  // lists with <air:AirSegment> keyed objects;
+  // but, each <air:AirSegmentError> will contain only one object,
+  // so <air:AirSegment> keyed list can be collapsed.
+  // If there are several errors for a particular segment, there will be two errors
+  // with segment information copied.
+  // Unlike this, in LowFareShoppingRsp <air:AirSegment> is usually a list.
+  errParserConfig.fullCollapseSingleKeyedObj.push('air:AirSegment');
+  errParserConfig.fullCollapseListObj.push('air:ErrorMessage');
+  // return config
+  return errParserConfig;
+}
 
-function Parser(root, uapiVersion, env, debug, config) {
+
+export function Parser(root, uapiVersion, env, debug, config) {
   this.debug = debug;
   if (!config) {
     this.config = defaultConfig(uapiVersion);
@@ -322,4 +343,4 @@ Parser.prototype.parse = function (xml) {
   });
 };
 
-module.exports = Parser;
+export default Parser;
