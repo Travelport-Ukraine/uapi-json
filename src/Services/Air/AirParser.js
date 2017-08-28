@@ -264,6 +264,28 @@ const AirErrorHandler = function (obj) {
         return Promise.reject(new AirRuntimeError(obj)); // TODO replace with custom error
     }
   }
+  // FIXME use switch above by merging <air:AvailabilityErrorInfo> into detail by means of parser
+  // (requires full coverage of parser by unit tests;
+  // then add a separate config group with new merge up functionality)
+  // then simply detect <common_v36_0:Code> = 3000
+  // see error response in AirCreateReservation.Waitlisted.xml for example
+  const segmentErrData = (obj.detail && obj.detail['air:AvailabilityErrorInfo']) || null;
+  if (segmentErrData) {
+    obj.detail = obj.detail['air:AvailabilityErrorInfo']; // Quickfix structure returned in exception
+    switch (segmentErrData[`common_${this.uapi_version}:Code`]) {
+      case '3000': {
+        const messages = _.pluck(segmentErrData['air:AirSegmentError'], 'air:ErrorMessage');
+        if (messages.indexOf('Booking is not complete due to waitlisted segment') !== -1) {
+          return Promise.reject(new AirRuntimeError.SegmentWaitlisted(obj));
+        }
+        // else // unknown error, fall back to SegmentBookingFailed
+        return Promise.reject(new AirRuntimeError.SegmentBookingFailed(obj));
+      }
+
+      default:
+        return Promise.reject(new AirRuntimeError(obj));
+    }
+  }
   return Promise.reject(new AirParsingError(obj));
 };
 
