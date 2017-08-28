@@ -15,6 +15,16 @@ module.exports = (settings) => {
       return service.searchLowFares(options);
     },
 
+    fareRules(options) {
+      // add request for fare rules
+      const request = Object.assign(options,
+        {
+          fetchFareRules: true,
+        }
+      );
+      return service.lookupFareRules(request);
+    },
+
     toQueue(options) {
       return service.gdsQueue(options);
     },

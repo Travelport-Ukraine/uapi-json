@@ -4,6 +4,7 @@ import chai from 'chai';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
+import assert from 'assert';
 import moment from 'moment';
 import auth from '../testconfig';
 import { AirRuntimeError } from '../../src/Services/Air/AirErrors';
@@ -1567,6 +1568,47 @@ describe('#AirService', () => {
       }).then(() => {
         expect(getUniversalRecordByPNR).to.have.callCount(1);
         expect(exchange).to.have.callCount(1);
+      });
+    });
+  });
+
+  describe('fareRules', () => {
+    it('should check function to be called', () => {
+      const fetch = sinon.spy(({ segments, passengers, fetchFareRules }) => {
+        expect(segments).to.be.an('array');
+        expect(segments).to.have.length(0);
+        expect(passengers).to.be.an('object'); // add one fake passenger
+        expect(passengers).to.have.all.keys('ADT');
+        expect(passengers.ADT).to.equal(1);
+        assert(fetchFareRules, 'fetchFareRules is necessary for underlying call');
+
+        return Promise.resolve([
+          {
+            RuleNumber: '123',
+            Source: 'ATPC',
+            TariffNumber: 'Test',
+            Rules: [],
+          },
+        ]);
+      });
+
+      const airService = () => ({
+        lookupFareRules: fetch,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      const service = createAirService({ auth });
+
+      return service.fareRules({
+        segments: [],
+        passengers: {
+          ADT: 1,
+        },
+      }).then(() => {
+        expect(fetch).to.have.callCount(1);
       });
     });
   });

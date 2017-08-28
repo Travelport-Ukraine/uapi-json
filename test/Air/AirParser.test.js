@@ -695,6 +695,37 @@ describe('#AirParser', () => {
     });
   });
 
+  describe('AIR_PRICE_FARE_RULES()', () => {
+    const test = (jsonResult) => {
+      assert(Array.isArray(jsonResult), 'should return an array of rule sets');
+      jsonResult.forEach((item) => {
+        assert(item.RuleNumber, 'No RuleNumber');
+        assert(item.Source, 'No Source');
+        assert(item.TariffNumber, 'No TariffNumber');
+        assert(Array.isArray(item.Rules), 'Rules should be an array');
+        item.Rules.forEach((ruleSting) => {
+          assert(typeof ruleSting === 'string', 'rule items should be strings');
+        });
+      });
+    };
+
+    it('should test parser for correct work', () => {
+      const uParser = new ParserUapi('air:AirPriceRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_PRICE_FARE_RULES_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirPriceReq.fareRules.xml`).toString();
+      const jsonSaved = JSON.parse(fs.readFileSync(`${xmlFolder}/AirPriceReq.fareRules.json`));
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        test(jsonResult);
+        // throw away nulls from JSON conversion
+        jsonSaved[0].Rules.filter((item, key) => {
+          if (!item) delete jsonSaved[0].Rules[key];
+        });
+        assert.deepEqual(jsonResult, jsonSaved, 'Result is not equivalent to expected');
+      }).catch(err => assert(false, 'Error during parsing ' + err.stack));
+    });
+  });
+
   function testBooking(jsonResult) {
     expect(jsonResult).to.be.an('array');
     jsonResult.forEach((result) => {
