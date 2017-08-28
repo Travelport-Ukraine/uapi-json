@@ -16,11 +16,13 @@ module.exports = {
   AIR_PRICE_FARE_RULES_REQUEST: compose(
     validate(
       validators.segments,
+      validators.passengers,
     ),
     transform(
       transformers.setBusinessFlag,
       // transformers.setGroupsForSegments, <air:Connection/> hack fails validation on pre-prod
       transformers.setHasFareBasisFlag,
+      transformers.convertPassengersObjectToArray,
     )
   ),
 

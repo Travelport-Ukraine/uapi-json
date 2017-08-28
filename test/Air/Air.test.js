@@ -1471,11 +1471,10 @@ describe('#AirService', () => {
     it('should check function to be called', () => {
       const fetch = sinon.spy(({ segments, passengers, fetchFareRules }) => {
         expect(segments).to.be.an('array');
-        expect(passengers).to.be.an('array'); // add one fake passenger
-        expect(passengers).to.have.length(1);
-        const fakePassenger = passengers[0];
-        expect(fakePassenger.ageCategory).to.equal('ADT');
-        expect(fakePassenger.Age).to.equal(20);
+        expect(segments).to.have.length(0);
+        expect(passengers).to.be.an('object'); // add one fake passenger
+        expect(passengers).to.have.all.keys('ADT');
+        expect(passengers.ADT).to.equal(1);
         assert(fetchFareRules, 'fetchFareRules is necessary for underlying call');
 
         return Promise.resolve([
@@ -1500,6 +1499,9 @@ describe('#AirService', () => {
 
       return service.fareRules({
         segments: [],
+        passengers: {
+          ADT: 1,
+        },
       }).then(() => {
         expect(fetch).to.have.callCount(1);
       });

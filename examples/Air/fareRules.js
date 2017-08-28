@@ -73,6 +73,9 @@ const params = {
       "fareBasisCode": "EN2PX"
     }
   ],
+  passengers: {
+    ADT: 1,
+  },
   long: true,
   requestId: '4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60',
 };

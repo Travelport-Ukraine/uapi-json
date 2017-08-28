@@ -16,13 +16,9 @@ module.exports = (settings) => {
     },
 
     fareRules(options) {
-      // add a fake passenger, request fare rules
+      // add request for fare rules
       const request = Object.assign(options,
         {
-          passengers: [{
-            ageCategory: 'ADT',
-            Age: 20,
-          }],
           fetchFareRules: true,
         }
       );
