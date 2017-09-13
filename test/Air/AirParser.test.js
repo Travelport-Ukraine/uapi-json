@@ -297,6 +297,18 @@ describe('#AirParser', () => {
         });
     });
 
+    it('should parse ticket without booking info', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_NO_BOOKING_INFO.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testTicket(result);
+        });
+    });
+
     it('should return correct error for duplicate ticket number', () => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;

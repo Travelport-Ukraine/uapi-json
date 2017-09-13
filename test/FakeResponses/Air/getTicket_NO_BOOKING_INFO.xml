@@ -1,0 +1,38 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AirRetrieveDocumentRsp TransactionId="7B02B1D30A0759BF283308B8D1FD715D" ResponseTime="1351" UniversalRecordLocatorCode="ULXKV1"
+                                    xmlns:air="http://www.travelport.com/schema/air_v39_0"
+                                    xmlns:common_v39_0="http://www.travelport.com/schema/common_v39_0">
+            <air:ETR Key="rqNqU0fB0BKAmGgyLHAAAA==" TotalPrice="UAH11246" BasePrice="USD363.00" Taxes="UAH1789" EquivalentBasePrice="UAH9457" Refundable="false" Exchangeable="false" IssuedDate="2017-07-11T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="MDBMCW" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="OK">
+                <air:AirReservationLocatorCode>85584H</air:AirReservationLocatorCode>
+                <common_v39_0:AgencyInfo>
+                    <common_v39_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-07-10T22:00:00.000+00:00"/>
+                </common_v39_0:AgencyInfo>
+                <common_v39_0:BookingTraveler Key="EDaoU0BAAA/Bz+3PGGAAAA==">
+                    <common_v39_0:BookingTravelerName First="MARKMR" Last="OREL"/>
+                </common_v39_0:BookingTraveler>
+                <common_v39_0:FormOfPayment Key="rqNqU0fB0BKAaGgyLHAAAA==" Type="Cash" Reusable="false" ProfileKey="pQu7xujNRG2KVBmVukYGFA=="/>
+                <common_v39_0:Payment Key="rqNqU0fB0BKAdGgyLHAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="rqNqU0fB0BKAaGgyLHAAAA=="/>
+                <common_v39_0:SupplierLocator SupplierCode="OK" SupplierLocatorCode="U5CHOY"/>
+                <air:FareCalc>IEV OK PRG 363.00 NUC363.00END ROE1.0 XT 443YK1188YQ</air:FareCalc>
+                <air:Ticket Key="rqNqU0fB0BKAqGgyLHAAAA==" TicketNumber="0649902914323" TicketStatus="X">
+                    <air:Coupon Key="rqNqU0fB0BKArGgyLHAAAA==" CouponNumber="1" MarketingCarrier="OK" MarketingFlightNumber="917" Origin="KBP" Destination="PRG" DepartureTime="2018-03-02T05:05:00.000+02:00" StopoverCode="true" BookingClass="Y" FareBasis="YECOK" NotValidBefore="2018-03-02" NotValidAfter="2018-03-02" Status="E" SegmentGroup="0" MarriageGroup="0"/>
+                </air:Ticket>
+                <air:AirPricingInfo Key="vG5kU0BAAA/B55B0PHAAAA==" TotalPrice="UAH11246" BasePrice="USD363.00" EquivalentBasePrice="UAH9457" Taxes="UAH1789" LatestTicketingTime="2017-07-14T23:59:00.000+02:00" TrueLastDateToTicket="2017-07-18T23:59:00.000+02:00" PricingMethod="Guaranteed" ETicketability="Yes" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="G">
+                    <air:FareInfo Key="vG5kU0BAAA/B75B0PHAAAA==" FareBasis="YECOK" PassengerTypeCode="ADT" Origin="KBP" Destination="PRG" EffectiveDate="2017-07-11T00:00:00.000+02:00" NotValidBefore="2018-03-02" NotValidAfter="2018-03-02">
+                        <common_v39_0:Endorsement Value="FARE RESTRICTIONS APPLY"/>
+                        <air:BaggageAllowance>
+                            <air:NumberOfPieces>1</air:NumberOfPieces>
+                        </air:BaggageAllowance>
+                    </air:FareInfo>
+                    <air:TaxInfo Category="UA" Amount="UAH105" Key="kF2v14BAAA/BDWOaRUAAAA=="/>
+                    <air:TaxInfo Category="UD" Amount="UAH53" Key="kF2v14BAAA/BEWOaRUAAAA=="/>
+                    <air:TaxInfo Category="YK" Amount="UAH443" Key="kF2v14BAAA/BFWOaRUAAAA=="/>
+                    <air:TaxInfo Category="YQ" Amount="UAH1188" Key="kF2v14BAAA/BGWOaRUAAAA=="/>
+                    <air:FareCalc>IEV OK PRG 363.00YECOK NUC363.00END ROE1.0</air:FareCalc>
+                </air:AirPricingInfo>
+            </air:ETR>
+        </air:AirRetrieveDocumentRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

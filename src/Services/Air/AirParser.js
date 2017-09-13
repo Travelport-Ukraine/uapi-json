@@ -342,7 +342,8 @@ const airGetTicket = function (obj) {
             Object.keys(airPricingInfo['air:FareInfo']).forEach(
               (fareKey) => {
                 const fare = airPricingInfo['air:FareInfo'][fareKey];
-                if (fare.FareBasis === coupon.FareBasis) {
+                if (fare.FareBasis === coupon.FareBasis
+                  && airPricingInfo['air:BookingInfo']) {
                   const bInfo = airPricingInfo['air:BookingInfo'].find(
                     info => info.FareInfoRef === fareKey
                   );
