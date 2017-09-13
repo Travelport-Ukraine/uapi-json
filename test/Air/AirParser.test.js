@@ -784,7 +784,7 @@ describe('#AirParser', () => {
         expect(fareQuote.pricingInfos).to.be.an('array').and.to.have.length.above(0);
 
         if (fareQuote.endorsement) {
-          expect(fareQuote.endorsement).to.match(/^[A-Z0-9]+$/);
+          expect(fareQuote.endorsement).to.match(/^[A-Z0-9\s\/]+$/);
         }
 
         if (fareQuote.platingCarrier) {
@@ -1237,10 +1237,24 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport-endorsement.xml`).toString();
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
-
         testBooking(jsonResult, false);
+        const [booking] = jsonResult;
+        expect(booking.fareQuotes[0].endorsement).to.be.equal('FARE RESTRICTIONS APPLY');
       });
     });
+
+    it('should test parsing of endorsement 2', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport-endorsement2.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        const [booking] = jsonResult;
+        testBooking(jsonResult, false);
+        expect(booking.fareQuotes[0].endorsement).to.be.equal('FARE RESTRICTIONS APPLY');
+      });
+    });
+
 
     it('should test parsing of universal record with only passive segments', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
