@@ -13,6 +13,19 @@ module.exports = {
     )
   ),
 
+  AIR_PRICE_FARE_RULES_REQUEST: compose(
+    validate(
+      validators.segments,
+      validators.passengers,
+    ),
+    transform(
+      transformers.setBusinessFlag,
+      // transformers.setGroupsForSegments, <air:Connection/> hack fails validation on pre-prod
+      transformers.setHasFareBasisFlag,
+      transformers.convertPassengersObjectToArray,
+    )
+  ),
+
   AIR_PRICE: compose(
     validate(
       validators.segments,
@@ -42,9 +55,12 @@ module.exports = {
     validate(
       validators.paramsIsObject,
       validators.fop,
+      validators.fopCreditCard,
       validators.pnr,
     ),
-    transform(),
+    transform(
+      transformers.fixCardFop,
+    ),
   ),
 
   AIR_REQUEST_BY_PNR: compose(

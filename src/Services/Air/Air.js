@@ -6,12 +6,23 @@ import getBookingFromUr from '../../utils/get-booking-from-ur';
 import airService from './AirService';
 import createTerminalService from '../Terminal/Terminal';
 import { AirRuntimeError } from './AirErrors';
+import validateServiceSettings from '../../utils/validate-service-settings';
 
 module.exports = (settings) => {
-  const service = airService(settings);
+  const service = airService(validateServiceSettings(settings));
   return {
     shop(options) {
       return service.searchLowFares(options);
+    },
+
+    fareRules(options) {
+      // add request for fare rules
+      const request = Object.assign(options,
+        {
+          fetchFareRules: true,
+        }
+      );
+      return service.lookupFareRules(request);
     },
 
     toQueue(options) {
@@ -27,10 +38,13 @@ module.exports = (settings) => {
         return service.createReservation(bookingParams).catch((err) => {
           if (err instanceof AirRuntimeError.SegmentBookingFailed
               || err instanceof AirRuntimeError.NoValidFare) {
-            const code = err.data['universal:UniversalRecord'].LocatorCode;
-            return service.cancelUR({
-              LocatorCode: code,
-            }).then(() => Promise.reject(err));
+            if (options.allowWaitlist) { // will not have a UR if waitlisting restricted
+              const code = err.data['universal:UniversalRecord'].LocatorCode;
+              return service.cancelUR({
+                LocatorCode: code,
+              }).then(() => Promise.reject(err));
+            }
+            return Promise.reject(err);
           }
           return Promise.reject(err);
         });

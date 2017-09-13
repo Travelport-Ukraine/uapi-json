@@ -6,9 +6,11 @@ import {
   RequestRuntimeError,
   RequestSoapError,
 } from './RequestErrors';
-import UapiParser from './uapi-parser';
+import { Parser as UapiParser, errorsConfig } from './uapi-parser';
 import prepareRequest from './prepare-request';
 import configInit from '../config';
+
+handlebars.registerHelper('equal', require('handlebars-helper-equal'));
 
 /**
  * basic function for requests/responses
@@ -120,8 +122,12 @@ module.exports = function uapiRequest(
         if (debugMode > 2) {
           log('Parsed error response', pd.json(parsedXML));
         }
-        const errData = uParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
-        return errorHandler.call(uParser, errData);
+        // use a special uAPI parser configuration for errors, copy detected uAPI version
+        const errParserConfig = errorsConfig();
+        const errParser =
+          new UapiParser(rootObject, uParser.uapi_version, params, debugMode, errParserConfig);
+        const errData = errParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
+        return errorHandler.call(errParser, errData);
       } else if (debugMode > 2) {
         log('Parsed response', pd.json(parsedXML));
       }

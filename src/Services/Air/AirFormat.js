@@ -300,7 +300,7 @@ function setIndexesForSegments(
   const indexedSegments = allSegments.map((s, k) => ({ ...s, index: k + 1 }));
 
   return {
-    segments: indexedSegments.filter(s => s.SegmentType !== 'Service'),
+    segments: indexedSegments.filter(s => s.SegmentType === undefined),
     serviceSegments: indexedSegments.filter(s => s.SegmentType === 'Service'),
   };
 }

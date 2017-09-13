@@ -4,7 +4,9 @@ import chai from 'chai';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
+import assert from 'assert';
 import moment from 'moment';
+import auth from '../testconfig';
 import { AirRuntimeError } from '../../src/Services/Air/AirErrors';
 
 const expect = chai.expect;
@@ -12,11 +14,6 @@ chai.use(sinonChai);
 
 const responsesDir = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const terminalResponsesDir = path.join(__dirname, '..', 'FakeResponses', 'Terminal');
-const auth = {
-  username: 'USERNAME',
-  password: 'PASSWORD',
-  targetBranch: 'BRANCH',
-};
 
 
 describe('#AirService', () => {
@@ -76,7 +73,7 @@ describe('#AirService', () => {
     });
 
     it('should call cancel ur if no valid fare', () => {
-      const params = { passengers: [], rule: 'RULE' };
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -99,21 +96,20 @@ describe('#AirService', () => {
         './AirService': service,
       });
 
-      return createAirService({ auth }).book(params).then(() => {
-        expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-        expect(createReservation.calledOnce).to.be.equal(true);
-        expect(cancelUR.calledOnce).to.be.equal(true);
-      })
+      return createAirService({ auth }).book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
           expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR.calledOnce).to.be.equal(true);
         });
     });
 
     it('should call cancel ur if segment booking failed', () => {
-      const params = { passengers: [], rule: 'RULE' };
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -136,21 +132,20 @@ describe('#AirService', () => {
         './AirService': service,
       });
 
-      return createAirService({ auth }).book(params).then(() => {
-        expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-        expect(createReservation.calledOnce).to.be.equal(true);
-        expect(cancelUR.calledOnce).to.be.equal(true);
-      })
+      return createAirService({ auth }).book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
           expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR.calledOnce).to.be.equal(true);
         });
     });
 
     it('should not call cancel ur if other error', () => {
-      const params = { passengers: [], rule: 'RULE' };
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -173,16 +168,123 @@ describe('#AirService', () => {
         './AirService': service,
       });
 
-      return createAirService({ auth }).book(params).then(() => {
-        expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-        expect(createReservation.calledOnce).to.be.equal(true);
-        expect(cancelUR.calledOnce).to.be.equal(true);
-      })
+      return createAirService({ auth }).book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
           expect(err).to.be.instanceof(AirRuntimeError.TicketingFailed);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR.calledOnce).to.be.equal(false);
+        });
+    });
+
+    it('should not call cancel ur if segment booking failed with SegmentBookingFailed or NoValidFare but restrictWaitlist=true', () => {
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
+      const airPricePricingSolutionXML = sinon.spy(
+        () => Promise.resolve({ foo: 123 })
+      );
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.SegmentBookingFailed({
+          detail: { },
+        }))
+      );
+      const cancelUR = sinon.spy((options) => {
+        expect(options.LocatorCode).to.be.equal(123);
+        return Promise.resolve();
+      });
+      const service = () => ({
+        airPricePricingSolutionXML,
+        createReservation,
+        cancelUR,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth }).book(params)
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR).to.have.callCount(0);
+        });
+    });
+
+    it('should not call cancel ur if segment booking failed with NoValidFare but restrictWaitlist=true', () => {
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
+      const airPricePricingSolutionXML = sinon.spy(
+        () => Promise.resolve({ foo: 123 })
+      );
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.NoValidFare({
+          detail: { },
+        }))
+      );
+      const cancelUR = sinon.spy((options) => {
+        expect(options.LocatorCode).to.be.equal(123);
+        return Promise.resolve();
+      });
+      const service = () => ({
+        airPricePricingSolutionXML,
+        createReservation,
+        cancelUR,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth }).book(params)
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR).to.have.callCount(0);
+        });
+    });
+
+    it('should not call cancel ur if segment booking failed with other error and restrictWaitlist=true', () => {
+      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
+      const airPricePricingSolutionXML = sinon.spy(
+        () => Promise.resolve({ foo: 123 })
+      );
+      const createReservation = sinon.spy(() =>
+        Promise.reject(new AirRuntimeError.SegmentWaitlisted({
+          detail: { },
+        }))
+      );
+      const cancelUR = sinon.spy((options) => {
+        expect(options.LocatorCode).to.be.equal(123);
+        return Promise.resolve();
+      });
+      const service = () => ({
+        airPricePricingSolutionXML,
+        createReservation,
+        cancelUR,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth }).book(params)
+        .then(() => {
+          throw new Error('Cant be success.');
+        })
+        .catch((err) => {
+          expect(err).to.be.instanceof(AirRuntimeError.SegmentWaitlisted);
+          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+          expect(createReservation.calledOnce).to.be.equal(true);
+          expect(cancelUR).to.have.callCount(0);
         });
     });
   });
@@ -293,7 +395,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      return createAirService()
+      return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
           expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
@@ -332,7 +434,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      return createAirService()
+      return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
           expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
@@ -382,7 +484,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      return createAirService()
+      return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
           expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
@@ -434,7 +536,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      return createAirService()
+      return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
           expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
@@ -493,7 +595,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      return createAirService()
+      return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
           expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
@@ -989,7 +1091,8 @@ describe('#AirService', () => {
         './AirService': service,
       });
 
-      return createAirService().cancelTicket()
+      return createAirService({ auth })
+        .cancelTicket()
         .then(() => Promise.reject(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelTicket);
@@ -1012,7 +1115,7 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      const service = createAirService();
+      const service = createAirService({ auth });
 
       return service.cancelTicket({
         ticketNumber: '1234567890123',
@@ -1056,7 +1159,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': terminalService,
       });
 
-      const service = createAirService();
+      const service = createAirService({ auth });
 
       return service.cancelTicket({
         ticketNumber: '1234567890123',
@@ -1080,9 +1183,10 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+        })
         .then(() => Promise.reject(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
@@ -1110,9 +1214,10 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+        })
         .then(() => {
           expect(getUniversalRecordByPNR).to.have.callCount(2);
           expect(getTicket).to.have.callCount(0);
@@ -1147,9 +1252,10 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+        })
         .then(() => {
           expect(getUniversalRecordByPNR).to.have.callCount(2);
           expect(getTicket).to.have.callCount(1);
@@ -1201,9 +1307,10 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+        })
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
           expect(err.causedBy).to.be.an.instanceof(AirRuntimeError.PNRHasOpenTickets);
@@ -1264,10 +1371,11 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-        cancelTickets: true,
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+          cancelTickets: true,
+        })
         .then(() => {
           expect(getUniversalRecordByPNR).to.have.callCount(2);
           expect(getTicket).to.have.callCount(2);
@@ -1319,10 +1427,11 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-        cancelTickets: true,
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+          cancelTickets: true,
+        })
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
           expect(err.causedBy).to.be.an.instanceof(
@@ -1379,10 +1488,11 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      return createAirService().cancelPNR({
-        pnr: 'PNR001',
-        cancelTickets: true,
-      })
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+          cancelTickets: true,
+        })
         .then((result) => {
           expect(result).to.equal(true);
           expect(getUniversalRecordByPNR).to.have.callCount(2);
@@ -1416,7 +1526,7 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      const service = createAirService();
+      const service = createAirService({ auth });
 
       return service.getExchangeInformation({
         pnr: 'PNR001',
@@ -1450,7 +1560,7 @@ describe('#AirService', () => {
         './AirService': airService,
       });
 
-      const service = createAirService();
+      const service = createAirService({ auth });
 
       return service.exchangeBooking({
         exchangeToken: 'token',
@@ -1458,6 +1568,47 @@ describe('#AirService', () => {
       }).then(() => {
         expect(getUniversalRecordByPNR).to.have.callCount(1);
         expect(exchange).to.have.callCount(1);
+      });
+    });
+  });
+
+  describe('fareRules', () => {
+    it('should check function to be called', () => {
+      const fetch = sinon.spy(({ segments, passengers, fetchFareRules }) => {
+        expect(segments).to.be.an('array');
+        expect(segments).to.have.length(0);
+        expect(passengers).to.be.an('object'); // add one fake passenger
+        expect(passengers).to.have.all.keys('ADT');
+        expect(passengers.ADT).to.equal(1);
+        assert(fetchFareRules, 'fetchFareRules is necessary for underlying call');
+
+        return Promise.resolve([
+          {
+            RuleNumber: '123',
+            Source: 'ATPC',
+            TariffNumber: 'Test',
+            Rules: [],
+          },
+        ]);
+      });
+
+      const airService = () => ({
+        lookupFareRules: fetch,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      const service = createAirService({ auth });
+
+      return service.fareRules({
+        segments: [],
+        passengers: {
+          ADT: 1,
+        },
+      }).then(() => {
+        expect(fetch).to.have.callCount(1);
       });
     });
   });

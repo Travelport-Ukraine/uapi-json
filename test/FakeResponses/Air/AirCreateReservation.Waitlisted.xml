@@ -1,0 +1,54 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <SOAP:Fault>
+            <faultcode>Server.Business</faultcode>
+            <faultstring>General air service Error.</faultstring>
+            <detail>
+                <air:AvailabilityErrorInfo xmlns:air="http://www.travelport.com/schema/air_v36_0"
+                                           xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0">
+                    <common_v36_0:Code>3000</common_v36_0:Code>
+                    <common_v36_0:Service>AIRSVC</common_v36_0:Service>
+                    <common_v36_0:Type>Business</common_v36_0:Type>
+                    <common_v36_0:Description>General air service Error.</common_v36_0:Description>
+                    <common_v36_0:TransactionId>E64EEED50A0764783F7D287DEAB3612C</common_v36_0:TransactionId>
+                    <common_v36_0:TraceId/>
+                    <air:AirSegmentError>
+                        <air:AirSegment Key="9VYj923R2BKAVCf4FAAAAA==" Group="0" Carrier="FZ" FlightNumber="744"
+                                        Origin="IEV" Destination="DXB" DepartureTime="2017-11-10T23:15:00.000+02:00"
+                                        ArrivalTime="2017-11-11T06:50:00.000+04:00" ClassOfService="R"
+                                        ChangeOfPlane="false" OptionalServicesIndicator="false"/>
+                        <air:ErrorMessage>*UNABLE - FLIGHT NOT FOUND IN VENDOR SYSTEM*</air:ErrorMessage>
+                    </air:AirSegmentError>
+                    <air:AirSegmentError>
+                        <air:AirSegment Key="9VYj923R2BKAXCf4FAAAAA==" Group="0" Carrier="FZ" FlightNumber="521"
+                                        Origin="DXB" Destination="BKK" DepartureTime="2017-11-11T16:20:00.000+04:00"
+                                        ArrivalTime="2017-11-12T01:25:00.000+07:00" ClassOfService="R"
+                                        ChangeOfPlane="false" OptionalServicesIndicator="false"/>
+                        <air:ErrorMessage>*0 AVAIL/WL CLOSED*</air:ErrorMessage>
+                    </air:AirSegmentError>
+                    <air:AirSegmentError>
+                        <air:AirSegment Key="9VYj923R2BKAbCf4FAAAAA==" Group="1" Carrier="FZ" FlightNumber="727"
+                                        Origin="DXB" Destination="IEV" DepartureTime="2017-11-20T09:20:00.000+04:00"
+                                        ArrivalTime="2017-11-20T13:25:00.000+02:00" ClassOfService="R"
+                                        ChangeOfPlane="false" OptionalServicesIndicator="false"/>
+                        <air:ErrorMessage>*0 AVAIL/WL CLOSED*</air:ErrorMessage>
+                    </air:AirSegmentError>
+                    <air:AirSegmentError>
+                        <air:AirSegment Key="9VYj923R2BKAXCf4FAAAAA==" Group="0" Carrier="FZ" FlightNumber="521"
+                                        Origin="DXB" Destination="BKK" DepartureTime="2017-11-11T16:20:00.000+04:00"
+                                        ArrivalTime="2017-11-12T01:25:00.000+07:00" ClassOfService="R"
+                                        ChangeOfPlane="false" OptionalServicesIndicator="false"/>
+                        <air:ErrorMessage>Booking is not complete due to waitlisted segment</air:ErrorMessage>
+                    </air:AirSegmentError>
+                    <air:AirSegmentError>
+                        <air:AirSegment Key="9VYj923R2BKAbCf4FAAAAA==" Group="1" Carrier="FZ" FlightNumber="727"
+                                        Origin="DXB" Destination="IEV" DepartureTime="2017-11-20T09:20:00.000+04:00"
+                                        ArrivalTime="2017-11-20T13:25:00.000+02:00" ClassOfService="R"
+                                        ChangeOfPlane="false" OptionalServicesIndicator="false"/>
+                        <air:ErrorMessage>Booking is not complete due to waitlisted segment</air:ErrorMessage>
+                    </air:AirSegmentError>
+                </air:AvailabilityErrorInfo>
+            </detail>
+        </SOAP:Fault>
+    </SOAP:Body>
+</SOAP:Envelope>

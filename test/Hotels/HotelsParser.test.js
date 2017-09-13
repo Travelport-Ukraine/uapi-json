@@ -1,6 +1,7 @@
+import ParserUapi from '../../src/Request/uapi-parser';
+
 const assert = require('assert');
 const fs = require('fs');
-const ParserUapi = require('../../src/Request/uapi-parser');
 const hotelsParser = require('../../src/Services/Hotels/HotelsParser');
 
 const xmlFolder = `${__dirname}/../FakeResponses/Hotels`;

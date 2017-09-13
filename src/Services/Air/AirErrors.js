@@ -32,6 +32,7 @@ Object.assign(AirValidationError, createErrorsList({
   DeliveryInformation: 'Missing of delivery information fields. See data.',
   ReservationLocator: 'Missing uapi_reservation_locator in request. See data.',
   ExchangeToken: 'Missing exchangeToken in request. See data.',
+  CreditCardMissing: 'Missing creditCard in request. See data.',
 }, AirValidationError));
 
 export const GdsValidationError = createErrorClass(
@@ -84,6 +85,7 @@ export const AirRuntimeError = createErrorClass(
 );
 Object.assign(AirRuntimeError, createErrorsList({
   SegmentBookingFailed: 'Failed to book on or more segments',
+  SegmentWaitlisted: 'One or more segments is waitlisted, not allowed',
   TicketingFailed: 'Ticketing failed',
   TicketingFoidRequired: 'FOID required for the PC selected',
   TicketingResponseMissing: 'Response message text doesn\'t contain OK:Ticket issued',

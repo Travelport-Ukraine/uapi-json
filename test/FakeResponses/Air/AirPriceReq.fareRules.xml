@@ -1,0 +1,556 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AirPriceRsp TraceId="test" TransactionId="B659C23D0A0759C48942E0BF717F834D" ResponseTime="3106" xmlns:air="http://www.travelport.com/schema/air_v36_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0">
+            <common_v36_0:ResponseMessage Code="710401" Type="Warning" ProviderCode="1G">Taxes returned at the FareInfo level are for informational purposes only, and may differ from those returned at the Itinerary/Passenger Type levels.</common_v36_0:ResponseMessage>
+            <common_v36_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">The price is informational and can only be stored manually.</common_v36_0:ResponseMessage>
+            <air:AirItinerary>
+                <air:AirSegment Key="hYdWSVCYSHaGarlvxCFZXA==" Group="0" Carrier="KL" FlightNumber="1382" ProviderCode="1G" Origin="KBP" Destination="AMS" DepartureTime="2016-07-01T05:45:00.000+03:00" ArrivalTime="2016-07-01T07:35:00.000+02:00" FlightTime="170" TravelTime="170" Distance="1119" ClassOfService="T" ChangeOfPlane="false" OptionalServicesIndicator="true" AvailabilitySource="S" PolledAvailabilityOption="O and D cache or polled status used with different local status" AvailabilityDisplayType="Fare Specific Fare Quote Unbooked">
+                    <air:FlightDetails Key="BBBaqJtJTHeG3R3QzOT78g==" Origin="KBP" Destination="AMS" DepartureTime="2016-07-01T05:45:00.000+03:00" ArrivalTime="2016-07-01T07:35:00.000+02:00" FlightTime="170" TravelTime="170" Distance="1119"/>
+                </air:AirSegment>
+                <air:AirSegment Key="tSDAYAJUStOa0baNH7CzNQ==" Group="1" Carrier="KL" FlightNumber="1233" ProviderCode="1G" Origin="AMS" Destination="CDG" DepartureTime="2016-07-01T12:30:00.000+02:00" ArrivalTime="2016-07-01T13:45:00.000+02:00" FlightTime="75" TravelTime="75" Distance="247" ClassOfService="T" ChangeOfPlane="false" OptionalServicesIndicator="true" AvailabilitySource="S" PolledAvailabilityOption="O and D cache or polled status used with different local status" AvailabilityDisplayType="Fare Specific Fare Quote Unbooked">
+                    <air:FlightDetails Key="38ozdMnjTC6b8/mWcJn7bg==" Origin="AMS" Destination="CDG" DepartureTime="2016-07-01T12:30:00.000+02:00" ArrivalTime="2016-07-01T13:45:00.000+02:00" FlightTime="75" TravelTime="75" Distance="247"/>
+                </air:AirSegment>
+            </air:AirItinerary>
+            <air:AirPriceResult>
+                <air:AirPricingSolution Key="P2MKOz6lQLesNFiw47RGcg==" TotalPrice="UAH8909" BasePrice="USD314.00" ApproximateTotalPrice="UAH8909" ApproximateBasePrice="UAH7970" EquivalentBasePrice="UAH7970" Taxes="UAH939" ApproximateTaxes="UAH939" QuoteDate="2016-05-16">
+                    <air:AirSegmentRef Key="hYdWSVCYSHaGarlvxCFZXA=="/>
+                    <air:AirSegmentRef Key="tSDAYAJUStOa0baNH7CzNQ=="/>
+                    <air:AirPricingInfo Key="7WFKqC/wRH+4JZ989QmI4Q==" TotalPrice="UAH8909" BasePrice="USD314.00" ApproximateTotalPrice="UAH8909" ApproximateBasePrice="UAH7970" EquivalentBasePrice="UAH7970" ApproximateTaxes="UAH939" Taxes="UAH939" LatestTicketingTime="2016-05-23T23:59:00.000+03:00" PricingMethod="Guaranteed" IncludesVAT="false" ETicketability="Yes" PlatingCarrier="KL" ProviderCode="1G">
+                        <air:FareInfo Key="MxjLUjVJQUWvBrD6X3uIbQ==" FareBasis="T7WKWUA" PassengerTypeCode="ADT" Origin="KBP" Destination="CDG" EffectiveDate="2016-05-17T00:36:00.000+03:00" DepartureDate="2016-07-01" Amount="UAH7970" NotValidBefore="2016-07-01" NotValidAfter="2016-07-01" TaxAmount="UAH939.00">
+                            <common_v36_0:Endorsement Value="NONENDO/NONREF"/>
+                            <air:FareRuleKey FareInfoRef="MxjLUjVJQUWvBrD6X3uIbQ==" ProviderCode="1G">6UUVoSldxwguAjerT1zTqcbKj3F8T9EyxsqPcXxP0TIjSPOlaHfQe5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA+sf5EYPtqNHM3ExqSoG050YrFZ2txsEb9H3UAmOMhkSQu0ZscBMSQ6OEAXXLugEWpuPVwn/pjQ0/woAkFsEj4laOxvxXbSjgBll6FxyIC6cYuAWfcH2w92IEQfz1U0L74i+OmnuOQqbpDPMn48bBn3qkp0FEw0raOCbZ1nsUQQBNiYoiAk5NpyB9hn26g2z+uaeJIc23zoev4Xvb2u1Qx+/he9va7VDH7+F729rtUMfv4Xvb2u1Qx+/he9va7VDH8ONhV50oNexly5qxZ3qLwMUu+QC5Q/Q9gU2i5vKx7Q6ILj4xa7lLkoTkeKXc2PFjBqICTKtPV+75GwF8kqQiiA=</air:FareRuleKey>
+                            <air:Brand BrandFound="false" UpSellBrandFound="false"/>
+                        </air:FareInfo>
+                        <air:BookingInfo BookingCode="T" CabinClass="Economy" FareInfoRef="MxjLUjVJQUWvBrD6X3uIbQ==" SegmentRef="hYdWSVCYSHaGarlvxCFZXA=="/>
+                        <air:BookingInfo BookingCode="T" CabinClass="Economy" FareInfoRef="MxjLUjVJQUWvBrD6X3uIbQ==" SegmentRef="tSDAYAJUStOa0baNH7CzNQ=="/>
+                        <air:TaxInfo Category="UA" Amount="UAH102" Key="1zd0OHPtRiy6RiqfMmJGaA=="/>
+                        <air:TaxInfo Category="UD" Amount="UAH51" Key="Z+ewpUTaSnyK5S4XAFB6ew=="/>
+                        <air:TaxInfo Category="YK" Amount="UAH432" Key="mRdAHUelTPuLBoXXXn6e0A=="/>
+                        <air:TaxInfo Category="CJ" Amount="UAH171" Key="IozJi+5wTyePmpb18PrTgA=="/>
+                        <air:TaxInfo Category="RN" Amount="UAH168" Key="Zd5mqwGQSvODJAvABHomLw=="/>
+                        <air:TaxInfo Category="VV" Amount="UAH15" Key="UcdlAJtsTvmDg/Pnd3o2rg=="/>
+                        <air:FareCalc>IEV KL X/AMS KL PAR 314.00T7WKWUA NUC314.00END ROE1.0</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty>
+                            <air:Amount>UAH2538.0</air:Amount>
+                        </air:ChangePenalty>
+                        <air:BaggageAllowances>
+                            <air:BaggageAllowanceInfo TravelerType="ADT" Origin="IEV" Destination="PAR" Carrier="KL">
+                                <air:URLInfo>
+                                    <air:URL>MYTRIPANDMORE.COM/BAGGAGEDETAILSKL.BAGG</air:URL>
+                                </air:URLInfo>
+                                <air:TextInfo>
+                                    <air:Text>1P</air:Text>
+                                    <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                                </air:TextInfo>
+                                <air:BagDetails ApplicableBags="1stChecked" BasePrice="UAH0" ApproximateBasePrice="UAH0" TotalPrice="UAH0" ApproximateTotalPrice="UAH0">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                                <air:BagDetails ApplicableBags="2ndChecked" BasePrice="UAH2172" ApproximateBasePrice="UAH2172" TotalPrice="UAH2172" ApproximateTotalPrice="UAH2172">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO100LB/45KG AND UPTO62LI/158LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                            </air:BaggageAllowanceInfo>
+                            <air:CarryOnAllowanceInfo Origin="IEV" Destination="AMS" Carrier="KL">
+                                <air:TextInfo>
+                                    <air:Text>1P</air:Text>
+                                </air:TextInfo>
+                                <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="UAH0" ApproximateBasePrice="UAH0" TotalPrice="UAH0" ApproximateTotalPrice="UAH0">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:CarryOnDetails>
+                            </air:CarryOnAllowanceInfo>
+                            <air:CarryOnAllowanceInfo Origin="AMS" Destination="PAR" Carrier="KL">
+                                <air:TextInfo>
+                                    <air:Text>1P</air:Text>
+                                </air:TextInfo>
+                                <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" TotalPrice="EUR0.00">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:CarryOnDetails>
+                            </air:CarryOnAllowanceInfo>
+                        </air:BaggageAllowances>
+                    </air:AirPricingInfo>
+                    <air:FareNote Key="fL5PSXf6Rfe//OnT6EMcFA==">RATE USED IN EQU TOTAL IS BSR 1USD - 25.38UAH</air:FareNote>
+                    <air:FareNote Key="VhAHF1HATyGLpmSFVi3rIw==">LAST DATE TO PURCHASE TICKET: 23MAY16</air:FareNote>
+                    <air:FareNote Key="XaC/GPdqQlK2201QrTGvnA==">TICKETING AGENCY 3AQ0</air:FareNote>
+                    <air:FareNote Key="9gOW+XuHT8eEugvD37jxJg==">DEFAULT PLATING CARRIER KL</air:FareNote>
+                    <air:FareNote Key="QdDA/GVSQ0Gt33fb79ws7A==">FARE HAS A PLATING CARRIER RESTRICTION</air:FareNote>
+                    <air:FareNote Key="oSAVJDrgSzWVo/uz6K9LyQ==">E-TKT REQUIRED</air:FareNote>
+                    <air:FareNote Key="SoiqRMhCRkWvNV0Ctj8r7g==">TICKETING FEES MAY APPLY</air:FareNote>
+                    <air:OptionalServices>
+                        <air:OptionalServicesTotal/>
+                        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="UAH406" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="551300" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="gwtYA8UPSxmHszCRoEdzmw==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH406" ApproximateTotalPrice="UAH406" ApproximateBasePrice="UAH406" Taxes="UAH0" OptionalServicesRuleRef="JdTPrzQcRzSi/YtoexKQUQ==">
+                            <common_v36_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT">
+                                <common_v36_0:SeatAttributes>
+                                    <common_v36_0:SeatAttribute Value="O"/>
+                                </common_v36_0:SeatAttributes>
+                            </common_v36_0:ServiceData>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>CHARGEABLE SEAT</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <common_v36_0:Remark>KL 1382 - UAH406.00 PER PASSENGER CHARGEABLE SEAT</common_v36_0:Remark>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI5" CommercialName="CHARGEABLE SEAT">
+                                <air:Title Type="External" LanguageCode="EN">CHARGEABLE SEAT</air:Title>
+                                <air:AirSegmentRef Key="hYdWSVCYSHaGarlvxCFZXA=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="UAH232" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="551225" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="Pj3mVuGqQcumOe4cur5H4w==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH232" ApproximateTotalPrice="UAH232" ApproximateBasePrice="UAH232" Taxes="UAH0" OptionalServicesRuleRef="Cbh3+6NpQDahkYk/hNP3PQ==">
+                            <common_v36_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" TravelerType="ADT">
+                                <common_v36_0:SeatAttributes>
+                                    <common_v36_0:SeatAttribute Value="O"/>
+                                </common_v36_0:SeatAttributes>
+                            </common_v36_0:ServiceData>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>CHARGEABLE SEAT</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <common_v36_0:Remark>KL 1233 - UAH232.00 PER PASSENGER CHARGEABLE SEAT</common_v36_0:Remark>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI6" CommercialName="CHARGEABLE SEAT">
+                                <air:Title Type="External" LanguageCode="EN">CHARGEABLE SEAT</air:Title>
+                                <air:AirSegmentRef Key="tSDAYAJUStOa0baNH7CzNQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="UAH1304" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="2018500" ServiceSubCode="0CC" SSRCode="ABAG" IssuanceReason="C" Key="5G8A2gosSPKJgQNHI2Nq0g==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH1304" ApproximateTotalPrice="UAH1304" ApproximateBasePrice="UAH1304" Taxes="UAH0" OptionalServicesRuleRef="HVeba16yTP6djNEhs+/Opg==">
+                            <common_v36_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>1ST ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI4" CommercialName="1ST ADDITIONAL BAG">
+                                <air:Title Type="External" LanguageCode="EN">1ST ADDITIONAL BAG</air:Title>
+                                <air:AirSegmentRef Key="hYdWSVCYSHaGarlvxCFZXA=="/>
+                                <air:AirSegmentRef Key="tSDAYAJUStOa0baNH7CzNQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="UAH1304" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="139500" ServiceSubCode="0CD" SSRCode="BBAG" IssuanceReason="C" Key="kuuQN2yyQJqfQOBDTFg6pw==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH1304" ApproximateTotalPrice="UAH1304" ApproximateBasePrice="UAH1304" Taxes="UAH0" OptionalServicesRuleRef="2Qva4B9iT/mM+EV4dudoyw==">
+                            <common_v36_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>2ND ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI1" CommercialName="2ND ADDITIONAL BAG">
+                                <air:Title Type="External" LanguageCode="EN">2ND ADDITIONAL BAG</air:Title>
+                                <air:AirSegmentRef Key="hYdWSVCYSHaGarlvxCFZXA=="/>
+                                <air:AirSegmentRef Key="tSDAYAJUStOa0baNH7CzNQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="UAH1304" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="140000" ServiceSubCode="0CE" SSRCode="CBAG" IssuanceReason="C" Key="FtXCX+uSSSSepIYRQ2al4Q==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH1304" ApproximateTotalPrice="UAH1304" ApproximateBasePrice="UAH1304" Taxes="UAH0" OptionalServicesRuleRef="G3DNwsG6TvCbN/mBHEgtCQ==">
+                            <common_v36_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>3RD OR MORE ADDITIONAL BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="3">Per Item</air:FeeApplication>
+                            <air:BrandingInfo Key="BI2" CommercialName="3RD OR MORE ADDITIONAL BAG">
+                                <air:Title Type="External" LanguageCode="EN">3RD OR MORE ADDITIONAL BAG</air:Title>
+                                <air:AirSegmentRef Key="hYdWSVCYSHaGarlvxCFZXA=="/>
+                                <air:AirSegmentRef Key="tSDAYAJUStOa0baNH7CzNQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalService Type="Baggage" TotalPrice="UAH290" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="102250" ServiceSubCode="0CF" SSRCode="IBAG" IssuanceReason="C" Key="CAwQRoCCS+uz47w70+J3rg==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH290" ApproximateTotalPrice="UAH290" ApproximateBasePrice="UAH290" Taxes="UAH0" OptionalServicesRuleRef="EnPgnjOyS5O1sMtK7W6n3w==">
+                            <common_v36_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" TravelerType="ADT"/>
+                            <common_v36_0:ServiceInfo>
+                                <common_v36_0:Description>1ST ADDITIONAL IVORY BAG</common_v36_0:Description>
+                            </common_v36_0:ServiceInfo>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI3" CommercialName="1ST ADDITIONAL IVORY BAG">
+                                <air:Title Type="External" LanguageCode="EN">1ST ADDITIONAL IVORY BAG</air:Title>
+                                <air:AirSegmentRef Key="tSDAYAJUStOa0baNH7CzNQ=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalServiceRules Key="JdTPrzQcRzSi/YtoexKQUQ==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="Cbh3+6NpQDahkYk/hNP3PQ==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="HVeba16yTP6djNEhs+/Opg==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="2Qva4B9iT/mM+EV4dudoyw==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="G3DNwsG6TvCbN/mBHEgtCQ==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                        <air:OptionalServiceRules Key="EnPgnjOyS5O1sMtK7W6n3w==">
+                            <common_v36_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                    </air:OptionalServices>
+                </air:AirPricingSolution>
+                <air:FareRule FareInfoRef="MxjLUjVJQUWvBrD6X3uIbQ==" RuleNumber="UATM" Source="ATPCO" TariffNumber="004">
+                    <air:FareRuleLong Category="0" Type="RULE">RULE - 021/UATM
+                        FOR ONE WAY FARES   NOTE - RULE EU50 IN IPRG APPLIES
+                        FOR ONE WAY FARES
+                        KLM STANDARD RULE - ECONOMY CLASS FARES
+                        APPLICATION
+                        AREA
+                        THESE FARES APPLY
+                        BETWEEN EUROPE AND TLV
+                        BETWEEN EUROPE AND RUSSIA (EAST OF THE URALS)
+                        BETWEEN EUROPE AND EUROPE.
+                        CLASS OF SERVICE
+                        THESE FARES APPLY FOR ECONOMY CLASS SERVICE.
+                        TYPES OF TRANSPORTATION
+                        THIS RULE GOVERNS ONE-WAY FARES.
+                        FARES GOVERNED BY THIS RULE CAN BE USED TO CREATE
+                        ROUND-TRIP/CIRCLE-TRIP/OPEN-JAW JOURNEYS.
+                        CAPACITY LIMITATIONS
+                        THE CARRIER SHALL LIMIT THE NUMBER OF PASSENGERS CARRIED
+                        ON ANY ONE FLIGHT AT FARES GOVERNED BY THIS RULE AND SUCH
+                        FARES WILL NOT NECESSARILY BE AVAILABLE ON ALL FLIGHTS.
+                        THE NUMBER OF SEATS WHICH THE CARRIER SHALL MAKE
+                        AVAILABLE ON A GIVEN FLIGHT WILL BE DETERMINED BY THE
+                        CARRIERS BEST JUDGMENT</air:FareRuleLong>
+                    <air:FareRuleLong Category="4" Type="RULE">UNLESS OTHERWISE SPECIFIED   NOTE - RULE EU04 IN IPRG
+                        APPLIES
+                        BETWEEN UKRAINE AND EUROPE
+                        IF THE FARE COMPONENT INCLUDES TRAVEL WITHIN UKRAINE
+                        THEN THAT TRAVEL MUST NOT BE ON
+                        ONE OR MORE OF THE FOLLOWING
+                        ANY PS FLIGHT OPERATED BY VV.</air:FareRuleLong>
+                    <air:FareRuleLong Category="5" Type="RULE">BETWEEN UKRAINE AND EUROPE   NOTE - RULE EU06 IN IPRG APPLIES
+                        WITHIN EUROPE FOR T- TYPE FARES
+                        RESERVATIONS FOR ALL SECTORS ARE REQUIRED AT LEAST 10 DAYS
+                        BEFORE DEPARTURE.
+                        WHEN RESERVATIONS ARE MADE AT LEAST 11 DAYS BEFORE
+                        DEPARTURE TICKETING MUST BE COMPLETED WITHIN 7 DAYS AFTER
+                        RESERVATIONS ARE MADE OR AT LEAST 10 DAYS BEFORE DEPARTURE
+                        WHICHEVER IS EARLIER.
+                        OR - RESERVATIONS FOR ALL SECTORS ARE REQUIRED AT LEAST 10
+                        DAYS BEFORE DEPARTURE.
+                        TICKETING MUST BE COMPLETED WITHIN 24 HOURS AFTER
+                        RESERVATIONS ARE MADE OR AT LEAST 10 DAYS BEFORE
+                        DEPARTURE WHICHEVER IS EARLIER.
+                        NOTE -
+                        --------------------------------------------------
+                        - FAREQUOTE GENERATES A LAST TICKETING DATE WHICH-
+                        - MAY DIFFER FROM THE DATE MENTIONED IN THE PNR. -
+                        - THE MOST RESTRICTIVE DATE PREVAILS.            -
+                        --------------------------------------------------</air:FareRuleLong>
+                    <air:FareRuleLong Category="7" Type="RULE">FOR  FC TYPE FARES
+                        TRAVEL FROM LAST STOPOVER MUST COMMENCE NO LATER THAN 6
+                        MONTHS AFTER DEPARTURE FROM FARE ORIGIN.</air:FareRuleLong>
+                    <air:FareRuleLong Category="8" Type="RULE">NONE FOR  FC TYPE FARES</air:FareRuleLong>
+                    <air:FareRuleLong Category="9" Type="RULE">UNLESS OTHERWISE SPECIFIED
+                        UNLIMITED TRANSFERS PERMITTED ON THE FARE COMPONENT
+                        FARE BREAK SURFACE SECTORS NOT PERMITTED AND EMBEDDED
+                        SURFACE SECTORS PERMITTED ON THE FARE COMPONENT.
+                        NOTE -
+                        OR
+                        AS PER ROUTING REQUIREMENTS</air:FareRuleLong>
+                    <air:FareRuleLong Category="10" Type="RULE">FOR ONE WAY FARES
+                        SINGLE/DOUBLE OPEN JAWS/ROUND TRIPS/CIRCLE TRIPS NOT
+                        PERMITTED.
+                        APPLICABLE ADD-ON CONSTRUCTION IS ADDRESSED IN
+                        MISCELLANEOUS PROVISIONS - CATEGORY 23.
+                        END-ON-END
+                        END-ON-END COMBINATIONS PERMITTED WITH DOMESTIC FARES
+                        BUT ARE NOT PERMITTED WITH INTERNATIONAL FARES. VALIDATE
+                        ALL FARE COMPONENTS. FARES MUST BE SHOWN SEPARATELY ON
+                        THE TICKET. TRAVEL MUST BE VIA THE POINT OF COMBINATION.
+                        SIDE TRIPS PERMITTED.</air:FareRuleLong>
+                    <air:FareRuleLong Category="12" Type="RULE">UNLESS OTHERWISE SPECIFIED   NOTE - RULE XX12 IN IPRG100
+                        APPLIES</air:FareRuleLong>
+                    <air:FareRuleLong Category="14" Type="RULE">UNLESS OTHERWISE SPECIFIED
+                        VALID FOR TRAVEL COMMENCING ON/AFTER 01NOV 16.</air:FareRuleLong>
+                    <air:FareRuleLong Category="15" Type="RULE">UNLESS OTHERWISE SPECIFIED
+                        IF THE FARE COMPONENT INCLUDES TRAVEL BETWEEN AREA 3 AND
+                        EUROPE ON
+                        ONE OR MORE OF THE FOLLOWING
+                        ANY 9W FLIGHT OPERATED BY 9W
+                        TICKETS MUST BE ISSUED ON KL OR 9W AND MAY NOT BE SOLD
+                        IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        TICKETS MUST BE ISSUED ON KL OR AF AND MAY NOT BE SOLD IN
+                        VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR DL AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR A9 AND MAY NOT BE
+                        SOLD IN RUSSIA/RUSSIA (EAST OF THE URALS)/EGYPT/
+                        NIGERIA/VENEZUELA/ANGOLA
+                        OR - TICKETS MUST BE ISSUED ON KL OR A9 AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR AE AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR AM AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR AZ AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR B2 AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR BP AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR CM AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR CY AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR CZ AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR FB AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR FV AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR J2 AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR JU AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR KE AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR KQ AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR LG AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR ME AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR MH AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR MK AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR MU AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR OK AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR OV AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR PS AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR PX AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR QF AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR RO AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR SB AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR SU AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR SV AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR UX AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR WF AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        OR - TICKETS MUST BE ISSUED ON KL OR 7I AND MAY NOT BE
+                        SOLD IN VENEZUELA/ANGOLA/EGYPT/NIGERIA
+                        NOTE -
+                        THE FARE THAT APPLIES ON THE DATE OF PURCHASE
+                        IS ONLY VALID FOR THE ENTIRE ITINERARY AND THE
+                        SPECIFIC TRAVEL DATES MENTIONED ON THE TICKET.
+                        ANY MODIFICATION MAY REQUIRE THE PAYMENT OF AN
+                        ADDITIONAL AMOUNT.
+                        ----------------------------------------------
+                        --FULL AND SEQUENTIAL USE OF COUPONS--
+                        THIS FARE IS ONLY VALID WHEN FLIGHT COUPONS ARE
+                        USED IN THE SAME ORDER AS SHOWN ON THE TICKET
+                        - IF ANY OF THE COUPONS IS NOT USED IN THE
+                        SEQUENCE SHOWN ON THE TICKET A FARE READJUSMENT
+                        WILL BE APPLIED AND THE FARE WILL BE RECALCULATED
+                        BASED ON THE NEW JOURNEY REQUESTED
+                        ---------------------------------------------
+                        ONLY KL/AF/DL AIRPORT TICKET OFFICES ARE ALLOWED
+                        TO PROCESS FARE RECALCULATION AND REISSUE AS
+                        DESCRIBED IN GGAIRKL OUT OF SEQUENCE</air:FareRuleLong>
+                    <air:FareRuleLong Category="16" Type="RULE">UNLESS OTHERWISE SPECIFIED   NOTE - RULE UA31 IN IPRG
+                        APPLIES
+                        BETWEEN UKRAINE AND EUROPE FOR T- TYPE FARES
+                        CHANGES
+                        BEFORE DEPARTURE
+                        CHARGE USD 100.00.
+                        CHILD/INFANT DISCOUNTS APPLY.
+                        NOTE -
+                        A CHANGE IS A ROUTING / DATE / FLIGHT MODIFICATION
+                        WHEN MORE THAN ONE FARE COMPONENT IS BEING CHANGED
+                        THE HIGHEST PENALTY OF ALL CHANGED FARE COMPONENTS
+                        WILL APPLY
+                        ////
+                        // BEFORE OUTBOUND DEPARTURE //
+                        ////
+                        NEW RESERVATION AND REISSUANCE MUST BE MADE AT THE
+                        SAME TIME PRIOR TO DEPARTURE OF THE ORIGINALLY
+                        SCHEDULED FLIGHT. IF CHANGE DOES NOT OCCUR ON THE
+                        FIRST FARE COMPONENT OF THE JOURNEY NEW FARE
+                        WILL BE RECALCULATED USING FARES IN EFFECT ON THE
+                        PREVIOUS TICKETING DATE AND UNDER FOLLOWING
+                        CONDITIONS
+                        - IF SAME BOOKING CLASS IS USED NEW FARE MAY BE
+                        LOWER OR EQUAL OR HIGHER THAN PREVIOUS AND
+                        A / MUST COMPLY WITH ALL PROVISIONS OF THE
+                        ORIGINALLY TICKETED FARE
+                        B / OR MUST COMPLY WITH ALL PROVISIONS OF THE
+                        NEW FARE BEING APPLIED
+                        - IF A DIFFERENT BOOKING CLASS IS USED NEW FARE
+                        MAY BE EQUAL OR HIGHER THAN PREVIOUS AND
+                        A / MUST COMPY WITH ALL PROVISIONS OF THE
+                        NEW FARE BEING APPLIED
+                        -----------------------
+                        NEW RESERVATION AND REISSUANCE MUST BE MADE AT THE
+                        SAME TIME PRIOR TO DEPARTURE OF THE ORIGINALLY
+                        SCHEDULED FLIGHT. WHEN CHANGE OCCURS ON THE FIRST
+                        FARE COMPONENT OF THE JOURNEY ONLY OR ON THE
+                        FIRST FARE COMPONENT AND OTHER FARE COMPONENT OF
+                        THE JOURNEY NEW FARE WILL BE RECALCULATED USING
+                        FARES IN EFFECT ON DATE OF REISSUE AND UNDER
+                        FOLLOWING CONDITIONS
+                        - IF SAME BOOKING CLASS IS USED NEW FARE MAY BE
+                        LOWER OR EQUAL OR HIGHER THAN PREVIOUS AND
+                        A / MUST COMPLY WITH ALL PROVISIONS OF THE
+                        ORIGINALLY TICKETED FARE
+                        B / OR MUST COMPLY WITH ALL PROVISIONS OF THE
+                        NEW FARE BEING APPLIED
+                        - IF A DIFFERENT BOOKING CLASS IS USED NEW FARE
+                        MAY BE EQUAL OR HIGHER THAN PREVIOUS AND
+                        A / MUST COMPLY WITH ALL PROVISIONS OF THE
+                        NEW FARE BEING APPLIED
+                        CHANGES NOT PERMITTED IN CASE OF NO-SHOW.
+                        NOTE -
+                        //  BEFORE OUTBOUND DEPARTURE  //
+                        //  NO SHOW  //
+                        IN THE EVENT OF NO SHOW - WHEN CHANGES ARE
+                        REQUESTED AFTER DEPARTURE OF THE ORIGINALLY
+                        SCHEDULED FLIGHT -  CHANGES ARE NOT PERMITTED AND
+                        CANCELLATION RULES SHALL APPLY
+                        AFTER DEPARTURE
+                        CHARGE USD 100.00.
+                        CHILD/INFANT DISCOUNTS APPLY.
+                        NOTE -
+                        /////
+                        // AFTER OUTBOUND DEPARTURE //
+                        ////
+                        NEW RESERVATION AND REISSUANCE MUST BE MADE AT THE
+                        SAME TIME. NEW FARE WILL BE RECALCULATED USING
+                        FARES IN EFFECT ON THE PREVIOUS TICKETING DATE
+                        AND UNDER FOLLOWING CONDITIONS
+                        - IF SAME BOOKING CLASS IS USED NEW FARE MAY BE
+                        LOWER OR EQUAL OR HIGHER THAN PREVIOUS AND
+                        A / MUST COMPLY WITH ALL PROVISIONS OF THE
+                        ORIGINALLY TICKETED FARE
+                        B / OR MUST COMPLY WITH ALL PROVISIONS OF THE
+                        NEW FARE BEING APPLIED
+                        - IF A DIFFERENT BOOKING CLASS IS USED NEW FARE
+                        MAY BE EQUAL OR HIGHER THAN PREVIOUS AND
+                        A / MUST COMPLY WITH ALL PROVISIONS OF THE NEW
+                        FARE BEING APPLIED
+                        CANCELLATIONS
+                        ANY TIME
+                        TICKET IS NON-REFUNDABLE IN CASE OF CANCEL.
+                        NOTE -
+                        ANY TIME
+                        CANCELLATIONS RULES APPLY BY FARE COMPONENT
+                        WHEN COMBINING A REFUNDABLE TICKET WITH A
+                        NON REFUNDABLE TICKET PROVISIONS WILL APPLY
+                        AS FOLLOWS
+                        - THE AMOUNT PAID ON THE REFUNDABLE FARE
+                        COMPONENT WILL BE REFUNDED UPON PAYMENT
+                        OF THE PENALTY AMOUNT IF APPLICABLE
+                        - THE AMOUNT PAID ON THE NON REFUNDABLE
+                        FARE COMPONENT WILL NOT BE REFUNDED
+                        --------------------------------------------------
+                        FOR NON REFUNDABLE TICKETS THE YQ/YR CARRIER
+                        IMPOSED SURCHARGE WILL NOT BE REFUNDED
+                        -----------------------------
+                        FOR DEATH/ILLNESS WAIVERS SEE GGAIRKLDEATH/
+                        GGAIRKLHOSPITAL OR KLAF.BIZ/AFKL.BIZ</air:FareRuleLong>
+                    <air:FareRuleLong Category="18" Type="RULE">FOR INSTANT PURCHASE 2ND LEVEL FARES
+                        THE ORIGINAL AND THE REISSUED TICKET MUST BE ANNOTATED -
+                        NONENDO/NONREF - IN THE ENDORSEMENT BOX.</air:FareRuleLong>
+                    <air:FareRuleLong Category="19" Type="RULE">UNLESS OTHERWISE SPECIFIED   NOTE - RULE ST19 IN IPRG
+                        APPLIES
+                        WITHIN EUROPE FOR ONE WAY FARES
+                        ACCOMPANIED CHILD 2-11 - CHARGE 75 PERCENT OF THE FARE.
+                        TICKET DESIGNATOR - CH25.
+                        MUST BE ACCOMPANIED ON ALL FLIGHTS BY ADULT 18 OR OLDER
+                        OR - INFANT UNDER 2 WITH A SEAT - CHARGE 75 PERCENT OF THE
+                        FARE.
+                        TICKET DESIGNATOR - CH25.
+                        MUST BE ACCOMPANIED BY ADULT 18 OR OLDER.
+                        NOTE -
+                        1 ADULT PASSENGER AGED AT LEAST 18 YEARS MAY
+                        BE ACCOMPANIED BY A MAXIMUM OF 2 INFANTS OF WHO
+                        BOTH CAN BE BOOKED AS INFANT OCCUPYING A SEAT.
+                        OR - INFANT UNDER 2 WITHOUT A SEAT - CHARGE 10 PERCENT OF
+                        THE FARE.
+                        TICKET DESIGNATOR - IN90.
+                        MUST BE ACCOMPANIED ON ALL FLIGHTS BY ADULT 18 OR
+                        OLDER.
+                        NOTE -
+                        1 ADULT PASSENGER AGED AT LEAST 18 YEARS
+                        MAY BE ACCOMPANIED BY A MAXIMUM OF 2 INFANTS OF
+                        WHO 1 HAVE TO BE BOOKED AS INFANT OCCUPYING A SEAT
+                        -------------------------------------------------
+                        THE AGE LIMITS REFERRED TO IN THIS RULE SHALL BE
+                        THOSE IN EFFECT ON THE DATE OF COMMENCEMENT
+                        OF TRAVEL.
+                        EXCEPTION - INFANTS WHO REACH THEIR 2ND
+                        BIRTHDAY DURING THEIR TRAVEL WILL BE REQUIRED
+                        TO OCCUPY A SEAT ON THE OUTBOUND AND INBOUND
+                        FLIGHT.
+                        THE CHILD FARE NEEDS TO BE APPLIED FOR THE WHOLE
+                        JOURNEY
+                        IF THE FARE COMPONENT IS
+                        ON DIRECT FLIGHTS
+                        UNACCOMPANIED CHILD 5-14. ID REQUIRED - CHARGE 100 PERCENT
+                        OF THE FARE PLUS EUR 50.00.
+                        TICKET DESIGNATOR - UM0.
+                        NOTE -
+                        SERVICE CHARGE FOR UNACCOMPANIED CHILD ON DIRECT
+                        FLIGHTS
+                        OTHERWISE
+                        UNACCOMPANIED CHILD 5-14 - CHARGE 100 PERCENT OF THE FARE
+                        PLUS EUR 75.00.
+                        TICKET DESIGNATOR - UM0.
+                        NOTE -
+                        SERVICE CHARGE FOR UNACCOMPANIED CHILD ON
+                        INDIRECT FLIGHTS</air:FareRuleLong>
+                    <air:FareRuleLong Category="23" Type="RULE">UNLESS OTHERWISE SPECIFIED
+                        THIS FARE MAY BE USED FOR ADD-ON CONSTRUCTION. THIS FARE
+                        MUST NOT BE USED AS THE HIGH OR THE LOW FARE WHEN
+                        CALCULATING A DIFFERENTIAL. THIS FARE MUST NOT BE USED AS
+                        THE THROUGH FARE WHEN PRICING A FARE COMPONENT WITH A
+                        DIFFERENTIAL.
+                        NOTE -
+                        THE FARE THAT APPLIES ON THE DATE OF PURCHASE
+                        IS ONLY VALID FOR THE ENTIRE ITINERARY AND THE
+                        SPECIFIC TRAVEL DATES MENTIONED ON THE TICKET.
+                        ANY MODIFICATION MAY REQUIRE THE PAYMENT OF AN
+                        ADDITIONAL AMOUNT.
+                        FULL AND SEQUENTIAL USE OF FLIGHT COUPONS-
+                        THE TICKET/ OR ELECTRONIC TICKET / IS NOT VALID IF
+                        THE FIRST COUPON HAS NOT BEEN USED AND WILL NOT
+                        BE HONORED IF ALL THE COUPONS ARE NOT USED IN THE
+                        SEQUENCE PROVIDED IN THE TICKET / OR ELECTRONIC
+                        TICKET /
+                        IN THIS CASE THE FARE MUST BE RECALCULATED BASED
+                        ON THE FARE THAT WAS VALID ON THE DAY OF ORIGINAL
+                        TICKET ISSUE AND IN THE ORIGINAL BOOKING CLASS.
+                        REISSUING FEES MAY BE COLLECTED DEPENDING ON THE
+                        CONDITIONS OF THE FARE.</air:FareRuleLong>
+                    <air:FareRuleLong Category="31" Type="RULE">DO A CATEGORY 31 SPECIFIC TEXT ENTRY TO VIEW CONTENTS
+                        ALSO REFERENCE 16 PENALTIES - FOR ADDITIONAL CHANGE INFORMATION</air:FareRuleLong>
+                </air:FareRule>
+            </air:AirPriceResult>
+        </air:AirPriceRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

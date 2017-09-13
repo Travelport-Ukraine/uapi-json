@@ -32,8 +32,8 @@ const params = {
 AirService.shop(params)
   .then(
     (results) => {
-      const fromSegments = results['0'].Directions['0']['0'].Segments;
-      const toSegments = results['0'].Directions['1']['0'].Segments;
+      const fromSegments = results['0'].directions['0']['0'].segments;
+      const toSegments = results['0'].directions['1']['0'].segments;
 
       const book = {
         segments: fromSegments.concat(toSegments),
@@ -59,6 +59,7 @@ AirService.shop(params)
           country: 'Galactic Empire',
           city: 'Mos Eisley',
         },
+        allowWaitlist: true,
       };
 
       return AirService.book(book).then(

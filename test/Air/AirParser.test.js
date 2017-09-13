@@ -9,12 +9,13 @@ import {
   AirRuntimeError,
   AirParsingError,
 } from '../../src/Services/Air/AirErrors';
-import ParserUapi from '../../src/Request/uapi-parser';
+import { Parser as ParserUapi, errorsConfig } from '../../src/Request/uapi-parser';
 
 const xmlFolder = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:\d{2}/i;
 const ticketRegExp = /^\d{13}$/;
 const pnrRegExp = /^[A-Z0-9]{6}$/i;
+const amountRegExp = /[A-Z]{3}(?:\d+\.)?\d+/i;
 
 const checkLowSearchFareXml = (filename) => {
   const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
@@ -194,8 +195,8 @@ describe('#AirParser', () => {
         'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'ticketNumber',
         'platingCarrier', 'ticketingPcc', 'issuedAt',
         'fareCalculation', 'farePricingMethod', 'farePricingType',
-        'priceInfoDetailsAvailable',
-        'totalPrice', 'basePrice', 'equivalentBasePrice', 'taxes', 'taxesInfo',
+        'priceInfoDetailsAvailable', 'priceInfoAvailable',
+        'taxes', 'taxesInfo',
         'noAdc', 'isConjunctionTicket', 'passengers', 'tickets',
       ]);
       if (result.exchangedTickets) {
@@ -207,8 +208,8 @@ describe('#AirParser', () => {
           }
         );
       }
-      expect(result.uapi_ur_locator).to.match(/^[A-Z0-9]{6}$/i);
-      expect(result.uapi_reservation_locator).to.match(/^[A-Z0-9]{6}$/i);
+      expect(result.uapi_ur_locator).to.match(pnrRegExp);
+      expect(result.uapi_reservation_locator).to.match(pnrRegExp);
       expect(result.pnr).to.match(pnrRegExp);
       expect(result.ticketNumber).to.match(ticketRegExp);
       expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
@@ -217,10 +218,16 @@ describe('#AirParser', () => {
       expect(result.issuedAt).to.match(timestampRegexp);
       expect(result.fareCalculation).to.have.length.above(0);
       // Price info
+      expect(result.priceInfoAvailable).to.be.a('boolean');
       expect(result.priceInfoDetailsAvailable).to.be.a('boolean');
       expect(result).to.be.an('object');
-      expect(result.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
-      expect(result.basePrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
+      if (result.priceInfoAvailable) {
+        expect(result.totalPrice).to.match(amountRegExp);
+        expect(result.basePrice).to.match(amountRegExp);
+        if (result.equivalentBasePrice) {
+          expect(result.equivalentBasePrice).to.match(amountRegExp);
+        }
+      }
       expect(result.taxes).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
       expect(result.taxesInfo).to.be.an('array');
       result.taxesInfo.forEach(
@@ -320,6 +327,17 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_IT.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testTicket(result);
+        });
+    });
+
+    it('should correctly parse IT ticket without FQ', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_IT_noFQ.xml`).toString();
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
@@ -442,6 +460,7 @@ describe('#AirParser', () => {
             'fareCalculation',
             'farePricingMethod',
             'farePricingType',
+            'priceInfoAvailable',
             'priceInfoDetailsAvailable',
             'passengers',
             'totalPrice',
@@ -676,14 +695,45 @@ describe('#AirParser', () => {
     });
   });
 
+  describe('AIR_PRICE_FARE_RULES()', () => {
+    const test = (jsonResult) => {
+      assert(Array.isArray(jsonResult), 'should return an array of rule sets');
+      jsonResult.forEach((item) => {
+        assert(item.RuleNumber, 'No RuleNumber');
+        assert(item.Source, 'No Source');
+        assert(item.TariffNumber, 'No TariffNumber');
+        assert(Array.isArray(item.Rules), 'Rules should be an array');
+        item.Rules.forEach((ruleSting) => {
+          assert(typeof ruleSting === 'string', 'rule items should be strings');
+        });
+      });
+    };
+
+    it('should test parser for correct work', () => {
+      const uParser = new ParserUapi('air:AirPriceRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_PRICE_FARE_RULES_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirPriceReq.fareRules.xml`).toString();
+      const jsonSaved = JSON.parse(fs.readFileSync(`${xmlFolder}/AirPriceReq.fareRules.json`));
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        test(jsonResult);
+        // throw away nulls from JSON conversion
+        jsonSaved[0].Rules.filter((item, key) => {
+          if (!item) delete jsonSaved[0].Rules[key];
+        });
+        assert.deepEqual(jsonResult, jsonSaved, 'Result is not equivalent to expected');
+      }).catch(err => assert(false, 'Error during parsing ' + err.stack));
+    });
+  });
+
   function testBooking(jsonResult) {
     expect(jsonResult).to.be.an('array');
     jsonResult.forEach((result) => {
       expect(result).to.be.an('object');
       // Checking object keys
-      expect(result).to.have.all.keys([
+      expect(result).to.include.all.keys([
         'version', 'uapi_ur_locator', 'uapi_reservation_locator',
-        'airlineLocatorInfo', 'bookingPCC', 'passengers', 'pnr', 'pnrList',
+        'airlineLocatorInfo', 'bookingPCC', 'passengers', 'pnr',
         'fareQuotes', 'segments', 'serviceSegments', 'hostCreatedAt',
         'createdAt', 'modifiedAt', 'type', 'tickets', 'emails',
       ]);
@@ -716,12 +766,6 @@ describe('#AirParser', () => {
         expect(passenger).to.include.keys([
           'lastName', 'firstName', 'uapi_passenger_ref',
         ]);
-      });
-      // Checking pnrList format
-      expect(result.pnrList).to.be.an('array');
-      expect(result.pnrList).to.have.length.above(0);
-      result.pnrList.forEach((pnr) => {
-        expect(pnr).to.match(/^[A-Z0-9]{6}$/);
       });
       // Checking reservations format
       expect(result.fareQuotes).to.be.an('array');
@@ -844,8 +888,10 @@ describe('#AirParser', () => {
           ]);
           expect(segment.status).to.match(/^[A-Z]{2}$/);
           // Planes
-          expect(segment.plane).to.be.an('array').and.to.have.length.above(0);
-          segment.plane.forEach(plane => expect(plane).to.be.a('string'));
+          if (segment.plane) {
+            expect(segment.plane).to.be.an('array').and.to.have.length.above(0);
+            segment.plane.forEach(plane => expect(plane).to.be.a('string'));
+          }
           // Duration
           expect(segment.duration).to.be.an('array').and.to.have.length.above(0);
           segment.duration.forEach(duration => expect(duration).to.match(/^\d+$/));
@@ -928,23 +974,47 @@ describe('#AirParser', () => {
       });
     });
 
+    it('should get flight details from separate requests if not available in importPNR');
+
+    it('should parse split booking child', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0');
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPnr_split_child.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          expect(result[0].splitBookings).to.be.an('array').and.to.have.lengthOf(1);
+        });
+    });
+
+    it('should parse split booking parent', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0');
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPnr_split_parent.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          expect(result[0].splitBookings).to.be.an('array').and.to.have.lengthOf(1);
+        });
+    });
+
     it('should parse booking with emails', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getPnr_emails.xml`).toString();
       return uParser.parse(xml)
-      .then(json => parseFunction.call(uParser, json))
-      .then((result) => {
-        testBooking(result);
-        const emails = result[0].emails;
-        expect(emails).to.have.lengthOf(2);
-        emails.forEach(
-          (email, index) => {
-            expect(email.index).to.equal(index + 1);
-            expect(email.email).to.be.a('string');
-          }
-        );
-      });
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testBooking(result);
+          const emails = result[0].emails;
+          expect(emails).to.have.lengthOf(2);
+          emails.forEach(
+            (email, index) => {
+              expect(email.index).to.equal(index + 1);
+              expect(email.email).to.be.a('string');
+            }
+          );
+        });
     });
 
     it('should parse exchanged ticket booking with conjunction', () => {
@@ -1029,7 +1099,7 @@ describe('#AirParser', () => {
         parseFunction.call(uParser, json);
         assert(false, 'Should be SegmentBookingFailed error.');
       }).catch((err) => {
-        assert(err, 'No error returner');
+        assert(err, 'No error returned');
         assert(err instanceof AirRuntimeError.SegmentBookingFailed, 'Should be SegmentBookingFailed error.');
       });
     });
@@ -1042,8 +1112,46 @@ describe('#AirParser', () => {
         parseFunction.call(uParser, json);
         assert(false, 'Should be NoValidFare error.');
       }).catch((err) => {
-        assert(err, 'No error returner');
+        assert(err, 'No error returned');
         assert(err instanceof AirRuntimeError.NoValidFare, 'Should be NoValidFare error.');
+      });
+    });
+
+    it('should test parsing of errors if waitlisted with restrictWaitlist', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { }, false, errorsConfig());
+      const parseFunction = airParser.AIR_ERRORS;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.Waitlisted.xml`).toString();
+      return uParser.parseXML(xml).then((obj) => {
+        const json = uParser.mergeLeafRecursive(obj, 'SOAP:Fault')['SOAP:Fault'];
+        return parseFunction.call(uParser, json);
+      }).then(() => {
+        assert(false, 'Should throw Waitlisted error.');
+      }).catch((err) => {
+        assert(err, 'No error returned');
+        assert(err instanceof AirRuntimeError.SegmentWaitlisted, 'Should be SegmentWaitlisted error.');
+      });
+    });
+
+    it('should test parsing of a failed reservation (waitlist open, SOAP:Fault)', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v36_0', { }, false, errorsConfig());
+      const parseFunction = airParser.AIR_ERRORS;
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.Waitlist.xml`).toString();
+      return uParser.parseXML(xml).then((obj) => {
+        const json = uParser.mergeLeafRecursive(obj, 'SOAP:Fault')['SOAP:Fault'];
+        return parseFunction.call(uParser, json);
+      }).then(() => {
+        assert(false, 'Should throw an error.');
+      }).catch((err) => {
+        assert(err, 'No error returned');
+        assert(err instanceof AirRuntimeError.SegmentBookingFailed, 'Should be SegmentBookingFailed error.');
+      });
+    });
+
+    it('should auto detect version and parse 36 version for a failed reservation', () => {
+      const uParser = new ParserUapi('universal:AirCreateReservationRsp', 'v33_0', { }, false, errorsConfig());
+      const xml = fs.readFileSync(`${xmlFolder}/AirCreateReservation.Waitlist.xml`).toString();
+      return uParser.parse(xml).then(() => {
+        assert(uParser.uapi_version === 'v36_0', 'auto-detect correct version');
       });
     });
   });
