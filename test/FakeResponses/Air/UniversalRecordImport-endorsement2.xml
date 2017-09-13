@@ -1,0 +1,247 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <universal:UniversalRecordImportRsp TraceId=""
+                                            TransactionId="7A549C730A0759CA627B9104ABD09F16"
+                                            ResponseTime="6498"
+                                            xmlns:universal="http://www.travelport.com/schema/universal_v36_0"
+                                            xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0"
+                                            xmlns:air="http://www.travelport.com/schema/air_v36_0"
+                                            xmlns:passive="http://www.travelport.com/schema/passive_v36_0">
+            <common_v36_0:ResponseMessage Code="3007" Type="Warning"
+                                          ProviderCode="1G">The reservation
+                returned by the host changed. The segment information is now
+                updated.
+            </common_v36_0:ResponseMessage>
+            <common_v36_0:ResponseMessage Code="0" Type="Warning"
+                                          ProviderCode="1G">PNR already exists
+                in Universal Record ULXKV1
+            </common_v36_0:ResponseMessage>
+            <universal:UniversalRecord LocatorCode="ULXKV1" Version="250"
+                                       Status="Active">
+                <common_v36_0:BookingTraveler Key="EDaoU0BAAA/Bw+3PGGAAAA==">
+                    <common_v36_0:BookingTravelerName First="DMYTROMR"
+                                                      Last="CHERTOUSOV"/>
+                    <common_v36_0:Email Key="EDaoU0BAAA/Bx+3PGGAAAA=="
+                                        EmailID="MARK@OREL.COM">
+                        <common_v36_0:ProviderReservationInfoRef
+                                Key="EDaoU0BAAA/BwkxPGGAAAA=="/>
+                    </common_v36_0:Email>
+                    <common_v36_0:Email Key="l+AiU0BAAA/BAmmPIGAAAA=="
+                                        EmailID="MARK@TRAVELPORT.UA"/>
+                    <common_v36_0:Email Key="ZgNqU0hB0BKAhil4HGAAAA=="
+                                        EmailID="D.CHERTOUSOV@GMAIL.COM">
+                        <common_v36_0:ProviderReservationInfoRef
+                                Key="EDaoU0BAAA/BwkxPGGAAAA=="/>
+                    </common_v36_0:Email>
+                </common_v36_0:BookingTraveler>
+                <common_v36_0:BookingTraveler Key="EDaoU0BAAA/Bz+3PGGAAAA==">
+                    <common_v36_0:BookingTravelerName First="MARKMR"
+                                                      Last="OREL"/>
+                </common_v36_0:BookingTraveler>
+                <common_v36_0:ActionStatus Key="EDaoU0BAAA/Bs+3PGGAAAA=="
+                                           Type="ACTIVE"
+                                           ProviderReservationInfoRef="EDaoU0BAAA/BwkxPGGAAAA=="
+                                           ProviderCode="1G">
+                    <common_v36_0:Remark>QSB 30JUL1449Z 5N AG
+                    </common_v36_0:Remark>
+                </common_v36_0:ActionStatus>
+                <universal:ProviderReservationInfo
+                        Key="EDaoU0BAAA/BwkxPGGAAAA==" ProviderCode="1G"
+                        LocatorCode="MDBMCW"
+                        CreateDate="2017-07-10T12:23:22.278+00:00"
+                        ModifiedDate="2017-09-13T08:22:04.986+00:00"
+                        HostCreateDate="2017-07-10" Imported="true"
+                        OwningPCC="7J8J"/>
+                <air:AirReservation LocatorCode="85584H"
+                                    CreateDate="2017-07-10T12:23:20.856+00:00"
+                                    ModifiedDate="2017-09-13T08:22:04.986+00:00">
+                    <common_v36_0:SupplierLocator SupplierCode="OK"
+                                                  SupplierLocatorCode="U5CHOY"
+                                                  ProviderReservationInfoRef="EDaoU0BAAA/BwkxPGGAAAA=="
+                                                  CreateDateTime="2017-07-10T11:59:00.000+00:00"/>
+                    <air:DocumentInfo>
+                        <air:TicketInfo Number="0649902914322" Status="N"
+                                        BookingTravelerRef="EDaoU0BAAA/Bw+3PGGAAAA==">
+                            <common_v36_0:Name First="DMYTROMR"
+                                               Last="CHERTOUSOV"/>
+                        </air:TicketInfo>
+                        <air:TicketInfo Number="0649902914323" Status="X"
+                                        BookingTravelerRef="EDaoU0BAAA/Bz+3PGGAAAA==">
+                            <common_v36_0:Name First="MARKMR" Last="OREL"/>
+                        </air:TicketInfo>
+                        <air:TicketInfo Number="0649902930626" Status="X"
+                                        BookingTravelerRef="EDaoU0BAAA/Bz+3PGGAAAA==">
+                            <common_v36_0:Name First="MARKMR" Last="OREL"/>
+                            <air:ExchangedTicketInfo Number="0649902914323"/>
+                        </air:TicketInfo>
+                        <air:TicketInfo Number="0649902930680" Status="N"
+                                        BookingTravelerRef="EDaoU0BAAA/Bz+3PGGAAAA==">
+                            <common_v36_0:Name First="MARKMR" Last="OREL"/>
+                            <air:ExchangedTicketInfo Number="0649902914323"/>
+                            <air:ExchangedTicketInfo Number="0649902930626"/>
+                        </air:TicketInfo>
+                    </air:DocumentInfo>
+                    <common_v36_0:BookingTravelerRef
+                            Key="EDaoU0BAAA/Bw+3PGGAAAA=="/>
+                    <common_v36_0:BookingTravelerRef
+                            Key="EDaoU0BAAA/Bz+3PGGAAAA=="/>
+                    <common_v36_0:ProviderReservationInfoRef
+                            Key="EDaoU0BAAA/BwkxPGGAAAA=="/>
+                    <air:AirSegment Key="FYbyx3BAAA/BRzsTmmAAAA==" Group="0"
+                                    Carrier="OK" CabinClass="Economy"
+                                    FlightNumber="917" ProviderCode="1G"
+                                    Origin="KBP" Destination="PRG"
+                                    DepartureTime="2018-03-02T05:05:00.000+02:00"
+                                    ArrivalTime="2018-03-02T06:10:00.000+01:00"
+                                    TravelTime="125" ClassOfService="Q"
+                                    ETicketability="Yes" Status="HK"
+                                    ChangeOfPlane="false"
+                                    GuaranteedPaymentCarrier="No"
+                                    ProviderReservationInfoRef="EDaoU0BAAA/BwkxPGGAAAA=="
+                                    TravelOrder="2"
+                                    OptionalServicesIndicator="false"
+                                    ElStat="A">
+                        <air:FlightDetails Key="FYbyx3BAAA/BSzsTmmAAAA=="
+                                           Origin="KBP" Destination="PRG"
+                                           DepartureTime="2018-03-02T05:05:00.000+02:00"
+                                           ArrivalTime="2018-03-02T06:10:00.000+01:00"
+                                           FlightTime="125" TravelTime="125"
+                                           Equipment="319"
+                                           DestinationTerminal="1" ElStat="A"/>
+                    </air:AirSegment>
+                    <air:AirPricingInfo Key="FYbyx3BAAA/BIzsTmmAAAA=="
+                                        TotalPrice="UAH2849"
+                                        BasePrice="USD42.00"
+                                        EquivalentBasePrice="UAH1096"
+                                        Taxes="UAH1753"
+                                        LatestTicketingTime="2017-09-15T23:59:00.000+02:00"
+                                        TrueLastDateToTicket="2017-09-15T23:59:00.000+02:00"
+                                        PricingMethod="Guaranteed"
+                                        ETicketability="Yes" ProviderCode="1G"
+                                        ProviderReservationInfoRef="EDaoU0BAAA/BwkxPGGAAAA=="
+                                        AirPricingInfoGroup="8"
+                                        PricingType="StoredFare" ElStat="A"
+                                        FareCalculationInd="G">
+                        <air:FareInfo Key="FYbyx3BAAA/BKzsTmmAAAA=="
+                                      FareBasis="Q0BAGG" PassengerTypeCode="ADT"
+                                      Origin="KBP" Destination="PRG"
+                                      EffectiveDate="2017-09-12T00:00:00.000+02:00"
+                                      NotValidBefore="2018-03-02"
+                                      NotValidAfter="2018-03-02"
+                                      PseudoCityCode="7J8J" ElStat="A">
+                            <common_v36_0:Endorsement
+                                    Value="FARE RESTRICTIONS APPLY"/>
+                            <air:BaggageAllowance>
+                                <air:NumberOfPieces>0</air:NumberOfPieces>
+                            </air:BaggageAllowance>
+                        </air:FareInfo>
+                        <air:BookingInfo BookingCode="Q" CabinClass="Economy"
+                                         FareInfoRef="FYbyx3BAAA/BKzsTmmAAAA=="
+                                         SegmentRef="FYbyx3BAAA/BRzsTmmAAAA=="/>
+                        <air:TaxInfo Category="UA" Amount="UAH105"
+                                     Key="FYbyx3BAAA/BNzsTmmAAAA=="/>
+                        <air:TaxInfo Category="UD" Amount="UAH53"
+                                     Key="FYbyx3BAAA/BOzsTmmAAAA=="/>
+                        <air:TaxInfo Category="YK" Amount="UAH339"
+                                     Key="FYbyx3BAAA/BPzsTmmAAAA=="/>
+                        <air:TaxInfo Category="YQ" Amount="UAH1256"
+                                     Key="FYbyx3BAAA/BQzsTmmAAAA=="/>
+                        <air:FareCalc>IEV OK PRG 42.00Q0BAGG NUC42.00END
+                            ROE1.0
+                        </air:FareCalc>
+                        <air:PassengerType Code="ADT"
+                                           BookingTravelerRef="EDaoU0BAAA/Bw+3PGGAAAA==">
+                            <air:FareGuaranteeInfo GuaranteeDate="2017-09-15"
+                                                   GuaranteeType="Guaranteed"/>
+                        </air:PassengerType>
+                        <air:PassengerType Code="ADT"
+                                           BookingTravelerRef="EDaoU0BAAA/Bz+3PGGAAAA==">
+                            <air:FareGuaranteeInfo GuaranteeDate="2017-09-15"
+                                                   GuaranteeType="Guaranteed"/>
+                        </air:PassengerType>
+                        <common_v36_0:BookingTravelerRef
+                                Key="EDaoU0BAAA/Bw+3PGGAAAA=="/>
+                        <common_v36_0:BookingTravelerRef
+                                Key="EDaoU0BAAA/Bz+3PGGAAAA=="/>
+                        <air:TicketingModifiersRef
+                                Key="FYbyx3BAAA/BJzsTmmAAAA=="/>
+                    </air:AirPricingInfo>
+                    <air:TicketingModifiers PlatingCarrier="OK"
+                                            Key="FYbyx3BAAA/BJzsTmmAAAA=="
+                                            ElStat="A">
+                        <air:DocumentSelect IssueElectronicTicket="true"/>
+                    </air:TicketingModifiers>
+                </air:AirReservation>
+                <passive:PassiveReservation LocatorCode="RGH7JE"
+                                            CreateDate="2017-07-17T15:05:37.127+00:00"
+                                            ModifiedDate="2017-09-13T08:22:04.141+00:00"
+                                            ProviderReservationInfoRef="EDaoU0BAAA/BwkxPGGAAAA==">
+                    <common_v36_0:BookingTravelerRef
+                            Key="EDaoU0BAAA/Bw+3PGGAAAA=="/>
+                    <common_v36_0:BookingTravelerRef
+                            Key="EDaoU0BAAA/Bz+3PGGAAAA=="/>
+                    <passive:PassiveSegment NumberOfItems="1"
+                                            SegmentType="Service" Status="HI"
+                                            SupplierCode="OK" Origin="IEV"
+                                            StartDate="2017-07-17T00:00:00.000+03:00"
+                                            Key="oigp90BAAA/BedfcsGAAAA=="
+                                            Group="0" TravelOrder="1"/>
+                    <passive:PassiveRemark
+                            PassiveSegmentRef="oigp90BAAA/BedfcsGAAAA==">
+                        <passive:Text>-D/996/REFUNDABLE
+                            BALANCES/NM-1OREL/MARKMR/0649999007890C1/8427/UAH
+                        </passive:Text>
+                    </passive:PassiveRemark>
+                </passive:PassiveReservation>
+                <common_v36_0:GeneralRemark Key="WzuhU0BAAA/BjSYcQHAAAA=="
+                                            Category="Vendor" TypeInGds="Vendor"
+                                            SupplierType="Air"
+                                            ProviderReservationInfoRef="EDaoU0BAAA/BwkxPGGAAAA=="
+                                            SupplierCode="OK"
+                                            Direction="Incoming"
+                                            CreateDate="2017-07-10T17:58:00.000+00:00">
+                    <common_v36_0:RemarkData>CCLD AS DUPLICATE BOOKING WITH
+                        1A-OJYTSV 1G-XXCZHE
+                    </common_v36_0:RemarkData>
+                </common_v36_0:GeneralRemark>
+                <common_v36_0:GeneralRemark Key="9gxhU0BAAA/BsrexeHAAAA=="
+                                            Category="Vendor" TypeInGds="Vendor"
+                                            SupplierType="Air"
+                                            ProviderReservationInfoRef="EDaoU0BAAA/BwkxPGGAAAA=="
+                                            SupplierCode="OK"
+                                            Direction="Incoming"
+                                            CreateDate="2017-07-11T12:02:00.000+00:00">
+                    <common_v36_0:RemarkData>PLS CHECK POSS DUPE WITH 1A-OJYTSV
+                        1G-XXCZHE
+                    </common_v36_0:RemarkData>
+                </common_v36_0:GeneralRemark>
+                <common_v36_0:AgencyInfo>
+                    <common_v36_0:AgentAction ActionType="Created"
+                                              AgentCode="UAPI7980742859-07362D4F"
+                                              BranchCode="257f/VZmSaKqfMsUWfwY6Q=="
+                                              AgencyCode="TVPORTDYNASKLTONWABAGENCY"
+                                              EventTime="2017-07-10T12:23:20.677+00:00"/>
+                    <common_v36_0:AgentAction ActionType="Modified"
+                                              AgentCode="UAPI7980742859-07362D4F"
+                                              BranchCode="P2731609"
+                                              AgencyCode="S1473516"
+                                              EventTime="2017-09-13T08:22:04.986+00:00"/>
+                    <common_v36_0:AgentAction ActionType="Ticketed"
+                                              AgentCode="UAPI7980742859-07362D4F"
+                                              BranchCode="P2731609"
+                                              AgencyCode="S1473516"
+                                              EventTime="2017-07-11T08:46:28.495+00:00"/>
+                </common_v36_0:AgencyInfo>
+                <common_v36_0:AgencyContactInfo>
+                    <common_v36_0:PhoneNumber Key="EDaoU0BAAA/Bu+3PGGAAAA=="
+                                              Type="Agency" Location="IEV"
+                                              Number="0660419905">
+                        <common_v36_0:ProviderReservationInfoRef
+                                Key="EDaoU0BAAA/BwkxPGGAAAA=="/>
+                    </common_v36_0:PhoneNumber>
+                </common_v36_0:AgencyContactInfo>
+            </universal:UniversalRecord>
+        </universal:UniversalRecordImportRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

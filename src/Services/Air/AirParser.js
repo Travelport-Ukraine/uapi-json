@@ -623,14 +623,17 @@ function extractBookings(obj) {
             ? modifiers.PlatingCarrier
             : null;
 
-          const endorsement = modifiers && modifiers['air:TicketEndorsement']
-            ? modifiers['air:TicketEndorsement'].Value
+          const firstFareInfo = utils.firstInObj(fareInfo);
+
+
+          const endorsement = firstFareInfo[`common_${this.uapi_version}:Endorsement`]
+            ? firstFareInfo[`common_${this.uapi_version}:Endorsement`].Value
             : null;
 
           fareQuotesCommon[pricingInfo.AirPricingInfoGroup] = Object.assign(
             {
               uapi_segment_refs: uapiSegmentRefs,
-              effectiveDate: utils.firstInObj(fareInfo).EffectiveDate,
+              effectiveDate: firstFareInfo.EffectiveDate,
               status: pricingInfo.Ticketed
                 ? 'Ticketed'
                 : 'Reserved',
