@@ -795,6 +795,10 @@ describe('#AirParser', () => {
         expect(fareQuote.index).to.be.a('number');
         expect(fareQuote.pricingInfos).to.be.an('array').and.to.have.length.above(0);
 
+        if (fareQuote.tourCode) {
+          expect(fareQuote.tourCode).to.match(/^[A-Z0-9]+/);
+        }
+
         if (fareQuote.endorsement) {
           expect(fareQuote.endorsement).to.match(/^[A-Z0-9\.\-\s\/]+$/);
         }
