@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <universal:UniversalRecordImportRsp xmlns:universal="http://www.travelport.com/schema/universal_v36_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" TraceId="" TransactionId="9A9DFF620A07406C574E30AFA03670F8" ResponseTime="2073">
+            <universal:UniversalRecord LocatorCode="TEWNKS" Version="0" Status="Active">
+                <common_v36_0:BookingTraveler Key="Q1Dy04sB0BKAE+fe0dAAAA==" ElStat="A">
+                    <common_v36_0:BookingTravelerName First="NMRS" Last="SLIP"/>
+                </common_v36_0:BookingTraveler>
+                <common_v36_0:ActionStatus Key="Q1Dy04sB0BKA13fe0dAAAA==" Type="ACTIVE" ProviderReservationInfoRef="Q1Dy04sB0BKAFwZe0dAAAA==" ProviderCode="1G" ElStat="A"/>
+                <universal:ProviderReservationInfo Key="Q1Dy04sB0BKAFwZe0dAAAA==" ProviderCode="1G" LocatorCode="SCKX8Y" CreateDate="2017-09-19T14:50:01.002+00:00" ModifiedDate="2017-09-19T14:50:01.002+00:00" HostCreateDate="2017-09-19" Imported="true" OwningPCC="7J8J"/>
+                <air:AirReservation LocatorCode="LQ2BZ6" CreateDate="2017-09-19T14:49:59.796+00:00" ModifiedDate="2017-09-19T14:50:01.002+00:00">
+                    <common_v36_0:SupplierLocator SupplierCode="PS" SupplierLocatorCode="JGRM9U" ProviderReservationInfoRef="Q1Dy04sB0BKAFwZe0dAAAA==" CreateDateTime="2017-09-19T14:28:00.000+00:00"/>
+                    <common_v36_0:BookingTravelerRef Key="Q1Dy04sB0BKAE+fe0dAAAA=="/>
+                    <common_v36_0:ProviderReservationInfoRef Key="Q1Dy04sB0BKAFwZe0dAAAA=="/>
+                    <air:AirSegment Key="Q1Dy04sB0BKAJDge0dAAAA==" Group="0" Carrier="PS" CabinClass="Economy" FlightNumber="57" ProviderCode="1G" Origin="KBP" Destination="ODS" DepartureTime="2017-12-20T10:00:00.000+02:00" ArrivalTime="2017-12-20T11:00:00.000+02:00" TravelTime="60" ClassOfService="V" ETicketability="Yes" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="Q1Dy04sB0BKAFwZe0dAAAA==" TravelOrder="1" OptionalServicesIndicator="false" ElStat="A">
+                        <air:FlightDetails Key="Q1Dy04sB0BKAtGge0dAAAA==" Origin="KBP" Destination="ODS" DepartureTime="2017-12-20T10:00:00.000+02:00" ArrivalTime="2017-12-20T11:00:00.000+02:00" ElStat="A"/>
+                    </air:AirSegment>
+                    <air:AirPricingInfo Key="Q1Dy04sB0BKA53fe0dAAAA==" TotalPrice="UAH3174" BasePrice="USD75.00" EquivalentBasePrice="UAH1969" Taxes="UAH1205" LatestTicketingTime="2017-09-22T23:59:00.000+02:00" TrueLastDateToTicket="2017-12-20T23:59:00.000+01:00" PricingMethod="GuaranteedUsingAirlinePrivateFare" ETicketability="Yes" ProviderCode="1G" ProviderReservationInfoRef="Q1Dy04sB0BKAFwZe0dAAAA==" AirPricingInfoGroup="1" PricingType="StoredFare" ElStat="A" FareCalculationInd="A">
+                        <air:FareInfo Key="Q1Dy04sB0BKA79fe0dAAAA==" FareBasis="VSCOWP6" PassengerTypeCode="SEA" Origin="KBP" Destination="ODS" EffectiveDate="2017-09-19T00:00:00.000+02:00" NegotiatedFare="true" TourCode="SC001S17" PseudoCityCode="7J8J" ElStat="A">
+                            <air:ContractCode Code="PSSC" ProviderCode="1G"/>
+                            <common_v36_0:Endorsement Value="NONEND/CHNG FOC/PS ONLY"/>
+                            <common_v36_0:Endorsement Value="REF AT ISSUING OFFICE ONLY"/>
+                            <air:BaggageAllowance>
+                                <air:NumberOfPieces>2</air:NumberOfPieces>
+                            </air:BaggageAllowance>
+                            <common_v36_0:Commission Level="Fare" Type="PercentBase" Percentage="0.0"/>
+                        </air:FareInfo>
+                        <air:BookingInfo BookingCode="V" CabinClass="Economy" FareInfoRef="Q1Dy04sB0BKA79fe0dAAAA==" SegmentRef="Q1Dy04sB0BKAJDge0dAAAA=="/>
+                        <air:TaxInfo Category="UA" Amount="UAH40" Key="Q1Dy04sB0BKA/9fe0dAAAA=="/>
+                        <air:TaxInfo Category="YK" Amount="UAH66" Key="Q1Dy04sB0BKAA+fe0dAAAA=="/>
+                        <air:TaxInfo Category="HF" Amount="UAH415" Key="Q1Dy04sB0BKAB+fe0dAAAA=="/>
+                        <air:TaxInfo Category="YQ" Amount="UAH237" Key="Q1Dy04sB0BKAC+fe0dAAAA=="/>
+                        <air:TaxInfo Category="YR" Amount="UAH447" Key="Q1Dy04sB0BKAD+fe0dAAAA=="/>
+                        <air:FareCalc>IEV PS ODS 75.00VSCOWP6 USD75.00END</air:FareCalc>
+                        <air:PassengerType Code="SEA" BookingTravelerRef="Q1Dy04sB0BKAE+fe0dAAAA==">
+                            <air:FareGuaranteeInfo GuaranteeDate="2017-09-22" GuaranteeType="GuaranteedUsingAirlinePrivateFare"/>
+                        </air:PassengerType>
+                        <common_v36_0:BookingTravelerRef Key="Q1Dy04sB0BKAE+fe0dAAAA=="/>
+                        <air:TicketingModifiersRef Key="Q1Dy04sB0BKAg7fe0dAAAA=="/>
+                    </air:AirPricingInfo>
+                    <air:TicketingModifiers PlatingCarrier="PS" Key="Q1Dy04sB0BKAg7fe0dAAAA==" ElStat="A">
+                        <air:DocumentSelect IssueElectronicTicket="true"/>
+                    </air:TicketingModifiers>
+                </air:AirReservation>
+                <common_v36_0:GeneralRemark Key="Q1Dy04sB0BKA5Jge0dAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="Q1Dy04sB0BKAFwZe0dAAAA==" CreateDate="2017-09-19T14:26:00.000+00:00" ElStat="A">
+                    <common_v36_0:RemarkData>VIEWTRIPITIN</common_v36_0:RemarkData>
+                </common_v36_0:GeneralRemark>
+                <common_v36_0:GeneralRemark Key="Q1Dy04sB0BKAxKge0dAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="Q1Dy04sB0BKAFwZe0dAAAA==" SupplierCode="PS" Direction="Incoming" CreateDate="2017-09-19T14:26:00.000+00:00" ElStat="A">
+                    <common_v36_0:RemarkData>ADTK1GTOPS BY 24SEP 1800 OTHERWISE WILL BE XLD</common_v36_0:RemarkData>
+                </common_v36_0:GeneralRemark>
+                <common_v36_0:GeneralRemark Key="Q1Dy04sB0BKAyKge0dAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="Q1Dy04sB0BKAFwZe0dAAAA==" SupplierCode="PS" Direction="Incoming" CreateDate="2017-09-19T14:28:00.000+00:00" ElStat="A">
+                    <common_v36_0:RemarkData>ADTK1GTOPS BY 24SEP 1800 OTHERWISE WILL BE XLD</common_v36_0:RemarkData>
+                </common_v36_0:GeneralRemark>
+                <common_v36_0:AgencyInfo>
+                    <common_v36_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="257f/VZmSaKqfMsUWfwY6Q==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2017-09-19T14:49:59.417+00:00"/>
+                </common_v36_0:AgencyInfo>
+                <common_v36_0:AgencyContactInfo>
+                    <common_v36_0:PhoneNumber Key="Q1Dy04sB0BKA33fe0dAAAA==" Type="Agency" Location="IEV" Number="380 44 9999999" ElStat="A">
+                        <common_v36_0:ProviderReservationInfoRef Key="Q1Dy04sB0BKAFwZe0dAAAA=="/>
+                    </common_v36_0:PhoneNumber>
+                </common_v36_0:AgencyContactInfo>
+            </universal:UniversalRecord>
+        </universal:UniversalRecordImportRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

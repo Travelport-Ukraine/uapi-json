@@ -76,6 +76,7 @@ export function defaultConfig(ver) {
     `common_${ver}:GeneralRemark`,
     'air:AirAvailabilityErrorInfo',
     'air:AirSegmentError',
+    `common_${ver}:Endorsement`,
   ];
 
   // Non-single field objects don't get collapsed
