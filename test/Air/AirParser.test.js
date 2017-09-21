@@ -795,8 +795,12 @@ describe('#AirParser', () => {
         expect(fareQuote.index).to.be.a('number');
         expect(fareQuote.pricingInfos).to.be.an('array').and.to.have.length.above(0);
 
+        if (fareQuote.tourCode) {
+          expect(fareQuote.tourCode).to.match(/^[A-Z0-9]+/);
+        }
+
         if (fareQuote.endorsement) {
-          expect(fareQuote.endorsement).to.match(/^[A-Z0-9\s\/]+$/);
+          expect(fareQuote.endorsement).to.match(/^[A-Z0-9\.\-\s\/]+$/);
         }
 
         if (fareQuote.platingCarrier) {
@@ -1055,7 +1059,6 @@ describe('#AirParser', () => {
       .then(json => parseFunction.call(uParser, json))
       .then((result) => {
         testBooking(result);
-        console.log(result[0].serviceSegments);
         const issuedServiceSegments = result[0].serviceSegments.find(
           item => item.documentNumber !== undefined
         );
@@ -1350,6 +1353,23 @@ describe('#AirParser', () => {
 
         expect(booking.fareQuotes[3].effectiveDate)
           .to.be.equal('2017-07-30T00:00:00.000+02:00');
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should test parsing of tour code', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport.TourCode.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false, true);
+        const [booking] = jsonResult;
+        expect(booking.segments[0].duration[0]).to.be.equal(0);
+        expect(booking.segments[0].plane[0]).to.be.equal('Unknown');
+        expect(booking.fareQuotes[0].endorsement).to.be.equal(
+          'NONEND/CHNG FOC/PS ONLY REF AT ISSUING OFFICE ONLY'
+        );
+        expect(booking.fareQuotes[0].tourCode).to.be.equal('SC001S17');
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
   });

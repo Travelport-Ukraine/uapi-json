@@ -686,9 +686,12 @@ function extractBookings(obj) {
 
           const firstFareInfo = utils.firstInObj(fareInfo);
 
+          const tourCode = firstFareInfo.TourCode || null;
 
           const endorsement = firstFareInfo[`common_${this.uapi_version}:Endorsement`]
-            ? firstFareInfo[`common_${this.uapi_version}:Endorsement`].Value
+            ? firstFareInfo[`common_${this.uapi_version}:Endorsement`]
+              .map(end => end.Value)
+              .join(' ')
             : null;
 
           fareQuotesCommon[pricingInfo.AirPricingInfoGroup] = Object.assign(
@@ -699,6 +702,7 @@ function extractBookings(obj) {
                 ? 'Ticketed'
                 : 'Reserved',
               endorsement,
+              tourCode,
             },
             platingCarrier
               ? { platingCarrier }
