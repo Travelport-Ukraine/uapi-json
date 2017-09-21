@@ -686,9 +686,7 @@ function extractBookings(obj) {
 
           const firstFareInfo = utils.firstInObj(fareInfo);
 
-          const tourCode = firstFareInfo
-            ? firstFareInfo.TourCode
-            : null;
+          const tourCode = firstFareInfo.TourCode || null;
 
           const endorsement = firstFareInfo[`common_${this.uapi_version}:Endorsement`]
             ? firstFareInfo[`common_${this.uapi_version}:Endorsement`]
