@@ -15,12 +15,12 @@ const params = {
     {
       from: 'LWO',
       to: 'JKT',
-      departureDate: '2016-07-18'
+      departureDate: '2018-07-18'
     },
     {
       from: 'JKT',
       to: 'IEV',
-      departureDate: '2016-07-21',
+      departureDate: '2018-07-21',
     },
   ],
   passengers: {
@@ -33,6 +33,11 @@ const params = {
   },
   cabins: ['Economy'], // ['Business'],
   requestId: '4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60',
+  maxJourneyTime: 300,
+  pricing: {
+    currency: 'USD',
+    // eTicketability: true,
+  },
 };
 
 AirService.shop(params)
