@@ -316,7 +316,11 @@ const airGetTicket = function (obj) {
   );
 
   const airPricingInfo = etr['air:AirPricingInfo']
-    ? etr['air:AirPricingInfo'][Object.keys(etr['air:AirPricingInfo'])[0]]
+    ? utils.firstInObj(etr['air:AirPricingInfo'])
+    : null;
+
+  const fareInfo = airPricingInfo && airPricingInfo['air:FareInfo']
+    ? utils.firstInObj(airPricingInfo['air:FareInfo'])
     : null;
 
   const ticketsList = etr['air:Ticket'];
@@ -407,6 +411,11 @@ const airGetTicket = function (obj) {
     : [];
   const priceSource = airPricingInfo || etr;
   const priceInfoAvailable = priceSource.BasePrice !== undefined;
+
+  const commission = (etr && etr[`common_${this.uapi_version}:Commission`])
+    || (fareInfo && fareInfo[`common_${this.uapi_version}:Commission`])
+    || null;
+
   const response = Object.assign(
     {
       uapi_ur_locator: obj.UniversalRecordLocatorCode,
@@ -429,6 +438,16 @@ const airGetTicket = function (obj) {
       noAdc: !etr.TotalPrice,
       isConjunctionTicket: tickets.length > 1,
     },
+    commission
+      ? {
+        commission: {
+          [commission.Type === 'PercentBase' ? 'percent' : 'amount']:
+            commission.Type === 'PercentBase'
+              ? parseFloat(commission.Percentage)
+              : parseFloat(commission.Amount.slice(3)),
+        },
+      }
+      : null,
     priceInfoAvailable
       ? {
         totalPrice: priceSource.TotalPrice
