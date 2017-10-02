@@ -31,7 +31,11 @@ module.exports = `
                 </air:AirLegModifiers>
             </air:SearchAirLeg>
             {{/legs}}
-            <air:AirSearchModifiers>
+            <air:AirSearchModifiers
+                {{#if maxJourneyTime}}
+                    MaxJourneyTime="{{maxJourneyTime}}"
+                {{/if}}
+            >
                 <air:PreferredProviders>
                     <com:Provider Code="1G" xmlns:com="http://www.travelport.com/schema/common_v33_0"/>
                 </air:PreferredProviders>
@@ -39,6 +43,17 @@ module.exports = `
             {{#passengers}}
             <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v33_0"/>
             {{/passengers}}
+            {{#if pricing}}
+            <air:AirPricingModifiers
+                {{#if pricing.currency}}
+                CurrencyType="{{pricing.currency}}"
+                {{/if}}
+
+                {{#if pricing.eTicketability}}
+                ETicketability="{{pricing.eTicketability}}"
+                {{/if}}
+            />
+            {{/if}}
             {{#if emulatePcc}}
             <air:PCC>
                 <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
