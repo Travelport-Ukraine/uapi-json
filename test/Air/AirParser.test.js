@@ -493,6 +493,7 @@ describe('#AirParser', () => {
             'passengers',
             'totalPrice',
             'basePrice',
+            'tourCode',
             'taxes',
             'taxesInfo',
             'equivalentBasePrice',
