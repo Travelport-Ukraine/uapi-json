@@ -345,6 +345,7 @@ describe('#AirParser', () => {
         .then((result) => {
           testTicket(result);
           expect(result.commission).to.be.deep.equal({ amount: 0 });
+          expect(result.tourCode).to.be.equal('IT151920');
         });
     });
 
@@ -491,6 +492,7 @@ describe('#AirParser', () => {
             'passengers',
             'totalPrice',
             'basePrice',
+            'tourCode',
             'taxes',
             'taxesInfo',
             'equivalentBasePrice',
