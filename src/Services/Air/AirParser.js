@@ -307,6 +307,8 @@ const airGetTicket = function (obj) {
     throw new AirRuntimeError.TicketInfoIncomplete(etr);
   }
 
+  const tourCode = etr.TourCode;
+
   const passengersList = etr[`common_${this.uapi_version}:BookingTraveler`];
   const passengers = Object.keys(passengersList).map(
     passengerKey => ({
@@ -437,6 +439,7 @@ const airGetTicket = function (obj) {
       // Flags
       noAdc: !etr.TotalPrice,
       isConjunctionTicket: tickets.length > 1,
+      tourCode,
     },
     commission
       ? {
