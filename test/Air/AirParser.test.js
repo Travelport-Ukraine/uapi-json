@@ -294,6 +294,7 @@ describe('#AirParser', () => {
           expect(result.priceInfoDetailsAvailable).to.equal(false);
           expect(result.noAdc).to.equal(true);
           expect(result.totalPrice).to.equal('UAH0');
+          expect(result.commission).to.be.deep.equal({ percent: 0.1 });
         });
     });
 
@@ -335,6 +336,18 @@ describe('#AirParser', () => {
         });
     });
 
+    it('should correctly parse ticket with commission if fareInfo', () => {
+      const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_COMMISSION_FARE.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testTicket(result);
+          expect(result.commission).to.be.deep.equal({ amount: 0 });
+        });
+    });
+
     it('should correctly parse IT ticket', () => {
       const uParser = new ParserUapi('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
@@ -343,6 +356,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
+          expect(result.commission).to.be.deep.equal({ percent: 0.1 });
         });
     });
 
