@@ -5,7 +5,7 @@ function currencyConvertParse(json) {
     json = json['util:CurrencyConversion'].map(curr => ({
       from: curr.From,
       to: curr.To,
-      rate: curr.BankSellingRate,
+      rate: parseFloat(curr.BankSellingRate),
     }));
   } catch (e) {
     throw new UtilsParsingError(json);
