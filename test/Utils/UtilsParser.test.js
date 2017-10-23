@@ -1,7 +1,10 @@
 import assert from 'assert';
 import { expect } from 'chai';
 import fs from 'fs';
-import errors from '../../src/Services/Utils/UtilsErrors';
+import {
+  UtilsParsingError,
+  UtilsRuntimeError,
+} from '../../src/Services/Utils/UtilsErrors';
 import ParserUapi from '../../src/Request/uapi-parser';
 import utilsParser from '../../src/Services/Utils/UtilsParser';
 
@@ -27,7 +30,10 @@ describe('#utilsParser', () => {
       return uParser.parse(xml).then((json) => {
         const result = parseFunction.call(uParser, json);
         expect(result).to.be.an('array').and.to.have.lengthOf(2);
-        result.forEach(c => expect(c).to.be.an('object').and.to.have.all.keys(['from', 'to', 'rate']));
+        result.forEach((c) => {
+          expect(c).to.be.an('object').and.to.have.all.keys(['from', 'to', 'rate']);
+          expect(c.rate).to.be.a('number');
+        });
       });
     });
 
@@ -36,7 +42,7 @@ describe('#utilsParser', () => {
       try {
         parseFunction({});
       } catch (e) {
-        assert(e instanceof errors.UtilsParsingError, 'Incorrect error thrown');
+        assert(e instanceof UtilsParsingError, 'Incorrect error thrown');
       }
     });
 
@@ -51,8 +57,8 @@ describe('#utilsParser', () => {
           return parseFunction.call(uParser, errData);
         })
         .then(() => assert(false, 'Error should be thrown'))
-        .catch(e => {
-          assert(e instanceof errors.UtilsRuntimeError);
+        .catch((e) => {
+          assert(e instanceof UtilsRuntimeError);
         });
     });
   });
