@@ -418,6 +418,9 @@ const airGetTicket = function (obj) {
     || (fareInfo && fareInfo[`common_${this.uapi_version}:Commission`])
     || null;
 
+  const fareCalculation = etr['air:FareCalc'].match(/^([\s\S]+END)($|\s)/)[1];
+  const roe = etr['air:FareCalc'].match(/ROE((?:\d+\.)?\d+)/);
+
   const response = Object.assign(
     {
       uapi_ur_locator: obj.UniversalRecordLocatorCode,
@@ -429,7 +432,7 @@ const airGetTicket = function (obj) {
       issuedAt: etr.IssuedDate,
       farePricingMethod: airPricingInfo ? airPricingInfo.PricingMethod : null,
       farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
-      fareCalculation: etr['air:FareCalc'],
+      fareCalculation,
       priceInfoAvailable,
       priceInfoDetailsAvailable: (airPricingInfo !== null),
       taxes: priceSource.Taxes,
@@ -441,6 +444,9 @@ const airGetTicket = function (obj) {
       isConjunctionTicket: tickets.length > 1,
       tourCode,
     },
+    roe
+      ? { roe: roe[1] }
+      : null,
     commission
       ? {
         commission: {
@@ -748,22 +754,30 @@ function extractBookings(obj) {
             }
           );
 
-          return {
-            uapi_pricing_info_ref: key,
-            passengers: pricingInfoPassengers,
-            uapi_pricing_info_group: pricingInfo.AirPricingInfoGroup,
-            fareCalculation: pricingInfo['air:FareCalc'],
-            farePricingMethod: pricingInfo.PricingMethod,
-            farePricingType: pricingInfo.PricingType,
-            totalPrice: pricingInfo.TotalPrice,
-            basePrice: pricingInfo.BasePrice,
-            equivalentBasePrice: pricingInfo.EquivalentBasePrice,
-            taxes: pricingInfo.Taxes,
-            passengersCount,
-            taxesInfo,
-            baggage,
-            timeToReprice: pricingInfo.LatestTicketingTime,
-          };
+          const fareCalculation = pricingInfo['air:FareCalc'].match(/^([\s\S]+END)($|\s)/)[1];
+          const roe = pricingInfo['air:FareCalc'].match(/ROE((?:\d+\.)?\d+)/);
+
+          return Object.assign(
+            {
+              uapi_pricing_info_ref: key,
+              passengers: pricingInfoPassengers,
+              uapi_pricing_info_group: pricingInfo.AirPricingInfoGroup,
+              fareCalculation,
+              farePricingMethod: pricingInfo.PricingMethod,
+              farePricingType: pricingInfo.PricingType,
+              totalPrice: pricingInfo.TotalPrice,
+              basePrice: pricingInfo.BasePrice,
+              equivalentBasePrice: pricingInfo.EquivalentBasePrice,
+              taxes: pricingInfo.Taxes,
+              passengersCount,
+              taxesInfo,
+              baggage,
+              timeToReprice: pricingInfo.LatestTicketingTime,
+            },
+            roe
+              ? { roe: roe[1] }
+              : null
+          );
         }
       );
 

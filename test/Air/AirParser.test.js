@@ -16,6 +16,7 @@ const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:
 const ticketRegExp = /^\d{13}$/;
 const pnrRegExp = /^[A-Z0-9]{6}$/i;
 const amountRegExp = /[A-Z]{3}(?:\d+\.)?\d+/i;
+const fareCalculationPattern = /.*END$/i;
 
 const checkLowSearchFareXml = (filename) => {
   const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
@@ -216,7 +217,7 @@ describe('#AirParser', () => {
       expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
       expect(result.isConjunctionTicket).to.be.a('boolean');
       expect(result.issuedAt).to.match(timestampRegexp);
-      expect(result.fareCalculation).to.have.length.above(0);
+      expect(result.fareCalculation).to.match(fareCalculationPattern);
       // Price info
       expect(result.priceInfoAvailable).to.be.a('boolean');
       expect(result.priceInfoDetailsAvailable).to.be.a('boolean');
@@ -477,7 +478,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           expect(result).to.be.an('object');
-          expect(result).to.have.all.keys([
+          expect(result).to.include.all.keys([
             'uapi_ur_locator',
             'uapi_reservation_locator',
             'pnr',
@@ -485,6 +486,7 @@ describe('#AirParser', () => {
             'ticketingPcc',
             'issuedAt',
             'fareCalculation',
+            'roe',
             'farePricingMethod',
             'farePricingType',
             'priceInfoAvailable',
@@ -509,7 +511,7 @@ describe('#AirParser', () => {
           expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
           expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
           expect(result.issuedAt).to.match(timestampRegexp);
-          expect(result.fareCalculation).to.have.length.above(0);
+          expect(result.fareCalculation).to.match(fareCalculationPattern);
           // Price info
           expect(result.priceInfoDetailsAvailable).to.equal(false);
           expect(result.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
@@ -869,7 +871,7 @@ describe('#AirParser', () => {
             );
 
             expect(pricingInfo.fareCalculation).to.be.a('string');
-            expect(pricingInfo.fareCalculation).to.have.length.above(0);
+            expect(pricingInfo.fareCalculation).to.match(fareCalculationPattern);
             expect(new Date(pricingInfo.timeToReprice)).to.be.an.instanceof(Date);
 
             expect(pricingInfo.passengersCount).to.be.an('object');
