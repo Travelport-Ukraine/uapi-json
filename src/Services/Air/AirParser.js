@@ -418,6 +418,9 @@ const airGetTicket = function (obj) {
     || (fareInfo && fareInfo[`common_${this.uapi_version}:Commission`])
     || null;
 
+  const fareCalculation = etr['air:FareCalc'].match(/^([\s\S]+END)($|\s)/)[1];
+  const roe = etr['air:FareCalc'].match(/ROE((?:\d+\.)?\d+)/);
+
   const response = Object.assign(
     {
       uapi_ur_locator: obj.UniversalRecordLocatorCode,
@@ -429,7 +432,7 @@ const airGetTicket = function (obj) {
       issuedAt: etr.IssuedDate,
       farePricingMethod: airPricingInfo ? airPricingInfo.PricingMethod : null,
       farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
-      fareCalculation: etr['air:FareCalc'],
+      fareCalculation,
       priceInfoAvailable,
       priceInfoDetailsAvailable: (airPricingInfo !== null),
       taxes: priceSource.Taxes,
@@ -441,6 +444,9 @@ const airGetTicket = function (obj) {
       isConjunctionTicket: tickets.length > 1,
       tourCode,
     },
+    roe
+      ? { roe: roe[1] }
+      : null,
     commission
       ? {
         commission: {
