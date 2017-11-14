@@ -17,6 +17,34 @@ const terminalResponsesDir = path.join(__dirname, '..', 'FakeResponses', 'Termin
 
 
 describe('#AirService', () => {
+  const getURByPNRSampleBooked = [
+    {
+      pnr: 'PNR002',
+    }, {
+      pnr: 'PNR001',
+    },
+  ];
+  const getURbyPNRSampleTicketed = [
+    {
+      pnr: 'PNR001',
+      uapi_ur_locator: 'UAPI01',
+      uapi_reservation_locator: 'ABCDEF',
+      ticketNumber: 123,
+      tickets: [
+        { number: '1234567890123' },
+        { number: '1234567890456' },
+      ],
+    },
+  ];
+  const getURbyPNRSampleTicketedWithEmptyTickets = [
+    {
+      pnr: 'PNR001',
+      uapi_ur_locator: 'UAPI01',
+      uapi_reservation_locator: 'ABCDEF',
+      ticketNumber: 123,
+      tickets: [],
+    },
+  ];
   describe('shop', () => {
     it('should check if correct function from service is called', () => {
       const searchLowFares = sinon.spy(() => {});
@@ -307,11 +335,7 @@ describe('#AirService', () => {
     ).toUpperCase();
 
     it('should return array of one element', () => {
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
-        pnr: 'PNR002',
-      }, {
-        pnr: 'PNR001',
-      }]));
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURByPNRSampleBooked));
       const airService = () => ({ getUniversalRecordByPNR });
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': airService,
@@ -325,11 +349,7 @@ describe('#AirService', () => {
         });
     });
     it('should throw error when pnr not in list', () => {
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
-        pnr: 'PNR002',
-      }, {
-        pnr: 'PNR001',
-      }]));
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURByPNRSampleBooked));
       const airService = () => ({ getUniversalRecordByPNR });
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': airService,
@@ -554,8 +574,8 @@ describe('#AirService', () => {
       getUniversalRecordByPNR.onCall(0).returns(
         Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
-      getUniversalRecordByPNR.onCall(1).returns(Promise.resolve([true]));
-      getUniversalRecordByPNR.onCall(2).returns(Promise.resolve([true]));
+      getUniversalRecordByPNR.onCall(1).returns(Promise.resolve(getURByPNRSampleBooked));
+      getUniversalRecordByPNR.onCall(2).returns(Promise.resolve(getURByPNRSampleBooked));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
       const executeCommand = sinon.stub();
       executeCommand.onCall(0).returns(
@@ -611,10 +631,10 @@ describe('#AirService', () => {
 
   describe('ticket', () => {
     it('should check if correct function from service is called', () => {
-      const params = { PNR: '123456' };
+      const params = { pnr: 'PNR001' };
 
       const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.resolve([{ uapi_reservation_locator: 'ABCDEF' }])
+        () => Promise.resolve(getURbyPNRSampleTicketed)
       );
       const ticket = sinon.spy((options) => {
         expect(options.ReservationLocator).to.be.equal('ABCDEF');
@@ -635,10 +655,10 @@ describe('#AirService', () => {
     });
 
     it('should resolve foid and reticket', () => {
-      const params = { PNR: '123456' };
+      const params = { pnr: 'PNR001' };
 
       const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.resolve([{ uapi_reservation_locator: 'ABCDEF' }])
+        () => Promise.resolve(getURbyPNRSampleTicketed)
       );
       const ticketResponses = [
         Promise.resolve(),
@@ -658,19 +678,89 @@ describe('#AirService', () => {
       });
 
       return createAirService({ auth }).ticket(params).then(() => {
-        throw new Error('Can not be successfull');
-      }).catch(() => {
         expect(getUniversalRecordByPNR.calledTwice).to.be.equal(true);
         expect(ticket.calledTwice).to.be.equal(true);
         expect(foid.calledOnce).to.be.equal(true);
       });
     });
 
-    it('should resolve rethrow other errors', () => {
-      const params = { PNR: '123456' };
+    it('should retry ticketing if PNR busy', function () {
+      this.timeout(3000);
+      const params = { pnr: 'PNR001' };
 
       const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.resolve([{ uapi_reservation_locator: 'ABCDEF' }])
+        () => Promise.resolve(getURbyPNRSampleTicketed)
+      );
+      const ticketResponses = [
+        Promise.resolve(),
+        Promise.reject(new AirRuntimeError.TicketingPNRBusy([1])),
+      ];
+
+      const ticket = sinon.spy((options) => {
+        expect(options.ReservationLocator).to.be.equal('ABCDEF');
+        return ticketResponses.pop();
+      });
+
+      const service = () => ({ getUniversalRecordByPNR, ticket });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth, debug: 1 }).ticket(params).then(() => {
+        console.log(`UniversalRecord requested ${getUniversalRecordByPNR.callCount}`);
+        console.log(`airTicketing requested ${ticket.callCount}`);
+        expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
+        expect(ticket.calledTwice).to.be.equal(true);
+      }).catch((err) => {
+        console.log(err);
+        throw err;
+      });
+    });
+
+
+    it('should set FOID and retry ticketing if PNR busy', function () {
+      this.timeout(5000);
+      const params = { pnr: 'PNR001' };
+
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketed)
+      );
+      const ticketResponses = [
+        Promise.resolve(),
+        Promise.reject(new AirRuntimeError.TicketingPNRBusy([2])),
+        Promise.reject(new AirRuntimeError.TicketingFoidRequired([1])),
+      ];
+
+      const ticket = sinon.spy((options) => {
+        expect(options.ReservationLocator).to.be.equal('ABCDEF');
+        return ticketResponses.pop();
+      });
+
+      const foid = sinon.spy(() => Promise.resolve({}));
+      const service = () => ({ getUniversalRecordByPNR, ticket, foid });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth, debug: 1 }).ticket(params).then(() => {
+        console.log(`UniversalRecord requested ${getUniversalRecordByPNR.callCount}`);
+        console.log(`airTicketing requested ${ticket.callCount}`);
+        expect(getUniversalRecordByPNR.callCount).to.be.equal(2);
+        expect(foid.calledOnce).to.be.equal(true);
+        expect(ticket.callCount).to.be.equal(3);
+      }).catch((err) => {
+        console.log(err);
+        throw err;
+      });
+    });
+
+    it('should resolve rethrow other errors', () => {
+      const params = { pnr: 'PNR001' };
+
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketed)
       );
       const ticketResponses = [
         Promise.reject(new AirRuntimeError.NoValidFare()),
@@ -762,10 +852,7 @@ describe('#AirService', () => {
       // Spies
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
       const getPNRByTicketNumber = sinon.spy(() => Promise.resolve('PNR001'));
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
-        pnr: 'PNR001',
-        uapi_ur_locator: 'UAPI01',
-      }]));
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       // Services
       const service = () => ({
         getTicket,
@@ -807,7 +894,7 @@ describe('#AirService', () => {
 
       const getUniversalRecordByPNR = sinon.spy((options) => {
         expect(options.pnr).to.be.equal('PNR001');
-        return Promise.resolve([params]);
+        return Promise.resolve(getURbyPNRSampleTicketed);
       });
 
       const service = () => ({
@@ -1139,9 +1226,7 @@ describe('#AirService', () => {
       );
       // Spies
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
-        pnr: 'PNR001',
-      }]));
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURByPNRSampleBooked));
       const executeCommand = sinon.spy(() => Promise.resolve('RLOC 1G PNR001'));
       const closeSession = sinon.spy(() => Promise.resolve(true));
       // Services
@@ -1195,10 +1280,8 @@ describe('#AirService', () => {
     });
     it('should cancel PNR if no tickets available', () => {
       // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
-        pnr: 'PNR001',
-        tickets: [],
-      }]));
+      const getUniversalRecordByPNR = sinon.spy(() =>
+        Promise.resolve(getURbyPNRSampleTicketedWithEmptyTickets));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
       const getTicket = sinon.spy(() => Promise.resolve({
         coupons: [],
@@ -1226,11 +1309,7 @@ describe('#AirService', () => {
     });
     it('should cancel PNR if tickets have only VOID coupons', () => {
       // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
-        tickets: [
-          '1234567890123',
-        ],
-      }]));
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
       const getTicket = sinon.spy(() => Promise.resolve({
         tickets: [{
@@ -1265,14 +1344,7 @@ describe('#AirService', () => {
     });
     it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have OPEN coupons and no cancelTicket option', () => {
       // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
-        pnr: 'PNR001',
-        tickets: [{
-          number: '1234567890123',
-        }, {
-          number: '1234567890456',
-        }],
-      }]));
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
       const getTicket = sinon.spy(options =>
         Promise.resolve({
@@ -1321,14 +1393,7 @@ describe('#AirService', () => {
     });
     it('should succeed when there are OPEN and VOID tickets and cancelTickets = true', () => {
       // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
-        pnr: 'PNR001',
-        tickets: [{
-          number: '1234567890123',
-        }, {
-          number: '1234567890456',
-        }],
-      }]));
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
       const getTicket = sinon.spy(options =>
@@ -1385,14 +1450,7 @@ describe('#AirService', () => {
     });
     it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have coupons other than OPEN', () => {
       // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
-        pnr: 'PNR001',
-        tickets: [{
-          number: '1234567890123',
-        }, {
-          number: '1234567890456',
-        }],
-      }]));
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
       const getTicket = sinon.spy(options =>
         Promise.resolve({
@@ -1444,14 +1502,7 @@ describe('#AirService', () => {
     });
     it('should cancel tickets and PNR if no errors occured', () => {
       // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{
-        pnr: 'PNR001',
-        tickets: [{
-          number: '1234567890123',
-        }, {
-          number: '1234567890456',
-        }],
-      }]));
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
       const getTicket = sinon.spy(options =>
@@ -1507,10 +1558,7 @@ describe('#AirService', () => {
     it('should check functions to be called', () => {
       const d = moment();
       const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.resolve([{
-          createdAt: d,
-          pnr: 'PNR001',
-        }])
+        () => Promise.resolve(getURByPNRSampleBooked)
       );
 
       const exchange = sinon.spy(({ bookingDate }) => {
@@ -1540,15 +1588,12 @@ describe('#AirService', () => {
   describe('exchangeBooking', () => {
     it('should check functions to be called', () => {
       const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.resolve([{
-          pnr: 111,
-          uapi_reservation_locator: 123,
-        }])
+        () => Promise.resolve(getURbyPNRSampleTicketed)
       );
 
       const exchange = sinon.spy(({ exchangeToken, uapi_reservation_locator }) => {
         expect(exchangeToken).to.be.equal('token');
-        expect(uapi_reservation_locator).to.be.equal(123);
+        expect(uapi_reservation_locator).to.be.equal('ABCDEF');
       });
 
       const airService = () => ({
@@ -1564,7 +1609,7 @@ describe('#AirService', () => {
 
       return service.exchangeBooking({
         exchangeToken: 'token',
-        pnr: 111,
+        pnr: 'PNR001',
       }).then(() => {
         expect(getUniversalRecordByPNR).to.have.callCount(1);
         expect(exchange).to.have.callCount(1);

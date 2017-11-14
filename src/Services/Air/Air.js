@@ -1,5 +1,6 @@
 import moment from 'moment';
 import _ from 'lodash';
+import retry from 'promise-retry';
 
 import { parsers } from '../../utils';
 import getBookingFromUr from '../../utils/get-booking-from-ur';
@@ -134,20 +135,30 @@ module.exports = (settings) => {
     },
 
     ticket(options) {
-      return this.getPNR(options).then((booking) => {
-        const ticketParams = Object.assign({}, options, {
-          ReservationLocator: booking.uapi_reservation_locator,
-        });
-        return service.ticket(ticketParams)
-          .then(result => result, (err) => {
-            if (err instanceof AirRuntimeError.TicketingFoidRequired) {
-              return this.getPNR(options)
-                .then(updatedBooking => service.foid(updatedBooking))
-                .then(() => service.ticket(ticketParams));
-            }
-            return Promise.reject(err);
-          });
-      });
+      return (options.ReservationLocator
+        ? Promise.resolve(options.ReservationLocator)
+        : this.getPNR(options).then(booking => booking.uapi_reservation_locator)
+      )
+        .then(ReservationLocator => retry({ retries: 3 }, (again, number) => {
+          if (settings.debug && number > 1) {
+            console.log(`ticket ${options.pnr} retry number ${number}`);
+          }
+          return service.ticket({
+            ...options,
+            ReservationLocator,
+          })
+            .catch((err) => {
+              if (err instanceof AirRuntimeError.TicketingFoidRequired) {
+                return this.getPNR(options)
+                  .then(service.foid)
+                  .then(() => again(err));
+              }
+              if (err instanceof AirRuntimeError.TicketingPNRBusy) {
+                return again(err);
+              }
+              return Promise.reject(err);
+            });
+        }));
     },
 
     flightInfo(options) {
