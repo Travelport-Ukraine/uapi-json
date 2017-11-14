@@ -708,13 +708,8 @@ describe('#AirService', () => {
       });
 
       return createAirService({ auth, debug: 1 }).ticket(params).then(() => {
-        console.log(`UniversalRecord requested ${getUniversalRecordByPNR.callCount}`);
-        console.log(`airTicketing requested ${ticket.callCount}`);
         expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
         expect(ticket.calledTwice).to.be.equal(true);
-      }).catch((err) => {
-        console.log(err);
-        throw err;
       });
     });
 
@@ -727,14 +722,14 @@ describe('#AirService', () => {
         () => Promise.resolve(getURbyPNRSampleTicketed)
       );
       const ticketResponses = [
-        Promise.resolve(),
-        Promise.reject(new AirRuntimeError.TicketingPNRBusy([2])),
-        Promise.reject(new AirRuntimeError.TicketingFoidRequired([1])),
+        () => Promise.resolve(),
+        () => Promise.reject(new AirRuntimeError.TicketingPNRBusy()),
+        () => Promise.reject(new AirRuntimeError.TicketingFoidRequired()),
       ];
 
       const ticket = sinon.spy((options) => {
         expect(options.ReservationLocator).to.be.equal('ABCDEF');
-        return ticketResponses.pop();
+        return ticketResponses.pop()();
       });
 
       const foid = sinon.spy(() => Promise.resolve({}));
@@ -745,14 +740,9 @@ describe('#AirService', () => {
       });
 
       return createAirService({ auth, debug: 1 }).ticket(params).then(() => {
-        console.log(`UniversalRecord requested ${getUniversalRecordByPNR.callCount}`);
-        console.log(`airTicketing requested ${ticket.callCount}`);
         expect(getUniversalRecordByPNR.callCount).to.be.equal(2);
         expect(foid.calledOnce).to.be.equal(true);
         expect(ticket.callCount).to.be.equal(3);
-      }).catch((err) => {
-        console.log(err);
-        throw err;
       });
     });
 
@@ -1337,10 +1327,9 @@ describe('#AirService', () => {
         })
         .then(() => {
           expect(getUniversalRecordByPNR).to.have.callCount(2);
-          expect(getTicket).to.have.callCount(1);
+          expect(getTicket).to.have.callCount(2);
           expect(cancelPNR).to.have.callCount(1);
-        })
-        .catch(console.error);
+        });
     });
     it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have OPEN coupons and no cancelTicket option', () => {
       // Spies
