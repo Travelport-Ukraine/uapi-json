@@ -686,6 +686,40 @@ describe('#AirService', () => {
       });
     });
 
+    it('should retry ticketing if PNR busy', function () {
+      this.timeout(3000);
+      const params = { pnr: 'PNR001' };
+
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketed)
+      );
+      const ticketResponses = [
+        Promise.resolve(),
+        Promise.reject(new AirRuntimeError.TicketingPNRBusy([1])),
+      ];
+
+      const ticket = sinon.spy((options) => {
+        expect(options.ReservationLocator).to.be.equal('ABCDEF');
+        return ticketResponses.pop();
+      });
+
+      const service = () => ({ getUniversalRecordByPNR, ticket });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth, debug: 1 }).ticket(params).then(() => {
+        console.log(`UniversalRecord requested ${getUniversalRecordByPNR.callCount}`);
+        console.log(`airTicketing requested ${ticket.callCount}`);
+        expect(getUniversalRecordByPNR.calledTwice).to.be.equal(true);
+        expect(ticket.calledTwice).to.be.equal(true);
+      }).catch((err) => {
+        console.log(err);
+        throw err;
+      });
+    });
+
     it('should resolve rethrow other errors', () => {
       const params = { pnr: 'PNR001' };
 
