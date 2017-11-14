@@ -61,9 +61,13 @@ const ticketParse = function (obj) {
   let checkTickets = false;
 
   if (obj['air:TicketFailureInfo']) {
-    const msg = obj['air:TicketFailureInfo'].Message;
-    if (/VALID\sFORM\sOF\sID\s\sFOID\s\sREQUIRED/.exec(msg)) {
+    const { Message, Code } = obj['air:TicketFailureInfo'];
+    if (/VALID\sFORM\sOF\sID\s\sFOID\s\sREQUIRED/.exec(Message)) {
       throw new AirRuntimeError.TicketingFoidRequired(obj);
+    }
+    if (Code === '3979') {
+      // The Provider reservation is being modified externally. Please Air Ticket later.
+      throw new AirRuntimeError.TicketingPNRBusy(obj);
     }
     throw new AirRuntimeError.TicketingFailed(obj);
   }
