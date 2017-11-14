@@ -136,7 +136,9 @@ module.exports = (settings) => {
 
     ticket(options) {
       return retry({ retries: 3 }, (again, number) => {
-        if (settings.debug && number > 1) console.log(`ticket ${options.pnr} retry number ${number}`);
+        if (settings.debug && number > 1) {
+          console.log(`ticket ${options.pnr} retry number ${number}`);
+        }
         return (options.ReservationLocator
             ? Promise.resolve(options)
             : this.getPNR(options).then((booking) => {
@@ -147,7 +149,7 @@ module.exports = (settings) => {
             })
         ).then(
           ticketParams => service.ticket(ticketParams)
-            .then(result => result, (err) => {
+            .catch((err) => {
               if (err instanceof AirRuntimeError.TicketingFoidRequired) {
                 return this.getPNR(options)
                   .then(updatedBooking => service.foid(updatedBooking))
@@ -157,7 +159,8 @@ module.exports = (settings) => {
                 return again(err);
               }
               return Promise.reject(err);
-            }));
+            })
+        );
       });
     },
 
