@@ -135,33 +135,31 @@ module.exports = (settings) => {
     },
 
     ticket(options) {
-      return retry({ retries: 3 }, (again, number) => {
-        if (settings.debug && number > 1) {
-          console.log(`ticket ${options.pnr} retry number ${number}`);
-        }
-        return (options.ReservationLocator
-            ? Promise.resolve(options)
-            : this.getPNR(options).then((booking) => {
-              const ticketParams = Object.assign({}, options, {
-                ReservationLocator: booking.uapi_reservation_locator,
-              });
-              return ticketParams;
-            })
-        ).then(
-          ticketParams => service.ticket(ticketParams)
+      return (options.ReservationLocator
+        ? Promise.resolve(options.ReservationLocator)
+        : this.getPNR(options).then(booking => booking.uapi_reservation_locator)
+      )
+        .then(ReservationLocator => retry({ retries: 3 }, (again, number) => {
+          if (settings.debug && number > 1) {
+            console.log(`ticket ${options.pnr} retry number ${number}`);
+          }
+          return service.ticket({
+            ...options,
+            ReservationLocator,
+          })
             .catch((err) => {
               if (err instanceof AirRuntimeError.TicketingFoidRequired) {
                 return this.getPNR(options)
                   .then(updatedBooking => service.foid(updatedBooking))
-                  .then(() => this.ticket(ticketParams));
+                  .then(() => again(err))
+                  .catch(() => again(err));
               }
               if (err instanceof AirRuntimeError.TicketingPNRBusy) {
                 return again(err);
               }
               return Promise.reject(err);
-            })
-        );
-      });
+            });
+        }));
     },
 
     flightInfo(options) {

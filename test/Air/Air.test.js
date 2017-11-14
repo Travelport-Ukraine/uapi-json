@@ -710,7 +710,7 @@ describe('#AirService', () => {
       return createAirService({ auth, debug: 1 }).ticket(params).then(() => {
         console.log(`UniversalRecord requested ${getUniversalRecordByPNR.callCount}`);
         console.log(`airTicketing requested ${ticket.callCount}`);
-        expect(getUniversalRecordByPNR.calledTwice).to.be.equal(true);
+        expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
         expect(ticket.calledTwice).to.be.equal(true);
       }).catch((err) => {
         console.log(err);
@@ -720,7 +720,7 @@ describe('#AirService', () => {
 
 
     it('should set FOID and retry ticketing if PNR busy', function () {
-      this.timeout(3000);
+      this.timeout(5000);
       const params = { pnr: 'PNR001' };
 
       const getUniversalRecordByPNR = sinon.spy(
