@@ -678,8 +678,6 @@ describe('#AirService', () => {
       });
 
       return createAirService({ auth }).ticket(params).then(() => {
-        throw new Error('Can not be successfull');
-      }).catch(() => {
         expect(getUniversalRecordByPNR.calledTwice).to.be.equal(true);
         expect(ticket.calledTwice).to.be.equal(true);
         expect(foid.calledOnce).to.be.equal(true);
