@@ -80,6 +80,7 @@ module.exports = function uapiRequest(
         },
         headers: {
           'Accept-Encoding': 'gzip',
+          'Content-Type': 'text/xml',
         },
         data: xml,
       })
