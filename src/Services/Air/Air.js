@@ -150,9 +150,10 @@ module.exports = (settings) => {
             .catch((err) => {
               if (err instanceof AirRuntimeError.TicketingFoidRequired) {
                 return this.getPNR(options)
-                  .then(updatedBooking => service.foid(updatedBooking))
-                  .then(() => again(err))
-                  .catch(() => again(err));
+                  .then((updatedBooking) => {
+                    return service.foid(updatedBooking)
+                      .then(() => again(err));
+                  });
               }
               if (err instanceof AirRuntimeError.TicketingPNRBusy) {
                 return again(err);
