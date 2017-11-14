@@ -36,6 +36,23 @@ describe('#TerminalParser', () => {
           );
         });
     });
+
+    it('should throw correct error in case of no agreement', () => {
+      const uParser = new ParserUapi('terminal:TerminalReq', 'v33_0', {});
+      const xml = fs.readFileSync(`${xmlFolder}/terminalError-other.xml`).toString();
+      return uParser.parse(xml)
+        .then((json) => {
+          const error = json['SOAP:Fault'][0];
+          const parsed = terminalParser.TERMINAL_ERROR.call(uParser, error);
+          return parsed;
+        })
+        .then(() => { throw new Error('Error not thrown') })
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(
+            TerminalError.TerminalRuntimeError
+          );
+        });
+    });
   });
   describe('createSession()', () => {
     it('should throw an error when credentials are wrong', () => {
