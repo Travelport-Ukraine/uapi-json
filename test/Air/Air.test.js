@@ -720,6 +720,44 @@ describe('#AirService', () => {
       });
     });
 
+
+    it('should set FOID and retry ticketing if PNR busy', function () {
+      this.timeout(3000);
+      const params = { pnr: 'PNR001' };
+
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketed)
+      );
+      const ticketResponses = [
+        Promise.resolve(),
+        Promise.reject(new AirRuntimeError.TicketingPNRBusy([2])),
+        Promise.reject(new AirRuntimeError.TicketingFoidRequired([1])),
+      ];
+
+      const ticket = sinon.spy((options) => {
+        expect(options.ReservationLocator).to.be.equal('ABCDEF');
+        return ticketResponses.pop();
+      });
+
+      const foid = sinon.spy(() => Promise.resolve({}));
+      const service = () => ({ getUniversalRecordByPNR, ticket, foid });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth, debug: 1 }).ticket(params).then(() => {
+        console.log(`UniversalRecord requested ${getUniversalRecordByPNR.callCount}`);
+        console.log(`airTicketing requested ${ticket.callCount}`);
+        expect(getUniversalRecordByPNR.callCount).to.be.equal(2);
+        expect(foid.calledOnce).to.be.equal(true);
+        expect(ticket.callCount).to.be.equal(3);
+      }).catch((err) => {
+        console.log(err);
+        throw err;
+      });
+    });
+
     it('should resolve rethrow other errors', () => {
       const params = { pnr: 'PNR001' };
 
