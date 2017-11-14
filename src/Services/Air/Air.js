@@ -137,13 +137,14 @@ module.exports = (settings) => {
     ticket(options) {
       return retry({ retries: 3 }, (again, number) => {
         if (settings.debug && number > 1) console.log(`ticket ${options.pnr} retry number ${number}`);
-        return (options.ReservationLocator ? Promise.resolve(options) :
-          this.getPNR(options).then((booking) => {
-            const ticketParams = Object.assign({}, options, {
-              ReservationLocator: booking.uapi_reservation_locator,
-            });
-            return ticketParams;
-          })
+        return (options.ReservationLocator
+            ? Promise.resolve(options)
+            : this.getPNR(options).then((booking) => {
+              const ticketParams = Object.assign({}, options, {
+                ReservationLocator: booking.uapi_reservation_locator,
+              });
+              return ticketParams;
+            })
         ).then(
           ticketParams => service.ticket(ticketParams)
             .then(result => result, (err) => {
