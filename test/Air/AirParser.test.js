@@ -1231,6 +1231,18 @@ describe('#AirParser', () => {
         assert(e instanceof AirRuntimeError.TicketingResponseMissing);
       });
     });
+
+    it('should throw error TicketingPNRBusy', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing-busyPNR.fabricated_reply.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        parseFunction.call(uParser, json);
+        assert(false, 'Should not return response.');
+      }).catch((e) => {
+        assert(e instanceof AirRuntimeError.TicketingPNRBusy);
+      });
+    });
   });
 
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {

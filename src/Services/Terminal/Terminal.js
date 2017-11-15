@@ -1,4 +1,3 @@
-import util from 'util';
 import screenLib from 'galileo-screen';
 import { TerminalRuntimeError } from './TerminalErrors';
 import terminalService from './TerminalService';
@@ -14,7 +13,7 @@ const screenFunctions = screenLib({ cursor: '><' });
 
 module.exports = function (settings) {
   const service = terminalService(validateServiceSettings(settings));
-  const log = (settings.options || {}).logFunction || console.log;
+  const log = (settings.options && settings.options.logFunction) || console.log;
   const emulatePcc = settings.auth.emulatePcc || false;
   const timeout = settings.timeout || false;
   const debug = settings.debug || 0;
@@ -139,13 +138,13 @@ module.exports = function (settings) {
       case TERMINAL_STATE_READY:
       case TERMINAL_STATE_ERROR:
         if (state.terminalState === TERMINAL_STATE_BUSY) {
-          util.log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
+          log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
         }
         if (state.sessionToken !== null) {
-          util.log('UAPI-JSON WARNING: Process left TerminalService session open');
-          util.log('UAPI-JSON WARNING: Session closing');
+          log('UAPI-JSON WARNING: Process left TerminalService session open');
+          log('UAPI-JSON WARNING: Session closing');
           terminal.closeSession().then(
-            () => util.log('UAPI-JSON WARNING: Session closed')
+            () => log('UAPI-JSON WARNING: Session closed')
           ).catch(
             () => {
               throw new TerminalRuntimeError.ErrorClosingSession();
@@ -164,10 +163,10 @@ module.exports = function (settings) {
       case TERMINAL_STATE_READY:
       case TERMINAL_STATE_ERROR:
         if (state.terminalState === TERMINAL_STATE_BUSY) {
-          util.log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
+          log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
         }
         if (state.sessionToken !== null) {
-          util.log('UAPI-JSON WARNING: Process left TerminalService session open');
+          log('UAPI-JSON WARNING: Process left TerminalService session open');
         }
         break;
       default:

@@ -1,5 +1,6 @@
 import moment from 'moment';
 import _ from 'lodash';
+import retry from 'promise-retry';
 
 import { parsers } from '../../utils';
 import getBookingFromUr from '../../utils/get-booking-from-ur';
@@ -10,6 +11,7 @@ import validateServiceSettings from '../../utils/validate-service-settings';
 
 module.exports = (settings) => {
   const service = airService(validateServiceSettings(settings));
+  const log = (settings.options && settings.options.logFunction) || console.log;
   return {
     shop(options) {
       return service.searchLowFares(options);
@@ -134,20 +136,30 @@ module.exports = (settings) => {
     },
 
     ticket(options) {
-      return this.getPNR(options).then((booking) => {
-        const ticketParams = Object.assign({}, options, {
-          ReservationLocator: booking.uapi_reservation_locator,
-        });
-        return service.ticket(ticketParams)
-          .then(result => result, (err) => {
-            if (err instanceof AirRuntimeError.TicketingFoidRequired) {
-              return this.getPNR(options)
-                .then(updatedBooking => service.foid(updatedBooking))
-                .then(() => service.ticket(ticketParams));
-            }
-            return Promise.reject(err);
-          });
-      });
+      return (options.ReservationLocator
+        ? Promise.resolve(options.ReservationLocator)
+        : this.getPNR(options).then(booking => booking.uapi_reservation_locator)
+      )
+        .then(ReservationLocator => retry({ retries: 3 }, (again, number) => {
+          if (settings.debug && number > 1) {
+            log(`ticket ${options.pnr} issue attempt number ${number}`);
+          }
+          return service.ticket({
+            ...options,
+            ReservationLocator,
+          })
+            .catch((err) => {
+              if (err instanceof AirRuntimeError.TicketingFoidRequired) {
+                return this.getPNR(options)
+                  .then(updatedBooking => service.foid(updatedBooking))
+                  .then(() => again(err));
+              }
+              if (err instanceof AirRuntimeError.TicketingPNRBusy) {
+                return again(err);
+              }
+              return Promise.reject(err);
+            });
+        }));
     },
 
     flightInfo(options) {

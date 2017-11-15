@@ -88,6 +88,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   SegmentWaitlisted: 'One or more segments is waitlisted, not allowed',
   TicketingFailed: 'Ticketing failed',
   TicketingFoidRequired: 'FOID required for the PC selected',
+  TicketingPNRBusy: 'Reservation is being modified, unable to ticket now',
   TicketingResponseMissing: 'Response message text doesn\'t contain OK:Ticket issued',
   TicketingTicketsMissing: 'Tickets not found in ticketing response',
   NoResultsFound: 'No results found',
