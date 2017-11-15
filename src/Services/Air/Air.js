@@ -11,6 +11,7 @@ import validateServiceSettings from '../../utils/validate-service-settings';
 
 module.exports = (settings) => {
   const service = airService(validateServiceSettings(settings));
+  const log = (settings.options && settings.options.logFunction) || console.log;
   return {
     shop(options) {
       return service.searchLowFares(options);
@@ -141,7 +142,7 @@ module.exports = (settings) => {
       )
         .then(ReservationLocator => retry({ retries: 3 }, (again, number) => {
           if (settings.debug && number > 1) {
-            console.log(`ticket ${options.pnr} issue attempt number ${number}`);
+            log(`ticket ${options.pnr} issue attempt number ${number}`);
           }
           return service.ticket({
             ...options,
