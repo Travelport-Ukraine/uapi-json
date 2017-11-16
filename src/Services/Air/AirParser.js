@@ -378,6 +378,7 @@ const airGetTicket = function (obj) {
               notValidBefore: coupon.NotValidBefore,
               notValidAfter: coupon.NotValidAfter,
               bookingClass: coupon.BookingClass,
+              stopover: coupon.StopoverCode === 'true',
             },
             bookingInfo !== null
               ? { serviceClass: bookingInfo.CabinClass }
