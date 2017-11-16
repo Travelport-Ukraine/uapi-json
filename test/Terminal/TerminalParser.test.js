@@ -5,7 +5,8 @@
 import fs from 'fs';
 import { expect } from 'chai';
 import uAPI from '../../src';
-import ParserUapi from '../../src/Request/uapi-parser';
+import { Parser as ParserUapi, errorsConfig } from '../../src/Request/uapi-parser';
+
 import terminalParser from '../../src/Services/Terminal/TerminalParser';
 
 const TerminalError = uAPI.errors.Terminal;
@@ -21,12 +22,13 @@ describe('#TerminalParser', () => {
     });
 
     it('should throw correct error in case of no agreement', () => {
-      const uParser = new ParserUapi('terminal:TerminalReq', 'v33_0', {});
+      const errorConfig = errorsConfig();
+      const uParser = new ParserUapi('terminal:TerminalReq', 'v33_0', {}, errorConfig);
       const xml = fs.readFileSync(`${xmlFolder}/terminalError.xml`).toString();
       return uParser.parse(xml)
         .then((json) => {
-          const error = json['SOAP:Fault'][0];
-          const parsed = terminalParser.TERMINAL_ERROR.call(uParser, error);
+          const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]);
+          const parsed = terminalParser.TERMINAL_ERROR.call(uParser, errData);
           return parsed;
         })
         .then(() => { throw new Error('Error not thrown') })
@@ -37,13 +39,14 @@ describe('#TerminalParser', () => {
         });
     });
 
-    it('should throw correct error in case of no agreement', () => {
-      const uParser = new ParserUapi('terminal:TerminalReq', 'v33_0', {});
+    it('should throw correct error ', () => {
+      const errorConfig = errorsConfig();
+      const uParser = new ParserUapi('terminal:TerminalReq', 'v33_0', {}, errorConfig);
       const xml = fs.readFileSync(`${xmlFolder}/terminalError-other.xml`).toString();
       return uParser.parse(xml)
         .then((json) => {
-          const error = json['SOAP:Fault'][0];
-          const parsed = terminalParser.TERMINAL_ERROR.call(uParser, error);
+          const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]);
+          const parsed = terminalParser.TERMINAL_ERROR.call(uParser, errData);
           return parsed;
         })
         .then(() => { throw new Error('Error not thrown') })

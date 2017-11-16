@@ -5,8 +5,8 @@ import {
 
 function errorHandler(rsp) {
   if (rsp && rsp.detail) {
-    const errorInfo = rsp.detail[0][`common_${this.uapi_version}:ErrorInfo`][0];
-    const code = errorInfo[`common_${this.uapi_version}:Code`][0];
+    const errorInfo = rsp.detail[`common_${this.uapi_version}:ErrorInfo`];
+    const code = errorInfo[`common_${this.uapi_version}:Code`];
     const faultString = rsp.faultstring;
     switch (code) {
       case '345':
