@@ -48,7 +48,7 @@ function formatServiceSegment(segment, remark) {
     ...parsers.serviceSegment(remark['passive:Text']),
     carrier: segment.SupplierCode,
     airport: segment.Origin,
-    date: moment(segment.StartDate).format(),
+    date: segment.StartDate,
     index: segment.index,
   };
 }
