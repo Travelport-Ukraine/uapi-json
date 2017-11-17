@@ -264,7 +264,7 @@ describe('#AirParser', () => {
           expect(coupon).to.include.all.keys([
             'couponNumber', 'from', 'to', 'departure', 'airline', 'flightNumber',
             'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter',
-            'bookingClass',
+            'bookingClass', 'stopover',
           ]);
           expect(coupon.couponNumber).to.match(/\d+/i);
           expect(coupon.from).to.match(/[A-Z]{3}/i);
@@ -382,6 +382,14 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
+          const couponsStopover = [true, false, true, false];
+          const coupons = result.tickets.reduce(
+            (acc, ticket) => acc.concat(ticket.coupons),
+            []
+          );
+          coupons.forEach((coupon, index) => {
+            expect(coupon.stopover).to.be.equal(couponsStopover[index]);
+          });
           expect(result.priceInfoDetailsAvailable).to.equal(true);
           expect(result.exchangedTickets).to.have.length.above(0);
         });
@@ -538,7 +546,7 @@ describe('#AirParser', () => {
               expect(coupon).to.be.an('object');
               expect(coupon).to.have.all.keys([
                 'couponNumber', 'from', 'to', 'departure', 'airline', 'flightNumber',
-                'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter', 'bookingClass',
+                'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter', 'bookingClass', 'stopover',
               ]);
               expect(coupon.couponNumber).to.match(/\d+/i);
               expect(coupon.from).to.match(/[A-Z]{3}/i);
