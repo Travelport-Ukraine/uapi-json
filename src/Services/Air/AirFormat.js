@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import moment from 'moment';
 import parsers from '../../utils/parsers';
 import { AirParsingError } from './AirErrors';
 
@@ -48,7 +47,7 @@ function formatServiceSegment(segment, remark) {
     ...parsers.serviceSegment(remark['passive:Text']),
     carrier: segment.SupplierCode,
     airport: segment.Origin,
-    date: moment(segment.StartDate).format(),
+    date: segment.StartDate,
     index: segment.index,
   };
 }
