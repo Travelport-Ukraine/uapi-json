@@ -592,23 +592,12 @@ function extractBookings(obj) {
           );
         }
 
-        // SSR DOC parsing of passport data http://gitlab.travel-swift.com/galileo/galileocommand/blob/master/lib/command/booking.js#L84
-        // TODO safety checks
-        const firstTraveler = utils.firstInObj(traveler[`common_${this.uapi_version}:SSR`]);
-        const ssr = firstTraveler ? firstTraveler.FreeText.split('/') : null;
-
-        // TODO try to parse Swift XI from common_v36_0:AccountingRemark first
-
         return Object.assign(
           {
             lastName: name.Last,
             firstName: name.First,
             uapi_passenger_ref: traveler.Key,
           },
-          ssr ? {
-            passCountry: ssr[1], // also in ssr[3]
-            passNumber: ssr[2],
-          } : null,
           traveler.DOB ? {
             birthDate: moment(traveler.DOB).format('YYYY-MM-DD'),
           } : null,
