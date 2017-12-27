@@ -644,6 +644,10 @@ function extractBookings(obj) {
       booking['air:DocumentInfo']['air:TicketInfo'].map(
         ticket => ({
           number: ticket.Number,
+          passengers: [{
+            firstName: ticket[`common_${this.uapi_version}:Name`].First,
+            lastName: ticket[`common_${this.uapi_version}:Name`].Last,
+          }],
           uapi_passenger_ref: ticket.BookingTravelerRef,
           uapi_pricing_info_ref: (ticket.AirPricingInfoRef)
             ? ticket.AirPricingInfoRef

@@ -978,8 +978,10 @@ describe('#AirParser', () => {
         result.tickets.forEach(
           (ticket) => {
             expect(ticket).to.be.an('object').and.to.have.all.keys([
-              'number', 'uapi_passenger_ref', 'uapi_pricing_info_ref'
+              'number', 'uapi_passenger_ref', 'uapi_pricing_info_ref', 'passengers',
             ]);
+            expect(ticket.passengers.length).to.be.equal(1);
+            expect(ticket.passengers[0]).to.have.all.keys(['firstName', 'lastName']);
             expect(ticket.number).to.match(/\d{13}/);
             expect(ticket.uapi_passenger_ref).to.be.a('string');
           }
