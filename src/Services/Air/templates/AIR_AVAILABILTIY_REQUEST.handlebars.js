@@ -12,6 +12,11 @@ module.exports = `
             {{#if emulatePcc}}
                 <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
             {{/if}}
+            {{#nextResultReference}}
+                <com:NextResultReference ProviderCode="1G" >
+                    {{nextResultReference}}
+                </com:NextResultReference>
+            {{/nextResultReference}}
             {{#legs}}
             <air:SearchAirLeg>
                 <air:SearchOrigin>
