@@ -57,6 +57,18 @@ describe('#AirService', () => {
     });
   });
 
+  describe('availability', () => {
+    it('should check if correct function from service is called', () => {
+      const availability = sinon.spy(() => {});
+      const service = () => ({ availability });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).availability({});
+      expect(availability.calledOnce).to.be.equal(true);
+    });
+  });
+
   describe('toQueue', () => {
     it('should check if correct function from service is called', () => {
       const gdsQueue = sinon.spy(() => {});
