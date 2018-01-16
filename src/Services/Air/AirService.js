@@ -20,6 +20,17 @@ module.exports = function (settings) {
       debug,
       options
     ),
+    availability: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.availability,
+      'air:AvailabilitySearchRsp',
+      AirValidator.AIR_LOW_FARE_SEARCH_REQUEST,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_AVAILABILITY,
+      debug,
+      options
+    ),
     lookupFareRules: uApiRequest(
       config.AirService.url,
       auth,

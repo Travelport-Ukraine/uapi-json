@@ -37,7 +37,6 @@ function formatSegment(segment) {
     arrival: segment.ArrivalTime,
     airline: segment.Carrier,
     flightNumber: segment.FlightNumber,
-    serviceClass: segment.CabinClass,
     uapi_segment_ref: segment.Key,
   };
 }
@@ -71,6 +70,7 @@ function formatTrip(segment, flightDetails) {
   const techStops = flightInfo.slice(1).map(details => details.Origin);
   return {
     ...formatSegment(segment),
+    serviceClass: segment.CabinClass,
     plane,
     duration,
     techStops,
