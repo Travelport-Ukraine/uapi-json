@@ -1713,7 +1713,7 @@ describe('#AirParser', () => {
       return true;
     }
     it('should parse simple response', () => {
-      const uParser = new ParserUapi('air:AvailabilitySearchRsp', 'v34_0', {
+      const uParser = new ParserUapi('air:AvailabilitySearchRsp', 'v36_0', {
         cabins: ['Economy'],
       });
 
@@ -1724,6 +1724,22 @@ describe('#AirParser', () => {
         .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testAvailability(result);
+        });
+    });
+
+    it('should parse response without connections', () => {
+      const uParser = new ParserUapi('air:AvailabilitySearchRsp', 'v36_0', {
+        cabins: ['Economy'],
+      });
+
+      const parseFunction = airParser.AIR_AVAILABILITY;
+      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp2.xml`).toString();
+      return uParser
+        .parse(xml)
+        .then((json) => parseFunction.call(uParser, json))
+        .then((result) => {
+          testAvailability(result);
+          expect(result.nextResultReference).to.be.null;
         });
     });
   });

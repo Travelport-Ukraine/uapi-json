@@ -46,6 +46,14 @@ module.exports = `
                 <air:PreferredProviders>
                     <com:Provider Code="1G" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
                 </air:PreferredProviders>
+                {{#if carriers}}
+                <air:PermittedCarriers>
+                    {{#carriers}}
+                    <com:Carrier Code="{{.}}" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
+                    {{/carriers}}
+                </air:PermittedCarriers>
+                {{/if}}
+
             </air:AirSearchModifiers>
             {{#if priсing}}
             <air:AirPricingModifiers

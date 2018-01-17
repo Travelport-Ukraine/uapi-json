@@ -996,9 +996,11 @@ function exchangeBooking(rsp) {
 
 function availability(rsp) {
   const itinerarySolution = utils.firstInObj(rsp['air:AirItinerarySolution']);
-  const connectedSegments = itinerarySolution['air:Connection'].map(
-    s => parseInt(s.SegmentIndex, 10)
-  );
+  const connectedSegments = itinerarySolution['air:Connection']
+    ? itinerarySolution['air:Connection'].map(
+      s => parseInt(s.SegmentIndex, 10)
+    )
+    : [];
 
   const results = [];
   let leg = [];
@@ -1044,7 +1046,7 @@ function availability(rsp) {
 
   return {
     legs: results,
-    nextResultReference: rsp[`common_${this.uapi_version}:NextResultReference`],
+    nextResultReference: rsp[`common_${this.uapi_version}:NextResultReference`] || null,
   };
 }
 
