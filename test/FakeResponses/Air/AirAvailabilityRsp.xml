@@ -1,0 +1,180 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AvailabilitySearchRsp TraceId="4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60" TransactionId="F993948D0A074261212ADFD0023CA66E" ResponseTime="525" DistanceUnits="MI"
+                                   xmlns:air="http://www.travelport.com/schema/air_v33_0">
+            <air:FlightDetailsList>
+                <air:FlightDetails Key="TbTehBBAAA/B9tfnB5AAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T06:40:00.000+02:00" ArrivalTime="2018-03-18T09:10:00.000+01:00" FlightTime="210" TravelTime="210" Equipment="319" DestinationTerminal="2E"/>
+                <air:FlightDetails Key="TbTehBBAAA/B/tfnB5AAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T06:40:00.000+02:00" ArrivalTime="2018-03-18T09:10:00.000+01:00" FlightTime="210" TravelTime="210" Equipment="319" DestinationTerminal="2E"/>
+                <air:FlightDetails Key="TbTehBBAAA/BBufnB5AAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T09:45:00.000+02:00" ArrivalTime="2018-03-18T12:10:00.000+01:00" FlightTime="205" TravelTime="205" Equipment="738" DestinationTerminal="2D"/>
+                <air:FlightDetails Key="TbTehBBAAA/BDufnB5AAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T09:45:00.000+02:00" ArrivalTime="2018-03-18T12:10:00.000+01:00" FlightTime="205" TravelTime="205" Equipment="738" DestinationTerminal="2D"/>
+                <air:FlightDetails Key="TbTehBBAAA/BFufnB5AAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T14:40:00.000+02:00" ArrivalTime="2018-03-18T17:05:00.000+01:00" FlightTime="205" TravelTime="205" Equipment="319" DestinationTerminal="2E"/>
+                <air:FlightDetails Key="TbTehBBAAA/BHufnB5AAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T14:40:00.000+02:00" ArrivalTime="2018-03-18T17:05:00.000+01:00" FlightTime="205" TravelTime="205" Equipment="319" DestinationTerminal="2E"/>
+                <air:FlightDetails Key="TbTehBBAAA/BJufnB5AAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T19:30:00.000+02:00" ArrivalTime="2018-03-18T22:00:00.000+01:00" FlightTime="210" TravelTime="210" Equipment="738" DestinationTerminal="2D"/>
+                <air:FlightDetails Key="TbTehBBAAA/BLufnB5AAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T19:30:00.000+02:00" ArrivalTime="2018-03-18T22:00:00.000+01:00" FlightTime="210" TravelTime="210" Equipment="738" DestinationTerminal="2D"/>
+                <air:FlightDetails Key="TbTehBBAAA/BNufnB5AAAA==" Origin="KBP" Destination="VIE" DepartureTime="2018-03-18T13:20:00.000+02:00" ArrivalTime="2018-03-18T14:25:00.000+01:00" FlightTime="125" TravelTime="285" Equipment="319"/>
+                <air:FlightDetails Key="TbTehBBAAA/BPufnB5AAAA==" Origin="VIE" Destination="CDG" DepartureTime="2018-03-18T15:05:00.000+01:00" ArrivalTime="2018-03-18T17:05:00.000+01:00" FlightTime="120" TravelTime="285" Equipment="319" DestinationTerminal="2F"/>
+                <air:FlightDetails Key="TbTehBBAAA/BRufnB5AAAA==" Origin="KBP" Destination="VIE" DepartureTime="2018-03-18T13:20:00.000+02:00" ArrivalTime="2018-03-18T14:25:00.000+01:00" FlightTime="125" TravelTime="285" Equipment="320"/>
+                <air:FlightDetails Key="TbTehBBAAA/BTufnB5AAAA==" Origin="VIE" Destination="CDG" DepartureTime="2018-03-18T15:00:00.000+01:00" ArrivalTime="2018-03-18T17:05:00.000+01:00" FlightTime="125" TravelTime="285" Equipment="321" DestinationTerminal="2F"/>
+                <air:FlightDetails Key="TbTehBBAAA/BVufnB5AAAA==" Origin="KBP" Destination="FRA" DepartureTime="2018-03-18T13:50:00.000+02:00" ArrivalTime="2018-03-18T15:40:00.000+01:00" FlightTime="170" TravelTime="290" Equipment="32A" DestinationTerminal="1"/>
+                <air:FlightDetails Key="TbTehBBAAA/BXufnB5AAAA==" Origin="FRA" Destination="CDG" DepartureTime="2018-03-18T16:30:00.000+01:00" ArrivalTime="2018-03-18T17:40:00.000+01:00" FlightTime="70" TravelTime="290" Equipment="320" OriginTerminal="1" DestinationTerminal="1"/>
+                <air:FlightDetails Key="TbTehBBAAA/BZufnB5AAAA==" Origin="KBP" Destination="MUC" DepartureTime="2018-03-18T15:50:00.000+02:00" ArrivalTime="2018-03-18T17:20:00.000+01:00" FlightTime="150" TravelTime="295" Equipment="32A" DestinationTerminal="2"/>
+                <air:FlightDetails Key="TbTehBBAAA/BbufnB5AAAA==" Origin="MUC" Destination="CDG" DepartureTime="2018-03-18T18:10:00.000+01:00" ArrivalTime="2018-03-18T19:45:00.000+01:00" FlightTime="95" TravelTime="295" Equipment="319" OriginTerminal="2" DestinationTerminal="1"/>
+            </air:FlightDetailsList>
+            <air:AirSegmentList>
+                <air:AirSegment Key="TbTehBBAAA/B+tfnB5AAAA==" Group="0" Carrier="PS" FlightNumber="9283" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T06:40:00.000+02:00" ArrivalTime="2018-03-18T09:10:00.000+01:00" FlightTime="210" TravelTime="210" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="AF" OperatingFlightNumber="1653">AIR FRANCE</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="CL|DL|ZL|FL"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="S9|E9|K9|H9|L9|V9|M9|Q9|N9|B9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/B9tfnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BAufnB5AAAA==" Group="0" Carrier="AF" FlightNumber="1653" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T06:40:00.000+02:00" ArrivalTime="2018-03-18T09:10:00.000+01:00" FlightTime="210" TravelTime="210" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J4|C3|D3|I3|Z3|O3"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|K9|H9|L9|Q9|T9|E9|N9|R9|V9|X9|GC"/>
+                        <air:BookingCodeInfo CabinClass="First" BookingCounts="P9|F9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="W9|S9|A9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/B/tfnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BCufnB5AAAA==" Group="0" Carrier="PS" FlightNumber="127" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T09:45:00.000+02:00" ArrivalTime="2018-03-18T12:10:00.000+01:00" FlightTime="205" TravelTime="205" ETicketability="Yes" Equipment="738" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C9|D9|Z9|F9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="S9|E9|K9|H9|L9|V9|M9|Q9|NC|BC|T4|GL"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BBufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BEufnB5AAAA==" Group="0" Carrier="AF" FlightNumber="3375" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T09:45:00.000+02:00" ArrivalTime="2018-03-18T12:10:00.000+01:00" FlightTime="205" TravelTime="205" ETicketability="Yes" Equipment="738" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="PS" OperatingFlightNumber="127">UKRAINE INTERNATIONAL AI</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C9|D9|I9|Z9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|K9|H9|Q9|L9|T9|E9|N9|R9|V9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="W9|S9|A9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BDufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BGufnB5AAAA==" Group="0" Carrier="PS" FlightNumber="9263" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T14:40:00.000+02:00" ArrivalTime="2018-03-18T17:05:00.000+01:00" FlightTime="205" TravelTime="205" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="AF" OperatingFlightNumber="1753">AIR FRANCE</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="CL|DL|ZL|FL"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="S9|E9|K9|H9|L9|V9|M9|Q9|N9|B9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BFufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BIufnB5AAAA==" Group="0" Carrier="AF" FlightNumber="1753" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T14:40:00.000+02:00" ArrivalTime="2018-03-18T17:05:00.000+01:00" FlightTime="205" TravelTime="205" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J4|C3|D3|I3|Z3|O2"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|K9|H9|L9|Q9|T9|E9|N9|R9|V9|X9|G4"/>
+                        <air:BookingCodeInfo CabinClass="First" BookingCounts="P9|F9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="W9|S9|A9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BHufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BKufnB5AAAA==" Group="0" Carrier="AF" FlightNumber="3368" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T19:30:00.000+02:00" ArrivalTime="2018-03-18T22:00:00.000+01:00" FlightTime="210" TravelTime="210" ETicketability="Yes" Equipment="738" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="PS" OperatingFlightNumber="129">UKRAINE INTERNATIONAL AI</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C9|D9|I9|Z9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|K9|H9|Q9|L9|T9|E9|N9|R9|V9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="W9|S9|A9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BJufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BMufnB5AAAA==" Group="0" Carrier="PS" FlightNumber="129" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T19:30:00.000+02:00" ArrivalTime="2018-03-18T22:00:00.000+01:00" FlightTime="210" TravelTime="210" ETicketability="Yes" Equipment="738" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C9|D9|Z9|F8"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="S9|E9|K9|H9|L9|V9|M9|Q9|NC|B9|TC|GL"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BLufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BOufnB5AAAA==" Group="0" Carrier="OS" FlightNumber="662" Origin="KBP" Destination="VIE" DepartureTime="2018-03-18T13:20:00.000+02:00" ArrivalTime="2018-03-18T14:25:00.000+01:00" FlightTime="125" TravelTime="285" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General" OperationalStatus="Flight Canceled">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="JR|CR|DR|ZR|PR|IR"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="YR|BR|MR|UR|HR|QR|VR|WR|SR|TR|LR|KR|OR|XR"/>
+                        <air:BookingCodeInfo CabinClass="First" BookingCounts="AR|FR"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="ER|GR|NR|RR"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BNufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BQufnB5AAAA==" Group="0" Carrier="OS" FlightNumber="7115" Origin="VIE" Destination="CDG" DepartureTime="2018-03-18T15:05:00.000+01:00" ArrivalTime="2018-03-18T17:05:00.000+01:00" FlightTime="120" TravelTime="285" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General" OperationalStatus="Flight Canceled">
+                    <air:CodeshareInfo OperatingCarrier="AF" OperatingFlightNumber="1739">AIR FRANCE</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="JR|CR|DR|ZR|PR|IR"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="YR|BR|MR|UR|HR|QR|VR|WR|SR|TR|LR|KR|OR|XR"/>
+                        <air:BookingCodeInfo CabinClass="First" BookingCounts="AR|FR"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="ER|GR|NR|RR"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BPufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BSufnB5AAAA==" Group="0" Carrier="PS" FlightNumber="9816" Origin="KBP" Destination="VIE" DepartureTime="2018-03-18T13:20:00.000+02:00" ArrivalTime="2018-03-18T14:25:00.000+01:00" FlightTime="125" TravelTime="285" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="OS" OperatingFlightNumber="662">AUSTRIAN AIRLINES</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C9|D9|Z9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="S9|E9|K9|HL|LL|VC|MC|QC|NC"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BRufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BUufnB5AAAA==" Group="0" Carrier="AF" FlightNumber="1739" Origin="VIE" Destination="CDG" DepartureTime="2018-03-18T15:00:00.000+01:00" ArrivalTime="2018-03-18T17:05:00.000+01:00" FlightTime="125" TravelTime="285" ETicketability="Yes" Equipment="321" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J5|C3|D3|I3|Z3|O3"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|K9|H9|L9|Q9|T9|E9|N9|R9|V9|XC|GC"/>
+                        <air:BookingCodeInfo CabinClass="First" BookingCounts="P9|F9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="W9|S9|A9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BTufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BWufnB5AAAA==" Group="0" Carrier="LH" FlightNumber="1491" Origin="KBP" Destination="FRA" DepartureTime="2018-03-18T13:50:00.000+02:00" ArrivalTime="2018-03-18T15:40:00.000+01:00" FlightTime="170" TravelTime="290" ETicketability="Yes" Equipment="32A" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C8|D7|Z4|P2"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|H9|Q9|V9|W9|S9|T9|L9|K9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BVufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BYufnB5AAAA==" Group="0" Carrier="LH" FlightNumber="1040" Origin="FRA" Destination="CDG" DepartureTime="2018-03-18T16:30:00.000+01:00" ArrivalTime="2018-03-18T17:40:00.000+01:00" FlightTime="70" TravelTime="290" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C8|D7|Z4|P2"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|H9|Q9|V9|W9|S9|T9|L9|K9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BXufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BaufnB5AAAA==" Group="0" Carrier="LH" FlightNumber="2545" Origin="KBP" Destination="MUC" DepartureTime="2018-03-18T15:50:00.000+02:00" ArrivalTime="2018-03-18T17:20:00.000+01:00" FlightTime="150" TravelTime="295" ETicketability="Yes" Equipment="32A" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C8|D7|Z3|P1"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|H9|Q9|V9|W9|S9|T9|L9|K7"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BZufnB5AAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="TbTehBBAAA/BcufnB5AAAA==" Group="0" Carrier="LH" FlightNumber="2236" Origin="MUC" Destination="CDG" DepartureTime="2018-03-18T18:10:00.000+01:00" ArrivalTime="2018-03-18T19:45:00.000+01:00" FlightTime="95" TravelTime="295" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C8|D7|Z3|P1"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|H9|Q9|V9|W9|S9|T9|L9|K7"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="TbTehBBAAA/BbufnB5AAAA=="/>
+                </air:AirSegment>
+            </air:AirSegmentList>
+            <air:AirItinerarySolution Key="TbTehBBAAA/BdufnB5AAAA==">
+                <air:AirSegmentRef Key="TbTehBBAAA/B+tfnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BAufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BCufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BEufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BGufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BIufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BKufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BMufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BOufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BQufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BSufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BUufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BWufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BYufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BaufnB5AAAA=="/>
+                <air:AirSegmentRef Key="TbTehBBAAA/BcufnB5AAAA=="/>
+                <air:Connection SegmentIndex="8"/>
+                <air:Connection SegmentIndex="10"/>
+                <air:Connection SegmentIndex="12"/>
+                <air:Connection SegmentIndex="14"/>
+            </air:AirItinerarySolution>
+        </air:AvailabilitySearchRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

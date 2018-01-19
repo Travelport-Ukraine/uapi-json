@@ -13,6 +13,7 @@ import gdsQueuePlace from './GDS_QUEUE_PLACE.handlebars';
 import universalRecordCancelUr from './UNIVERSAL_RECORD_CANCEL_UR.handlebars';
 import universalRecordFoid from './UNIVERSAL_RECORD_FOID.handlebars';
 import universalRecordImport from './UNIVERSAL_RECORD_IMPORT_REQUEST.handlebars';
+import availability from './AIR_AVAILABILTIY_REQUEST.handlebars';
 
 module.exports = {
   createReservation,
@@ -30,4 +31,5 @@ module.exports = {
   universalRecordCancelUr,
   universalRecordFoid,
   universalRecordImport,
+  availability,
 };

@@ -17,6 +17,10 @@ module.exports = (settings) => {
       return service.searchLowFares(options);
     },
 
+    availability(options) {
+      return service.availability(options);
+    },
+
     fareRules(options) {
       // add request for fare rules
       const request = Object.assign(options,

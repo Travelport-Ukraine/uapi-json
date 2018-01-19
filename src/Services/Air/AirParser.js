@@ -994,6 +994,62 @@ function exchangeBooking(rsp) {
   throw new AirRuntimeError.CantDetectExchangeReponse(rsp);
 }
 
+function availability(rsp) {
+  const itinerarySolution = utils.firstInObj(rsp['air:AirItinerarySolution']);
+  const connectedSegments = itinerarySolution['air:Connection']
+    ? itinerarySolution['air:Connection'].map(
+      s => parseInt(s.SegmentIndex, 10)
+    )
+    : [];
+
+  const results = [];
+  let leg = [];
+  itinerarySolution['air:AirSegmentRef'].forEach((segmentRef, key) => {
+    const segment = rsp['air:AirSegmentList'][segmentRef];
+    const isConnected = connectedSegments.find(s => s === key);
+    const availInfo = segment['air:AirAvailInfo'].find(info => info.ProviderCode === '1G');
+
+    const cabinsAvailability = availInfo
+      ? this.env.cabins.reduce((acc, cabin) => {
+        const codes = availInfo['air:BookingCodeInfo']
+          .find(info => info.CabinClass === cabin)
+          .BookingCounts
+          .split('|')
+          .map(item => ({
+            bookingClass: item[0],
+            cabin,
+            count: parseInt(item[1].trim() || '0', 10),
+          }));
+
+        return acc.concat(codes);
+      }, [])
+      : null;
+
+    const s = {
+      ...format.formatSegment(segment),
+      plane: segment.Equipment,
+      duration: segment.FlightTime,
+      availability: cabinsAvailability,
+    };
+
+    leg.push(s);
+
+    if (!isConnected) {
+      results.push(leg);
+      leg = [];
+    }
+  });
+
+  if (leg.length !== 0) {
+    results.push(leg);
+  }
+
+  return {
+    legs: results,
+    nextResultReference: rsp[`common_${this.uapi_version}:NextResultReference`] || null,
+  };
+}
+
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: lowFaresSearchRequest,
   AIR_PRICE_REQUEST_PRICING_SOLUTION_XML: airPriceRspPricingSolutionXML,
@@ -1011,4 +1067,5 @@ module.exports = {
   AIR_CANCEL_PNR: airCancelPnr,
   AIR_EXCHANGE_QUOTE: exchangeQuote,
   AIR_EXCHANGE: exchangeBooking,
+  AIR_AVAILABILITY: availability,
 };

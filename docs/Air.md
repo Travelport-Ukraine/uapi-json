@@ -10,6 +10,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 
 **AirService**
 * [.shop(params)](#shop)
+* [.availability(params)](#shop) (same params as `.shop(params)`)
 * [.book(params)](#book)
 * [.ticket(params)](#ticket)
 * [.toQueue(params)](#toQueue)
@@ -36,8 +37,19 @@ Low Fare Shop functionality combines air availability and a fare quote request t
 | --- | --- | --- |
 | legs | `Array<Leg>` | See `Leg` description [below](#leg). |
 | passengers | `Search Passengers` | See `Search Passengers` description [below](#passengers). |
-| cabins | `Cabins array` | See `Cabins array` description [below](#cabins). |
-| requestId | `string` | Trace id of this request. |
+| pricing | `Pricing` | See `Pricing` modifiers description [below](#pricing_mod). <i>Optional.</i> |
+| cabins | `Array<Cabin>` | See `Cabins array` description [below](#cabins). |
+| requestId | `string` | Trace id of this request. <i>Optional.</i> |
+| maxJourneyTime | `number` | Maximum travel time in minutes. <i>Optional.</i> |
+| carriers | `Array<String>` | Array of carriers' codes. <i>Optional.</i> |
+
+### Pricing object
+<a name="pricing_mod"></a>
+| Param | Type | Description |
+| --- | --- | --- |
+| currency | `String` | Currency to convert results prices. |
+| eTicketability | `Boolean` | Detect if pricing solution will be ticketable as e-ticket. |
+
 
 ### Leg object
 <a name="leg"></a>

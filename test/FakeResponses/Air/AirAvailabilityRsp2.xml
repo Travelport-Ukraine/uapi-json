@@ -1,0 +1,27 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AvailabilitySearchRsp TraceId="4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60" TransactionId="02F7DB740A07405DABB04F8F50746D63" ResponseTime="415" DistanceUnits="MI"
+                                   xmlns:air="http://www.travelport.com/schema/air_v36_0"
+                                   xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0">
+            <common_v36_0:ResponseMessage Code="3051" Type="Warning">No more later flights.</common_v36_0:ResponseMessage>
+            <common_v36_0:ResponseMessage Code="0" Type="Warning">No more AirItinerarySolution exists for the requested SearchAirLeg. Origin:IEV Destination:NYC PreferredTime:2018-11-10 00:00 EarliestTime:2018-11-09 22:00 LatestTime:2018-11-10 04:00</common_v36_0:ResponseMessage>
+            <air:FlightDetailsList>
+                <air:FlightDetails Key="Lb5ohBdB0BKA8lCgt8AAAA==" Origin="KBP" Destination="JFK" DepartureTime="2018-11-10T11:30:00.000+02:00" ArrivalTime="2018-11-10T14:40:00.000-05:00" FlightTime="610" TravelTime="610" Equipment="777" DestinationTerminal="7"/>
+            </air:FlightDetailsList>
+            <air:AirSegmentList>
+                <air:AirSegment Key="Lb5ohBdB0BKA9lCgt8AAAA==" Group="0" Carrier="PS" FlightNumber="231" Origin="KBP" Destination="JFK" DepartureTime="2018-11-10T11:30:00.000+02:00" ArrivalTime="2018-11-10T14:40:00.000-05:00" FlightTime="610" TravelTime="610" ETicketability="Yes" Equipment="777" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C9|D9|Z9|F9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="W9|Y9|P9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="S9|E9|K9|H9|L9|V9|M9|Q9|N9|B9|T9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="Lb5ohBdB0BKA8lCgt8AAAA=="/>
+                </air:AirSegment>
+            </air:AirSegmentList>
+            <air:AirItinerarySolution Key="Lb5ohBdB0BKA+lCgt8AAAA==">
+                <air:AirSegmentRef Key="Lb5ohBdB0BKA9lCgt8AAAA=="/>
+            </air:AirItinerarySolution>
+        </air:AvailabilitySearchRsp>
+    </SOAP:Body>
+</SOAP:Envelope>
