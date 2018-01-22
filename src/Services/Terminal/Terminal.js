@@ -17,9 +17,14 @@ module.exports = function (settings) {
   const emulatePcc = settings.auth.emulatePcc || false;
   const timeout = settings.timeout || false;
   const debug = settings.debug || 0;
+  const autoClose = settings.autoClose === undefined
+    ? true
+    : settings.autoClose;
+  const token = settings.auth.token || null;
+
   const state = {
     terminalState: TERMINAL_STATE_NONE,
-    sessionToken: null,
+    sessionToken: token,
   };
   // Processing response with MD commands
   const processResponse = (response, previousResponse = null) => {
@@ -82,6 +87,7 @@ module.exports = function (settings) {
   });
 
   const terminal = {
+    getToken: getSessionToken,
     executeCommand: command => Promise.resolve()
       .then(() => {
         if (debug) {
@@ -131,49 +137,50 @@ module.exports = function (settings) {
       ),
   };
 
-  // Adding event handler on beforeExit and exit process events
-  process.on('beforeExit', () => {
-    switch (state.terminalState) {
-      case TERMINAL_STATE_BUSY:
-      case TERMINAL_STATE_READY:
-      case TERMINAL_STATE_ERROR:
-        if (state.terminalState === TERMINAL_STATE_BUSY) {
-          log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
-        }
-        if (state.sessionToken !== null) {
-          log('UAPI-JSON WARNING: Process left TerminalService session open');
-          log('UAPI-JSON WARNING: Session closing');
-          terminal.closeSession().then(
-            () => log('UAPI-JSON WARNING: Session closed')
-          ).catch(
-            () => {
-              throw new TerminalRuntimeError.ErrorClosingSession();
-            }
-          );
-        }
-        break;
-      default:
-        break;
-    }
-  });
-  /* istanbul ignore next */
-  process.on('exit', () => {
-    switch (state.terminalState) {
-      case TERMINAL_STATE_BUSY:
-      case TERMINAL_STATE_READY:
-      case TERMINAL_STATE_ERROR:
-        if (state.terminalState === TERMINAL_STATE_BUSY) {
-          log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
-        }
-        if (state.sessionToken !== null) {
-          log('UAPI-JSON WARNING: Process left TerminalService session open');
-        }
-        break;
-      default:
-        break;
-    }
-  });
-
+  if (autoClose) {
+    // Adding event handler on beforeExit and exit process events
+    process.on('beforeExit', () => {
+      switch (state.terminalState) {
+        case TERMINAL_STATE_BUSY:
+        case TERMINAL_STATE_READY:
+        case TERMINAL_STATE_ERROR:
+          if (state.terminalState === TERMINAL_STATE_BUSY) {
+            log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
+          }
+          if (state.sessionToken !== null) {
+            log('UAPI-JSON WARNING: Process left TerminalService session open');
+            log('UAPI-JSON WARNING: Session closing');
+            terminal.closeSession().then(
+              () => log('UAPI-JSON WARNING: Session closed')
+            ).catch(
+              () => {
+                throw new TerminalRuntimeError.ErrorClosingSession();
+              }
+            );
+          }
+          break;
+        default:
+          break;
+      }
+    });
+    /* istanbul ignore next */
+    process.on('exit', () => {
+      switch (state.terminalState) {
+        case TERMINAL_STATE_BUSY:
+        case TERMINAL_STATE_READY:
+        case TERMINAL_STATE_ERROR:
+          if (state.terminalState === TERMINAL_STATE_BUSY) {
+            log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
+          }
+          if (state.sessionToken !== null) {
+            log('UAPI-JSON WARNING: Process left TerminalService session open');
+          }
+          break;
+        default:
+          break;
+      }
+    });
+  }
 
   return terminal;
 };
