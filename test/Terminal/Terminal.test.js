@@ -393,5 +393,53 @@ describe('#Terminal', function terminalTest() {
           expect(executeCommandOk.getCall(1).args[0].command).to.equal('I');
         });
     });
+
+    it('Should work in stateless mod', () => {
+      // Resetting spies
+      getSessionToken.reset();
+      executeCommandOk.reset();
+      closeSession.reset();
+
+      const emulatePcc = '7j8i';
+
+      const emulateConfig = Object.assign({}, config, {
+        emulatePcc,
+      });
+
+      let uAPITerminal = terminalOk({
+        auth: emulateConfig,
+        autoClose: false,
+      });
+
+      return uAPITerminal.getToken()
+        .then((sessionToken) => {
+          expect(sessionToken).to.be.equal('TOKEN');
+          expect(getSessionToken.callCount).to.equal(1);
+          expect(executeCommandOk.callCount).to.equal(1);
+          expect(closeSession.callCount).to.equal(0);
+
+          uAPITerminal = null;
+
+          const auth = Object.assign(
+            {},
+            emulateConfig,
+            { token: sessionToken }
+          );
+
+          uAPITerminal = terminalOk({
+            auth,
+            autoClose: false,
+          });
+
+          return uAPITerminal
+            .executeCommand('I')
+            .then(() => uAPITerminal.closeSession())
+            .then(() => {
+              expect(getSessionToken.callCount).to.equal(1);
+              expect(executeCommandOk.callCount).to.equal(2);
+              expect(closeSession.callCount).to.equal(1);
+            });
+        });
+    });
   });
 });

@@ -12,7 +12,7 @@ using your own Service bureau.
 **TerminalService**
 * [`.executeCommand()`](#execute_command)
 * [`.closeSession()`](#close_session)
-
+* [`.getToken()`](#get_token)
 
 ## .executeCommand(command)
 <a name="execute_command"></a>
@@ -30,3 +30,12 @@ When you have finished command execution it's necessary to close terminal connec
 to free up space in the terminal pool. Takes no parameters
 
 **Returns**: `Promise` which fullfills with true if terminal was succesfully closed
+
+
+## .getToken()
+<a name="get_token"></a>
+Use this method to resolve token.
+If token is resolved after `executeCommand` it takes no time for resolving.  
+Takes no parameters
+
+**Returns**: `Promise<String>`
