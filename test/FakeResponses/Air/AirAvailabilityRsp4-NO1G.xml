@@ -141,7 +141,7 @@
                 </air:AirSegment>
                 <air:AirSegment Key="nMB0UESc1BKACyXaBLAAAA==" Group="0" Carrier="QS" FlightNumber="8758" Origin="PRG" Destination="CDG" DepartureTime="2018-11-10T07:10:00.000+01:00" ArrivalTime="2018-11-10T09:00:00.000+01:00" FlightTime="110" TravelTime="295" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="No polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="O" AvailabilityDisplayType="General">
                     <air:CodeshareInfo OperatingCarrier="OK" OperatingFlightNumber="758">CZECH AIRLINES</air:CodeshareInfo>
-                    <air:AirAvailInfo ProviderCode="1P">
+                    <air:AirAvailInfo ProviderCode="1G">
                     </air:AirAvailInfo>
                     <air:FlightDetailsRef Key="nMB0UESc1BKAByXaBLAAAA=="/>
                 </air:AirSegment>
