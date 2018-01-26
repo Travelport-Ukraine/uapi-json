@@ -1,0 +1,175 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AvailabilitySearchRsp TraceId="4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60" TransactionId="31ACF6A70A075712386BEFCE05C3028D" ResponseTime="882" DistanceUnits="MI"
+                                   xmlns:air="http://www.travelport.com/schema/air_v36_0"
+                                   xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0">
+            <common_v36_0:NextResultReference>H4sIAAAAAAAAAJ1Uz08TQRR+bamAVgliiMEoGo14cbelQEW8ICDBLD9CCYcSDsPudBnc7iwz07IYY6IXT56NJp6MJCb+ASYmXvVojDfjwXA0/gF4wZmhS1mJNtrDdufNN99733vf7OsfkOYMutZQDRlVQTxjlDG0aREuwgefzj59j56nIDEFLZzcxWEAAImNFvWUh67atGK4/XyDCHvVcB1uIAcFAjNuyJ0K9Y2JUDBkiwV6B/vWwy+9ZLdzKwltS3AMMbZAKljlEZBbsuQBM6IyJVWFOtgz92hMhSwG2CZlYiNBqD8iGRwcNBiGmzDc8nBIVjx8mMlSTFwQXy8FnLRUK0wP+a5ZFIz4roSkXUargYCuA5tTvsAuZnK3vUIZ1hrX4T6kLThCGXFJtMoEjNaIg9mYrKgeS4t9eBhUWb0DsWbq+qNGHq775fnFj++eFB4nAfRYQLIMN2H5cxc+v12+fubR9nLEpsY79H9csPdLJCFhQQfHiNmr2gfjaJMLMP4+qGIcPxIyMP6tM438LSXoJnyO4TJm2FHAGSomSU16EY4HOlyPC7gYL6tejboQ5jgSWqWcdIbXM6m1ml6HnL6Q7/PSEZLlSnMfa+SIbLLs8IWYsrogfQmjnA0xR0qQcWQ0klCCDuLXkEe0gBL1cQlO0HKZY9GAZERMdNsadZCiFnDaosw11dpUmJhIUSecQXsi0/uW6JaHDHXIUJj9Kt/cCJ21pa87yj0MeuOgFcSxcVM+IvTu7s632WXjRRKSt6GVTBPPI1xeQzK2yqhPPepuCuj5rb7GnuodJMo/v2dUC/viyWwNM6aKs40Dl4qiuvLqQ2d5vTDXl1IG54eKjGpTsjV+y0w8u9ffs63xG+3QOiFsc3J6IQwDdfxyU0/qOTfGl5J9ldb2iPzWHDDPUU8mjkXixtRBmTJQL6fkFyg1Nzov/87ls/3ZwWw+m88P5/KFwaFsYSA7lC/kBq4VBnJZiZuaWAyC8BdQA9in3wUAAA==</common_v36_0:NextResultReference>
+            <air:FlightDetailsList>
+                <air:FlightDetails Key="nMB0UESc1BKAjxXaBLAAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T06:40:00.000+02:00" ArrivalTime="2018-11-10T09:10:00.000+01:00" FlightTime="210" TravelTime="210" Equipment="319" DestinationTerminal="2E"/>
+                <air:FlightDetails Key="nMB0UESc1BKAlxXaBLAAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T09:45:00.000+02:00" ArrivalTime="2018-11-10T12:10:00.000+01:00" FlightTime="205" TravelTime="205" Equipment="73J" DestinationTerminal="2D"/>
+                <air:FlightDetails Key="nMB0UESc1BKAnxXaBLAAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T09:45:00.000+02:00" ArrivalTime="2018-11-10T12:10:00.000+01:00" FlightTime="205" TravelTime="205" Equipment="73J" DestinationTerminal="2D"/>
+                <air:FlightDetails Key="nMB0UESc1BKApxXaBLAAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T14:40:00.000+02:00" ArrivalTime="2018-11-10T17:05:00.000+01:00" FlightTime="205" TravelTime="205" Equipment="319" DestinationTerminal="2E"/>
+                <air:FlightDetails Key="nMB0UESc1BKArxXaBLAAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T19:30:00.000+02:00" ArrivalTime="2018-11-10T22:00:00.000+01:00" FlightTime="210" TravelTime="210" Equipment="E90" DestinationTerminal="2D"/>
+                <air:FlightDetails Key="nMB0UESc1BKAtxXaBLAAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T19:30:00.000+02:00" ArrivalTime="2018-11-10T22:00:00.000+01:00" FlightTime="210" TravelTime="210" Equipment="E90" DestinationTerminal="2D"/>
+                <air:FlightDetails Key="nMB0UESc1BKAvxXaBLAAAA==" Origin="KBP" Destination="LJU" DepartureTime="2018-11-10T05:00:00.000+02:00" ArrivalTime="2018-11-10T06:10:00.000+01:00" FlightTime="130" TravelTime="285" Equipment="CR9"/>
+                <air:FlightDetails Key="nMB0UESc1BKAxxXaBLAAAA==" Origin="LJU" Destination="CDG" DepartureTime="2018-11-10T06:45:00.000+01:00" ArrivalTime="2018-11-10T08:45:00.000+01:00" FlightTime="120" TravelTime="285" Equipment="CR9" DestinationTerminal="2D"/>
+                <air:FlightDetails Key="nMB0UESc1BKAzxXaBLAAAA==" Origin="IEV" Destination="WAW" DepartureTime="2018-11-10T06:00:00.000+02:00" ArrivalTime="2018-11-10T06:30:00.000+01:00" FlightTime="90" TravelTime="290" Equipment="E95" OriginTerminal="0"/>
+                <air:FlightDetails Key="nMB0UESc1BKA1xXaBLAAAA==" Origin="WAW" Destination="CDG" DepartureTime="2018-11-10T07:20:00.000+01:00" ArrivalTime="2018-11-10T09:50:00.000+01:00" FlightTime="150" TravelTime="290" Equipment="E95" DestinationTerminal="1"/>
+                <air:FlightDetails Key="nMB0UESc1BKA3xXaBLAAAA==" Origin="KBP" Destination="FRA" DepartureTime="2018-11-10T13:50:00.000+02:00" ArrivalTime="2018-11-10T15:40:00.000+01:00" FlightTime="170" TravelTime="290" Equipment="32A" DestinationTerminal="1"/>
+                <air:FlightDetails Key="nMB0UESc1BKA5xXaBLAAAA==" Origin="FRA" Destination="CDG" DepartureTime="2018-11-10T16:30:00.000+01:00" ArrivalTime="2018-11-10T17:40:00.000+01:00" FlightTime="70" TravelTime="290" Equipment="320" OriginTerminal="1" DestinationTerminal="1"/>
+                <air:FlightDetails Key="nMB0UESc1BKA7xXaBLAAAA==" Origin="KBP" Destination="PRG" DepartureTime="2018-11-10T05:05:00.000+02:00" ArrivalTime="2018-11-10T06:10:00.000+01:00" FlightTime="125" TravelTime="295" Equipment="319" DestinationTerminal="1"/>
+                <air:FlightDetails Key="nMB0UESc1BKA9xXaBLAAAA==" Origin="PRG" Destination="CDG" DepartureTime="2018-11-10T07:10:00.000+01:00" ArrivalTime="2018-11-10T09:00:00.000+01:00" FlightTime="110" TravelTime="295" Equipment="319" OriginTerminal="2" DestinationTerminal="2D"/>
+                <air:FlightDetails Key="nMB0UESc1BKA/xXaBLAAAA==" Origin="KBP" Destination="PRG" DepartureTime="2018-11-10T05:05:00.000+02:00" ArrivalTime="2018-11-10T06:10:00.000+01:00" FlightTime="125" TravelTime="295" Equipment="319" DestinationTerminal="1"/>
+                <air:FlightDetails Key="nMB0UESc1BKAByXaBLAAAA==" Origin="PRG" Destination="CDG" DepartureTime="2018-11-10T07:10:00.000+01:00" ArrivalTime="2018-11-10T09:00:00.000+01:00" FlightTime="110" TravelTime="295" Equipment="319" OriginTerminal="2" DestinationTerminal="2D"/>
+            </air:FlightDetailsList>
+            <air:AirSegmentList>
+                <air:AirSegment Key="nMB0UESc1BKAkxXaBLAAAA==" Group="0" Carrier="AF" FlightNumber="1653" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T06:40:00.000+02:00" ArrivalTime="2018-11-10T09:10:00.000+01:00" FlightTime="210" TravelTime="210" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C9|D9|I9|Z8"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|K9|H9|L9|Q9|T9|E9|N9|R9|V6"/>
+                        <air:BookingCodeInfo CabinClass="First" BookingCounts="P9|F9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="W9|S9|A9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKAjxXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKAmxXaBLAAAA==" Group="0" Carrier="PS" FlightNumber="127" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T09:45:00.000+02:00" ArrivalTime="2018-11-10T12:10:00.000+01:00" FlightTime="205" TravelTime="205" ETicketability="Yes" Equipment="73J" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C9|D9|Z9|F9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="S9|E9|K9|H9|L9|V9|M9|Q9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKAlxXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKAoxXaBLAAAA==" Group="0" Carrier="AF" FlightNumber="3375" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T09:45:00.000+02:00" ArrivalTime="2018-11-10T12:10:00.000+01:00" FlightTime="205" TravelTime="205" ETicketability="Yes" Equipment="73J" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="PS" OperatingFlightNumber="127">UKRAINE INTERNATIONAL AI</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C9|D9|I9|Z9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|K9|H9|Q9|L9|T9|E9|N9|R9|V9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="W9|S9|A9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKAnxXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKAqxXaBLAAAA==" Group="0" Carrier="AF" FlightNumber="1753" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T14:40:00.000+02:00" ArrivalTime="2018-11-10T17:05:00.000+01:00" FlightTime="205" TravelTime="205" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J8|C7|D7|I6|Z4|O1"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|K9|H9|L9|Q9|T9|E9|N9|R9|V9|X9"/>
+                        <air:BookingCodeInfo CabinClass="First" BookingCounts="P9|F9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="W9|S9|A9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKApxXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKAsxXaBLAAAA==" Group="0" Carrier="AF" FlightNumber="3368" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T19:30:00.000+02:00" ArrivalTime="2018-11-10T22:00:00.000+01:00" FlightTime="210" TravelTime="210" ETicketability="Yes" Equipment="E90" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="PS" OperatingFlightNumber="129">UKRAINE INTERNATIONAL AI</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C9|D9|I9|Z9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|K9|H9|Q9|L9|T9|E9|N9|R9|V9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="W9|S9|A9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKArxXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKAuxXaBLAAAA==" Group="0" Carrier="PS" FlightNumber="129" Origin="KBP" Destination="CDG" DepartureTime="2018-11-10T19:30:00.000+02:00" ArrivalTime="2018-11-10T22:00:00.000+01:00" FlightTime="210" TravelTime="210" ETicketability="Yes" Equipment="E90" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C9|D9|Z9|F9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="S9|E9|K9|H9|L9|V9|M9|Q9|N9|B9|T2"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKAtxXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKAwxXaBLAAAA==" Group="0" Carrier="JP" FlightNumber="935" Origin="KBP" Destination="LJU" DepartureTime="2018-11-10T05:00:00.000+02:00" ArrivalTime="2018-11-10T06:10:00.000+01:00" FlightTime="130" TravelTime="285" ETicketability="Yes" Equipment="CR9" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="No polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="O" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="YA|BA|PA|MA|HA|QA|EA|TA|VA|WA|GA|UA|NA|XA"/>
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="RA|IA"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKAvxXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKAyxXaBLAAAA==" Group="0" Carrier="JP" FlightNumber="322" Origin="LJU" Destination="CDG" DepartureTime="2018-11-10T06:45:00.000+01:00" ArrivalTime="2018-11-10T08:45:00.000+01:00" FlightTime="120" TravelTime="285" ETicketability="Yes" Equipment="CR9" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="No polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="O" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="CA|DA|ZA|RA|JA|IA"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="YA|BA|PA|MA|HA|QA|EA|VA|WA|SA|GA|UA|AA|NA|XA"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKAxxXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKA0xXaBLAAAA==" Group="0" Carrier="LO" FlightNumber="756" Origin="IEV" Destination="WAW" DepartureTime="2018-11-10T06:00:00.000+02:00" ArrivalTime="2018-11-10T06:30:00.000+01:00" FlightTime="90" TravelTime="290" ETicketability="Yes" Equipment="E95" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C6|D5|Z4|F2"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="P4|A4|R4|J4"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|E9|H9|K9|Q9|G9|T9|S9|V9|W9|L4"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKAzxXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKA2xXaBLAAAA==" Group="0" Carrier="LO" FlightNumber="331" Origin="WAW" Destination="CDG" DepartureTime="2018-11-10T07:20:00.000+01:00" ArrivalTime="2018-11-10T09:50:00.000+01:00" FlightTime="150" TravelTime="290" ETicketability="Yes" Equipment="E95" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C6|D5|Z4|F2"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="P4|A4|R4|J4"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|E9|H9|K9|Q9|G9|T9|S9|V9|W9|L4"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKA1xXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKA4xXaBLAAAA==" Group="0" Carrier="LH" FlightNumber="1491" Origin="KBP" Destination="FRA" DepartureTime="2018-11-10T13:50:00.000+02:00" ArrivalTime="2018-11-10T15:40:00.000+01:00" FlightTime="170" TravelTime="290" ETicketability="Yes" Equipment="32A" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C9|D9|Z7|P4"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|H9|Q9|V9|W9|S9|T3"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKA3xXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKA6xXaBLAAAA==" Group="0" Carrier="LH" FlightNumber="1040" Origin="FRA" Destination="CDG" DepartureTime="2018-11-10T16:30:00.000+01:00" ArrivalTime="2018-11-10T17:40:00.000+01:00" FlightTime="70" TravelTime="290" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C9|D9|Z7|P4"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|H9|Q9|V9|W9|S9|T3"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKA5xXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKA8xXaBLAAAA==" Group="0" Carrier="OK" FlightNumber="917" Origin="KBP" Destination="PRG" DepartureTime="2018-11-10T05:05:00.000+02:00" ArrivalTime="2018-11-10T06:10:00.000+01:00" FlightTime="125" TravelTime="295" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="No polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J8|C8|D8|I8|Z9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|M9|B9|H9|K9|T9|A9|L9|X9|Q9|G9|E9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKA7xXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKA+xXaBLAAAA==" Group="0" Carrier="OK" FlightNumber="758" Origin="PRG" Destination="CDG" DepartureTime="2018-11-10T07:10:00.000+01:00" ArrivalTime="2018-11-10T09:00:00.000+01:00" FlightTime="110" TravelTime="295" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="No polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J3|C3|D3|I3|Z9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|M9|B9|H9|K9|T9|A9|L9|X9|Q9|U9|V9|N9|S9|W9|O2|E9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKA9xXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKAAyXaBLAAAA==" Group="0" Carrier="QS" FlightNumber="8917" Origin="KBP" Destination="PRG" DepartureTime="2018-11-10T05:05:00.000+02:00" ArrivalTime="2018-11-10T06:10:00.000+01:00" FlightTime="125" TravelTime="295" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="No polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="O" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="OK" OperatingFlightNumber="917">CZECH AIRLINES</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="YA|PA|BA|LA|QA|TA|WA|XA"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKA/xXaBLAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="nMB0UESc1BKACyXaBLAAAA==" Group="0" Carrier="QS" FlightNumber="8758" Origin="PRG" Destination="CDG" DepartureTime="2018-11-10T07:10:00.000+01:00" ArrivalTime="2018-11-10T09:00:00.000+01:00" FlightTime="110" TravelTime="295" ETicketability="Yes" Equipment="319" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="No polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="O" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="OK" OperatingFlightNumber="758">CZECH AIRLINES</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="YA|PA|BA|LA|QA|VA|XA|UA|JA"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="nMB0UESc1BKAByXaBLAAAA=="/>
+                </air:AirSegment>
+            </air:AirSegmentList>
+            <air:AirItinerarySolution Key="nMB0UESc1BKADyXaBLAAAA==">
+                <air:AirSegmentRef Key="nMB0UESc1BKAkxXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKAmxXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKAoxXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKAqxXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKAsxXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKAuxXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKAwxXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKAyxXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKA0xXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKA2xXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKA4xXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKA6xXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKA8xXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKA+xXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKAAyXaBLAAAA=="/>
+                <air:AirSegmentRef Key="nMB0UESc1BKACyXaBLAAAA=="/>
+                <air:Connection SegmentIndex="6"/>
+                <air:Connection SegmentIndex="8"/>
+                <air:Connection SegmentIndex="10"/>
+                <air:Connection SegmentIndex="12"/>
+                <air:Connection SegmentIndex="14"/>
+            </air:AirItinerarySolution>
+        </air:AvailabilitySearchRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

@@ -1705,8 +1705,9 @@ describe('#AirParser', () => {
 
           expect(segment.availability).to.be.a('array');
           segment.availability.forEach(obj => {
-            expect(obj).to.have.all.keys(['bookingClass', 'cabin', 'count']);
-          })
+            expect(obj).to.have.all.keys(['bookingClass', 'cabin', 'seats']);
+            expect(obj.seats).to.be.a('string');
+          });
         });
       });
 
@@ -1727,10 +1728,23 @@ describe('#AirParser', () => {
         });
     });
 
-    it('should parse response without connections', () => {
+    it('should parse response with A and C availability', () => {
       const uParser = new ParserUapi('air:AvailabilitySearchRsp', 'v36_0', {
         cabins: ['Economy'],
       });
+
+      const parseFunction = airParser.AIR_AVAILABILITY;
+      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp3.xml`).toString();
+      return uParser
+        .parse(xml)
+        .then((json) => parseFunction.call(uParser, json))
+        .then((result) => {
+          testAvailability(result);
+        });
+    });
+
+    it('should parse response without connections', () => {
+      const uParser = new ParserUapi('air:AvailabilitySearchRsp', 'v36_0', {});
 
       const parseFunction = airParser.AIR_AVAILABILITY;
       const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp2.xml`).toString();

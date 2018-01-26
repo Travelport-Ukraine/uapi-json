@@ -1009,7 +1009,15 @@ function availability(rsp) {
     const isConnected = connectedSegments.find(s => s === key);
     const availInfo = segment['air:AirAvailInfo'].find(info => info.ProviderCode === '1G');
 
-    const cabinsAvailability = availInfo
+    if (!availInfo) {
+      return;
+    }
+
+    if (!availInfo['air:BookingCodeInfo']) {
+      return;
+    }
+
+    const cabinsAvailability = this.env.cabins && this.env.cabins.length > 0
       ? this.env.cabins.reduce((acc, cabin) => {
         const codes = availInfo['air:BookingCodeInfo']
           .find(info => info.CabinClass === cabin)
@@ -1018,12 +1026,23 @@ function availability(rsp) {
           .map(item => ({
             bookingClass: item[0],
             cabin,
-            count: parseInt(item[1].trim() || '0', 10),
+            seats: item[1].trim(),
           }));
 
         return acc.concat(codes);
       }, [])
-      : null;
+      : availInfo['air:BookingCodeInfo']
+        .reduce((acc, x) => {
+          const codes = x.BookingCounts
+            .split('|')
+            .map(item => ({
+              bookingClass: item[0],
+              cabin: x.CabinClass,
+              seats: item[1].trim(),
+            }));
+
+          return acc.concat(codes);
+        }, []);
 
     const s = {
       ...format.formatSegment(segment),
