@@ -1017,21 +1017,14 @@ function availability(rsp) {
       return;
     }
 
-    const cabinsAvailability = this.env.cabins && this.env.cabins.length > 0
-      ? this.env.cabins.reduce((acc, cabin) => {
-        const codes = availInfo['air:BookingCodeInfo']
-          .find(info => info.CabinClass === cabin)
-          .BookingCounts
-          .split('|')
-          .map(item => ({
-            bookingClass: item[0],
-            cabin,
-            seats: item[1].trim(),
-          }));
+    const cabinsAvailability = availInfo['air:BookingCodeInfo']
+        .filter((info) => {
+          if (this.env.cabins && this.env.cabins.length > 0) {
+            return this.env.cabins.indexOf(info.CabinClass) !== -1;
+          }
 
-        return acc.concat(codes);
-      }, [])
-      : availInfo['air:BookingCodeInfo']
+          return true;
+        })
         .reduce((acc, x) => {
           const codes = x.BookingCounts
             .split('|')
