@@ -1,0 +1,20 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <SOAP:Fault>
+            <faultcode>Server.Security</faultcode>
+            <faultstring>NO AGREEMENT EXISTS FOR AGENCY - 7J8J</faultstring>
+            <detail>
+                <common_v36_0:ErrorInfo
+                        xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0">
+                    <common_v36_0:Code>345</common_v36_0:Code>
+                    <common_v36_0:Service>SYSTEM</common_v36_0:Service>
+                    <common_v36_0:Type>Security</common_v36_0:Type>
+                    <common_v36_0:Description>No Agreement Exists</common_v36_0:Description>
+                    <common_v36_0:TransactionId>4C822EE40A0759BE3994AA5304F6C104</common_v36_0:TransactionId>
+                    <common_v36_0:TraceId/>
+                </common_v36_0:ErrorInfo>
+            </detail>
+        </SOAP:Fault>
+    </SOAP:Body>
+</SOAP:Envelope>

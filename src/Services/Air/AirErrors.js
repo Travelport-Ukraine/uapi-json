@@ -118,6 +118,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   ExchangeTokenIncorrect: 'Can\'t parse exchange token. Please resolve it again.',
   DuplicateTicketFound: 'Duplicate ticket number found. Provide PNR, UR locator',
   NoPNRFoundInUR: 'No PNR found in Universal record',
+  NoAgreement: 'There is no agreement between current pcc and you trying to reach',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(

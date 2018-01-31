@@ -253,6 +253,8 @@ const AirErrorHandler = function (obj) {
   // FIXME collapse versions using a regexp search in ParserUapi
   if (errData) {
     switch (errData[`common_${this.uapi_version}:Code`]) {
+      case '345':
+        return Promise.reject(new AirRuntimeError.NoAgreement());
       case '4454':
         return Promise.reject(new AirRuntimeError.NoResidualValue(obj));
       case '12009':
