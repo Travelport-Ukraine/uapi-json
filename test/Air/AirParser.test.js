@@ -1770,4 +1770,22 @@ describe('#AirParser', () => {
         });
     });
   });
+
+  describe('AIR_ERROR', () => {
+    it('should correct handle error of agreement', () => {
+      const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
+      const parseFunction = airParser.AIR_ERRORS;
+      const xml = fs.readFileSync(`${xmlFolder}/NoAgreementError.xml`).toString();
+      return uParser.parse(xml)
+        .then(
+          (json) => {
+            const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]); // parse error data
+            return parseFunction.call(uParser, errData);
+          }
+        )
+        .catch(
+          err => expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement)
+        );
+    });
+  });
 });
