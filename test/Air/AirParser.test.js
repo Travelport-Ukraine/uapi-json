@@ -16,7 +16,6 @@ const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:
 const ticketRegExp = /^\d{13}$/;
 const pnrRegExp = /^[A-Z0-9]{6}$/i;
 const amountRegExp = /[A-Z]{3}(?:\d+\.)?\d+/i;
-const fareCalculationPattern = /.*END$/i;
 
 const checkLowSearchFareXml = (filename) => {
   const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
@@ -219,7 +218,7 @@ describe('#AirParser', () => {
       expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
       expect(result.isConjunctionTicket).to.be.a('boolean');
       expect(result.issuedAt).to.match(timestampRegexp);
-      expect(result.fareCalculation).to.match(fareCalculationPattern);
+      expect(result.fareCalculation).to.be.a('string').and.to.have.length.above(0);
       // Price info
       expect(result.priceInfoAvailable).to.be.a('boolean');
       expect(result.priceInfoDetailsAvailable).to.be.a('boolean');
@@ -521,7 +520,7 @@ describe('#AirParser', () => {
           expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
           expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
           expect(result.issuedAt).to.match(timestampRegexp);
-          expect(result.fareCalculation).to.match(fareCalculationPattern);
+          expect(result.fareCalculation).to.be.a('string').and.to.have.length.above(0);
           // Price info
           expect(result.priceInfoDetailsAvailable).to.equal(false);
           expect(result.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
@@ -880,8 +879,7 @@ describe('#AirParser', () => {
               }
             );
 
-            expect(pricingInfo.fareCalculation).to.be.a('string');
-            expect(pricingInfo.fareCalculation).to.match(fareCalculationPattern);
+            expect(pricingInfo.fareCalculation).to.be.a('string').and.to.have.length.above(0);
             expect(new Date(pricingInfo.timeToReprice)).to.be.an.instanceof(Date);
 
             expect(pricingInfo.passengersCount).to.be.an('object');
@@ -1568,10 +1566,12 @@ describe('#AirParser', () => {
           'bookingInfo',
           'equivalentBasePrice',
           'fareCalculation',
+          'roe',
           'taxes',
           'totalPrice',
           'uapi_pricing_info_ref',
         ]);
+        expect(pricing.roe).to.match(/\d+\.\d+/);
         expect(pricing.bookingInfo).to.be.an('array').and.have.length.above(0);
         pricing.bookingInfo.forEach((info) => {
           expect(info).to.have.all.keys([

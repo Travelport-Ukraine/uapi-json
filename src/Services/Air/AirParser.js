@@ -10,6 +10,19 @@ import {
   GdsRuntimeError,
 } from './AirErrors';
 
+const parseFareCalculation = (str) => {
+  const fareCalculation = str.match(/^([\s\S]+)END($|\s)/)[1];
+  const roe = str.match(/ROE((?:\d+\.)?\d+)/);
+  return Object.assign(
+    {
+      fareCalculation,
+    },
+    roe
+      ? { roe: roe[1] }
+      : null
+  );
+};
+
 const searchLowFaresValidate = (obj) => {
   // +List, e.g. AirPricePointList, see below
   const rootArrays = ['AirPricePoint', 'AirSegment', 'FareInfo', 'FlightDetails', 'Route'];
@@ -425,9 +438,6 @@ const airGetTicket = function (obj) {
     || (fareInfo && fareInfo[`common_${this.uapi_version}:Commission`])
     || null;
 
-  const fareCalculation = etr['air:FareCalc'].match(/^([\s\S]+END)($|\s)/)[1];
-  const roe = etr['air:FareCalc'].match(/ROE((?:\d+\.)?\d+)/);
-
   const response = Object.assign(
     {
       uapi_ur_locator: obj.UniversalRecordLocatorCode,
@@ -439,7 +449,6 @@ const airGetTicket = function (obj) {
       issuedAt: etr.IssuedDate,
       farePricingMethod: airPricingInfo ? airPricingInfo.PricingMethod : null,
       farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
-      fareCalculation,
       priceInfoAvailable,
       priceInfoDetailsAvailable: (airPricingInfo !== null),
       taxes: priceSource.Taxes,
@@ -451,9 +460,7 @@ const airGetTicket = function (obj) {
       isConjunctionTicket: tickets.length > 1,
       tourCode,
     },
-    roe
-      ? { roe: roe[1] }
-      : null,
+    parseFareCalculation(etr['air:FareCalc']),
     commission
       ? {
         commission: {
@@ -754,15 +761,11 @@ function extractBookings(obj) {
             }
           );
 
-          const fareCalculation = pricingInfo['air:FareCalc'].match(/^([\s\S]+END)($|\s)/)[1];
-          const roe = pricingInfo['air:FareCalc'].match(/ROE((?:\d+\.)?\d+)/);
-
           return Object.assign(
             {
               uapi_pricing_info_ref: key,
               passengers: pricingInfoPassengers,
               uapi_pricing_info_group: pricingInfo.AirPricingInfoGroup,
-              fareCalculation,
               farePricingMethod: pricingInfo.PricingMethod,
               farePricingType: pricingInfo.PricingType,
               totalPrice: pricingInfo.TotalPrice,
@@ -774,9 +777,7 @@ function extractBookings(obj) {
               baggage,
               timeToReprice: pricingInfo.LatestTicketingTime,
             },
-            roe
-              ? { roe: roe[1] }
-              : null
+            parseFareCalculation(pricingInfo['air:FareCalc']),
           );
         }
       );
@@ -955,12 +956,14 @@ function exchangeQuote(req) {
               };
             });
 
-          return {
-            ...format.formatPrices(pricing),
-            bookingInfo,
-            uapi_pricing_info_ref: pricing.Key,
-            fareCalculation: pricing['air:FareCalc'],
-          };
+          return Object.assign(
+            {
+              ...format.formatPrices(pricing),
+              bookingInfo,
+              uapi_pricing_info_ref: pricing.Key,
+            },
+            parseFareCalculation(pricing['air:FareCalc']),
+          );
         });
 
       const airPricingDetails = solution['air:PricingDetails'];
