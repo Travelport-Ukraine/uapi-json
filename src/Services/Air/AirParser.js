@@ -425,7 +425,7 @@ const airGetTicket = function (obj) {
     || (fareInfo && fareInfo[`common_${this.uapi_version}:Commission`])
     || null;
 
-  const fareCalculation = etr['air:FareCalc'].match(/^([\s\S]+END)($|\s)/)[1];
+  const fareCalculation = etr['air:FareCalc'].match(/^([\s\S]+)END($|\s)/)[1];
   const roe = etr['air:FareCalc'].match(/ROE((?:\d+\.)?\d+)/);
 
   const response = Object.assign(
@@ -754,7 +754,7 @@ function extractBookings(obj) {
             }
           );
 
-          const fareCalculation = pricingInfo['air:FareCalc'].match(/^([\s\S]+END)($|\s)/)[1];
+          const fareCalculation = pricingInfo['air:FareCalc'].match(/^([\s\S]+)END($|\s)/)[1];
           const roe = pricingInfo['air:FareCalc'].match(/ROE((?:\d+\.)?\d+)/);
 
           return Object.assign(
@@ -955,12 +955,20 @@ function exchangeQuote(req) {
               };
             });
 
-          return {
-            ...format.formatPrices(pricing),
-            bookingInfo,
-            uapi_pricing_info_ref: pricing.Key,
-            fareCalculation: pricing['air:FareCalc'],
-          };
+          const fareCalculation = pricing['air:FareCalc'].match(/^([\s\S]+)END($|\s)/)[1];
+          const roe = pricing['air:FareCalc'].match(/ROE((?:\d+\.)?\d+)/);
+
+          return Object.assign(
+            {
+              ...format.formatPrices(pricing),
+              bookingInfo,
+              uapi_pricing_info_ref: pricing.Key,
+              fareCalculation,
+            },
+            roe
+              ? { roe: roe[1] }
+              : null
+          );
         });
 
       const airPricingDetails = solution['air:PricingDetails'];
