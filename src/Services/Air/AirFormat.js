@@ -62,9 +62,11 @@ function formatPrices(prices) {
 
 
 function formatTrip(segment, flightDetails) {
-  const flightInfo = Object.keys(flightDetails).map(
-    detailsKey => flightDetails[detailsKey]
-  );
+  const flightInfo = flightDetails
+    ? Object.keys(flightDetails).map(
+      detailsKey => flightDetails[detailsKey]
+    )
+    : [];
   const plane = flightInfo.map(details => details.Equipment || 'Unknown');
   const duration = flightInfo.map(details => details.FlightTime || 0);
   const techStops = flightInfo.slice(1).map(details => details.Origin);
