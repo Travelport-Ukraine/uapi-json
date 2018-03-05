@@ -931,11 +931,11 @@ describe('#AirParser', () => {
           expect(segment.status).to.match(/^[A-Z]{2}$/);
           // Planes
           if (segment.plane) {
-            expect(segment.plane).to.be.an('array').and.to.have.length.above(0);
+            expect(segment.plane).to.be.an('array');
             segment.plane.forEach(plane => expect(plane).to.be.a('string'));
           }
           // Duration
-          expect(segment.duration).to.be.an('array').and.to.have.length.above(0);
+          expect(segment.duration).to.be.an('array');
           segment.duration.forEach(duration => expect(duration).to.match(/^\d+$/));
           // Tech stops
           expect(segment.techStops).to.be.an('array');
@@ -991,6 +991,25 @@ describe('#AirParser', () => {
   }
 
   describe('AIR_CREATE_RESERVATION()', () => {
+    it('should parse booking with no details on some segments', () => {
+      const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPNR-no-details.xml`).toString();
+      return uParser.parse(xml)
+      .then(json => parseFunction.call(uParser, json))
+      .then((result) => {
+        testBooking(result);
+        const segments = result[0].segments;
+        expect(segments[0].plane).to.has.lengthOf(0);
+        expect(segments[0].duration).to.has.lengthOf(0);
+        expect(segments[1].plane).to.has.lengthOf(0);
+        expect(segments[1].duration).to.has.lengthOf(0);
+        expect(segments[2].plane).to.has.lengthOf(1);
+        expect(segments[2].duration).to.has.lengthOf(1);
+        expect(segments[3].plane).to.has.lengthOf(1);
+        expect(segments[3].duration).to.has.lengthOf(1);
+      });
+    });
     it('should parse booking with XF and ZP taxes in FQ', () => {
       const uParser = new ParserUapi('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
