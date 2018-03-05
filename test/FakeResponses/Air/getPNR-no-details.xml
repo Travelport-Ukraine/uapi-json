@@ -1,0 +1,140 @@
+<SOAP:Envelope 
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <universal:UniversalRecordImportRsp TraceId="" TransactionId="F59486ED0A0759C7319A8B53BF7E3116" ResponseTime="1398" 
+      xmlns:universal="http://www.travelport.com/schema/universal_v36_0" 
+      xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0" 
+      xmlns:air="http://www.travelport.com/schema/air_v36_0" 
+      xmlns:passive="http://www.travelport.com/schema/passive_v36_0">
+      <common_v36_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record AGWZ5F</common_v36_0:ResponseMessage>
+      <universal:UniversalRecord LocatorCode="AGWZ5F" Version="11" Status="Active">
+        <common_v36_0:BookingTraveler Key="RwB4cFBAAA/Bz8h2uCAAAA==" TravelerType="ADT" VIP="false">
+          <common_v36_0:BookingTravelerName First="OLEKSIIMR" Last="YEVTUSHENKO"/>
+        </common_v36_0:BookingTraveler>
+        <common_v36_0:BookingTraveler Key="RwB4cFBAAA/B08h2uCAAAA==" TravelerType="ADT" VIP="false">
+          <common_v36_0:BookingTravelerName First="YURIIMR" Last="SHAPOVALOV"/>
+        </common_v36_0:BookingTraveler>
+        <common_v36_0:BookingTraveler Key="RwB4cFBAAA/B28h2uCAAAA==" TravelerType="ADT" VIP="false">
+          <common_v36_0:BookingTravelerName First="IEVGENMR" Last="BREZHNIEV"/>
+          <common_v36_0:SSR Key="Po7cAGBAAA/Bg+0oQRAAAA==" SegmentRef="RwB4cFBAAA/B38h2uCAAAA==" Status="HK" Type="TKNE" FreeText="0579733728051C1" Carrier="AF" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA=="/>
+          <common_v36_0:SSR Key="Po7cAGBAAA/Bh+0oQRAAAA==" SegmentRef="RwB4cFBAAA/B48h2uCAAAA==" Status="HK" Type="TKNE" FreeText="0579733728051C2" Carrier="AF" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA=="/>
+          <common_v36_0:SSR Key="Po7cAGBAAA/Bi+0oQRAAAA==" Status="HK" Type="DOCS" FreeText="P/UA/FG560760/UA/17SEP72/M/09JUN27/BREZHNIEV/IEVGENMR -1BREZHNIEV/IEVGENMR" Carrier="AF" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA=="/>
+          <common_v36_0:SSR Key="Po7cAGBAAA/Bj+0oQRAAAA==" Status="HK" Type="DOCS" FreeText="P/UA/FG560760/UA/17SEP72/M/09JUN27/BREZHNIEV/IEVGENMR -1BREZHNIEV/IEVGENMR" Carrier="KL" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA=="/>
+          <common_v36_0:SSR Key="Po7cAGBAAA/Bk+0oQRAAAA==" Status="HK" Type="DOCO" FreeText="UA/V/1109084680/UA/07SEP17/CA -1BREZHNIEV/IEVGENMR" Carrier="AF" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA=="/>
+          <common_v36_0:SSR Key="Po7cAGBAAA/Bl+0oQRAAAA==" Status="HK" Type="DOCO" FreeText="UA/V/1109084680/UA/07SEP17/CA -1BREZHNIEV/IEVGENMR" Carrier="KL" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA=="/>
+          <common_v36_0:SSR Key="Po7cAGBAAA/Bm+0oQRAAAA==" Status="HK" Type="DOCA" FreeText="D/CA/457 PALMERSTON BOULEVARD/TORONTO/ONTARIO/M6G2N9 -1BREZHNIEV/IEVGENMR" Carrier="AF" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA=="/>
+          <common_v36_0:SSR Key="Po7cAGBAAA/Bn+0oQRAAAA==" Status="HK" Type="DOCA" FreeText="D/CA/457 PALMERSTON BOULEVARD/TORONTO/ONTARIO/M6G2N9 -1BREZHNIEV/IEVGENMR" Carrier="KL" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA=="/>
+          <common_v36_0:SSR Key="eGmEUHBAAA/B+a7/1GAAAA==" SegmentRef="Po7cAGBAAA/Bs+0oQRAAAA==" Status="HK" Type="TKNE" FreeText="0579733728227C1" Carrier="KL" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA=="/>
+          <common_v36_0:SSR Key="eGmEUHBAAA/B/a7/1GAAAA==" SegmentRef="Po7cAGBAAA/Bu+0oQRAAAA==" Status="HK" Type="TKNE" FreeText="0579733728227C2" Carrier="KL" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA=="/>
+        </common_v36_0:BookingTraveler>
+        <common_v36_0:OSI Key="Po7cAGBAAA/B990oQRAAAA==" Carrier="YY" Text="CTCM 380504874949" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA=="/>
+        <common_v36_0:ActionStatus Key="Po7cAGBAAA/BO90oQRAAAA==" Type="ACTIVE" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" ProviderCode="1G">
+          <common_v36_0:Remark>IEV 20FEB1528Z K2 AG</common_v36_0:Remark>
+        </common_v36_0:ActionStatus>
+        <universal:ProviderReservationInfo Key="RwB4cFBAAA/B58h2uCAAAA==" ProviderCode="1G" LocatorCode="KK8NFK" CreateDate="2018-02-05T07:46:37.622+00:00" ModifiedDate="2018-03-05T09:53:28.331+00:00" HostCreateDate="2018-01-04" OwningPCC="3L03">
+          <universal:ProviderReservationDetails ProviderReservationDetail="false" CustomCheck="false" ProviderProfile="false" DivideDetails="true" EnhancedItinModifiers="false" IntegratedContent="false" Cruise="false" RailSegment="false"/>
+        </universal:ProviderReservationInfo>
+        <air:AirReservation LocatorCode="JGZSM5" CreateDate="2018-02-05T07:46:37.622+00:00" ModifiedDate="2018-03-02T13:24:24.080+00:00">
+          <common_v36_0:SupplierLocator SupplierCode="AF" SupplierLocatorCode="PGWQSH" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" CreateDateTime="2018-02-20T10:47:00.000+00:00"/>
+          <common_v36_0:SupplierLocator SupplierCode="KL" SupplierLocatorCode="PGWQSH" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" CreateDateTime="2018-02-20T10:47:00.000+00:00"/>
+          <common_v36_0:BookingTravelerRef Key="RwB4cFBAAA/B28h2uCAAAA=="/>
+          <common_v36_0:ProviderReservationInfoRef Key="RwB4cFBAAA/B58h2uCAAAA=="/>
+          <air:AirSegment Key="RwB4cFBAAA/B38h2uCAAAA==" Group="0" Carrier="AF" CabinClass="Economy" FlightNumber="1653" ProviderCode="1G" Origin="KBP" Destination="CDG" DepartureTime="2018-02-15T06:40:00.000+02:00" ArrivalTime="2018-02-15T09:10:00.000+01:00" TravelTime="210" ClassOfService="L" ETicketability="Yes" MarriageGroup="3" Status="HK" SupplierCode="AF" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" TravelOrder="1" OptionalServicesIndicator="false"/>
+          <air:AirSegment Key="RwB4cFBAAA/B48h2uCAAAA==" Group="1" Carrier="AF" CabinClass="Economy" FlightNumber="356" ProviderCode="1G" Origin="CDG" Destination="YYZ" DepartureTime="2018-02-15T14:15:00.000+01:00" ArrivalTime="2018-02-15T16:40:00.000-05:00" TravelTime="505" ClassOfService="V" ETicketability="Yes" MarriageGroup="3" Status="HK" SupplierCode="AF" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" TravelOrder="2" OptionalServicesIndicator="false"/>
+          <air:AirSegment Key="Po7cAGBAAA/Bs+0oQRAAAA==" Group="2" Carrier="KL" CabinClass="Economy" FlightNumber="692" ProviderCode="1G" Origin="YYZ" Destination="AMS" DepartureTime="2018-04-08T17:15:00.000-04:00" ArrivalTime="2018-04-09T06:30:00.000+02:00" TravelTime="435" ClassOfService="V" ETicketability="Yes" MarriageGroup="5" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" TravelOrder="3" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="Po7cAGBAAA/Bt+0oQRAAAA==" Origin="YYZ" Destination="AMS" DepartureTime="2018-04-08T17:15:00.000-04:00" ArrivalTime="2018-04-09T06:30:00.000+02:00" FlightTime="435" TravelTime="435" Equipment="77W" OriginTerminal="3"/>
+            <air:Connection Duration="180"/>
+          </air:AirSegment>
+          <air:AirSegment Key="Po7cAGBAAA/Bu+0oQRAAAA==" Group="2" Carrier="KL" CabinClass="Economy" FlightNumber="1385" ProviderCode="1G" Origin="AMS" Destination="KBP" DepartureTime="2018-04-09T09:30:00.000+02:00" ArrivalTime="2018-04-09T13:15:00.000+03:00" TravelTime="165" ClassOfService="L" ETicketability="Yes" MarriageGroup="5" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" TravelOrder="4" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="Po7cAGBAAA/Bv+0oQRAAAA==" Origin="AMS" Destination="KBP" DepartureTime="2018-04-09T09:30:00.000+02:00" ArrivalTime="2018-04-09T13:15:00.000+03:00" FlightTime="165" TravelTime="165" Equipment="73H"/>
+          </air:AirSegment>
+          <air:AirPricingInfo Key="eGmEUHBAAA/BWZ7/1GAAAA==" TotalPrice="UAH4935" BasePrice="USD177.00" ApproximateTotalPrice="CZK3857" ApproximateBasePrice="CZK3857" EquivalentBasePrice="UAH4935" Taxes="UAH0" PricingMethod="ManualFare" ETicketability="No" ProviderCode="1G" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="B">
+            <air:FareInfo Key="eGmEUHBAAA/B4a7/1GAAAA==" FareBasis="VL7PRUA" PassengerTypeCode="ADT" Origin="YYZ" Destination="AMS" EffectiveDate="2018-02-20T00:00:00.000+01:00" NotValidBefore="2018-04-08" NotValidAfter="2018-04-08">
+              <common_v36_0:Endorsement Value="NON ENDO- FARE RSTR COULD APPLY"/>
+              <air:BaggageAllowance>
+                <air:NumberOfPieces>1</air:NumberOfPieces>
+              </air:BaggageAllowance>
+            </air:FareInfo>
+            <air:FareInfo Key="eGmEUHBAAA/B7a7/1GAAAA==" FareBasis="VL7PRUA" PassengerTypeCode="ADT" Origin="AMS" Destination="KBP" EffectiveDate="2018-02-20T00:00:00.000+01:00" NotValidBefore="2018-04-09" NotValidAfter="2018-04-09">
+              <common_v36_0:Endorsement Value="NON ENDO- FARE RSTR COULD APPLY"/>
+              <air:BaggageAllowance>
+                <air:NumberOfPieces>1</air:NumberOfPieces>
+              </air:BaggageAllowance>
+            </air:FareInfo>
+            <air:BookingInfo BookingCode="V" CabinClass="Economy" FareInfoRef="eGmEUHBAAA/B4a7/1GAAAA==" SegmentRef="Po7cAGBAAA/Bs+0oQRAAAA=="/>
+            <air:BookingInfo BookingCode="L" CabinClass="Economy" FareInfoRef="eGmEUHBAAA/B7a7/1GAAAA==" SegmentRef="Po7cAGBAAA/Bu+0oQRAAAA=="/>
+            <air:FareCalc>IEV AF X/PAR AF YTO M88.50VL7PRUA KL X/AMS KL IEV M88.50VL7PRUA NUC177.00END ROE1.0</air:FareCalc>
+            <air:PassengerType Code="ADT" BookingTravelerRef="RwB4cFBAAA/B28h2uCAAAA==">
+              <air:FareGuaranteeInfo GuaranteeType="ManualFare"/>
+            </air:PassengerType>
+            <common_v36_0:BookingTravelerRef Key="RwB4cFBAAA/B28h2uCAAAA=="/>
+            <air:PaymentRef Key="eGmEUHBAAA/BOO7/1GAAAA=="/>
+            <air:TicketingModifiersRef Key="eGmEUHBAAA/BXZ7/1GAAAA=="/>
+          </air:AirPricingInfo>
+          <common_v36_0:Payment Key="eGmEUHBAAA/BOO7/1GAAAA==" Type="Itinerary" Amount="UAH4935" ApproximateAmount="UAH4935" FormOfPaymentRef="eGmEUHBAAA/BNO7/1GAAAA=="/>
+          <air:TicketingModifiers PlatingCarrier="AF" Key="eGmEUHBAAA/BXZ7/1GAAAA==">
+            <common_v36_0:Commission Level="Fare" Type="Flat" Amount="UAH0.00"/>
+            <air:DocumentSelect IssueElectronicTicket="true"/>
+          </air:TicketingModifiers>
+        </air:AirReservation>
+        <passive:PassiveReservation LocatorCode="QB0B2D" CreateDate="2018-03-02T13:24:24.080+00:00" ModifiedDate="2018-03-02T13:24:24.080+00:00" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==">
+          <common_v36_0:SupplierLocator SupplierCode="AF" SupplierLocatorCode="PGWQSH" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" CreateDateTime="2018-02-20T10:47:00.000+00:00"/>
+          <common_v36_0:SupplierLocator SupplierCode="KL" SupplierLocatorCode="PGWQSH" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" CreateDateTime="2018-02-20T10:47:00.000+00:00"/>
+          <common_v36_0:BookingTravelerRef Key="RwB4cFBAAA/B28h2uCAAAA=="/>
+          <passive:PassiveSegment NumberOfItems="1" SegmentType="Service" Status="HI" SupplierCode="AF" Origin="YYZ" StartDate="2018-04-11T00:00:00.000-04:00" Key="eGmEUHBAAA/BRO7/1GAAAA==" Group="0" TravelOrder="5"/>
+          <passive:PassiveRemark PassiveSegmentRef="eGmEUHBAAA/BRO7/1GAAAA==">
+            <passive:Text>-D/98F/PENALTY FEE/NM-1BREZHNIEV/IEVGENMR/0572904112346C1/5045/UAH</passive:Text>
+          </passive:PassiveRemark>
+        </passive:PassiveReservation>
+        <air:EMDSummaryInfo ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" Key="++o8cFBAAA/BssLhAFAAAA==">
+          <air:EMDSummary Key="++o8cFBAAA/BjtLhAFAAAA==" Number="0572904112336" PrimaryDocumentIndicator="true" AssociatedTicketNumber="0579733728050" PlatingCarrier="AF" IssueDate="2018-02-06T11:27:08.000+00:00">
+            <air:EMDCoupon Key="++o8cFBAAA/BktLhAFAAAA==" Number="1" Status="Open" SvcDescription="1ST ADDITIONAL BAG" ConsumedAtIssuanceInd="false" RFIC="C" RFISC="0CC" RFIDescription="Baggage" Origin="KBP" Destination="CDG" FlightNumber="1653" NonRefundableInd="true"/>
+            <air:EMDCoupon Key="++o8cFBAAA/BltLhAFAAAA==" Number="2" Status="Open" SvcDescription="1ST ADDITIONAL BAG" ConsumedAtIssuanceInd="false" RFIC="C" RFISC="0CC" RFIDescription="Baggage" Origin="CDG" Destination="YYZ" FlightNumber="0356" NonRefundableInd="true"/>
+          </air:EMDSummary>
+          <air:EMDTravelerInfo>
+            <air:NameInfo First="DMYTROMR" Last="KOTOV"/>
+          </air:EMDTravelerInfo>
+        </air:EMDSummaryInfo>
+        <common_v36_0:GeneralRemark Key="Po7cAGBAAA/B190oQRAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" CreateDate="2018-01-04T11:30:00.000+00:00">
+          <common_v36_0:RemarkData>VIEWTRIPNET</common_v36_0:RemarkData>
+        </common_v36_0:GeneralRemark>
+        <common_v36_0:GeneralRemark Key="Po7cAGBAAA/B290oQRAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" CreateDate="2018-01-04T11:30:00.000+00:00">
+          <common_v36_0:RemarkData>VIEWTRIPITIN</common_v36_0:RemarkData>
+        </common_v36_0:GeneralRemark>
+        <common_v36_0:GeneralRemark Key="Po7cAGBAAA/B390oQRAAAA==" Category="-S" TypeInGds="Alpha" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" CreateDate="2018-02-20T10:38:00.000+00:00">
+          <common_v36_0:RemarkData>SPLIT PTY/20FEB/K2AG/IEV/KPZK3W</common_v36_0:RemarkData>
+        </common_v36_0:GeneralRemark>
+        <common_v36_0:GeneralRemark Key="Po7cAGBAAA/B490oQRAAAA==" Category="-S" TypeInGds="Alpha" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" CreateDate="2018-02-20T10:41:00.000+00:00">
+          <common_v36_0:RemarkData>SPLIT PTY/20FEB/K2AG/IEV/KR273E</common_v36_0:RemarkData>
+        </common_v36_0:GeneralRemark>
+        <common_v36_0:GeneralRemark Key="Po7cAGBAAA/B590oQRAAAA==" Category="-S" TypeInGds="Alpha" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" CreateDate="2018-02-20T10:41:00.000+00:00">
+          <common_v36_0:RemarkData>SPLIT PTY/20FEB/K2AG/IEV/KR2RRI</common_v36_0:RemarkData>
+        </common_v36_0:GeneralRemark>
+        <common_v36_0:GeneralRemark Key="Po7cAGBAAA/B690oQRAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2018-01-04T11:31:00.000+00:00">
+          <common_v36_0:RemarkData>ADTK1GTOAF BY 07JAN 1400 OTHERWISE WILL BE XLD</common_v36_0:RemarkData>
+        </common_v36_0:GeneralRemark>
+        <common_v36_0:GeneralRemark Key="Po7cAGBAAA/B790oQRAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2018-01-04T11:32:00.000+00:00">
+          <common_v36_0:RemarkData>ADTK1GTOKL BY 07JAN18/1800Z OTHERWISE WILL BE XXLD</common_v36_0:RemarkData>
+        </common_v36_0:GeneralRemark>
+        <common_v36_0:GeneralRemark Key="Po7cAGBAAA/B890oQRAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2018-01-04T11:33:00.000+00:00">
+          <common_v36_0:RemarkData>ADTK1GTOAF BY 07JAN 1400 OTHERWISE WILL BE XLD</common_v36_0:RemarkData>
+        </common_v36_0:GeneralRemark>
+        <common_v36_0:UnassociatedRemark Key="Po7cAGBAAA/BA+0oQRAAAA==" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==">
+          <common_v36_0:RemarkData>KIEV KYIV 14J  KOLTSOVA BLVD./TEL.380 985826752</common_v36_0:RemarkData>
+        </common_v36_0:UnassociatedRemark>
+        <common_v36_0:AgencyInfo>
+          <common_v36_0:AgentAction ActionType="Created" AgentCode="SOA_BOOKAGENT" BranchCode="bv20AskeRoOM+VVaVnARSQ==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2018-02-05T07:46:37.613+00:00"/>
+          <common_v36_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2018-03-02T13:24:24.080+00:00"/>
+        </common_v36_0:AgencyInfo>
+        <common_v36_0:AgencyContactInfo>
+          <common_v36_0:PhoneNumber Key="Po7cAGBAAA/BQ90oQRAAAA==" Type="Agency" Location="KGO" Number="38 0522 36 13 86 --TRAVEL AGENCY OK--">
+            <common_v36_0:ProviderReservationInfoRef Key="RwB4cFBAAA/B58h2uCAAAA=="/>
+          </common_v36_0:PhoneNumber>
+        </common_v36_0:AgencyContactInfo>
+        <common_v36_0:FormOfPayment Key="eGmEUHBAAA/BNO7/1GAAAA==" Type="MiscFormOfPayment" Reusable="false" ProfileKey="+299rmMtT2Gq6DU6gsKvCw==">
+          <common_v36_0:MiscFormOfPayment Text="0579733728051" Category="Exchange"/>
+        </common_v36_0:FormOfPayment>
+      </universal:UniversalRecord>
+    </universal:UniversalRecordImportRsp>
+  </SOAP:Body>
+</SOAP:Envelope>
