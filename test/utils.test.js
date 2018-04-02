@@ -280,6 +280,10 @@ describe('#Utils', () => {
         expect(utils.getErrorPcc(null)).to.be.a('null');
       });
 
+      it('should not break on any other string', () => {
+        expect(utils.getErrorPcc('123')).to.equal(null);
+      });
+
       it('should work with correct data', () => {
         expect(utils.getErrorPcc('NO AGREEMENT EXISTS FOR AGENCY - 38KP')).to.equal('38KP');
       });
