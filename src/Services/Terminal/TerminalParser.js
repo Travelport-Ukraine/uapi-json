@@ -2,6 +2,7 @@ import {
   TerminalRuntimeError,
   TerminalParsingError,
 } from './TerminalErrors';
+import utils from '../../utils';
 
 function errorHandler(rsp) {
   if (rsp && rsp.detail) {
@@ -12,7 +13,7 @@ function errorHandler(rsp) {
       case '345':
         throw new TerminalRuntimeError.NoAgreement({
           screen: faultString,
-          data: rsp,
+          pcc: utils.getErrorPcc(rsp.faultstring),
         });
       default:
         throw new TerminalRuntimeError(rsp);

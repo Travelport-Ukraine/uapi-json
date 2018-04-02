@@ -267,7 +267,9 @@ const AirErrorHandler = function (obj) {
   if (errData) {
     switch (errData[`common_${this.uapi_version}:Code`]) {
       case '345':
-        return Promise.reject(new AirRuntimeError.NoAgreement());
+        return Promise.reject(new AirRuntimeError.NoAgreement({
+          pcc: utils.getErrorPcc(obj.faultstring),
+        }));
       case '4454':
         return Promise.reject(new AirRuntimeError.NoResidualValue(obj));
       case '12009':

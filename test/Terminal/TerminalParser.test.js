@@ -31,8 +31,9 @@ describe('#TerminalParser', () => {
           const parsed = terminalParser.TERMINAL_ERROR.call(uParser, errData);
           return parsed;
         })
-        .then(() => { throw new Error('Error not thrown') })
+        .then(() => { throw new Error('Error not thrown'); })
         .catch((err) => {
+          expect(err.data.pcc).to.be.equal('79YE');
           expect(err).to.be.an.instanceof(
             TerminalError.TerminalRuntimeError.NoAgreement
           );

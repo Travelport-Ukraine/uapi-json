@@ -1803,7 +1803,10 @@ describe('#AirParser', () => {
           }
         )
         .catch(
-          err => expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement)
+          (err) => {
+            expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement);
+            expect(err.data.pcc).to.be.equal('7J8J');
+          }
         );
     });
   });
