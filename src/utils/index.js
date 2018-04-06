@@ -10,6 +10,7 @@ import hasAllFields from './has-all-required-fields';
 import inflate from './inflate-promise';
 import deflate from './deflate-promise';
 import getBookingFromUr from './get-booking-from-ur';
+import getErrorPcc from './get-error-pcc';
 
 const utils = {
   renameProperty,
@@ -24,6 +25,7 @@ const utils = {
   inflate,
   deflate,
   getBookingFromUr,
+  getErrorPcc,
 };
 
 export default utils;
