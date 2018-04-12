@@ -287,6 +287,10 @@ describe('#Utils', () => {
       it('should work with correct data', () => {
         expect(utils.getErrorPcc('NO AGREEMENT EXISTS FOR AGENCY - 38KP')).to.equal('38KP');
       });
+
+      it('should also work with data', () => {
+        expect(utils.getErrorPcc('NO AGREEMENT EXISTS FOR AGENCY -  0XF')).to.equal('0XF');
+      });
     });
   });
 });

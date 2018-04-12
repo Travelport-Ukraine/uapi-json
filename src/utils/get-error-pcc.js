@@ -3,7 +3,7 @@ export default (string) => {
     return null;
   }
 
-  const [, pcc = null] = string.match(/NO AGREEMENT EXISTS FOR AGENCY - ([A-Z0-9]+)/) || [];
+  const [, pcc = null] = string.match(/NO AGREEMENT EXISTS FOR AGENCY(?:\s+)-(?:\s+)([A-Z0-9]+)/) || [];
 
   return pcc;
 };
