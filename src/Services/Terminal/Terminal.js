@@ -41,7 +41,11 @@ module.exports = function (settings) {
       sessionToken: state.sessionToken,
       command: 'MD',
     }).then(
-      mdResponse => processResponse(mdResponse, processedResponse)
+      mdResponse => (
+        mdResponse.join('\n') === response.join('\n')
+          ? processedResponse
+          : processResponse(mdResponse, processedResponse)
+      )
     );
   };
   // Getting session token

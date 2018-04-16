@@ -2,6 +2,7 @@
   eslint-disable import/no-extraneous-dependencies
 */
 
+import fs from 'fs';
 import sinon from 'sinon';
 import chai, { expect } from 'chai';
 import sinonChai from 'sinon-chai';
@@ -19,6 +20,25 @@ const ModifiedTerminalRuntimeError = Object.assign({}, TerminalRuntimeError, {
   ErrorClosingSession: DumbErrorClosingSession,
 });
 
+const wait = time => new Promise((resolve) => {
+  setTimeout(() => resolve(), time);
+});
+const rTrim = str => str.replace(/\s*$/, '');
+
+const getTerminalResponse = path => new Promise((resolve, reject) => {
+  fs.readFile(
+    `${__dirname}/TerminalResponses/${path}.txt`,
+    (err, data) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      const res = rTrim(data.toString());
+      resolve(res.split(/\n/));
+    },
+  );
+});
+
 // Token const
 const token = 'TOKEN';
 
@@ -30,16 +50,13 @@ const executeCommandSlow = sinon.spy((params) => {
   expect(params.command).to.be.a('string');
   switch (params.command) {
     case 'I':
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(['IGNORED']);
-        }, 100);
-      });
+      return wait(100)
+        .then(() => getTerminalResponse('I'));
     default:
       if (params.command.match(/^SEM/)) {
-        return Promise.resolve(['PROCEED']);
+        return getTerminalResponse('SEM');
       }
-      return Promise.resolve(['ERR']);
+      return getTerminalResponse('ERR');
   }
 });
 const executeCommandOk = sinon.spy((params) => {
@@ -48,46 +65,41 @@ const executeCommandOk = sinon.spy((params) => {
   expect(params.command).to.be.a('string');
   switch (params.command) {
     case 'I':
-      return Promise.resolve(['IGNORED']);
+      return getTerminalResponse('I');
     case 'TE':
-      return Promise.resolve([
-        'TKT: 064 9902 789263     NAME: CHERTOUSOV/DMYTROMR             ',
-        '                                                               ',
-        'ISSUED: 11JAN17          FOP:CASH                              ',
-        'PSEUDO: 7J8J  PLATING CARRIER: OK  ISO: UA  IATA: 99999992     ',
-        '   USE  CR FLT  CLS  DATE BRDOFF TIME  ST F/B        FARE   CPN',
-        '   RFND OK  917  Q  15MAY KBPPRG  0505 OK Q0BAGG             1 ',
-        '                                          NVB15MAY NVA15MAY    ',
-        '   RFND OK  630  P  15MAY PRGBRU  0655 OK P0BAGG             2 ',
-        '                                          NVB15MAY NVA15MAY    ',
-        '                                                               ',
-        'FARE USD    41.00 TAX      109UA TAX       55UD TAX     2075XT ',
-        'TOTAL UAH     3357                                             ',
-        'EQUIV UAH     1118                                             ',
-        ')><',
-      ]);
+      return getTerminalResponse('set01/TE-P1');
     case 'MD':
-      return Promise.resolve([
-        '                                          NVB15MAY NVA15MAY    ',
-        '   RFND OK  630  P  15MAY PRGBRU  0655 OK P0BAGG             2 ',
-        '                                          NVB15MAY NVA15MAY    ',
-        '                                                               ',
-        'FARE USD    41.00 TAX      109UA TAX       55UD TAX     2075XT ',
-        'TOTAL UAH     3357                                             ',
-        'EQUIV UAH     1118                                             ',
-        '   FARE RESTRICTIONS APPLY                                     ',
-        '                                                               ',
-        'IEV OK PRG 39.00 OK BRU 2.17 NUC41.17END ROE1.0 XT             ',
-        '464YK231CZ1380YQ                                               ',
-        'RLOC 1G BGQF5K    1A ZWWJYF                                    ',
-        '                                                               ',
-        '><',
-      ]);
+      return getTerminalResponse('set01/TE-P2');
     default:
       if (params.command.match(/^SEM/)) {
-        return Promise.resolve(['PROCEED']);
+        return getTerminalResponse('SEM');
       }
-      return Promise.resolve(['ERR']);
+      return getTerminalResponse('ERR');
+  }
+});
+const executeCommandMdIssues = sinon.spy((params) => {
+  expect(params).to.be.an('object');
+  expect(params.sessionToken).to.equal(token);
+  expect(params.command).to.be.a('string');
+
+  const mdCall = sinon.stub();
+  mdCall.onCall(0).returns(
+    getTerminalResponse('set02/HFF-P2')
+  );
+  mdCall.onCall(1).returns(
+    getTerminalResponse('set02/HFF-P3')
+  );
+
+  switch (params.command) {
+    case '*HFF':
+      return getTerminalResponse('set02/HFF-P1');
+    case 'MD':
+      return mdCall();
+    default:
+      if (params.command.match(/^SEM/)) {
+        return getTerminalResponse('SEM');
+      }
+      return getTerminalResponse('ERR');
   }
 });
 const executeCommandEmulationFailed = sinon.spy((params) => {
@@ -96,12 +108,12 @@ const executeCommandEmulationFailed = sinon.spy((params) => {
   expect(params.command).to.be.a('string');
   switch (params.command) {
     case 'I':
-      return Promise.resolve(['IGNORED']);
+      return getTerminalResponse('I');
     default:
       if (params.command.match(/^SEM/)) {
-        return Promise.resolve(['RESTRICTED']);
+        return getTerminalResponse('RESTRICTED');
       }
-      return Promise.resolve(['ERR']);
+      return getTerminalResponse('ERR');
   }
 });
 const closeSession = sinon.spy(() => Promise.resolve(true));
@@ -116,6 +128,11 @@ const terminalServiceSlow = () => ({
 const terminalServiceOk = () => ({
   getSessionToken,
   executeCommand: executeCommandOk,
+  closeSession,
+});
+const terminalServiceMdIssues = () => ({
+  getSessionToken,
+  executeCommand: executeCommandMdIssues,
   closeSession,
 });
 const terminalServiceCloseSessionError = () => ({
@@ -139,6 +156,9 @@ const terminalSlow = proxyquire('../../src/Services/Terminal/Terminal', {
 });
 const terminalOk = proxyquire('../../src/Services/Terminal/Terminal', {
   './TerminalService': terminalServiceOk,
+});
+const terminalMdIssues = proxyquire('../../src/Services/Terminal/Terminal', {
+  './TerminalService': terminalServiceMdIssues,
 });
 const terminalEmulationFailed = proxyquire('../../src/Services/Terminal/Terminal', {
   './TerminalService': terminalServiceEmulationFailed,
@@ -296,32 +316,12 @@ describe('#Terminal', function terminalTest() {
         auth: config,
       });
 
-      return uAPITerminal
-        .executeCommand('TE')
-        .then((response) => {
-          const expectedResponse = [
-            'TKT: 064 9902 789263     NAME: CHERTOUSOV/DMYTROMR             ',
-            '                                                               ',
-            'ISSUED: 11JAN17          FOP:CASH                              ',
-            'PSEUDO: 7J8J  PLATING CARRIER: OK  ISO: UA  IATA: 99999992     ',
-            '   USE  CR FLT  CLS  DATE BRDOFF TIME  ST F/B        FARE   CPN',
-            '   RFND OK  917  Q  15MAY KBPPRG  0505 OK Q0BAGG             1 ',
-            '                                          NVB15MAY NVA15MAY    ',
-            '   RFND OK  630  P  15MAY PRGBRU  0655 OK P0BAGG             2 ',
-            '                                          NVB15MAY NVA15MAY    ',
-            '                                                               ',
-            'FARE USD    41.00 TAX      109UA TAX       55UD TAX     2075XT ',
-            'TOTAL UAH     3357                                             ',
-            'EQUIV UAH     1118                                             ',
-            '   FARE RESTRICTIONS APPLY                                     ',
-            '                                                               ',
-            'IEV OK PRG 39.00 OK BRU 2.17 NUC41.17END ROE1.0 XT             ',
-            '464YK231CZ1380YQ                                               ',
-            'RLOC 1G BGQF5K    1A ZWWJYF                                    ',
-            '                                                               ',
-            '><',
-          ].join('\n');
-          expect(response).to.equal(expectedResponse);
+      return Promise.all([
+        uAPITerminal.executeCommand('TE'),
+        getTerminalResponse('set01/TE-composed'),
+      ])
+        .then(([response, composed]) => {
+          expect(rTrim(response)).to.equal(rTrim(composed.join('\n')));
         })
         .then(() => uAPITerminal.closeSession())
         .then(() => {
@@ -331,6 +331,24 @@ describe('#Terminal', function terminalTest() {
           expect(executeCommandOk.getCall(0).args[0].sessionToken).to.equal(token);
           expect(executeCommandOk.getCall(0).args[0].command).to.equal('TE');
           expect(executeCommandOk.getCall(1).args[0].command).to.equal('MD');
+        });
+    });
+    it('should handle uapi MD issues', () => {
+      // Resetting spies
+      getSessionToken.reset();
+      executeCommandOk.reset();
+      closeSession.reset();
+
+      const uAPITerminal = terminalMdIssues({
+        auth: config,
+      });
+
+      return Promise.all([
+        uAPITerminal.executeCommand('*HFF'),
+        getTerminalResponse('set02/HFF-composed'),
+      ])
+        .then(([response, composed]) => {
+          expect(rTrim(response)).to.equal(rTrim(composed.join('\n')));
         });
     });
   });
