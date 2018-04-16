@@ -1,0 +1,20 @@
+TKT: 064 9902 789263     NAME: CHERTOUSOV/DMYTROMR             
+                                                               
+ISSUED: 11JAN17          FOP:CASH                              
+PSEUDO: 7J8J  PLATING CARRIER: OK  ISO: UA  IATA: 99999992     
+   USE  CR FLT  CLS  DATE BRDOFF TIME  ST F/B        FARE   CPN
+   RFND OK  917  Q  15MAY KBPPRG  0505 OK Q0BAGG             1 
+                                          NVB15MAY NVA15MAY    
+   RFND OK  630  P  15MAY PRGBRU  0655 OK P0BAGG             2 
+                                          NVB15MAY NVA15MAY    
+                                                               
+FARE USD    41.00 TAX      109UA TAX       55UD TAX     2075XT 
+TOTAL UAH     3357                                             
+EQUIV UAH     1118                                             
+   FARE RESTRICTIONS APPLY                                     
+                                                               
+IEV OK PRG 39.00 OK BRU 2.17 NUC41.17END ROE1.0 XT             
+464YK231CZ1380YQ                                               
+RLOC 1G BGQF5K    1A ZWWJYF                                    
+                                                               
+><

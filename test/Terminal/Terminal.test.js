@@ -23,6 +23,7 @@ const ModifiedTerminalRuntimeError = Object.assign({}, TerminalRuntimeError, {
 const wait = time => new Promise((resolve) => {
   setTimeout(() => resolve(), time);
 });
+const rTrim = str => str.replace(/\s*$/, '');
 
 const getTerminalResponse = path => new Promise((resolve, reject) => {
   fs.readFile(
@@ -32,7 +33,7 @@ const getTerminalResponse = path => new Promise((resolve, reject) => {
         reject(err);
         return;
       }
-      const res = data.toString().replace(/\s*$/, '');
+      const res = rTrim(data.toString());
       resolve(res.split(/\n/));
     },
   );
@@ -315,32 +316,12 @@ describe('#Terminal', function terminalTest() {
         auth: config,
       });
 
-      return uAPITerminal
-        .executeCommand('TE')
-        .then((response) => {
-          const expectedResponse = [
-            'TKT: 064 9902 789263     NAME: CHERTOUSOV/DMYTROMR             ',
-            '                                                               ',
-            'ISSUED: 11JAN17          FOP:CASH                              ',
-            'PSEUDO: 7J8J  PLATING CARRIER: OK  ISO: UA  IATA: 99999992     ',
-            '   USE  CR FLT  CLS  DATE BRDOFF TIME  ST F/B        FARE   CPN',
-            '   RFND OK  917  Q  15MAY KBPPRG  0505 OK Q0BAGG             1 ',
-            '                                          NVB15MAY NVA15MAY    ',
-            '   RFND OK  630  P  15MAY PRGBRU  0655 OK P0BAGG             2 ',
-            '                                          NVB15MAY NVA15MAY    ',
-            '                                                               ',
-            'FARE USD    41.00 TAX      109UA TAX       55UD TAX     2075XT ',
-            'TOTAL UAH     3357                                             ',
-            'EQUIV UAH     1118                                             ',
-            '   FARE RESTRICTIONS APPLY                                     ',
-            '                                                               ',
-            'IEV OK PRG 39.00 OK BRU 2.17 NUC41.17END ROE1.0 XT             ',
-            '464YK231CZ1380YQ                                               ',
-            'RLOC 1G BGQF5K    1A ZWWJYF                                    ',
-            '                                                               ',
-            '><',
-          ].join('\n');
-          expect(response).to.equal(expectedResponse);
+      return Promise.all([
+        uAPITerminal.executeCommand('TE'),
+        getTerminalResponse('set01/TE-composed'),
+      ])
+        .then(([response, composed]) => {
+          expect(rTrim(response)).to.equal(rTrim(composed.join('\n')));
         })
         .then(() => uAPITerminal.closeSession())
         .then(() => {
@@ -362,9 +343,12 @@ describe('#Terminal', function terminalTest() {
         auth: config,
       });
 
-      return uAPITerminal.executeCommand('*HFF')
-        .then((response) => {
-          expect(response).to.equal('     *****      FILED FARE HISTORY          4PP13A    *****\nXFQ ZAINULLIN/IURIIMR-ADT  G  UAH    13013      03APR18\nAOB ZAINULLIN/IURIIMR-ADT  TTLUAH    13013      03APR18\nAOB ZAINULLIN/IURIIMR-ADT     UAH        0     03APR18\nAFQ ZAINULLIN/IURIIMR-ADT  G              7712625095845\nXFQ ZAINULLIN/IURIIMR-ADT  G  UAH    13013      03APR18\nAOB ZAINULLIN/IURIIMR-ADT  TTLUAH    13013      03APR18\nAOB ZAINULLIN/IURIIMR-ADT     UAH        0     03APR18\nAFQ ZAINULLIN/IURIIMR-ADT  G              7712625095845\nXFQ ZAINULLIN/IURIIMR-ADT  G  UAH    13013      03APR18\nAOB ZAINULLIN/IURIIMR-ADT  TTLUAH    13013      03APR18\nAOB ZAINULLIN/IURIIMR-ADT     UAH        0     03APR18\nAFQ ZAINULLIN/IURIIMR-ADT  G              7712625095845\nAFQ ZAINULLIN/IURIIMR-ADT  G              7712625095845\nXFQ ZAINULLIN/IURIIMR-ADT  G  UAH    13013      03APR18\nAOB ZAINULLIN/IURIIMR-ADT  TTLUAH    13013      03APR18\nAOB ZAINULLIN/IURIIMR-ADT     UAH        0     03APR18\nAFQ ZAINULLIN/IURIIMR-ADT  G              7712625095845\nXFQ ZAINULLIN/IURIIMR-ADT  G  UAH    13013      03APR18\nAOB ZAINULLIN/IURIIMR-ADT  TTLUAH    13013      03APR18\nAOB ZAINULLIN/IURIIMR-ADT     UAH        0     03APR18\nAFQ ZAINULLIN/IURIIMR-ADT  G              7712625095845\nRCVD-\nCRDT- IEV/5JV7/1G AG          0648Z/03APR\nXFQ ZAINULLIN/IURIIMR    I-ADT  I  UAH    12698      03APR18\n\n>XFQP1/-P*5JV7/TA7W30)><\n)><');
+      return Promise.all([
+        uAPITerminal.executeCommand('*HFF'),
+        getTerminalResponse('set02/HFF-composed'),
+      ])
+        .then(([response, composed]) => {
+          expect(rTrim(response)).to.equal(rTrim(composed.join('\n')));
         });
     });
   });
