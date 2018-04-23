@@ -306,6 +306,28 @@ describe('#Terminal', function terminalTest() {
           expect(console.log).to.have.callCount(2);
         });
     });
+    it('Should execute command with custop stopMD function', () => {
+      // Resetting spies
+      getSessionToken.reset();
+      executeCommandOk.reset();
+      closeSession.reset();
+
+      const uAPITerminal = terminalOk({
+        auth: config,
+        debug: 0,
+      });
+
+      let result = '';
+
+      return uAPITerminal
+        .executeCommand('TE', (screens) => {
+          result = screens;
+          return true;
+        })
+        .then((response) => {
+          expect(response).to.equal(result);
+        });
+    });
     it('should concatenate command output with MD', () => {
       // Resetting spies
       getSessionToken.reset();

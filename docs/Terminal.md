@@ -10,11 +10,11 @@ using your own Service bureau.
 # API
 
 **TerminalService**
-* [`.executeCommand()`](#execute_command)
+* [`.executeCommand(command, stopMD)`](#execute_command)
 * [`.closeSession()`](#close_session)
 * [`.getToken()`](#get_token)
 
-## .executeCommand(command)
+## .executeCommand(command, stopMd)
 <a name="execute_command"></a>
 Executes a command in terminal and returns its terminal response
 
@@ -23,6 +23,7 @@ Executes a command in terminal and returns its terminal response
 | Param | Type | Description |
 | --- | --- | --- |
 | command | `String` | String representation of the command you want to execute |
+| stopMD | `(screens) => boolean` | Function which gets all previous screens concatenated and detects if more `MD` command needed. |
 
 ## .closeSession()
 <a name="close_session"></a>
