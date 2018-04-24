@@ -20,6 +20,8 @@ module.exports = function (settings) {
   const autoClose = settings.autoClose === undefined
     ? true
     : settings.autoClose;
+
+  const defaultStopMD = screens => !screenFunctions.hasMore(screens);
   const token = settings.auth.token || null;
 
   const state = {
@@ -27,14 +29,14 @@ module.exports = function (settings) {
     sessionToken: token,
   };
   // Processing response with MD commands
-  const processResponse = (response, previousResponse = null) => {
+  const processResponse = (response, stopMD, previousResponse = null) => {
     const processedResponse = previousResponse
       ? screenFunctions.mergeResponse(
         previousResponse,
         response.join('\n')
       )
       : response.join('\n');
-    if (!screenFunctions.hasMore(processedResponse)) {
+    if (stopMD(processedResponse)) {
       return processedResponse;
     }
     return service.executeCommand({
@@ -44,7 +46,7 @@ module.exports = function (settings) {
       mdResponse => (
         mdResponse.join('\n') === response.join('\n')
           ? processedResponse
-          : processResponse(mdResponse, processedResponse)
+          : processResponse(mdResponse, stopMD, processedResponse)
       )
     );
   };
@@ -92,7 +94,7 @@ module.exports = function (settings) {
 
   const terminal = {
     getToken: getSessionToken,
-    executeCommand: command => Promise.resolve()
+    executeCommand: (command, stopMD = defaultStopMD) => Promise.resolve()
       .then(() => {
         if (debug) {
           log(`Terminal request:\n${command}`);
@@ -106,7 +108,7 @@ module.exports = function (settings) {
           sessionToken,
         })
       )
-      .then(processResponse)
+      .then(screen => processResponse(screen, stopMD))
       .then(
         (response) => {
           if (debug) {
