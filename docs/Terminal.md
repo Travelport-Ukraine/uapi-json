@@ -14,7 +14,7 @@ using your own Service bureau.
 * [`.closeSession()`](#close_session)
 * [`.getToken()`](#get_token)
 
-## .executeCommand(command, stopMd)
+## .executeCommand(command, stopMD)
 <a name="execute_command"></a>
 Executes a command in terminal and returns its terminal response
 
