@@ -94,7 +94,7 @@ module.exports = function (settings) {
 
   const terminal = {
     getToken: getSessionToken,
-    executeCommand: (command, stopMd = defaultStopMD) => Promise.resolve()
+    executeCommand: (command, stopMD = defaultStopMD) => Promise.resolve()
       .then(() => {
         if (debug) {
           log(`Terminal request:\n${command}`);
@@ -108,7 +108,7 @@ module.exports = function (settings) {
           sessionToken,
         })
       )
-      .then(screen => processResponse(screen, stopMd))
+      .then(screen => processResponse(screen, stopMD))
       .then(
         (response) => {
           if (debug) {
