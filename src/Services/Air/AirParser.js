@@ -1053,7 +1053,7 @@ function availability(rsp) {
 
     leg.push(s);
 
-    if (!isConnected) {
+    if (isConnected === undefined) {
       results.push(leg);
       leg = [];
     }

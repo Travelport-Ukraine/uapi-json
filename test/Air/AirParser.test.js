@@ -1788,6 +1788,20 @@ describe('#AirParser', () => {
           expect(result.legs.length).to.be.equal(0);
         });
     });
+
+    it('should parse response without 1G avail info', () => {
+      const uParser = new ParserUapi('air:AvailabilitySearchRsp', 'v36_0', {});
+
+      const parseFunction = airParser.AIR_AVAILABILITY;
+      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp5.xml`).toString();
+      return uParser
+        .parse(xml)
+        .then((json) => parseFunction.call(uParser, json))
+        .then((result) => {
+          expect(result.legs).to.have.length(7);
+          expect(result.legs[0]).to.have.length(2);
+        });
+    });
   });
 
   describe('AIR_ERROR', () => {
