@@ -1272,6 +1272,43 @@ describe('#AirParser', () => {
         assert(e instanceof AirRuntimeError.TicketingPNRBusy);
       });
     });
+
+    it('should throw error TicketingFOPUnavailable (12008: Host Error during ticket issue)', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing-CardPaymentUnavailable.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        parseFunction.call(uParser, json);
+        assert(false, 'Should not return response.');
+      }).catch((e) => {
+        assert(e instanceof AirRuntimeError.TicketingFOPUnavailable);
+      });
+    });
+
+    it('should throw any AirRuntimeError different from TicketingFOPUnavailable for other host errors (12008: Host Error during ticket issue)', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing-HostError.fabricated_reply.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        parseFunction.call(uParser, json);
+        assert(false, 'Should not return response.');
+      }).catch((e) => {
+        assert(!(e instanceof AirRuntimeError.TicketingFOPUnavailable));
+        assert(e instanceof AirRuntimeError);
+      });
+    });
+
+    it('should throw any AirRuntimeError for missing Fare Quote (3788: Unable to ticket without pricing information)', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing-FareQuoteMissing.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        parseFunction.call(uParser, json);
+        assert(false, 'Should not return response.');
+      }).catch((e) => {
+        assert(e instanceof AirRuntimeError);
+      });
+    });
   });
 
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
