@@ -1285,7 +1285,19 @@ describe('#AirParser', () => {
       });
     });
 
-    it('should throw any AirRuntimeError different from TicketingFOPUnavailable for other host errors (12008: Host Error during ticket issue)', () => {
+    it('should throw error TicketingCreditCardRejected (12008: Host Error during ticket issue)', () => {
+      const uParser = new ParserUapi('air:AirTicketingRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_TICKET_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/AirTicketing-CardPayment-RefuseCredit.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        parseFunction.call(uParser, json);
+        assert(false, 'Should not return response.');
+      }).catch((e) => {
+        assert(e instanceof AirRuntimeError.TicketingCreditCardRejected);
+      });
+    });
+
+    it('should throw any AirRuntimeError different from TicketingFOPUnavailable/TicketingCreditCardRejected for other host errors (12008: Host Error during ticket issue)', () => {
       const uParser = new ParserUapi('air:AirTicketingRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_TICKET_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/AirTicketing-HostError.fabricated_reply.xml`).toString();
@@ -1294,6 +1306,7 @@ describe('#AirParser', () => {
         assert(false, 'Should not return response.');
       }).catch((e) => {
         assert(!(e instanceof AirRuntimeError.TicketingFOPUnavailable));
+        assert(!(e instanceof AirRuntimeError.TicketingCreditCardRejected));
         assert(e instanceof AirRuntimeError);
       });
     });

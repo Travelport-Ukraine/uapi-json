@@ -87,6 +87,11 @@ const ticketParse = function (obj) {
         // Host error during ticket issue. FOP SELECTED NOT AUTHORIZED FOR CARRIER XX
         throw new AirRuntimeError.TicketingFOPUnavailable(obj);
       }
+
+      if (Message.indexOf('REFUSE CREDIT') !== -1) {
+        // Host error during ticket issue. REFUSE CREDIT
+        throw new AirRuntimeError.TicketingCreditCardRejected(obj);
+      }
     }
     throw new AirRuntimeError.TicketingFailed(obj);
   }
