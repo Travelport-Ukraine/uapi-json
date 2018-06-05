@@ -1,0 +1,13 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AirTicketingRsp TransactionId="AF961EE80A0742643164D22BA8F59735" ResponseTime="1809"
+                             xmlns:air="http://www.travelport.com/schema/air_v36_0"
+                             xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0">
+            <air:TicketFailureInfo Code="12008" Message="Host error during ticket issue. REFUSE CREDIT" BookingTravelerRef="S+lKTOBAAA/Bu10ggMAAAA==">
+                <air:AirPricingInfoRef Key="S+lKTOBAAA/BkxzggMAAAA=="/>
+                <common_v36_0:Name First="ARTEMMR" Last="PYLYPCHUK"/>
+            </air:TicketFailureInfo>
+        </air:AirTicketingRsp>
+    </SOAP:Body>
+</SOAP:Envelope>
