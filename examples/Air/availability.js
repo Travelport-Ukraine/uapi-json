@@ -15,7 +15,7 @@ const params = {
     {
       from: 'IEV',
       to: 'NYC',
-      departureDate: '2018-11-10'
+      departureDate: '2018-11-10',
     },
   ],
   passengers: {
@@ -29,6 +29,9 @@ const params = {
   carriers: ['KL'],
   cabins: ['Economy'], // ['Business'],
   requestId: '4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60',
+  // permittedConnectionPoints: ['AMS'],
+  // preferredConnectionPoints: ['KBP'],
+  // prohibitedConnectionPoints: ['DME', 'SVO', 'PAR'],
   // maxJourneyTime: 300,
   // pricing: {
     // currency: 'USD',
