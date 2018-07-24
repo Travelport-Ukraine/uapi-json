@@ -90,6 +90,8 @@ Object.assign(AirRuntimeError, createErrorsList({
   TicketingFailed: 'Ticketing failed',
   TicketingFoidRequired: 'FOID required for the PC selected',
   TicketingPNRBusy: 'Reservation is being modified, unable to ticket now',
+  TicketingFOPUnavailable: 'Selected FOP is not available for this carrier',
+  TicketingCreditCardRejected: 'Credit card rejected by the airline',
   TicketingResponseMissing: 'Response message text doesn\'t contain OK:Ticket issued',
   TicketingTicketsMissing: 'Tickets not found in ticketing response',
   NoResultsFound: 'No results found',

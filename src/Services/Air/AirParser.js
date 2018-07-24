@@ -82,6 +82,17 @@ const ticketParse = function (obj) {
       // The Provider reservation is being modified externally. Please Air Ticket later.
       throw new AirRuntimeError.TicketingPNRBusy(obj);
     }
+    if (Code === '12008') {
+      if (Message.indexOf('FOP SELECTED NOT AUTHORIZED') !== -1) {
+        // Host error during ticket issue. FOP SELECTED NOT AUTHORIZED FOR CARRIER XX
+        throw new AirRuntimeError.TicketingFOPUnavailable(obj);
+      }
+
+      if (Message.indexOf('REFUSE CREDIT') !== -1) {
+        // Host error during ticket issue. REFUSE CREDIT
+        throw new AirRuntimeError.TicketingCreditCardRejected(obj);
+      }
+    }
     throw new AirRuntimeError.TicketingFailed(obj);
   }
 
@@ -1053,7 +1064,7 @@ function availability(rsp) {
 
     leg.push(s);
 
-    if (!isConnected) {
+    if (isConnected === undefined) {
       results.push(leg);
       leg = [];
     }

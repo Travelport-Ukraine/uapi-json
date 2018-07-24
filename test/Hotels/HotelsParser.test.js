@@ -9,7 +9,11 @@ const xmlFolder = `${__dirname}/../FakeResponses/Hotels`;
 describe('#hotelsParser', () => {
   describe('searchParse()', () => {
     it('give response object', () => {
-      const uParser = new ParserUapi('hotel:HotelSearchAvailabilityRsp', 'v_33_0', {});
+      // example search request (incomplete)
+      const request = {
+        location: 'IEV',
+      };
+      const uParser = new ParserUapi('hotel:HotelSearchAvailabilityRsp', 'v_33_0', request);
       const parseFunction = hotelsParser.HOTELS_SEARCH_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/HOTELS_SEARCH_REQUEST.xml`).toString();
 
@@ -20,6 +24,8 @@ describe('#hotelsParser', () => {
         hotels.hotels.forEach((hotel) => {
           assert.notEqual(hotel.HotelCode, undefined, 'No hotel code');
           assert.notEqual(hotel.HotelChain, undefined, 'No hotel chain');
+          assert.notEqual(hotel.HotelLocation, undefined, 'No hotel city/location');
+          assert.equal(hotel.HotelLocation, 'IEV', 'Hotel location in IATA code from request (missing in reply)');
           assert.notEqual(hotel.VendorLocationKey, undefined, 'No vendorlocation key');
           assert.notEqual(hotel.Name, undefined, 'No name');
           assert.notEqual(hotel.Description, undefined, 'No description');
@@ -43,7 +49,17 @@ describe('#hotelsParser', () => {
 
   describe('rateParse()', () => {
     it('give response object', () => {
-      const uParser = new ParserUapi('hotel:HotelDetailsRsp', 'v_33_0', {});
+      // test object from searchHotels() hotels list
+      const request = {
+        HotelCode: 'TEST',
+        HotelChain: 'Test hotels',
+        HotelLocation: 'LON', // or GBLON@
+        Name: 'First Premium Test Hotel',
+        Rates: [],
+        Address: 'test address',
+        Amenties: [],
+      };
+      const uParser = new ParserUapi('hotel:HotelDetailsRsp', 'v_33_0', request);
       const parseFunction = hotelsParser.HOTELS_RATE_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/HOTELS_RATE_REQUEST.xml`).toString();
 
@@ -61,6 +77,8 @@ describe('#hotelsParser', () => {
           assert.notEqual(rates.media, undefined, 'Images are not defined');
           assert.notEqual(rates.hotel.HotelCode, undefined, 'No hotel code');
           assert.notEqual(rates.hotel.HotelChain, undefined, 'No hotel chain');
+          assert.notEqual(rates.hotel.HotelLocation, undefined, 'No hotel city/location');
+          assert.equal(rates.hotel.HotelLocation, 'GBLON@', 'Hotel location in TRM code from XML');
           assert.notEqual(rates.hotel.Name, undefined, 'No name');
           assert.notEqual(rates.hotel.Address, undefined, 'No address');
           assert.equal(rates.DetailItem.constructor, Object, 'No details');

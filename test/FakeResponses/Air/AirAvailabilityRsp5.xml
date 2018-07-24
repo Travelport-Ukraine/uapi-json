@@ -1,0 +1,162 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AvailabilitySearchRsp TraceId="" TransactionId="4B6163F10A074265660F39126F5C72FE" ResponseTime="426" DistanceUnits="MI"
+                                   xmlns:air="http://www.travelport.com/schema/air_v36_0"
+                                   xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0">
+            <common_v36_0:NextResultReference>H4sIAAAAAAAAAJ1Uz2sTQRR+SZr+0GiplSIVraJYL92NSdul1ov9YYlsf9AUkZQepruTzdTNznZ2km5FBL148iwKnsSC4B8gCF71KOJFxYP07B/QU52ZZpuuRYPmsNl588333vfeN/v6J6QDBr1rqI60Gieudp0xtGmSgIcPPp15+h49T0GiAG0BuYtDHwASG23yKQ4NWbSqOblgg3Crojl2oCEb+RyzQBM7Vepp0yFnyOJL9A72zIffBshuz1YSOpfhKGJsiVSxzMPhyrIpDugRlS6oqtTGrr5Ho0tk0ccWKRMLcUK9ccFgY7/JMNaC4YaLQ7Lq4sNMpmQKOPHUksMJU7ZCd5Hn6EXOiOcISNphtOZz6D2wWfA4djATu11VyrDSuA73IW1CO2XEIdEq4zNaJzZmk6KiRizN9+GhX2ONDsSaqeqPGnm47pfnbn1898R4nARQYwHBMtaC5c9d+Px25erpR9srEZsc7+j/ccHeL5GEhAndAUbMqigfTKHNgIP290EV4/jxkIH2b51p5m8rQR8JFhguY4ZtCZyjfIbUhRfhmK/CjTiHC/GyGtXIC6FPIa5UiklngkYmuZbT6xbT5+J9UThCsFxu7WOFHBdNFh0+H1PWEKQuYZSzKaa9BBlbRCMJJegmXh25RAkoUQ+X4DgtlwPMm5AMj4nuXKM2ktQcTpmUObpc6xITE8kbhHNoT2R63xJ94pAmD2kSs1/lm2uhvbb8fUe6h8FAHLSKAqxNiEeE3t3d+TG/or1IQvImdJBZ4rokENeQTFYY9ahLnU0O/b/V19yTvYNE5cvXULZwMJ7MUjCtUJxvHrhY5LXVVx96yuvGwmBKGjw4VGRUm5St8Ft64tm9XP+2wm90Qcc0t/SZ2aUw9OXxSy09qebcHF9K9FVY2yXiW3PAPEdckTgWiRtTBUVKX76cFF+g1MT8rPg7m88OZ0ezuZHhfG5s1DCGcoaRHclnR7JZI5/PCdxi4bbvh78AARJOe98FAAA=</common_v36_0:NextResultReference>
+            <air:FlightDetailsList>
+                <air:FlightDetails Key="POgrANlJ0BKA7WmGtEAAAA==" Origin="RIX" Destination="AUH" DepartureTime="2019-02-11T23:30:00.000+02:00" ArrivalTime="2019-02-12T07:30:00.000+04:00" FlightTime="360" TravelTime="615" Equipment="CS3" DestinationTerminal="1"/>
+                <air:FlightDetails Key="POgrANlJ0BKA9WmGtEAAAA==" Origin="AUH" Destination="BOM" DepartureTime="2019-02-12T08:30:00.000+04:00" ArrivalTime="2019-02-12T13:15:00.000+05:30" FlightTime="195" TravelTime="615" Equipment="73H" OriginTerminal="1" DestinationTerminal="2"/>
+                <air:FlightDetails Key="POgrANlJ0BKA/WmGtEAAAA==" Origin="RIX" Destination="AUH" DepartureTime="2019-02-11T23:30:00.000+02:00" ArrivalTime="2019-02-12T07:30:00.000+04:00" FlightTime="360" TravelTime="615" Equipment="CS3" DestinationTerminal="1"/>
+                <air:FlightDetails Key="POgrANlJ0BKABXmGtEAAAA==" Origin="AUH" Destination="BOM" DepartureTime="2019-02-12T08:30:00.000+04:00" ArrivalTime="2019-02-12T13:15:00.000+05:30" FlightTime="195" TravelTime="615" Equipment="73H" OriginTerminal="1" DestinationTerminal="2"/>
+                <air:FlightDetails Key="POgrANlJ0BKADXmGtEAAAA==" Origin="RIX" Destination="BRU" DepartureTime="2019-02-11T07:20:00.000+02:00" ArrivalTime="2019-02-11T09:00:00.000+01:00" FlightTime="160" TravelTime="755" Equipment="CS3"/>
+                <air:FlightDetails Key="POgrANlJ0BKAFXmGtEAAAA==" Origin="BRU" Destination="BOM" DepartureTime="2019-02-11T10:20:00.000+01:00" ArrivalTime="2019-02-11T23:25:00.000+05:30" FlightTime="515" TravelTime="755" Equipment="332" DestinationTerminal="2"/>
+                <air:FlightDetails Key="POgrANlJ0BKAHXmGtEAAAA==" Origin="RIX" Destination="BRU" DepartureTime="2019-02-11T07:20:00.000+02:00" ArrivalTime="2019-02-11T09:00:00.000+01:00" FlightTime="160" TravelTime="755" Equipment="CS3"/>
+                <air:FlightDetails Key="POgrANlJ0BKAJXmGtEAAAA==" Origin="BRU" Destination="BOM" DepartureTime="2019-02-11T10:20:00.000+01:00" ArrivalTime="2019-02-11T23:25:00.000+05:30" FlightTime="515" TravelTime="755" Equipment="332" DestinationTerminal="2"/>
+                <air:FlightDetails Key="POgrANlJ0BKALXmGtEAAAA==" Origin="RIX" Destination="MUC" DepartureTime="2019-02-11T07:40:00.000+02:00" ArrivalTime="2019-02-11T08:55:00.000+01:00" FlightTime="135" TravelTime="765" Equipment="CS3" DestinationTerminal="1"/>
+                <air:FlightDetails Key="POgrANlJ0BKANXmGtEAAAA==" Origin="MUC" Destination="BOM" DepartureTime="2019-02-11T11:25:00.000+01:00" ArrivalTime="2019-02-11T23:55:00.000+05:30" FlightTime="480" TravelTime="765" Equipment="333" OriginTerminal="2" DestinationTerminal="2"/>
+                <air:FlightDetails Key="POgrANlJ0BKAPXmGtEAAAA==" Origin="RIX" Destination="MUC" DepartureTime="2019-02-11T07:40:00.000+02:00" ArrivalTime="2019-02-11T08:55:00.000+01:00" FlightTime="135" TravelTime="765" Equipment="CS3" DestinationTerminal="1"/>
+                <air:FlightDetails Key="POgrANlJ0BKARXmGtEAAAA==" Origin="MUC" Destination="BOM" DepartureTime="2019-02-11T11:25:00.000+01:00" ArrivalTime="2019-02-11T23:55:00.000+05:30" FlightTime="480" TravelTime="765" Equipment="333" OriginTerminal="2" DestinationTerminal="2"/>
+                <air:FlightDetails Key="POgrANlJ0BKATXmGtEAAAA==" Origin="RIX" Destination="TXL" DepartureTime="2019-02-11T07:35:00.000+02:00" ArrivalTime="2019-02-11T08:15:00.000+01:00" FlightTime="100" TravelTime="770" Equipment="73C"/>
+                <air:FlightDetails Key="POgrANlJ0BKAVXmGtEAAAA==" Origin="TXL" Destination="MUC" DepartureTime="2019-02-11T09:00:00.000+01:00" ArrivalTime="2019-02-11T10:10:00.000+01:00" FlightTime="70" TravelTime="770" Equipment="321" DestinationTerminal="2"/>
+                <air:FlightDetails Key="POgrANlJ0BKAXXmGtEAAAA==" Origin="MUC" Destination="BOM" DepartureTime="2019-02-11T11:25:00.000+01:00" ArrivalTime="2019-02-11T23:55:00.000+05:30" FlightTime="480" TravelTime="770" Equipment="333" OriginTerminal="2" DestinationTerminal="2"/>
+            </air:FlightDetailsList>
+            <air:AirSegmentList>
+                <air:AirSegment Key="POgrANlJ0BKA8WmGtEAAAA==" Group="0" Carrier="EY" FlightNumber="8125" Origin="RIX" Destination="AUH" DepartureTime="2019-02-11T23:30:00.000+02:00" ArrivalTime="2019-02-12T07:30:00.000+04:00" FlightTime="360" TravelTime="615" ETicketability="Yes" Equipment="CS3" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo>AIR BALTIC CORPORATION</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y4|B4|H4|K4|M4|Q4|L4|V4|U4|E4|T4"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKA7WmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKA+WmGtEAAAA==" Group="0" Carrier="EY" FlightNumber="7605" Origin="AUH" Destination="BOM" DepartureTime="2019-02-12T08:30:00.000+04:00" ArrivalTime="2019-02-12T13:15:00.000+05:30" FlightTime="195" TravelTime="615" ETicketability="Yes" Equipment="73H" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="9W" OperatingFlightNumber="585">JET AIRWAYS  INDIA  LTD</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y4|B4|H4|K4|M4|Q4|L4|V4|U4|E4|T4"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKA9WmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKAAXmGtEAAAA==" Group="0" Carrier="BT" FlightNumber="797" Origin="RIX" Destination="AUH" DepartureTime="2019-02-11T23:30:00.000+02:00" ArrivalTime="2019-02-12T07:30:00.000+04:00" FlightTime="360" TravelTime="615" ETicketability="Yes" Equipment="CS3" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C9|D9|J9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|S9|M9|B9|H9|O9|Q9|V9|E9|A9|W9|Z9|U9|P7|K7|L7|F8"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKA/WmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKACXmGtEAAAA==" Group="0" Carrier="9W" FlightNumber="585" Origin="AUH" Destination="BOM" DepartureTime="2019-02-12T08:30:00.000+04:00" ArrivalTime="2019-02-12T13:15:00.000+05:30" FlightTime="195" TravelTime="615" ETicketability="Yes" Equipment="73H" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C7|J7|Z7|I7|P7"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y7|M7|T7|U7|N7|L7|Q7|S7|K7|H7|V7|O7|W7"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKABXmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKAEXmGtEAAAA==" Group="0" Carrier="BT" FlightNumber="601" Origin="RIX" Destination="BRU" DepartureTime="2019-02-11T07:20:00.000+02:00" ArrivalTime="2019-02-11T09:00:00.000+01:00" FlightTime="160" TravelTime="755" ETicketability="Yes" Equipment="CS3" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C8|D8|J8"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|S9|M9|B9|H9|O9|Q9|V9|E9|A9|W9|Z9|U9|K9|L9|F8|G9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKADXmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKAGXmGtEAAAA==" Group="0" Carrier="SN" FlightNumber="601" Origin="BRU" Destination="BOM" DepartureTime="2019-02-11T10:20:00.000+01:00" ArrivalTime="2019-02-11T23:25:00.000+05:30" FlightTime="515" TravelTime="755" ETicketability="Yes" Equipment="332" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C9|D9|Z8|P5"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|H9|Q9|V9|W9|S9|T9|E9|L9|K9|G9|X8"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKAFXmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKAIXmGtEAAAA==" Group="0" Carrier="SN" FlightNumber="4008" Origin="RIX" Destination="BRU" DepartureTime="2019-02-11T07:20:00.000+02:00" ArrivalTime="2019-02-11T09:00:00.000+01:00" FlightTime="160" TravelTime="755" ETicketability="Yes" Equipment="CS3" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="BT" OperatingFlightNumber="601">AIR BALTIC CORPORATION S</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J4|C4|D4|Z4|P4"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y4|B4|M4|U4|H4|Q4|V4|W4|S4|T4|E4"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKAHXmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKAKXmGtEAAAA==" Group="0" Carrier="SN" FlightNumber="601" Origin="BRU" Destination="BOM" DepartureTime="2019-02-11T10:20:00.000+01:00" ArrivalTime="2019-02-11T23:25:00.000+05:30" FlightTime="515" TravelTime="755" ETicketability="Yes" Equipment="332" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J4|C4|D4|Z4|P4"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y4|B4|M4|U4|H4|Q4|V4|W4|S4|T4|E4|G9|X8"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKAJXmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKAMXmGtEAAAA==" Group="0" Carrier="BT" FlightNumber="221" Origin="RIX" Destination="MUC" DepartureTime="2019-02-11T07:40:00.000+02:00" ArrivalTime="2019-02-11T08:55:00.000+01:00" FlightTime="135" TravelTime="765" ETicketability="Yes" Equipment="CS3" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C9|D9|J9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|S9|M9|B9|H9|O9|Q9|V9|E9|A9|W9|Z9|U9|P9|K9|L9|F9|T9|G9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKALXmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKAOXmGtEAAAA==" Group="0" Carrier="LH" FlightNumber="764" Origin="MUC" Destination="BOM" DepartureTime="2019-02-11T11:25:00.000+01:00" ArrivalTime="2019-02-11T23:55:00.000+05:30" FlightTime="480" TravelTime="765" ETicketability="Yes" Equipment="333" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="G9|E3"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|H9|Q9|V9|W9|S9|T9|L9|K9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKANXmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKAQXmGtEAAAA==" Group="0" Carrier="BT" FlightNumber="221" Origin="RIX" Destination="MUC" DepartureTime="2019-02-11T07:40:00.000+02:00" ArrivalTime="2019-02-11T08:55:00.000+01:00" FlightTime="135" TravelTime="765" ETicketability="Yes" Equipment="CS3" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C9|D9|J9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|S9|M9|B9|H9|O9|Q9|V9|E9|A9|W9|Z9|U9|P9|K9|L9|F9|T9|G9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKAPXmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKASXmGtEAAAA==" Group="0" Carrier="AI" FlightNumber="8764" Origin="MUC" Destination="BOM" DepartureTime="2019-02-11T11:25:00.000+01:00" ArrivalTime="2019-02-11T23:55:00.000+05:30" FlightTime="480" TravelTime="765" ETicketability="Yes" Equipment="333" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:CodeshareInfo OperatingCarrier="LH" OperatingFlightNumber="764">DEUTSCHE LUFTHANSA AG</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|H9|K9|Q9|V9|W9|G9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKARXmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKAUXmGtEAAAA==" Group="0" Carrier="BT" FlightNumber="211" Origin="RIX" Destination="TXL" DepartureTime="2019-02-11T07:35:00.000+02:00" ArrivalTime="2019-02-11T08:15:00.000+01:00" FlightTime="100" TravelTime="770" ETicketability="Yes" Equipment="73C" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="C9|D9|J9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|S9|M9|B9|H9|O9|Q9|V8|E9|A9|W9|Z9|U9|P9|K9|T9|G9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKATXmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKAWXmGtEAAAA==" Group="0" Carrier="LH" FlightNumber="2031" Origin="TXL" Destination="MUC" DepartureTime="2019-02-11T09:00:00.000+01:00" ArrivalTime="2019-02-11T10:10:00.000+01:00" FlightTime="70" TravelTime="770" ETicketability="Yes" Equipment="321" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|H9|Q9|V9|W9|S9|T9|L9|K9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKAVXmGtEAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="POgrANlJ0BKAYXmGtEAAAA==" Group="0" Carrier="LH" FlightNumber="764" Origin="MUC" Destination="BOM" DepartureTime="2019-02-11T11:25:00.000+01:00" ArrivalTime="2019-02-11T23:55:00.000+05:30" FlightTime="480" TravelTime="770" ETicketability="Yes" Equipment="333" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+                    <air:AirAvailInfo ProviderCode="1G">
+                        <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9"/>
+                        <air:BookingCodeInfo CabinClass="PremiumEconomy" BookingCounts="G9|E5"/>
+                        <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|M9|U9|H9|Q9|V9|W9|S9|T9|L9|K9"/>
+                    </air:AirAvailInfo>
+                    <air:FlightDetailsRef Key="POgrANlJ0BKAXXmGtEAAAA=="/>
+                </air:AirSegment>
+            </air:AirSegmentList>
+            <air:AirItinerarySolution Key="POgrANlJ0BKAZXmGtEAAAA==">
+                <air:AirSegmentRef Key="POgrANlJ0BKA8WmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKA+WmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKAAXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKACXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKAEXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKAGXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKAIXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKAKXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKAMXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKAOXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKAQXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKASXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKAUXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKAWXmGtEAAAA=="/>
+                <air:AirSegmentRef Key="POgrANlJ0BKAYXmGtEAAAA=="/>
+                <air:Connection SegmentIndex="0"/>
+                <air:Connection SegmentIndex="2"/>
+                <air:Connection SegmentIndex="4"/>
+                <air:Connection SegmentIndex="6"/>
+                <air:Connection SegmentIndex="8"/>
+                <air:Connection SegmentIndex="10"/>
+                <air:Connection SegmentIndex="12"/>
+                <air:Connection SegmentIndex="13"/>
+            </air:AirItinerarySolution>
+        </air:AvailabilitySearchRsp>
+    </SOAP:Body>
+</SOAP:Envelope>
