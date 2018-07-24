@@ -27,6 +27,36 @@ module.exports = `
                 </air:SearchDestination>
                 <air:SearchDepTime PreferredTime="{{departureDate}}"/>
                 <air:AirLegModifiers>
+                    {{#*inline "connectionPoint"}}
+                      <com:ConnectionPoint>
+                        <com:CityOrAirport Code="{{connection}}" />
+                      </com:ConnectionPoint>
+                    {{/inline}}
+
+                    {{#if ../permittedConnectionPoints}}
+                    <air:PermittedConnectionPoints>
+                    {{#each ../permittedConnectionPoints as |connection|}}
+                      {{> connectionPoint connection=connection}}
+                    {{/each}}
+                    </air:PermittedConnectionPoints>
+                    {{/if}}
+
+                    {{#if ../prohibitedConnectionPoints}}
+                    <air:ProhibitedConnectionPoints>
+                    {{#each ../prohibitedConnectionPoints as |connection| }}
+                      {{> connectionPoint connection=connection}}
+                    {{/each}}
+                    </air:ProhibitedConnectionPoints>
+                    {{/if}}
+
+                    {{#if ../preferredConnectionPoints}}
+                    <air:PreferredConnectionPoints>
+                    {{#each ../preferredConnectionPoints as |connection|}}
+                      {{> connectionPoint connection=connection}}
+                    {{/each}}
+                    </air:PreferredConnectionPoints>
+                    {{/if}}
+
                     {{#if ../cabins}}
                     <air:PreferredCabins>
                         {{#each ../cabins}}

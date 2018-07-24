@@ -33,6 +33,7 @@ Object.assign(AirValidationError, createErrorsList({
   ReservationLocator: 'Missing uapi_reservation_locator in request. See data.',
   ExchangeToken: 'Missing exchangeToken in request. See data.',
   CreditCardMissing: 'Missing creditCard in request. See data.',
+  IncorrectConnectionsFormat: 'Connections should be an array with IATA codes.',
 }, AirValidationError));
 
 export const GdsValidationError = createErrorClass(
