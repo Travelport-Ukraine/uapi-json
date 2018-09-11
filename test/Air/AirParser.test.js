@@ -1846,7 +1846,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp5.xml`).toString();
       return uParser
         .parse(xml)
-        .then((json) => parseFunction.call(uParser, json))
+        .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           expect(result.legs).to.have.length(7);
           expect(result.legs[0]).to.have.length(2);
@@ -1855,7 +1855,24 @@ describe('#AirParser', () => {
   });
 
   describe('AIR_ERROR', () => {
-    it('should correct handle error of agreement', () => {
+    it('should correctly handle archived booking', () => {
+      const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
+      const parseFunction = airParser.AIR_ERRORS;
+      const xml = fs.readFileSync(`${xmlFolder}/UnableToRetrieve.xml`).toString();
+      return uParser.parse(xml)
+        .then(
+          (json) => {
+            const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]); // parse error data
+            return parseFunction.call(uParser, errData);
+          }
+        )
+        .catch(
+          (err) => {
+            expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieve);
+          }
+        );
+    });
+    it('should correctly handle error of agreement', () => {
       const uParser = new ParserUapi('air:LowFareSearchRsp', 'v33_0', {});
       const parseFunction = airParser.AIR_ERRORS;
       const xml = fs.readFileSync(`${xmlFolder}/NoAgreementError.xml`).toString();
