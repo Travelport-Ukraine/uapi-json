@@ -281,6 +281,8 @@ const AirErrorHandler = function (obj) {
         return Promise.reject(new AirRuntimeError.NoAgreement({
           pcc: utils.getErrorPcc(obj.faultstring),
         }));
+      case '1512':
+        return Promise.reject(new AirRuntimeError.UnableToRetrieve(obj));
       case '4454':
         return Promise.reject(new AirRuntimeError.NoResidualValue(obj));
       case '12009':
