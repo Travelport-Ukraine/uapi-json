@@ -122,6 +122,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   DuplicateTicketFound: 'Duplicate ticket number found. Provide PNR, UR locator',
   NoPNRFoundInUR: 'No PNR found in Universal record',
   NoAgreement: 'There is no agreement between current pcc and you trying to reach',
+  UnableToRetrieve: 'Unable to retrieve PNR. Please contact your local Travelport Helpdesk.',
 }, AirRuntimeError));
 
 export const AirFlightInfoRuntimeError = createErrorClass(
