@@ -85,7 +85,7 @@ module.exports = function uapiRequest(
         data: xml,
       })
         .then((response) => {
-          if (debugMode > 1) {
+          if (debugMode) {
             log('Response SOAP: ', pd.xml(response.data));
           }
           return response.data;
