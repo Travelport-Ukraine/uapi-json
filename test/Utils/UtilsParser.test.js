@@ -1,13 +1,12 @@
 import assert from 'assert';
 import { expect } from 'chai';
 import fs from 'fs';
-import {
-  UtilsParsingError,
-  UtilsRuntimeError,
-} from '../../src/Services/Utils/UtilsErrors';
+import uAPI from '../../src';
 import ParserUapi from '../../src/Request/uapi-parser';
 import utilsParser from '../../src/Services/Utils/UtilsParser';
 
+const UtilsError = uAPI.errors.Utils;
+const RequestError = uAPI.errors.Request;
 const xmlFolder = `${__dirname}/../FakeResponses/Utils`;
 
 describe('#utilsParser', () => {
@@ -42,7 +41,7 @@ describe('#utilsParser', () => {
       try {
         parseFunction({});
       } catch (e) {
-        assert(e instanceof UtilsParsingError, 'Incorrect error thrown');
+        assert(e instanceof UtilsError.UtilsParsingError, 'Incorrect error thrown');
       }
     });
 
@@ -57,8 +56,9 @@ describe('#utilsParser', () => {
           return parseFunction.call(uParser, errData);
         })
         .then(() => assert(false, 'Error should be thrown'))
-        .catch((e) => {
-          assert(e instanceof UtilsRuntimeError);
+        .catch((err) => {
+          expect(err).to.be.an.instanceOf(RequestError.RequestRuntimeError.UnhandledError);
+          expect(err.causedBy).to.be.an.instanceOf(UtilsError.UtilsRuntimeError);
         });
     });
   });

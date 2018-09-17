@@ -632,16 +632,22 @@ describe('#AirParser', () => {
       const uParser = new ParserUapi('SOAP:Fault', 'v33_0', {});
       const parseFunction = airParser.AIR_ERRORS.bind(uParser);
       const json = fs.readFileSync(`${xmlFolder}/../Air/LowFaresSearch.NoSolutions.Parsed.error.json`).toString();
-      return parseFunction(JSON.parse(json))
-        .catch(err => expect(err).to.be.an.instanceof(AirRuntimeError.NoResultsFound));
+      return Promise.resolve()
+        .then(() => parseFunction(JSON.parse(json)))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.NoResultsFound);
+        });
     });
 
     it('should throw AirRuntimeError.NoResultsFound error3', () => {
       const uParser = new ParserUapi('SOAP:Fault', 'v33_0', {});
       const parseFunction = airParser.AIR_ERRORS.bind(uParser);
       const json = fs.readFileSync(`${xmlFolder}/../Air/LowFaresSearch.date-time-in-past.Parsed.error.json`).toString();
-      return parseFunction(JSON.parse(json))
-        .catch(err => expect(err).to.be.an.instanceof(AirRuntimeError.InvalidRequestData));
+      return Promise.resolve()
+        .then(() => parseFunction(JSON.parse(json)))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.InvalidRequestData);
+        });
     });
   });
 

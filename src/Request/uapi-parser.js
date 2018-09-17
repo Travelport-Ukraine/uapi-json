@@ -301,50 +301,52 @@ Parser.prototype.parseVersion = function (obj) {
 Parser.prototype.parse = function (xml) {
   const self = this;
 
-  return this.parseXML(xml).then((obj) => {
-    const start = new Date();
+  return this
+    .parseXML(xml)
+    .then((obj) => {
+      const start = new Date();
 
-    if (!self.rootObject) {
-      // fall back to custom non-uAPI parser interface with dirty code //FIXME rewrite Hotels
-      return obj;
-    }
+      if (!self.rootObject) {
+        // fall back to custom non-uAPI parser interface with dirty code //FIXME rewrite Hotels
+        return obj;
+      }
 
-    if (obj['SOAP:Fault']) {
+      if (obj['SOAP:Fault']) {
+        try {
+          this.uapi_version = this.parseVersion(obj);
+        } catch (e) {
+          throw new RequestRuntimeError.VersionParsingError(obj, e);
+        }
+        return obj;
+      }
+
+      // trying to redefine version based on response;
       try {
-        this.uapi_version = this.parseVersion(obj);
+        const soapName = self.rootObject.split(':')[0];
+        const rootProps = obj[self.rootObject][0].$;
+        const version = rootProps[`xmlns:${soapName}`].split(`${soapName}_`).pop();
+
+        self.config = defaultConfig(version);
+        self.uapi_version = version;
       } catch (e) {
         throw new RequestRuntimeError.VersionParsingError(obj, e);
       }
-      return obj;
-    }
 
-    // trying to redefine version based on response;
-    try {
-      const soapName = self.rootObject.split(':')[0];
-      const rootProps = obj[self.rootObject][0].$;
-      const version = rootProps[`xmlns:${soapName}`].split(`${soapName}_`).pop();
+      const data = self.mergeLeafRecursive(obj, self.rootObject);
 
-      self.config = defaultConfig(version);
-      self.uapi_version = version;
-    } catch (e) {
-      throw new RequestRuntimeError.VersionParsingError(obj, e);
-    }
+      if (!data[self.rootObject]) {
+        throw new RequestSoapError.SoapParsingError(obj);
+      }
 
-    const data = self.mergeLeafRecursive(obj, self.rootObject);
+      const end = new Date() - start;
+      if (this.debug > 1) {
+        console.info('uAPI_Parse execution time: %dms', end);
+      }
 
-    if (!data[self.rootObject]) {
-      throw new RequestSoapError.SoapParsingError(obj);
-    }
-
-    const end = new Date() - start;
-    if (this.debug > 1) {
-      console.info('uAPI_Parse execution time: %dms', end);
-    }
-
-    return data[self.rootObject];
-  }, (err) => {
-    throw new RequestSoapError.SoapParsingError(null, err);
-  });
+      return data[self.rootObject];
+    }).catch((err) => {
+      throw new RequestRuntimeError.UnhandledError(null, err);
+    });
 };
 
 export default Parser;

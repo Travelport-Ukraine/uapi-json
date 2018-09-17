@@ -9,6 +9,9 @@ import {
   AirFlightInfoRuntimeError,
   GdsRuntimeError,
 } from './AirErrors';
+import {
+  RequestRuntimeError,
+} from '../../Request/RequestErrors';
 
 const parseFareCalculation = (str) => {
   const fareCalculation = str.match(/^([\s\S]+)END($|\s)/)[1];
@@ -272,55 +275,47 @@ function airPriceRspPricingSolutionXML(obj) {
   };
 }
 
-const AirErrorHandler = function (obj) {
-  const errData = (obj.detail && obj.detail[`common_${this.uapi_version}:ErrorInfo`]) || null;
-  // FIXME collapse versions using a regexp search in ParserUapi
-  if (errData) {
-    switch (errData[`common_${this.uapi_version}:Code`]) {
-      case '345':
-        return Promise.reject(new AirRuntimeError.NoAgreement({
-          pcc: utils.getErrorPcc(obj.faultstring),
-        }));
-      case '1512':
-        return Promise.reject(new AirRuntimeError.UnableToRetrieve(obj));
-      case '4454':
-        return Promise.reject(new AirRuntimeError.NoResidualValue(obj));
-      case '12009':
-        return Promise.reject(new AirRuntimeError.TicketsNotIssued(obj));
-      case '13003':
-        return Promise.reject(new AirRuntimeError.NoReservationToImport(obj));
-      case '3003':
-        return Promise.reject(new AirRuntimeError.InvalidRequestData(obj));
-      case '2602': // No Solutions in the response.
-      case '3037': // No availability on chosen flights, unable to fare quote
-        return Promise.reject(new AirRuntimeError.NoResultsFound(obj));
-      default:
-        return Promise.reject(new AirRuntimeError(obj)); // TODO replace with custom error
-    }
+const AirErrorHandler = function (rsp) {
+  let errorInfo;
+  let code;
+  try {
+    errorInfo = (
+      rsp.detail[`common_${this.uapi_version}:ErrorInfo`]
+      || rsp.detail['air:AvailabilityErrorInfo']
+    );
+    code = errorInfo[`common_${this.uapi_version}:Code`];
+  } catch (err) {
+    throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
   }
-  // FIXME use switch above by merging <air:AvailabilityErrorInfo> into detail by means of parser
-  // (requires full coverage of parser by unit tests;
-  // then add a separate config group with new merge up functionality)
-  // then simply detect <common_v36_0:Code> = 3000
-  // see error response in AirCreateReservation.Waitlisted.xml for example
-  const segmentErrData = (obj.detail && obj.detail['air:AvailabilityErrorInfo']) || null;
-  if (segmentErrData) {
-    obj.detail = obj.detail['air:AvailabilityErrorInfo']; // Quickfix structure returned in exception
-    switch (segmentErrData[`common_${this.uapi_version}:Code`]) {
-      case '3000': {
-        const messages = _.pluck(segmentErrData['air:AirSegmentError'], 'air:ErrorMessage');
-        if (messages.indexOf('Booking is not complete due to waitlisted segment') !== -1) {
-          return Promise.reject(new AirRuntimeError.SegmentWaitlisted(obj));
-        }
-        // else // unknown error, fall back to SegmentBookingFailed
-        return Promise.reject(new AirRuntimeError.SegmentBookingFailed(obj));
+  switch (code) {
+    case '345':
+      throw new AirRuntimeError.NoAgreement({
+        pcc: utils.getErrorPcc(rsp.faultstring),
+      });
+    case '1512':
+      throw new AirRuntimeError.UnableToRetrieve(rsp);
+    case '4454':
+      throw new AirRuntimeError.NoResidualValue(rsp);
+    case '12009':
+      throw new AirRuntimeError.TicketsNotIssued(rsp);
+    case '13003':
+      throw new AirRuntimeError.NoReservationToImport(rsp);
+    case '3003':
+      throw new AirRuntimeError.InvalidRequestData(rsp);
+    case '3000': {
+      const messages = _.pluck(errorInfo['air:AirSegmentError'], 'air:ErrorMessage');
+      if (messages.indexOf('Booking is not complete due to waitlisted segment') !== -1) {
+        throw new AirRuntimeError.SegmentWaitlisted(rsp);
       }
-
-      default:
-        return Promise.reject(new AirRuntimeError(obj));
+      // else // unknown error, fall back to SegmentBookingFailed
+      throw new AirRuntimeError.SegmentBookingFailed(rsp);
     }
+    case '2602': // No Solutions in the response.
+    case '3037': // No availability on chosen flights, unable to fare quote
+      throw new AirRuntimeError.NoResultsFound(rsp);
+    default:
+      throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
   }
-  return Promise.reject(new AirParsingError(obj));
 };
 
 const airGetTicket = function (obj) {
