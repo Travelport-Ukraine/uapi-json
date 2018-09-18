@@ -3,8 +3,6 @@ module.exports = `
     <soap:Body>
         <air:AvailabilitySearchReq
             AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}"
-            SolutionResult="true"
-            ReturnBrandedFares="true"
             xmlns:air="http://www.travelport.com/schema/air_v36_0"
             xmlns:com="http://www.travelport.com/schema/common_v36_0"
             >
