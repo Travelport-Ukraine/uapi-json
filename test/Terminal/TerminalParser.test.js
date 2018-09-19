@@ -16,9 +16,13 @@ const xmlFolder = `${__dirname}/MockResponses`;
 describe('#TerminalParser', () => {
   describe('errorHandler()', () => {
     it('should throw an error in case of SOAP:Fault', () => {
-      expect(terminalParser.TERMINAL_ERROR).to.throw(
-        TerminalError.TerminalRuntimeError
-      );
+      return Promise.resolve()
+        .then(() => terminalParser.TERMINAL_ERROR())
+        .then(() => Promise.reject(new Error('Error not thrown')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceOf(RequestError.RequestRuntimeError.UnhandledError);
+          expect(err.causedBy).to.be.an.instanceOf(TerminalError.TerminalRuntimeError);
+        });
     });
 
     it('should throw correct error in case of no agreement', () => {
@@ -50,11 +54,10 @@ describe('#TerminalParser', () => {
           const parsed = terminalParser.TERMINAL_ERROR.call(uParser, errData);
           return parsed;
         })
-        .then(() => { throw new Error('Error not thrown') })
+        .then(() => { throw new Error('Error not thrown'); })
         .catch((err) => {
-          expect(err).to.be.an.instanceof(
-            TerminalError.TerminalRuntimeError
-          );
+          expect(err).to.be.an.instanceOf(RequestError.RequestRuntimeError.UnhandledError);
+          expect(err.causedBy).to.be.an.instanceOf(TerminalError.TerminalRuntimeError);
         });
     });
   });
@@ -65,9 +68,8 @@ describe('#TerminalParser', () => {
       return uParser.parse(xml).then(() => {
         throw new Error('Successfully parsed error result');
       }).catch((err) => {
-        expect(err).to.be.an.instanceof(
-          RequestError.RequestSoapError.SoapParsingError
-        );
+        expect(err).to.be.an.instanceOf(RequestError.RequestRuntimeError.UnhandledError);
+        expect(err.causedBy).to.be.an.instanceOf(RequestError.RequestSoapError.SoapServerError);
       });
     });
     it('should throw an error when no host token in response', () => {

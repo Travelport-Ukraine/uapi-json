@@ -1,6 +1,10 @@
-import errors from './HotelsErrors';
-
-const { HotelsParsingError, HotelsRuntimeError } = errors;
+import {
+  HotelsParsingError,
+  HotelsRuntimeError,
+} from './HotelsErrors';
+import {
+  RequestRuntimeError,
+} from '../../Request/RequestErrors';
 
 const amenties = require('./amenties');
 const Utils = require('../../utils');
@@ -232,21 +236,23 @@ const cancelBookParse = function (obj) {
   return result;
 };
 
-const errorHandler = function (err) {
-  let errno = 0;
+const errorHandler = function (rsp) {
+  let errorInfo;
+  let code;
   try {
-    errno = err.detail[`common_${this.uapi_version}:ErrorInfo`][`common_${this.uapi_version}:Code`];
-  } catch (e) {
-    console.log('Error not parsed');
+    errorInfo = rsp.detail[`common_${this.uapi_version}:ErrorInfo`];
+    code = errorInfo[`common_${this.uapi_version}:Code`];
+  } catch (err) {
+    throw new RequestRuntimeError.UnhandledError(null, new HotelsRuntimeError(rsp));
   }
-  switch (errno * 1) {
-    case 4965:
-      throw new HotelsRuntimeError.NoResultsFound(err);
-    case 5574:
-      throw new HotelsRuntimeError.NoEnginesResults(err);
-    case 5000:
+  switch (code) {
+    case '4965':
+      throw new HotelsRuntimeError.NoResultsFound(rsp);
+    case '5574':
+      throw new HotelsRuntimeError.NoEnginesResults(rsp);
+    case '5000':
     default:
-      throw new HotelsRuntimeError(err);
+      throw new RequestRuntimeError.UnhandledError(null, new HotelsRuntimeError(rsp));
   }
 };
 

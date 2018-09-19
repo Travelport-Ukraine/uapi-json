@@ -1,4 +1,10 @@
-import { UtilsParsingError, UtilsRuntimeError } from './UtilsErrors';
+import {
+  UtilsParsingError,
+  UtilsRuntimeError,
+} from './UtilsErrors';
+import {
+  RequestRuntimeError,
+} from '../../Request/RequestErrors';
 
 function currencyConvertParse(json) {
   try {
@@ -14,17 +20,18 @@ function currencyConvertParse(json) {
   return json;
 }
 
-const errorHandler = function (err) {
-  let errno = 0;
+const errorHandler = function (rsp) {
+  let errorInfo;
+  let code;
   try {
-    errno = err.detail[`common_${this.uapi_version}:ErrorInfo`][`common_${this.uapi_version}:Code`];
-  } catch (e) {
-    throw new UtilsRuntimeError(err);
+    errorInfo = rsp.detail[`common_${this.uapi_version}:ErrorInfo`];
+    code = errorInfo[`common_${this.uapi_version}:Code`];
+  } catch (err) {
+    throw new RequestRuntimeError.UnhandledError(null, new UtilsRuntimeError(rsp));
   }
-
-  switch (errno * 1) {
+  switch (code) {
     default:
-      throw new UtilsRuntimeError(err);
+      throw new RequestRuntimeError.UnhandledError(null, new UtilsRuntimeError(rsp));
   }
 };
 
