@@ -2,25 +2,31 @@ import {
   TerminalRuntimeError,
   TerminalParsingError,
 } from './TerminalErrors';
+import {
+  RequestRuntimeError,
+} from '../../Request/RequestErrors';
 import utils from '../../utils';
 
 function errorHandler(rsp) {
-  if (rsp && rsp.detail) {
-    const errorInfo = rsp.detail[`common_${this.uapi_version}:ErrorInfo`];
-    const code = errorInfo[`common_${this.uapi_version}:Code`];
-    const faultString = rsp.faultstring;
-    switch (code) {
-      case '345':
-        throw new TerminalRuntimeError.NoAgreement({
-          screen: faultString,
-          pcc: utils.getErrorPcc(rsp.faultstring),
-        });
-      default:
-        throw new TerminalRuntimeError(rsp);
-    }
+  let errorInfo;
+  let code;
+  let faultString;
+  try {
+    errorInfo = rsp.detail[`common_${this.uapi_version}:ErrorInfo`];
+    code = errorInfo[`common_${this.uapi_version}:Code`];
+    faultString = rsp.faultstring;
+  } catch (err) {
+    throw new RequestRuntimeError.UnhandledError(null, new TerminalRuntimeError(rsp));
   }
-
-  throw new TerminalRuntimeError(rsp);
+  switch (code) {
+    case '345':
+      throw new TerminalRuntimeError.NoAgreement({
+        screen: faultString,
+        pcc: utils.getErrorPcc(rsp.faultstring),
+      });
+    default:
+      throw new RequestRuntimeError.UnhandledError(null, new TerminalRuntimeError(rsp));
+  }
 }
 
 function createSession(rsp) {
