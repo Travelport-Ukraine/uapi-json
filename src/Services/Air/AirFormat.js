@@ -150,14 +150,14 @@ function formatLowFaresSearch(searchRequest, searchResult) {
     const passengerCategories = _.mapKeys(price['air:AirPricingInfo'], (passengerFare, key) => {
       let code = passengerFare['air:PassengerType'];
 
-      if (_.isString(code)) { // air:PassengerType in fullCollapseList_obj ParserUapi param
+      if (Object.prototype.toString.call(code) === '[object String]') { // air:PassengerType in fullCollapseList_obj ParserUapi param
         passengerCounts[code] = 1;
 
         // air:PassengerType in noCollapseList
       } else if (Array.isArray(code) && code.constructor === Array) { // ParserUapi param
         const count = code.length;
         const list = _.uniq(_.map(code, (item) => {
-          if (_.isString(item)) {
+          if (Object.prototype.toString.call(item) === '[object String]') {
             return item;
           } if (Object.prototype.toString.call(item) === '[object Object]' && item.Code) {
             // air:PassengerType in fullCollapseList_obj like above,
