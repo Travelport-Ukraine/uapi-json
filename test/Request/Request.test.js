@@ -46,7 +46,7 @@ const serviceParamsReturningString = [
 
 const requestError = proxyquire('../../src/Request/uapi-request', {
   axios: {
-    request: () => Promise.reject(new Error({ response: { status: 300, data: 3 } })),
+    request: () => Promise.reject({ response: { status: 300, data: 3 } }),
   },
 });
 const requestJsonResponse = proxyquire('../../src/Request/uapi-request', {
