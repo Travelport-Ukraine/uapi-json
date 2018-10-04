@@ -5,7 +5,7 @@
 const fs = require('fs');
 const sinon = require('sinon');
 const chai = require('chai');
-const expect = require('chai').expect;
+const { expect } = require('chai');
 const sinonChai = require('sinon-chai');
 const proxyquire = require('proxyquire');
 const config = require('../testconfig');
@@ -13,8 +13,7 @@ const uAPI = require('../../src');
 
 chai.use(sinonChai);
 
-const TerminalError = uAPI.errors.Terminal;
-const TerminalRuntimeError = TerminalError.TerminalRuntimeError;
+const { TerminalError: { TerminalRuntimeError } } = uAPI.errors;
 
 const DumbErrorClosingSession = sinon.spy(() => true);
 const ModifiedTerminalRuntimeError = Object.assign({}, TerminalRuntimeError, {

@@ -34,4 +34,3 @@ describe('Air.transformers.fixCardFop', () => {
     expect(converted.fop.type).to.be.equal('Cash');
   });
 });
-

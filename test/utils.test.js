@@ -113,7 +113,7 @@ describe('#Utils', () => {
   describe('.transform', () => {
     it('should transform data and dont mutate input', () => {
       const params = { me: 'you' };
-      const t1 = sinon.spy((params) => { params.me = 'me'; return params; });
+      const t1 = sinon.spy((innerParams) => { innerParams.me = 'me'; return innerParams; });
       const transform = utils.transform(t1);
       return transform(params).then((res) => {
         expect(params).to.be.not.deep.equal(res);
@@ -257,7 +257,7 @@ describe('#Utils', () => {
 
       it('should return error on incorrect inflate', () => {
         const original = 'somestring';
-        return utils.inflate(original).then((res) => {
+        return utils.inflate(original).then(() => {
           throw new Error('Cant be response');
         }).catch((e) => {
           expect(e.message).not.equal('Cant be response');
@@ -266,7 +266,7 @@ describe('#Utils', () => {
 
       it('should return error if cant deflate', () => {
         const original = 123;
-        return utils.deflate(original).then((res) => {
+        return utils.deflate(original).then(() => {
           throw new Error('Cant be response');
         }).catch((e) => {
           expect(e.message).not.equal('Cant be response');

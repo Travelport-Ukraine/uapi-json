@@ -132,7 +132,7 @@ function defaultConfig(ver) {
   const CollapseKeysOnly = [
     'air:FlightDetailsRef', // can be a list of several tech stops
     'air:AirSegmentRef',
-    /* 'air:FareInfoRef',*/
+    /* 'air:FareInfoRef', */
     'common_' + ver + ':BookingTravelerRef',
     'common_' + ver + ':ProviderReservationInfoRef',
   ];
@@ -199,7 +199,7 @@ Parser.prototype.mapArrayKeys = function mapArrayKeys(array, name) {
 
   if (!hasAllKeys) {
     _.forEach(array, (value, key) => {
-      array[key] = self.mergeLeafRecursive(value, name /* + ':' + key*/);
+      array[key] = self.mergeLeafRecursive(value, name /* + ':' + key */);
     });
     return array;
   }

@@ -15,4 +15,3 @@ describe('Air.transformers.setBusinessFlag', () => {
     expect(converted.business).to.be.equal(true);
   });
 });
-

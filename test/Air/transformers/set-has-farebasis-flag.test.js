@@ -21,4 +21,3 @@ describe('Air.trasnformers.setHasFareBasis', () => {
     expect(converted.hasFareBasis).to.be.deep.equal(false);
   });
 });
-

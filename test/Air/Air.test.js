@@ -9,7 +9,7 @@ const moment = require('moment');
 const auth = require('../testconfig');
 const { AirRuntimeError } = require('../../src/Services/Air/AirErrors');
 
-const expect = chai.expect;
+const { expect } = chai;
 chai.use(sinonChai);
 
 const responsesDir = path.join(__dirname, '..', 'FakeResponses', 'Air');
@@ -120,8 +120,7 @@ describe('#AirService', () => {
       const createReservation = sinon.spy(() =>
         Promise.reject(new AirRuntimeError.NoValidFare({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        }))
-      );
+        })));
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -156,8 +155,7 @@ describe('#AirService', () => {
       const createReservation = sinon.spy(() =>
         Promise.reject(new AirRuntimeError.SegmentBookingFailed({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        }))
-      );
+        })));
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -192,8 +190,7 @@ describe('#AirService', () => {
       const createReservation = sinon.spy(() =>
         Promise.reject(new AirRuntimeError.TicketingFailed({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        }))
-      );
+        })));
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -228,8 +225,7 @@ describe('#AirService', () => {
       const createReservation = sinon.spy(() =>
         Promise.reject(new AirRuntimeError.SegmentBookingFailed({
           detail: { },
-        }))
-      );
+        })));
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -264,8 +260,7 @@ describe('#AirService', () => {
       const createReservation = sinon.spy(() =>
         Promise.reject(new AirRuntimeError.NoValidFare({
           detail: { },
-        }))
-      );
+        })));
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -300,8 +295,7 @@ describe('#AirService', () => {
       const createReservation = sinon.spy(() =>
         Promise.reject(new AirRuntimeError.SegmentWaitlisted({
           detail: { },
-        }))
-      );
+        })));
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -369,7 +363,7 @@ describe('#AirService', () => {
       return createAirService({ auth })
         .importPNR({ pnr: 'PNR003' })
         .then(
-          () => Promise.reject('No error throwned'),
+          () => Promise.reject(new Error('No error throwned')),
           (err) => {
             expect(err).to.be.an.instanceOf(AirRuntimeError.NoPNRFoundInUR);
           }
@@ -1367,8 +1361,7 @@ describe('#AirService', () => {
               }],
             }],
           },
-        }[options.ticketNumber])
-      );
+        }[options.ticketNumber]));
 
       // Services
       const airService = () => ({
@@ -1423,8 +1416,7 @@ describe('#AirService', () => {
               }],
             }],
           },
-        }[options.ticketNumber])
-      );
+        }[options.ticketNumber]));
 
       // Services
       const airService = () => ({
@@ -1473,8 +1465,7 @@ describe('#AirService', () => {
               }],
             }],
           },
-        }[options.ticketNumber])
-      );
+        }[options.ticketNumber]));
 
       // Services
       const airService = () => ({
@@ -1526,8 +1517,7 @@ describe('#AirService', () => {
               }],
             }],
           },
-        }[options.ticketNumber])
-      );
+        }[options.ticketNumber]));
 
       // Services
       const airService = () => ({

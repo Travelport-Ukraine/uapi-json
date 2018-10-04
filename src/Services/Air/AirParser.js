@@ -201,12 +201,11 @@ function airPriceRspPricingSolutionXML(obj) {
   let pricingSolution = 0;
   if (pricingSolutions.length > 1) {
     console.log('More than one solution found in booking. Resolving the cheapest one.');
-    const sorted = pricingSolutions.sort(
+    [pricingSolution] = pricingSolutions.sort(
       (a, b) => parseFloat(a.$.TotalPrice.slice(3)) - parseFloat(b.$.TotalPrice.slice(3))
     );
-    pricingSolution = sorted[0];
   } else {
-    pricingSolution = pricingSolutions[0];
+    [pricingSolution] = pricingSolutions;
   }
 
 
@@ -226,7 +225,7 @@ function airPriceRspPricingSolutionXML(obj) {
     // find a reservation with places available for this passenger type, decrease counter
     const reservationKey = _.findKey(passengersPerReservations, (elem) => {
       const item = elem;
-      const ageCategory = passenger.ageCategory;
+      const { ageCategory } = passenger;
       if (item[ageCategory] > 0) {
         item[ageCategory] -= 1;
         return true;
@@ -387,7 +386,8 @@ const airGetTicket = function (obj) {
                     bookingInfo = bInfo;
                   }
                 }
-              });
+              }
+            );
           }
 
           const couponInfo = Object.assign(
@@ -499,8 +499,8 @@ const airGetTicket = function (obj) {
 
 function airCancelTicket(obj) {
   if (
-    !obj['air:VoidResultInfo'] ||
-    obj['air:VoidResultInfo'].ResultType !== 'Success'
+    !obj['air:VoidResultInfo']
+    || obj['air:VoidResultInfo'].ResultType !== 'Success'
   ) {
     throw new AirRuntimeError.TicketCancelResultUnknown(obj);
   }
@@ -564,8 +564,8 @@ function extractBookings(obj) {
     const providerInfoKey = providerInfo.Key;
     const resRemarks = remarks[providerInfoKey] || [];
     const splitBookings = (
-      providerInfo['universal:ProviderReservationDetails'] &&
-      providerInfo['universal:ProviderReservationDetails'].DivideDetails === 'true'
+      providerInfo['universal:ProviderReservationDetails']
+      && providerInfo['universal:ProviderReservationDetails'].DivideDetails === 'true'
     )
       ? resRemarks.reduce(
         (acc, remark) => {
@@ -581,8 +581,7 @@ function extractBookings(obj) {
 
     const passiveReservation = record['passive:PassiveReservation']
       ? record['passive:PassiveReservation'].find(res =>
-        res.ProviderReservationInfoRef === providerInfoKey
-      )
+        res.ProviderReservationInfoRef === providerInfoKey)
       : null;
 
     if (!providerInfo) {
@@ -889,7 +888,7 @@ function gdsQueue(req) {
 
   let data = null;
   try {
-    data = req['common_v36_0:ResponseMessage'][0];
+    [data] = req['common_v36_0:ResponseMessage'];
   } catch (e) {
     throw new GdsRuntimeError.PlacingInQueueError(req);
   }

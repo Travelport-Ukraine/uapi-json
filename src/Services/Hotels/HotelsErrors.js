@@ -116,4 +116,3 @@ module.exports = {
   HotelsParsingError,
   HotelsRuntimeError,
 };
-

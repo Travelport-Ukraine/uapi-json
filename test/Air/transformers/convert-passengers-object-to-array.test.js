@@ -12,6 +12,8 @@ describe('Air.transformers.convertPassengersObjectToArray', () => {
       if (passenger.ageCategory === 'CNN') {
         expect(passenger.child).to.be.true;
       }
+
+      return null;
     });
   });
 });

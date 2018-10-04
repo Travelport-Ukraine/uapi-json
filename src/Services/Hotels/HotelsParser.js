@@ -56,8 +56,7 @@ const getComments = (rsp) => {
         id: comment.$.CommentId,
         date: comment.$.Date,
         language: comment.$.CommenterLanguage,
-      })
-    );
+      }));
   }
   return [];
 };
@@ -199,8 +198,7 @@ const bookParse = function (rsp) {
     ({
       type: elem.Type,
       text: elem._,
-    })
-  );
+    }));
 
   const univrec = rsp['universal:UniversalRecord'];
 

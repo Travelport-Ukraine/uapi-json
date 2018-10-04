@@ -32,5 +32,4 @@ module.exports = params =>
     .catch(e =>
       Promise.reject(
         new AirRuntimeError.ExchangeTokenIncorrect(params, e)
-      )
-    );
+      ));

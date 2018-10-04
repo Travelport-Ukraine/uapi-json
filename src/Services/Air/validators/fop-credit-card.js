@@ -1,6 +1,6 @@
-const { AirValidationError } = require('../AirErrors');
-
 const Joi = require('joi');
+
+const { AirValidationError } = require('../AirErrors');
 
 module.exports = (params) => {
   if (params.fop.type === 'Card') {

@@ -19,4 +19,3 @@ const r = params => sinon.spy((url,
 });
 
 module.exports = r;
-

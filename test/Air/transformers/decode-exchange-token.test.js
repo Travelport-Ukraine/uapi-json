@@ -7,7 +7,7 @@ const token = 'eJztWFtz2jgU/isezz61BHzhEpjpg7Bl8OILNSJd2sl0HFuAG8eitiGQTv77SsYGc
 describe('Air.transformers.decodeExchangeToken', () => {
   it('should not pass and add xml', () => {
     const params = { exchangeToken: token };
-    return convert(params).then((rsp) => {
+    return convert(params).then(() => {
       expect(params.xml).to.be.an('object');
       expect(params.xml).to.have.all.keys([
         'air:AirExchangeBundle_XML',
@@ -19,11 +19,10 @@ describe('Air.transformers.decodeExchangeToken', () => {
 
   it('should throw correct error', () => {
     const params = { exchangeToken: 123 };
-    return convert(params).then((rsp) => {
+    return convert(params).then(() => {
       throw new Error('Cant be success');
     }).catch((e) => {
       expect(e).to.be.instanceof(AirRuntimeError.ExchangeTokenIncorrect);
     });
   });
 });
-

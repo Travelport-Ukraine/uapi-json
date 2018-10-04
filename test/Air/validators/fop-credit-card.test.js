@@ -45,7 +45,8 @@ describe('Air.validators.fopCreditCard', () => {
   });
 
   it('should not throw error when correct Luhn', () => {
-    const params = { fop: { type: 'Card' },
+    const params = {
+      fop: { type: 'Card' },
       creditCard: goodCC,
     };
     const fn = () => validate(params);
@@ -53,7 +54,8 @@ describe('Air.validators.fopCreditCard', () => {
   });
 
   it('should throw error when incorrect Luhn', () => {
-    const params = { fop: { type: 'Card' },
+    const params = {
+      fop: { type: 'Card' },
       creditCard: badCC,
     };
     const fn = () => validate(params);
@@ -61,7 +63,8 @@ describe('Air.validators.fopCreditCard', () => {
   });
 
   it('should throw error when cvv missing', () => {
-    const params = { fop: { type: 'Card' },
+    const params = {
+      fop: { type: 'Card' },
       creditCard: goodCCNoCvv,
     };
     const fn = () => validate(params);
@@ -69,7 +72,8 @@ describe('Air.validators.fopCreditCard', () => {
   });
 
   it('should throw error when CC type is not one of 1G types', () => {
-    const params = { fop: { type: 'Card' },
+    const params = {
+      fop: { type: 'Card' },
       creditCard: goodCCBadType,
     };
     const fn = () => validate(params);
@@ -77,7 +81,8 @@ describe('Air.validators.fopCreditCard', () => {
   });
 
   it('should not leak CC data into exception', () => {
-    const params = { fop: { type: 'Card' },
+    const params = {
+      fop: { type: 'Card' },
       creditCard: goodCCNoCvv,
     };
     const fn = () => validate(params);

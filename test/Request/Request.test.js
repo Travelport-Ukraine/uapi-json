@@ -8,7 +8,7 @@ const {
   RequestSoapError,
 } = require('../../src/Request/RequestErrors');
 
-const expect = chai.expect;
+const { expect } = chai;
 chai.use(sinonChai);
 
 const templates = require('../../src/Services/Air/templates');
@@ -46,7 +46,7 @@ const serviceParamsReturningString = [
 
 const requestError = proxyquire('../../src/Request/uapi-request', {
   axios: {
-    request: () => Promise.reject({ response: { status: 300, data: 3 } }),
+    request: () => Promise.reject(new Error({ response: { status: 300, data: 3 } })),
   },
 });
 const requestJsonResponse = proxyquire('../../src/Request/uapi-request', {
@@ -102,7 +102,6 @@ describe('#Request', () => {
     it('should test custom log function with success', () => {
       const log = sinon.spy((...args) => {
         console.log(args);
-        return;
       });
 
       const params = serviceParams.concat([3]).concat([{ logFunction: log }]);
@@ -117,7 +116,6 @@ describe('#Request', () => {
     it('should test custom log function with error', () => {
       const log = sinon.spy((...args) => {
         console.log(args);
-        return;
       });
 
       const params = serviceParams.concat([3]).concat([{ logFunction: log }]);
@@ -132,7 +130,6 @@ describe('#Request', () => {
     it('should test result of parser as string', () => {
       const log = sinon.spy((...args) => {
         console.log(args);
-        return;
       });
 
       const params = serviceParamsReturningString

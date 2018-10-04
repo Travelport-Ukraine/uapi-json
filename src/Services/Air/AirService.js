@@ -5,7 +5,9 @@ const getConfig = require('../../config');
 const templates = require('./templates');
 
 module.exports = function (settings) {
-  const { auth, debug, production, options } = settings;
+  const {
+    auth, debug, production, options
+  } = settings;
   const config = getConfig(auth.region, production);
 
   return {

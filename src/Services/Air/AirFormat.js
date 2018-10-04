@@ -5,10 +5,10 @@ const { AirParsingError } = require('./AirErrors');
 function getBaggage(baggageAllowance) {
   // Checking for allowance
   if (
-    !baggageAllowance ||
-    (
-      !baggageAllowance['air:NumberOfPieces'] &&
-      !baggageAllowance['air:MaxWeight']
+    !baggageAllowance
+    || (
+      !baggageAllowance['air:NumberOfPieces']
+      && !baggageAllowance['air:MaxWeight']
     )
   ) {
     console.warn('Baggage information is not number and is not weight!', JSON.stringify(baggageAllowance));
@@ -117,8 +117,8 @@ function formatLowFaresSearch(searchRequest, searchResult) {
               flightDetailsRef => flightDetails[flightDetailsRef]
             );
             const seatsAvailable = (
-              segment['air:AirAvailInfo'] &&
-              segment['air:AirAvailInfo'].ProviderCode === '1G'
+              segment['air:AirAvailInfo']
+              && segment['air:AirAvailInfo'].ProviderCode === '1G'
             ) ? (Number(
                 segment['air:AirAvailInfo']['air:BookingCodeInfo'].BookingCounts
                   .match(new RegExp(`${segmentInfo.BookingCode}(\\d+)`))[1]
@@ -143,8 +143,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
           platingCarrier: thisFare.PlatingCarrier,
           segments: trips,
         };
-      })
-    );
+      }));
 
 
     const passengerCounts = {};
@@ -160,7 +159,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
         const list = _.uniq(_.map(code, (item) => {
           if (_.isString(item)) {
             return item;
-          } else if (_.isObject(item) && item.Code) {
+          } if (_.isObject(item) && item.Code) {
             // air:PassengerType in fullCollapseList_obj like above,
             // but there is Age or other info, except Code
             return item.Code;
@@ -168,7 +167,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
           throw new AirParsingError.PTCIsNotSet();
         }));
 
-        code = list[0];
+        [code] = list;
         if (!list[0] || list.length !== 1) { // TODO throw error
           console.log('Warning: different categories '
             + list.join() + ' in single fare calculation ' + key + ' in fare ' + fareKey);
@@ -250,8 +249,7 @@ function setIndexesForSegments(
       ({
         ...segment,
         index: key + 1,
-      })
-    );
+      }));
     return { segments: segmentsNew, serviceSegments };
   }
 
@@ -291,11 +289,9 @@ function setIndexesForSegments(
 
   for (let i = 1; i <= maxOrder; i += 1) {
     segments.forEach(s =>
-      (Number(s.TravelOrder) === i ? allSegments.push(s) : null)
-    );
+      (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
     serviceSegments.forEach(s =>
-      (Number(s.TravelOrder) === i ? allSegments.push(s) : null)
-    );
+      (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
   }
 
   const indexedSegments = allSegments.map((s, k) => ({ ...s, index: k + 1 }));

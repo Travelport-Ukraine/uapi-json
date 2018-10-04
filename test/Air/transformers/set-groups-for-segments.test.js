@@ -19,4 +19,3 @@ describe('Air.transformers.setGroupsForSegments', () => {
     expect(converted.segments[3].transfer).to.be.equal(false);
   });
 });
-

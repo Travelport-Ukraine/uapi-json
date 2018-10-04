@@ -11,10 +11,10 @@ module.exports = function validateServiceSettings(settings) {
     throw new ServiceError.ServiceParamsAuthMissing(settings);
   }
   if (
-    Object.prototype.toString.call(settings.auth) !== '[object Object]' ||
-    Object.prototype.toString.call(settings.auth.username) !== '[object String]' ||
-    Object.prototype.toString.call(settings.auth.password) !== '[object String]' ||
-    Object.prototype.toString.call(settings.auth.targetBranch) !== '[object String]'
+    Object.prototype.toString.call(settings.auth) !== '[object Object]'
+    || Object.prototype.toString.call(settings.auth.username) !== '[object String]'
+    || Object.prototype.toString.call(settings.auth.password) !== '[object String]'
+    || Object.prototype.toString.call(settings.auth.targetBranch) !== '[object String]'
   ) {
     throw new ServiceError.ServiceParamsAuthInvalid(settings);
   }

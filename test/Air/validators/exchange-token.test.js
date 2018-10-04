@@ -10,7 +10,7 @@ describe('Air.validators.exchangeToken', () => {
   });
 
   it('should pass', () => {
-    const t = new Buffer('123').toString('base64');
+    const t = Buffer.from('123').toString('base64');
     const fn = () => check({ exchangeToken: t });
     expect(fn).to.not.throw(AirValidationError.ExchangeToken);
   });

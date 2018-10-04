@@ -127,11 +127,16 @@ module.exports = function uapiRequest(
         }
         // use a special uAPI parser configuration for errors, copy detected uAPI version
         const errParserConfig = errorsConfig();
-        const errParser =
-          new Parser(rootObject, uParser.uapi_version, params, debugMode, errParserConfig);
+        const errParser = new Parser(
+          rootObject,
+          uParser.uapi_version,
+          params,
+          debugMode,
+          errParserConfig,
+        );
         const errData = errParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
         return errorHandler.call(errParser, errData);
-      } else if (debugMode > 2) {
+      } if (debugMode > 2) {
         log('Parsed response', pd.json(parsedXML));
       }
 

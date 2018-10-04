@@ -43,4 +43,3 @@ describe('Air.transformers.setPassengersAge', () => {
     expect(converted.passengers[2].ageCategory).to.be.equal('C05');
   });
 });
-

@@ -26,8 +26,7 @@ module.exports = (settings) => {
       const request = Object.assign(options,
         {
           fetchFareRules: true,
-        }
-      );
+        });
       return service.lookupFareRules(request);
     },
 
@@ -61,8 +60,8 @@ module.exports = (settings) => {
       return this.getUniversalRecordByPNR(options)
         .then(
           ur =>
-            getBookingFromUr(ur, options.pnr) ||
-            Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
+            getBookingFromUr(ur, options.pnr)
+            || Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
         );
     },
 
@@ -118,8 +117,8 @@ module.exports = (settings) => {
             })
             .then((response) => {
               if (
-                (!response.match(pnrRegExp)) ||
-                (response.indexOf(segmentResult) === -1)
+                (!response.match(pnrRegExp))
+                || (response.indexOf(segmentResult) === -1)
               ) {
                 return Promise.reject(new AirRuntimeError.UnableToSaveBookingWithExtraSegment());
               }
@@ -248,8 +247,7 @@ module.exports = (settings) => {
                   })
                   .then(parsers.bookingPnr)
                   .then(pnr => localTerminal.closeSession()
-                    .then(() => ({ ...line, pnr }))
-                  );
+                    .then(() => ({ ...line, pnr })));
               }))
               .then(data => ({ type: 'list', data }));
           }
@@ -269,8 +267,7 @@ module.exports = (settings) => {
         .then(results =>
           terminal.closeSession()
             .then(() => results)
-            .catch(() => results)
-        );
+            .catch(() => results));
     },
 
     cancelTicket(options) {

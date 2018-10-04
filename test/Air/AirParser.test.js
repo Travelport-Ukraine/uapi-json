@@ -581,7 +581,7 @@ describe('#AirParser', () => {
         assert(result[0].directions, 'No Directions.');
         assert(result[0].bookingComponents, 'No Booking components.');
         assert(result[0].directions.length, 'Directions length not 2.');
-        const directions = result[0].directions;
+        const { directions } = result[0];
         const first = directions[0][0];
         const second = directions[1][0];
         assert(directions[0].length === 1, 'From direction length shoudl be 1');
@@ -765,6 +765,8 @@ describe('#AirParser', () => {
         // throw away nulls from JSON conversion
         jsonSaved[0].Rules.filter((item, key) => {
           if (!item) delete jsonSaved[0].Rules[key];
+
+          return null;
         });
         assert.deepEqual(jsonResult, jsonSaved, 'Result is not equivalent to expected');
       }).catch(err => assert(false, 'Error during parsing ' + err.stack));
@@ -833,7 +835,7 @@ describe('#AirParser', () => {
         }
 
         if (fareQuote.endorsement) {
-          expect(fareQuote.endorsement).to.match(/^[A-Z0-9\.\-\s\/]+$/);
+          expect(fareQuote.endorsement).to.match(/^[A-Z0-9.\-\s/]+$/);
         }
 
         if (fareQuote.platingCarrier) {
@@ -1005,7 +1007,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testBooking(result);
-          const segments = result[0].segments;
+          const { segments } = result[0];
           expect(segments[0].plane).to.has.lengthOf(0);
           expect(segments[0].duration).to.has.lengthOf(0);
           expect(segments[1].plane).to.has.lengthOf(0);
@@ -1075,7 +1077,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testBooking(result);
-          const emails = result[0].emails;
+          const { emails } = result[0];
           expect(emails).to.have.lengthOf(2);
           emails.forEach(
             (email, index) => {
@@ -1737,7 +1739,7 @@ describe('#AirParser', () => {
       const uParser = new Parser('air:AirExchangeRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_EXCHANGE;
       const xml = fs.readFileSync(`${xmlFolder}/AirExchange-1pas-1ticket.xml`).toString();
-      return uParser.parse(xml).then(json => parseFunction.call(uParser, {})).then((result) => {
+      return uParser.parse(xml).then(() => parseFunction.call(uParser, {})).then(() => {
         throw new Error('Cant return result');
       }).catch((e) => {
         expect(e).to.be.instanceof(AirRuntimeError.CantDetectExchangeReponse);
