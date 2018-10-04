@@ -15,7 +15,7 @@
     "coveralls": "cat ./coverage/lcov.info | codecov",
     "fix": "eslint --fix src/ test/",
     "lint": "eslint src/ test/",
-    "prepublish": "npm run lint && npm run test && npm run build"
+    "prepublish": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
