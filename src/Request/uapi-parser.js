@@ -238,7 +238,7 @@ Parser.prototype.mergeLeafRecursive = function (obj, name) {
     } else {
       object = this.mapArrayKeys(obj, listName);
     }
-  } else if (_.isObject(obj)) {
+  } else if (Object.prototype.toString.call(obj) === '[object Object]') {
     object = obj;
     const keys = Object.keys(object);
 
@@ -261,7 +261,7 @@ Parser.prototype.mergeLeafRecursive = function (obj, name) {
     return obj;
   }
 
-  if (_.isObject(object)) {
+  if (Object.prototype.toString.call(object) === '[object Object]') {
     return mergeLeaf(object);
   }
   return object;

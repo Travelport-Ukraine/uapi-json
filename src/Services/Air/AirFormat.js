@@ -159,7 +159,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
         const list = _.uniq(_.map(code, (item) => {
           if (_.isString(item)) {
             return item;
-          } if (_.isObject(item) && item.Code) {
+          } if (Object.prototype.toString.call(item) === '[object Object]' && item.Code) {
             // air:PassengerType in fullCollapseList_obj like above,
             // but there is Age or other info, except Code
             return item.Code;

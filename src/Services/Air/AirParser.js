@@ -32,7 +32,7 @@ const searchLowFaresValidate = (obj) => {
 
   rootArrays.forEach((name) => {
     const airName = 'air:' + name + 'List';
-    if (!_.isObject(obj[airName])) {
+    if (!Object.prototype.toString.call(obj[airName]) === '[object Object]') {
       throw new AirParsingError.ResponseDataMissing({ missing: airName });
     }
   });
@@ -48,7 +48,7 @@ const countHistogram = (arr) => {
     throw new AirParsingError.HistogramTypeInvalid();
   }
 
-  if (_.isObject(arr[0])) {
+  if (Object.prototype.toString.call(arr[0]) === '[object Object]') {
     arr = arr.map(elem => elem.Code);
   }
 
