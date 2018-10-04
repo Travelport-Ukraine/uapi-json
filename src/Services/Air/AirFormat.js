@@ -154,7 +154,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
         passengerCounts[code] = 1;
 
         // air:PassengerType in noCollapseList
-      } else if (_.isArray(code) && code.constructor === Array) { // ParserUapi param
+      } else if (Array.isArray(code) && code.constructor === Array) { // ParserUapi param
         const count = code.length;
         const list = _.uniq(_.map(code, (item) => {
           if (_.isString(item)) {

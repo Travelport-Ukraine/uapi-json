@@ -44,7 +44,7 @@ const countHistogram = (arr) => {
   const a = {};
   let prev = null;
 
-  if (!_.isArray(arr)) {
+  if (!Array.isArray(arr)) {
     throw new AirParsingError.HistogramTypeInvalid();
   }
 

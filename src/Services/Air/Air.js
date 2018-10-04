@@ -167,7 +167,7 @@ module.exports = (settings) => {
 
     flightInfo(options) {
       const parameters = {
-        flightInfoCriteria: _.isArray(options) ? options : [options],
+        flightInfoCriteria: Array.isArray(options) ? options : [options],
       };
       return service.flightInfo(parameters);
     },

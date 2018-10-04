@@ -214,7 +214,7 @@ Parser.prototype.mergeLeafRecursive = function (obj, name) {
   let object;
   const self = this;
 
-  if (_.isArray(obj)) {
+  if (Array.isArray(obj)) {
     let listName = (name.substr(-4) === 'List') ? name.substring(0, name.length - 4) : name;
 
     if (_.size(obj) === 1) {
