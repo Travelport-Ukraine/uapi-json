@@ -114,8 +114,9 @@ const ticketParse = function (obj) {
 
   if (obj['air:ETR']) {
     try {
-      checkTickets = _.reduce(obj['air:ETR'], (acc, x) => {
-        const tickets = _.reduce(x['air:Ticket'], (acc2, t) => !!(acc2 && t.TicketNumber), true);
+      checkTickets = Object.values(obj['air:ETR']).reduce((acc, x) => {
+        const tickets = Object.values(x['air:Ticket'] || {})
+          .reduce((acc2, t) => !!(acc2 && t.TicketNumber), true);
         return !!(acc && tickets);
       }, true);
     } catch (e) {
