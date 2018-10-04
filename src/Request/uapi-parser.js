@@ -219,7 +219,7 @@ Parser.prototype.mergeLeafRecursive = function (obj, name) {
   if (Array.isArray(obj)) {
     let listName = (name.substr(-4) === 'List') ? name.substring(0, name.length - 4) : name;
 
-    if (_.size(obj) === 1) {
+    if (Object.keys(obj).length === 1) {
       if (obj[0][listName]) {
         // the XML has e.g. air:FlightDetailsList with one node that is air:FlightDetails
         object = this.mapArrayKeys(obj[0][listName], listName);

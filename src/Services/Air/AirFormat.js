@@ -185,7 +185,9 @@ function formatLowFaresSearch(searchRequest, searchResult) {
         return { ...acc, [code]: passengerFare };
       }, {});
 
-    if (_.size(passengerCategories) !== _.size(price['air:AirPricingInfo'])) {
+    if (Object.keys(passengerCategories).length
+      !== Object.keys(price['air:AirPricingInfo']).length
+    ) {
       console.log('Warning: duplicate categories in passengerCategories map for fare ' + fareKey);
     }
 
