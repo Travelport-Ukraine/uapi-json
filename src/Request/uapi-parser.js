@@ -198,7 +198,7 @@ Parser.prototype.mapArrayKeys = function mapArrayKeys(array, name) {
   }
 
   if (!hasAllKeys) {
-    _.forEach(array, (value, key) => {
+    array.forEach((value, key) => {
       array[key] = self.mergeLeafRecursive(value, name /* + ':' + key */);
     });
     return array;
