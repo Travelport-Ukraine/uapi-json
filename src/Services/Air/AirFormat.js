@@ -107,8 +107,8 @@ function formatLowFaresSearch(searchRequest, searchResult) {
       return;
     }
 
-    const directions = _.map(thisFare['air:FlightOptionsList'], direction =>
-      _.map(direction['air:Option'], (option) => {
+    const directions = thisFare['air:FlightOptionsList'].map(direction =>
+      Object.values(direction['air:Option']).map((option) => {
         const trips = option['air:BookingInfo'].map(
           (segmentInfo) => {
             const fareInfo = fareInfos[segmentInfo.FareInfoRef];
@@ -147,38 +147,41 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 
 
     const passengerCounts = {};
-    const passengerCategories = _.mapKeys(price['air:AirPricingInfo'], (passengerFare, key) => {
-      let code = passengerFare['air:PassengerType'];
 
-      if (Object.prototype.toString.call(code) === '[object String]') { // air:PassengerType in fullCollapseList_obj ParserUapi param
-        passengerCounts[code] = 1;
+    const passengerCategories = Object.keys(price['air:AirPricingInfo'])
+      .reduce((acc, key) => {
+        const passengerFare = price['air:AirPricingInfo'][key];
+        let code = passengerFare['air:PassengerType'];
 
-        // air:PassengerType in noCollapseList
-      } else if (Array.isArray(code) && code.constructor === Array) { // ParserUapi param
-        const count = code.length;
-        const list = _.uniq(_.map(code, (item) => {
-          if (Object.prototype.toString.call(item) === '[object String]') {
-            return item;
-          } if (Object.prototype.toString.call(item) === '[object Object]' && item.Code) {
-            // air:PassengerType in fullCollapseList_obj like above,
-            // but there is Age or other info, except Code
-            return item.Code;
+        if (Object.prototype.toString.call(code) === '[object String]') { // air:PassengerType in fullCollapseList_obj ParserUapi param
+          passengerCounts[code] = 1;
+
+          // air:PassengerType in noCollapseList
+        } else if (Array.isArray(code) && code.constructor === Array) { // ParserUapi param
+          const count = code.length;
+          const list = _.uniq(code.map((item) => {
+            if (Object.prototype.toString.call(item) === '[object String]') {
+              return item;
+            } if (Object.prototype.toString.call(item) === '[object Object]' && item.Code) {
+              // air:PassengerType in fullCollapseList_obj like above,
+              // but there is Age or other info, except Code
+              return item.Code;
+            }
+            throw new AirParsingError.PTCIsNotSet();
+          }));
+
+          [code] = list;
+          if (!list[0] || list.length !== 1) { // TODO throw error
+            console.log('Warning: different categories '
+              + list.join() + ' in single fare calculation ' + key + ' in fare ' + fareKey);
           }
-          throw new AirParsingError.PTCIsNotSet();
-        }));
-
-        [code] = list;
-        if (!list[0] || list.length !== 1) { // TODO throw error
-          console.log('Warning: different categories '
-            + list.join() + ' in single fare calculation ' + key + ' in fare ' + fareKey);
+          passengerCounts[code] = count;
+        } else {
+          throw new AirParsingError.PTCTypeInvalid();
         }
-        passengerCounts[code] = count;
-      } else {
-        throw new AirParsingError.PTCTypeInvalid();
-      }
 
-      return code;
-    });
+        return { ...acc, [code]: passengerFare };
+      }, {});
 
     if (_.size(passengerCategories) !== _.size(price['air:AirPricingInfo'])) {
       console.log('Warning: duplicate categories in passengerCategories map for fare ' + fareKey);

@@ -204,7 +204,9 @@ Parser.prototype.mapArrayKeys = function mapArrayKeys(array, name) {
     return array;
   }
 
-  const object = _.mapKeys(array, getItemEmbKey);
+  const object = array
+    .reduce((acc, item) => ({ ...acc, [getItemEmbKey(item)]: item }), {});
+
   return self.mergeLeafRecursive(object, name);
 };
 

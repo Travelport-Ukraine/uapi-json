@@ -182,12 +182,13 @@ function airPriceRspPassengersPerReservation(obj) {
   const prices = priceResult['air:AirPricingSolution'];
   const priceKeys = Object.keys(prices);
 
-  const pricing = prices[_.first(priceKeys)];
+  const pricing = prices[_.first(priceKeys)]['air:AirPricingInfo'];
 
-  return _.mapValues(pricing['air:AirPricingInfo'], (fare) => {
-    const histogram = countHistogram(fare['air:PassengerType']);
-    return histogram;
-  });
+  return Object.keys(pricing)
+    .reduce((acc, right) => ({
+      ...acc,
+      [right]: countHistogram(pricing[right]['air:PassengerType']),
+    }), {});
 }
 
 function airPriceRspPricingSolutionXML(obj) {
@@ -302,7 +303,7 @@ const AirErrorHandler = function (rsp) {
     case '3003':
       throw new AirRuntimeError.InvalidRequestData(rsp);
     case '3000': {
-      const messages = _.map(errorInfo['air:AirSegmentError'], 'air:ErrorMessage');
+      const messages = errorInfo['air:AirSegmentError'].map(err => err['air:ErrorMessage']);
       if (messages.indexOf('Booking is not complete due to waitlisted segment') !== -1) {
         throw new AirRuntimeError.SegmentWaitlisted(rsp);
       }
