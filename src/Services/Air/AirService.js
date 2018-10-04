@@ -1,8 +1,8 @@
-import uApiRequest from '../../Request/uapi-request';
-import AirParser from './AirParser';
-import AirValidator from './AirValidator';
-import getConfig from '../../config';
-import templates from './templates';
+const uApiRequest = require('../../Request/uapi-request');
+const AirParser = require('./AirParser');
+const AirValidator = require('./AirValidator');
+const getConfig = require('../../config');
+const templates = require('./templates');
 
 module.exports = function (settings) {
   const { auth, debug, production, options } = settings;

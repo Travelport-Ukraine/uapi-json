@@ -1,4 +1,4 @@
-import { AirValidationError } from '../AirErrors';
+const { AirValidationError } = require('../AirErrors');
 
 const connectionsFields = [
   'preferredConnectionPoints',
@@ -18,6 +18,6 @@ function validateIsArray(params, prop) {
   }
 }
 
-export default (params) => {
+module.exports = (params) => {
   connectionsFields.forEach(cf => validateIsArray(params, cf));
 };

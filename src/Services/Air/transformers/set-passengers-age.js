@@ -1,6 +1,6 @@
-import moment from 'moment';
+const moment = require('moment');
 
-export default (params) => {
+module.exports = (params) => {
   params.passengers = params.passengers.map((passenger) => {
     const birth = moment(passenger.birthDate.toUpperCase(), 'YYYY-MM-DD');
     passenger.Age = moment().diff(birth, 'years');

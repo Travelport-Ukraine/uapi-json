@@ -1,10 +1,10 @@
-import _ from 'lodash';
-import xml2js from 'xml2js';
+const _ = require('lodash');
+const xml2js = require('xml2js');
 
-import {
+const {
   RequestSoapError,
   RequestRuntimeError,
-} from './RequestErrors';
+} = require('./RequestErrors');
 
 const parseString = xml => new Promise((resolve, reject) => {
   xml2js.parseString(xml, (err, json) => {
@@ -39,7 +39,7 @@ function mergeLeaf(item) {
  * Default parsing algorithm configuration (for all responses)
  */
 
-export function defaultConfig(ver) {
+function defaultConfig(ver) {
   // do not collapse arrays with single objects or objects with single keys if they have this name
   const noCollapseList = [
     'air:BookingInfo',
@@ -146,7 +146,7 @@ export function defaultConfig(ver) {
   };
 }
 
-export function errorsConfig(/* ver */) {
+function errorsConfig(/* ver */) {
   // get default config and modify it
   const errParserConfig = defaultConfig();
   // 1. If waitlisted with restrictWaitlist=true, reply will be SOAP:Fault,
@@ -164,7 +164,7 @@ export function errorsConfig(/* ver */) {
 }
 
 
-export function Parser(root, uapiVersion, env, debug, config) {
+function Parser(root, uapiVersion, env, debug, config) {
   this.debug = debug;
   if (!config) {
     this.config = defaultConfig(uapiVersion);
@@ -349,4 +349,4 @@ Parser.prototype.parse = function (xml) {
     });
 };
 
-export default Parser;
+module.exports = { Parser, defaultConfig, errorsConfig };

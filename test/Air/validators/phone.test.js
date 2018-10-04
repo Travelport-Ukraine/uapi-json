@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { AirValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { AirValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import validate from '../../../src/Services/Air/validators/phone';
+const validate = require('../../../src/Services/Air/validators/phone');
 
 describe('Air.validators.phoneOptional', () => {
   it('should throw error when no phone is set', () => {

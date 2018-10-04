@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { AirValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { AirValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import validate from '../../../src/Services/Air/validators/fop-credit-card';
+const validate = require('../../../src/Services/Air/validators/fop-credit-card');
 
 const goodCC = {
   number: '5483969848297751',

@@ -1,10 +1,10 @@
-import { expect } from 'chai';
-import fs from 'fs';
-import path from 'path';
-import sinon from 'sinon';
+const { expect } = require('chai');
+const fs = require('fs');
+const path = require('path');
+const sinon = require('sinon');
 
-import errors from '../src/error-types';
-import utils from '../src/utils';
+const errors = require('../src/error-types');
+const utils = require('../src/utils');
 
 describe('#Utils', () => {
   describe('.getBookingFromUr', () => {

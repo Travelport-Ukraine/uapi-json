@@ -1,26 +1,26 @@
-import {
+const {
   createErrorClass,
   createErrorsList,
-} from 'node-errors-helpers';
-import errorTypes from '../../error-types';
+} = require('node-errors-helpers');
+const errorTypes = require('../../error-types');
 
 // Validation errors
-export const HotelsValidationError = createErrorClass(
+const HotelsValidationError = createErrorClass(
   'HotelsValidationError',
   'Hotels service validation error',
   errorTypes.ValidationError
 );
-export const TravellersError = createErrorClass(
+const TravellersError = createErrorClass(
   'TravellersError',
   'Travellers information is incorrect',
   HotelsValidationError
 );
-export const ContactError = createErrorClass(
+const ContactError = createErrorClass(
   'AddressError',
   'Address information is incorrect',
   HotelsValidationError
 );
-export const PaymentDataError = createErrorClass(
+const PaymentDataError = createErrorClass(
   'PaymentDataError',
   'Payment information is incorrect',
   HotelsValidationError
@@ -111,7 +111,7 @@ Object.assign(HotelsRuntimeError, createErrorsList({
   NoResultsFound: 'No results found',
 }, HotelsRuntimeError));
 
-export default {
+module.exports = {
   HotelsValidationError,
   HotelsParsingError,
   HotelsRuntimeError,

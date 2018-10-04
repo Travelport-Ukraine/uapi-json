@@ -1,13 +1,13 @@
-import fs from 'fs';
-import path from 'path';
-import chai from 'chai';
-import proxyquire from 'proxyquire';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import assert from 'assert';
-import moment from 'moment';
-import auth from '../testconfig';
-import { AirRuntimeError } from '../../src/Services/Air/AirErrors';
+const fs = require('fs');
+const path = require('path');
+const chai = require('chai');
+const proxyquire = require('proxyquire');
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
+const assert = require('assert');
+const moment = require('moment');
+const auth = require('../testconfig');
+const { AirRuntimeError } = require('../../src/Services/Air/AirErrors');
 
 const expect = chai.expect;
 chai.use(sinonChai);

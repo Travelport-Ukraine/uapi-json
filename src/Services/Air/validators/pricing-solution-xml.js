@@ -1,6 +1,6 @@
-import { AirValidationError } from '../AirErrors';
+const { AirValidationError } = require('../AirErrors');
 
-export default (params) => {
+module.exports = (params) => {
   const solution = params['air:AirPricingSolution'];
   if (Object.prototype.toString.call(solution) !== '[object Object]') {
     throw new AirValidationError.AirPricingSolutionInvalidType(params);

@@ -2,13 +2,14 @@
   eslint-disable import/no-extraneous-dependencies
 */
 
-import fs from 'fs';
-import sinon from 'sinon';
-import chai, { expect } from 'chai';
-import sinonChai from 'sinon-chai';
-import proxyquire from 'proxyquire';
-import config from '../testconfig';
-import uAPI from '../../src';
+const fs = require('fs');
+const sinon = require('sinon');
+const chai = require('chai');
+const expect = require('chai').expect;
+const sinonChai = require('sinon-chai');
+const proxyquire = require('proxyquire');
+const config = require('../testconfig');
+const uAPI = require('../../src');
 
 chai.use(sinonChai);
 

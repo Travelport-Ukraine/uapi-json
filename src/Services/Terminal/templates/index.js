@@ -1,8 +1,8 @@
-import closeSession from './TERMINAL_CLOSE_SESSION.handlebars';
-import createSession from './TERMINAL_CREATE_SESSION.handlebars';
-import request from './TERMINAL_REQUEST.handlebars';
+const closeSession = require('./TERMINAL_CLOSE_SESSION.handlebars');
+const createSession = require('./TERMINAL_CREATE_SESSION.handlebars');
+const request = require('./TERMINAL_REQUEST.handlebars');
 
-export default {
+module.exports = {
   closeSession,
   createSession,
   request,

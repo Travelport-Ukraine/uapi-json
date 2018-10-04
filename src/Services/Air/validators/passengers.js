@@ -1,6 +1,6 @@
-import { AirValidationError } from '../AirErrors';
+const { AirValidationError } = require('../AirErrors');
 
-export default (params) => {
+module.exports = (params) => {
   if (Object.prototype.toString.call(params.passengers) !== '[object Object]') {
     throw new AirValidationError.PassengersHashMissing(params);
   }

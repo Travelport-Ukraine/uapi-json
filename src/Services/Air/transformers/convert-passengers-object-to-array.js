@@ -1,4 +1,4 @@
-export default (params) => {
+module.exports = (params) => {
   const list = [];
 
   Object.keys(params.passengers).forEach((ageCategory) => {

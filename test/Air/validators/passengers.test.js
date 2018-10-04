@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { AirValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { AirValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import passengers from '../../../src/Services/Air/validators/passengers';
+const passengers = require('../../../src/Services/Air/validators/passengers');
 
 describe('Air.validators.passenger', () => {
   it('should throw error when passenger are not set', () => {

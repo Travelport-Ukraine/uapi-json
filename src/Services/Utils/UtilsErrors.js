@@ -1,11 +1,11 @@
-import {
+const {
   createErrorClass,
   createErrorsList,
-} from 'node-errors-helpers';
-import errorTypes from '../../error-types';
+} = require('node-errors-helpers');
+const errorTypes = require('../../error-types');
 
 // Validation errors
-export const UtilsValidationError = createErrorClass(
+const UtilsValidationError = createErrorClass(
   'UtilsValidationError',
   'Utils service validation error',
   errorTypes.ValidationError
@@ -15,20 +15,20 @@ Object.assign(UtilsValidationError, createErrorsList({
 }, UtilsValidationError));
 
 // Parsing errors
-export const UtilsParsingError = createErrorClass(
+const UtilsParsingError = createErrorClass(
   'UtilsParsingError',
   'Utils service parsing error',
   errorTypes.ParsingError
 );
 
 // Runtime errors
-export const UtilsRuntimeError = createErrorClass(
+const UtilsRuntimeError = createErrorClass(
   'UtilsRuntimeError',
   'Utils service runtime error',
   errorTypes.RuntimeError
 );
 
-export default {
+module.exports = {
   UtilsValidationError,
   UtilsParsingError,
   UtilsRuntimeError,

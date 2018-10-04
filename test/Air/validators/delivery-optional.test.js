@@ -1,4 +1,4 @@
-import validate from '../../../src/Services/Air/validators/delivery-info-optional';
+const validate = require('../../../src/Services/Air/validators/delivery-info-optional');
 
 describe('Air.validators.deliveryInfoOptional', () => {
   it('should pass', () => {

@@ -1,5 +1,5 @@
-import validateServiceSettings from '../../src/utils/validate-service-settings';
-import { ServiceError } from '../../src/error-types';
+const validateServiceSettings = require('../../src/utils/validate-service-settings');
+const { ServiceError } = require('../../src/error-types');
 
 describe('Service settings validation', () => {
   it('should fail when no settings provided', () => Promise

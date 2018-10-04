@@ -1,4 +1,4 @@
-import validateServiceSettings from '../../utils/validate-service-settings';
+const validateServiceSettings = require('../../utils/validate-service-settings');
 
 const uApiRequest = require('../../Request/uapi-request');
 const UtilsParser = require('./UtilsParser');

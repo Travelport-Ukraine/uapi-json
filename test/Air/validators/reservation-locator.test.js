@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { AirValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { AirValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import check from '../../../src/Services/Air/validators/reservation-locator';
+const check = require('../../../src/Services/Air/validators/reservation-locator');
 
 describe('Air.validators.reservationLocator', () => {
   it('should throw error when locator is not set', () => {

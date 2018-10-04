@@ -1,4 +1,4 @@
-import { UtilsValidationError } from './UtilsErrors';
+const { UtilsValidationError } = require('./UtilsErrors');
 
 function Validator(params) {
   this.params = params;

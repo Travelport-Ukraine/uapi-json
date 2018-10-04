@@ -1,6 +1,6 @@
-import errors from '../error-types';
+const errors = require('../error-types');
 
-export default (object, fields, ErrorClass = errors.ValidationError) => {
+module.exports = (object, fields, ErrorClass = errors.ValidationError) => {
   fields.forEach((field) => {
     if (object[field] === undefined) {
       throw new ErrorClass({

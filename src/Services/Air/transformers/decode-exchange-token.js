@@ -1,8 +1,8 @@
-import xml2js from 'xml2js';
-import { AirRuntimeError } from '../AirErrors';
-import { inflate } from '../../../utils';
+const xml2js = require('xml2js');
+const { AirRuntimeError } = require('../AirErrors');
+const { inflate } = require('../../../utils');
 
-export default params =>
+module.exports = params =>
   inflate(params.exchangeToken)
     .then(JSON.parse)
     .then((token) => {

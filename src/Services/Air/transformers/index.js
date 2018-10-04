@@ -1,13 +1,13 @@
-import convertPassengersObjectToArray from './convert-passengers-object-to-array';
-import setBusinessFlag from './set-business-flag';
-import setPassengersAge from './set-passengers-age';
-import setHasFareBasisFlag from './set-has-farebasis-flag';
-import setGroupsForSegments from './set-groups-for-segments';
-import addMetaPassengersBooking from './add-meta-passengers-booking';
-import decodeExchangeToken from './decode-exchange-token';
-import fixCardFop from './fix-card-fop';
+const convertPassengersObjectToArray = require('./convert-passengers-object-to-array');
+const setBusinessFlag = require('./set-business-flag');
+const setPassengersAge = require('./set-passengers-age');
+const setHasFareBasisFlag = require('./set-has-farebasis-flag');
+const setGroupsForSegments = require('./set-groups-for-segments');
+const addMetaPassengersBooking = require('./add-meta-passengers-booking');
+const decodeExchangeToken = require('./decode-exchange-token');
+const fixCardFop = require('./fix-card-fop');
 
-export default {
+module.exports = {
   convertPassengersObjectToArray,
   setBusinessFlag,
   setPassengersAge,

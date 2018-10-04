@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { GdsValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { GdsValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import pnr from '../../../src/Services/Air/validators/pnr';
+const pnr = require('../../../src/Services/Air/validators/pnr');
 
 describe('Air.validators.pnr', () => {
   it('should throw error when pnr is not set', () => {

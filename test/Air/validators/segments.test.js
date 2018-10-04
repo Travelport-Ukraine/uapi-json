@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import { AirValidationError } from '../../../src/Services/Air/AirErrors';
-import validate from '../../../src/Services/Air/validators/segments';
+const { expect } = require('chai');
+const { AirValidationError } = require('../../../src/Services/Air/AirErrors');
+const validate = require('../../../src/Services/Air/validators/segments');
 
 describe('Air.validators.segments', () => {
   it('should pass', () => {

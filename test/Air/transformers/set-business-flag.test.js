@@ -1,6 +1,6 @@
-import { expect } from 'chai';
+const { expect } = require('chai');
 
-import convert from '../../../src/Services/Air/transformers/set-business-flag';
+const convert = require('../../../src/Services/Air/transformers/set-business-flag');
 
 describe('Air.transformers.setBusinessFlag', () => {
   it('should not modify params', () => {

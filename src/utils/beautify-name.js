@@ -1,4 +1,4 @@
-export default (string) => {
+module.exports = (string) => {
   if (Object.prototype.toString.apply(string) !== '[object String]') {
     return null;
   }

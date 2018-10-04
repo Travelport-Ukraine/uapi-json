@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import AirFormat from '../../src/Services/Air/AirFormat';
+const { expect } = require('chai');
+const AirFormat = require('../../src/Services/Air/AirFormat');
 
 describe('#AirFormat', () => {
   describe('.getBaggage()', () => {

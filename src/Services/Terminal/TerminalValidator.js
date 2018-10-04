@@ -1,6 +1,6 @@
-import {
+const {
   TerminalValidationError,
-} from './TerminalErrors';
+} = require('./TerminalErrors');
 
 function Validator(params) {
   this.params = params;

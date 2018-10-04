@@ -1,16 +1,16 @@
-import renameProperty from './rename-property';
-import firstInObj from './first-in-obj';
-import beautifyName from './beautify-name';
-import price from './price';
-import validate from './validate';
-import parsers from './parsers';
-import transform from './transform';
-import compose from './compose';
-import hasAllFields from './has-all-required-fields';
-import inflate from './inflate-promise';
-import deflate from './deflate-promise';
-import getBookingFromUr from './get-booking-from-ur';
-import getErrorPcc from './get-error-pcc';
+const renameProperty = require('./rename-property');
+const firstInObj = require('./first-in-obj');
+const beautifyName = require('./beautify-name');
+const price = require('./price');
+const validate = require('./validate');
+const parsers = require('./parsers');
+const transform = require('./transform');
+const compose = require('./compose');
+const hasAllFields = require('./has-all-required-fields');
+const inflate = require('./inflate-promise');
+const deflate = require('./deflate-promise');
+const getBookingFromUr = require('./get-booking-from-ur');
+const getErrorPcc = require('./get-error-pcc');
 
 const utils = {
   renameProperty,
@@ -28,4 +28,4 @@ const utils = {
   getErrorPcc,
 };
 
-export default utils;
+module.exports = utils;

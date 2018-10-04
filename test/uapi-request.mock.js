@@ -1,17 +1,14 @@
-import sinon from 'sinon';
-import { expect } from 'chai';
-import fs from 'fs';
+const sinon = require('sinon');
+const { expect } = require('chai');
 
-const r = params => sinon.spy(function(
-  url,
+const r = params => sinon.spy((url,
   auth,
   template,
   root,
   validator,
   error,
   parser,
-  debug
-) {
+  debug) => {
   expect(url.match(/.*.pp.*/)).to.be.equal(null);
   expect(auth).to.be.equal(params.auth);
   expect(template).to.be.a('string');
@@ -21,5 +18,5 @@ const r = params => sinon.spy(function(
   expect(debug).to.be.equal(params.debug);
 });
 
-export default r;
+module.exports = r;
 

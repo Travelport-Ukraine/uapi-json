@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import parsers from '../../utils/parsers';
-import { AirParsingError } from './AirErrors';
+const _ = require('lodash');
+const parsers = require('../../utils/parsers');
+const { AirParsingError } = require('./AirErrors');
 
 function getBaggage(baggageAllowance) {
   // Checking for allowance

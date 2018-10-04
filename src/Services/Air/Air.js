@@ -1,13 +1,13 @@
-import moment from 'moment';
-import _ from 'lodash';
-import retry from 'promise-retry';
+const moment = require('moment');
+const _ = require('lodash');
+const retry = require('promise-retry');
 
-import { parsers } from '../../utils';
-import getBookingFromUr from '../../utils/get-booking-from-ur';
-import airService from './AirService';
-import createTerminalService from '../Terminal/Terminal';
-import { AirRuntimeError } from './AirErrors';
-import validateServiceSettings from '../../utils/validate-service-settings';
+const { parsers } = require('../../utils');
+const getBookingFromUr = require('../../utils/get-booking-from-ur');
+const airService = require('./AirService');
+const createTerminalService = require('../Terminal/Terminal');
+const { AirRuntimeError } = require('./AirErrors');
+const validateServiceSettings = require('../../utils/validate-service-settings');
 
 module.exports = (settings) => {
   const service = airService(validateServiceSettings(settings));

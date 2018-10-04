@@ -1,21 +1,20 @@
 {
   "name": "uapi-json",
-  "version": "0.20.3",
+  "version": "1.0.0",
   "description": "Travelport Universal API",
-  "main": "build/",
+  "main": "src/",
   "files": [
-    "build/",
+    "src/",
     "README.md",
     "LICENSE",
     "docs"
   ],
   "scripts": {
-    "test": "mocha -t 3000 --compilers js:babel-core/register --recursive",
-    "cover": "babel-node ./node_modules/.bin/isparta cover _mocha -- --recursive -t 3000",
+    "test": "mocha -t 3000 --recursive",
+    "cover": "isparta cover _mocha -- --recursive -t 3000",
     "coveralls": "cat ./coverage/lcov.info | codecov",
     "fix": "eslint --fix src/",
     "lint": "eslint src/",
-    "build": "babel --copy-files src/ -d build/",
     "prepublish": "npm run lint && npm run test && npm run build"
   },
   "repository": {
@@ -30,7 +29,8 @@
   "author": "Mark Orel <mail.ormark@gmail.com>",
   "constributors": [
     "Dmitry Chertousov <d.chertousov@gmail.com>",
-    "Artem Pylypchuk <articicejuice@gmail.com>"
+    "Artem Pylypchuk <articicejuice@gmail.com>",
+    "Yevhenii Huselietov <d46k16@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
@@ -47,12 +47,6 @@
     "xml2js": "^0.4.9"
   },
   "devDependencies": {
-    "babel-cli": "^6.14.0",
-    "babel-core": "^6.23.1",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-es2015-node4": "^2.1.0",
-    "babel-register": "^6.26.0",
     "chai": "^3.5.0",
     "codecov": "^1.0.1",
     "eslint": "^3.4.0",

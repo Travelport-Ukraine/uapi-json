@@ -1,6 +1,6 @@
-import { GdsValidationError } from '../AirErrors';
+const { GdsValidationError } = require('../AirErrors');
 
-export default (params) => {
+module.exports = (params) => {
   if (params.pnr === undefined) {
     throw new GdsValidationError.PnrMissing(params);
   }

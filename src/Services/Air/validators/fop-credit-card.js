@@ -1,8 +1,8 @@
-import { AirValidationError } from '../AirErrors';
+const { AirValidationError } = require('../AirErrors');
 
 const Joi = require('joi');
 
-export default (params) => {
+module.exports = (params) => {
   if (params.fop.type === 'Card') {
     const schema = Joi.object().keys({
       number: Joi.string()

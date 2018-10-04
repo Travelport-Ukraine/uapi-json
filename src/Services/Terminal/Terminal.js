@@ -1,13 +1,13 @@
-import screenLib from 'galileo-screen';
-import { TerminalRuntimeError } from './TerminalErrors';
-import terminalService from './TerminalService';
-import validateServiceSettings from '../../utils/validate-service-settings';
+const screenLib = require('galileo-screen');
+const { TerminalRuntimeError } = require('./TerminalErrors');
+const terminalService = require('./TerminalService');
+const validateServiceSettings = require('../../utils/validate-service-settings');
 
-export const TERMINAL_STATE_NONE = 'TERMINAL_STATE_NONE';
-export const TERMINAL_STATE_BUSY = 'TERMINAL_STATE_BUSY';
-export const TERMINAL_STATE_READY = 'TERMINAL_STATE_READY';
-export const TERMINAL_STATE_CLOSED = 'TERMINAL_STATE_CLOSED';
-export const TERMINAL_STATE_ERROR = 'TERMINAL_STATE_ERROR';
+const TERMINAL_STATE_NONE = 'TERMINAL_STATE_NONE';
+const TERMINAL_STATE_BUSY = 'TERMINAL_STATE_BUSY';
+const TERMINAL_STATE_READY = 'TERMINAL_STATE_READY';
+const TERMINAL_STATE_CLOSED = 'TERMINAL_STATE_CLOSED';
+const TERMINAL_STATE_ERROR = 'TERMINAL_STATE_ERROR';
 
 const screenFunctions = screenLib({ cursor: '><' });
 

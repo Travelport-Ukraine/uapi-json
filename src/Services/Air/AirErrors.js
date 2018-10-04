@@ -1,11 +1,11 @@
-import {
+const {
   createErrorClass,
   createErrorsList,
-} from 'node-errors-helpers';
-import errorTypes from '../../error-types';
+} = require('node-errors-helpers');
+const errorTypes = require('../../error-types');
 
 // Validation errors
-export const AirValidationError = createErrorClass(
+const AirValidationError = createErrorClass(
   'AirValidationError',
   'Air service validation error',
   errorTypes.ValidationError
@@ -36,7 +36,7 @@ Object.assign(AirValidationError, createErrorsList({
   IncorrectConnectionsFormat: 'Connections should be an array with IATA codes.',
 }, AirValidationError));
 
-export const GdsValidationError = createErrorClass(
+const GdsValidationError = createErrorClass(
   'GdsValidationError',
   'Gds service validation error',
   errorTypes.ValidationError
@@ -47,7 +47,7 @@ Object.assign(GdsValidationError, createErrorsList({
   PccMissing: 'Pcc is missing in request',
 }, GdsValidationError));
 
-export const AirFlightInfoValidationError = createErrorClass(
+const AirFlightInfoValidationError = createErrorClass(
   'AirFlightInfoValidationError',
   'Air FlightInfo service validation error',
   errorTypes.ValidationError
@@ -59,7 +59,7 @@ Object.assign(AirFlightInfoValidationError, createErrorsList({
 }, AirFlightInfoValidationError));
 
 // Parsing errors
-export const AirParsingError = createErrorClass(
+const AirParsingError = createErrorClass(
   'AirParsingError',
   'Air service parsing error',
   errorTypes.ParsingError
@@ -79,7 +79,7 @@ Object.assign(AirParsingError, createErrorsList({
 }, AirParsingError));
 
 // Runtime errors
-export const AirRuntimeError = createErrorClass(
+const AirRuntimeError = createErrorClass(
   'AirRuntimeError',
   'Air service runtime error',
   errorTypes.RuntimeError
@@ -125,7 +125,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   UnableToRetrieve: 'Unable to retrieve PNR. Please contact your local Travelport Helpdesk.',
 }, AirRuntimeError));
 
-export const AirFlightInfoRuntimeError = createErrorClass(
+const AirFlightInfoRuntimeError = createErrorClass(
   'AirFlightInfoRuntimeError',
   'Air flight info service runtime error',
   errorTypes.RuntimeError
@@ -136,7 +136,7 @@ Object.assign(AirFlightInfoRuntimeError, createErrorsList({
   InvalidFlightNumber: 'Invalid flight number',
 }, AirFlightInfoRuntimeError));
 
-export const GdsRuntimeError = createErrorClass(
+const GdsRuntimeError = createErrorClass(
   'GdsRuntimeError',
   'Gds service runtime error',
   errorTypes.RuntimeError
@@ -146,7 +146,7 @@ Object.assign(GdsRuntimeError, createErrorsList({
   PlacingInQueueError: 'Error during placing in queue request',
 }, GdsRuntimeError));
 
-export default {
+module.exports = {
   AirValidationError,
   AirFlightInfoValidationError,
   GdsValidationError,

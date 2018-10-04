@@ -1,17 +1,17 @@
-import _ from 'lodash';
-import xml2js from 'xml2js';
-import moment from 'moment';
-import utils from '../../utils';
-import format from './AirFormat';
-import {
+const _ = require('lodash');
+const xml2js = require('xml2js');
+const moment = require('moment');
+const utils = require('../../utils');
+const format = require('./AirFormat');
+const {
   AirParsingError,
   AirRuntimeError,
   AirFlightInfoRuntimeError,
   GdsRuntimeError,
-} from './AirErrors';
-import {
+} = require('./AirErrors');
+const {
   RequestRuntimeError,
-} from '../../Request/RequestErrors';
+} = require('../../Request/RequestErrors');
 
 const parseFareCalculation = (str) => {
   const fareCalculation = str.match(/^([\s\S]+)END($|\s)/)[1];

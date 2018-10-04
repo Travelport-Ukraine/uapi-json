@@ -1,6 +1,6 @@
-import { validate, transform, compose } from '../../utils';
-import validators from './validators';
-import transformers from './transformers';
+const { validate, transform, compose } = require('../../utils');
+const validators = require('./validators');
+const transformers = require('./transformers');
 
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: compose(

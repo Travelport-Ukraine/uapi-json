@@ -1,8 +1,8 @@
-import { expect } from 'chai';
-import moment from 'moment';
+const { expect } = require('chai');
+const moment = require('moment');
 
-import convert from '../../../src/Services/Air/transformers/add-meta-passengers-booking';
-import age from '../../../src/Services/Air/transformers/set-passengers-age';
+const convert = require('../../../src/Services/Air/transformers/add-meta-passengers-booking');
+const age = require('../../../src/Services/Air/transformers/set-passengers-age');
 
 describe('Air.transformers.setPassengersAge', () => {
   it('should add age', () => {

@@ -32,4 +32,4 @@ const parse = (string) => {
   );
 };
 
-export default parse;
+module.exports = parse;

@@ -1,6 +1,6 @@
-import { expect } from 'chai';
+const { expect } = require('chai');
 
-import convert from '../../../src/Services/Air/transformers/set-has-farebasis-flag';
+const convert = require('../../../src/Services/Air/transformers/set-has-farebasis-flag');
 
 describe('Air.trasnformers.setHasFareBasis', () => {
   it('should set flag = true', () => {

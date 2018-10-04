@@ -1,4 +1,4 @@
-import { ServiceError } from '../error-types';
+const { ServiceError } = require('../error-types');
 
 module.exports = function validateServiceSettings(settings) {
   if (!settings) {

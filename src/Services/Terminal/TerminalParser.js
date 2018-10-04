@@ -1,11 +1,11 @@
-import {
+const {
   TerminalRuntimeError,
   TerminalParsingError,
-} from './TerminalErrors';
-import {
+} = require('./TerminalErrors');
+const {
   RequestRuntimeError,
-} from '../../Request/RequestErrors';
-import utils from '../../utils';
+} = require('../../Request/RequestErrors');
+const utils = require('../../utils');
 
 function errorHandler(rsp) {
   let errorInfo;

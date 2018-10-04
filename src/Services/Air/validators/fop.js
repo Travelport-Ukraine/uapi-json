@@ -1,6 +1,6 @@
-import { AirValidationError } from '../AirErrors';
+const { AirValidationError } = require('../AirErrors');
 
-export default (params) => {
+module.exports = (params) => {
   if (params.fop === undefined) {
     throw new AirValidationError.FopMissing();
   }

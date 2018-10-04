@@ -1,12 +1,12 @@
-import fs from 'fs';
-import path from 'path';
-import proxyquire from 'proxyquire';
-import sinon from 'sinon';
-import chai from 'chai';
-import sinonChai from 'sinon-chai';
-import {
+const fs = require('fs');
+const path = require('path');
+const proxyquire = require('proxyquire');
+const sinon = require('sinon');
+const chai = require('chai');
+const sinonChai = require('sinon-chai');
+const {
   RequestSoapError,
-} from '../../src/Request/RequestErrors';
+} = require('../../src/Request/RequestErrors');
 
 const expect = chai.expect;
 chai.use(sinonChai);

@@ -1,10 +1,10 @@
-import {
+const {
   HotelsParsingError,
   HotelsRuntimeError,
-} from './HotelsErrors';
-import {
+} = require('./HotelsErrors');
+const {
   RequestRuntimeError,
-} from '../../Request/RequestErrors';
+} = require('../../Request/RequestErrors');
 
 const amenties = require('./amenties');
 const Utils = require('../../utils');

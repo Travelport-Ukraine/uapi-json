@@ -1,6 +1,6 @@
-import zlib from 'zlib';
+const zlib = require('zlib');
 
-export default string => new Promise((resolve, reject) => {
+module.exports = string => new Promise((resolve, reject) => {
   zlib.deflate(string, (err, result) => {
     if (err) {
       reject(err);

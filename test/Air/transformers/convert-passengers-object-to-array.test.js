@@ -1,6 +1,6 @@
-import { expect } from 'chai';
+const { expect } = require('chai');
 
-import convert from '../../../src/Services/Air/transformers/convert-passengers-object-to-array';
+const convert = require('../../../src/Services/Air/transformers/convert-passengers-object-to-array');
 
 
 describe('Air.transformers.convertPassengersObjectToArray', () => {

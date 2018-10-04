@@ -1,14 +1,14 @@
-import handlebars from 'handlebars';
-import axios from 'axios';
-import { pd } from 'pretty-data';
-import {
+const handlebars = require('handlebars');
+const axios = require('axios');
+const { pd } = require('pretty-data');
+const {
   RequestValidationError,
   RequestRuntimeError,
   RequestSoapError,
-} from './RequestErrors';
-import { Parser as UapiParser, errorsConfig } from './uapi-parser';
-import prepareRequest from './prepare-request';
-import configInit from '../config';
+} = require('./RequestErrors');
+const { Parser, errorsConfig } = require('./uapi-parser');
+const prepareRequest = require('./prepare-request');
+const configInit = require('../config');
 
 handlebars.registerHelper('equal', require('handlebars-helper-equal'));
 
@@ -17,10 +17,12 @@ handlebars.registerHelper('equal', require('handlebars-helper-equal'));
  * @param  {string} service          service url for current response (gateway)
  * @param  {object} auth             {username,password} - credentials
  * @param  {string} reqType          url to file with xml for current request
+ * @param  {object} rootObject
  * @param  {function} validateFunction function for validation
  * @param  {function} errorHandler    function that gets SOAP:Fault object and handle error
  * @param  {function} parseFunction    function for transforming json soap object to normal object
  * @param  {boolean} debugMode        true - log requests, false - dont
+ * @param  {object} options
  * @return {Promise}                  returning promise for best error handling ever)
  */
 module.exports = function uapiRequest(
@@ -54,7 +56,7 @@ module.exports = function uapiRequest(
     }
 
     // create a v36 uAPI parser with default params and request data in env
-    const uParser = new UapiParser(rootObject, 'v36_0', params, debugMode);
+    const uParser = new Parser(rootObject, 'v36_0', params, debugMode);
 
     const validateInput = () =>
       Promise.resolve(params)
@@ -126,7 +128,7 @@ module.exports = function uapiRequest(
         // use a special uAPI parser configuration for errors, copy detected uAPI version
         const errParserConfig = errorsConfig();
         const errParser =
-          new UapiParser(rootObject, uParser.uapi_version, params, debugMode, errParserConfig);
+          new Parser(rootObject, uParser.uapi_version, params, debugMode, errParserConfig);
         const errData = errParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
         return errorHandler.call(errParser, errData);
       } else if (debugMode > 2) {

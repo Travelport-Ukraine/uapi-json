@@ -1,4 +1,4 @@
-import { HotelsValidationError } from './HotelsErrors';
+const { HotelsValidationError } = require('./HotelsErrors');
 
 function Validator(params) {
   this.params = params;

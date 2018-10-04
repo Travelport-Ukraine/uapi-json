@@ -8,4 +8,4 @@ const parse = (screen) => {
   return null;
 };
 
-export default parse;
+module.exports = parse;
