@@ -182,7 +182,7 @@ function airPriceRspPassengersPerReservation(obj) {
   const prices = priceResult['air:AirPricingSolution'];
   const priceKeys = Object.keys(prices);
 
-  const pricing = prices[_.first(priceKeys)]['air:AirPricingInfo'];
+  const pricing = prices[priceKeys[0]]['air:AirPricingInfo'];
 
   return Object.keys(pricing)
     .reduce((acc, right) => ({
