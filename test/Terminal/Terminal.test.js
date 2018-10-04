@@ -13,7 +13,7 @@ const uAPI = require('../../src');
 
 chai.use(sinonChai);
 
-const { TerminalError: { TerminalRuntimeError } } = uAPI.errors;
+const { Terminal: { TerminalRuntimeError } } = uAPI.errors;
 
 const DumbErrorClosingSession = sinon.spy(() => true);
 const ModifiedTerminalRuntimeError = Object.assign({}, TerminalRuntimeError, {
