@@ -4,10 +4,10 @@ module.exports = (params) => {
   params.passengers.forEach((item) => {
     const birthSSR = moment(item.birthDate.toUpperCase(), 'YYYY-MM-DD');
     const { passCountry: country,
-            passNumber: num,
-            firstName: first,
-            lastName: last,
-            gender } = item;
+      passNumber: num,
+      firstName: first,
+      lastName: last,
+      gender } = item;
 
     const due = moment().add(12, 'month').format('DDMMMYY');
     const birth = birthSSR.format('DDMMMYY');

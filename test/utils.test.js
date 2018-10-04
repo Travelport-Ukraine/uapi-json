@@ -115,7 +115,7 @@ describe('#Utils', () => {
       const params = { me: 'you' };
       const t1 = sinon.spy((params) => { params.me = 'me'; return params; });
       const transform = utils.transform(t1);
-      return transform(params).then(res => {
+      return transform(params).then((res) => {
         expect(params).to.be.not.deep.equal(res);
         expect(params).to.not.be.equal(res);
         expect(res.me).to.be.equal('me');
@@ -126,17 +126,17 @@ describe('#Utils', () => {
     it('should correctly work without any transformers', () => {
       const params = { me: 'you' };
       const transform = utils.transform();
-      return transform(params).then(res => {
+      return transform(params).then((res) => {
         expect(params).to.be.deep.equal(res);
         expect(params).to.not.be.equal(res);
-      })
+      });
     });
   });
 
   describe('.compose', () => {
     it('should compose two functions', () => {
-      const add1 = (a) => a + 1;
-      const mul2 = (a) => a * 2;
+      const add1 = a => a + 1;
+      const mul2 = a => a * 2;
 
       const addMul = utils.compose(add1, mul2);
       const res = addMul(5);
@@ -250,25 +250,25 @@ describe('#Utils', () => {
     describe('.inflate/.deflate', () => {
       it('should return string same before and after', () => {
         const original = 'somestring';
-        return utils.deflate(original).then(utils.inflate).then(res => {
+        return utils.deflate(original).then(utils.inflate).then((res) => {
           expect(res).to.be.equal(original);
         });
       });
 
       it('should return error on incorrect inflate', () => {
         const original = 'somestring';
-        return utils.inflate(original).then(res => {
-          throw new Error('Cant be response')
-        }).catch(e => {
+        return utils.inflate(original).then((res) => {
+          throw new Error('Cant be response');
+        }).catch((e) => {
           expect(e.message).not.equal('Cant be response');
         });
       });
 
       it('should return error if cant deflate', () => {
         const original = 123;
-        return utils.deflate(original).then(res => {
+        return utils.deflate(original).then((res) => {
           throw new Error('Cant be response');
-        }).catch(e => {
+        }).catch((e) => {
           expect(e.message).not.equal('Cant be response');
         });
       });

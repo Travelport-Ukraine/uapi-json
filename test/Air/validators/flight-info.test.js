@@ -38,7 +38,7 @@ describe('Air.validators.flightInfo', () => {
   it('should validate array', () => {
     const params = [
       { airline: 123, flightNumber: 777, departure: 123 },
-      { airline: 123, flightNumber: 777, departure: 123 }
+      { airline: 123, flightNumber: 777, departure: 123 },
     ];
     const fn = () => flightInfo({ flightInfoCriteria: params });
     expect(fn).to.not.throw(Error);

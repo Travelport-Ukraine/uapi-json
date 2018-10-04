@@ -100,7 +100,7 @@ describe('#Request', () => {
     });
 
     it('should test custom log function with success', () => {
-      const log = sinon.spy(function (...args) {
+      const log = sinon.spy((...args) => {
         console.log(args);
         return;
       });
@@ -115,7 +115,7 @@ describe('#Request', () => {
     });
 
     it('should test custom log function with error', () => {
-      const log = sinon.spy(function (...args) {
+      const log = sinon.spy((...args) => {
         console.log(args);
         return;
       });
@@ -130,7 +130,7 @@ describe('#Request', () => {
     });
 
     it('should test result of parser as string', () => {
-      const log = sinon.spy(function (...args) {
+      const log = sinon.spy((...args) => {
         console.log(args);
         return;
       });

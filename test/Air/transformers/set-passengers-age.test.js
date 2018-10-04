@@ -17,7 +17,7 @@ describe('Air.transformers.setPassengersAge', () => {
       ],
     };
     const converted = convert(params);
-    converted.passengers.forEach(passenger => {
+    converted.passengers.forEach((passenger) => {
       expect(passenger.Age).to.be.equal(checkAges.pop());
     });
   });

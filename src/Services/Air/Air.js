@@ -208,15 +208,15 @@ module.exports = (settings) => {
     getTickets(options) {
       return this.getPNR(options)
         .then(
-           booking => Promise.all(
-             booking.tickets.map(
-               ticket => this.getTicket({
-                 pnr: booking.pnr,
-                 uapi_ur_locator: booking.uapi_ur_locator,
-                 ticketNumber: ticket.number,
-               })
-             )
-           )
+          booking => Promise.all(
+            booking.tickets.map(
+              ticket => this.getTicket({
+                pnr: booking.pnr,
+                uapi_ur_locator: booking.uapi_ur_locator,
+                ticketNumber: ticket.number,
+              })
+            )
+          )
         )
         .catch(
           err => Promise.reject(new AirRuntimeError.UnableToRetrieveTickets(options, err))

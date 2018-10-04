@@ -30,7 +30,7 @@ describe('Air.transformers.setPassengersAge', () => {
       birthDate: moment().subtract(5, 'years').format('YYYY-MM-DD'),
       gender: 'M',
       ageCategory: 'CNN',
-    }]
+    }];
     const params = { passengers };
 
     const converted = convert(age(params));

@@ -201,7 +201,7 @@ describe('#Terminal', function terminalTest() {
         debug: 1,
       });
 
-      return uAPITerminal.executeCommand('I')
+      uAPITerminal.executeCommand('I')
         .then(() => {
           expect(closeSession.callCount).to.equal(0);
           process.emit('beforeExit');

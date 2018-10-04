@@ -15,15 +15,13 @@ const xmlFolder = `${__dirname}/MockResponses`;
 
 describe('#TerminalParser', () => {
   describe('errorHandler()', () => {
-    it('should throw an error in case of SOAP:Fault', () => {
-      return Promise.resolve()
-        .then(() => terminalParser.TERMINAL_ERROR())
-        .then(() => Promise.reject(new Error('Error not thrown')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceOf(RequestError.RequestRuntimeError.UnhandledError);
-          expect(err.causedBy).to.be.an.instanceOf(TerminalError.TerminalRuntimeError);
-        });
-    });
+    it('should throw an error in case of SOAP:Fault', () => Promise.resolve()
+      .then(() => terminalParser.TERMINAL_ERROR())
+      .then(() => Promise.reject(new Error('Error not thrown')))
+      .catch((err) => {
+        expect(err).to.be.an.instanceOf(RequestError.RequestRuntimeError.UnhandledError);
+        expect(err.causedBy).to.be.an.instanceOf(TerminalError.TerminalRuntimeError);
+      }));
 
     it('should throw correct error in case of no agreement', () => {
       const errorConfig = errorsConfig();

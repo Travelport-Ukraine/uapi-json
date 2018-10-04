@@ -38,7 +38,7 @@ describe('#UtilsValidator', () => {
 
     it('should correct validate and return object', () => {
       const params = UtilsValidator.CURRENCY_CONVERSION(
-        { currencies: [{ from: 'UAR', to: 'EUR'}] }
+        { currencies: [{ from: 'UAR', to: 'EUR' }] }
       );
       expect(params).not.equal(undefined);
     });

@@ -90,6 +90,4 @@ describe('Air.validators.fopCreditCard', () => {
     }
     expect('some text, ' + goodCC.number + '-bla-bla').to.contain(goodCC.number);
   });
-
-
 });

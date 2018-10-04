@@ -1002,45 +1002,45 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getPNR-no-details.xml`).toString();
       return uParser.parse(xml)
-      .then(json => parseFunction.call(uParser, json))
-      .then((result) => {
-        testBooking(result);
-        const segments = result[0].segments;
-        expect(segments[0].plane).to.has.lengthOf(0);
-        expect(segments[0].duration).to.has.lengthOf(0);
-        expect(segments[1].plane).to.has.lengthOf(0);
-        expect(segments[1].duration).to.has.lengthOf(0);
-        expect(segments[2].plane).to.has.lengthOf(1);
-        expect(segments[2].duration).to.has.lengthOf(1);
-        expect(segments[3].plane).to.has.lengthOf(1);
-        expect(segments[3].duration).to.has.lengthOf(1);
-      });
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testBooking(result);
+          const segments = result[0].segments;
+          expect(segments[0].plane).to.has.lengthOf(0);
+          expect(segments[0].duration).to.has.lengthOf(0);
+          expect(segments[1].plane).to.has.lengthOf(0);
+          expect(segments[1].duration).to.has.lengthOf(0);
+          expect(segments[2].plane).to.has.lengthOf(1);
+          expect(segments[2].duration).to.has.lengthOf(1);
+          expect(segments[3].plane).to.has.lengthOf(1);
+          expect(segments[3].duration).to.has.lengthOf(1);
+        });
     });
     it('should parse booking with XF and ZP taxes in FQ', () => {
       const uParser = new Parser('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getPNR_XF_ZP.xml`).toString();
       return uParser.parse(xml)
-      .then(json => parseFunction.call(uParser, json))
-      .then((result) => {
-        testBooking(result);
-        const detialedTaxes = result[0].fareQuotes[0].pricingInfos[0].taxesInfo.filter(
-          tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
-        );
-        expect(detialedTaxes).to.have.lengthOf(2);
-        detialedTaxes.forEach(
-          (tax) => {
-            expect(tax.details).to.be.an('array').and.to.have.length.above(0);
-            tax.details.forEach(
-              (detailInfo) => {
-                expect(detailInfo).to.have.all.keys(['airport', 'value']);
-                expect(detailInfo.airport).to.match(/^[A-Z]{3}$/);
-                expect(detailInfo.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
-              }
-            );
-          }
-        );
-      });
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testBooking(result);
+          const detialedTaxes = result[0].fareQuotes[0].pricingInfos[0].taxesInfo.filter(
+            tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
+          );
+          expect(detialedTaxes).to.have.lengthOf(2);
+          detialedTaxes.forEach(
+            (tax) => {
+              expect(tax.details).to.be.an('array').and.to.have.length.above(0);
+              tax.details.forEach(
+                (detailInfo) => {
+                  expect(detailInfo).to.have.all.keys(['airport', 'value']);
+                  expect(detailInfo.airport).to.match(/^[A-Z]{3}$/);
+                  expect(detailInfo.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
+                }
+              );
+            }
+          );
+        });
     });
 
     it('should get flight details from separate requests if not available in importPNR');
@@ -1109,14 +1109,14 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getPNR-EMD-issued.xml`).toString();
       return uParser.parse(xml)
-      .then(json => parseFunction.call(uParser, json))
-      .then((result) => {
-        testBooking(result);
-        const issuedServiceSegments = result[0].serviceSegments.find(
-          item => item.documentNumber !== undefined
-        );
-        expect(issuedServiceSegments).to.be.an('object');
-      });
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testBooking(result);
+          const issuedServiceSegments = result[0].serviceSegments.find(
+            item => item.documentNumber !== undefined
+          );
+          expect(issuedServiceSegments).to.be.an('object');
+        });
     });
 
     it('should test parsing of create reservation 2ADT1CNN', () => {
@@ -1567,7 +1567,7 @@ describe('#AirParser', () => {
           'uapi_pricing_info_ref',
         ]);
         expect(detail.taxes).to.be.an('array');
-        detail.taxes.forEach(tax => {
+        detail.taxes.forEach((tax) => {
           expect(tax).to.have.all.keys(['type', 'value']);
           expect(tax.type).to.match(/[A-Z0-9]{2}/);
         });
@@ -1670,9 +1670,7 @@ describe('#AirParser', () => {
       const uParser = new Parser(null, 'v36_0', { });
       const parseFunction = airParser.AIR_EXCHANGE_QUOTE;
       const xml = fs.readFileSync(`${xmlFolder}/AirExchangeQuote-1.xml`).toString();
-      return uParser.parse(xml).then((json) => {
-        return parseFunction.call(uParser, json);
-      }).then(result => {
+      return uParser.parse(xml).then(json => parseFunction.call(uParser, json)).then((result) => {
         testExchangeFormat(result);
       });
     });
@@ -1681,9 +1679,7 @@ describe('#AirParser', () => {
       const uParser = new Parser(null, 'v36_0', { });
       const parseFunction = airParser.AIR_EXCHANGE_QUOTE;
       const xml = fs.readFileSync(`${xmlFolder}/AirExchangeQuote-2.xml`).toString();
-      return uParser.parse(xml).then((json) => {
-        return parseFunction.call(uParser, json);
-      }).then(result => {
+      return uParser.parse(xml).then(json => parseFunction.call(uParser, json)).then((result) => {
         testExchangeFormat(result);
       });
     });
@@ -1702,7 +1698,7 @@ describe('#AirParser', () => {
           const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]);
           return parseFunction.call(uParser, errData);
         })
-        .catch(err => {
+        .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.NoResidualValue);
         });
     });
@@ -1721,7 +1717,7 @@ describe('#AirParser', () => {
           const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]);
           return parseFunction.call(uParser, errData);
         })
-        .catch(err => {
+        .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.TicketsNotIssued);
         });
     });
@@ -1732,9 +1728,7 @@ describe('#AirParser', () => {
       const uParser = new Parser('air:AirExchangeRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_EXCHANGE;
       const xml = fs.readFileSync(`${xmlFolder}/AirExchange-1pas-1ticket.xml`).toString();
-      return uParser.parse(xml).then((json) => {
-        return parseFunction.call(uParser, json);
-      }).then(result => {
+      return uParser.parse(xml).then(json => parseFunction.call(uParser, json)).then((result) => {
         expect(result).to.be.equal(true);
       });
     });
@@ -1743,11 +1737,9 @@ describe('#AirParser', () => {
       const uParser = new Parser('air:AirExchangeRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_EXCHANGE;
       const xml = fs.readFileSync(`${xmlFolder}/AirExchange-1pas-1ticket.xml`).toString();
-      return uParser.parse(xml).then((json) => {
-        return parseFunction.call(uParser, {});
-      }).then(result => {
+      return uParser.parse(xml).then(json => parseFunction.call(uParser, {})).then((result) => {
         throw new Error('Cant return result');
-      }).catch(e => {
+      }).catch((e) => {
         expect(e).to.be.instanceof(AirRuntimeError.CantDetectExchangeReponse);
       });
     });
@@ -1757,9 +1749,9 @@ describe('#AirParser', () => {
     function testAvailability(rsp) {
       expect(rsp).to.have.all.keys(['legs', 'nextResultReference']);
       expect(rsp.legs).to.be.a('array');
-      rsp.legs.forEach(leg => {
+      rsp.legs.forEach((leg) => {
         expect(leg).to.be.a('array');
-        leg.forEach(segment => {
+        leg.forEach((segment) => {
           expect(segment).to.be.an('object');
           expect(segment).to.have.all.keys([
             'from', 'to', 'departure', 'arrival', 'airline',
@@ -1779,7 +1771,7 @@ describe('#AirParser', () => {
           expect(segment.uapi_segment_ref).to.be.a('string');
 
           expect(segment.availability).to.be.a('array');
-          segment.availability.forEach(obj => {
+          segment.availability.forEach((obj) => {
             expect(obj).to.have.all.keys(['bookingClass', 'cabin', 'seats']);
             expect(obj.seats).to.be.a('string');
           });
@@ -1797,7 +1789,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp.xml`).toString();
       return uParser
         .parse(xml)
-        .then((json) => parseFunction.call(uParser, json))
+        .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testAvailability(result);
         });
@@ -1812,7 +1804,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp3.xml`).toString();
       return uParser
         .parse(xml)
-        .then((json) => parseFunction.call(uParser, json))
+        .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testAvailability(result);
         });
@@ -1825,7 +1817,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp2.xml`).toString();
       return uParser
         .parse(xml)
-        .then((json) => parseFunction.call(uParser, json))
+        .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testAvailability(result);
           expect(result.nextResultReference).to.be.null;
@@ -1839,7 +1831,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp4-NO1G.xml`).toString();
       return uParser
         .parse(xml)
-        .then((json) => parseFunction.call(uParser, json))
+        .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           expect(result.legs.length).to.be.equal(0);
         });

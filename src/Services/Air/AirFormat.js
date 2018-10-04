@@ -120,9 +120,9 @@ function formatLowFaresSearch(searchRequest, searchResult) {
               segment['air:AirAvailInfo'] &&
               segment['air:AirAvailInfo'].ProviderCode === '1G'
             ) ? (Number(
-              segment['air:AirAvailInfo']['air:BookingCodeInfo'].BookingCounts
-                .match(new RegExp(`${segmentInfo.BookingCode}(\\d+)`))[1]
-            )) : null;
+                segment['air:AirAvailInfo']['air:BookingCodeInfo'].BookingCounts
+                  .match(new RegExp(`${segmentInfo.BookingCode}(\\d+)`))[1]
+              )) : null;
             return Object.assign(
               formatTrip(segment, tripFlightDetails),
               {
@@ -155,7 +155,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
         passengerCounts[code] = 1;
 
         // air:PassengerType in noCollapseList
-      } else if (_.isArray(code) && code.constructor === Array) {  // ParserUapi param
+      } else if (_.isArray(code) && code.constructor === Array) { // ParserUapi param
         const count = code.length;
         const list = _.uniq(_.map(code, (item) => {
           if (_.isString(item)) {
@@ -262,7 +262,7 @@ function setIndexesForSegments(
           ...segment,
           index: key + 1,
         })
-      );
+    );
     return { segments, serviceSegments: serviceSegmentsNew };
   }
 

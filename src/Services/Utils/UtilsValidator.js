@@ -31,7 +31,7 @@ Validator.prototype.currencies = function () {
 module.exports = {
   CURRENCY_CONVERSION(params) {
     return new Validator(params)
-    .currencies()
-    .end();
+      .currencies()
+      .end();
   },
 };

@@ -1065,8 +1065,8 @@ describe('#AirService', () => {
       const searchPassengersList = sinon.spy(
         screen => (
           (screen === 'listscreen')
-          ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
-          : null
+            ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
+            : null
         ),
       );
 
@@ -1111,8 +1111,8 @@ describe('#AirService', () => {
       const searchPassengersList = sinon.spy(
         screen => (
           (screen === 'listscreen')
-          ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
-          : null
+            ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
+            : null
         ),
       );
 

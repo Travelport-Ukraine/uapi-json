@@ -30,7 +30,7 @@ function getItemEmbKey(item) {
 function mergeLeaf(item) {
   const leaf = item.$;
   delete (item.$);
-    // item.renameProperty('_', 'text'); //TODO decide if _ is the best name
+  // item.renameProperty('_', 'text'); //TODO decide if _ is the best name
   return _.extend(item, leaf);
 }
 
@@ -288,8 +288,8 @@ Parser.prototype.parseVersion = function (obj) {
     .reduce(
       (acc, key) => acc.concat(
         Object.keys(detail[key][0].$)
-        .filter(detailKey => detailKey.match(/^xmlns/i))
-        .map(detailKey => detail[key][0].$[detailKey])
+          .filter(detailKey => detailKey.match(/^xmlns/i))
+          .map(detailKey => detail[key][0].$[detailKey])
       ),
       []
     )

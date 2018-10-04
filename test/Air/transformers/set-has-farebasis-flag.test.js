@@ -16,7 +16,7 @@ describe('Air.trasnformers.setHasFareBasis', () => {
   });
 
   it('should set flag = false 2', () => {
-    const params = { segments: [{  }] };
+    const params = { segments: [{ }] };
     const converted = convert(params);
     expect(converted.hasFareBasis).to.be.deep.equal(false);
   });

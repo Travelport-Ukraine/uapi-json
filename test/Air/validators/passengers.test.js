@@ -11,7 +11,7 @@ describe('Air.validators.passenger', () => {
 
 
   it('should throw error when passengers key is incorrect', () => {
-    const fn = () => passengers({ passengers: { 'adult': '123' } });
+    const fn = () => passengers({ passengers: { adult: '123' } });
     expect(fn).to.throw(AirValidationError.PassengersCategoryInvalid);
   });
 

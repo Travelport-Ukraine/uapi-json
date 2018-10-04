@@ -10,6 +10,7 @@
     "func-names": 0,
     "no-param-reassign": 0,
     "prefer-template": 0,
+    "new-cap": 0,
     "max-len": ["error", 100, 2, {
       "ignoreRegExpLiterals": true,
       "ignoreUrls": true,
