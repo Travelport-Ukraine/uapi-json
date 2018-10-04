@@ -224,8 +224,8 @@ function airPriceRspPricingSolutionXML(obj) {
 
   this.env.passengers.forEach((passenger, index) => {
     // find a reservation with places available for this passenger type, decrease counter
-    const reservationKey = _.findKey(passengersPerReservations, (elem) => {
-      const item = elem;
+    const reservationKey = Object.keys(passengersPerReservations).find((key) => {
+      const item = passengersPerReservations[key];
       const { ageCategory } = passenger;
       if (item[ageCategory] > 0) {
         item[ageCategory] -= 1;
@@ -234,7 +234,7 @@ function airPriceRspPricingSolutionXML(obj) {
       return false;
     });
 
-    const pricingInfo = _.find(pricingInfos, info => info.$.Key === reservationKey);
+    const pricingInfo = pricingInfos.find(info => info.$.Key === reservationKey);
 
     pricingInfo['air:PassengerType'].push({
       $: {
