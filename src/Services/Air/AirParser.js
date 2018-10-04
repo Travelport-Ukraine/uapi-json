@@ -194,7 +194,7 @@ function airPriceRspPassengersPerReservation(obj) {
 
 function airPriceRspPricingSolutionXML(obj) {
   // first let's parse a regular structure
-  const objCopy = _.cloneDeep(obj);
+  const objCopy = JSON.parse(JSON.stringify((obj)));
   const passengersPerReservations = airPriceRspPassengersPerReservation.call(this, objCopy);
 
   const segments = obj['air:AirPriceRsp'][0]['air:AirItinerary'][0]['air:AirSegment'];
@@ -220,7 +220,7 @@ function airPriceRspPricingSolutionXML(obj) {
 
   // delete existing air passenger types for each fare (map stored in passengersPerReservations)
   const pricingInfos = pricingSolution['air:AirPricingInfo'].map(
-    info => _.assign({}, info, { 'air:PassengerType': [] })
+    info => Object.assign({}, info, { 'air:PassengerType': [] })
   );
 
   this.env.passengers.forEach((passenger, index) => {
@@ -271,7 +271,7 @@ function airPriceRspPricingSolutionXML(obj) {
   });
 
   return {
-    'air:AirPricingSolution': _.clone(pricingSolution.$),
+    'air:AirPricingSolution': JSON.parse(JSON.stringify((pricingSolution.$))),
     'air:AirPricingSolution_XML': resultXml,
   };
 }

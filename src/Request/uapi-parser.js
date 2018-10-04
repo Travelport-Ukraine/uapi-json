@@ -31,7 +31,8 @@ function mergeLeaf(item) {
   const leaf = item.$;
   delete (item.$);
   // item.renameProperty('_', 'text'); //TODO decide if _ is the best name
-  return _.extend(item, leaf);
+
+  return Object.assign({}, item, leaf);
 }
 
 
