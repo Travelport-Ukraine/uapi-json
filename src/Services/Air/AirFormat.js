@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const parsers = require('../../utils/parsers');
 const { AirParsingError } = require('./AirErrors');
 

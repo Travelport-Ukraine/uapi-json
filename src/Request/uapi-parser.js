@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const xml2js = require('xml2js');
 
 const {
