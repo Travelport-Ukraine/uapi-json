@@ -161,7 +161,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
           // air:PassengerType in noCollapseList
         } else if (Array.isArray(code) && code.constructor === Array) { // ParserUapi param
           const count = code.length;
-          const list = _.uniq(code.map((item) => {
+          const list = Array.from(new Set((code.map((item) => {
             if (Object.prototype.toString.call(item) === '[object String]') {
               return item;
             } if (Object.prototype.toString.call(item) === '[object Object]' && item.Code) {
@@ -170,7 +170,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
               return item.Code;
             }
             throw new AirParsingError.PTCIsNotSet();
-          }));
+          }))));
 
           [code] = list;
           if (!list[0] || list.length !== 1) { // TODO throw error
