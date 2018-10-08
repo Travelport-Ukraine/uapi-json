@@ -24,7 +24,11 @@ module.exports = `
       {{#if emulatePcc}}
       <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
       {{/if}}
+      {{#if reservationLocatorCode}}
+      <air:AirReservationLocatorCode>{{reservationLocatorCode}}</air:AirReservationLocatorCode>
+      {{else}}
       <com:TicketNumber>{{ticketNumber}}</com:TicketNumber>
+      {{/if}}
     </air:AirRetrieveDocumentReq>
   </soap:Body>
 </soap:Envelope>

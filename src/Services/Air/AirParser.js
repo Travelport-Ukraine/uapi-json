@@ -318,19 +318,7 @@ const AirErrorHandler = function (rsp) {
   }
 };
 
-const airGetTicket = function (obj) {
-  const failure = obj['air:DocumentFailureInfo'];
-  if (failure) {
-    if (failure.Code === '3273') {
-      throw new AirRuntimeError.DuplicateTicketFound(obj);
-    }
-    throw new AirRuntimeError.TicketRetrieveError(obj);
-  }
-
-  const etr = obj['air:ETR'];
-  if (!etr) {
-    throw new AirRuntimeError.TicketRetrieveError(obj);
-  }
+function getTicketFromEtr(etr, obj) {
   // Checking if pricing info exists
   if (!etr.ProviderLocatorCode) {
     throw new AirRuntimeError.TicketInfoIncomplete(etr);
@@ -485,7 +473,7 @@ const airGetTicket = function (obj) {
     priceInfoAvailable
       ? {
         totalPrice: priceSource.TotalPrice
-          || `${(priceSource.EquivalentBasePrice || priceSource.BasePrice).slice(0, 3)}0`,
+        || `${(priceSource.EquivalentBasePrice || priceSource.BasePrice).slice(0, 3)}0`,
         basePrice: priceSource.BasePrice,
         equivalentBasePrice: priceSource.EquivalentBasePrice,
       }
@@ -496,6 +484,30 @@ const airGetTicket = function (obj) {
   );
 
   return response;
+}
+
+const airGetTicket = function (obj) {
+  const failure = obj['air:DocumentFailureInfo'];
+  if (failure) {
+    if (failure.Code === '3273') {
+      throw new AirRuntimeError.DuplicateTicketFound(obj);
+    }
+    throw new AirRuntimeError.TicketRetrieveError(obj);
+  }
+
+  const etr = obj['air:ETR'];
+  if (!etr) {
+    throw new AirRuntimeError.TicketRetrieveError(obj);
+  }
+
+  const multipleTickets = !!etr[Object.keys(etr)[0]].ProviderLocatorCode;
+
+  if (multipleTickets) {
+    return Object.values(etr)
+      .map(innerEtr => getTicketFromEtr.call(this, innerEtr, obj));
+  }
+
+  return getTicketFromEtr.call(this, etr, obj);
 };
 
 function airCancelTicket(obj) {

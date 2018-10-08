@@ -61,7 +61,16 @@ module.exports = (settings) => {
           ur =>
             getBookingFromUr(ur, options.pnr)
             || Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
-        );
+        )
+        .then((data) => {
+          /*
+            disable tickets from PNR, because this is known bug in uapi,
+            use getTickets(pnr) instead
+           */
+          const { tickets, ...otherData } = data; // eslint-disable-line no-unused-vars
+
+          return otherData;
+        });
     },
 
     importPNR(options) {
@@ -190,6 +199,10 @@ module.exports = (settings) => {
         });
     },
 
+    getTickets(options) {
+      return service.getTickets(options);
+    },
+
     getPNRByTicketNumber(options) {
       const terminal = createTerminalService(settings);
       return terminal.executeCommand(`*TE/${options.ticketNumber}`)
@@ -200,24 +213,6 @@ module.exports = (settings) => {
         )
         .catch(
           err => Promise.reject(new AirRuntimeError.GetPnrError(options, err))
-        );
-    },
-
-    getTickets(options) {
-      return this.getPNR(options)
-        .then(
-          booking => Promise.all(
-            booking.tickets.map(
-              ticket => this.getTicket({
-                pnr: booking.pnr,
-                uapi_ur_locator: booking.uapi_ur_locator,
-                ticketNumber: ticket.number,
-              })
-            )
-          )
-        )
-        .catch(
-          err => Promise.reject(new AirRuntimeError.UnableToRetrieveTickets(options, err))
         );
     },
 
