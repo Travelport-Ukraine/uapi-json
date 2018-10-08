@@ -9,7 +9,7 @@ const AirService = uAPI.createAirService({
 });
 
 const params = {
-  pnr: 'PNR001',
+  reservationLocatorCode: 'RLC001',
 };
 
 AirService.getTickets(params).then(
