@@ -200,7 +200,9 @@ module.exports = (settings) => {
     },
 
     getTickets(options) {
-      return service.getTickets(options);
+      return service.getTickets(options).catch(
+        err => Promise.reject(new AirRuntimeError.UnableToRetrieveTickets(options, err))
+      );
     },
 
     getPNRByTicketNumber(options) {
@@ -278,7 +280,9 @@ module.exports = (settings) => {
     },
 
     cancelPNR(options) {
-      return this.getTickets(options)
+      return this.getUniversalRecordByPNR(options).then(record => this.getTickets({
+        reservationLocatorCode: record.uapi_reservation_locator,
+      })
         .then(
           tickets => Promise.all(tickets.map(
             (ticketData) => {
@@ -323,7 +327,7 @@ module.exports = (settings) => {
         .then(booking => service.cancelPNR(booking))
         .catch(
           err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
-        );
+        ));
     },
 
     getExchangeInformation(options) {
