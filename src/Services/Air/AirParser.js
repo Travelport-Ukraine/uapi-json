@@ -270,7 +270,7 @@ function airPriceRspPricingSolutionXML(obj) {
   });
 
   return {
-    'air:AirPricingSolution': JSON.parse(JSON.stringify((pricingSolution.$))),
+    'air:AirPricingSolution': utils.clone(pricingSolution.$),
     'air:AirPricingSolution_XML': resultXml,
   };
 }

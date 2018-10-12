@@ -99,9 +99,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 
   const fares = [];
 
-  Object.entries(pricesList).forEach((entry) => {
-    const [fareKey, price] = entry;
-
+  Object.entries(pricesList).forEach(([fareKey, price]) => {
     const [firstKey] = Object.keys(price['air:AirPricingInfo']);
     const thisFare = price['air:AirPricingInfo'][firstKey]; // get trips from first reservation
     if (!thisFare.PlatingCarrier) {

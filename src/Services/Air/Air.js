@@ -22,10 +22,11 @@ module.exports = (settings) => {
 
     fareRules(options) {
       // add request for fare rules
-      const request = Object.assign(options,
-        {
-          fetchFareRules: true,
-        });
+      const request = {
+        ...options,
+        fetchFareRules: true,
+      };
+
       return service.lookupFareRules(request);
     },
 
@@ -244,8 +245,10 @@ module.exports = (settings) => {
                     return localTerminal.executeCommand(`*${line.id}`);
                   })
                   .then(parsers.bookingPnr)
-                  .then(pnr => localTerminal.closeSession()
-                    .then(() => ({ ...line, pnr })));
+                  .then((pnr) => {
+                    return localTerminal.closeSession()
+                      .then(() => ({ ...line, pnr }));
+                  });
               }))
               .then(data => ({ type: 'list', data }));
           }
