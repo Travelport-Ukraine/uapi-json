@@ -13,7 +13,6 @@
       "functions": "never",
       "objects": "only-multiline"
     }],
-    "new-cap": 0,
     "max-len": ["error", 100, 2, {
       "ignoreRegExpLiterals": true,
       "ignoreUrls": true,
