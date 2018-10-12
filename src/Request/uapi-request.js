@@ -34,7 +34,7 @@ module.exports = function uapiRequest(
   errorHandler,
   parseFunction,
   debugMode = false,
-  options = {},
+  options = {}
 ) {
   const config = configInit(auth.region || 'emea');
   const log = options.logFunction || console.log;
@@ -132,7 +132,7 @@ module.exports = function uapiRequest(
           uParser.uapi_version,
           params,
           debugMode,
-          errParserConfig,
+          errParserConfig
         );
         const errData = errParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
         return errorHandler.call(errParser, errData);

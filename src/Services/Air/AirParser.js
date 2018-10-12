@@ -438,7 +438,7 @@ const airGetTicket = function (obj) {
               })
             ),
           }
-          : null,
+          : null
       )
     )
     : [];
@@ -625,7 +625,7 @@ function extractBookings(obj) {
           } : null,
           traveler.Gender ? {
             gender: traveler.Gender,
-          } : null,
+          } : null
         );
       }
     );
@@ -714,7 +714,7 @@ function extractBookings(obj) {
                       })
                     ),
                   }
-                  : null,
+                  : null
               )
             )
             : [];
@@ -787,7 +787,7 @@ function extractBookings(obj) {
               baggage,
               timeToReprice: pricingInfo.LatestTicketingTime,
             },
-            parseFareCalculation(pricingInfo['air:FareCalc']),
+            parseFareCalculation(pricingInfo['air:FareCalc'])
           );
         }
       );
@@ -844,7 +844,7 @@ function extractBookings(obj) {
       },
       splitBookings.length > 0
         ? { splitBookings }
-        : null,
+        : null
     );
   });
 }
@@ -972,7 +972,7 @@ function exchangeQuote(req) {
               bookingInfo,
               uapi_pricing_info_ref: pricing.Key,
             },
-            parseFareCalculation(pricing['air:FareCalc']),
+            parseFareCalculation(pricing['air:FareCalc'])
           );
         });
 

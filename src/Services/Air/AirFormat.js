@@ -132,7 +132,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
                 baggage: [getBaggage(fareInfo['air:BaggageAllowance'])],
                 fareBasisCode: fareInfo.FareBasis,
               },
-              seatsAvailable ? { seatsAvailable } : null,
+              seatsAvailable ? { seatsAvailable } : null
             );
           }
         );

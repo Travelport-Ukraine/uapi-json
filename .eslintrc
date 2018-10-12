@@ -8,7 +8,11 @@
     "func-names": 0,
     "no-param-reassign": 0,
     "prefer-template": 0,
-    "comma-dangle": 0,
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "functions": "never",
+      "objects": "only-multiline"
+    }],
     "implicit-arrow-linebreak": 0,
     "new-cap": 0,
     "max-len": ["error", 100, 2, {

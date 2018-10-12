@@ -1061,7 +1061,7 @@ describe('#AirService', () => {
           (screen === 'listscreen')
             ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
             : null
-        ),
+        )
       );
 
 
@@ -1107,7 +1107,7 @@ describe('#AirService', () => {
           (screen === 'listscreen')
             ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
             : null
-        ),
+        )
       );
 
 

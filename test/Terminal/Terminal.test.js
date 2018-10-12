@@ -35,7 +35,7 @@ const getTerminalResponse = path => new Promise((resolve, reject) => {
       }
       const res = rTrim(data.toString());
       resolve(res.split(/\n/));
-    },
+    }
   );
 });
 
