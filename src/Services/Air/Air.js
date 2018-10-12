@@ -58,8 +58,7 @@ module.exports = (settings) => {
     getPNR(options) {
       return this.getUniversalRecordByPNR(options)
         .then(
-          ur =>
-            getBookingFromUr(ur, options.pnr)
+          ur => getBookingFromUr(ur, options.pnr)
             || Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
         );
     },
@@ -263,10 +262,9 @@ module.exports = (settings) => {
             new AirRuntimeError.MissingPaxListAndBooking(firstScreen)
           );
         })
-        .then(results =>
-          terminal.closeSession()
-            .then(() => results)
-            .catch(() => results));
+        .then(results => terminal.closeSession()
+          .then(() => results)
+          .catch(() => results));
     },
 
     cancelTicket(options) {

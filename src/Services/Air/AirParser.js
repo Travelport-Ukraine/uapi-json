@@ -581,8 +581,7 @@ function extractBookings(obj) {
       : [];
 
     const passiveReservation = record['passive:PassiveReservation']
-      ? record['passive:PassiveReservation'].find(res =>
-        res.ProviderReservationInfoRef === providerInfoKey)
+      ? record['passive:PassiveReservation'].find(res => res.ProviderReservationInfoRef === providerInfoKey)
       : null;
 
     if (!providerInfo) {

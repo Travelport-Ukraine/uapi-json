@@ -58,14 +58,14 @@ module.exports = function uapiRequest(
     // create a v36 uAPI parser with default params and request data in env
     const uParser = new Parser(rootObject, 'v36_0', params, debugMode);
 
-    const validateInput = () =>
+    const validateInput = () => (
       Promise.resolve(params)
         .then(validateFunction)
         .then((validatedParams) => {
           params = validatedParams;
           uParser.env = validatedParams;
           return reqType;
-        });
+        }));
 
     const sendRequest = function (xml) {
       if (debugMode) {

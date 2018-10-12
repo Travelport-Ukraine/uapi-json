@@ -117,10 +117,9 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.NoValidFare({
-          'universal:UniversalRecord': { LocatorCode: 123 },
-        })));
+      const createReservation = sinon.spy(() => Promise.reject(new AirRuntimeError.NoValidFare({
+        'universal:UniversalRecord': { LocatorCode: 123 },
+      })));
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -152,10 +151,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.SegmentBookingFailed({
+      const createReservation = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.SegmentBookingFailed({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        })));
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -187,10 +187,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.TicketingFailed({
+      const createReservation = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.TicketingFailed({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        })));
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -222,10 +223,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.SegmentBookingFailed({
+      const createReservation = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.SegmentBookingFailed({
           detail: { },
-        })));
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -257,10 +259,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.NoValidFare({
+      const createReservation = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.NoValidFare({
           detail: { },
-        })));
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -292,10 +295,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.SegmentWaitlisted({
+      const createReservation = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.SegmentWaitlisted({
           detail: { },
-        })));
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -1276,8 +1280,9 @@ describe('#AirService', () => {
     });
     it('should cancel PNR if no tickets available', () => {
       // Spies
-      const getUniversalRecordByPNR = sinon.spy(() =>
-        Promise.resolve(getURbyPNRSampleTicketedWithEmptyTickets));
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketedWithEmptyTickets)
+      );
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
       const getTicket = sinon.spy(() => Promise.resolve({
         coupons: [],
@@ -1305,7 +1310,9 @@ describe('#AirService', () => {
     });
     it('should cancel PNR if tickets have only VOID coupons', () => {
       // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketed)
+      );
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
       const getTicket = sinon.spy(() => Promise.resolve({
         tickets: [{
@@ -1339,29 +1346,30 @@ describe('#AirService', () => {
     });
     it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have OPEN coupons and no cancelTicket option', () => {
       // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketed)
+      );
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
-      const getTicket = sinon.spy(options =>
-        Promise.resolve({
-          1234567890123: {
-            tickets: [{
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
+      const getTicket = sinon.spy(options => Promise.resolve({
+        1234567890123: {
+          tickets: [{
+            coupons: [{
+              status: 'V',
+            }, {
+              status: 'V',
             }],
-          },
-          1234567890456: {
-            tickets: [{
-              coupons: [{
-                status: 'O',
-              }, {
-                status: 'O',
-              }],
+          }],
+        },
+        1234567890456: {
+          tickets: [{
+            coupons: [{
+              status: 'O',
+            }, {
+              status: 'O',
             }],
-          },
-        }[options.ticketNumber]));
+          }],
+        },
+      }[options.ticketNumber]));
 
       // Services
       const airService = () => ({
@@ -1390,33 +1398,32 @@ describe('#AirService', () => {
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
-      const getTicket = sinon.spy(options =>
-        Promise.resolve({
-          1234567890123: {
-            tickets: [{
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
-            }],
-          },
-          1234567890456: {
-            tickets: [{
-              coupons: [{
-                status: 'O',
-              }, {
-                status: 'O',
-              }],
+      const getTicket = sinon.spy(options => Promise.resolve({
+        1234567890123: {
+          tickets: [{
+            coupons: [{
+              status: 'V',
             }, {
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
+              status: 'V',
             }],
-          },
-        }[options.ticketNumber]));
+          }],
+        },
+        1234567890456: {
+          tickets: [{
+            coupons: [{
+              status: 'O',
+            }, {
+              status: 'O',
+            }],
+          }, {
+            coupons: [{
+              status: 'V',
+            }, {
+              status: 'V',
+            }],
+          }],
+        },
+      }[options.ticketNumber]));
 
       // Services
       const airService = () => ({
@@ -1445,27 +1452,26 @@ describe('#AirService', () => {
       // Spies
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
-      const getTicket = sinon.spy(options =>
-        Promise.resolve({
-          1234567890123: {
-            tickets: [{
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
+      const getTicket = sinon.spy(options => Promise.resolve({
+        1234567890123: {
+          tickets: [{
+            coupons: [{
+              status: 'V',
+            }, {
+              status: 'V',
             }],
-          },
-          1234567890456: {
-            tickets: [{
-              coupons: [{
-                status: 'F',
-              }, {
-                status: 'A',
-              }],
+          }],
+        },
+        1234567890456: {
+          tickets: [{
+            coupons: [{
+              status: 'F',
+            }, {
+              status: 'A',
             }],
-          },
-        }[options.ticketNumber]));
+          }],
+        },
+      }[options.ticketNumber]));
 
       // Services
       const airService = () => ({
@@ -1497,27 +1503,26 @@ describe('#AirService', () => {
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
-      const getTicket = sinon.spy(options =>
-        Promise.resolve({
-          1234567890123: {
-            tickets: [{
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
+      const getTicket = sinon.spy(options => Promise.resolve({
+        1234567890123: {
+          tickets: [{
+            coupons: [{
+              status: 'V',
+            }, {
+              status: 'V',
             }],
-          },
-          1234567890456: {
-            tickets: [{
-              coupons: [{
-                status: 'O',
-              }, {
-                status: 'O',
-              }],
+          }],
+        },
+        1234567890456: {
+          tickets: [{
+            coupons: [{
+              status: 'O',
+            }, {
+              status: 'O',
             }],
-          },
-        }[options.ticketNumber]));
+          }],
+        },
+      }[options.ticketNumber]));
 
       // Services
       const airService = () => ({
