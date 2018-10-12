@@ -1,7 +1,6 @@
 {
   "extends": "airbnb-base",
   "plugins": [
-    "jsx-a11y",
     "import"
   ],
   "rules": {
