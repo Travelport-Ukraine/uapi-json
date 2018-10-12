@@ -117,10 +117,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.NoValidFare({
+      const createReservation = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.NoValidFare({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        })));
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -152,10 +153,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.SegmentBookingFailed({
+      const createReservation = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.SegmentBookingFailed({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        })));
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -187,10 +189,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.TicketingFailed({
+      const createReservation = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.TicketingFailed({
           'universal:UniversalRecord': { LocatorCode: 123 },
-        })));
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -222,10 +225,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.SegmentBookingFailed({
+      const createReservation = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.SegmentBookingFailed({
           detail: { },
-        })));
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -257,10 +261,9 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.NoValidFare({
-          detail: { },
-        })));
+      const createReservation = sinon.spy(() => Promise.reject(new AirRuntimeError.NoValidFare({
+        detail: { },
+      })));
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -292,10 +295,11 @@ describe('#AirService', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
-      const createReservation = sinon.spy(() =>
-        Promise.reject(new AirRuntimeError.SegmentWaitlisted({
+      const createReservation = sinon.spy(
+        () => Promise.reject(new AirRuntimeError.SegmentWaitlisted({
           detail: { },
-        })));
+        }))
+      );
       const cancelUR = sinon.spy((options) => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
@@ -1062,7 +1066,7 @@ describe('#AirService', () => {
           (screen === 'listscreen')
             ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
             : null
-        ),
+        )
       );
 
 
@@ -1108,7 +1112,7 @@ describe('#AirService', () => {
           (screen === 'listscreen')
             ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
             : null
-        ),
+        )
       );
 
 
@@ -1278,8 +1282,9 @@ describe('#AirService', () => {
     });
     it('should cancel PNR if no tickets available', () => {
       // Spies
-      const getUniversalRecordByPNR = sinon.spy(() =>
-        Promise.resolve(getURbyPNRSampleTicketedWithEmptyTickets));
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketedWithEmptyTickets)
+      );
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
       const getTicket = sinon.spy(() => Promise.resolve({
         coupons: [],
@@ -1395,33 +1400,32 @@ describe('#AirService', () => {
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
       const cancelPNR = sinon.spy(() => Promise.resolve(true));
 
-      const getTickets = sinon.spy(() =>
-        Promise.resolve([
-          {
-            tickets: [{
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
-            }],
-          },
-          {
-            tickets: [{
-              coupons: [{
-                status: 'O',
-              }, {
-                status: 'O',
-              }],
+      const getTickets = sinon.spy(() => Promise.resolve([
+        {
+          tickets: [{
+            coupons: [{
+              status: 'V',
             }, {
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
+              status: 'V',
             }],
-          }
-        ]));
+          }],
+        },
+        {
+          tickets: [{
+            coupons: [{
+              status: 'O',
+            }, {
+              status: 'O',
+            }],
+          }, {
+            coupons: [{
+              status: 'V',
+            }, {
+              status: 'V',
+            }],
+          }],
+        },
+      ]));
 
       // Services
       const airService = () => ({

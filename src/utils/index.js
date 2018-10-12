@@ -11,6 +11,7 @@ const inflate = require('./inflate-promise');
 const deflate = require('./deflate-promise');
 const getBookingFromUr = require('./get-booking-from-ur');
 const getErrorPcc = require('./get-error-pcc');
+const clone = require('./clone');
 
 const utils = {
   renameProperty,
@@ -26,6 +27,7 @@ const utils = {
   deflate,
   getBookingFromUr,
   getErrorPcc,
+  clone,
 };
 
 module.exports = utils;

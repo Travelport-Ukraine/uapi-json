@@ -22,10 +22,11 @@ module.exports = (settings) => {
 
     fareRules(options) {
       // add request for fare rules
-      const request = Object.assign(options,
-        {
-          fetchFareRules: true,
-        });
+      const request = {
+        ...options,
+        fetchFareRules: true,
+      };
+
       return service.lookupFareRules(request);
     },
 
@@ -58,8 +59,7 @@ module.exports = (settings) => {
     getPNR(options) {
       return this.getUniversalRecordByPNR(options)
         .then(
-          ur =>
-            getBookingFromUr(ur, options.pnr)
+          ur => getBookingFromUr(ur, options.pnr)
             || Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
         )
         .then((data) => {
@@ -242,8 +242,10 @@ module.exports = (settings) => {
                     return localTerminal.executeCommand(`*${line.id}`);
                   })
                   .then(parsers.bookingPnr)
-                  .then(pnr => localTerminal.closeSession()
-                    .then(() => ({ ...line, pnr })));
+                  .then((pnr) => {
+                    return localTerminal.closeSession()
+                      .then(() => ({ ...line, pnr }));
+                  });
               }))
               .then(data => ({ type: 'list', data }));
           }
@@ -260,10 +262,9 @@ module.exports = (settings) => {
             new AirRuntimeError.MissingPaxListAndBooking(firstScreen)
           );
         })
-        .then(results =>
-          terminal.closeSession()
-            .then(() => results)
-            .catch(() => results));
+        .then(results => terminal.closeSession()
+          .then(() => results)
+          .catch(() => results));
     },
 
     cancelTicket(options) {

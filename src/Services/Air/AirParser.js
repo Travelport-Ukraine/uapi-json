@@ -270,7 +270,7 @@ function airPriceRspPricingSolutionXML(obj) {
   });
 
   return {
-    'air:AirPricingSolution': JSON.parse(JSON.stringify((pricingSolution.$))),
+    'air:AirPricingSolution': utils.clone(pricingSolution.$),
     'air:AirPricingSolution_XML': resultXml,
   };
 }
@@ -426,7 +426,7 @@ function getTicketFromEtr(etr, obj) {
               })
             ),
           }
-          : null,
+          : null
       )
     )
     : [];
@@ -593,8 +593,7 @@ function extractBookings(obj) {
       : [];
 
     const passiveReservation = record['passive:PassiveReservation']
-      ? record['passive:PassiveReservation'].find(res =>
-        res.ProviderReservationInfoRef === providerInfoKey)
+      ? record['passive:PassiveReservation'].find(res => res.ProviderReservationInfoRef === providerInfoKey)
       : null;
 
     if (!providerInfo) {
@@ -637,7 +636,7 @@ function extractBookings(obj) {
           } : null,
           traveler.Gender ? {
             gender: traveler.Gender,
-          } : null,
+          } : null
         );
       }
     );
@@ -726,7 +725,7 @@ function extractBookings(obj) {
                       })
                     ),
                   }
-                  : null,
+                  : null
               )
             )
             : [];
@@ -799,7 +798,7 @@ function extractBookings(obj) {
               baggage,
               timeToReprice: pricingInfo.LatestTicketingTime,
             },
-            parseFareCalculation(pricingInfo['air:FareCalc']),
+            parseFareCalculation(pricingInfo['air:FareCalc'])
           );
         }
       );
@@ -856,7 +855,7 @@ function extractBookings(obj) {
       },
       splitBookings.length > 0
         ? { splitBookings }
-        : null,
+        : null
     );
   });
 }
@@ -984,7 +983,7 @@ function exchangeQuote(req) {
               bookingInfo,
               uapi_pricing_info_ref: pricing.Key,
             },
-            parseFareCalculation(pricing['air:FareCalc']),
+            parseFareCalculation(pricing['air:FareCalc'])
           );
         });
 

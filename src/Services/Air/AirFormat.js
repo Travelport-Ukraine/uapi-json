@@ -99,52 +99,49 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 
   const fares = [];
 
-  Object.entries(pricesList).forEach((entry) => {
-    const [fareKey, price] = entry;
-
+  Object.entries(pricesList).forEach(([fareKey, price]) => {
     const [firstKey] = Object.keys(price['air:AirPricingInfo']);
     const thisFare = price['air:AirPricingInfo'][firstKey]; // get trips from first reservation
     if (!thisFare.PlatingCarrier) {
       return;
     }
 
-    const directions = thisFare['air:FlightOptionsList'].map(direction =>
-      Object.values(direction['air:Option']).map((option) => {
-        const trips = option['air:BookingInfo'].map(
-          (segmentInfo) => {
-            const fareInfo = fareInfos[segmentInfo.FareInfoRef];
-            const segment = segments[segmentInfo.SegmentRef];
-            const tripFlightDetails = segment['air:FlightDetailsRef'].map(
-              flightDetailsRef => flightDetails[flightDetailsRef]
-            );
-            const seatsAvailable = (
-              segment['air:AirAvailInfo']
+    const directions = thisFare['air:FlightOptionsList'].map(direction => Object.values(direction['air:Option']).map((option) => {
+      const trips = option['air:BookingInfo'].map(
+        (segmentInfo) => {
+          const fareInfo = fareInfos[segmentInfo.FareInfoRef];
+          const segment = segments[segmentInfo.SegmentRef];
+          const tripFlightDetails = segment['air:FlightDetailsRef'].map(
+            flightDetailsRef => flightDetails[flightDetailsRef]
+          );
+          const seatsAvailable = (
+            segment['air:AirAvailInfo']
               && segment['air:AirAvailInfo'].ProviderCode === '1G'
-            ) ? (Number(
-                segment['air:AirAvailInfo']['air:BookingCodeInfo'].BookingCounts
-                  .match(new RegExp(`${segmentInfo.BookingCode}(\\d+)`))[1]
-              )) : null;
-            return Object.assign(
-              formatTrip(segment, tripFlightDetails),
-              {
-                serviceClass: segmentInfo.CabinClass,
-                bookingClass: segmentInfo.BookingCode,
-                baggage: [getBaggage(fareInfo['air:BaggageAllowance'])],
-                fareBasisCode: fareInfo.FareBasis,
-              },
-              seatsAvailable ? { seatsAvailable } : null,
-            );
-          }
-        );
-        return {
-          from: direction.Origin,
-          to: direction.Destination,
-          // duration
-          // TODO get overnight stops, etc from connection
-          platingCarrier: thisFare.PlatingCarrier,
-          segments: trips,
-        };
-      }));
+          ) ? (Number(
+              segment['air:AirAvailInfo']['air:BookingCodeInfo'].BookingCounts
+                .match(new RegExp(`${segmentInfo.BookingCode}(\\d+)`))[1]
+            )) : null;
+          return Object.assign(
+            formatTrip(segment, tripFlightDetails),
+            {
+              serviceClass: segmentInfo.CabinClass,
+              bookingClass: segmentInfo.BookingCode,
+              baggage: [getBaggage(fareInfo['air:BaggageAllowance'])],
+              fareBasisCode: fareInfo.FareBasis,
+            },
+            seatsAvailable ? { seatsAvailable } : null
+          );
+        }
+      );
+      return {
+        from: direction.Origin,
+        to: direction.Destination,
+        // duration
+        // TODO get overnight stops, etc from connection
+        platingCarrier: thisFare.PlatingCarrier,
+        segments: trips,
+      };
+    }));
 
 
     const passengerCounts = {};
@@ -251,21 +248,19 @@ function setIndexesForSegments(
   }
 
   if (segments !== null && serviceSegments === null) {
-    const segmentsNew = segments.map((segment, key) =>
-      ({
-        ...segment,
-        index: key + 1,
-      }));
+    const segmentsNew = segments.map((segment, key) => ({
+      ...segment,
+      index: key + 1,
+    }));
     return { segments: segmentsNew, serviceSegments };
   }
 
   if (segments === null && serviceSegments !== null) {
     const serviceSegmentsNew = serviceSegments.map(
-      (segment, key) =>
-        ({
-          ...segment,
-          index: key + 1,
-        })
+      (segment, key) => ({
+        ...segment,
+        index: key + 1,
+      })
     );
     return { segments, serviceSegments: serviceSegmentsNew };
   }
@@ -294,10 +289,8 @@ function setIndexesForSegments(
   const allSegments = [];
 
   for (let i = 1; i <= maxOrder; i += 1) {
-    segments.forEach(s =>
-      (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
-    serviceSegments.forEach(s =>
-      (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
+    segments.forEach(s => (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
+    serviceSegments.forEach(s => (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
   }
 
   const indexedSegments = allSegments.map((s, k) => ({ ...s, index: k + 1 }));

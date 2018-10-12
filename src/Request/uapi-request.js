@@ -34,7 +34,7 @@ module.exports = function uapiRequest(
   errorHandler,
   parseFunction,
   debugMode = false,
-  options = {},
+  options = {}
 ) {
   const config = configInit(auth.region || 'emea');
   const log = options.logFunction || console.log;
@@ -58,14 +58,14 @@ module.exports = function uapiRequest(
     // create a v36 uAPI parser with default params and request data in env
     const uParser = new Parser(rootObject, 'v36_0', params, debugMode);
 
-    const validateInput = () =>
+    const validateInput = () => (
       Promise.resolve(params)
         .then(validateFunction)
         .then((validatedParams) => {
           params = validatedParams;
           uParser.env = validatedParams;
           return reqType;
-        });
+        }));
 
     const sendRequest = function (xml) {
       if (debugMode) {
@@ -132,7 +132,7 @@ module.exports = function uapiRequest(
           uParser.uapi_version,
           params,
           debugMode,
-          errParserConfig,
+          errParserConfig
         );
         const errData = errParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
         return errorHandler.call(errParser, errData);

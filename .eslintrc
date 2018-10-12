@@ -1,7 +1,6 @@
 {
   "extends": "airbnb-base",
   "plugins": [
-    "jsx-a11y",
     "import"
   ],
   "rules": {
@@ -9,9 +8,12 @@
     "func-names": 0,
     "no-param-reassign": 0,
     "prefer-template": 0,
-    "comma-dangle": 0,
-    "implicit-arrow-linebreak": 0,
-    "new-cap": 0,
+    "arrow-body-style": 0,
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "functions": "never",
+      "objects": "only-multiline"
+    }],
     "max-len": ["error", 100, 2, {
       "ignoreRegExpLiterals": true,
       "ignoreUrls": true,
