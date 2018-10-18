@@ -116,11 +116,12 @@ function formatLowFaresSearch(searchRequest, searchResult) {
           );
           const seatsAvailable = (
             segment['air:AirAvailInfo']
-              && segment['air:AirAvailInfo'].ProviderCode === '1G'
-          ) ? (Number(
+              && segment['air:AirAvailInfo'].ProviderCode === '1G')
+            ? (Number(
               segment['air:AirAvailInfo']['air:BookingCodeInfo'].BookingCounts
                 .match(new RegExp(`${segmentInfo.BookingCode}(\\d+)`))[1]
-            )) : null;
+            ))
+            : null;
           return Object.assign(
             formatTrip(segment, tripFlightDetails),
             {

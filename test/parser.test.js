@@ -3,8 +3,9 @@ const { expect } = require('chai');
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
-const { Parser, defaultConfig, errorsConfig } = require('../src/Request/uapi-parser');
-
+const Parser = require('../src/Request/uapi-parser');
+const errorsConfig = require('../src/Request/errors-config');
+const defaultConfig = require('../src/Request/default-config');
 const { errors } = require('../src');
 
 const xmlFolder = path.join(__dirname, '/FakeResponses');

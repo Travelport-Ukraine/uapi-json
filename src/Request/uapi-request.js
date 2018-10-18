@@ -6,7 +6,8 @@ const {
   RequestRuntimeError,
   RequestSoapError,
 } = require('./RequestErrors');
-const { Parser, errorsConfig } = require('./uapi-parser');
+const Parser = require('./uapi-parser');
+const errorsConfig = require('./errors-config');
 const prepareRequest = require('./prepare-request');
 const configInit = require('../config');
 
@@ -136,7 +137,9 @@ module.exports = function uapiRequest(
         );
         const errData = errParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
         return errorHandler.call(errParser, errData);
-      } if (debugMode > 2) {
+      }
+
+      if (debugMode > 2) {
         log('Parsed response', pd.json(parsedXML));
       }
 

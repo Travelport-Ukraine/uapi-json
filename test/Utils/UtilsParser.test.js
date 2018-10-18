@@ -2,7 +2,7 @@ const assert = require('assert');
 const { expect } = require('chai');
 const fs = require('fs');
 const uAPI = require('../../src');
-const { Parser } = require('../../src/Request/uapi-parser');
+const Parser = require('../../src/Request/uapi-parser');
 const utilsParser = require('../../src/Services/Utils/UtilsParser');
 
 const UtilsError = uAPI.errors.Utils;

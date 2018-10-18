@@ -5,7 +5,8 @@
 const fs = require('fs');
 const { expect } = require('chai');
 const uAPI = require('../../src');
-const { Parser, errorsConfig } = require('../../src/Request/uapi-parser');
+const Parser = require('../../src/Request/uapi-parser');
+const errorsConfig = require('../../src/Request/errors-config');
 
 const terminalParser = require('../../src/Services/Terminal/TerminalParser');
 
