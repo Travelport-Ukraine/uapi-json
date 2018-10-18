@@ -61,7 +61,16 @@ module.exports = (settings) => {
         .then(
           ur => getBookingFromUr(ur, options.pnr)
             || Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
-        );
+        )
+        .then((data) => {
+          /*
+            disable tickets from PNR, because this is known bug in uapi,
+            use getTickets(reservationLocatorCode) instead
+           */
+          const { tickets, ...otherData } = data; // eslint-disable-line no-unused-vars
+
+          return otherData;
+        });
     },
 
     importPNR(options) {
@@ -190,6 +199,12 @@ module.exports = (settings) => {
         });
     },
 
+    getTickets(options) {
+      return service.getTickets(options).catch(
+        err => Promise.reject(new AirRuntimeError.UnableToRetrieveTickets(options, err))
+      );
+    },
+
     getPNRByTicketNumber(options) {
       const terminal = createTerminalService(settings);
       return terminal.executeCommand(`*TE/${options.ticketNumber}`)
@@ -200,24 +215,6 @@ module.exports = (settings) => {
         )
         .catch(
           err => Promise.reject(new AirRuntimeError.GetPnrError(options, err))
-        );
-    },
-
-    getTickets(options) {
-      return this.getPNR(options)
-        .then(
-          booking => Promise.all(
-            booking.tickets.map(
-              ticket => this.getTicket({
-                pnr: booking.pnr,
-                uapi_ur_locator: booking.uapi_ur_locator,
-                ticketNumber: ticket.number,
-              })
-            )
-          )
-        )
-        .catch(
-          err => Promise.reject(new AirRuntimeError.UnableToRetrieveTickets(options, err))
         );
     },
 
@@ -284,7 +281,9 @@ module.exports = (settings) => {
     },
 
     cancelPNR(options) {
-      return this.getTickets(options)
+      return this.getUniversalRecordByPNR(options).then(record => this.getTickets({
+        reservationLocatorCode: record.uapi_reservation_locator,
+      })
         .then(
           tickets => Promise.all(tickets.map(
             (ticketData) => {
@@ -329,7 +328,7 @@ module.exports = (settings) => {
         .then(booking => service.cancelPNR(booking))
         .catch(
           err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
-        );
+        ));
     },
 
     getExchangeInformation(options) {

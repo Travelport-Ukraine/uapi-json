@@ -143,6 +143,17 @@ module.exports = function (settings) {
       debug,
       options
     ),
+    getTickets: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.retrieveDocument,
+      'air:AirRetrieveDocumentRsp',
+      AirValidator.AIR_GET_TICKETS,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_GET_TICKET,
+      debug,
+      options
+    ),
     cancelTicket: uApiRequest(
       config.AirService.url,
       auth,

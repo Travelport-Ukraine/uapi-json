@@ -315,7 +315,7 @@ Request for the ticket information for all tickets in PNR.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| pnr | `String` | 1G PNR. |
+| reservationLocatorCode | `String` | uAPI reservation code. |
 
 **See: <a href="../examples/Air/getTickets.js">getTickets example</a>**
 

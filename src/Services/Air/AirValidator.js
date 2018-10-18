@@ -97,6 +97,14 @@ module.exports = {
     transform()
   ),
 
+  AIR_GET_TICKETS: compose(
+    validate(
+      validators.paramsIsObject,
+      validators.reservationLocator
+    ),
+    transform()
+  ),
+
   AIR_CANCEL_TICKET: compose(
     validate(
       validators.paramsIsObject,
