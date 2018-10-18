@@ -11,8 +11,8 @@
   ],
   "scripts": {
     "test": "mocha -t 3000 --recursive",
-    "cover": "nyc --reporter=text-lcov mocha -t 3000 --recursive",
-    "coveralls": "nyc --reporter=text-lcov > coverage.lcov && codecov",
+    "cover": "nyc mocha -t 3000 --recursive",
+    "coveralls": "nyc report --reporter=text-lcov > coverage.lcov",
     "fix": "eslint --fix src/ test/",
     "lint": "eslint src/ test/",
     "prepublish": "npm run lint && npm run test"
@@ -41,7 +41,6 @@
     "joi": "^13.7.0",
     "moment": "^2.10.6",
     "node-errors-helpers": "^0.1.2",
-
     "pretty-data": "^0.40.0",
     "promise-retry": "^1.1.1",
     "xml2js": "^0.4.9"
