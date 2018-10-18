@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "test": "mocha -t 3000 --recursive",
-    "cover": "isparta cover _mocha -- --recursive -t 3000",
+    "cover": "isparta cover mocha -- --recursive -t 3000",
     "coveralls": "cat ./coverage/lcov.info | codecov",
     "fix": "eslint --fix src/ test/",
     "lint": "eslint src/ test/",
