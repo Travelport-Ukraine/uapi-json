@@ -65,7 +65,7 @@ module.exports = (settings) => {
         .then((data) => {
           /*
             disable tickets from PNR, because this is known bug in uapi,
-            use getTickets(pnr) instead
+            use getTickets(reservationLocatorCode) instead
            */
           const { tickets, ...otherData } = data; // eslint-disable-line no-unused-vars
 
