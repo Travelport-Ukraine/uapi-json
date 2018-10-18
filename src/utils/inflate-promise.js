@@ -1,7 +1,7 @@
-import zlib from 'zlib';
+const zlib = require('zlib');
 
-export default stringBuffer => new Promise((resolve, reject) => {
-  const buf = new Buffer(stringBuffer, 'base64');
+module.exports = stringBuffer => new Promise((resolve, reject) => {
+  const buf = Buffer.from(stringBuffer, 'base64');
   zlib.inflate(buf, (err, result) => {
     if (err) {
       reject(err);

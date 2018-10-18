@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { GdsValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { GdsValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import queue from '../../../src/Services/Air/validators/queue';
+const queue = require('../../../src/Services/Air/validators/queue');
 
 describe('Air.validators.queue', () => {
   it('should throw error when queue is not set', () => {

@@ -1,7 +1,7 @@
-import { AirValidationError } from '../AirErrors';
-import hasAllFields from '../../../utils/has-all-required-fields';
+const { AirValidationError } = require('../AirErrors');
+const hasAllFields = require('../../../utils/has-all-required-fields');
 
-export default (params) => {
+module.exports = (params) => {
   hasAllFields(params, ['phone'], AirValidationError.PhoneMissing);
   const requiredFields = ['number', 'location', 'countryCode'];
   hasAllFields(

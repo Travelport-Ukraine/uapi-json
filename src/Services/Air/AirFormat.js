@@ -1,14 +1,13 @@
-import _ from 'lodash';
-import parsers from '../../utils/parsers';
-import { AirParsingError } from './AirErrors';
+const parsers = require('../../utils/parsers');
+const { AirParsingError } = require('./AirErrors');
 
 function getBaggage(baggageAllowance) {
   // Checking for allowance
   if (
-    !baggageAllowance ||
-    (
-      !baggageAllowance['air:NumberOfPieces'] &&
-      !baggageAllowance['air:MaxWeight']
+    !baggageAllowance
+    || (
+      !baggageAllowance['air:NumberOfPieces']
+      && !baggageAllowance['air:MaxWeight']
     )
   ) {
     console.warn('Baggage information is not number and is not weight!', JSON.stringify(baggageAllowance));
@@ -100,88 +99,92 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 
   const fares = [];
 
-  _.forEach(pricesList, (price, fareKey) => {
-    const firstKey = _.first(Object.keys(price['air:AirPricingInfo']));
+  Object.entries(pricesList).forEach(([fareKey, price]) => {
+    const [firstKey] = Object.keys(price['air:AirPricingInfo']);
     const thisFare = price['air:AirPricingInfo'][firstKey]; // get trips from first reservation
     if (!thisFare.PlatingCarrier) {
       return;
     }
 
-    const directions = _.map(thisFare['air:FlightOptionsList'], direction =>
-      _.map(direction['air:Option'], (option) => {
-        const trips = option['air:BookingInfo'].map(
-          (segmentInfo) => {
-            const fareInfo = fareInfos[segmentInfo.FareInfoRef];
-            const segment = segments[segmentInfo.SegmentRef];
-            const tripFlightDetails = segment['air:FlightDetailsRef'].map(
-              flightDetailsRef => flightDetails[flightDetailsRef]
-            );
-            const seatsAvailable = (
-              segment['air:AirAvailInfo'] &&
-              segment['air:AirAvailInfo'].ProviderCode === '1G'
-            ) ? (Number(
+    const directions = thisFare['air:FlightOptionsList'].map(direction => Object.values(direction['air:Option']).map((option) => {
+      const trips = option['air:BookingInfo'].map(
+        (segmentInfo) => {
+          const fareInfo = fareInfos[segmentInfo.FareInfoRef];
+          const segment = segments[segmentInfo.SegmentRef];
+          const tripFlightDetails = segment['air:FlightDetailsRef'].map(
+            flightDetailsRef => flightDetails[flightDetailsRef]
+          );
+          const seatsAvailable = (
+            segment['air:AirAvailInfo']
+              && segment['air:AirAvailInfo'].ProviderCode === '1G')
+            ? (Number(
               segment['air:AirAvailInfo']['air:BookingCodeInfo'].BookingCounts
                 .match(new RegExp(`${segmentInfo.BookingCode}(\\d+)`))[1]
-            )) : null;
-            return Object.assign(
-              formatTrip(segment, tripFlightDetails),
-              {
-                serviceClass: segmentInfo.CabinClass,
-                bookingClass: segmentInfo.BookingCode,
-                baggage: [getBaggage(fareInfo['air:BaggageAllowance'])],
-                fareBasisCode: fareInfo.FareBasis,
-              },
-              seatsAvailable ? { seatsAvailable } : null,
-            );
-          }
-        );
-        return {
-          from: direction.Origin,
-          to: direction.Destination,
-          // duration
-          // TODO get overnight stops, etc from connection
-          platingCarrier: thisFare.PlatingCarrier,
-          segments: trips,
-        };
-      })
-    );
+            ))
+            : null;
+          return Object.assign(
+            formatTrip(segment, tripFlightDetails),
+            {
+              serviceClass: segmentInfo.CabinClass,
+              bookingClass: segmentInfo.BookingCode,
+              baggage: [getBaggage(fareInfo['air:BaggageAllowance'])],
+              fareBasisCode: fareInfo.FareBasis,
+            },
+            seatsAvailable ? { seatsAvailable } : null
+          );
+        }
+      );
+      return {
+        from: direction.Origin,
+        to: direction.Destination,
+        // duration
+        // TODO get overnight stops, etc from connection
+        platingCarrier: thisFare.PlatingCarrier,
+        segments: trips,
+      };
+    }));
 
 
     const passengerCounts = {};
-    const passengerCategories = _.mapKeys(price['air:AirPricingInfo'], (passengerFare, key) => {
-      let code = passengerFare['air:PassengerType'];
 
-      if (_.isString(code)) { // air:PassengerType in fullCollapseList_obj ParserUapi param
-        passengerCounts[code] = 1;
+    const passengerCategories = Object.keys(price['air:AirPricingInfo'])
+      .reduce((acc, key) => {
+        const passengerFare = price['air:AirPricingInfo'][key];
+        let code = passengerFare['air:PassengerType'];
 
-        // air:PassengerType in noCollapseList
-      } else if (_.isArray(code) && code.constructor === Array) {  // ParserUapi param
-        const count = code.length;
-        const list = _.uniq(_.map(code, (item) => {
-          if (_.isString(item)) {
-            return item;
-          } else if (_.isObject(item) && item.Code) {
-            // air:PassengerType in fullCollapseList_obj like above,
-            // but there is Age or other info, except Code
-            return item.Code;
+        if (Object.prototype.toString.call(code) === '[object String]') { // air:PassengerType in fullCollapseList_obj ParserUapi param
+          passengerCounts[code] = 1;
+
+          // air:PassengerType in noCollapseList
+        } else if (Array.isArray(code) && code.constructor === Array) { // ParserUapi param
+          const count = code.length;
+          const list = Array.from(new Set((code.map((item) => {
+            if (Object.prototype.toString.call(item) === '[object String]') {
+              return item;
+            } if (Object.prototype.toString.call(item) === '[object Object]' && item.Code) {
+              // air:PassengerType in fullCollapseList_obj like above,
+              // but there is Age or other info, except Code
+              return item.Code;
+            }
+            throw new AirParsingError.PTCIsNotSet();
+          }))));
+
+          [code] = list;
+          if (!list[0] || list.length !== 1) { // TODO throw error
+            console.log('Warning: different categories '
+              + list.join() + ' in single fare calculation ' + key + ' in fare ' + fareKey);
           }
-          throw new AirParsingError.PTCIsNotSet();
-        }));
-
-        code = list[0];
-        if (!list[0] || list.length !== 1) { // TODO throw error
-          console.log('Warning: different categories '
-            + list.join() + ' in single fare calculation ' + key + ' in fare ' + fareKey);
+          passengerCounts[code] = count;
+        } else {
+          throw new AirParsingError.PTCTypeInvalid();
         }
-        passengerCounts[code] = count;
-      } else {
-        throw new AirParsingError.PTCTypeInvalid();
-      }
 
-      return code;
-    });
+        return { ...acc, [code]: passengerFare };
+      }, {});
 
-    if (_.size(passengerCategories) !== _.size(price['air:AirPricingInfo'])) {
+    if (Object.keys(passengerCategories).length
+      !== Object.keys(price['air:AirPricingInfo']).length
+    ) {
       console.log('Warning: duplicate categories in passengerCategories map for fare ' + fareKey);
     }
 
@@ -246,23 +249,20 @@ function setIndexesForSegments(
   }
 
   if (segments !== null && serviceSegments === null) {
-    const segmentsNew = segments.map((segment, key) =>
-      ({
-        ...segment,
-        index: key + 1,
-      })
-    );
+    const segmentsNew = segments.map((segment, key) => ({
+      ...segment,
+      index: key + 1,
+    }));
     return { segments: segmentsNew, serviceSegments };
   }
 
   if (segments === null && serviceSegments !== null) {
     const serviceSegmentsNew = serviceSegments.map(
-      (segment, key) =>
-        ({
-          ...segment,
-          index: key + 1,
-        })
-      );
+      (segment, key) => ({
+        ...segment,
+        index: key + 1,
+      })
+    );
     return { segments, serviceSegments: serviceSegmentsNew };
   }
 
@@ -290,12 +290,8 @@ function setIndexesForSegments(
   const allSegments = [];
 
   for (let i = 1; i <= maxOrder; i += 1) {
-    segments.forEach(s =>
-      (Number(s.TravelOrder) === i ? allSegments.push(s) : null)
-    );
-    serviceSegments.forEach(s =>
-      (Number(s.TravelOrder) === i ? allSegments.push(s) : null)
-    );
+    segments.forEach(s => (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
+    serviceSegments.forEach(s => (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
   }
 
   const indexedSegments = allSegments.map((s, k) => ({ ...s, index: k + 1 }));

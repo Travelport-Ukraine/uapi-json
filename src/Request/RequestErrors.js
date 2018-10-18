@@ -1,11 +1,11 @@
-import {
+const {
   createErrorClass,
   createErrorsList,
-} from 'node-errors-helpers';
-import errorTypes from '../error-types';
+} = require('node-errors-helpers');
+const errorTypes = require('../error-types');
 
 // Validation errors
-export const RequestValidationError = createErrorClass(
+const RequestValidationError = createErrorClass(
   'RequestValidationError',
   'Request validation error',
   errorTypes.ValidationError
@@ -18,7 +18,7 @@ Object.assign(RequestValidationError, createErrorsList({
 }, RequestValidationError));
 
 // Runtime errors
-export const RequestRuntimeError = createErrorClass(
+const RequestRuntimeError = createErrorClass(
   'RequestRuntimeError',
   'Request runtime error',
   errorTypes.RuntimeError
@@ -31,7 +31,7 @@ Object.assign(RequestRuntimeError, createErrorsList({
 }, RequestRuntimeError));
 
 // Soap errors
-export const RequestSoapError = createErrorClass(
+const RequestSoapError = createErrorClass(
   'RequestSoapError',
   'Request SOAP error',
   errorTypes.SoapError
@@ -42,7 +42,7 @@ Object.assign(RequestSoapError, createErrorsList({
   SoapServerError: 'SOAP server error. Check auth and other data',
 }, RequestSoapError));
 
-export default {
+module.exports = {
   RequestValidationError,
   RequestRuntimeError,
   RequestSoapError,

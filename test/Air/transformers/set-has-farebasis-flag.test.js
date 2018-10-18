@@ -1,6 +1,6 @@
-import { expect } from 'chai';
+const { expect } = require('chai');
 
-import convert from '../../../src/Services/Air/transformers/set-has-farebasis-flag';
+const convert = require('../../../src/Services/Air/transformers/set-has-farebasis-flag');
 
 describe('Air.trasnformers.setHasFareBasis', () => {
   it('should set flag = true', () => {
@@ -16,9 +16,8 @@ describe('Air.trasnformers.setHasFareBasis', () => {
   });
 
   it('should set flag = false 2', () => {
-    const params = { segments: [{  }] };
+    const params = { segments: [{ }] };
     const converted = convert(params);
     expect(converted.hasFareBasis).to.be.deep.equal(false);
   });
 });
-

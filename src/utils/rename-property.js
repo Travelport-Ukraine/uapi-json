@@ -1,4 +1,4 @@
-export default (obj, oldName, newName) => {
+module.exports = (obj, oldName, newName) => {
   if (oldName === newName) {
     return obj;
   }

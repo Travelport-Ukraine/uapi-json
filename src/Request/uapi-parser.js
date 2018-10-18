@@ -1,10 +1,10 @@
-import _ from 'lodash';
-import xml2js from 'xml2js';
+const xml2js = require('xml2js');
+const defaultConfig = require('./default-config');
 
-import {
+const {
   RequestSoapError,
   RequestRuntimeError,
-} from './RequestErrors';
+} = require('./RequestErrors');
 
 const parseString = xml => new Promise((resolve, reject) => {
   xml2js.parseString(xml, (err, json) => {
@@ -30,141 +30,12 @@ function getItemEmbKey(item) {
 function mergeLeaf(item) {
   const leaf = item.$;
   delete (item.$);
-    // item.renameProperty('_', 'text'); //TODO decide if _ is the best name
-  return _.extend(item, leaf);
+  // item.renameProperty('_', 'text'); //TODO decide if _ is the best name
+
+  return Object.assign({}, item, leaf);
 }
 
-
-/*
- * Default parsing algorithm configuration (for all responses)
- */
-
-export function defaultConfig(ver) {
-  // do not collapse arrays with single objects or objects with single keys if they have this name
-  const noCollapseList = [
-    'air:BookingInfo',
-    'air:FareRule',
-    // there's one SSR per each airline (per each passenger), they are usually identical
-    'common_' + ver + ':SSR',
-    'air:AirReservation',
-    'air:PassengerType',
-    'air:TicketInfo',
-    'air:Ticket',
-    'air:Coupon',
-    'air:AirExchangeBundle',
-    'common_' + ver + ':ResponseMessage',
-    'common_' + ver + ':BookingTraveler',
-    'air:BaggageAllowanceInfo',
-    'air:CarryOnAllowanceInfo',
-    'hotel:RateInfo',
-    'hotel:HotelSearchResult',
-    // 'hotel:Amenities',
-    'hotel:Amenity',
-    'hotel:HotelDetailItem',
-    'hotel:AggregatorHotelDetails',
-    'common_' + ver + ':MediaItem',
-    'util:CurrencyConversion',
-    'common_' + ver + ':TaxDetail',
-    'common_' + ver + ':SupplierLocator',
-    'passive:PassiveReservation',
-    'passive:PassiveSegment',
-    'passive:PassiveRemark',
-    `common_${ver}:Email`,
-    'air:ExchangedTicketInfo',
-    'air:AirAvailabilityErrorInfo',
-    'air:AirSegmentError',
-    `common_${ver}:GeneralRemark`,
-    'air:AirAvailabilityErrorInfo',
-    'air:AirSegmentError',
-    `common_${ver}:Endorsement`,
-    'air:AirAvailInfo',
-    'air:BookingCodeInfo',
-  ];
-
-  // Non-single field objects don't get collapsed
-  //  from single item arrays into objects automatically, e.g.
-  // air:AirReservation
-  // air:AirSegment
-  // universal:ProviderReservationInfo
-
-
-  // Some single-object arrays with one key can be safely collapsed into an object or a scalar,
-  // because they would never have a second item or any more fields in objects
-  // NOTE: if such array name ends in list, e.g. FlightOptionsList (with FlightOption item),
-  //  they will not get collapsed
-  const fullCollapseListObj = [
-    'air:ETR',
-    'air:FareTicketDesignator',
-    `common_${ver}:Address`,
-    `common_${ver}:ShippingAddress`,
-    `common_${ver}:PhoneNumber`,
-    `common_${ver}:ProviderReservationInfoRef`, // TODO check if can be collapsed
-    `common_${ver}:Commission`,
-    /*
-      Collapses into array of codes, e.g.
-      in airPriceRsp/AirPriceResult/AirPricingSolution/AirPricingInfo
-    */
-    'air:PassengerType',
-    // 'air:ChangePenalty', //TODO can be a list of penalties both amount and percent?
-    'air:TextInfo',
-    'air:FareNote', // removes useless keys
-  ];
-
-  // NOTE: for air:PassengerType '$' with one member will get collapsed
-  // can't collapse objs: air:ChangePenalty (amount and/or percent),
-  //  air:Connection, other keyed lists
-
-  // Some keyed objects' keys are utterly useless, e.g. in air:FareNote
-  //  where GDS text is displayed
-  // good to use together with fullCollapseListObj
-  const dropKeys = [
-    'air:FareNote',
-  ];
-
-  // Some single-object arrays might have a keyed object,
-  //  but we guarantee that there will never be more than one
-  const fullCollapseSingleKeyedObj = [
-    // 'air:FlightDetails' //can't collapse those in airPriceRsp/AirItinerary/AirSegment,
-    //    because they might list several tech stops on flight segment
-  ];
-
-  // Keyed lists that contain empty objects can get collapsed into arrays of keys
-  const CollapseKeysOnly = [
-    'air:FlightDetailsRef', // can be a list of several tech stops
-    'air:AirSegmentRef',
-    /* 'air:FareInfoRef',*/
-    'common_' + ver + ':BookingTravelerRef',
-    'common_' + ver + ':ProviderReservationInfoRef',
-  ];
-
-  return {
-    noCollapseList,
-    fullCollapseListObj,
-    fullCollapseSingleKeyedObj,
-    CollapseKeysOnly,
-    dropKeys,
-  };
-}
-
-export function errorsConfig(/* ver */) {
-  // get default config and modify it
-  const errParserConfig = defaultConfig();
-  // 1. If waitlisted with restrictWaitlist=true, reply will be SOAP:Fault,
-  // this error reply will contain <air:AvailabilityErrorInfo> / <air:AirSegmentError>
-  // lists with <air:AirSegment> keyed objects;
-  // but, each <air:AirSegmentError> will contain only one object,
-  // so <air:AirSegment> keyed list can be collapsed.
-  // If there are several errors for a particular segment, there will be two errors
-  // with segment information copied.
-  // Unlike this, in LowFareShoppingRsp <air:AirSegment> is usually a list.
-  errParserConfig.fullCollapseSingleKeyedObj.push('air:AirSegment');
-  errParserConfig.fullCollapseListObj.push('air:ErrorMessage');
-  // return config
-  return errParserConfig;
-}
-
-
-export function Parser(root, uapiVersion, env, debug, config) {
+function Parser(root, uapiVersion, env, debug, config) {
   this.debug = debug;
   if (!config) {
     this.config = defaultConfig(uapiVersion);
@@ -198,13 +69,12 @@ Parser.prototype.mapArrayKeys = function mapArrayKeys(array, name) {
   }
 
   if (!hasAllKeys) {
-    _.forEach(array, (value, key) => {
-      array[key] = self.mergeLeafRecursive(value, name /* + ':' + key*/);
-    });
-    return array;
+    return array.map(value => self.mergeLeafRecursive(value, name /* + ':' + key */));
   }
 
-  const object = _.mapKeys(array, getItemEmbKey);
+  const object = array
+    .reduce((acc, item) => ({ ...acc, [getItemEmbKey(item)]: item }), {});
+
   return self.mergeLeafRecursive(object, name);
 };
 
@@ -214,10 +84,10 @@ Parser.prototype.mergeLeafRecursive = function (obj, name) {
   let object;
   const self = this;
 
-  if (_.isArray(obj)) {
+  if (Array.isArray(obj)) {
     let listName = (name.substr(-4) === 'List') ? name.substring(0, name.length - 4) : name;
 
-    if (_.size(obj) === 1) {
+    if (Object.keys(obj).length === 1) {
       if (obj[0][listName]) {
         // the XML has e.g. air:FlightDetailsList with one node that is air:FlightDetails
         object = this.mapArrayKeys(obj[0][listName], listName);
@@ -238,7 +108,7 @@ Parser.prototype.mergeLeafRecursive = function (obj, name) {
     } else {
       object = this.mapArrayKeys(obj, listName);
     }
-  } else if (_.isObject(obj)) {
+  } else if (Object.prototype.toString.call(obj) === '[object Object]') {
     object = obj;
     const keys = Object.keys(object);
 
@@ -261,7 +131,7 @@ Parser.prototype.mergeLeafRecursive = function (obj, name) {
     return obj;
   }
 
-  if (_.isObject(object)) {
+  if (Object.prototype.toString.call(object) === '[object Object]') {
     return mergeLeaf(object);
   }
   return object;
@@ -288,8 +158,8 @@ Parser.prototype.parseVersion = function (obj) {
     .reduce(
       (acc, key) => acc.concat(
         Object.keys(detail[key][0].$)
-        .filter(detailKey => detailKey.match(/^xmlns/i))
-        .map(detailKey => detail[key][0].$[detailKey])
+          .filter(detailKey => detailKey.match(/^xmlns/i))
+          .map(detailKey => detail[key][0].$[detailKey])
       ),
       []
     )
@@ -349,4 +219,4 @@ Parser.prototype.parse = function (xml) {
     });
 };
 
-export default Parser;
+module.exports = Parser;

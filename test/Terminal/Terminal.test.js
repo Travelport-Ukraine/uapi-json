@@ -2,18 +2,18 @@
   eslint-disable import/no-extraneous-dependencies
 */
 
-import fs from 'fs';
-import sinon from 'sinon';
-import chai, { expect } from 'chai';
-import sinonChai from 'sinon-chai';
-import proxyquire from 'proxyquire';
-import config from '../testconfig';
-import uAPI from '../../src';
+const fs = require('fs');
+const sinon = require('sinon');
+const chai = require('chai');
+const { expect } = require('chai');
+const sinonChai = require('sinon-chai');
+const proxyquire = require('proxyquire');
+const config = require('../testconfig');
+const uAPI = require('../../src');
 
 chai.use(sinonChai);
 
-const TerminalError = uAPI.errors.Terminal;
-const TerminalRuntimeError = TerminalError.TerminalRuntimeError;
+const { Terminal: { TerminalRuntimeError } } = uAPI.errors;
 
 const DumbErrorClosingSession = sinon.spy(() => true);
 const ModifiedTerminalRuntimeError = Object.assign({}, TerminalRuntimeError, {
@@ -35,7 +35,7 @@ const getTerminalResponse = path => new Promise((resolve, reject) => {
       }
       const res = rTrim(data.toString());
       resolve(res.split(/\n/));
-    },
+    }
   );
 });
 
@@ -200,7 +200,7 @@ describe('#Terminal', function terminalTest() {
         debug: 1,
       });
 
-      return uAPITerminal.executeCommand('I')
+      uAPITerminal.executeCommand('I')
         .then(() => {
           expect(closeSession.callCount).to.equal(0);
           process.emit('beforeExit');

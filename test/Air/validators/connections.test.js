@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { AirValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { AirValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import connections from '../../../src/Services/Air/validators/connections';
+const connections = require('../../../src/Services/Air/validators/connections');
 
 describe('Air.validators.connections', () => {
   it('should be ok without connections', () => {

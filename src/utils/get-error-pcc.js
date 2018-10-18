@@ -1,4 +1,4 @@
-export default (string) => {
+module.exports = (string) => {
   if (!string) {
     return null;
   }

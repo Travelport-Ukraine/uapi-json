@@ -1,8 +1,8 @@
-import { expect } from 'chai';
-import moment from 'moment';
+const { expect } = require('chai');
+const moment = require('moment');
 
-import convert from '../../../src/Services/Air/transformers/add-meta-passengers-booking';
-import age from '../../../src/Services/Air/transformers/set-passengers-age';
+const convert = require('../../../src/Services/Air/transformers/add-meta-passengers-booking');
+const age = require('../../../src/Services/Air/transformers/set-passengers-age');
 
 describe('Air.transformers.setPassengersAge', () => {
   it('should add age', () => {
@@ -30,7 +30,7 @@ describe('Air.transformers.setPassengersAge', () => {
       birthDate: moment().subtract(5, 'years').format('YYYY-MM-DD'),
       gender: 'M',
       ageCategory: 'CNN',
-    }]
+    }];
     const params = { passengers };
 
     const converted = convert(age(params));
@@ -43,4 +43,3 @@ describe('Air.transformers.setPassengersAge', () => {
     expect(converted.passengers[2].ageCategory).to.be.equal('C05');
   });
 });
-

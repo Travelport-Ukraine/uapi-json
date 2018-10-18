@@ -1,14 +1,14 @@
-import fs from 'fs';
-import path from 'path';
-import proxyquire from 'proxyquire';
-import sinon from 'sinon';
-import chai from 'chai';
-import sinonChai from 'sinon-chai';
-import {
+const fs = require('fs');
+const path = require('path');
+const proxyquire = require('proxyquire');
+const sinon = require('sinon');
+const chai = require('chai');
+const sinonChai = require('sinon-chai');
+const {
   RequestSoapError,
-} from '../../src/Request/RequestErrors';
+} = require('../../src/Request/RequestErrors');
 
-const expect = chai.expect;
+const { expect } = chai;
 chai.use(sinonChai);
 
 const templates = require('../../src/Services/Air/templates');
@@ -100,9 +100,8 @@ describe('#Request', () => {
     });
 
     it('should test custom log function with success', () => {
-      const log = sinon.spy(function (...args) {
+      const log = sinon.spy((...args) => {
         console.log(args);
-        return;
       });
 
       const params = serviceParams.concat([3]).concat([{ logFunction: log }]);
@@ -115,9 +114,8 @@ describe('#Request', () => {
     });
 
     it('should test custom log function with error', () => {
-      const log = sinon.spy(function (...args) {
+      const log = sinon.spy((...args) => {
         console.log(args);
-        return;
       });
 
       const params = serviceParams.concat([3]).concat([{ logFunction: log }]);
@@ -130,9 +128,8 @@ describe('#Request', () => {
     });
 
     it('should test result of parser as string', () => {
-      const log = sinon.spy(function (...args) {
+      const log = sinon.spy((...args) => {
         console.log(args);
-        return;
       });
 
       const params = serviceParamsReturningString

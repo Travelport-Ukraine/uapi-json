@@ -1,11 +1,11 @@
-import {
+const {
   createErrorClass,
   createErrorsList,
-} from 'node-errors-helpers';
-import errorTypes from '../../error-types';
+} = require('node-errors-helpers');
+const errorTypes = require('../../error-types');
 
 // Validation errors
-export const TerminalValidationError = createErrorClass(
+const TerminalValidationError = createErrorClass(
   'TerminalValidationError',
   'Terminal service validation error',
   errorTypes.ValidationError
@@ -22,7 +22,7 @@ Object.assign(TerminalValidationError, createErrorsList({
 }, TerminalValidationError));
 
 // Parsing errors
-export const TerminalParsingError = createErrorClass(
+const TerminalParsingError = createErrorClass(
   'TerminalParsingError',
   'Terminal service parsing error',
   errorTypes.ParsingError
@@ -33,7 +33,7 @@ Object.assign(TerminalParsingError, createErrorsList({
 }, TerminalParsingError));
 
 // Runtime errors
-export const TerminalRuntimeError = createErrorClass(
+const TerminalRuntimeError = createErrorClass(
   'TerminalRuntimeError',
   'Terminal service runtime error',
   errorTypes.RuntimeError
@@ -47,7 +47,7 @@ Object.assign(TerminalRuntimeError, createErrorsList({
   NoAgreement: 'There is no agreement between current pcc and you trying to reach',
 }, TerminalRuntimeError));
 
-export default {
+module.exports = {
   TerminalValidationError,
   TerminalParsingError,
   TerminalRuntimeError,

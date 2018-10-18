@@ -1,13 +1,12 @@
-import moment from 'moment';
-import _ from 'lodash';
-import retry from 'promise-retry';
+const moment = require('moment');
+const retry = require('promise-retry');
 
-import { parsers } from '../../utils';
-import getBookingFromUr from '../../utils/get-booking-from-ur';
-import airService from './AirService';
-import createTerminalService from '../Terminal/Terminal';
-import { AirRuntimeError } from './AirErrors';
-import validateServiceSettings from '../../utils/validate-service-settings';
+const { parsers } = require('../../utils');
+const getBookingFromUr = require('../../utils/get-booking-from-ur');
+const airService = require('./AirService');
+const createTerminalService = require('../Terminal/Terminal');
+const { AirRuntimeError } = require('./AirErrors');
+const validateServiceSettings = require('../../utils/validate-service-settings');
 
 module.exports = (settings) => {
   const service = airService(validateServiceSettings(settings));
@@ -23,11 +22,11 @@ module.exports = (settings) => {
 
     fareRules(options) {
       // add request for fare rules
-      const request = Object.assign(options,
-        {
-          fetchFareRules: true,
-        }
-      );
+      const request = {
+        ...options,
+        fetchFareRules: true,
+      };
+
       return service.lookupFareRules(request);
     },
 
@@ -60,9 +59,8 @@ module.exports = (settings) => {
     getPNR(options) {
       return this.getUniversalRecordByPNR(options)
         .then(
-          ur =>
-            getBookingFromUr(ur, options.pnr) ||
-            Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
+          ur => getBookingFromUr(ur, options.pnr)
+            || Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
         );
     },
 
@@ -118,8 +116,8 @@ module.exports = (settings) => {
             })
             .then((response) => {
               if (
-                (!response.match(pnrRegExp)) ||
-                (response.indexOf(segmentResult) === -1)
+                (!response.match(pnrRegExp))
+                || (response.indexOf(segmentResult) === -1)
               ) {
                 return Promise.reject(new AirRuntimeError.UnableToSaveBookingWithExtraSegment());
               }
@@ -168,7 +166,7 @@ module.exports = (settings) => {
 
     flightInfo(options) {
       const parameters = {
-        flightInfoCriteria: _.isArray(options) ? options : [options],
+        flightInfoCriteria: Array.isArray(options) ? options : [options],
       };
       return service.flightInfo(parameters);
     },
@@ -208,15 +206,15 @@ module.exports = (settings) => {
     getTickets(options) {
       return this.getPNR(options)
         .then(
-           booking => Promise.all(
-             booking.tickets.map(
-               ticket => this.getTicket({
-                 pnr: booking.pnr,
-                 uapi_ur_locator: booking.uapi_ur_locator,
-                 ticketNumber: ticket.number,
-               })
-             )
-           )
+          booking => Promise.all(
+            booking.tickets.map(
+              ticket => this.getTicket({
+                pnr: booking.pnr,
+                uapi_ur_locator: booking.uapi_ur_locator,
+                ticketNumber: ticket.number,
+              })
+            )
+          )
         )
         .catch(
           err => Promise.reject(new AirRuntimeError.UnableToRetrieveTickets(options, err))
@@ -247,9 +245,10 @@ module.exports = (settings) => {
                     return localTerminal.executeCommand(`*${line.id}`);
                   })
                   .then(parsers.bookingPnr)
-                  .then(pnr => localTerminal.closeSession()
-                    .then(() => ({ ...line, pnr }))
-                  );
+                  .then((pnr) => {
+                    return localTerminal.closeSession()
+                      .then(() => ({ ...line, pnr }));
+                  });
               }))
               .then(data => ({ type: 'list', data }));
           }
@@ -266,11 +265,9 @@ module.exports = (settings) => {
             new AirRuntimeError.MissingPaxListAndBooking(firstScreen)
           );
         })
-        .then(results =>
-          terminal.closeSession()
-            .then(() => results)
-            .catch(() => results)
-        );
+        .then(results => terminal.closeSession()
+          .then(() => results)
+          .catch(() => results));
     },
 
     cancelTicket(options) {

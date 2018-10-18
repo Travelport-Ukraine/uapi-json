@@ -1,5 +1,5 @@
-export default function getBookingFromUr(ur, pnr) {
+module.exports = function getBookingFromUr(ur, pnr) {
   return ur.find(
     record => record.pnr === pnr
   );
-}
+};

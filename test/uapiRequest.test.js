@@ -1,11 +1,11 @@
-import assert from 'assert';
-import { expect } from 'chai';
-import handlebars from 'handlebars';
-import uAPI from '../src/Request/uapi-request';
-import prepareRequest from '../src/Request/prepare-request';
-import { errors } from '../src';
-import config from '../src/config';
-import auth from './testconfig';
+const assert = require('assert');
+const { expect } = require('chai');
+const handlebars = require('handlebars');
+const uAPI = require('../src/Request/uapi-request');
+const prepareRequest = require('../src/Request/prepare-request');
+const { errors } = require('../src');
+const config = require('../src/config');
+const auth = require('./testconfig');
 
 describe('uapiRequest tests', () => {
   it('should return error when request file not exists', () => {

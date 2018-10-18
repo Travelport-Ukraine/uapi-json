@@ -1,8 +1,8 @@
-import bookingPnr from './booking-pnr';
-import searchPassengersList from './search-passengers-list';
-import serviceSegment from './service-segment';
+const bookingPnr = require('./booking-pnr');
+const searchPassengersList = require('./search-passengers-list');
+const serviceSegment = require('./service-segment');
 
-export default {
+module.exports = {
   bookingPnr,
   searchPassengersList,
   serviceSegment,

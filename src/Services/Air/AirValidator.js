@@ -1,40 +1,40 @@
-import { validate, transform, compose } from '../../utils';
-import validators from './validators';
-import transformers from './transformers';
+const { validate, transform, compose } = require('../../utils');
+const validators = require('./validators');
+const transformers = require('./transformers');
 
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: compose(
     validate(
       validators.passengers,
-      validators.legs,
+      validators.legs
     ),
     transform(
-      transformers.convertPassengersObjectToArray,
+      transformers.convertPassengersObjectToArray
     )
   ),
 
   AIR_PRICE_FARE_RULES_REQUEST: compose(
     validate(
       validators.segments,
-      validators.passengers,
+      validators.passengers
     ),
     transform(
       transformers.setBusinessFlag,
       // transformers.setGroupsForSegments, <air:Connection/> hack fails validation on pre-prod
       transformers.setHasFareBasisFlag,
-      transformers.convertPassengersObjectToArray,
+      transformers.convertPassengersObjectToArray
     )
   ),
 
   AIR_PRICE: compose(
     validate(
-      validators.segments,
+      validators.segments
     ),
     transform(
       transformers.setBusinessFlag,
       transformers.setPassengersAge,
       transformers.setGroupsForSegments,
-      transformers.setHasFareBasisFlag,
+      transformers.setHasFareBasisFlag
     )
   ),
 
@@ -43,11 +43,11 @@ module.exports = {
       validators.emailOptional,
       validators.phone,
       validators.deliveryInfoOptional,
-      validators.pricingSolutionXml,
+      validators.pricingSolutionXml
     ),
     transform(
       transformers.setPassengersAge,
-      transformers.addMetaPassengersBooking,
+      transformers.addMetaPassengersBooking
     )
   ),
 
@@ -56,16 +56,16 @@ module.exports = {
       validators.paramsIsObject,
       validators.fop,
       validators.fopCreditCard,
-      validators.pnr,
+      validators.pnr
     ),
     transform(
-      transformers.fixCardFop,
-    ),
+      transformers.fixCardFop
+    )
   ),
 
   AIR_REQUEST_BY_PNR: compose(
     validate(
-      validators.pnr,
+      validators.pnr
     ),
     transform()
   ),
@@ -74,7 +74,7 @@ module.exports = {
     validate(
       validators.pnr,
       validators.pcc,
-      validators.queue,
+      validators.queue
     ),
     transform()
   ),
@@ -84,24 +84,24 @@ module.exports = {
 
   AIR_FLIGHT_INFORMATION: compose(
     validate(
-      validators.flightInfo,
+      validators.flightInfo
     ),
-    transform(),
+    transform()
   ),
 
   AIR_GET_TICKET: compose(
     validate(
       validators.paramsIsObject,
-      validators.ticketNumber,
+      validators.ticketNumber
     ),
-    transform(),
+    transform()
   ),
 
   AIR_CANCEL_TICKET: compose(
     validate(
       validators.paramsIsObject,
       validators.pnr,
-      validators.ticketNumber,
+      validators.ticketNumber
     ),
     transform()
   ),
@@ -109,7 +109,7 @@ module.exports = {
   AIR_CANCEL_PNR: compose(
     validate(
       validators.paramsIsObject,
-      validators.pnr,
+      validators.pnr
     ),
     transform()
   ),
@@ -117,7 +117,7 @@ module.exports = {
   AIR_EXCHANGE_QUOTE: compose(
     validate(
       validators.segments,
-      validators.pnr,
+      validators.pnr
     ),
     transform()
   ),
@@ -126,10 +126,10 @@ module.exports = {
     validate(
       validators.pnr,
       validators.reservationLocator,
-      validators.exchangeToken,
+      validators.exchangeToken
     ),
     transform(
-      transformers.decodeExchangeToken,
+      transformers.decodeExchangeToken
     )
   ),
 };

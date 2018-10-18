@@ -1,10 +1,10 @@
-import {
+const {
   HotelsParsingError,
   HotelsRuntimeError,
-} from './HotelsErrors';
-import {
+} = require('./HotelsErrors');
+const {
   RequestRuntimeError,
-} from '../../Request/RequestErrors';
+} = require('../../Request/RequestErrors');
 
 const amenties = require('./amenties');
 const Utils = require('../../utils');
@@ -50,14 +50,12 @@ const getComments = (rsp) => {
     && rsp['hotel:GuestReviews'][0]
     && rsp['hotel:GuestReviews'][0]['hotel:Comments']
   ) {
-    return rsp['hotel:GuestReviews'][0]['hotel:Comments'].map(comment =>
-      ({
-        text: comment._,
-        id: comment.$.CommentId,
-        date: comment.$.Date,
-        language: comment.$.CommenterLanguage,
-      })
-    );
+    return rsp['hotel:GuestReviews'][0]['hotel:Comments'].map(comment => ({
+      text: comment._,
+      id: comment.$.CommentId,
+      date: comment.$.Date,
+      language: comment.$.CommenterLanguage,
+    }));
   }
   return [];
 };
@@ -195,12 +193,10 @@ const bookParse = function (rsp) {
 
   const msg = rsp[`common_${self.uapi_version}:ResponseMessage`] || [];
 
-  result.ResponseMessages = msg.map(elem =>
-    ({
-      type: elem.Type,
-      text: elem._,
-    })
-  );
+  result.ResponseMessages = msg.map(elem => ({
+    type: elem.Type,
+    text: elem._,
+  }));
 
   const univrec = rsp['universal:UniversalRecord'];
 

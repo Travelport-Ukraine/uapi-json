@@ -1,6 +1,6 @@
-import moment from 'moment';
+const moment = require('moment');
 
-import beautify from '../beautify-name';
+const beautify = require('../beautify-name');
 
 const parse = (screen) => {
   const listPattern = /0*([0-9]+)\s[0-9]{2}([^\s]+)\s*(X?)\s([0-9]{2}[A-Z]{3}\d*)/g;
@@ -33,4 +33,4 @@ const parse = (screen) => {
   return parsedList;
 };
 
-export default parse;
+module.exports = parse;

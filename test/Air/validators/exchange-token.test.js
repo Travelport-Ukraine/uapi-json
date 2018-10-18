@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { AirValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { AirValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import check from '../../../src/Services/Air/validators/exchange-token';
+const check = require('../../../src/Services/Air/validators/exchange-token');
 
 describe('Air.validators.exchangeToken', () => {
   it('should throw error when check is not set', () => {
@@ -10,7 +10,7 @@ describe('Air.validators.exchangeToken', () => {
   });
 
   it('should pass', () => {
-    const t = new Buffer('123').toString('base64');
+    const t = Buffer.from('123').toString('base64');
     const fn = () => check({ exchangeToken: t });
     expect(fn).to.not.throw(AirValidationError.ExchangeToken);
   });

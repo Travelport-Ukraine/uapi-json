@@ -1,17 +1,16 @@
-import _ from 'lodash';
-import xml2js from 'xml2js';
-import moment from 'moment';
-import utils from '../../utils';
-import format from './AirFormat';
-import {
+const xml2js = require('xml2js');
+const moment = require('moment');
+const utils = require('../../utils');
+const format = require('./AirFormat');
+const {
   AirParsingError,
   AirRuntimeError,
   AirFlightInfoRuntimeError,
   GdsRuntimeError,
-} from './AirErrors';
-import {
+} = require('./AirErrors');
+const {
   RequestRuntimeError,
-} from '../../Request/RequestErrors';
+} = require('../../Request/RequestErrors');
 
 const parseFareCalculation = (str) => {
   const fareCalculation = str.match(/^([\s\S]+)END($|\s)/)[1];
@@ -32,7 +31,7 @@ const searchLowFaresValidate = (obj) => {
 
   rootArrays.forEach((name) => {
     const airName = 'air:' + name + 'List';
-    if (!_.isObject(obj[airName])) {
+    if (!Object.prototype.toString.call(obj[airName]) === '[object Object]') {
       throw new AirParsingError.ResponseDataMissing({ missing: airName });
     }
   });
@@ -44,11 +43,11 @@ const countHistogram = (arr) => {
   const a = {};
   let prev = null;
 
-  if (!_.isArray(arr)) {
+  if (!Array.isArray(arr)) {
     throw new AirParsingError.HistogramTypeInvalid();
   }
 
-  if (_.isObject(arr[0])) {
+  if (Object.prototype.toString.call(arr[0]) === '[object Object]') {
     arr = arr.map(elem => elem.Code);
   }
 
@@ -114,8 +113,9 @@ const ticketParse = function (obj) {
 
   if (obj['air:ETR']) {
     try {
-      checkTickets = _.reduce(obj['air:ETR'], (acc, x) => {
-        const tickets = _.reduce(x['air:Ticket'], (acc2, t) => !!(acc2 && t.TicketNumber), true);
+      checkTickets = Object.values(obj['air:ETR']).reduce((acc, x) => {
+        const tickets = Object.values(x['air:Ticket'] || {})
+          .reduce((acc2, t) => !!(acc2 && t.TicketNumber), true);
         return !!(acc && tickets);
       }, true);
     } catch (e) {
@@ -182,17 +182,18 @@ function airPriceRspPassengersPerReservation(obj) {
   const prices = priceResult['air:AirPricingSolution'];
   const priceKeys = Object.keys(prices);
 
-  const pricing = prices[_.first(priceKeys)];
+  const pricing = prices[priceKeys[0]]['air:AirPricingInfo'];
 
-  return _.mapValues(pricing['air:AirPricingInfo'], (fare) => {
-    const histogram = countHistogram(fare['air:PassengerType']);
-    return histogram;
-  });
+  return Object.keys(pricing)
+    .reduce((acc, right) => ({
+      ...acc,
+      [right]: countHistogram(pricing[right]['air:PassengerType']),
+    }), {});
 }
 
 function airPriceRspPricingSolutionXML(obj) {
   // first let's parse a regular structure
-  const objCopy = _.cloneDeep(obj);
+  const objCopy = JSON.parse(JSON.stringify((obj)));
   const passengersPerReservations = airPriceRspPassengersPerReservation.call(this, objCopy);
 
   const segments = obj['air:AirPriceRsp'][0]['air:AirItinerary'][0]['air:AirSegment'];
@@ -201,12 +202,11 @@ function airPriceRspPricingSolutionXML(obj) {
   let pricingSolution = 0;
   if (pricingSolutions.length > 1) {
     console.log('More than one solution found in booking. Resolving the cheapest one.');
-    const sorted = pricingSolutions.sort(
+    [pricingSolution] = pricingSolutions.sort(
       (a, b) => parseFloat(a.$.TotalPrice.slice(3)) - parseFloat(b.$.TotalPrice.slice(3))
     );
-    pricingSolution = sorted[0];
   } else {
-    pricingSolution = pricingSolutions[0];
+    [pricingSolution] = pricingSolutions;
   }
 
 
@@ -219,14 +219,14 @@ function airPriceRspPricingSolutionXML(obj) {
 
   // delete existing air passenger types for each fare (map stored in passengersPerReservations)
   const pricingInfos = pricingSolution['air:AirPricingInfo'].map(
-    info => _.assign({}, info, { 'air:PassengerType': [] })
+    info => Object.assign({}, info, { 'air:PassengerType': [] })
   );
 
   this.env.passengers.forEach((passenger, index) => {
     // find a reservation with places available for this passenger type, decrease counter
-    const reservationKey = _.findKey(passengersPerReservations, (elem) => {
-      const item = elem;
-      const ageCategory = passenger.ageCategory;
+    const reservationKey = Object.keys(passengersPerReservations).find((key) => {
+      const item = passengersPerReservations[key];
+      const { ageCategory } = passenger;
       if (item[ageCategory] > 0) {
         item[ageCategory] -= 1;
         return true;
@@ -234,7 +234,7 @@ function airPriceRspPricingSolutionXML(obj) {
       return false;
     });
 
-    const pricingInfo = _.find(pricingInfos, info => info.$.Key === reservationKey);
+    const pricingInfo = pricingInfos.find(info => info.$.Key === reservationKey);
 
     pricingInfo['air:PassengerType'].push({
       $: {
@@ -254,23 +254,23 @@ function airPriceRspPricingSolutionXML(obj) {
       rootName: root,
     });
 
-        // workaround because xml2js does not accept arrays to generate multiple "root objects"
+    // workaround because xml2js does not accept arrays to generate multiple "root objects"
     const buildObject = {
       [root]: pricingSolution[root],
     };
 
     const intResult = builder.buildObject(buildObject);
-        // remove root object tags at first and last line
+    // remove root object tags at first and last line
     const lines = intResult.split('\n');
     lines.splice(0, 1);
     lines.splice(-1, 1);
 
-        // return
+    // return
     resultXml[root + '_XML'] = lines.join('\n');
   });
 
   return {
-    'air:AirPricingSolution': _.clone(pricingSolution.$),
+    'air:AirPricingSolution': utils.clone(pricingSolution.$),
     'air:AirPricingSolution_XML': resultXml,
   };
 }
@@ -303,7 +303,7 @@ const AirErrorHandler = function (rsp) {
     case '3003':
       throw new AirRuntimeError.InvalidRequestData(rsp);
     case '3000': {
-      const messages = _.pluck(errorInfo['air:AirSegmentError'], 'air:ErrorMessage');
+      const messages = errorInfo['air:AirSegmentError'].map(err => err['air:ErrorMessage']);
       if (messages.indexOf('Booking is not complete due to waitlisted segment') !== -1) {
         throw new AirRuntimeError.SegmentWaitlisted(rsp);
       }
@@ -387,7 +387,8 @@ const airGetTicket = function (obj) {
                     bookingInfo = bInfo;
                   }
                 }
-              });
+              }
+            );
           }
 
           const couponInfo = Object.assign(
@@ -423,23 +424,23 @@ const airGetTicket = function (obj) {
 
   const taxes = (airPricingInfo && airPricingInfo['air:TaxInfo'])
     ? Object.keys(airPricingInfo['air:TaxInfo']).map(
-        taxKey => Object.assign(
-          {
-            type: airPricingInfo['air:TaxInfo'][taxKey].Category,
-            value: airPricingInfo['air:TaxInfo'][taxKey].Amount,
-          },
-          airPricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`]
-            ? {
-              details: airPricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`].map(
-                taxDetail => ({
-                  airport: taxDetail.OriginAirport,
-                  value: taxDetail.Amount,
-                })
-              ),
-            }
-            : null,
-        )
+      taxKey => Object.assign(
+        {
+          type: airPricingInfo['air:TaxInfo'][taxKey].Category,
+          value: airPricingInfo['air:TaxInfo'][taxKey].Amount,
+        },
+        airPricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`]
+          ? {
+            details: airPricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`].map(
+              taxDetail => ({
+                airport: taxDetail.OriginAirport,
+                value: taxDetail.Amount,
+              })
+            ),
+          }
+          : null
       )
+    )
     : [];
   const priceSource = airPricingInfo || etr;
   const priceInfoAvailable = priceSource.BasePrice !== undefined;
@@ -499,8 +500,8 @@ const airGetTicket = function (obj) {
 
 function airCancelTicket(obj) {
   if (
-    !obj['air:VoidResultInfo'] ||
-    obj['air:VoidResultInfo'].ResultType !== 'Success'
+    !obj['air:VoidResultInfo']
+    || obj['air:VoidResultInfo'].ResultType !== 'Success'
   ) {
     throw new AirRuntimeError.TicketCancelResultUnknown(obj);
   }
@@ -564,8 +565,8 @@ function extractBookings(obj) {
     const providerInfoKey = providerInfo.Key;
     const resRemarks = remarks[providerInfoKey] || [];
     const splitBookings = (
-      providerInfo['universal:ProviderReservationDetails'] &&
-      providerInfo['universal:ProviderReservationDetails'].DivideDetails === 'true'
+      providerInfo['universal:ProviderReservationDetails']
+      && providerInfo['universal:ProviderReservationDetails'].DivideDetails === 'true'
     )
       ? resRemarks.reduce(
         (acc, remark) => {
@@ -580,9 +581,7 @@ function extractBookings(obj) {
       : [];
 
     const passiveReservation = record['passive:PassiveReservation']
-      ? record['passive:PassiveReservation'].find(res =>
-          res.ProviderReservationInfoRef === providerInfoKey
-        )
+      ? record['passive:PassiveReservation'].find(res => res.ProviderReservationInfoRef === providerInfoKey)
       : null;
 
     if (!providerInfo) {
@@ -625,7 +624,7 @@ function extractBookings(obj) {
           } : null,
           traveler.Gender ? {
             gender: traveler.Gender,
-          } : null,
+          } : null
         );
       }
     );
@@ -714,7 +713,7 @@ function extractBookings(obj) {
                       })
                     ),
                   }
-                  : null,
+                  : null
               )
             )
             : [];
@@ -787,7 +786,7 @@ function extractBookings(obj) {
               baggage,
               timeToReprice: pricingInfo.LatestTicketingTime,
             },
-            parseFareCalculation(pricingInfo['air:FareCalc']),
+            parseFareCalculation(pricingInfo['air:FareCalc'])
           );
         }
       );
@@ -844,7 +843,7 @@ function extractBookings(obj) {
       },
       splitBookings.length > 0
         ? { splitBookings }
-        : null,
+        : null
     );
   });
 }
@@ -883,13 +882,13 @@ function airPriceFareRules(data) {
 }
 
 function gdsQueue(req) {
-    // TODO implement all major error cases
-    // https://support.travelport.com/webhelp/uapi/uAPI.htm#Error_Codes/QUESVC_Service_Error_Codes.htm%3FTocPath%3DError%2520Codes%2520and%2520Messages|_____9
-    // like 7015 "Branch does not have Queueing configured"
+  // TODO implement all major error cases
+  // https://support.travelport.com/webhelp/uapi/uAPI.htm#Error_Codes/QUESVC_Service_Error_Codes.htm%3FTocPath%3DError%2520Codes%2520and%2520Messages|_____9
+  // like 7015 "Branch does not have Queueing configured"
 
   let data = null;
   try {
-    data = req['common_v36_0:ResponseMessage'][0];
+    [data] = req['common_v36_0:ResponseMessage'];
   } catch (e) {
     throw new GdsRuntimeError.PlacingInQueueError(req);
   }
@@ -972,7 +971,7 @@ function exchangeQuote(req) {
               bookingInfo,
               uapi_pricing_info_ref: pricing.Key,
             },
-            parseFareCalculation(pricing['air:FareCalc']),
+            parseFareCalculation(pricing['air:FareCalc'])
           );
         });
 
@@ -1033,24 +1032,24 @@ function availability(rsp) {
     }
 
     const cabinsAvailability = availInfo['air:BookingCodeInfo']
-        .filter((info) => {
-          if (this.env.cabins && this.env.cabins.length > 0) {
-            return this.env.cabins.indexOf(info.CabinClass) !== -1;
-          }
+      .filter((info) => {
+        if (this.env.cabins && this.env.cabins.length > 0) {
+          return this.env.cabins.indexOf(info.CabinClass) !== -1;
+        }
 
-          return true;
-        })
-        .reduce((acc, x) => {
-          const codes = x.BookingCounts
-            .split('|')
-            .map(item => ({
-              bookingClass: item[0],
-              cabin: x.CabinClass,
-              seats: item[1].trim(),
-            }));
+        return true;
+      })
+      .reduce((acc, x) => {
+        const codes = x.BookingCounts
+          .split('|')
+          .map(item => ({
+            bookingClass: item[0],
+            cabin: x.CabinClass,
+            seats: item[1].trim(),
+          }));
 
-          return acc.concat(codes);
-        }, []);
+        return acc.concat(codes);
+      }, []);
 
     const s = {
       ...format.formatSegment(segment),

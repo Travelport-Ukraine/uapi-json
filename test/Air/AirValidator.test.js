@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import uAPI from '../../src';
-import AirValidator from '../../src/Services/Air/AirValidator';
+const { expect } = require('chai');
+const uAPI = require('../../src');
+const AirValidator = require('../../src/Services/Air/AirValidator');
 
 describe('#AirValidator', () => {
   describe('getTicket', () => {

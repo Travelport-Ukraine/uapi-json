@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { AirValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { AirValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import passengers from '../../../src/Services/Air/validators/passengers';
+const passengers = require('../../../src/Services/Air/validators/passengers');
 
 describe('Air.validators.passenger', () => {
   it('should throw error when passenger are not set', () => {
@@ -11,7 +11,7 @@ describe('Air.validators.passenger', () => {
 
 
   it('should throw error when passengers key is incorrect', () => {
-    const fn = () => passengers({ passengers: { 'adult': '123' } });
+    const fn = () => passengers({ passengers: { adult: '123' } });
     expect(fn).to.throw(AirValidationError.PassengersCategoryInvalid);
   });
 

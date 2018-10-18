@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { AirValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { AirValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import pricingSolution from '../../../src/Services/Air/validators/pricing-solution-xml';
+const pricingSolution = require('../../../src/Services/Air/validators/pricing-solution-xml');
 
 describe('Air.validators.pricingSolutionXml', () => {
   it('should throw error when pricing solution not set', () => {

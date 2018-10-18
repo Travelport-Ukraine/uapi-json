@@ -1,4 +1,4 @@
-import { HotelsValidationError } from './HotelsErrors';
+const { HotelsValidationError } = require('./HotelsErrors');
 
 function Validator(params) {
   this.params = params;
@@ -230,38 +230,38 @@ Validator.prototype.hostToken = function () {
 module.exports = {
   HOTELS_SEARCH_REQUEST(params) {
     return new Validator(params)
-            .code()
-            .location()
-            .startDate()
-            .endDate()
-            .rooms()
-            .end();
+      .code()
+      .location()
+      .startDate()
+      .endDate()
+      .rooms()
+      .end();
   },
   HOTELS_RATE_REQUEST(params) {
     return new Validator(params)
-            .hotelChain()
-            .hotelCode()
-            .startDate()
-            .endDate()
-            .rooms()
-            .end();
+      .hotelChain()
+      .hotelCode()
+      .startDate()
+      .endDate()
+      .rooms()
+      .end();
   },
   HOTELS_BOOK_REQUEST(params) {
     return new Validator(params)
-            .hotelChain()
-            .hotelCode()
-            .startDate()
-            .endDate()
-            .people()
-            .firstPeopleContacts()
-            .guarantee()
-            .rates()
-            .hostToken()
-            .end();
+      .hotelChain()
+      .hotelCode()
+      .startDate()
+      .endDate()
+      .people()
+      .firstPeopleContacts()
+      .guarantee()
+      .rates()
+      .hostToken()
+      .end();
   },
   HOTELS_CANCEL_BOOK_REQUEST(params) {
     return new Validator(params)
-            .locatorCode()
-            .end();
+      .locatorCode()
+      .end();
   },
 };

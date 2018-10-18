@@ -1,4 +1,4 @@
-import { UtilsValidationError } from './UtilsErrors';
+const { UtilsValidationError } = require('./UtilsErrors');
 
 function Validator(params) {
   this.params = params;
@@ -31,7 +31,7 @@ Validator.prototype.currencies = function () {
 module.exports = {
   CURRENCY_CONVERSION(params) {
     return new Validator(params)
-    .currencies()
-    .end();
+      .currencies()
+      .end();
   },
 };

@@ -1,9 +1,9 @@
 /*
   eslint-disable import/no-extraneous-dependencies
 */
-import { expect } from 'chai';
-import uAPI from '../../src';
-import TerminalValidator from '../../src/Services/Terminal/TerminalValidator';
+const { expect } = require('chai');
+const uAPI = require('../../src');
+const TerminalValidator = require('../../src/Services/Terminal/TerminalValidator');
 
 const TerminalError = uAPI.errors.Terminal;
 

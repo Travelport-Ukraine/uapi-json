@@ -1,7 +1,8 @@
-import { expect } from 'chai';
-import { AirFlightInfoValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { AirFlightInfoValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import flightInfo, { validateItem } from '../../../src/Services/Air/validators/flight-info';
+const flightInfo = require('../../../src/Services/Air/validators/flight-info');
+const validateItem = require('../../../src/Services/Air/validators/utils/validate-flight-info-item');
 
 describe('Air.validators.flightInfo', () => {
   it('sould throw error when airline missing', () => {
@@ -37,7 +38,7 @@ describe('Air.validators.flightInfo', () => {
   it('should validate array', () => {
     const params = [
       { airline: 123, flightNumber: 777, departure: 123 },
-      { airline: 123, flightNumber: 777, departure: 123 }
+      { airline: 123, flightNumber: 777, departure: 123 },
     ];
     const fn = () => flightInfo({ flightInfoCriteria: params });
     expect(fn).to.not.throw(Error);

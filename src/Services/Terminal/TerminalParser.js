@@ -1,11 +1,11 @@
-import {
+const {
   TerminalRuntimeError,
   TerminalParsingError,
-} from './TerminalErrors';
-import {
+} = require('./TerminalErrors');
+const {
   RequestRuntimeError,
-} from '../../Request/RequestErrors';
-import utils from '../../utils';
+} = require('../../Request/RequestErrors');
+const utils = require('../../utils');
 
 function errorHandler(rsp) {
   let errorInfo;
@@ -31,8 +31,8 @@ function errorHandler(rsp) {
 
 function createSession(rsp) {
   if (
-    !rsp[`common_${this.uapi_version}:HostToken`] ||
-    !rsp[`common_${this.uapi_version}:HostToken`]._
+    !rsp[`common_${this.uapi_version}:HostToken`]
+    || !rsp[`common_${this.uapi_version}:HostToken`]._
   ) {
     throw new TerminalParsingError.TerminalSessionTokenMissing();
   }
@@ -41,8 +41,8 @@ function createSession(rsp) {
 
 function terminalRequest(rsp) {
   if (
-    !rsp['terminal:TerminalCommandResponse'] ||
-    !rsp['terminal:TerminalCommandResponse']['terminal:Text']
+    !rsp['terminal:TerminalCommandResponse']
+    || !rsp['terminal:TerminalCommandResponse']['terminal:Text']
   ) {
     throw new TerminalParsingError.TerminalResponseMissing();
   }
@@ -51,10 +51,10 @@ function terminalRequest(rsp) {
 
 function closeSession(rsp) {
   if (
-    !rsp[`common_${this.uapi_version}:ResponseMessage`] ||
-    !rsp[`common_${this.uapi_version}:ResponseMessage`][0] ||
-    !rsp[`common_${this.uapi_version}:ResponseMessage`][0]._ ||
-    !rsp[`common_${this.uapi_version}:ResponseMessage`][0]._.match(/Terminal End Session Successful/i)
+    !rsp[`common_${this.uapi_version}:ResponseMessage`]
+    || !rsp[`common_${this.uapi_version}:ResponseMessage`][0]
+    || !rsp[`common_${this.uapi_version}:ResponseMessage`][0]._
+    || !rsp[`common_${this.uapi_version}:ResponseMessage`][0]._.match(/Terminal End Session Successful/i)
   ) {
     throw new TerminalRuntimeError.TerminalCloseSessionFailed();
   }

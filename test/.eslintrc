@@ -2,5 +2,10 @@
   "env":{
     "node": true,
     "mocha": true
+  },
+  "rules": {
+    "camelcase": 1,
+    "no-unused-expressions": 0,
+    "prefer-promise-reject-errors": 1
   }
 }

@@ -1,6 +1,6 @@
-import { expect } from 'chai';
+const { expect } = require('chai');
 
-import convert from '../../../src/Services/Air/transformers/set-groups-for-segments';
+const convert = require('../../../src/Services/Air/transformers/set-groups-for-segments');
 
 describe('Air.transformers.setGroupsForSegments', () => {
   it('should add transfer info for segments', () => {
@@ -19,4 +19,3 @@ describe('Air.transformers.setGroupsForSegments', () => {
     expect(converted.segments[3].transfer).to.be.equal(false);
   });
 });
-

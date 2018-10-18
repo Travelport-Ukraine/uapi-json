@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import moment from 'moment';
+const { expect } = require('chai');
+const moment = require('moment');
 
-import convert from '../../../src/Services/Air/transformers/set-passengers-age';
+const convert = require('../../../src/Services/Air/transformers/set-passengers-age');
 
 describe('Air.transformers.setPassengersAge', () => {
   it('should add age of passsengers', () => {
@@ -17,9 +17,8 @@ describe('Air.transformers.setPassengersAge', () => {
       ],
     };
     const converted = convert(params);
-    converted.passengers.forEach(passenger => {
+    converted.passengers.forEach((passenger) => {
       expect(passenger.Age).to.be.equal(checkAges.pop());
     });
   });
 });
-

@@ -1,7 +1,7 @@
-import proxyquire from 'proxyquire';
-import { expect } from 'chai';
-import createMock from '../uapi-request.mock';
-import auth from '../testconfig';
+const proxyquire = require('proxyquire').noCallThru();
+const { expect } = require('chai');
+const createMock = require('../uapi-request.mock');
+const auth = require('../testconfig');
 
 describe('#AirService', () => {
   it('should test that all function created correctly', () => {
@@ -10,13 +10,13 @@ describe('#AirService', () => {
       debug: 0,
       production: true,
     };
-    const r = createMock(params);
+    const requestMock = createMock(params);
 
     const createAirService = proxyquire('../../src/Services/Air/AirService', {
-      '../../Request/uapi-request': r,
+      '../../Request/uapi-request': requestMock,
     });
 
     createAirService(params);
-    expect(r.called).to.be.equal(true);
+    expect(requestMock.called).to.be.equal(true);
   });
 });

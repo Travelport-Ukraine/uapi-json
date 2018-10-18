@@ -1,6 +1,6 @@
-import { expect } from 'chai';
+const { expect } = require('chai');
 
-import convert from '../../../src/Services/Air/transformers/fix-card-fop';
+const convert = require('../../../src/Services/Air/transformers/fix-card-fop');
 
 const goodCC = {
   number: '5483969848297751',
@@ -34,4 +34,3 @@ describe('Air.transformers.fixCardFop', () => {
     expect(converted.fop.type).to.be.equal('Cash');
   });
 });
-

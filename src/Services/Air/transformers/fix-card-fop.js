@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-export default (params) => {
+module.exports = (params) => {
   if (params.fop.type === 'Card') {
     params.fop.type = 'Credit'; // FIXME: determine card type and add it
 

@@ -1,10 +1,10 @@
-import book from './HOTELS_BOOK_REQUEST.handlebars';
-import rate from './HOTELS_RATE_REQUEST.handlebars';
-import searchGalielo from './HOTELS_SEARCH_GALILEO_REQUEST.handlebars';
-import search from './HOTELS_SEARCH_REQUEST.handlebars';
-import universalRecordCancelUR from './UNIVERSAL_RECORD_CANCEL_UR.handlebars';
+const book = require('./HOTELS_BOOK_REQUEST.handlebars');
+const rate = require('./HOTELS_RATE_REQUEST.handlebars');
+const searchGalielo = require('./HOTELS_SEARCH_GALILEO_REQUEST.handlebars');
+const search = require('./HOTELS_SEARCH_REQUEST.handlebars');
+const universalRecordCancelUR = require('./UNIVERSAL_RECORD_CANCEL_UR.handlebars');
 
-export default {
+module.exports = {
   book,
   rate,
   searchGalielo,

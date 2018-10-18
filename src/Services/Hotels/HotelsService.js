@@ -1,4 +1,4 @@
-import validateServiceSettings from '../../utils/validate-service-settings';
+const validateServiceSettings = require('../../utils/validate-service-settings');
 
 const uApiRequest = require('../../Request/uapi-request');
 const HotelsParser = require('./HotelsParser');
@@ -7,7 +7,9 @@ const getConfig = require('../../config');
 const templates = require('./templates');
 
 module.exports = function (settings) {
-  const { auth, debug, production, options } = validateServiceSettings(settings);
+  const {
+    auth, debug, production, options
+  } = validateServiceSettings(settings);
   const config = getConfig(auth.region, production);
   return {
     search: uApiRequest(

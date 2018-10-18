@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { AirValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { AirValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import legs from '../../../src/Services/Air/validators/legs';
+const legs = require('../../../src/Services/Air/validators/legs');
 
 describe('Air.validators.legs', () => {
   it('should throw error when legs are set', () => {

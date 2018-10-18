@@ -1,22 +1,22 @@
-import legs from './legs';
-import passengers from './passengers';
-import pricingSolutionXml from './pricing-solution-xml';
-import paramsIsObject from './params-is-object';
-import fop from './fop';
-import fopCreditCard from './fop-credit-card';
-import pnr from './pnr';
-import pcc from './pcc';
-import queue from './queue';
-import ticketNumber from './ticket-number';
-import flightInfo from './flight-info';
-import emailOptional from './email-optional';
-import phone from './phone';
-import deliveryInfoOptional from './delivery-info-optional';
-import segments from './segments';
-import reservationLocator from './reservation-locator';
-import exchangeToken from './exchange-token';
+const legs = require('./legs');
+const passengers = require('./passengers');
+const pricingSolutionXml = require('./pricing-solution-xml');
+const paramsIsObject = require('./params-is-object');
+const fop = require('./fop');
+const fopCreditCard = require('./fop-credit-card');
+const pnr = require('./pnr');
+const pcc = require('./pcc');
+const queue = require('./queue');
+const ticketNumber = require('./ticket-number');
+const flightInfo = require('./flight-info');
+const emailOptional = require('./email-optional');
+const phone = require('./phone');
+const deliveryInfoOptional = require('./delivery-info-optional');
+const segments = require('./segments');
+const reservationLocator = require('./reservation-locator');
+const exchangeToken = require('./exchange-token');
 
-export default {
+module.exports = {
   legs,
   passengers,
   pricingSolutionXml,

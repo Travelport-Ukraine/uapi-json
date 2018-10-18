@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { GdsValidationError } from '../../../src/Services/Air/AirErrors';
+const { expect } = require('chai');
+const { GdsValidationError } = require('../../../src/Services/Air/AirErrors');
 
-import pcc from '../../../src/Services/Air/validators/pcc';
+const pcc = require('../../../src/Services/Air/validators/pcc');
 
 describe('Air.validators.pcc', () => {
   it('should throw error when pcc is not set', () => {

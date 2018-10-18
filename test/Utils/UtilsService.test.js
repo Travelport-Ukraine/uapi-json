@@ -1,7 +1,7 @@
-import proxyquire from 'proxyquire';
-import { expect } from 'chai';
-import createMock from '../uapi-request.mock';
-import auth from '../testconfig';
+const proxyquire = require('proxyquire').noCallThru();
+const { expect } = require('chai');
+const createMock = require('../uapi-request.mock');
+const auth = require('../testconfig');
 
 describe('#UtilsService', () => {
   it('should test that all function created correctly', () => {

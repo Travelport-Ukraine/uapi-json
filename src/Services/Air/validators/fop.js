@@ -1,6 +1,6 @@
-import { AirValidationError } from '../AirErrors';
+const { AirValidationError } = require('../AirErrors');
 
-export default (params) => {
+module.exports = (params) => {
   if (params.fop === undefined) {
     throw new AirValidationError.FopMissing();
   }
@@ -8,7 +8,7 @@ export default (params) => {
   if (
     Object.prototype.toString.call(params.fop) !== '[object Object]'
     || (
-         params.fop.type !== 'Cash'
+      params.fop.type !== 'Cash'
       && params.fop.type !== 'Card'
     )
   ) {

@@ -1,10 +1,10 @@
-import {
+const {
   UtilsParsingError,
   UtilsRuntimeError,
-} from './UtilsErrors';
-import {
+} = require('./UtilsErrors');
+const {
   RequestRuntimeError,
-} from '../../Request/RequestErrors';
+} = require('../../Request/RequestErrors');
 
 function currencyConvertParse(json) {
   try {

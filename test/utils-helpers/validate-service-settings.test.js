@@ -1,5 +1,5 @@
-import validateServiceSettings from '../../src/utils/validate-service-settings';
-import { ServiceError } from '../../src/error-types';
+const validateServiceSettings = require('../../src/utils/validate-service-settings');
+const { ServiceError } = require('../../src/error-types');
 
 describe('Service settings validation', () => {
   it('should fail when no settings provided', () => Promise
@@ -10,8 +10,7 @@ describe('Service settings validation', () => {
       err instanceof ServiceError.ServiceParamsMissing
         ? Promise.resolve()
         : Promise.reject(err)
-    ))
-  );
+    )));
   it('should fail when settings invalid', () => Promise
     .resolve()
     .then(() => validateServiceSettings('STRING'))
@@ -20,8 +19,7 @@ describe('Service settings validation', () => {
       err instanceof ServiceError.ServiceParamsInvalid
         ? Promise.resolve()
         : Promise.reject(err)
-    ))
-  );
+    )));
   it('should fail when no settings.auth provided', () => Promise
     .resolve()
     .then(() => validateServiceSettings({}))
@@ -30,8 +28,7 @@ describe('Service settings validation', () => {
       err instanceof ServiceError.ServiceParamsAuthMissing
         ? Promise.resolve()
         : Promise.reject(err)
-    ))
-  );
+    )));
   it('should fail when no settings.auth not an object', () => Promise
     .resolve()
     .then(() => validateServiceSettings({
@@ -42,8 +39,7 @@ describe('Service settings validation', () => {
       err instanceof ServiceError.ServiceParamsAuthInvalid
         ? Promise.resolve()
         : Promise.reject(err)
-    ))
-  );
+    )));
   it('should fail when no settings.auth does not have username', () => Promise
     .resolve()
     .then(() => validateServiceSettings({
@@ -54,8 +50,7 @@ describe('Service settings validation', () => {
       err instanceof ServiceError.ServiceParamsAuthInvalid
         ? Promise.resolve()
         : Promise.reject(err)
-    ))
-  );
+    )));
   it('should fail when no settings.auth does not have password', () => Promise
     .resolve()
     .then(() => validateServiceSettings({
@@ -66,8 +61,7 @@ describe('Service settings validation', () => {
       err instanceof ServiceError.ServiceParamsAuthInvalid
         ? Promise.resolve()
         : Promise.reject(err)
-    ))
-  );
+    )));
   it('should fail when no settings.auth does not have targetBranch', () => Promise
     .resolve()
     .then(() => validateServiceSettings({
@@ -78,12 +72,10 @@ describe('Service settings validation', () => {
       err instanceof ServiceError.ServiceParamsAuthInvalid
         ? Promise.resolve()
         : Promise.reject(err)
-    ))
-  );
+    )));
   it('should be OK when OK', () => Promise
     .resolve()
     .then(() => validateServiceSettings({
       auth: { username: 'USERNAME', password: 'PASSWORD', targetBranch: 'BRANCH' },
-    }))
-  );
+    })));
 });

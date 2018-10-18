@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import uAPI from '../../src';
-import UtilsValidator from '../../src/Services/Utils/UtilsValidator';
+const { expect } = require('chai');
+const uAPI = require('../../src');
+const UtilsValidator = require('../../src/Services/Utils/UtilsValidator');
 
 describe('#UtilsValidator', () => {
   describe('.CURRENCY_CONVERSION', () => {
@@ -25,20 +25,18 @@ describe('#UtilsValidator', () => {
     });
 
     it('should check if all fields exists', () => {
-      const fn = () =>
-        UtilsValidator.CURRENCY_CONVERSION({ currencies: [{ to: 'RUB' }] });
+      const fn = () => UtilsValidator.CURRENCY_CONVERSION({ currencies: [{ to: 'RUB' }] });
       expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.CurrenciesMissing);
     });
 
     it('should check if all fields exists2', () => {
-      const fn = () =>
-        UtilsValidator.CURRENCY_CONVERSION({ currencies: [{}] });
+      const fn = () => UtilsValidator.CURRENCY_CONVERSION({ currencies: [{}] });
       expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.CurrenciesMissing);
     });
 
     it('should correct validate and return object', () => {
       const params = UtilsValidator.CURRENCY_CONVERSION(
-        { currencies: [{ from: 'UAR', to: 'EUR'}] }
+        { currencies: [{ from: 'UAR', to: 'EUR' }] }
       );
       expect(params).not.equal(undefined);
     });
