@@ -9,7 +9,8 @@ const {
   AirRuntimeError,
   AirParsingError,
 } = require('../../src/Services/Air/AirErrors');
-const { Parser, errorsConfig } = require('../../src/Request/uapi-parser');
+const Parser = require('../../src/Request/uapi-parser');
+const errorsConfig = require('../../src/Request/errors-config');
 
 const xmlFolder = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:\d{2}/i;
