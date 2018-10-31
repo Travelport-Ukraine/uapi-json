@@ -76,6 +76,7 @@ Object.assign(AirParsingError, createErrorsList({
   PricingSolutionNotFound: 'Pricing solution not found',
   ReservationProviderInfoMissing: 'Can\'t find provider information about reservation',
   CancelResponseNotFound: 'Cancel response not found',
+  InvalidServiceSegmentFormat: 'Service segment format is invalid',
 }, AirParsingError));
 
 // Runtime errors

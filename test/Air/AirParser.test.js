@@ -1409,6 +1409,16 @@ describe('#AirParser', () => {
       });
     });
 
+    it('should parse pnr with remark which does not contain service segment', () => {
+      const uParser = new Parser('universal:UniversalRecordImportRsp', 'v36_0', {});
+      const parseFunction = airParser.AIR_IMPORT_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/importPNR.remark.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false);
+      });
+    });
+
     it('should parse pnr having fare quotes without taxes', () => {
       const uParser = new Parser('universal:UniversalRecordImportRsp', 'v36_0', {});
       const parseFunction = airParser.AIR_IMPORT_REQUEST;
