@@ -665,8 +665,15 @@ function extractBookings(obj) {
         const remark = passiveReservation['passive:PassiveRemark'].find(
           r => r.PassiveSegmentRef === s.Key
         );
-        return format.formatServiceSegment(s, remark);
-      })
+
+        try {
+          return format.formatServiceSegment(s, remark);
+        } catch (e) {
+          console.warn(`PassiveRemark is not service segment: ${remark['passive:Text']}.`);
+
+          return null;
+        }
+      }).filter(v => v)
       : [];
 
     const fareQuotesCommon = {};

@@ -1,3 +1,7 @@
+const {
+  AirParsingError,
+} = require('../../Services/Air/AirErrors');
+
 const itemPattern = new RegExp([
   // rfiCode, rfiSubcode
   '-([A-Z]{1})/([A-Z0-9]{3})',
@@ -6,6 +10,12 @@ const itemPattern = new RegExp([
 ].join(''), 'i');
 
 const parse = (string) => {
+  const match = string.match(itemPattern);
+
+  if (match === null) {
+    throw new AirParsingError.InvalidServiceSegmentFormat();
+  }
+
   const [
     _,
     rfiCode,
@@ -15,7 +25,7 @@ const parse = (string) => {
     documentNumber,
     amount,
     currency,
-  ] = string.match(itemPattern);
+  ] = match;
 
   return Object.assign(
     {
