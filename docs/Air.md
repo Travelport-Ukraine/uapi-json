@@ -370,7 +370,7 @@ Gets ticket information with [`getTicket`](#getTicket) and then tries to cancel 
 > May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 
 Gets pnr information and tickets list from [`importPNR`](#importPNR) and then do one of following actions:
-* if PNR has tickets and all of them have status `VOID` then tries to cancel PNR
+* if PNR has tickets and all of them have status `VOID`, `REFUND` or both of them, then tries to cancel PNR
 * if PNR has tickets and no `cancelTickets` flag is set, error is returned
 * if PNR has tickets and `cancelTickets` flag set to `true`, checks tickets
   * if PNR has only tickets with `VOID` or `OPEN` coupons, then tickets are cancelled, then the booking is cancelled
