@@ -287,22 +287,13 @@ module.exports = (settings) => {
         .then(
           tickets => Promise.all(tickets.map(
             (ticketData) => {
-              // Check for VOID
-              const allTicketsVoid = ticketData.tickets.every(
+              // Check for VOID or REFUND
+              const allTicketsVoidOrRefund = ticketData.tickets.every(
                 ticket => ticket.coupons.every(
-                  coupon => coupon.status === 'V'
+                  coupon => coupon.status === 'V' || coupon.status === 'R'
                 )
               );
-              if (allTicketsVoid) {
-                return Promise.resolve(true);
-              }
-              // Check for REFUNDED
-              const allTicketsRefunded = ticketData.tickets.every(
-                ticket => ticket.coupons.every(
-                  coupon => coupon.status === 'R'
-                )
-              );
-              if (allTicketsRefunded && !allTicketsVoid && !options.cancelTickets) {
+              if (allTicketsVoidOrRefund) {
                 return Promise.resolve(true);
               }
               // Check for cancelTicket option

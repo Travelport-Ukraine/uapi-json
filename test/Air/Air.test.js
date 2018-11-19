@@ -1394,7 +1394,7 @@ describe('#AirService', () => {
           expect(cancelPNR).to.have.callCount(0);
         });
     });
-    it('should succeed when there are no VOID, but REFUNDED tickets and no cancelTickets is passed', () => {
+    it('should succeed when there are no VOID, but REFUNDED tickets', () => {
       // Spies
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
@@ -1407,6 +1407,54 @@ describe('#AirService', () => {
               status: 'R',
             }, {
               status: 'R',
+            }],
+          }],
+        },
+      ]));
+
+      // Services
+      const airService = () => ({
+        getUniversalRecordByPNR,
+        getTickets,
+        cancelPNR,
+        cancelTicket,
+      });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+      });
+
+      return createAirService({ auth })
+        .cancelPNR({
+          pnr: 'PNR001',
+        })
+        .then(() => {
+          expect(getUniversalRecordByPNR).to.have.callCount(2);
+          expect(getTickets).to.have.callCount(1);
+          expect(cancelPNR).to.have.callCount(1);
+        });
+    });
+    it('should succeed when there are VOID and REFUNDED tickets', () => {
+      // Spies
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
+      const cancelTicket = sinon.spy(() => Promise.resolve(true));
+      const cancelPNR = sinon.spy(() => Promise.resolve(true));
+
+      const getTickets = sinon.spy(() => Promise.resolve([
+        {
+          tickets: [{
+            coupons: [{
+              status: 'R',
+            }, {
+              status: 'R',
+            }],
+          }],
+        },
+        {
+          tickets: [{
+            coupons: [{
+              status: 'V',
+            }, {
+              status: 'V',
             }],
           }],
         },
