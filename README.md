@@ -44,7 +44,7 @@ It also exports a set of error classes that help to check errors against them
 ```javascript
 const uAPI = require('uapi-json');
 
-const settings = { auth: {username: 'USERNAME', password: 'PASSWORD'}};
+const settings = { auth: {username: 'USERNAME', password: 'PASSWORD', region: 'REGION'}};
 const AirService = uAPI.createAirService(settings);
 
 AirService.importPNR().catch((err) => {
@@ -77,7 +77,7 @@ It also has several useful helpers to handle errors.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| auth | `Object <username, password, targetBranch, emulatePcc>` | - | See `auth` description [below](#auth). |
+| auth | `Object <username, password, targetBranch, emulatePcc, region>` | - | See `auth` description [below](#auth). |
 | debug | `Number` | `0` | Can be `0`, `1`, or `2`. |
 | production | `Boolean` | `true` | Production variable is connected with production and pre-production environment. Can be true for production and false for pre-production. For more information read docs. |
 | timeout | `Number` | - | Optional. Used for `TerminalService` only. See [`TerminalService`](docs/Terminal.md) |
@@ -94,6 +94,7 @@ It also has several useful helpers to handle errors.
 `username`, `password` and `targetBranch` should be set in `auth` object and are provided by Travelport.
 Optional `emulatePcc` is a PCC on behalf of which transactions are executed.
 This PCC needs to have set SVCB field in the AAT profile.
+Optional `region` is to select a region, default `emea`.
 
 There are 3 types of `debug` mode:
 
