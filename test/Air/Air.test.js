@@ -1394,7 +1394,7 @@ describe('#AirService', () => {
           expect(cancelPNR).to.have.callCount(0);
         });
     });
-    it('should succeed when there are no VOID, but REFUNDED tickets and cancelTickets = false', () => {
+    it('should succeed when there are no VOID, but REFUNDED tickets and no cancelTickets is passed', () => {
       // Spies
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       const cancelTicket = sinon.spy(() => Promise.resolve(true));

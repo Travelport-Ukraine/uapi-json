@@ -302,7 +302,7 @@ module.exports = (settings) => {
                   coupon => coupon.status === 'R'
                 )
               );
-              if (!allTicketsVoid && allTicketsRefunded && !options.cancelTickets) {
+              if (allTicketsRefunded && !allTicketsVoid && !options.cancelTickets) {
                 return Promise.resolve(true);
               }
               // Check for cancelTicket option
