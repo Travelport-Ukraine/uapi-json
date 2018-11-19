@@ -296,6 +296,15 @@ module.exports = (settings) => {
               if (allTicketsVoid) {
                 return Promise.resolve(true);
               }
+              // Check for REFUNDED
+              const allTicketsRefunded = ticketData.tickets.every(
+                ticket => ticket.coupons.every(
+                  coupon => coupon.status === 'R'
+                )
+              );
+              if (!allTicketsVoid && allTicketsRefunded && !options.cancelTickets) {
+                return Promise.resolve(true);
+              }
               // Check for cancelTicket option
               if (options.cancelTickets !== true) {
                 return Promise.reject(new AirRuntimeError.PNRHasOpenTickets());
