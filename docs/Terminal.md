@@ -17,10 +17,24 @@ const auth = {
   username: 'Universal API/ХХХХХХХХХХ',
   password: 'ХХХХХХХХХХ',
   targetBranch: 'ХХХХХХХ',
-  emulatePcc: 'ХХХХ',
+  emulatePcc: 'ХХХХ', // Optional
 };
 
-const AirService = uAPI.createAirService({ auth, debug: 2 });
+const TerminalService = uAPI.createTerminalService({
+  auth: auth,
+  debug: 2,
+  production: true,
+});
+
+TerminalService.executeCommand('SEM/TARGET_PCC/AG')
+  .then((res) => {
+    console.log(res);
+    TerminalService.closeSession();
+  })
+  .catch((err) => {
+    console.error(err);
+    TerminalService.closeSession();
+  });
 ```
 
 More usage examples are [here](../examples/Terminal/).
