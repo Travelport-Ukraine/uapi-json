@@ -97,7 +97,7 @@ After searching for air segments and fares, air bookings are created using the r
 | rule | `String` | Custom check rule. |
 | allowWaitlist | `Boolean` | Allow open waitlisted segments, do not cancel booking. See `allowWaitlist` description [below](#allow-waitlist). |
 | deliveryInformation | `Delivery Information` | Optional. See `Delivery Information` description [below](#delivery-info). |
-| tau | `String`/`Date`/`Array<Number>` | Optional. Takes  See `TAU` desctiption [below](#tau).
+| tau | `String`/`Date`/`Array<Number>` | Optional. Takes  See `TAU` desctiption [below](#tau). The default value is 3 hours from the current timestamp.
 
 ### Segment object
 <a name="segment"></a>
@@ -165,6 +165,8 @@ With `allowWaitlist`=true the UR is canceled only for a closed wait list, but op
 ### TAU - Ticketing Arrangement
 <a name="tau"></a>
 Ticketing Arrangement is an optional param used for domestic purposes of agents to specify assumed date/time of booking.
+
+The default value is 3 hours from the current timestamp.
 
 The `tau` option  represents an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format, Date object or Array of numbers.
 
