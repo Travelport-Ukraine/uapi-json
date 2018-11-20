@@ -84,17 +84,21 @@ It also has several useful helpers to handle errors.
 | autoClose | `Boolean` | Optional. Used only in `TerminalService`. Defines if service should make `closeSession` request. |
 | options | `Object` | {} | Optional. User for all services to all additional options like custom log function, etc. See `options` description [bellow](#options). |
 
-<a name="options"></a>
 ### Additional options 
+<a name="options"></a>
 
 `logFunction` - set custom logging function that should match next shape `(...args) => {}`. Will receive all requests and responses from uapi/terminal.
 
 ### Auth object
 <a name="auth"></a>
-`username`, `password` and `targetBranch` should be set in `auth` object and are provided by Travelport.
-Optional `emulatePcc` is a PCC on behalf of which transactions are executed.
-This PCC needs to have set SVCB field in the AAT profile.
-Optional `region` is to select a region, default `emea`.
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+|  username | `String` | - | User name identifier, provided by Travelport. |
+| password | `String` | - | Password for current username, provided by Travelport. |
+| targetBranch | `String` | - | Branch, provided by Travelport. |
+| region | `String` | `emea` | Optional. Used to select region. |
+| emulatePcc | `String/Boolean` | `False` | Optional. A PCC on behalf of which transactions are executed in Air, Hotels, Utils. This PCC needs to have set SVCB field in the AAT profile. Define a PCC if you have a bureau and want to execute transactions on its behalf. Follow this [documentation](docs/Terminal.md#emulatePcc) to take a detailew view of the `emulatePcc` for the Terminal. |
 
 There are 3 types of `debug` mode:
 

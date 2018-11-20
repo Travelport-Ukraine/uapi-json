@@ -3,9 +3,27 @@
 Terminal service provides an interface to run terminal commands
 for terminal-enabled uAPI credentials.
 
+# PCC Emulation
+<a name='emulatePcc'></a>
+
 You can use Terminal service to run commands on behalf of your own PCC
-or to use `emulatePcc` option from `auth` to run commands on behalf of other PCC
-using your own Service bureau.
+or to use `emulatePcc` option from [auth](../README.md#auth) to run commands on behalf of other PCC
+using your own Service bureau. 
+
+If you logged in with your PCC you're still able to execute a command on behalf of other PCC, just simply switch PCC with the Terminal command `SEM/TARGET_PCC/AG`.
+
+```javascript
+const auth = {
+  username: 'Universal API/ХХХХХХХХХХ',
+  password: 'ХХХХХХХХХХ',
+  targetBranch: 'ХХХХХХХ',
+  emulatePcc: 'ХХХХ',
+};
+
+const AirService = uAPI.createAirService({ auth, debug: 2 });
+```
+
+More usage examples are [here](../examples/Terminal/).
 
 # API
 
