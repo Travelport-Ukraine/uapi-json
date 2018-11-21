@@ -112,6 +112,38 @@ describe('#AirService', () => {
       });
     });
 
+    it('should check if book is called correctly with TAU option provided', () => {
+      const params = {
+        passengers: [],
+        rule: 'RULE',
+        tau: '2020-02-08 09:30',
+      };
+
+      const airPricePricingSolutionXML = sinon.spy(
+        () => Promise.resolve({ foo: 123 })
+      );
+      const createReservation = sinon.spy((options) => {
+        expect(options.foo).to.be.equal(123);
+        expect(options.ActionStatusType).to.be.equal('TAU');
+        expect(options.rule).to.be.equal(params.rule);
+        expect(options.passengers).to.be.equal(params.passengers);
+        expect(options.tau).to.be.equal(params.tau);
+        return Promise.resolve();
+      });
+      const cancelUR = sinon.spy(() => {});
+      const service = () => ({ airPricePricingSolutionXML, createReservation });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth }).book(params).then(() => {
+        expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
+        expect(createReservation.calledOnce).to.be.equal(true);
+        expect(cancelUR.calledOnce).to.be.equal(false);
+      });
+    });
+
     it('should call cancel ur if no valid fare', () => {
       const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
