@@ -1,3 +1,9 @@
+/**
+ * This is an example of advnaced emulation, using several PCCs.
+ * In this example you can see a booking transfer from one PCC to another.
+ * You can use this code snippet without any warranties.
+ */
+
 const uAPI = require('../../index');
 const auth = require('../../test/testconfig');
 
