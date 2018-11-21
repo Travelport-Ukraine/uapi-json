@@ -40,7 +40,7 @@ async function main() {
   }
   // Opening booking in WXYZ
   await TerminalServiceWXYZ.executeCommand(`*${pnr}`);
-  // TickeingTicketing in WXYZ
+  // Ticketing in WXYZ
   await TerminalServiceWXYZ.executeCommand('TKP');
 }
 
