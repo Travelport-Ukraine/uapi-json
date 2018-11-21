@@ -21,63 +21,11 @@ for several PCC emulations.
 See [advanced emulation example](../examples/Terminal/emulation.js) to get an example
 on how to use emulation.
 
+# Session closing
 Be aware to close the session after all your manipulations with the terminal.
 
 Session closing takes the current token and sends a request to terminate the session,
-see [here](#close_session).
-
-Let's see another example with several emulations:
-```javascript
-const auth =  {
-  username: 'Universal API/ХХХХХХХХХХ',
-  password: 'ХХХХХХХХХХ',
-  targetBranch: 'ХХХХХХХ',
-};
-
-// Let's create two instances for two PCCs - ABCD and WXYZ
-const auth_ABCD = {
-  ...auth,
-  emulatePcc: 'ABCD'
-};
-const auth_WXYZ = {
-  ...auth,
-  emulatePcc: 'WXYZ'
-};
-
-// Now, create two terminal instances
-const TerminalServiceABCD = uAPI.createTerminalService({
-  auth: auth_ABCD,
-  debug: 2,
-  production: true,
-});
-const TerminalServiceWXYZ = uAPI.createTerminalService({
-  auth: auth_WXYZ,
-  debug: 2,
-  production: true,
-});
-
-/*
-  At this point, we are having two instances with two different PCCs connected to.
-  Now we're able to execute a command on behalf of both of the PCCs.
-*/
-TerminalServiceABCD
-  .executeCommand('I')
-  .then(console.log)
-  .then(
-    () => TerminalService.closeSession()
-  )
-  .catch(console.error);
-
-TerminalServiceWXYZ
-  .executeCommand('I')
-  .then(console.log)
-  .then(
-    () => TerminalService.closeSession()
-  )
-  .catch(console.error);
-```
-
-More usage examples are [here](../examples/Terminal/).
+see [close_session](#close_session) method.
 
 # API
 
