@@ -36,8 +36,10 @@ module.exports = (settings) => {
 
     book(options) {
       return service.airPricePricingSolutionXML(options).then((data) => {
+        const tauDate = moment(options.tau || null);
+        const tau = tauDate.isValid() ? tauDate.format() : moment().add(3, 'hours').format();
         const bookingParams = Object.assign({}, {
-          ticketDate: moment().add(3, 'hours').format(),
+          ticketDate: tau,
           ActionStatusType: 'TAU',
         }, data, options);
         return service.createReservation(bookingParams).catch((err) => {

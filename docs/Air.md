@@ -94,9 +94,10 @@ After searching for air segments and fares, air bookings are created using the r
 | segments | `Array<Segment>` | See `Segment` description [below](#segment). |
 | passengers | `Book Passengers` | See `Book Passengers` description [below](#book-passengers). |
 | phone | `Phone`  | Booking agency/traveller phone. See `Phone` description [below](#phone). |
-| deliveryInformation | `Delivery Information` | Optional param. See `Delivery Information` description [below](#delivery-info). |
 | rule | `String` | Custom check rule. |
 | allowWaitlist | `Boolean` | Allow open waitlisted segments, do not cancel booking. See `allowWaitlist` description [below](#allow-waitlist). |
+| deliveryInformation | `Delivery Information` | Optional. See `Delivery Information` description [below](#delivery-info). |
+| tau | `String`/`Date`/`Array<Number>` | Optional. Takes  See `TAU` desctiption [below](#tau). The default value is 3 hours from the current timestamp.
 
 ### Segment object
 <a name="segment"></a>
@@ -143,6 +144,13 @@ Please specify `transfer` field to mark connection segment.
 | countryCode | `String` | Country code, prepending telephone number. |
 | number | `String` | Phone number. |
 
+### allowWaitlist
+<a name="allow-waitlist"></a>
+
+Default behavior is to cancel the entire Universal Record when part of the booking has failed.
+This includes both open and closed waitlisting and other errors.
+With `allowWaitlist`=true the UR is canceled only for a closed wait list, but open waitlist reservation is kept and returned to user.
+
 ### Delivery info object
 <a name="delivery-info"></a>
 
@@ -154,14 +162,17 @@ Please specify `transfer` field to mark connection segment.
 | country | `String` | Country |
 | city | `String` | City |
 
+### TAU - Ticketing Arrangement
+<a name="tau"></a>
+Ticketing Arrangement is an optional param used for domestic purposes of agents to specify assumed date/time of booking.
+
+The default value is 3 hours from the current timestamp.
+
+The `tau` option  represents an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format, Date object or Array of numbers.
+
+To see the list of all available formats, please use the following [documentation](http://momentjs.com/docs/#/parsing/).
+
 **See: <a href="../examples/Air/book.js">Book example</a>**
-
-### allowWaitlist
-<a name="allow-waitlist"></a>
-
-Default behavior is to cancel the entire Universal Record when part of the booking has failed.
-This includes both open and closed waitlisting and other errors.
-With `allowWaitlist`=true the UR is canceled only for a closed wait list, but open waitlist reservation is kept and returned to user.
 
 
 ## .ticket(params)
