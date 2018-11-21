@@ -8,33 +8,110 @@ for terminal-enabled uAPI credentials.
 
 You can use Terminal service to run commands on behalf of your own PCC
 or to use `emulatePcc` option from [auth](../README.md#auth) to run commands on behalf of other PCC
-using your own Service bureau. 
+using your own Service bureau.
 
-If you logged in with your PCC you're still able to execute a command on behalf of other PCC, just simply switch PCC with the Terminal command `SEM/TARGET_PCC/AG`.
+Creatin a terminal instance creates a terminal with a token that links to the specific Terminal instance to keep emulation running on one instance.
+
+With token assignment if `emulatePcc` is passed, behind the scene - runs command `SEM` to provide emulation of specified PCC.
+
+To don't mess things up we highly recommend you to use several terminal instances for several PCC emulations.
 
 ```javascript
 const auth = {
   username: 'Universal API/ХХХХХХХХХХ',
   password: 'ХХХХХХХХХХ',
   targetBranch: 'ХХХХХХХ',
-  emulatePcc: 'ХХХХ', // Optional
+  emulatePcc: 'ABCD', // Let's emulate 'ABCD' PCC
 };
 
+/*
+  We create a terminal instance.
+  Behind the scene, it creates a token, credentials, and runs `SEM` to emulate the PCC.
+*/
 const TerminalService = uAPI.createTerminalService({
   auth: auth,
   debug: 2,
   production: true,
 });
 
-TerminalService.executeCommand('SEM/TARGET_PCC/AG')
-  .then((res) => {
-    console.log(res);
-    TerminalService.closeSession();
-  })
-  .catch((err) => {
-    console.error(err);
-    TerminalService.closeSession();
-  });
+/*
+  As soon as we have Terminal instance - we can execute commands on its behalf.
+  All executed commands of the instance will run on PCC's behalf.
+*/
+TerminalService
+  .executeCommand('I')
+  .then(console.log)
+  .then(
+    () => TerminalService.executeCommand('.CDIEV')
+  )
+  .then(console.log)
+  .then(
+    () => TerminalService.executeCommand('.ADPS')
+  )
+  .then(console.log)
+  .then(
+    () => TerminalService.executeCommand('@LT')
+  )
+  .then(console.log)
+  .then(
+    () => TerminalService.closeSession()
+  )
+  .catch(console.error);
+```
+
+Be aware to close the session after all your manipulations with the terminal.
+
+Session closing takes the current token and sends a request to terminate the session, see [here](#close_session).
+
+Let's see another example with several emulations:
+```javascript
+const auth =  {
+  username: 'Universal API/ХХХХХХХХХХ',
+  password: 'ХХХХХХХХХХ',
+  targetBranch: 'ХХХХХХХ',
+};
+
+// Let's create two instances for two PCCs - ABCD and WXYZ
+const auth_ABCD = {
+  ...auth,
+  emulatePcc: 'ABCD'
+};
+const auth_WXYZ = {
+  ...auth,
+  emulatePcc: 'WXYZ'
+};
+
+// Now, create two terminal instances
+const TerminalServiceABCD = uAPI.createTerminalService({
+  auth: auth_ABCD,
+  debug: 2,
+  production: true,
+});
+const TerminalServiceWXYZ = uAPI.createTerminalService({
+  auth: auth_WXYZ,
+  debug: 2,
+  production: true,
+});
+
+/*
+  At this point, we are having two instances with two different PCCs connected to.
+  Now we're able to execute a command on behalf of both of the PCCs.
+*/
+TerminalServiceABCD
+  .executeCommand('I')
+  .then(console.log)
+  .then(
+    () => TerminalService.closeSession()
+  )
+  .catch(console.error);
+
+TerminalServiceWXYZ
+  .executeCommand('I')
+  .then(console.log)
+  .then(
+    () => TerminalService.closeSession()
+  )
+  .catch(console.error);
 ```
 
 More usage examples are [here](../examples/Terminal/).
