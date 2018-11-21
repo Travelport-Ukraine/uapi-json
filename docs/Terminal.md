@@ -3,9 +3,29 @@
 Terminal service provides an interface to run terminal commands
 for terminal-enabled uAPI credentials.
 
+# PCC Emulation
+<a name='emulatePcc'></a>
+
 You can use Terminal service to run commands on behalf of your own PCC
-or to use `emulatePcc` option from `auth` to run commands on behalf of other PCC
-using your own Service bureau.
+or to use `emulatePcc` option from [auth](../README.md#auth)
+to run commands on behalf of other PCC using your own Service bureau.
+
+In `uapi` terminals are not linked to the specific PCC and identified only by tokens.
+That's why, if the `emulatePcc` option is passed, we run `SEM` command behind the scene
+to provide emulation for specific PCC.
+
+Though you may still send `SEM` commands to the terminal on your own,
+in order to not messthings up, we highly recommend you to use several terminal instances
+for several PCC emulations.
+
+See [advanced emulation example](../examples/Terminal/emulation.js) to get an example
+on how to use emulation.
+
+# Session closing
+Be aware to close the session after all your manipulations with the terminal.
+
+Session closing takes the current token and sends a request to terminate the session,
+see [close_session](#close_session) method.
 
 # API
 

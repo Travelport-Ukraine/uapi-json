@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-require('babel-register');
 
 const readline = require('readline2');
 const prefix = '>';
 const uAPI = require('../../index');
 const testConfig = require('../../test/testconfig');
 
-const config = Object.assign({}, testConfig);
+const config = {
+  ...testConfig,
+};
 
 const TerminalService = uAPI.createTerminalService({
   auth: config,
@@ -32,7 +33,7 @@ rl.on('line', (line) => {
 
   rl.pause();
   TerminalService
-  .executeCommand(line)
+    .executeCommand(line)
     .then((reply) => {
       process.stdout.write(reply.slice(0, -1));
     })
