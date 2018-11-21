@@ -1,9 +1,10 @@
 const uAPI = require('../../index');
 const testConfig = require('../../test/testconfig');
 
-const config = Object.assign({}, testConfig, {
-  emulatePcc: '7j8j',
-});
+const config = {
+  ...testConfig,
+  emulatePcc: '7J8J',
+};
 
 const TerminalService = uAPI.createTerminalService({
   auth: config,

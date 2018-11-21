@@ -7,61 +7,24 @@ for terminal-enabled uAPI credentials.
 <a name='emulatePcc'></a>
 
 You can use Terminal service to run commands on behalf of your own PCC
-or to use `emulatePcc` option from [auth](../README.md#auth) to run commands on behalf of other PCC
-using your own Service bureau.
+or to use `emulatePcc` option from [auth](../README.md#auth)
+to run commands on behalf of other PCC using your own Service bureau.
 
-Creatin a terminal instance creates a terminal with a token that links to the specific Terminal instance to keep emulation running on one instance.
+In `uapi` terminals are not linked to the specific PCC and identified only by tokens.
+That's why, if the `emulatePcc` option is passed, we run `SEM` command behind the scene
+to provide emulation for specific PCC.
 
-With token assignment if `emulatePcc` is passed, behind the scene - runs command `SEM` to provide emulation of specified PCC.
+Though you may still send `SEM` commands to the terminal on your own,
+in order to not messthings up, we highly recommend you to use several terminal instances
+for several PCC emulations.
 
-To don't mess things up we highly recommend you to use several terminal instances for several PCC emulations.
-
-```javascript
-const auth = {
-  username: 'Universal API/ХХХХХХХХХХ',
-  password: 'ХХХХХХХХХХ',
-  targetBranch: 'ХХХХХХХ',
-  emulatePcc: 'ABCD', // Let's emulate 'ABCD' PCC
-};
-
-/*
-  We create a terminal instance.
-  Behind the scene, it creates a token, credentials, and runs `SEM` to emulate the PCC.
-*/
-const TerminalService = uAPI.createTerminalService({
-  auth: auth,
-  debug: 2,
-  production: true,
-});
-
-/*
-  As soon as we have Terminal instance - we can execute commands on its behalf.
-  All executed commands of the instance will run on PCC's behalf.
-*/
-TerminalService
-  .executeCommand('I')
-  .then(console.log)
-  .then(
-    () => TerminalService.executeCommand('.CDIEV')
-  )
-  .then(console.log)
-  .then(
-    () => TerminalService.executeCommand('.ADPS')
-  )
-  .then(console.log)
-  .then(
-    () => TerminalService.executeCommand('@LT')
-  )
-  .then(console.log)
-  .then(
-    () => TerminalService.closeSession()
-  )
-  .catch(console.error);
-```
+See [advanced emulation example](../examples/Terminal/emulation.js) to get an example
+on how to use emulation.
 
 Be aware to close the session after all your manipulations with the terminal.
 
-Session closing takes the current token and sends a request to terminate the session, see [here](#close_session).
+Session closing takes the current token and sends a request to terminate the session,
+see [here](#close_session).
 
 Let's see another example with several emulations:
 ```javascript

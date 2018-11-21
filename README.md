@@ -98,7 +98,7 @@ It also has several useful helpers to handle errors.
 | password | `String` | - | Password for current username, provided by Travelport. |
 | targetBranch | `String` | - | Branch, provided by Travelport. |
 | region | `String` | `emea` | Optional. Used to select region. |
-| emulatePcc | `String/Boolean` | `False` | Optional. A PCC on behalf of which transactions are executed in Air, Hotels, Utils. This PCC needs to have set SVCB field in the AAT profile. Define a PCC if you have a bureau and want to execute transactions on its behalf. Follow this [documentation](docs/Terminal.md#emulatePcc) to take a detailew view of the `emulatePcc` for the Terminal. |
+| emulatePcc | `String/Boolean` | `False` | Optional. A PCC on behalf of which transactions are executed in Air, Hotels, Utils. This PCC needs to have set SVCB field in the AAT profile. Define a PCC if you have a service bureau and want to execute transactions on behalf of some of its PCCs. Follow this [documentation](docs/Terminal.md#emulatePcc) to take a detailew view of the `emulatePcc` for the Terminal. |
 
 There are 3 types of `debug` mode:
 
@@ -118,7 +118,3 @@ See the following services pages to take a detailed view
 
 # Contributing
 Please visit [CONTRIBUTING.md](/CONTRIBUTING.md)
-
-
-
-
