@@ -16,7 +16,7 @@ handlebars.registerHelper('equal', require('handlebars-helper-equal'));
 /**
  * basic function for requests/responses
  * @param  {string} service          service url for current response (gateway)
- * @param  {object} auth             {username,password} - credentials
+ * @param  {object} auth             {username,password,targetBranch,provider} - credentials
  * @param  {string} reqType          url to file with xml for current request
  * @param  {object} rootObject
  * @param  {function} validateFunction function for validation
@@ -45,6 +45,8 @@ module.exports = function uapiRequest(
     throw new RequestValidationError.ServiceUrlMissing();
   } else if (!auth || auth.username === undefined || auth.password === undefined) {
     throw new RequestValidationError.AuthDataMissing();
+  } else if (!auth.provider) {
+    auth.provider = '1G';
   } else if (reqType === undefined) {
     throw new RequestValidationError.RequestTypeUndefined();
   } else if (Object.prototype.toString.call(reqType) !== '[object String]') {
@@ -57,7 +59,7 @@ module.exports = function uapiRequest(
     }
 
     // create a v36 uAPI parser with default params and request data in env
-    const uParser = new Parser(rootObject, 'v36_0', params, debugMode);
+    const uParser = new Parser(rootObject, 'v36_0', params, debugMode, null, auth.provider);
 
     const validateInput = () => (
       Promise.resolve(params)
@@ -133,7 +135,8 @@ module.exports = function uapiRequest(
           uParser.uapi_version,
           params,
           debugMode,
-          errParserConfig
+          errParserConfig,
+          auth.provider
         );
         const errData = errParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
         return errorHandler.call(errParser, errData);
@@ -164,7 +167,12 @@ module.exports = function uapiRequest(
       .then(sendRequest)
       .then(parseResponse)
       .then(validateSOAP)
-      .then(parseFunction.bind(uParser))// TODO merge Hotels
+      .then((res) => {
+        const parser = parseFunction.bind(uParser);
+        return parser(res, {
+          provider: auth.provider
+        });
+      }) // TODO: merge Hotels
       .then(handleSuccess);
   };
 };

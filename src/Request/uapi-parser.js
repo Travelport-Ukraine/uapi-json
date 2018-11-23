@@ -35,7 +35,7 @@ function mergeLeaf(item) {
   return Object.assign({}, item, leaf);
 }
 
-function Parser(root, uapiVersion, env, debug, config) {
+function Parser(root, uapiVersion, env, debug, config, provider) {
   this.debug = debug;
   if (!config) {
     this.config = defaultConfig(uapiVersion);
@@ -43,6 +43,7 @@ function Parser(root, uapiVersion, env, debug, config) {
     this.config = config;
   }
 
+  this.provider = provider || '1G';
   this.uapi_version = uapiVersion;
   this.env = env;
   this.rootObject = root;
