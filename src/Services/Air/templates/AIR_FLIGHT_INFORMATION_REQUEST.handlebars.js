@@ -16,7 +16,7 @@ module.exports = `
             />
             {{/flightInfoCriteria}}
             {{#if emulatePcc}}
-            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
+            <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
             {{/if}}
         </air:FlightInformationReq>
     </soapenv:Body>

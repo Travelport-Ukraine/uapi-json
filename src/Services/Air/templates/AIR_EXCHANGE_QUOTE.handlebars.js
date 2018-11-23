@@ -12,13 +12,13 @@ module.exports = `
                     OriginApplication="UAPI"/>
 
             {{#if emulatePcc}}
-                <com:OverridePCC ProviderCode="1G"
+                <com:OverridePCC ProviderCode="{{provider}}"
                                  xmlns:com="http://www.travelport.com/schema/common_v36_0"
                                  PseudoCityCode="{{emulatePcc}}"
                 />
             {{/if}}
 
-            <air:ProviderReservationInfo ProviderCode="1G"
+            <air:ProviderReservationInfo ProviderCode="{{provider}}"
                     ProviderLocatorCode="{{pnr}}"
             />
 
@@ -40,7 +40,7 @@ module.exports = `
                                     FlightNumber="{{flightNumber}}"
                                     LinkAvailability="true"
                                     PolledAvailabilityOption="Polled avail exists"
-                                    ProviderCode="1G"
+                                    ProviderCode="{{provider}}"
                                     Key="{{@index}}"
                                     {{#if group}}
                                     Group="{{group}}"

@@ -13,7 +13,7 @@ module.exports = `
                     OriginApplication="UAPI"/>
 
             {{#if emulatePcc}}
-                <com:OverridePCC ProviderCode="1G"
+                <com:OverridePCC ProviderCode="{{provider}}"
                                  xmlns:com="http://www.travelport.com/schema/common_v36_0"
                                  PseudoCityCode="{{emulatePcc}}"
                 />

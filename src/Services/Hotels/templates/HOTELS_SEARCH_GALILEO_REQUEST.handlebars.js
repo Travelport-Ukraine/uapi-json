@@ -5,7 +5,7 @@ module.exports = `
     <hot:HotelSearchAvailabilityReq TargetBranch="{{TargetBranch}}" >
       <com:BillingPointOfSaleInfo OriginApplication="UAPI" />
       {{#nextResult}}
-        <com:NextResultReference ProviderCode="1G" >
+        <com:NextResultReference ProviderCode="{{provider}}" >
           {{nextResult}}
         </com:NextResultReference>
         {{/nextResult}}
@@ -14,7 +14,7 @@ module.exports = `
       </hot:HotelSearchLocation>
       <hot:HotelSearchModifiers AvailableHotelsOnly="true" {{#currency}} PreferredCurrency="{{currency}}" {{/currency}} NumberOfAdults="{{NumberOfAdults}}" NumberOfRooms="{{NumberOfRooms}}">
         <com:PermittedProviders xmlns:com="http://www.travelport.com/schema/common_v34_0">
-          <com:Provider Code="1G"/>
+          <com:Provider Code="{{provider}}"/>
         </com:PermittedProviders>
         {{#children.length}}
         <hot:NumberOfChildren Count="{{children.length}}">

@@ -20,7 +20,7 @@ module.exports = `
             >
             <com:BillingPointOfSaleInfo OriginApplication="uAPI" />
             {{#if emulatePcc}}
-            <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
+            <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
             {{/if}}
             {{#each passengers}}
             <com:BookingTraveler Key="P_{{@index}}" Age="{{Age}}" DOB="{{DOB}}" Gender="{{gender}}" TravelerType="{{ageCategory}}">
@@ -71,7 +71,7 @@ module.exports = `
                 {{{air:AirPricingSolution_XML.air:FareNote_XML}}}
             </air:AirPricingSolution>
 
-            <com:ActionStatus Type="{{ActionStatusType}}" TicketDate="{{ticketDate}}" ProviderCode="1G" />
+            <com:ActionStatus Type="{{ActionStatusType}}" TicketDate="{{ticketDate}}" ProviderCode="{{provider}}" />
 
         </univ:AirCreateReservationReq>
     </soap:Body>

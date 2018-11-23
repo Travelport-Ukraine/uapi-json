@@ -13,7 +13,7 @@ module.exports = `
       >
       <com:BillingPointOfSaleInfo OriginApplication="uAPI" />
       {{#if emulatePcc}}
-      <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
+      <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
       {{/if}}
       <air:AirReservationLocatorCode>{{uapi_reservation_locator}}</air:AirReservationLocatorCode>
       {{#segments}}
