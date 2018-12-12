@@ -47,4 +47,11 @@ describe('uapiRequest tests', () => {
     const request = prepareRequest(template, { emulatePcc }, {});
     expect(request).to.equal('PCC');
   });
+
+  it('should has specific provider', () => {
+    const provider = '1V';
+    const template = handlebars.compile('{{#if provider}}{{provider}}{{/if}}');
+    const request = prepareRequest(template, { provider }, {});
+    expect(request).to.equal('1V');
+  });
 });
