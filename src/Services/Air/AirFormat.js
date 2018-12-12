@@ -1,6 +1,14 @@
 const parsers = require('../../utils/parsers');
 const { AirParsingError } = require('./AirErrors');
 
+function travelOrderReducer(acc, { TravelOrder }) {
+  const x = parseInt(TravelOrder, 10);
+  if (x > acc) {
+    return x;
+  }
+  return acc;
+}
+
 function getBaggage(baggageAllowance) {
   // Checking for allowance
   if (
@@ -267,21 +275,8 @@ function setIndexesForSegments(
     return { segments, serviceSegments: serviceSegmentsNew };
   }
 
-  const maxSegmentsTravelOrder = segments.reduce((acc, x) => {
-    if (x.TravelOrder > acc) {
-      return x.TravelOrder;
-    }
-
-    return acc;
-  }, 0);
-
-  const maxServiceSegmentsTravelOrder = serviceSegments.reduce((acc, x) => {
-    if (x.TravelOrder > acc) {
-      return x.TravelOrder;
-    }
-
-    return acc;
-  }, 0);
+  const maxSegmentsTravelOrder = segments.reduce(travelOrderReducer, 0);
+  const maxServiceSegmentsTravelOrder = serviceSegments.reduce(travelOrderReducer, 0);
 
   const maxOrder = Math.max(
     maxSegmentsTravelOrder,
