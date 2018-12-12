@@ -7,11 +7,11 @@ module.exports = `
   >
   <soapenv:Header />
   <soapenv:Body>
-    <gds:GdsQueuePlaceReq TargetBranch="{{TargetBranch}}" RetrieveProviderReservationDetails="true" PseudoCityCode="{{pcc}}" ProviderCode="1G" ProviderLocatorCode="{{pnr}}">
+    <gds:GdsQueuePlaceReq TargetBranch="{{TargetBranch}}" RetrieveProviderReservationDetails="true" PseudoCityCode="{{pcc}}" ProviderCode="{{provider}}" ProviderLocatorCode="{{pnr}}">
       <com:BillingPointOfSaleInfo OriginApplication="uAPI" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
       <com:QueueSelector Queue="{{queue}}" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
       {{#if emulatePcc}}
-      <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
+      <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
       {{/if}}
     </gds:GdsQueuePlaceReq>
   </soapenv:Body>

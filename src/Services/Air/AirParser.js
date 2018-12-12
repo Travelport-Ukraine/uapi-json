@@ -67,6 +67,7 @@ const countHistogram = (arr) => {
 function lowFaresSearchRequest(obj) {
   return format.formatLowFaresSearch({
     debug: false,
+    provider: this.provider
   }, searchLowFaresValidate.call(this, obj));
 }
 
@@ -1040,7 +1041,7 @@ function availability(rsp) {
   itinerarySolution['air:AirSegmentRef'].forEach((segmentRef, key) => {
     const segment = rsp['air:AirSegmentList'][segmentRef];
     const isConnected = connectedSegments.find(s => s === key);
-    const availInfo = segment['air:AirAvailInfo'].find(info => info.ProviderCode === '1G');
+    const availInfo = segment['air:AirAvailInfo'].find(info => info.ProviderCode === this.provider);
 
     if (!availInfo) {
       return;

@@ -1,7 +1,7 @@
 module.exports = `
 <!--Release 8.1-->
 <!--Version Dated as of 15/Apr/2015 11:24:06-->
-<!--Air Pricing For Galileo(1G) with LFS CheckFlightDetails Request-->
+<!--Air Pricing For Galileo({{provider}}) with LFS CheckFlightDetails Request-->
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
     <soap:Header/>
     <soap:Body>
@@ -29,7 +29,7 @@ module.exports = `
                                 FlightNumber="{{flightNumber}}"
                                 LinkAvailability="true"
                                 PolledAvailabilityOption="Polled avail exists"
-                                ProviderCode="1G"
+                                ProviderCode="{{provider}}"
                                 Key="{{@index}}"
                                 Group="{{group}}">
                     {{#if transfer}}
@@ -59,7 +59,7 @@ module.exports = `
             {{/if}}
             {{#if emulatePcc}}
             <air:PCC>
-                <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
+                <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
             </air:PCC>
             {{/if}}
         </air:AirPriceReq>

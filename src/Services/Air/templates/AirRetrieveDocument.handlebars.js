@@ -12,7 +12,7 @@ module.exports = `
             RetrieveProviderReservationDetails="true"
             ReturnRestrictions="true"
             ReturnPricing="true" RetrieveMCO="false"
-            ProviderCode="1G"
+            ProviderCode="{{provider}}"
             {{#if uapi_ur_locator}}
                 UniversalRecordLocatorCode="{{uapi_ur_locator}}"
             {{/if}}
@@ -22,7 +22,7 @@ module.exports = `
     >
       <com:BillingPointOfSaleInfo OriginApplication="uAPI"/>
       {{#if emulatePcc}}
-      <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
+      <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
       {{/if}}
       {{#if reservationLocatorCode}}
       <air:AirReservationLocatorCode>{{reservationLocatorCode}}</air:AirReservationLocatorCode>

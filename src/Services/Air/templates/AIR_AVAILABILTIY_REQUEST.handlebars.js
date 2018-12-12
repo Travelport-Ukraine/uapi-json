@@ -8,10 +8,10 @@ module.exports = `
             >
             <com:BillingPointOfSaleInfo OriginApplication="uAPI"/>
             {{#if emulatePcc}}
-                <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
+                <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
             {{/if}}
             {{#nextResultReference}}
-                <com:NextResultReference ProviderCode="1G" >
+                <com:NextResultReference ProviderCode="{{provider}}" >
                     {{nextResultReference}}
                 </com:NextResultReference>
             {{/nextResultReference}}
@@ -72,7 +72,7 @@ module.exports = `
                 IncludeFlightDetails="true"
             >
                 <air:PreferredProviders>
-                    <com:Provider Code="1G" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
+                    <com:Provider Code="{{provider}}" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
                 </air:PreferredProviders>
                 {{#if carriers}}
                 <air:PermittedCarriers>

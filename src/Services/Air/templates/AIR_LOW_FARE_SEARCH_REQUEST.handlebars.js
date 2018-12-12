@@ -1,7 +1,7 @@
 module.exports = `
 <!--Release 33-->
 <!--Version Dated as of 14/Aug/2015 18:47:44-->
-<!--Air Low Fare Search For Galileo(1G) Request-->
+<!--Air Low Fare Search For Galileo({{provider}}) Request-->
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
     <soap:Body>
         <air:LowFareSearchReq
@@ -67,7 +67,7 @@ module.exports = `
                 {{/if}}
             >
                 <air:PreferredProviders>
-                    <com:Provider Code="1G" xmlns:com="http://www.travelport.com/schema/common_v33_0"/>
+                    <com:Provider Code="{{provider}}" xmlns:com="http://www.travelport.com/schema/common_v33_0"/>
                 </air:PreferredProviders>
                 {{#if carriers}}
                 <air:PermittedCarriers>
@@ -93,7 +93,7 @@ module.exports = `
             {{/if}}
             {{#if emulatePcc}}
             <air:PCC>
-                <com:OverridePCC ProviderCode="1G" PseudoCityCode="{{emulatePcc}}"/>
+                <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
             </air:PCC>
             {{/if}}
         </air:LowFareSearchReq>

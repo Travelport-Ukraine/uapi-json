@@ -77,7 +77,7 @@ It also has several useful helpers to handle errors.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| auth | `Object <username, password, targetBranch, emulatePcc, region>` | - | See `auth` description [below](#auth). |
+| auth | `Object <username, password, targetBranch, emulatePcc, region, provider>` | - | See `auth` description [below](#auth). |
 | debug | `Number` | `0` | Can be `0`, `1`, or `2`. |
 | production | `Boolean` | `true` | Production variable is connected with production and pre-production environment. Can be true for production and false for pre-production. For more information read docs. |
 | timeout | `Number` | - | Optional. Used for `TerminalService` only. See [`TerminalService`](docs/Terminal.md) |
@@ -99,6 +99,7 @@ It also has several useful helpers to handle errors.
 | targetBranch | `String` | - | Branch, provided by Travelport. |
 | region | `String` | `emea` | Optional. Used to select region. |
 | emulatePcc | `String/Boolean` | `False` | Optional. A PCC on behalf of which transactions are executed in Air, Hotels, Utils. This PCC needs to have set SVCB field in the AAT profile. Define a PCC if you have a service bureau and want to execute transactions on behalf of some of its PCCs. Follow this [documentation](docs/Terminal.md#emulatePcc) to take a detailew view of the `emulatePcc` for the Terminal. |
+| provider | `String` | `1G` | Optional. Obtains data directly from specific provider. Be aware, the default provider is `1G`, we never tested any other providers, **use this option at your own risk**.
 
 There are 3 types of `debug` mode:
 

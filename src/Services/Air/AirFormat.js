@@ -100,6 +100,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
   const fareInfos = searchResult['air:FareInfoList'];
   const segments = searchResult['air:AirSegmentList'];
   const flightDetails = searchResult['air:FlightDetailsList'];
+  const { provider } = searchRequest;
 
   // const legs = _.first(_.toArray(searchResult['air:RouteList']))['air:Leg'];
 
@@ -124,7 +125,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
           );
           const seatsAvailable = (
             segment['air:AirAvailInfo']
-              && segment['air:AirAvailInfo'].ProviderCode === '1G')
+              && segment['air:AirAvailInfo'].ProviderCode === provider)
             ? (Number(
               segment['air:AirAvailInfo']['air:BookingCodeInfo'].BookingCounts
                 .match(new RegExp(`${segmentInfo.BookingCode}(\\d+)`))[1]

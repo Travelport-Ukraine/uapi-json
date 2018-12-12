@@ -4,7 +4,7 @@ module.exports = `
    <soapenv:Body>
       <ter:EndTerminalSessionReq TargetBranch="{{TargetBranch}}">
          <com:BillingPointOfSaleInfo OriginApplication="uAPI" />
-         <com:HostToken Host="1G">{{sessionToken}}</com:HostToken>
+         <com:HostToken Host="{{provider}}">{{sessionToken}}</com:HostToken>
       </ter:EndTerminalSessionReq>
    </soapenv:Body>
 </soapenv:Envelope>
