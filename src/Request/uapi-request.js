@@ -37,19 +37,24 @@ module.exports = function uapiRequest(
   debugMode = false,
   options = {}
 ) {
-  const config = configInit(auth.region || 'emea');
+  // Assign default value
+  auth.provider = auth.provider || '1G';
+  auth.region = auth.region || 'emea';
+
+  const config = configInit(auth.region);
   const log = options.logFunction || console.log;
 
   // Performing checks
   if (!service || service.length <= 0) {
     throw new RequestValidationError.ServiceUrlMissing();
-  } else if (!auth || auth.username === undefined || auth.password === undefined) {
+  }
+  if (!auth || auth.username === undefined || auth.password === undefined) {
     throw new RequestValidationError.AuthDataMissing();
-  } else if (!auth.provider) {
-    auth.provider = '1G';
-  } else if (reqType === undefined) {
+  }
+  if (reqType === undefined) {
     throw new RequestValidationError.RequestTypeUndefined();
-  } else if (Object.prototype.toString.call(reqType) !== '[object String]') {
+  }
+  if (Object.prototype.toString.call(reqType) !== '[object String]') {
     throw new RequestRuntimeError.TemplateFileMissing();
   }
 
@@ -169,9 +174,7 @@ module.exports = function uapiRequest(
       .then(validateSOAP)
       .then((res) => {
         const parser = parseFunction.bind(uParser);
-        return parser(res, {
-          provider: auth.provider
-        });
+        return parser(res);
       }) // TODO: merge Hotels
       .then(handleSuccess);
   };
