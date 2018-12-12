@@ -172,10 +172,7 @@ module.exports = function uapiRequest(
       .then(sendRequest)
       .then(parseResponse)
       .then(validateSOAP)
-      .then((res) => {
-        const parser = parseFunction.bind(uParser);
-        return parser(res);
-      }) // TODO: merge Hotels
+      .then(parseFunction.bind(uParser)) // TODO: merge Hotels
       .then(handleSuccess);
   };
 };
