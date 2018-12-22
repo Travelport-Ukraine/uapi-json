@@ -288,54 +288,58 @@ module.exports = (settings) => {
           ur => getBookingFromUr(ur, options.pnr)
             || Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
         )
-        .then(record => this.getTickets({
-          reservationLocatorCode: record.uapi_reservation_locator,
-        })
-          .then(
-            tickets => Promise.all(tickets.map(
-              (ticketData) => {
-                // Check for VOID or REFUND
-                const allTicketsVoidOrRefund = ticketData.tickets.every(
-                  ticket => ticket.coupons.every(
-                    coupon => coupon.status === 'V' || coupon.status === 'R'
-                  )
-                );
-                if (allTicketsVoidOrRefund) {
-                  return Promise.resolve(true);
-                }
-                // Check for cancelTicket option
-                if (options.cancelTickets !== true) {
-                  return Promise.reject(new AirRuntimeError.PNRHasOpenTickets());
-                }
-                // Check for not OPEN/VOID segments
-                const hasNotOpenSegment = ticketData.tickets.some(
-                  ticket => ticket.coupons.some(
-                    coupon => 'OV'.indexOf(coupon.status) === -1
-                  )
-                );
-                if (hasNotOpenSegment) {
-                  return Promise.reject(new AirRuntimeError.UnableToCancelTicketStatusNotOpen());
-                }
-                return Promise.all(
-                  ticketData.tickets.map(
-                    ticket => (
-                      ticket.coupons[0].status !== 'V'
-                        ? service.cancelTicket({
-                          pnr: options.pnr,
-                          ticketNumber: ticket.ticketNumber,
-                        })
-                        : Promise.resolve(true)
-                    )
-                  )
-                );
-              }
-            ))
+        .then((record) => {
+          return (
+            record.tickets.length === 0
+              ? Promise.resolve([])
+              : this.getTickets({ reservationLocatorCode: record.uapi_reservation_locator })
           )
-          .then(() => this.getPNR(options))
-          .then(booking => service.cancelPNR(booking))
-          .catch(
-            err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
-          ));
+            .then(
+              tickets => Promise.all(tickets.map(
+                (ticketData) => {
+                  // Check for VOID or REFUND
+                  const allTicketsVoidOrRefund = ticketData.tickets.every(
+                    ticket => ticket.coupons.every(
+                      coupon => coupon.status === 'V' || coupon.status === 'R'
+                    )
+                  );
+                  if (allTicketsVoidOrRefund) {
+                    return Promise.resolve(true);
+                  }
+                  // Check for cancelTicket option
+                  if (options.cancelTickets !== true) {
+                    return Promise.reject(new AirRuntimeError.PNRHasOpenTickets());
+                  }
+                  // Check for not OPEN/VOID segments
+                  const hasNotOpenSegment = ticketData.tickets.some(
+                    ticket => ticket.coupons.some(
+                      coupon => 'OV'.indexOf(coupon.status) === -1
+                    )
+                  );
+                  if (hasNotOpenSegment) {
+                    return Promise.reject(new AirRuntimeError.UnableToCancelTicketStatusNotOpen());
+                  }
+                  return Promise.all(
+                    ticketData.tickets.map(
+                      ticket => (
+                        ticket.coupons[0].status !== 'V'
+                          ? service.cancelTicket({
+                            pnr: options.pnr,
+                            ticketNumber: ticket.ticketNumber,
+                          })
+                          : Promise.resolve(true)
+                      )
+                    )
+                  );
+                }
+              ))
+            )
+            .then(() => this.getPNR(options))
+            .then(booking => service.cancelPNR(booking))
+            .catch(
+              err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
+            );
+        });
     },
 
     getExchangeInformation(options) {
