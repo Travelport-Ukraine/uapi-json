@@ -284,21 +284,15 @@ module.exports = (settings) => {
 
     cancelPNR(options) {
       return this.getUniversalRecordByPNR(options)
-        .then(
-          ur => getBookingFromUr(ur, options.pnr)
-            || Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
-        )
-        .catch(
-          err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
-        )
-        .then((record) => {
-          return (
-            record.tickets.length === 0
-              ? Promise.resolve([])
-              : this.getTickets({ reservationLocatorCode: record.uapi_reservation_locator })
-          )
-            .then(
-              tickets => Promise.all(tickets.map(
+        .then((ur) => {
+          const record = Array.isArray(ur) ? ur[0] : ur;
+
+          return this.getTickets(record)
+            .catch(() => {
+              return Promise.resolve([]);
+            })
+            .then((tickets) => {
+              return Promise.all(tickets.map(
                 (ticketData) => {
                   // Check for VOID or REFUND
                   const allTicketsVoidOrRefund = ticketData.tickets.every(
@@ -335,8 +329,8 @@ module.exports = (settings) => {
                     )
                   );
                 }
-              ))
-            )
+              ));
+            })
             .then(() => this.getPNR(options))
             .then(booking => service.cancelPNR(booking))
             .catch(
