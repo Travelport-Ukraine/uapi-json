@@ -110,7 +110,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   FailedToCancelPnr: 'Failed to cancel PNR',
   FailedToCancelTicket: 'Failed to cancel ticket',
   UnableToCancelTicketStatusNotOpen: 'Unable to cancel ticket with status not OPEN',
-  PNRHasOpenTickets: 'Selected PNR has tickets. Please use `cancelTickets` option or cancel tickets manually',
+  PNRHasOpenTickets: 'Selected PNR has tickets. Please use `cancelTickets` option or cancel tickets manually, or use `ignoreTickets` option',
   NoReservationToImport: 'No reservation to import',
   UnableToImportPnr: 'Unable to import requested PNR',
   UnableToOpenPNRInTerminal: 'Unable to open requested PNR in Terminal',
