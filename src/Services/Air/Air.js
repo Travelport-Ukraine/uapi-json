@@ -288,6 +288,9 @@ module.exports = (settings) => {
           ur => getBookingFromUr(ur, options.pnr)
             || Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
         )
+        .catch(
+          err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
+        )
         .then((record) => {
           return (
             record.tickets.length === 0
