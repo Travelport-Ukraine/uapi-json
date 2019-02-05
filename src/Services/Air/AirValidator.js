@@ -16,7 +16,8 @@ module.exports = {
   AIR_PRICE_FARE_RULES_REQUEST: compose(
     validate(
       validators.segments,
-      validators.passengers
+      validators.passengers,
+      validators.platingCarrier
     ),
     transform(
       transformers.setBusinessFlag,
@@ -28,7 +29,8 @@ module.exports = {
 
   AIR_PRICE: compose(
     validate(
-      validators.segments
+      validators.segments,
+      validators.platingCarrier
     ),
     transform(
       transformers.setBusinessFlag,

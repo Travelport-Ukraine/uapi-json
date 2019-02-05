@@ -34,6 +34,7 @@ Object.assign(AirValidationError, createErrorsList({
   ExchangeToken: 'Missing exchangeToken in request. See data.',
   CreditCardMissing: 'Missing creditCard in request. See data.',
   IncorrectConnectionsFormat: 'Connections should be an array with IATA codes.',
+  PlatingCarrierInvalid: 'Plating Carrier Invalid'
 }, AirValidationError));
 
 const GdsValidationError = createErrorClass(

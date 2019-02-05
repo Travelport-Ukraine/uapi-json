@@ -15,6 +15,7 @@ const deliveryInfoOptional = require('./delivery-info-optional');
 const segments = require('./segments');
 const reservationLocator = require('./reservation-locator');
 const exchangeToken = require('./exchange-token');
+const platingCarrier = require('./platingCarrier');
 
 module.exports = {
   legs,
@@ -34,4 +35,5 @@ module.exports = {
   segments,
   reservationLocator,
   exchangeToken,
+  platingCarrier,
 };
