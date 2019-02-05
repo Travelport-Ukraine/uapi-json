@@ -38,6 +38,9 @@ module.exports = `
                 </air:AirSegment>
                 {{/segments}}
             </air:AirItinerary>
+            {{#if plattingCarrier}}
+              <air:AirPricingModifiers PlatingCarrier="{{platingCarrier}}"/>
+            {{/if}}
             {{#if business}}
             <air:AirPricingModifiers InventoryRequestType="DirectAccess">
                 <air:PermittedCabins>
