@@ -27,6 +27,7 @@ const params = {
     ADT: 1,
   },
   requestId: 'test-request',
+  platingCarier: 'PS'
 };
 
 AirService.shop(params)

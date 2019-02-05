@@ -97,7 +97,8 @@ After searching for air segments and fares, air bookings are created using the r
 | rule | `String` | Custom check rule. |
 | allowWaitlist | `Boolean` | Allow open waitlisted segments, do not cancel booking. See `allowWaitlist` description [below](#allow-waitlist). |
 | deliveryInformation | `Delivery Information` | Optional. See `Delivery Information` description [below](#delivery-info). |
-| tau | `String`/`Date`/`Array<Number>` | Optional. Takes  See `TAU` desctiption [below](#tau). The default value is 3 hours from the current timestamp.
+| tau | `String`/`Date`/`Array<Number>` | Optional. Takes  See `TAU` description [below](#tau). The default value is 3 hours from the current timestamp.|
+| platingCarrier | `String` | Optional. PlatingCarrier. |
 
 ### Segment object
 <a name="segment"></a>
@@ -386,7 +387,7 @@ Gets pnr information and tickets list from [`importPNR`](#importPNR) and then do
 * if PNR has tickets and `cancelTickets` flag set to `true`, checks tickets
   * if PNR has only tickets with `VOID` or `OPEN` coupons, then tickets are cancelled, then the booking is cancelled
   * if PNR contains tickets with coupons having other statuses, then error is returned
-* if `ignoreTickets` flag set to `true`, all tickets in PNR will be ignored, regardless of their status and `cancelTickets` flag 
+* if `ignoreTickets` flag set to `true`, all tickets in PNR will be ignored, regardless of their status and `cancelTickets` flag
 
 **Returns**: `Promise` which is resolved with true
 
