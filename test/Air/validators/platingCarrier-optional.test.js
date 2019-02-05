@@ -9,6 +9,10 @@ describe('Air.validators.platingCarrier', () => {
     validate({ platingCarrier });
   });
 
+  it('should pass if platingCarrier missing', () => {
+    validate({ });
+  });
+
   it('should throw error', () => {
     const fn = () => validate({ platingCarrier: '=_=' });
     expect(fn).to.throw(AirValidationError.PlatingCarrierInvalid);
