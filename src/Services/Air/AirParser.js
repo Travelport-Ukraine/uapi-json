@@ -762,9 +762,6 @@ function extractBookings(obj) {
             {
               uapi_segment_refs: uapiSegmentRefs,
               effectiveDate: firstFareInfo.EffectiveDate,
-              status: pricingInfo.Ticketed
-                ? 'Ticketed'
-                : 'Reserved',
               endorsement,
               tourCode,
             },

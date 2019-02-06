@@ -825,7 +825,7 @@ describe('#AirParser', () => {
           'uapi_segment_refs',
           'uapi_passenger_refs',
           'endorsement',
-          'status',
+          // 'status',
           'effectiveDate',
         ]);
         expect(fareQuote.index).to.be.a('number');
@@ -842,7 +842,6 @@ describe('#AirParser', () => {
         if (fareQuote.platingCarrier) {
           expect(fareQuote.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
         }
-        expect(fareQuote.status).to.be.oneOf(['Reserved', 'Ticketed']);
 
         expect(fareQuote.uapi_passenger_refs).to.be.an('array');
         expect(fareQuote.uapi_passenger_refs).to.have.length.above(0);
