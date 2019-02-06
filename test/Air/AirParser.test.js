@@ -825,7 +825,6 @@ describe('#AirParser', () => {
           'uapi_segment_refs',
           'uapi_passenger_refs',
           'endorsement',
-          // 'status',
           'effectiveDate',
         ]);
         expect(fareQuote.index).to.be.a('number');
