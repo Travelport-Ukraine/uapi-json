@@ -1,0 +1,19 @@
+<SOAP:Envelope
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <SOAP:Fault>
+      <faultcode>Server.null</faultcode>
+      <faultstring>The reservation 'CYG7GQ' has no tickets yet</faultstring>
+      <detail>
+        <common_v39_0:ErrorInfo
+          xmlns:common_v39_0="http://www.travelport.com/schema/common_v39_0">
+          <common_v39_0:Code>3000</common_v39_0:Code>
+          <common_v39_0:Service>PROVISIONINGSERVICE</common_v39_0:Service>
+          <common_v39_0:Type/>
+          <common_v39_0:Description>The reservation 'CYG7GQ' has no tickets yet</common_v39_0:Description>
+          <common_v39_0:TransactionId>C6FB7E470A07570E8038A067797F5F8D</common_v39_0:TransactionId>
+        </common_v39_0:ErrorInfo>
+      </detail>
+    </SOAP:Fault>
+  </SOAP:Body>
+</SOAP:Envelope>

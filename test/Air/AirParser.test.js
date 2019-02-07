@@ -191,6 +191,21 @@ describe('#AirParser', () => {
       expect(check).not.to.throw(Error);
     });
   });
+
+  describe('getTickets', () => {
+    it('should return empty array if UR have no tickets', () => {
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-error-no-tickets.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          expect(result).to.be.a('array').that.is.empty;
+        });
+    });
+  });
+
   describe('getTicket', () => {
     function testTicket(result) {
       expect(result).to.be.an('object');
