@@ -288,7 +288,6 @@ const AirErrorHandler = function (rsp) {
   } catch (err) {
     throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
   }
-  // console.log(errorInfo, code)
   switch (code) {
     case '345':
       throw new AirRuntimeError.NoAgreement({
