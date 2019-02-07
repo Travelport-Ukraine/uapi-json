@@ -1031,6 +1031,24 @@ describe('#AirService', () => {
   });
 
   describe('getTickets', () => {
+    it('should throw an error when some function fails', (done) => {
+      const AirService = () => ({
+        getUniversalRecordByPNR: () => Promise.resolve({ uapi_reservation_locator: 'RLC001' }),
+        getTickets: () => Promise.reject(new Error('Some error')),
+      });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': AirService,
+      });
+      const service = createAirService({ auth });
+
+       service.getTickets({ uapi_reservation_locator: 'RLC001' })
+        .then(() => done(new Error('Error has not occured')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieveTickets);
+          expect(err.causedBy).to.be.an.instanceof(Error);
+          done();
+        });
+    });
     it('should work with right responses', (done) => {
       const importPNRVoidResponse = JSON.parse(
         fs.readFileSync(path.join(responsesDir, 'importPNR_VOID.json')).toString()
