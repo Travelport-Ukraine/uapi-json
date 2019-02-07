@@ -496,6 +496,17 @@ const airGetTicket = function (obj) {
     throw new AirRuntimeError.TicketRetrieveError(obj);
   }
 
+  if (
+    obj['SOAP:Fault']
+    && obj['SOAP:Fault'][0]
+    && obj['SOAP:Fault'][0].detail[0]
+    && obj['SOAP:Fault'][0].detail[0][`common_${this.uapi_version}:ErrorInfo`][0]
+    && obj['SOAP:Fault'][0].detail[0][`common_${this.uapi_version}:ErrorInfo`][0][`common_${this.uapi_version}:Code`][0]
+    === '3000'
+  ) {
+    return [];
+  }
+
   const etr = obj['air:ETR'];
   if (!etr) {
     throw new AirRuntimeError.TicketRetrieveError(obj);
