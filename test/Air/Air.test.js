@@ -1041,7 +1041,7 @@ describe('#AirService', () => {
       });
       const service = createAirService({ auth });
 
-       service.getTickets({ uapi_reservation_locator: 'RLC001' })
+      service.getTickets({ uapi_reservation_locator: 'RLC001' })
         .then(() => done(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieveTickets);
