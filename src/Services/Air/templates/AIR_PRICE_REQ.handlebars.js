@@ -29,7 +29,7 @@ module.exports = `
                                 FlightNumber="{{flightNumber}}"
                                 LinkAvailability="true"
                                 PolledAvailabilityOption="Polled avail exists"
-                                ProviderCode="{{provider}}"
+                                ProviderCode="{{../provider}}"
                                 Key="{{@index}}"
                                 Group="{{group}}">
                     {{#if transfer}}
