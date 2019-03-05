@@ -12,6 +12,7 @@ const deflate = require('./deflate-promise');
 const getBookingFromUr = require('./get-booking-from-ur');
 const getErrorPcc = require('./get-error-pcc');
 const clone = require('./clone');
+const getHashSubstr = require('./getHashSubstr');
 
 const utils = {
   renameProperty,
@@ -28,6 +29,7 @@ const utils = {
   getBookingFromUr,
   getErrorPcc,
   clone,
+  getHashSubstr,
 };
 
 module.exports = utils;

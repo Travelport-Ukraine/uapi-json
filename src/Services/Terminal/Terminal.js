@@ -2,6 +2,7 @@ const screenLib = require('galileo-screen');
 const { TerminalRuntimeError } = require('./TerminalErrors');
 const terminalService = require('./TerminalService');
 const validateServiceSettings = require('../../utils/validate-service-settings');
+const { getHashSubstr } = require('../../utils');
 
 const TERMINAL_STATE_NONE = 'TERMINAL_STATE_NONE';
 const TERMINAL_STATE_BUSY = 'TERMINAL_STATE_BUSY';
@@ -91,43 +92,39 @@ module.exports = function (settings) {
       .then(resolve)
       .catch(reject);
   });
+  // Get terminal ID
+  const getTerminalId = sessionToken => getHashSubstr(sessionToken);
 
   const terminal = {
     getToken: getSessionToken,
-    executeCommand: (command, stopMD = defaultStopMD) => Promise.resolve()
-      .then(() => {
+    executeCommand: (command, stopMD = defaultStopMD) => new Promise(async (resolve, reject) => {
+      try {
+        const sessionToken = await getSessionToken();
+        const terminalId = getTerminalId(sessionToken);
+
         if (debug) {
-          log(`Terminal request:\n${command}`);
+          log(`[${terminalId}] Terminal request:\n${command}`);
         }
-        return Promise.resolve();
-      })
-      .then(() => getSessionToken())
-      .then(
-        sessionToken => service.executeCommand({
-          command,
-          sessionToken,
-        })
-      )
-      .then(screen => processResponse(screen, stopMD))
-      .then(
-        (response) => {
-          if (debug) {
-            log(`Terminal response:\n${response}`);
-          }
-          Object.assign(state, {
-            terminalState: TERMINAL_STATE_READY,
-          });
-          return response;
+
+        const screen = await service.executeCommand({ command, sessionToken });
+        const response = await processResponse(screen, stopMD);
+
+        if (debug) {
+          log(`[${terminalId}] Terminal response:\n${response}`);
         }
-      )
-      .catch(
-        (err) => {
-          Object.assign(state, {
-            terminalState: TERMINAL_STATE_ERROR,
-          });
-          throw err;
-        }
-      ),
+
+        Object.assign(state, {
+          terminalState: TERMINAL_STATE_READY,
+        });
+
+        resolve(response);
+      } catch (err) {
+        Object.assign(state, {
+          terminalState: TERMINAL_STATE_ERROR,
+        });
+        reject(err);
+      }
+    }),
     closeSession: () => getSessionToken()
       .then(
         sessionToken => service.closeSession({
