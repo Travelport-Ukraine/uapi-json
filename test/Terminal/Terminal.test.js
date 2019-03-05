@@ -254,7 +254,6 @@ describe('#Terminal', function terminalTest() {
           expect(err).to.be.an.instanceof(
             TerminalRuntimeError.TerminalIsClosed
           );
-          expect(console.log).to.have.callCount(1);
         });
     });
     it('Should return error when executing command on busy terminal', () => {

@@ -93,14 +93,14 @@ module.exports = function (settings) {
       .catch(reject);
   });
   // Get terminal ID
-  const getTerminalId = sessionToken => Promise.resolve(getHashSubstr(sessionToken));
+  const getTerminalId = sessionToken => getHashSubstr(sessionToken);
 
   const terminal = {
     getToken: getSessionToken,
-    executeCommand: (command, stopMD = defaultStopMD) => new Promise(async (resolve) => {
+    executeCommand: (command, stopMD = defaultStopMD) => new Promise(async (resolve, reject) => {
       try {
         const sessionToken = await getSessionToken();
-        const terminalId = await getTerminalId(sessionToken);
+        const terminalId = getTerminalId(sessionToken);
 
         if (debug) {
           log(`[${terminalId}] Terminal request:\n${command}`);
@@ -122,7 +122,7 @@ module.exports = function (settings) {
         Object.assign(state, {
           terminalState: TERMINAL_STATE_ERROR,
         });
-        throw err;
+        reject(err);
       }
     }),
     closeSession: () => getSessionToken()
