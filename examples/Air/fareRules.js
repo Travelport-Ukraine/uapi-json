@@ -5,13 +5,13 @@ const AirService = uAPI.createAirService(
   {
     auth: config,
     debug: 2,
-    production: true,
+    production: false,
   }
 );
 const AirServiceQuiet = uAPI.createAirService(
   {
     auth: config,
-    production: true,
+    production: false,
   }
 );
 
@@ -20,14 +20,14 @@ const requestPTC = 'ADT';
 const shop_params = {
   legs: [
     {
-      from: 'LWO',
-      to: 'CGK',
-      departureDate: '2017-09-18',
+      from: 'LOS',
+      to: 'IST',
+      departureDate: '2019-06-18',
     },
     {
-      from: 'CGK',
-      to: 'KBP',
-      departureDate: '2017-09-21',
+      from: 'IST',
+      to: 'LOS',
+      departureDate: '2019-06-21',
     },
   ],
   passengers: {

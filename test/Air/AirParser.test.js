@@ -191,6 +191,21 @@ describe('#AirParser', () => {
       expect(check).not.to.throw(Error);
     });
   });
+
+  describe('getTickets', () => {
+    it('should return empty array if UR have no tickets', () => {
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v39_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-error-no-tickets.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          expect(result).to.be.a('array').that.is.empty;
+        });
+    });
+  });
+
   describe('getTicket', () => {
     function testTicket(result) {
       expect(result).to.be.an('object');
@@ -825,7 +840,6 @@ describe('#AirParser', () => {
           'uapi_segment_refs',
           'uapi_passenger_refs',
           'endorsement',
-          'status',
           'effectiveDate',
         ]);
         expect(fareQuote.index).to.be.a('number');
@@ -842,7 +856,6 @@ describe('#AirParser', () => {
         if (fareQuote.platingCarrier) {
           expect(fareQuote.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
         }
-        expect(fareQuote.status).to.be.oneOf(['Reserved', 'Ticketed']);
 
         expect(fareQuote.uapi_passenger_refs).to.be.an('array');
         expect(fareQuote.uapi_passenger_refs).to.have.length.above(0);

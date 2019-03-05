@@ -29,7 +29,7 @@ module.exports = `
                                 FlightNumber="{{flightNumber}}"
                                 LinkAvailability="true"
                                 PolledAvailabilityOption="Polled avail exists"
-                                ProviderCode="{{provider}}"
+                                ProviderCode="{{../provider}}"
                                 Key="{{@index}}"
                                 Group="{{group}}">
                     {{#if transfer}}
@@ -38,6 +38,9 @@ module.exports = `
                 </air:AirSegment>
                 {{/segments}}
             </air:AirItinerary>
+            {{#if plattingCarrier}}
+              <air:AirPricingModifiers PlatingCarrier="{{platingCarrier}}"/>
+            {{/if}}
             {{#if business}}
             <air:AirPricingModifiers InventoryRequestType="DirectAccess">
                 <air:PermittedCabins>
