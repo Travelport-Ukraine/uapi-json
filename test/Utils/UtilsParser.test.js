@@ -12,7 +12,7 @@ const xmlFolder = `${__dirname}/../FakeResponses/Utils`;
 describe('#utilsParser', () => {
   describe('currencyConvert()', () => {
     it('should parse single currency pair request', () => {
-      const uParser = new Parser('util:CurrencyConversionRsp', 'v_33_0', {});
+      const uParser = new Parser('util:CurrencyConversionRsp', 'v47_0', {});
       const parseFunction = utilsParser.CURRENCY_CONVERSION;
       const xml = fs.readFileSync(`${xmlFolder}/currency-conversion.single.xml`).toString();
       return uParser.parse(xml).then((json) => {
@@ -23,7 +23,7 @@ describe('#utilsParser', () => {
     });
 
     it('should parse multi currency pair request', () => {
-      const uParser = new Parser('util:CurrencyConversionRsp', 'v_33_0', {});
+      const uParser = new Parser('util:CurrencyConversionRsp', 'v47_0', {});
       const parseFunction = utilsParser.CURRENCY_CONVERSION;
       const xml = fs.readFileSync(`${xmlFolder}/currency-conversion.multi.xml`).toString();
       return uParser.parse(xml).then((json) => {
@@ -47,7 +47,7 @@ describe('#utilsParser', () => {
 
     it('should test error handling', () => {
       const parseFunction = utilsParser.UTILS_ERROR;
-      const uParser = new Parser('util:CurrencyConversionRsp', 'v_33_0', {});
+      const uParser = new Parser('util:CurrencyConversionRsp', 'v47_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/../Other/UnableToFareQuoteError.xml`).toString(); // any error
       return uParser
         .parse(xml)
