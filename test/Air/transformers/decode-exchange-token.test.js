@@ -12,7 +12,7 @@ describe('Air.transformers.decodeExchangeToken', () => {
       expect(params.xml).to.have.all.keys([
         'air:AirExchangeBundle_XML',
         'air:AirPricingSolution_XML',
-        'common_v36_0:HostToken_XML',
+        'common_v47_0:HostToken_XML',
       ]);
     });
   });

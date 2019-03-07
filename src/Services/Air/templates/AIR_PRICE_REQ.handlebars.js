@@ -13,8 +13,8 @@ module.exports = `
             FareRuleType="{{#if long}}long{{else}}short{{/if}}"
             {{/if}}
             xmlns:air="http://www.travelport.com/schema/air_v36_0"
-            xmlns:com="http://www.travelport.com/schema/common_v36_0">
-            <com:BillingPointOfSaleInfo OriginApplication="UAPI" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
+            xmlns:com="http://www.travelport.com/schema/common_v47_0">
+            <com:BillingPointOfSaleInfo OriginApplication="UAPI" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
             <air:AirItinerary>
                 {{#segments}}
                 <air:AirSegment ArrivalTime="{{arrival}}"
@@ -44,14 +44,14 @@ module.exports = `
             {{#if business}}
             <air:AirPricingModifiers InventoryRequestType="DirectAccess">
                 <air:PermittedCabins>
-                    <com:CabinClass Type="Business" xmlns:com="http://www.travelport.com/schema/common_v36_0" />
+                    <com:CabinClass Type="Business" xmlns:com="http://www.travelport.com/schema/common_v47_0" />
                 </air:PermittedCabins>
             </air:AirPricingModifiers>
             {{else}}
             <air:AirPricingModifiers InventoryRequestType="DirectAccess"/>
             {{/if}}
             {{#passengers}}
-            <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}" {{#if child}}Age="9"{{else if Age}}Age="{{Age}}"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
+            <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}" {{#if child}}Age="9"{{else if Age}}Age="{{Age}}"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
             {{/passengers}}
             {{#if hasFareBasis}}
             <air:AirPricingCommand>

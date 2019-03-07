@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <universal:AirCreateReservationRsp xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" TraceId="" TransactionId="F73FB0980A0759BB25ACBE18205C1E0C" ResponseTime="4593">
-            <common_v36_0:ResponseMessage Code="13566" Type="Warning" ProviderCode="1G">Brand optional services were filtered out as they are not offered in the brand or are only available at a charge.</common_v36_0:ResponseMessage>
-            <common_v36_0:ResponseMessage Code="3715" Type="Warning" ProviderCode="1G">Host only allows one Address/Delivery Address. Only one sent in request.</common_v36_0:ResponseMessage>
-            <common_v36_0:ResponseMessage Code="13565" Type="Warning" ProviderCode="1G">UpsellBrandID has been ignored.</common_v36_0:ResponseMessage>
+        <universal:AirCreateReservationRsp xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" TraceId="" TransactionId="F73FB0980A0759BB25ACBE18205C1E0C" ResponseTime="4593">
+            <common_v47_0:ResponseMessage Code="13566" Type="Warning" ProviderCode="1G">Brand optional services were filtered out as they are not offered in the brand or are only available at a charge.</common_v47_0:ResponseMessage>
+            <common_v47_0:ResponseMessage Code="3715" Type="Warning" ProviderCode="1G">Host only allows one Address/Delivery Address. Only one sent in request.</common_v47_0:ResponseMessage>
+            <common_v47_0:ResponseMessage Code="13565" Type="Warning" ProviderCode="1G">UpsellBrandID has been ignored.</common_v47_0:ResponseMessage>
             <universal:UniversalRecord LocatorCode="XBKYH9" Version="0" Status="Active">
-                <common_v36_0:BookingTraveler Key="rsv/H8fiQ6SzbleEuyD2hA==" TravelerType="ADT" DOB="2068-07-25" Gender="M" ElStat="A">
-                    <common_v36_0:BookingTravelerName First="SKYWALKER" Last="ANAKIN"/>
-                    <common_v36_0:DeliveryInfo>
-                        <common_v36_0:ShippingAddress Key="PPczPCULQXaihbEPsRRCKA==" ElStat="A">
-                            <common_v36_0:AddressName>Agency</common_v36_0:AddressName>
-                            <common_v36_0:Street>Mezhygirska St. 1</common_v36_0:Street>
-                            <common_v36_0:City>Kyiv</common_v36_0:City>
-                            <common_v36_0:PostalCode>123456</common_v36_0:PostalCode>
-                            <common_v36_0:Country>UA</common_v36_0:Country>
-                            <common_v36_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
-                        </common_v36_0:ShippingAddress>
-                        <common_v36_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
-                    </common_v36_0:DeliveryInfo>
-                    <common_v36_0:PhoneNumber Key="npgH9GtXQ6GGMfOn900crw==" Type="Other" Location="IEV" CountryCode="38" Number="0445857777" ElStat="A">
-                        <common_v36_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
-                    </common_v36_0:PhoneNumber>
-                    <common_v36_0:Email Key="Z3pFhPuLQMKrtDgnrST0QQ==" Type="Other" EmailID="avia@711.ua" ElStat="A">
-                        <common_v36_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
-                    </common_v36_0:Email>
-                </common_v36_0:BookingTraveler>
-                <common_v36_0:BookingTraveler Key="sKCAU5tBTle0tRWEnxx/rw==" TravelerType="ADT" DOB="2066-07-25" Gender="M" ElStat="A">
-                    <common_v36_0:BookingTravelerName First="VAIDER" Last="DARTH"/>
-                    <common_v36_0:DeliveryInfo>
-                        <common_v36_0:ShippingAddress Key="5adZTT67Q+iOkdLtWQSQoA==" ElStat="A">
-                            <common_v36_0:AddressName>Agency</common_v36_0:AddressName>
-                            <common_v36_0:Street>Mezhygirska St. 1</common_v36_0:Street>
-                            <common_v36_0:City>Kyiv</common_v36_0:City>
-                            <common_v36_0:PostalCode>123456</common_v36_0:PostalCode>
-                            <common_v36_0:Country>UA</common_v36_0:Country>
-                        </common_v36_0:ShippingAddress>
-                    </common_v36_0:DeliveryInfo>
-                    <common_v36_0:PhoneNumber Key="JbeD9mb7SPOvvGESpDNiSA==" Type="Other" Location="IEV" CountryCode="38" Number="0445857777" ElStat="A">
-                        <common_v36_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
-                    </common_v36_0:PhoneNumber>
-                    <common_v36_0:Email Key="lAPxEkJdQI6psnSJeVMFgw==" Type="Other" EmailID="avia@711.ua" ElStat="A">
-                        <common_v36_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
-                    </common_v36_0:Email>
-                </common_v36_0:BookingTraveler>
-                <common_v36_0:BookingTraveler Key="8giuKZjGSr24Sm4Ly8AawA==" TravelerType="CNN" DOB="2005-07-25" Gender="M" ElStat="A">
-                    <common_v36_0:BookingTravelerName First="SKYWALKER" Last="ANAKINJR"/>
-                    <common_v36_0:DeliveryInfo>
-                        <common_v36_0:ShippingAddress Key="+l5SleUtS7WWDTkgUcv62w==" ElStat="A">
-                            <common_v36_0:AddressName>Agency</common_v36_0:AddressName>
-                            <common_v36_0:Street>Mezhygirska St. 1</common_v36_0:Street>
-                            <common_v36_0:City>Kyiv</common_v36_0:City>
-                            <common_v36_0:PostalCode>123456</common_v36_0:PostalCode>
-                            <common_v36_0:Country>UA</common_v36_0:Country>
-                        </common_v36_0:ShippingAddress>
-                    </common_v36_0:DeliveryInfo>
-                    <common_v36_0:PhoneNumber Key="qKgzedoDTFu15sgzSHlNgw==" Type="Other" Location="IEV" CountryCode="38" Number="0445857777" ElStat="A">
-                        <common_v36_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
-                    </common_v36_0:PhoneNumber>
-                    <common_v36_0:Email Key="bQ+vuhEZTiGpNA+zJmsocw==" Type="Other" EmailID="avia@711.ua" ElStat="A">
-                        <common_v36_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
-                    </common_v36_0:Email>
-                </common_v36_0:BookingTraveler>
-                <common_v36_0:ActionStatus Key="/PYI4qL8RHaZVwADKEQcKw==" Type="TAW" TicketDate="2016-09-08T01:09:00.000+03:00" ProviderReservationInfoRef="WU0oSYkYS7+fRjrmDy4Otg==" ProviderCode="1G" PseudoCityCode="3AQ0" ElStat="A"/>
+                <common_v47_0:BookingTraveler Key="rsv/H8fiQ6SzbleEuyD2hA==" TravelerType="ADT" DOB="2068-07-25" Gender="M" ElStat="A">
+                    <common_v47_0:BookingTravelerName First="SKYWALKER" Last="ANAKIN"/>
+                    <common_v47_0:DeliveryInfo>
+                        <common_v47_0:ShippingAddress Key="PPczPCULQXaihbEPsRRCKA==" ElStat="A">
+                            <common_v47_0:AddressName>Agency</common_v47_0:AddressName>
+                            <common_v47_0:Street>Mezhygirska St. 1</common_v47_0:Street>
+                            <common_v47_0:City>Kyiv</common_v47_0:City>
+                            <common_v47_0:PostalCode>123456</common_v47_0:PostalCode>
+                            <common_v47_0:Country>UA</common_v47_0:Country>
+                            <common_v47_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
+                        </common_v47_0:ShippingAddress>
+                        <common_v47_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
+                    </common_v47_0:DeliveryInfo>
+                    <common_v47_0:PhoneNumber Key="npgH9GtXQ6GGMfOn900crw==" Type="Other" Location="IEV" CountryCode="38" Number="0445857777" ElStat="A">
+                        <common_v47_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
+                    </common_v47_0:PhoneNumber>
+                    <common_v47_0:Email Key="Z3pFhPuLQMKrtDgnrST0QQ==" Type="Other" EmailID="avia@711.ua" ElStat="A">
+                        <common_v47_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
+                    </common_v47_0:Email>
+                </common_v47_0:BookingTraveler>
+                <common_v47_0:BookingTraveler Key="sKCAU5tBTle0tRWEnxx/rw==" TravelerType="ADT" DOB="2066-07-25" Gender="M" ElStat="A">
+                    <common_v47_0:BookingTravelerName First="VAIDER" Last="DARTH"/>
+                    <common_v47_0:DeliveryInfo>
+                        <common_v47_0:ShippingAddress Key="5adZTT67Q+iOkdLtWQSQoA==" ElStat="A">
+                            <common_v47_0:AddressName>Agency</common_v47_0:AddressName>
+                            <common_v47_0:Street>Mezhygirska St. 1</common_v47_0:Street>
+                            <common_v47_0:City>Kyiv</common_v47_0:City>
+                            <common_v47_0:PostalCode>123456</common_v47_0:PostalCode>
+                            <common_v47_0:Country>UA</common_v47_0:Country>
+                        </common_v47_0:ShippingAddress>
+                    </common_v47_0:DeliveryInfo>
+                    <common_v47_0:PhoneNumber Key="JbeD9mb7SPOvvGESpDNiSA==" Type="Other" Location="IEV" CountryCode="38" Number="0445857777" ElStat="A">
+                        <common_v47_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
+                    </common_v47_0:PhoneNumber>
+                    <common_v47_0:Email Key="lAPxEkJdQI6psnSJeVMFgw==" Type="Other" EmailID="avia@711.ua" ElStat="A">
+                        <common_v47_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
+                    </common_v47_0:Email>
+                </common_v47_0:BookingTraveler>
+                <common_v47_0:BookingTraveler Key="8giuKZjGSr24Sm4Ly8AawA==" TravelerType="CNN" DOB="2005-07-25" Gender="M" ElStat="A">
+                    <common_v47_0:BookingTravelerName First="SKYWALKER" Last="ANAKINJR"/>
+                    <common_v47_0:DeliveryInfo>
+                        <common_v47_0:ShippingAddress Key="+l5SleUtS7WWDTkgUcv62w==" ElStat="A">
+                            <common_v47_0:AddressName>Agency</common_v47_0:AddressName>
+                            <common_v47_0:Street>Mezhygirska St. 1</common_v47_0:Street>
+                            <common_v47_0:City>Kyiv</common_v47_0:City>
+                            <common_v47_0:PostalCode>123456</common_v47_0:PostalCode>
+                            <common_v47_0:Country>UA</common_v47_0:Country>
+                        </common_v47_0:ShippingAddress>
+                    </common_v47_0:DeliveryInfo>
+                    <common_v47_0:PhoneNumber Key="qKgzedoDTFu15sgzSHlNgw==" Type="Other" Location="IEV" CountryCode="38" Number="0445857777" ElStat="A">
+                        <common_v47_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
+                    </common_v47_0:PhoneNumber>
+                    <common_v47_0:Email Key="bQ+vuhEZTiGpNA+zJmsocw==" Type="Other" EmailID="avia@711.ua" ElStat="A">
+                        <common_v47_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
+                    </common_v47_0:Email>
+                </common_v47_0:BookingTraveler>
+                <common_v47_0:ActionStatus Key="/PYI4qL8RHaZVwADKEQcKw==" Type="TAW" TicketDate="2016-09-08T01:09:00.000+03:00" ProviderReservationInfoRef="WU0oSYkYS7+fRjrmDy4Otg==" ProviderCode="1G" PseudoCityCode="3AQ0" ElStat="A"/>
                 <universal:ProviderReservationInfo Key="WU0oSYkYS7+fRjrmDy4Otg==" ProviderCode="1G" LocatorCode="62XJNY" CreateDate="2016-09-04T22:09:25.551+00:00" ModifiedDate="2016-09-04T22:09:25.551+00:00" HostCreateDate="2016-09-04" OwningPCC="3AQ0">
                     <universal:ProviderReservationDetails ProviderReservationDetail="false" CustomCheck="true" ProviderProfile="false" DivideDetails="false" EnhancedItinModifiers="false" IntegratedContent="false" Cruise="false" RailSegment="false"/>
                 </universal:ProviderReservationInfo>
                 <air:AirReservation LocatorCode="RQEG6H" CreateDate="2016-09-04T22:09:25.090+00:00" ModifiedDate="2016-09-04T22:09:25.551+00:00">
-                    <common_v36_0:SupplierLocator SupplierCode="A3" SupplierLocatorCode="3QDHSB" ProviderReservationInfoRef="WU0oSYkYS7+fRjrmDy4Otg==" CreateDateTime="2016-09-04T22:09:00.000+00:00"/>
-                    <common_v36_0:BookingTravelerRef Key="rsv/H8fiQ6SzbleEuyD2hA=="/>
-                    <common_v36_0:BookingTravelerRef Key="sKCAU5tBTle0tRWEnxx/rw=="/>
-                    <common_v36_0:BookingTravelerRef Key="8giuKZjGSr24Sm4Ly8AawA=="/>
-                    <common_v36_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
+                    <common_v47_0:SupplierLocator SupplierCode="A3" SupplierLocatorCode="3QDHSB" ProviderReservationInfoRef="WU0oSYkYS7+fRjrmDy4Otg==" CreateDateTime="2016-09-04T22:09:00.000+00:00"/>
+                    <common_v47_0:BookingTravelerRef Key="rsv/H8fiQ6SzbleEuyD2hA=="/>
+                    <common_v47_0:BookingTravelerRef Key="sKCAU5tBTle0tRWEnxx/rw=="/>
+                    <common_v47_0:BookingTravelerRef Key="8giuKZjGSr24Sm4Ly8AawA=="/>
+                    <common_v47_0:ProviderReservationInfoRef Key="WU0oSYkYS7+fRjrmDy4Otg=="/>
                     <air:AirSegment Key="sybKtzvtTHm1Nq7P6FxPTw==" Group="0" Carrier="A3" CabinClass="Economy" FlightNumber="967" ProviderCode="1G" Origin="KBP" Destination="ATH" DepartureTime="2016-11-10T18:35:00.000+02:00" ArrivalTime="2016-11-10T21:05:00.000+02:00" TravelTime="150" Distance="921" ClassOfService="P" ETicketability="Yes" Equipment="320" MarriageGroup="1" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="WU0oSYkYS7+fRjrmDy4Otg==" TravelOrder="1" OptionalServicesIndicator="false" LinkAvailability="true" ElStat="A">
                         <air:FlightDetails Key="DXL1sFlRQeCskvTL8ujUkw==" Origin="KBP" Destination="ATH" DepartureTime="2016-11-10T18:35:00.000+02:00" ArrivalTime="2016-11-10T21:05:00.000+02:00" FlightTime="150" TravelTime="150" Equipment="320" ElStat="C"/>
-                        <common_v36_0:SellMessage>ADD ADVANCE PASSENGER INFORMATION SSRS DOCA/DOCO/DOCS</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>PERSONAL DATA WHICH IS PROVIDED TO US IN CONNECTION</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>WITH YOUR TRAVEL MAY BE PASSED TO GOVERNMENT AUTHORITIES</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>FOR BORDER CONTROL AND AVIATION SECURITY PURPOSES</common_v36_0:SellMessage>
+                        <common_v47_0:SellMessage>ADD ADVANCE PASSENGER INFORMATION SSRS DOCA/DOCO/DOCS</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>PERSONAL DATA WHICH IS PROVIDED TO US IN CONNECTION</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>WITH YOUR TRAVEL MAY BE PASSED TO GOVERNMENT AUTHORITIES</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>FOR BORDER CONTROL AND AVIATION SECURITY PURPOSES</common_v47_0:SellMessage>
                     </air:AirSegment>
                     <air:AirSegment Key="SAJ2rz9GTIKL6+WDYQcF3w==" Group="1" Carrier="A3" CabinClass="Economy" FlightNumber="614" ProviderCode="1G" Origin="ATH" Destination="CDG" DepartureTime="2016-11-11T16:15:00.000+02:00" ArrivalTime="2016-11-11T18:45:00.000+01:00" TravelTime="210" Distance="1306" ClassOfService="P" ETicketability="Yes" Equipment="320" MarriageGroup="1" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="WU0oSYkYS7+fRjrmDy4Otg==" TravelOrder="2" OptionalServicesIndicator="false" LinkAvailability="true" ElStat="A">
                         <air:FlightDetails Key="rti3oOo/SniNfhAB3RhsxQ==" Origin="ATH" Destination="CDG" DepartureTime="2016-11-11T16:15:00.000+02:00" ArrivalTime="2016-11-11T18:45:00.000+01:00" FlightTime="210" TravelTime="210" Equipment="320" DestinationTerminal="1" ElStat="C"/>
-                        <common_v36_0:SellMessage>ARRIVES CDG TERMINAL 1</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>ADD ADVANCE PASSENGER INFORMATION SSRS DOCA/DOCO/DOCS</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>PERSONAL DATA WHICH IS PROVIDED TO US IN CONNECTION</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>WITH YOUR TRAVEL MAY BE PASSED TO GOVERNMENT AUTHORITIES</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>FOR BORDER CONTROL AND AVIATION SECURITY PURPOSES</common_v36_0:SellMessage>
+                        <common_v47_0:SellMessage>ARRIVES CDG TERMINAL 1</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>ADD ADVANCE PASSENGER INFORMATION SSRS DOCA/DOCO/DOCS</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>PERSONAL DATA WHICH IS PROVIDED TO US IN CONNECTION</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>WITH YOUR TRAVEL MAY BE PASSED TO GOVERNMENT AUTHORITIES</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>FOR BORDER CONTROL AND AVIATION SECURITY PURPOSES</common_v47_0:SellMessage>
                     </air:AirSegment>
                     <air:AirPricingInfo Key="xX+Tx9dsQ6S3ZCeQPaEdOw==" TotalPrice="UAH1996" BasePrice="USD25.00" ApproximateTotalPrice="UAH1996" ApproximateBasePrice="UAH668" EquivalentBasePrice="UAH668" Taxes="UAH1328" LatestTicketingTime="2016-11-10T23:59:00.000+02:00" TrueLastDateToTicket="2016-11-10T23:59:00.000+02:00" PricingMethod="Guaranteed" Exchangeable="true" IncludesVAT="false" ETicketability="Yes" PlatingCarrier="A3" ProviderCode="1G" ProviderReservationInfoRef="WU0oSYkYS7+fRjrmDy4Otg==" AirPricingInfoGroup="1" PricingType="StoredFare" ElStat="A">
                         <air:FareInfo Key="wwhe2DUWR32/Hdbbi+dATg==" FareBasis="P0BAGTI" PassengerTypeCode="ADT" Origin="KBP" Destination="ATH" EffectiveDate="2016-09-04T00:00:00.000+03:00" NotValidBefore="2016-11-10" NotValidAfter="2016-11-10" PseudoCityCode="3AQ0" ElStat="C">
-                            <common_v36_0:Endorsement Value="VALID ON A3 FLIGHTS/"/>
-                            <common_v36_0:Endorsement Value="DATES SHOWN ONLY"/>
-                            <common_v36_0:Endorsement Value="NON-REFUNDABLE"/>
+                            <common_v47_0:Endorsement Value="VALID ON A3 FLIGHTS/"/>
+                            <common_v47_0:Endorsement Value="DATES SHOWN ONLY"/>
+                            <common_v47_0:Endorsement Value="NON-REFUNDABLE"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>0</air:NumberOfPieces>
                             </air:BaggageAllowance>
@@ -121,11 +121,11 @@
                                 <air:ImageLocation Type="Consumer" ImageWidth="150" ImageHeight="150">https://merchandisingmanagement.travelport.com/documents/10431/17755/Go%20Light%202%20-%20150x150.jpg</air:ImageLocation>
                                 <air:OptionalServices>
                                     <air:OptionalService Type="MealOrBeverage" CreateDate="2016-09-04T22:09:19.858+00:00" ElStat="A" Key="wZ0/LVhvRE+WDkz3dgLpBg==" SecondaryType="SN" Chargeable="Included in the brand">
-                                        <common_v36_0:ServiceInfo>
-                                            <common_v36_0:Description>Snacks and drinks on board</common_v36_0:Description>
-                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/domestic_snacks_and_drinks.jpg"/>
-                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/domestic_snacks_and_drinks.jpg"/>
-                                        </common_v36_0:ServiceInfo>
+                                        <common_v47_0:ServiceInfo>
+                                            <common_v47_0:Description>Snacks and drinks on board</common_v47_0:Description>
+                                            <common_v47_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/domestic_snacks_and_drinks.jpg"/>
+                                            <common_v47_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/domestic_snacks_and_drinks.jpg"/>
+                                        </common_v47_0:ServiceInfo>
                                         <air:EMD AssociatedItem="Flight"/>
                                         <air:Text Type="Strapline" LanguageCode="EN">Snacks and drinks on board</air:Text>
                                         <air:Text Type="MarketingAgent" LanguageCode="EN">Complimentary snacks and drinks are available on board all Aegean Airlines flights.</air:Text>
@@ -134,11 +134,11 @@
                                         <air:Title Type="Short" LanguageCode="EN">Snacks</air:Title>
                                     </air:OptionalService>
                                     <air:OptionalService Type="FrequentFlyer" CreateDate="2016-09-04T22:09:19.858+00:00" ElStat="A" Key="Mdmk4DRFT5KmyzkuuEYxlQ==" SecondaryType="MG" Chargeable="Included in the brand">
-                                        <common_v36_0:ServiceInfo>
-                                            <common_v36_0:Description>Mileage accrual</common_v36_0:Description>
-                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/miles_accrual.jpg"/>
-                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/miles_accrual.jpg"/>
-                                        </common_v36_0:ServiceInfo>
+                                        <common_v47_0:ServiceInfo>
+                                            <common_v47_0:Description>Mileage accrual</common_v47_0:Description>
+                                            <common_v47_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/miles_accrual.jpg"/>
+                                            <common_v47_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/miles_accrual.jpg"/>
+                                        </common_v47_0:ServiceInfo>
                                         <air:EMD AssociatedItem="Flight"/>
                                         <air:Text Type="Strapline" LanguageCode="EN">Earn and save</air:Text>
                                         <air:Text Type="MarketingAgent" LanguageCode="EN">Miles can be accrued in all Aegean Airlines booking classes, then redeemable on a variety of exclusive awards.</air:Text>
@@ -147,11 +147,11 @@
                                         <air:Title Type="Short" LanguageCode="EN">Miles</air:Title>
                                     </air:OptionalService>
                                     <air:OptionalService Type="Baggage" CreateDate="2016-09-04T22:09:19.858+00:00" ElStat="A" Key="LFXIDhMfTWayLnORRsoyzg==" SecondaryType="CY" Chargeable="Included in the brand">
-                                        <common_v36_0:ServiceInfo>
-                                            <common_v36_0:Description>Hand baggage</common_v36_0:Description>
-                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/hand_luggage.jpg"/>
-                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/hand_luggage.jpg"/>
-                                        </common_v36_0:ServiceInfo>
+                                        <common_v47_0:ServiceInfo>
+                                            <common_v47_0:Description>Hand baggage</common_v47_0:Description>
+                                            <common_v47_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/hand_luggage.jpg"/>
+                                            <common_v47_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/hand_luggage.jpg"/>
+                                        </common_v47_0:ServiceInfo>
                                         <air:EMD AssociatedItem="Flight"/>
                                         <air:Text Type="Strapline" LanguageCode="EN">Taking bags on board</air:Text>
                                         <air:Text Type="MarketingAgent" LanguageCode="EN">Carry on board 1 bag up to 8 kg in Economy Class, or 2 bags up to 8kg and 5 kg respectively in Business Class.</air:Text>
@@ -165,9 +165,9 @@
                         <air:FareInfo Key="4K9AXrX7ShWLPMZ1m0fChg==" FareBasis="P0BAGTI" PassengerTypeCode="ADT" Origin="ATH" Destination="CDG" EffectiveDate="2016-09-04T00:00:00.000+03:00" Amount="NUC24.52" NotValidBefore="2016-11-11" NotValidAfter="2016-11-11" PseudoCityCode="3AQ0" ElStat="C">
                             <air:FareSurcharge Key="Ds3rQi0mS56BKRIECR7s0A==" Type="Other" Amount="NUC2.26" ElStat="A" SegmentRef="SAJ2rz9GTIKL6+WDYQcF3w=="/>
                             <air:FareSurcharge Key="jpGsbMdVR7Sk7L6L3Aqlag==" Type="Other" Amount="NUC2.26" ElStat="A" SegmentRef="SAJ2rz9GTIKL6+WDYQcF3w=="/>
-                            <common_v36_0:Endorsement Value="VALID ON A3 FLIGHTS/"/>
-                            <common_v36_0:Endorsement Value="DATES SHOWN ONLY"/>
-                            <common_v36_0:Endorsement Value="NON-REFUNDABLE"/>
+                            <common_v47_0:Endorsement Value="VALID ON A3 FLIGHTS/"/>
+                            <common_v47_0:Endorsement Value="DATES SHOWN ONLY"/>
+                            <common_v47_0:Endorsement Value="NON-REFUNDABLE"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>0</air:NumberOfPieces>
                             </air:BaggageAllowance>
@@ -187,15 +187,15 @@
                         <air:PassengerType Code="ADT" BookingTravelerRef="sKCAU5tBTle0tRWEnxx/rw==">
                             <air:FareGuaranteeInfo GuaranteeDate="2016-09-07" GuaranteeType="Guaranteed"/>
                         </air:PassengerType>
-                        <common_v36_0:BookingTravelerRef Key="rsv/H8fiQ6SzbleEuyD2hA=="/>
-                        <common_v36_0:BookingTravelerRef Key="sKCAU5tBTle0tRWEnxx/rw=="/>
+                        <common_v47_0:BookingTravelerRef Key="rsv/H8fiQ6SzbleEuyD2hA=="/>
+                        <common_v47_0:BookingTravelerRef Key="sKCAU5tBTle0tRWEnxx/rw=="/>
                         <air:TicketingModifiersRef Key="AnlmgXLfS7uqCMCvBmP2YA=="/>
                     </air:AirPricingInfo>
                     <air:AirPricingInfo Key="wJUfE8flRC2tbgYkdxlh5Q==" TotalPrice="UAH1996" BasePrice="USD25.00" ApproximateTotalPrice="UAH1996" ApproximateBasePrice="UAH668" EquivalentBasePrice="UAH668" Taxes="UAH1328" LatestTicketingTime="2016-11-10T23:59:00.000+02:00" TrueLastDateToTicket="2016-11-10T23:59:00.000+02:00" PricingMethod="Guaranteed" Exchangeable="true" IncludesVAT="false" ETicketability="Yes" PlatingCarrier="A3" ProviderCode="1G" ProviderReservationInfoRef="WU0oSYkYS7+fRjrmDy4Otg==" AirPricingInfoGroup="1" PricingType="StoredFare" ElStat="A">
                         <air:FareInfo Key="wwhe2DUWR32/Hdbbi+dATg==" FareBasis="P0BAGTI" PassengerTypeCode="ADT" Origin="KBP" Destination="ATH" EffectiveDate="2016-09-04T00:00:00.000+03:00" NotValidBefore="2016-11-10" NotValidAfter="2016-11-10" PseudoCityCode="3AQ0" ElStat="C">
-                            <common_v36_0:Endorsement Value="VALID ON A3 FLIGHTS/"/>
-                            <common_v36_0:Endorsement Value="DATES SHOWN ONLY"/>
-                            <common_v36_0:Endorsement Value="NON-REFUNDABLE"/>
+                            <common_v47_0:Endorsement Value="VALID ON A3 FLIGHTS/"/>
+                            <common_v47_0:Endorsement Value="DATES SHOWN ONLY"/>
+                            <common_v47_0:Endorsement Value="NON-REFUNDABLE"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>0</air:NumberOfPieces>
                             </air:BaggageAllowance>
@@ -225,11 +225,11 @@
                                 <air:ImageLocation Type="Consumer" ImageWidth="150" ImageHeight="150">https://merchandisingmanagement.travelport.com/documents/10431/17755/Go%20Light%202%20-%20150x150.jpg</air:ImageLocation>
                                 <air:OptionalServices>
                                     <air:OptionalService Type="MealOrBeverage" CreateDate="2016-09-04T22:09:19.858+00:00" ElStat="A" Key="kqkL3UORSRqeR1zhKmY7ew==" SecondaryType="SN" Chargeable="Included in the brand">
-                                        <common_v36_0:ServiceInfo>
-                                            <common_v36_0:Description>Snacks and drinks on board</common_v36_0:Description>
-                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/domestic_snacks_and_drinks.jpg"/>
-                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/domestic_snacks_and_drinks.jpg"/>
-                                        </common_v36_0:ServiceInfo>
+                                        <common_v47_0:ServiceInfo>
+                                            <common_v47_0:Description>Snacks and drinks on board</common_v47_0:Description>
+                                            <common_v47_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/domestic_snacks_and_drinks.jpg"/>
+                                            <common_v47_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/domestic_snacks_and_drinks.jpg"/>
+                                        </common_v47_0:ServiceInfo>
                                         <air:EMD AssociatedItem="Flight"/>
                                         <air:Text Type="Strapline" LanguageCode="EN">Snacks and drinks on board</air:Text>
                                         <air:Text Type="MarketingAgent" LanguageCode="EN">Complimentary snacks and drinks are available on board all Aegean Airlines flights.</air:Text>
@@ -238,11 +238,11 @@
                                         <air:Title Type="Short" LanguageCode="EN">Snacks</air:Title>
                                     </air:OptionalService>
                                     <air:OptionalService Type="FrequentFlyer" CreateDate="2016-09-04T22:09:19.858+00:00" ElStat="A" Key="BcP8mSVgRoqq1ZUJI6THsA==" SecondaryType="MG" Chargeable="Included in the brand">
-                                        <common_v36_0:ServiceInfo>
-                                            <common_v36_0:Description>Mileage accrual</common_v36_0:Description>
-                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/miles_accrual.jpg"/>
-                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/miles_accrual.jpg"/>
-                                        </common_v36_0:ServiceInfo>
+                                        <common_v47_0:ServiceInfo>
+                                            <common_v47_0:Description>Mileage accrual</common_v47_0:Description>
+                                            <common_v47_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/miles_accrual.jpg"/>
+                                            <common_v47_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/miles_accrual.jpg"/>
+                                        </common_v47_0:ServiceInfo>
                                         <air:EMD AssociatedItem="Flight"/>
                                         <air:Text Type="Strapline" LanguageCode="EN">Earn and save</air:Text>
                                         <air:Text Type="MarketingAgent" LanguageCode="EN">Miles can be accrued in all Aegean Airlines booking classes, then redeemable on a variety of exclusive awards.</air:Text>
@@ -251,11 +251,11 @@
                                         <air:Title Type="Short" LanguageCode="EN">Miles</air:Title>
                                     </air:OptionalService>
                                     <air:OptionalService Type="Baggage" CreateDate="2016-09-04T22:09:19.858+00:00" ElStat="A" Key="w7HjEZpIRBeompI7ne9zZQ==" SecondaryType="CY" Chargeable="Included in the brand">
-                                        <common_v36_0:ServiceInfo>
-                                            <common_v36_0:Description>Hand baggage</common_v36_0:Description>
-                                            <common_v36_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/hand_luggage.jpg"/>
-                                            <common_v36_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/hand_luggage.jpg"/>
-                                        </common_v36_0:ServiceInfo>
+                                        <common_v47_0:ServiceInfo>
+                                            <common_v47_0:Description>Hand baggage</common_v47_0:Description>
+                                            <common_v47_0:MediaItem caption="Consumer" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/hand_luggage.jpg"/>
+                                            <common_v47_0:MediaItem caption="Agent" height="60" width="60" url="https://merchandisingmanagement.travelport.com/documents/10431/17757/hand_luggage.jpg"/>
+                                        </common_v47_0:ServiceInfo>
                                         <air:EMD AssociatedItem="Flight"/>
                                         <air:Text Type="Strapline" LanguageCode="EN">Taking bags on board</air:Text>
                                         <air:Text Type="MarketingAgent" LanguageCode="EN">Carry on board 1 bag up to 8 kg in Economy Class, or 2 bags up to 8kg and 5 kg respectively in Business Class.</air:Text>
@@ -269,9 +269,9 @@
                         <air:FareInfo Key="4K9AXrX7ShWLPMZ1m0fChg==" FareBasis="P0BAGTI" PassengerTypeCode="ADT" Origin="ATH" Destination="CDG" EffectiveDate="2016-09-04T00:00:00.000+03:00" Amount="NUC24.52" NotValidBefore="2016-11-11" NotValidAfter="2016-11-11" PseudoCityCode="3AQ0" ElStat="C">
                             <air:FareSurcharge Key="n8dhQ7n/R/KPrq8eFIJEjg==" Type="Other" Amount="NUC2.26" ElStat="A" SegmentRef="SAJ2rz9GTIKL6+WDYQcF3w=="/>
                             <air:FareSurcharge Key="8REFVtTeRwSW5D/1GJiVKg==" Type="Other" Amount="NUC2.26" ElStat="A" SegmentRef="SAJ2rz9GTIKL6+WDYQcF3w=="/>
-                            <common_v36_0:Endorsement Value="VALID ON A3 FLIGHTS/"/>
-                            <common_v36_0:Endorsement Value="DATES SHOWN ONLY"/>
-                            <common_v36_0:Endorsement Value="NON-REFUNDABLE"/>
+                            <common_v47_0:Endorsement Value="VALID ON A3 FLIGHTS/"/>
+                            <common_v47_0:Endorsement Value="DATES SHOWN ONLY"/>
+                            <common_v47_0:Endorsement Value="NON-REFUNDABLE"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>0</air:NumberOfPieces>
                             </air:BaggageAllowance>
@@ -288,16 +288,16 @@
                         <air:PassengerType Code="CNN" BookingTravelerRef="8giuKZjGSr24Sm4Ly8AawA==">
                             <air:FareGuaranteeInfo GuaranteeDate="2016-09-07" GuaranteeType="Guaranteed"/>
                         </air:PassengerType>
-                        <common_v36_0:BookingTravelerRef Key="8giuKZjGSr24Sm4Ly8AawA=="/>
+                        <common_v47_0:BookingTravelerRef Key="8giuKZjGSr24Sm4Ly8AawA=="/>
                         <air:TicketingModifiersRef Key="AnlmgXLfS7uqCMCvBmP2YA=="/>
                     </air:AirPricingInfo>
                     <air:TicketingModifiers PlatingCarrier="A3" Key="AnlmgXLfS7uqCMCvBmP2YA==" ElStat="A">
                         <air:DocumentSelect IssueElectronicTicket="true"/>
                     </air:TicketingModifiers>
                 </air:AirReservation>
-                <common_v36_0:AgencyInfo>
-                    <common_v36_0:AgentAction ActionType="Created" AgentCode="UAPI4466145968-D6034EC2" BranchCode="P2660493" AgencyCode="S1828245" EventTime="2016-09-04T22:09:21.745+00:00"/>
-                </common_v36_0:AgencyInfo>
+                <common_v47_0:AgencyInfo>
+                    <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI4466145968-D6034EC2" BranchCode="P2660493" AgencyCode="S1828245" EventTime="2016-09-04T22:09:21.745+00:00"/>
+                </common_v47_0:AgencyInfo>
             </universal:UniversalRecord>
         </universal:AirCreateReservationRsp>
     </SOAP:Body>

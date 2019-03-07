@@ -3,22 +3,22 @@
   <SOAP:Body>
     <air:AirRetrieveDocumentRsp TransactionId="B76AC1DC0A0759CB3DE0CA5F329DE3DC" ResponseTime="762" UniversalRecordLocatorCode="WYBENZ"
       xmlns:air="http://www.travelport.com/schema/air_v39_0"
-      xmlns:common_v39_0="http://www.travelport.com/schema/common_v39_0">
+      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
       <air:ETR Key="dP3Eq2BAAA/BL1VOJDAAAA==" Taxes="UAH7238.00" Refundable="false" Exchangeable="false" IssuedDate="2017-08-06T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="3V49L0" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="OK">
         <air:AirReservationLocatorCode>11GPE2</air:AirReservationLocatorCode>
-        <common_v39_0:AgencyInfo>
-          <common_v39_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-08-05T22:00:00.000+00:00"/>
-        </common_v39_0:AgencyInfo>
-        <common_v39_0:BookingTraveler Key="AdS1lyBAAA/BjXahREAAAA==">
-          <common_v39_0:BookingTravelerName First="DMYTROMR" Last="CHERTOUSOV"/>
-          <common_v39_0:SSR Key="RWM1lyBAAA/BqXhZYEAAAA==" SegmentRef="AdS1lyBAAA/B7dahREAAAA==" Status="HK" Type="TKNE" FreeText="0649902914203C1" Carrier="OK" ProviderReservationInfoRef="AdS1lyBAAA/BHOPhREAAAA=="/>
-          <common_v39_0:SSR Key="RWM1lyBAAA/BrXhZYEAAAA==" SegmentRef="AdS1lyBAAA/BiuahREAAAA==" Status="HK" Type="TKNE" FreeText="0649902914203C2" Carrier="OK" ProviderReservationInfoRef="AdS1lyBAAA/BHOPhREAAAA=="/>
-          <common_v39_0:SSR Key="dP3Eq2BAAA/BD1VOJDAAAA==" SegmentRef="dP3Eq2BAAA/BF1VOJDAAAA==" Status="HK" Type="TKNE" FreeText="0649902930699C1" Carrier="OK" ProviderReservationInfoRef="AdS1lyBAAA/BHOPhREAAAA=="/>
-          <common_v39_0:SSR Key="dP3Eq2BAAA/BE1VOJDAAAA==" SegmentRef="dP3Eq2BAAA/BI1VOJDAAAA==" Status="HK" Type="TKNE" FreeText="0649902930699C2" Carrier="OK" ProviderReservationInfoRef="AdS1lyBAAA/BHOPhREAAAA=="/>
-        </common_v39_0:BookingTraveler>
-        <common_v39_0:FormOfPayment Key="dP3Eq2BAAA/B00VOJDAAAA==" Type="Cash" Reusable="false" ProfileKey="KmFEZN0ZQneWyj8eGJtXrQ=="/>
-        <common_v39_0:Payment Key="dP3Eq2BAAA/B10VOJDAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="dP3Eq2BAAA/B00VOJDAAAA=="/>
-        <common_v39_0:SupplierLocator SupplierCode="OK" SupplierLocatorCode="P4WSXR"/>
+        <common_v47_0:AgencyInfo>
+          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-08-05T22:00:00.000+00:00"/>
+        </common_v47_0:AgencyInfo>
+        <common_v47_0:BookingTraveler Key="AdS1lyBAAA/BjXahREAAAA==">
+          <common_v47_0:BookingTravelerName First="DMYTROMR" Last="CHERTOUSOV"/>
+          <common_v47_0:SSR Key="RWM1lyBAAA/BqXhZYEAAAA==" SegmentRef="AdS1lyBAAA/B7dahREAAAA==" Status="HK" Type="TKNE" FreeText="0649902914203C1" Carrier="OK" ProviderReservationInfoRef="AdS1lyBAAA/BHOPhREAAAA=="/>
+          <common_v47_0:SSR Key="RWM1lyBAAA/BrXhZYEAAAA==" SegmentRef="AdS1lyBAAA/BiuahREAAAA==" Status="HK" Type="TKNE" FreeText="0649902914203C2" Carrier="OK" ProviderReservationInfoRef="AdS1lyBAAA/BHOPhREAAAA=="/>
+          <common_v47_0:SSR Key="dP3Eq2BAAA/BD1VOJDAAAA==" SegmentRef="dP3Eq2BAAA/BF1VOJDAAAA==" Status="HK" Type="TKNE" FreeText="0649902930699C1" Carrier="OK" ProviderReservationInfoRef="AdS1lyBAAA/BHOPhREAAAA=="/>
+          <common_v47_0:SSR Key="dP3Eq2BAAA/BE1VOJDAAAA==" SegmentRef="dP3Eq2BAAA/BI1VOJDAAAA==" Status="HK" Type="TKNE" FreeText="0649902930699C2" Carrier="OK" ProviderReservationInfoRef="AdS1lyBAAA/BHOPhREAAAA=="/>
+        </common_v47_0:BookingTraveler>
+        <common_v47_0:FormOfPayment Key="dP3Eq2BAAA/B00VOJDAAAA==" Type="Cash" Reusable="false" ProfileKey="KmFEZN0ZQneWyj8eGJtXrQ=="/>
+        <common_v47_0:Payment Key="dP3Eq2BAAA/B10VOJDAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="dP3Eq2BAAA/B00VOJDAAAA=="/>
+        <common_v47_0:SupplierLocator SupplierCode="OK" SupplierLocatorCode="P4WSXR"/>
         <air:FareCalc>IEV OK PRG M/IT OK IEV M/IT END ROE1.0 XT UAH52UD UAH337YK UAH689CZ UAH2454YQ PD104UA PD52UD PD443YK PD657CZ PD2346YQ</air:FareCalc>
         <air:Ticket Key="dP3Eq2BAAA/BR1VOJDAAAA==" TicketNumber="0649902930699" TicketStatus="N">
           <air:Coupon Key="dP3Eq2BAAA/BS1VOJDAAAA==" CouponNumber="1" MarketingCarrier="OK" MarketingFlightNumber="977" Origin="KBP" Destination="PRG" DepartureTime="2018-05-01T04:10:00.000+03:00" StopoverCode="true" BookingClass="C" FareBasis="CBRSOK" NotValidBefore="2018-05-01" NotValidAfter="2018-05-01" Status="O" SegmentGroup="0" MarriageGroup="0"/>
@@ -26,16 +26,16 @@
           <air:ExchangedTicketInfo Number="0649902914202"/>
           <air:ExchangedTicketInfo Number="0649902914203"/>
         </air:Ticket>
-        <common_v39_0:Commission Key="7pV9p2BAAA/Bw1z4KDAAAA==" Level="Fare" Type="PercentBase" Percentage="0.1"/>
+        <common_v47_0:Commission Key="7pV9p2BAAA/Bw1z4KDAAAA==" Level="Fare" Type="PercentBase" Percentage="0.1"/>
         <air:AirPricingInfo Key="dP3Eq2BAAA/B20VOJDAAAA==" TotalPrice="UAH21242" BasePrice="USD680.00" EquivalentBasePrice="UAH17606" Taxes="UAH3636" LatestTicketingTime="2017-08-09T23:59:00.000+02:00" TrueLastDateToTicket="2017-08-13T23:59:00.000+02:00" PricingMethod="Guaranteed" ETicketability="Yes" ProviderReservationInfoRef="AdS1lyBAAA/BHOPhREAAAA==" AirPricingInfoGroup="10" Ticketed="true" PricingType="StoredFare" FareCalculationInd="G">
           <air:FareInfo Key="dP3Eq2BAAA/B40VOJDAAAA==" FareBasis="CBRSOK" PassengerTypeCode="ADT" Origin="KBP" Destination="PRG" EffectiveDate="2017-08-06T00:00:00.000+02:00" NotValidBefore="2018-05-01" NotValidAfter="2018-05-01">
-            <common_v39_0:Endorsement Value="FARE RESTRICTIONS APPLY"/>
+            <common_v47_0:Endorsement Value="FARE RESTRICTIONS APPLY"/>
             <air:BaggageAllowance>
               <air:NumberOfPieces>2</air:NumberOfPieces>
             </air:BaggageAllowance>
           </air:FareInfo>
           <air:FareInfo Key="dP3Eq2BAAA/B70VOJDAAAA==" FareBasis="CBRSOK" PassengerTypeCode="ADT" Origin="PRG" Destination="KBP" EffectiveDate="2017-08-06T00:00:00.000+02:00" NotValidBefore="2018-05-04" NotValidAfter="2018-05-04">
-            <common_v39_0:Endorsement Value="FARE RESTRICTIONS APPLY"/>
+            <common_v47_0:Endorsement Value="FARE RESTRICTIONS APPLY"/>
             <air:BaggageAllowance>
               <air:NumberOfPieces>2</air:NumberOfPieces>
             </air:BaggageAllowance>
@@ -51,7 +51,7 @@
           <air:PassengerType Code="ADT" BookingTravelerRef="AdS1lyBAAA/BjXahREAAAA==">
             <air:FareGuaranteeInfo GuaranteeType="Guaranteed"/>
           </air:PassengerType>
-          <common_v39_0:BookingTravelerRef Key="AdS1lyBAAA/BjXahREAAAA=="/>
+          <common_v47_0:BookingTravelerRef Key="AdS1lyBAAA/BjXahREAAAA=="/>
           <air:PaymentRef Key="dP3Eq2BAAA/Bz0VOJDAAAA=="/>
         </air:AirPricingInfo>
         <air:BaggageAllowances>

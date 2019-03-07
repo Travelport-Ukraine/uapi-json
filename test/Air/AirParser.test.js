@@ -172,7 +172,7 @@ describe('#AirParser', () => {
       const check = () => airParser.AIR_CANCEL_PNR.call({
         uapi_version: 'v36_0',
       }, {
-        'common_v36_0:ResponseMessage': [{
+        'common_v47_0:ResponseMessage': [{
           _: 'Some message',
         }, {
           _: 'Another message',
@@ -184,7 +184,7 @@ describe('#AirParser', () => {
       const check = () => airParser.AIR_CANCEL_PNR.call({
         uapi_version: 'v36_0',
       }, {
-        'common_v36_0:ResponseMessage': [{
+        'common_v47_0:ResponseMessage': [{
           _: 'Itinerary Cancelled',
         }],
       });

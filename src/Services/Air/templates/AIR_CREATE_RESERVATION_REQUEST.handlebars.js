@@ -14,9 +14,9 @@ module.exports = `
             {{#if UniversalRecordLocatorCode}} UniversalRecordLocatorCode="{{UniversalRecordLocatorCode}}" {{/if}}
             {{#if allowWaitlist}}RestrictWaitlist="false"{{else}}RestrictWaitlist="true"{{/if}}
             xmlns:univ="http://www.travelport.com/schema/universal_v47_0"
-            xmlns:com="http://www.travelport.com/schema/common_v36_0"
+            xmlns:com="http://www.travelport.com/schema/common_v47_0"
             xmlns:air="http://www.travelport.com/schema/air_v36_0"
-            xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0"
+            xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
             >
             <com:BillingPointOfSaleInfo OriginApplication="uAPI" />
             {{#if emulatePcc}}

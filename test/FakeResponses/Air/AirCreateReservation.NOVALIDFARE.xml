@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <universal:AirCreateReservationRsp xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" TraceId="" TransactionId="016358100A07425A0F207B6265FECEBB" ResponseTime="4398">
-            <common_v36_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">Some of the requested AirPricingInfos could not be saved for the requested provider.</common_v36_0:ResponseMessage>
-            <common_v36_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">NO VALID FARE FOR INPUT CRITERIA</common_v36_0:ResponseMessage>
-            <common_v36_0:ResponseMessage Code="1" Type="Warning" ProviderCode="1G">LISTED SEGMENT IS FOLLOWED BY CONFIRMED SEGMENT 02</common_v36_0:ResponseMessage>
+        <universal:AirCreateReservationRsp xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" TraceId="" TransactionId="016358100A07425A0F207B6265FECEBB" ResponseTime="4398">
+            <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">Some of the requested AirPricingInfos could not be saved for the requested provider.</common_v47_0:ResponseMessage>
+            <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">NO VALID FARE FOR INPUT CRITERIA</common_v47_0:ResponseMessage>
+            <common_v47_0:ResponseMessage Code="1" Type="Warning" ProviderCode="1G">LISTED SEGMENT IS FOLLOWED BY CONFIRMED SEGMENT 02</common_v47_0:ResponseMessage>
             <universal:UniversalRecord LocatorCode="JRVWPZ" Version="0" Status="Active">
-                <common_v36_0:BookingTraveler Key="5QbHDplnR8WiW/qOCf/eRw==" TravelerType="ADT" Age="16" DOB="1999-11-10" Gender="M" ElStat="A">
-                    <common_v36_0:BookingTravelerName First="ALONA" Last="KIZKO"/>
-                    <common_v36_0:DeliveryInfo>
-                        <common_v36_0:ShippingAddress Key="W0eop2yaQ5muD7+GuGxslQ==" ElStat="A">
-                            <common_v36_0:AddressName>Agency</common_v36_0:AddressName>
-                            <common_v36_0:Street>Mezhygirska St. 1</common_v36_0:Street>
-                            <common_v36_0:City>Kyiv</common_v36_0:City>
-                            <common_v36_0:PostalCode>123456</common_v36_0:PostalCode>
-                            <common_v36_0:Country>UA</common_v36_0:Country>
-                            <common_v36_0:ProviderReservationInfoRef Key="6WZkWf8uSXiwVugGCe0/nw=="/>
-                        </common_v36_0:ShippingAddress>
-                        <common_v36_0:ProviderReservationInfoRef Key="6WZkWf8uSXiwVugGCe0/nw=="/>
-                    </common_v36_0:DeliveryInfo>
-                    <common_v36_0:PhoneNumber Key="UAXQNJraRc+2gW5qbnocxw==" Type="Other" Location="IEV" CountryCode="38" Number="0445857777" ElStat="A">
-                        <common_v36_0:ProviderReservationInfoRef Key="6WZkWf8uSXiwVugGCe0/nw=="/>
-                    </common_v36_0:PhoneNumber>
-                    <common_v36_0:Email Key="h99dGkQcSHme3sm4fQcO0A==" Type="Other" EmailID="avia@711.ua" ElStat="A">
-                        <common_v36_0:ProviderReservationInfoRef Key="6WZkWf8uSXiwVugGCe0/nw=="/>
-                    </common_v36_0:Email>
-                    <common_v36_0:SSR Key="xD9s262RTM6xJKNDOeCkeA==" Status="HK" Type="DOCS" FreeText="P/UA/13123kd/UA/10NOV99/M/26OCT17/ASD/ARAR/URUUR" Carrier="PS" ProviderReservationInfoRef="6WZkWf8uSXiwVugGCe0/nw==" ElStat="A"/>
-                </common_v36_0:BookingTraveler>
-                <common_v36_0:ActionStatus Key="kbJlXEygRzSLrSMbykRvJQ==" Type="TAW" TicketDate="2016-10-27T14:27:00.000+03:00" ProviderReservationInfoRef="6WZkWf8uSXiwVugGCe0/nw==" ProviderCode="1G" PseudoCityCode="3AQ0" ElStat="A"/>
+                <common_v47_0:BookingTraveler Key="5QbHDplnR8WiW/qOCf/eRw==" TravelerType="ADT" Age="16" DOB="1999-11-10" Gender="M" ElStat="A">
+                    <common_v47_0:BookingTravelerName First="ALONA" Last="KIZKO"/>
+                    <common_v47_0:DeliveryInfo>
+                        <common_v47_0:ShippingAddress Key="W0eop2yaQ5muD7+GuGxslQ==" ElStat="A">
+                            <common_v47_0:AddressName>Agency</common_v47_0:AddressName>
+                            <common_v47_0:Street>Mezhygirska St. 1</common_v47_0:Street>
+                            <common_v47_0:City>Kyiv</common_v47_0:City>
+                            <common_v47_0:PostalCode>123456</common_v47_0:PostalCode>
+                            <common_v47_0:Country>UA</common_v47_0:Country>
+                            <common_v47_0:ProviderReservationInfoRef Key="6WZkWf8uSXiwVugGCe0/nw=="/>
+                        </common_v47_0:ShippingAddress>
+                        <common_v47_0:ProviderReservationInfoRef Key="6WZkWf8uSXiwVugGCe0/nw=="/>
+                    </common_v47_0:DeliveryInfo>
+                    <common_v47_0:PhoneNumber Key="UAXQNJraRc+2gW5qbnocxw==" Type="Other" Location="IEV" CountryCode="38" Number="0445857777" ElStat="A">
+                        <common_v47_0:ProviderReservationInfoRef Key="6WZkWf8uSXiwVugGCe0/nw=="/>
+                    </common_v47_0:PhoneNumber>
+                    <common_v47_0:Email Key="h99dGkQcSHme3sm4fQcO0A==" Type="Other" EmailID="avia@711.ua" ElStat="A">
+                        <common_v47_0:ProviderReservationInfoRef Key="6WZkWf8uSXiwVugGCe0/nw=="/>
+                    </common_v47_0:Email>
+                    <common_v47_0:SSR Key="xD9s262RTM6xJKNDOeCkeA==" Status="HK" Type="DOCS" FreeText="P/UA/13123kd/UA/10NOV99/M/26OCT17/ASD/ARAR/URUUR" Carrier="PS" ProviderReservationInfoRef="6WZkWf8uSXiwVugGCe0/nw==" ElStat="A"/>
+                </common_v47_0:BookingTraveler>
+                <common_v47_0:ActionStatus Key="kbJlXEygRzSLrSMbykRvJQ==" Type="TAW" TicketDate="2016-10-27T14:27:00.000+03:00" ProviderReservationInfoRef="6WZkWf8uSXiwVugGCe0/nw==" ProviderCode="1G" PseudoCityCode="3AQ0" ElStat="A"/>
                 <universal:ProviderReservationInfo Key="6WZkWf8uSXiwVugGCe0/nw==" ProviderCode="1G" LocatorCode="M54F5M" CreateDate="2016-10-26T14:27:21.790+00:00" ModifiedDate="2016-10-26T14:27:21.790+00:00" HostCreateDate="2016-10-26" OwningPCC="3AQ0">
                     <universal:ProviderReservationDetails ProviderReservationDetail="false" CustomCheck="true" ProviderProfile="false" DivideDetails="false" EnhancedItinModifiers="false" IntegratedContent="false" Cruise="false" RailSegment="false"/>
                 </universal:ProviderReservationInfo>
                 <air:AirReservation LocatorCode="6SMGXR" CreateDate="2016-10-26T14:27:21.285+00:00" ModifiedDate="2016-10-26T14:27:21.790+00:00">
-                    <common_v36_0:BookingTravelerRef Key="5QbHDplnR8WiW/qOCf/eRw=="/>
-                    <common_v36_0:ProviderReservationInfoRef Key="6WZkWf8uSXiwVugGCe0/nw=="/>
+                    <common_v47_0:BookingTravelerRef Key="5QbHDplnR8WiW/qOCf/eRw=="/>
+                    <common_v47_0:ProviderReservationInfoRef Key="6WZkWf8uSXiwVugGCe0/nw=="/>
                     <air:AirSegment Key="dUugXmaSTRuWjfHaqIYHEg==" Group="0" Carrier="PS" CabinClass="Economy" FlightNumber="111" ProviderCode="1G" Origin="KBP" Destination="LGW" DepartureTime="2017-01-02T10:00:00.000+02:00" ArrivalTime="2017-01-02T11:25:00.000+00:00" TravelTime="205" ClassOfService="K" ETicketability="Yes" Equipment="738" Status="HL" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="6WZkWf8uSXiwVugGCe0/nw==" TravelOrder="1" OptionalServicesIndicator="false" LinkAvailability="true" ElStat="A">
                         <air:FlightDetails Key="dqxSikTPSvKL7N8Kd+XhMQ==" Origin="KBP" Destination="LGW" DepartureTime="2017-01-02T10:00:00.000+02:00" ArrivalTime="2017-01-02T11:25:00.000+00:00" FlightTime="205" TravelTime="205" Equipment="738" DestinationTerminal="S" ElStat="C"/>
-                        <common_v36_0:SellMessage>ARRIVES LGW TERMINAL S</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>ADD ADVANCE PASSENGER INFORMATION SSRS DOCA/DOCO/DOCS</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>PERSONAL DATA WHICH IS PROVIDED TO US IN CONNECTION</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>WITH YOUR TRAVEL MAY BE PASSED TO GOVERNMENT AUTHORITIES</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>FOR BORDER CONTROL AND AVIATION SECURITY PURPOSES</common_v36_0:SellMessage>
+                        <common_v47_0:SellMessage>ARRIVES LGW TERMINAL S</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>ADD ADVANCE PASSENGER INFORMATION SSRS DOCA/DOCO/DOCS</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>PERSONAL DATA WHICH IS PROVIDED TO US IN CONNECTION</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>WITH YOUR TRAVEL MAY BE PASSED TO GOVERNMENT AUTHORITIES</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>FOR BORDER CONTROL AND AVIATION SECURITY PURPOSES</common_v47_0:SellMessage>
                     </air:AirSegment>
                     <air:AirSegment Key="3k1T/J0oQE2cTkuPnpnqcg==" Group="1" Carrier="PS" CabinClass="Economy" FlightNumber="112" ProviderCode="1G" Origin="LGW" Destination="KBP" DepartureTime="2017-01-21T12:20:00.000+00:00" ArrivalTime="2017-01-21T17:40:00.000+02:00" TravelTime="200" ClassOfService="M" ETicketability="Yes" Equipment="738" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="6WZkWf8uSXiwVugGCe0/nw==" TravelOrder="2" OptionalServicesIndicator="false" LinkAvailability="true" ElStat="A">
                         <air:FlightDetails Key="kBR8BaevR+uBTEfnfgF4Lg==" Origin="LGW" Destination="KBP" DepartureTime="2017-01-21T12:20:00.000+00:00" ArrivalTime="2017-01-21T17:40:00.000+02:00" FlightTime="200" TravelTime="200" Equipment="738" OriginTerminal="S" ElStat="A"/>
-                        <common_v36_0:SellMessage>DEPARTS LGW TERMINAL S</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>ADD ADVANCE PASSENGER INFORMATION SSRS DOCA/DOCO/DOCS</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>PERSONAL DATA WHICH IS PROVIDED TO US IN CONNECTION</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>WITH YOUR TRAVEL MAY BE PASSED TO GOVERNMENT AUTHORITIES</common_v36_0:SellMessage>
-                        <common_v36_0:SellMessage>FOR BORDER CONTROL AND AVIATION SECURITY PURPOSES</common_v36_0:SellMessage>
+                        <common_v47_0:SellMessage>DEPARTS LGW TERMINAL S</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>ADD ADVANCE PASSENGER INFORMATION SSRS DOCA/DOCO/DOCS</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>PERSONAL DATA WHICH IS PROVIDED TO US IN CONNECTION</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>WITH YOUR TRAVEL MAY BE PASSED TO GOVERNMENT AUTHORITIES</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>FOR BORDER CONTROL AND AVIATION SECURITY PURPOSES</common_v47_0:SellMessage>
                     </air:AirSegment>
                 </air:AirReservation>
-                <common_v36_0:AgencyInfo>
-                    <common_v36_0:AgentAction ActionType="Created" AgentCode="UAPI4466145968-D6034EC2" BranchCode="P2660493" AgencyCode="S1828245" EventTime="2016-10-26T14:27:17.790+00:00"/>
-                </common_v36_0:AgencyInfo>
+                <common_v47_0:AgencyInfo>
+                    <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI4466145968-D6034EC2" BranchCode="P2660493" AgencyCode="S1828245" EventTime="2016-10-26T14:27:17.790+00:00"/>
+                </common_v47_0:AgencyInfo>
             </universal:UniversalRecord>
         </universal:AirCreateReservationRsp>
     </SOAP:Body>

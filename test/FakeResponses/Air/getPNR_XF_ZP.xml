@@ -3,57 +3,57 @@
   <SOAP:Body>
     <universal:UniversalRecordImportRsp TraceId="" TransactionId="5EF93A610A0759BC70CF85D144C2C735" ResponseTime="1247"
       xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
-      xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0"
+      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
       xmlns:air="http://www.travelport.com/schema/air_v36_0">
-      <common_v36_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record HAB2JQ</common_v36_0:ResponseMessage>
+      <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record HAB2JQ</common_v47_0:ResponseMessage>
       <universal:UniversalRecord LocatorCode="HAB2JQ" Version="1" Status="Active">
-        <common_v36_0:BookingTraveler Key="4EwW8wBAAA/B6krOEKAAAA==">
-          <common_v36_0:BookingTravelerName First="FEDIRMR" Last="IVANOV"/>
-          <common_v36_0:PhoneNumber Key="8FBT8wBAAA/BxUY0XKAAAA==" Type="Mobile" Location="IEV" Number="3805085763213">
-            <common_v36_0:ProviderReservationInfoRef Key="4EwW8wBAAA/BGRiOEKAAAA=="/>
-          </common_v36_0:PhoneNumber>
-          <common_v36_0:SSR Key="4EwW8wBAAA/B7krOEKAAAA==" Status="HK" Type="DOCS" FreeText="P/AA/S12345678/GB/12JUL76/M/23OCT26/IVANOV/FEDIRMR -1IVANOV/FEDIRMR" Carrier="DL" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
-          <common_v36_0:SSR Key="4EwW8wBAAA/B8krOEKAAAA==" Status="HK" Type="DOCS" FreeText="P/AA/S12345678/GB/12JUL76/M/23OCT26/IVANOV/FEDIRMR -1IVANOV/FEDIRMR" Carrier="AA" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
-          <common_v36_0:SSR Key="4EwW8wBAAA/B9krOEKAAAA==" SegmentRef="4EwW8wBAAA/B/krOEKAAAA==" Status="HK" Type="TKNE" FreeText="0579902896660C1" Carrier="AA" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
-          <common_v36_0:SSR Key="4EwW8wBAAA/B+krOEKAAAA==" SegmentRef="4EwW8wBAAA/BBlrOEKAAAA==" Status="HK" Type="TKNE" FreeText="0579902896660C2" Carrier="AA" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
-        </common_v36_0:BookingTraveler>
-        <common_v36_0:ActionStatus Key="4EwW8wBAAA/BokrOEKAAAA==" Type="ACTIVE" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA==" ProviderCode="1G">
-          <common_v36_0:Remark>IEV 25MAY1444Z 34 AG</common_v36_0:Remark>
-        </common_v36_0:ActionStatus>
+        <common_v47_0:BookingTraveler Key="4EwW8wBAAA/B6krOEKAAAA==">
+          <common_v47_0:BookingTravelerName First="FEDIRMR" Last="IVANOV"/>
+          <common_v47_0:PhoneNumber Key="8FBT8wBAAA/BxUY0XKAAAA==" Type="Mobile" Location="IEV" Number="3805085763213">
+            <common_v47_0:ProviderReservationInfoRef Key="4EwW8wBAAA/BGRiOEKAAAA=="/>
+          </common_v47_0:PhoneNumber>
+          <common_v47_0:SSR Key="4EwW8wBAAA/B7krOEKAAAA==" Status="HK" Type="DOCS" FreeText="P/AA/S12345678/GB/12JUL76/M/23OCT26/IVANOV/FEDIRMR -1IVANOV/FEDIRMR" Carrier="DL" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
+          <common_v47_0:SSR Key="4EwW8wBAAA/B8krOEKAAAA==" Status="HK" Type="DOCS" FreeText="P/AA/S12345678/GB/12JUL76/M/23OCT26/IVANOV/FEDIRMR -1IVANOV/FEDIRMR" Carrier="AA" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
+          <common_v47_0:SSR Key="4EwW8wBAAA/B9krOEKAAAA==" SegmentRef="4EwW8wBAAA/B/krOEKAAAA==" Status="HK" Type="TKNE" FreeText="0579902896660C1" Carrier="AA" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
+          <common_v47_0:SSR Key="4EwW8wBAAA/B+krOEKAAAA==" SegmentRef="4EwW8wBAAA/BBlrOEKAAAA==" Status="HK" Type="TKNE" FreeText="0579902896660C2" Carrier="AA" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA=="/>
+        </common_v47_0:BookingTraveler>
+        <common_v47_0:ActionStatus Key="4EwW8wBAAA/BokrOEKAAAA==" Type="ACTIVE" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA==" ProviderCode="1G">
+          <common_v47_0:Remark>IEV 25MAY1444Z 34 AG</common_v47_0:Remark>
+        </common_v47_0:ActionStatus>
         <universal:ProviderReservationInfo Key="4EwW8wBAAA/BGRiOEKAAAA==" ProviderCode="1G" LocatorCode="X6631S" CreateDate="2017-05-31T11:28:40.578+00:00" ModifiedDate="2017-05-31T14:46:51.575+00:00" HostCreateDate="2017-05-25" Imported="true" OwningPCC="7J8J">
           <universal:ProviderReservationDetails ProviderReservationDetail="false" CustomCheck="true" ProviderProfile="false" DivideDetails="false" EnhancedItinModifiers="false" IntegratedContent="false" Cruise="false" RailSegment="false"/>
         </universal:ProviderReservationInfo>
         <air:AirReservation LocatorCode="4HN6N9" CreateDate="2017-05-31T11:28:38.822+00:00" ModifiedDate="2017-05-31T14:43:19.098+00:00">
-          <common_v36_0:SupplierLocator SupplierCode="AA" SupplierLocatorCode="VLGZLM" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA==" CreateDateTime="2017-05-25T14:41:00.000+00:00"/>
+          <common_v47_0:SupplierLocator SupplierCode="AA" SupplierLocatorCode="VLGZLM" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA==" CreateDateTime="2017-05-25T14:41:00.000+00:00"/>
           <air:DocumentInfo>
             <air:TicketInfo Number="0579902896659" Status="X" BookingTravelerRef="4EwW8wBAAA/B6krOEKAAAA==" AirPricingInfoRef="4EwW8wBAAA/BskrOEKAAAA==">
-              <common_v36_0:Name First="FEDIRMR" Last="IVANOV"/>
+              <common_v47_0:Name First="FEDIRMR" Last="IVANOV"/>
             </air:TicketInfo>
             <air:TicketInfo Number="0579902896660" Status="N" BookingTravelerRef="4EwW8wBAAA/B6krOEKAAAA==" AirPricingInfoRef="4EwW8wBAAA/BskrOEKAAAA==">
-              <common_v36_0:Name First="FEDIRMR" Last="IVANOV"/>
+              <common_v47_0:Name First="FEDIRMR" Last="IVANOV"/>
               <air:ExchangedTicketInfo Number="0579902896659"/>
             </air:TicketInfo>
           </air:DocumentInfo>
-          <common_v36_0:BookingTravelerRef Key="4EwW8wBAAA/B6krOEKAAAA=="/>
-          <common_v36_0:ProviderReservationInfoRef Key="4EwW8wBAAA/BGRiOEKAAAA=="/>
+          <common_v47_0:BookingTravelerRef Key="4EwW8wBAAA/B6krOEKAAAA=="/>
+          <common_v47_0:ProviderReservationInfoRef Key="4EwW8wBAAA/BGRiOEKAAAA=="/>
           <air:AirSegment Key="4EwW8wBAAA/B/krOEKAAAA==" Group="0" Carrier="AA" CabinClass="Economy" FlightNumber="2115" ProviderCode="1G" Origin="LGA" Destination="DCA" DepartureTime="2018-04-02T06:00:00.000-04:00" ArrivalTime="2018-04-02T07:02:00.000-04:00" TravelTime="62" ClassOfService="V" ETicketability="No" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA==" TravelOrder="1" OptionalServicesIndicator="false">
             <air:FlightDetails Key="4EwW8wBAAA/BAlrOEKAAAA==" Origin="LGA" Destination="DCA" DepartureTime="2018-04-02T06:00:00.000-04:00" ArrivalTime="2018-04-02T07:02:00.000-04:00" FlightTime="62" TravelTime="62" Equipment="319" OriginTerminal="C" DestinationTerminal="C"/>
           </air:AirSegment>
           <air:AirSegment Key="4EwW8wBAAA/BBlrOEKAAAA==" Group="1" Carrier="AA" CabinClass="Economy" FlightNumber="4100" ProviderCode="1G" Origin="DCA" Destination="DTW" DepartureTime="2018-04-10T10:07:00.000-04:00" ArrivalTime="2018-04-10T11:55:00.000-04:00" TravelTime="108" ClassOfService="N" ETicketability="No" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA==" TravelOrder="2" OptionalServicesIndicator="false">
-            <common_v36_0:SegmentRemark Key="4EwW8wBAAA/BDlrOEKAAAA==">AIR WISCONSIN AS AMERICAN EAGLE</common_v36_0:SegmentRemark>
+            <common_v47_0:SegmentRemark Key="4EwW8wBAAA/BDlrOEKAAAA==">AIR WISCONSIN AS AMERICAN EAGLE</common_v47_0:SegmentRemark>
             <air:FlightDetails Key="4EwW8wBAAA/BClrOEKAAAA==" Origin="DCA" Destination="DTW" DepartureTime="2018-04-10T10:07:00.000-04:00" ArrivalTime="2018-04-10T11:55:00.000-04:00" FlightTime="108" TravelTime="108" Equipment="CRJ" OriginTerminal="C" DestinationTerminal="N"/>
           </air:AirSegment>
           <air:AirPricingInfo Key="4EwW8wBAAA/BskrOEKAAAA==" TotalPrice="UAH9944" BasePrice="USD325.16" EquivalentBasePrice="UAH8552" Taxes="UAH1392" TrueLastDateToTicket="2017-05-26T23:59:00.000+02:00" PricingMethod="Guaranteed" ETicketability="Yes" ProviderCode="1G" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA==" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="G">
             <air:FareInfo Key="4EwW8wBAAA/BukrOEKAAAA==" FareBasis="VUAHZNN1" PassengerTypeCode="ADT" Origin="LGA" Destination="DCA" EffectiveDate="2017-05-25T00:00:00.000+02:00" NotValidBefore="2018-04-02" NotValidAfter="2018-04-02" PseudoCityCode="7J8J">
-              <common_v36_0:Endorsement Value="NONREF/SVCCHGPLUSFAREDIF/"/>
-              <common_v36_0:Endorsement Value="CXL BY FLT TIME OR NOVALUE"/>
+              <common_v47_0:Endorsement Value="NONREF/SVCCHGPLUSFAREDIF/"/>
+              <common_v47_0:Endorsement Value="CXL BY FLT TIME OR NOVALUE"/>
               <air:BaggageAllowance>
                 <air:NumberOfPieces>0</air:NumberOfPieces>
               </air:BaggageAllowance>
             </air:FareInfo>
             <air:FareInfo Key="4EwW8wBAAA/BykrOEKAAAA==" FareBasis="NVAIZNN3" PassengerTypeCode="ADT" Origin="DCA" Destination="DTW" EffectiveDate="2017-05-25T00:00:00.000+02:00" NotValidBefore="2018-04-10" NotValidAfter="2018-04-10" PseudoCityCode="7J8J">
-              <common_v36_0:Endorsement Value="NONREF/SVCCHGPLUSFAREDIF/"/>
-              <common_v36_0:Endorsement Value="CXL BY FLT TIME OR NOVALUE"/>
+              <common_v47_0:Endorsement Value="NONREF/SVCCHGPLUSFAREDIF/"/>
+              <common_v47_0:Endorsement Value="CXL BY FLT TIME OR NOVALUE"/>
               <air:BaggageAllowance>
                 <air:NumberOfPieces>0</air:NumberOfPieces>
               </air:BaggageAllowance>
@@ -63,43 +63,43 @@
             <air:TaxInfo Category="AY" Amount="UAH296" Key="4EwW8wBAAA/B2krOEKAAAA=="/>
             <air:TaxInfo Category="US" Amount="UAH642" Key="4EwW8wBAAA/B3krOEKAAAA=="/>
             <air:TaxInfo Category="XF" Amount="UAH238" Key="4EwW8wBAAA/B4krOEKAAAA==">
-              <common_v36_0:TaxDetail Amount="USD5" OriginAirport="LGA"/>
-              <common_v36_0:TaxDetail Amount="USD5" OriginAirport="DCA"/>
+              <common_v47_0:TaxDetail Amount="USD5" OriginAirport="LGA"/>
+              <common_v47_0:TaxDetail Amount="USD5" OriginAirport="DCA"/>
             </air:TaxInfo>
             <air:TaxInfo Category="ZP" Amount="UAH216" Key="4EwW8wBAAA/B5krOEKAAAA==">
-              <common_v36_0:TaxDetail Amount="USD4.10" OriginAirport="LGA"/>
-              <common_v36_0:TaxDetail Amount="USD4.10" OriginAirport="DCA"/>
+              <common_v47_0:TaxDetail Amount="USD4.10" OriginAirport="LGA"/>
+              <common_v47_0:TaxDetail Amount="USD4.10" OriginAirport="DCA"/>
             </air:TaxInfo>
             <air:FareCalc>NYC AA WAS 242.79VUAHZNN1 AA DTT Q10.74 71.63NVAIZNN3 USD325.16END</air:FareCalc>
             <air:PassengerType Code="ADT" BookingTravelerRef="4EwW8wBAAA/B6krOEKAAAA==">
               <air:FareGuaranteeInfo GuaranteeType="Guaranteed"/>
             </air:PassengerType>
-            <common_v36_0:BookingTravelerRef Key="4EwW8wBAAA/B6krOEKAAAA=="/>
+            <common_v47_0:BookingTravelerRef Key="4EwW8wBAAA/B6krOEKAAAA=="/>
             <air:PaymentRef Key="4EwW8wBAAA/BgnrOEKAAAA=="/>
             <air:TicketingModifiersRef Key="4EwW8wBAAA/BtkrOEKAAAA=="/>
           </air:AirPricingInfo>
-          <common_v36_0:Payment Key="4EwW8wBAAA/BgnrOEKAAAA==" Type="Itinerary" Amount="UAH9944" ApproximateAmount="CZK8956" FormOfPaymentRef="4EwW8wBAAA/BfnrOEKAAAA=="/>
+          <common_v47_0:Payment Key="4EwW8wBAAA/BgnrOEKAAAA==" Type="Itinerary" Amount="UAH9944" ApproximateAmount="CZK8956" FormOfPaymentRef="4EwW8wBAAA/BfnrOEKAAAA=="/>
           <air:TicketingModifiers PlatingCarrier="AF" Key="4EwW8wBAAA/BtkrOEKAAAA==">
-            <common_v36_0:Commission Level="Fare" Type="PercentBase" Percentage="0.0"/>
+            <common_v47_0:Commission Level="Fare" Type="PercentBase" Percentage="0.0"/>
             <air:DocumentSelect IssueElectronicTicket="true"/>
           </air:TicketingModifiers>
         </air:AirReservation>
-        <common_v36_0:GeneralRemark Key="4EwW8wBAAA/BenrOEKAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA==" CreateDate="2017-05-24T11:58:00.000+00:00">
-          <common_v36_0:RemarkData>VIEWTRIPITIN</common_v36_0:RemarkData>
-        </common_v36_0:GeneralRemark>
-        <common_v36_0:AgencyInfo>
-          <common_v36_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="257f/VZmSaKqfMsUWfwY6Q==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2017-05-31T11:28:38.393+00:00"/>
-          <common_v36_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-05-31T14:43:19.098+00:00"/>
-          <common_v36_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-05-31T11:28:40.567+00:00"/>
-        </common_v36_0:AgencyInfo>
-        <common_v36_0:AgencyContactInfo>
-          <common_v36_0:PhoneNumber Key="4EwW8wBAAA/BqkrOEKAAAA==" Type="Agency" Location="IEV" Number="380 44 9999999">
-            <common_v36_0:ProviderReservationInfoRef Key="4EwW8wBAAA/BGRiOEKAAAA=="/>
-          </common_v36_0:PhoneNumber>
-        </common_v36_0:AgencyContactInfo>
-        <common_v36_0:FormOfPayment Key="4EwW8wBAAA/BfnrOEKAAAA==" Type="MiscFormOfPayment" Reusable="false" ProfileKey="/jTyIB9dR7u2wklYQUPRSw==">
-          <common_v36_0:MiscFormOfPayment Text="0579902896659" Category="Exchange"/>
-        </common_v36_0:FormOfPayment>
+        <common_v47_0:GeneralRemark Key="4EwW8wBAAA/BenrOEKAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="4EwW8wBAAA/BGRiOEKAAAA==" CreateDate="2017-05-24T11:58:00.000+00:00">
+          <common_v47_0:RemarkData>VIEWTRIPITIN</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:AgencyInfo>
+          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="257f/VZmSaKqfMsUWfwY6Q==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2017-05-31T11:28:38.393+00:00"/>
+          <common_v47_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-05-31T14:43:19.098+00:00"/>
+          <common_v47_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-05-31T11:28:40.567+00:00"/>
+        </common_v47_0:AgencyInfo>
+        <common_v47_0:AgencyContactInfo>
+          <common_v47_0:PhoneNumber Key="4EwW8wBAAA/BqkrOEKAAAA==" Type="Agency" Location="IEV" Number="380 44 9999999">
+            <common_v47_0:ProviderReservationInfoRef Key="4EwW8wBAAA/BGRiOEKAAAA=="/>
+          </common_v47_0:PhoneNumber>
+        </common_v47_0:AgencyContactInfo>
+        <common_v47_0:FormOfPayment Key="4EwW8wBAAA/BfnrOEKAAAA==" Type="MiscFormOfPayment" Reusable="false" ProfileKey="/jTyIB9dR7u2wklYQUPRSw==">
+          <common_v47_0:MiscFormOfPayment Text="0579902896659" Category="Exchange"/>
+        </common_v47_0:FormOfPayment>
       </universal:UniversalRecord>
     </universal:UniversalRecordImportRsp>
   </SOAP:Body>

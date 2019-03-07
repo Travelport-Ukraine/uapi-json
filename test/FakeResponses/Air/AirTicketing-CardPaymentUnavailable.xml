@@ -3,10 +3,10 @@
     <SOAP:Body>
         <air:AirTicketingRsp TransactionId="AF580AC50A07406D85EAB3FCFF7FAECF" ResponseTime="811"
                              xmlns:air="http://www.travelport.com/schema/air_v36_0"
-                             xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0">
+                             xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
             <air:TicketFailureInfo Code="12008" Message="Host error during ticket issue. FOP SELECTED NOT AUTHORIZED FOR CARRIER M9" BookingTravelerRef="iFlKTOBAAA/BaD3paMAAAA==">
                 <air:AirPricingInfoRef Key="iFlKTOBAAA/BKD3paMAAAA=="/>
-                <common_v36_0:Name First="ARTEMMR" Last="PYLYPCHUK"/>
+                <common_v47_0:Name First="ARTEMMR" Last="PYLYPCHUK"/>
             </air:TicketFailureInfo>
         </air:AirTicketingRsp>
     </SOAP:Body>

@@ -6,7 +6,7 @@
                 Mos Eisley
                 ' with length = '64' is not facet-valid with respect to maxLength '50' for type '#AnonType_CitytypeStructuredAddress'.</faultstring>
             <detail>
-                <ErrorInfo xmlns="http://www.travelport.com/schema/common_v36_0">
+                <ErrorInfo xmlns="http://www.travelport.com/schema/common_v47_0">
                     <Code>1000</Code>
                     <Service>WEBSVC</Service>
                     <Type>Data</Type>

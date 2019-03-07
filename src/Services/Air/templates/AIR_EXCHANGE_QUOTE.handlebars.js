@@ -3,17 +3,17 @@ module.exports = `
     <soap:Body>
         <air:AirExchangeQuoteReq TraceId="{{requestId}}"
                 xmlns:air="http://www.travelport.com/schema/air_v36_0"
-                xmlns:com="http://www.travelport.com/schema/common_v36_0"
+                xmlns:com="http://www.travelport.com/schema/common_v47_0"
                 AuthorizedBy="user"
                 TargetBranch="{{TargetBranch}}">
 
             <com:BillingPointOfSaleInfo
-                    xmlns:com="http://www.travelport.com/schema/common_v36_0"
+                    xmlns:com="http://www.travelport.com/schema/common_v47_0"
                     OriginApplication="UAPI"/>
 
             {{#if emulatePcc}}
                 <com:OverridePCC ProviderCode="{{provider}}"
-                                 xmlns:com="http://www.travelport.com/schema/common_v36_0"
+                                 xmlns:com="http://www.travelport.com/schema/common_v47_0"
                                  PseudoCityCode="{{emulatePcc}}"
                 />
             {{/if}}

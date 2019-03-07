@@ -603,7 +603,7 @@ function extractBookings(obj) {
     )
       ? resRemarks.reduce(
         (acc, remark) => {
-          const splitMatch = remark['common_v36_0:RemarkData'].match(/^SPLIT\s.*([A-Z0-9]{6})$/);
+          const splitMatch = remark['common_v47_0:RemarkData'].match(/^SPLIT\s.*([A-Z0-9]{6})$/);
           if (!splitMatch) {
             return acc;
           }
@@ -925,7 +925,7 @@ function gdsQueue(req) {
 
   let data = null;
   try {
-    [data] = req['common_v36_0:ResponseMessage'];
+    [data] = req['common_v47_0:ResponseMessage'];
   } catch (e) {
     throw new GdsRuntimeError.PlacingInQueueError(req);
   }
