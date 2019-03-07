@@ -1,6 +1,6 @@
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <air:AirPriceRsp TraceId="test" TransactionId="B659C23D0A0759C48942E0BF717F834D" ResponseTime="3106" xmlns:air="http://www.travelport.com/schema/air_v36_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+        <air:AirPriceRsp TraceId="test" TransactionId="B659C23D0A0759C48942E0BF717F834D" ResponseTime="3106" xmlns:air="http://www.travelport.com/schema/air_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
             <common_v47_0:ResponseMessage Code="710401" Type="Warning" ProviderCode="1G">Taxes returned at the FareInfo level are for informational purposes only, and may differ from those returned at the Itinerary/Passenger Type levels.</common_v47_0:ResponseMessage>
             <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">The price is informational and can only be stored manually.</common_v47_0:ResponseMessage>
             <air:AirItinerary>

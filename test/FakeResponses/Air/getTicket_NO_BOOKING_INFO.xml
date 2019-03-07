@@ -2,7 +2,7 @@
         xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
         <air:AirRetrieveDocumentRsp TransactionId="7B02B1D30A0759BF283308B8D1FD715D" ResponseTime="1351" UniversalRecordLocatorCode="ULXKV1"
-                                    xmlns:air="http://www.travelport.com/schema/air_v39_0"
+                                    xmlns:air="http://www.travelport.com/schema/air_v47_0"
                                     xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
             <air:ETR Key="rqNqU0fB0BKAmGgyLHAAAA==" TotalPrice="UAH11246" BasePrice="USD363.00" Taxes="UAH1789" EquivalentBasePrice="UAH9457" Refundable="false" Exchangeable="false" IssuedDate="2017-07-11T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="MDBMCW" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="OK">
                 <air:AirReservationLocatorCode>85584H</air:AirReservationLocatorCode>

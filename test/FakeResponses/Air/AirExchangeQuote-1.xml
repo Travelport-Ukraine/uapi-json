@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <air:AirExchangeQuoteRsp xmlns:air="http://www.travelport.com/schema/air_v36_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" TraceId="" TransactionId="9A7A8F3E0A0759CD8644D727F86EEA93" ResponseTime="5390">
+        <air:AirExchangeQuoteRsp xmlns:air="http://www.travelport.com/schema/air_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" TraceId="" TransactionId="9A7A8F3E0A0759CD8644D727F86EEA93" ResponseTime="5390">
             <air:AirPricingSolution Key="l5s9spBAAA/B+HmPXLAAAA==" TotalPrice="CZK11910" BasePrice="AED1700" EquivalentBasePrice="CZK11910" Taxes="CZK0">
                 <air:AirSegment Key="l5s9spBAAA/B9HmPXLAAAA==" Group="0" Carrier="EK" CabinClass="Economy" FlightNumber="418" Origin="DXB" Destination="BKK" DepartureTime="2017-08-25T08:45:00.000+04:00" ArrivalTime="2017-08-25T18:10:00.000+07:00" ClassOfService="U" OptionalServicesIndicator="false">
                     <air:CodeshareInfo OperatingCarrier="EK" OperatingFlightNumber="418"/>

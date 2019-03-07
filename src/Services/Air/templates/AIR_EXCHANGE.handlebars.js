@@ -2,7 +2,7 @@ module.exports = `
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
     <soap:Body>
         <air:AirExchangeReq
-                xmlns:air="http://www.travelport.com/schema/air_v36_0"
+                xmlns:air="http://www.travelport.com/schema/air_v47_0"
                 xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
                 AuthorizedBy="user"
                 ReturnReservation="false"

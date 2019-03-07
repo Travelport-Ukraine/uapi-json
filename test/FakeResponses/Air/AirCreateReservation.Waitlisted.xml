@@ -4,7 +4,7 @@
             <faultcode>Server.Business</faultcode>
             <faultstring>General air service Error.</faultstring>
             <detail>
-                <air:AvailabilityErrorInfo xmlns:air="http://www.travelport.com/schema/air_v36_0"
+                <air:AvailabilityErrorInfo xmlns:air="http://www.travelport.com/schema/air_v47_0"
                                            xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
                     <common_v47_0:Code>3000</common_v47_0:Code>
                     <common_v47_0:Service>AIRSVC</common_v47_0:Service>

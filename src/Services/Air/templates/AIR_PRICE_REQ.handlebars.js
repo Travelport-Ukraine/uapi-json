@@ -9,10 +9,9 @@ module.exports = `
             AuthorizedBy="user" CheckFlightDetails="true" TargetBranch="{{TargetBranch}}"
             TraceId="{{requestId}}"
             {{#if fetchFareRules}}
-            CheckOBFees="false"
             FareRuleType="{{#if long}}long{{else}}short{{/if}}"
             {{/if}}
-            xmlns:air="http://www.travelport.com/schema/air_v36_0"
+            xmlns:air="http://www.travelport.com/schema/air_v47_0"
             xmlns:com="http://www.travelport.com/schema/common_v47_0">
             <com:BillingPointOfSaleInfo OriginApplication="UAPI" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
             <air:AirItinerary>

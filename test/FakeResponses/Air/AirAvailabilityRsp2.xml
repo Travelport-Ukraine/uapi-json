@@ -2,7 +2,7 @@
         xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
         <air:AvailabilitySearchRsp TraceId="4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60" TransactionId="02F7DB740A07405DABB04F8F50746D63" ResponseTime="415" DistanceUnits="MI"
-                                   xmlns:air="http://www.travelport.com/schema/air_v36_0"
+                                   xmlns:air="http://www.travelport.com/schema/air_v47_0"
                                    xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
             <common_v47_0:ResponseMessage Code="3051" Type="Warning">No more later flights.</common_v47_0:ResponseMessage>
             <common_v47_0:ResponseMessage Code="0" Type="Warning">No more AirItinerarySolution exists for the requested SearchAirLeg. Origin:IEV Destination:NYC PreferredTime:2018-11-10 00:00 EarliestTime:2018-11-09 22:00 LatestTime:2018-11-10 04:00</common_v47_0:ResponseMessage>

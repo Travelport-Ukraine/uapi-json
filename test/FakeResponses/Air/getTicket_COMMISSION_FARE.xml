@@ -2,7 +2,7 @@
         xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
         <air:AirRetrieveDocumentRsp TransactionId="DCCA8E010A074063BC97480EBC6F4307" ResponseTime="689" UniversalRecordLocatorCode="YF699R"
-                                    xmlns:air="http://www.travelport.com/schema/air_v39_0"
+                                    xmlns:air="http://www.travelport.com/schema/air_v47_0"
                                     xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
             <air:ETR Key="MIL7H7BAAA/BUhSWmFAAAA==" TotalPrice="UAH915" BasePrice="USD3.00" Taxes="UAH835" EquivalentBasePrice="UAH80" Refundable="false" Exchangeable="false" TourCode="IT151920" IssuedDate="2017-10-02T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="PZRDZQ" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="PS">
                 <air:AirReservationLocatorCode>MT8UCW</air:AirReservationLocatorCode>

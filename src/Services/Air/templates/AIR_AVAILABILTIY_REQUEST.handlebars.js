@@ -3,7 +3,7 @@ module.exports = `
     <soap:Body>
         <air:AvailabilitySearchReq
             AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}"
-            xmlns:air="http://www.travelport.com/schema/air_v36_0"
+            xmlns:air="http://www.travelport.com/schema/air_v47_0"
             xmlns:com="http://www.travelport.com/schema/common_v47_0"
             >
             <com:BillingPointOfSaleInfo OriginApplication="uAPI"/>

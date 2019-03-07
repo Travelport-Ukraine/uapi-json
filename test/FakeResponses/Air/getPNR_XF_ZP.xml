@@ -4,7 +4,7 @@
     <universal:UniversalRecordImportRsp TraceId="" TransactionId="5EF93A610A0759BC70CF85D144C2C735" ResponseTime="1247"
       xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
       xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
-      xmlns:air="http://www.travelport.com/schema/air_v36_0">
+      xmlns:air="http://www.travelport.com/schema/air_v47_0">
       <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record HAB2JQ</common_v47_0:ResponseMessage>
       <universal:UniversalRecord LocatorCode="HAB2JQ" Version="1" Status="Active">
         <common_v47_0:BookingTraveler Key="4EwW8wBAAA/B6krOEKAAAA==">

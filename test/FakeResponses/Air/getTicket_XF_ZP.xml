@@ -2,7 +2,7 @@
   xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP:Body>
     <air:AirRetrieveDocumentRsp TransactionId="5E46A5390A0759BE836F45B9F75CB69F" ResponseTime="714" UniversalRecordLocatorCode="HAB2JQ"
-      xmlns:air="http://www.travelport.com/schema/air_v39_0"
+      xmlns:air="http://www.travelport.com/schema/air_v47_0"
       xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
       <air:ETR Key="4EwW8wBAAA/BElrOEKAAAA==" TotalPrice="UAH9944" BasePrice="USD325.16" Taxes="UAH1392" EquivalentBasePrice="UAH8552" Refundable="false" Exchangeable="false" IssuedDate="2017-05-25T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="X6631S" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="AF">
         <air:AirReservationLocatorCode>4HN6N9</air:AirReservationLocatorCode>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <air:AirTicketingRsp xmlns:air="http://www.travelport.com/schema/air_v36_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" TransactionId="420A001C0A074263C19D8A7C13169424" ResponseTime="3051">
+        <air:AirTicketingRsp xmlns:air="http://www.travelport.com/schema/air_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" TransactionId="420A001C0A074263C19D8A7C13169424" ResponseTime="3051">
             <common_v47_0:ResponseMessage Code="0" Type="Info" ProviderCode="1G">PNR SP31BW Fare 1 - ELECTRONIC TKT GENERATED TTL FARE  UAH      5743 SUPPORTING DOCUMENTS GENERATED MIR GENERATED - TTL FARE  UAH      5743 ------------------------------------- ITINERARY/INVOICE GENERATED</common_v47_0:ResponseMessage>
             <common_v47_0:ResponseMessage Code="0" Type="Info" ProviderCode="1G">OK:Ticket issued</common_v47_0:ResponseMessage>
             <air:ETR Key="69nuEDwIQqe1Gw36Xw/0og==" TotalPrice="UAH5743" BasePrice="USD129.00" Taxes="UAH2376" EquivalentBasePrice="UAH3367" Refundable="false" Exchangeable="false" IssuedDate="2016-09-19T00:00:00.000+03:00" ProviderCode="1G" ProviderLocatorCode="SP31BW" IATANumber="72324464" PseudoCityCode="3AQ0" PlatingCarrier="KL" ElStat="A">

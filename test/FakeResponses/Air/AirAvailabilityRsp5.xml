@@ -2,7 +2,7 @@
         xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
         <air:AvailabilitySearchRsp TraceId="" TransactionId="4B6163F10A074265660F39126F5C72FE" ResponseTime="426" DistanceUnits="MI"
-                                   xmlns:air="http://www.travelport.com/schema/air_v36_0"
+                                   xmlns:air="http://www.travelport.com/schema/air_v47_0"
                                    xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
             <common_v47_0:NextResultReference>H4sIAAAAAAAAAJ1Uz2sTQRR+SZr+0GiplSIVraJYL92NSdul1ov9YYlsf9AUkZQepruTzdTNznZ2km5FBL148iwKnsSC4B8gCF71KOJFxYP07B/QU52ZZpuuRYPmsNl588333vfeN/v6J6QDBr1rqI60Gieudp0xtGmSgIcPPp15+h49T0GiAG0BuYtDHwASG23yKQ4NWbSqOblgg3Crojl2oCEb+RyzQBM7Vepp0yFnyOJL9A72zIffBshuz1YSOpfhKGJsiVSxzMPhyrIpDugRlS6oqtTGrr5Ho0tk0ccWKRMLcUK9ccFgY7/JMNaC4YaLQ7Lq4sNMpmQKOPHUksMJU7ZCd5Hn6EXOiOcISNphtOZz6D2wWfA4djATu11VyrDSuA73IW1CO2XEIdEq4zNaJzZmk6KiRizN9+GhX2ONDsSaqeqPGnm47pfnbn1898R4nARQYwHBMtaC5c9d+Px25erpR9srEZsc7+j/ccHeL5GEhAndAUbMqigfTKHNgIP290EV4/jxkIH2b51p5m8rQR8JFhguY4ZtCZyjfIbUhRfhmK/CjTiHC/GyGtXIC6FPIa5UiklngkYmuZbT6xbT5+J9UThCsFxu7WOFHBdNFh0+H1PWEKQuYZSzKaa9BBlbRCMJJegmXh25RAkoUQ+X4DgtlwPMm5AMj4nuXKM2ktQcTpmUObpc6xITE8kbhHNoT2R63xJ94pAmD2kSs1/lm2uhvbb8fUe6h8FAHLSKAqxNiEeE3t3d+TG/or1IQvImdJBZ4rokENeQTFYY9ahLnU0O/b/V19yTvYNE5cvXULZwMJ7MUjCtUJxvHrhY5LXVVx96yuvGwmBKGjw4VGRUm5St8Ft64tm9XP+2wm90Qcc0t/SZ2aUw9OXxSy09qebcHF9K9FVY2yXiW3PAPEdckTgWiRtTBUVKX76cFF+g1MT8rPg7m88OZ0ezuZHhfG5s1DCGcoaRHclnR7JZI5/PCdxi4bbvh78AARJOe98FAAA=</common_v47_0:NextResultReference>
             <air:FlightDetailsList>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP:Body>
-    <air:AirRetrieveDocumentRsp xmlns:air="http://www.travelport.com/schema/air_v39_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" TransactionId="3F223A5A0A07425C6210708C84263EB2" ResponseTime="1185" UniversalRecordLocatorCode="XCSM3Y">
+    <air:AirRetrieveDocumentRsp xmlns:air="http://www.travelport.com/schema/air_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" TransactionId="3F223A5A0A07425C6210708C84263EB2" ResponseTime="1185" UniversalRecordLocatorCode="XCSM3Y">
       <air:ETR Key="3C2afwBAAA/B3tqcXGAAAA==" BasePrice="USD78.00" Taxes="UAH3603.00" EquivalentBasePrice="UAH2060" IssuedDate="2017-05-22T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="X3TV3U" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="OK">
         <air:AirReservationLocatorCode>XWE2ZR</air:AirReservationLocatorCode>
         <common_v47_0:AgencyInfo>

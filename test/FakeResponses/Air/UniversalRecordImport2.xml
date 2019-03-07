@@ -4,7 +4,7 @@
         <universal:UniversalRecordImportRsp TraceId="" TransactionId="E3B7781C0A0759D48C9CEE33608E4278" ResponseTime="1796"
                                             xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
                                             xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
-                                            xmlns:air="http://www.travelport.com/schema/air_v36_0">
+                                            xmlns:air="http://www.travelport.com/schema/air_v47_0">
             <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record UKF7AJ</common_v47_0:ResponseMessage>
             <common_v47_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival cities for segments Air CHI-YTO UA476 2018-02-02T06:45:00.000-06:00 in 1G and Air IEV-FRA UA9149 2018-02-08T06:00:00.000+02:00 in 1G</common_v47_0:ResponseMessage>
             <common_v47_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival cities for segments Air FRA-IEV AC9207 2018-03-02T09:30:00.000+01:00 in 1G and Air YTO-FRA AC9104 2018-03-10T18:05:00.000-05:00 in 1G</common_v47_0:ResponseMessage>

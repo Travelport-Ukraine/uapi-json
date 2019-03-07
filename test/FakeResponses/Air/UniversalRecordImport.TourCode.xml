@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <universal:UniversalRecordImportRsp xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" TraceId="" TransactionId="9A9DFF620A07406C574E30AFA03670F8" ResponseTime="2073">
+        <universal:UniversalRecordImportRsp xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" xmlns:air="http://www.travelport.com/schema/air_v47_0" TraceId="" TransactionId="9A9DFF620A07406C574E30AFA03670F8" ResponseTime="2073">
             <universal:UniversalRecord LocatorCode="TEWNKS" Version="0" Status="Active">
                 <common_v47_0:BookingTraveler Key="Q1Dy04sB0BKAE+fe0dAAAA==" ElStat="A">
                     <common_v47_0:BookingTravelerName First="NMRS" Last="SLIP"/>

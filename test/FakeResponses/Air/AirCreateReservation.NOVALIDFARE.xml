@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <universal:AirCreateReservationRsp xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" TraceId="" TransactionId="016358100A07425A0F207B6265FECEBB" ResponseTime="4398">
+        <universal:AirCreateReservationRsp xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" xmlns:air="http://www.travelport.com/schema/air_v47_0" TraceId="" TransactionId="016358100A07425A0F207B6265FECEBB" ResponseTime="4398">
             <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">Some of the requested AirPricingInfos could not be saved for the requested provider.</common_v47_0:ResponseMessage>
             <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">NO VALID FARE FOR INPUT CRITERIA</common_v47_0:ResponseMessage>
             <common_v47_0:ResponseMessage Code="1" Type="Warning" ProviderCode="1G">LISTED SEGMENT IS FOLLOWED BY CONFIRMED SEGMENT 02</common_v47_0:ResponseMessage>

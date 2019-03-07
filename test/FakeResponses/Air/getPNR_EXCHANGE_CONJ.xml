@@ -4,7 +4,7 @@
     <universal:UniversalRecordImportRsp TraceId="" TransactionId="9804AD0A0A074261080330847EA6FEA3" ResponseTime="857"
       xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
       xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
-      xmlns:air="http://www.travelport.com/schema/air_v36_0">
+      xmlns:air="http://www.travelport.com/schema/air_v47_0">
       <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record W3DV7F</common_v47_0:ResponseMessage>
       <common_v47_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival cities for segments Air FRA-LIS LH1166 2018-05-26T09:10:00.000+02:00 in 1G and Air BCN-FRA LH1139 2018-06-01T06:50:00.000+02:00 in 1G</common_v47_0:ResponseMessage>
       <universal:UniversalRecord LocatorCode="W3DV7F" Version="1" Status="Active">

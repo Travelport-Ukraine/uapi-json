@@ -7,7 +7,7 @@ module.exports = `
         <air:LowFareSearchReq
             AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}"
             ReturnUpsellFare="true"
-            xmlns:air="http://www.travelport.com/schema/air_v33_0"
+            xmlns:air="http://www.travelport.com/schema/air_v47_0"
             xmlns:com="http://www.travelport.com/schema/common_v47_0"
             >
             <com:BillingPointOfSaleInfo OriginApplication="uAPI"/>
