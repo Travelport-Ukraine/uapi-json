@@ -4,7 +4,7 @@
         <universal:UniversalRecordImportRsp TraceId=""
                                             TransactionId="7A549C730A0759CA627B9104ABD09F16"
                                             ResponseTime="6498"
-                                            xmlns:universal="http://www.travelport.com/schema/universal_v36_0"
+                                            xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
                                             xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0"
                                             xmlns:air="http://www.travelport.com/schema/air_v36_0"
                                             xmlns:passive="http://www.travelport.com/schema/passive_v36_0">

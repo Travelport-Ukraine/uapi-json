@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <universal:AirCreateReservationRsp xmlns:universal="http://www.travelport.com/schema/universal_v36_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" TraceId="" TransactionId="F73FB0980A0759BB25ACBE18205C1E0C" ResponseTime="4593">
+        <universal:AirCreateReservationRsp xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" TraceId="" TransactionId="F73FB0980A0759BB25ACBE18205C1E0C" ResponseTime="4593">
             <common_v36_0:ResponseMessage Code="13566" Type="Warning" ProviderCode="1G">Brand optional services were filtered out as they are not offered in the brand or are only available at a charge.</common_v36_0:ResponseMessage>
             <common_v36_0:ResponseMessage Code="3715" Type="Warning" ProviderCode="1G">Host only allows one Address/Delivery Address. Only one sent in request.</common_v36_0:ResponseMessage>
             <common_v36_0:ResponseMessage Code="13565" Type="Warning" ProviderCode="1G">UpsellBrandID has been ignored.</common_v36_0:ResponseMessage>

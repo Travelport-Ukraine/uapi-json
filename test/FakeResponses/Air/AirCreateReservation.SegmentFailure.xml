@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <universal:AirCreateReservationRsp xmlns:universal="http://www.travelport.com/schema/universal_v36_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" TraceId="" TransactionId="2ECAED150A0759D74851F02ED426EDBC" ResponseTime="5301">
+        <universal:AirCreateReservationRsp xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0" xmlns:air="http://www.travelport.com/schema/air_v36_0" TraceId="" TransactionId="2ECAED150A0759D74851F02ED426EDBC" ResponseTime="5301">
             <common_v36_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">Some of the requested AirPricingInfos could not be saved for the requested provider.</common_v36_0:ResponseMessage>
             <common_v36_0:ResponseMessage Code="3029" Type="Warning" ProviderCode="1G">Some of the prices could not be stored because either flight departure time changes have occurred or some of the segments failed to be sold. Please verify connections, then price and store again.</common_v36_0:ResponseMessage>
             <common_v36_0:ResponseMessage Code="1" Type="Warning" ProviderCode="1G">CHECK CONTINUITY SEGMENT 03</common_v36_0:ResponseMessage>

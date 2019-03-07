@@ -2,7 +2,7 @@
   xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP:Body>
     <universal:UniversalRecordImportRsp TraceId="" TransactionId="E16F2E970A07406DB0B844A4CD4D98B3" ResponseTime="1313"
-      xmlns:universal="http://www.travelport.com/schema/universal_v36_0"
+      xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
       xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0"
       xmlns:air="http://www.travelport.com/schema/air_v36_0">
       <common_v36_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record NQ5HW5</common_v36_0:ResponseMessage>

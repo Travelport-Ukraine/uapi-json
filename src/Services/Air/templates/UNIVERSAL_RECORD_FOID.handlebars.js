@@ -3,7 +3,7 @@ module.exports = `
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
   xmlns:air="http://www.travelport.com/schema/air_v36_0"
   xmlns:com="http://www.travelport.com/schema/common_v36_0"
-  xmlns:univ="http://www.travelport.com/schema/universal_v36_0"
+  xmlns:univ="http://www.travelport.com/schema/universal_v47_0"
   >
   <soapenv:Header/>
   <soapenv:Body>

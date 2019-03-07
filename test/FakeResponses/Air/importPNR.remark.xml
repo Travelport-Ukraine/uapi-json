@@ -2,7 +2,7 @@
         xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
         <universal:UniversalRecordImportRsp TraceId="" TransactionId="7C72743B0A07570F6C90B16F37DA7333" ResponseTime="494"
-                                            xmlns:universal="http://www.travelport.com/schema/universal_v36_0"
+                                            xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
                                             xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0"
                                             xmlns:air="http://www.travelport.com/schema/air_v36_0"
                                             xmlns:passive="http://www.travelport.com/schema/passive_v36_0">
