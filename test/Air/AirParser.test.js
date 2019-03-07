@@ -390,7 +390,7 @@ describe('#AirParser', () => {
         });
     });
 
-    it('should parse exchanged conjunction ticket', () => {
+    it.only('should parse exchanged conjunction ticket', () => {
       const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_EXCHANGE_CONJ.xml`).toString();
@@ -399,7 +399,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
-          const couponsStopover = [true, false, true, false];
+          const couponsStopover = [false, true, true, true];
           const coupons = result.tickets.reduce(
             (acc, ticket) => acc.concat(ticket.coupons),
             []

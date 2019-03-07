@@ -385,8 +385,6 @@ function getTicketFromEtr(etr, obj) {
             );
           }
 
-          console.log(coupon.StopoverCode);
-
           const couponInfo = Object.assign(
             {
               couponNumber: coupon.CouponNumber,
@@ -414,8 +412,6 @@ function getTicketFromEtr(etr, obj) {
           return couponInfo;
         }
       );
-
-      console.log('====');
 
       return {
         ticketNumber: ticket.TicketNumber,
