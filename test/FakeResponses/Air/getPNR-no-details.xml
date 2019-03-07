@@ -5,7 +5,7 @@
       xmlns:universal="http://www.travelport.com/schema/universal_v47_0" 
       xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0" 
       xmlns:air="http://www.travelport.com/schema/air_v36_0" 
-      xmlns:passive="http://www.travelport.com/schema/passive_v36_0">
+      xmlns:passive="http://www.travelport.com/schema/passive_v47_0">
       <common_v36_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record AGWZ5F</common_v36_0:ResponseMessage>
       <universal:UniversalRecord LocatorCode="AGWZ5F" Version="11" Status="Active">
         <common_v36_0:BookingTraveler Key="RwB4cFBAAA/Bz8h2uCAAAA==" TravelerType="ADT" VIP="false">
