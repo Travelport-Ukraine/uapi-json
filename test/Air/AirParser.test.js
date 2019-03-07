@@ -390,7 +390,7 @@ describe('#AirParser', () => {
         });
     });
 
-    it.only('should parse exchanged conjunction ticket', () => {
+    it('should parse exchanged conjunction ticket', () => {
       const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v39_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_EXCHANGE_CONJ.xml`).toString();
