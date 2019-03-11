@@ -3,8 +3,8 @@ module.exports = `
     <soap:Body>
         <air:AvailabilitySearchReq
             AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}"
-            xmlns:air="http://www.travelport.com/schema/air_v36_0"
-            xmlns:com="http://www.travelport.com/schema/common_v36_0"
+            xmlns:air="http://www.travelport.com/schema/air_v47_0"
+            xmlns:com="http://www.travelport.com/schema/common_v47_0"
             >
             <com:BillingPointOfSaleInfo OriginApplication="uAPI"/>
             {{#if emulatePcc}}
@@ -72,12 +72,12 @@ module.exports = `
                 IncludeFlightDetails="true"
             >
                 <air:PreferredProviders>
-                    <com:Provider Code="{{provider}}" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
+                    <com:Provider Code="{{provider}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
                 </air:PreferredProviders>
                 {{#if carriers}}
                 <air:PermittedCarriers>
                     {{#carriers}}
-                    <com:Carrier Code="{{.}}" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
+                    <com:Carrier Code="{{.}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
                     {{/carriers}}
                 </air:PermittedCarriers>
                 {{/if}}
@@ -95,7 +95,7 @@ module.exports = `
             />
             {{/if}}
             {{#passengers}}
-                <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
+                <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
             {{/passengers}}
 
         </air:AvailabilitySearchReq>

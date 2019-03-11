@@ -3,8 +3,8 @@ module.exports = `
 <!--Release 8.1-->
 <!--Version Dated as of 15/Apr/2015 11:24:07-->
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-    <soap:Header xmlns:univ="http://www.travelport.com/schema/universal_v36_0">
-        <univ:SupportedVersions airVersion="air_v36_0"/>
+    <soap:Header xmlns:univ="http://www.travelport.com/schema/universal_v47_0">
+        <univ:SupportedVersions airVersion="air_v47_0"/>
     </soap:Header>
     <soap:Body>
         <univ:AirCreateReservationReq
@@ -13,10 +13,10 @@ module.exports = `
             {{#if rule}}RuleName="{{rule}}"{{/if}}
             {{#if UniversalRecordLocatorCode}} UniversalRecordLocatorCode="{{UniversalRecordLocatorCode}}" {{/if}}
             {{#if allowWaitlist}}RestrictWaitlist="false"{{else}}RestrictWaitlist="true"{{/if}}
-            xmlns:univ="http://www.travelport.com/schema/universal_v36_0"
-            xmlns:com="http://www.travelport.com/schema/common_v36_0"
-            xmlns:air="http://www.travelport.com/schema/air_v36_0"
-            xmlns:common_v36_0="http://www.travelport.com/schema/common_v36_0"
+            xmlns:univ="http://www.travelport.com/schema/universal_v47_0"
+            xmlns:com="http://www.travelport.com/schema/common_v47_0"
+            xmlns:air="http://www.travelport.com/schema/air_v47_0"
+            xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
             >
             <com:BillingPointOfSaleInfo OriginApplication="uAPI" />
             {{#if emulatePcc}}

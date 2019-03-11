@@ -63,8 +63,8 @@ module.exports = function uapiRequest(
       log('Input params ', pd.json(params));
     }
 
-    // create a v36 uAPI parser with default params and request data in env
-    const uParser = new Parser(rootObject, 'v36_0', params, debugMode, null, auth.provider);
+    // create a v47 uAPI parser with default params and request data in env
+    const uParser = new Parser(rootObject, 'v47_0', params, debugMode, null, auth.provider);
 
     const validateInput = () => (
       Promise.resolve(params)

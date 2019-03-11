@@ -3,7 +3,7 @@ module.exports = `
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
     <soapenv:Header/>
     <soapenv:Body>
-        <hot:HotelDetailsReq xmlns:com="http://www.travelport.com/schema/common_v34_0" xmlns:hot="http://www.travelport.com/schema/hotel_v34_0" ReturnGuestReviews="true" ReturnMediaLinks="true" TargetBranch="{{TargetBranch}}">
+        <hot:HotelDetailsReq xmlns:com="http://www.travelport.com/schema/common_v47_0" xmlns:hot="http://www.travelport.com/schema/hotel_v47_0" ReturnGuestReviews="true" ReturnMediaLinks="true" TargetBranch="{{TargetBranch}}">
             <com:BillingPointOfSaleInfo OriginApplication="UAPI"/>
             <hot:HotelProperty HotelChain="{{HotelChain}}" HotelCode="{{HotelCode}}" {{#if Name}} Name="{{Name}}" {{/if}}/>
             <hot:HotelDetailsModifiers MaxWait="11000" RateRuleDetail="Complete"  {{#if currency}} PreferredCurrency="{{currency}}" {{/if}}>
@@ -31,7 +31,7 @@ module.exports = `
                 </hot:BookingGuestInformation>
             </hot:HotelDetailsModifiers>
             {{#if HostToken}}
-            <com:HostToken Host="TRM"  xmlns:com="http://www.travelport.com/schema/common_v34_0">
+            <com:HostToken Host="TRM"  xmlns:com="http://www.travelport.com/schema/common_v47_0">
             {{HostToken}}
             </com:HostToken>
             {{/if}}

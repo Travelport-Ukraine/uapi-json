@@ -8,10 +8,10 @@ module.exports = `
     <univ:UniversalRecordImportReq
       AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}"
       ProviderCode="{{provider}}" ProviderLocatorCode="{{pnr}}"
-      xmlns:univ="http://www.travelport.com/schema/universal_v36_0"
-      xmlns:com="http://www.travelport.com/schema/common_v36_0"
+      xmlns:univ="http://www.travelport.com/schema/universal_v47_0"
+      xmlns:com="http://www.travelport.com/schema/common_v47_0"
       >
-      <com:BillingPointOfSaleInfo OriginApplication="uAPI" xmlns:com="http://www.travelport.com/schema/common_v36_0"/>
+      <com:BillingPointOfSaleInfo OriginApplication="uAPI" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
       {{#if emulatePcc}}
       <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
       {{/if}}

@@ -26,7 +26,7 @@ describe('#TerminalParser', () => {
 
     it('should throw correct error in case of no agreement', () => {
       const errorConfig = errorsConfig();
-      const uParser = new Parser('terminal:TerminalReq', 'v33_0', {}, errorConfig);
+      const uParser = new Parser('terminal:TerminalReq', 'v47_0', {}, errorConfig);
       const xml = fs.readFileSync(`${xmlFolder}/terminalError.xml`).toString();
       return uParser.parse(xml)
         .then((json) => {
@@ -45,7 +45,7 @@ describe('#TerminalParser', () => {
 
     it('should throw correct error ', () => {
       const errorConfig = errorsConfig();
-      const uParser = new Parser('terminal:TerminalReq', 'v33_0', {}, errorConfig);
+      const uParser = new Parser('terminal:TerminalReq', 'v47_0', {}, errorConfig);
       const xml = fs.readFileSync(`${xmlFolder}/terminalError-other.xml`).toString();
       return uParser.parse(xml)
         .then((json) => {
@@ -62,7 +62,7 @@ describe('#TerminalParser', () => {
   });
   describe('createSession()', () => {
     it('should throw an error when credentials are wrong', () => {
-      const uParser = new Parser('terminal:CreateTerminalSessionRsp', 'v36_0', {});
+      const uParser = new Parser('terminal:CreateTerminalSessionRsp', 'v47_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/createSessionAuthError.xml`).toString();
       return uParser.parse(xml).then(() => {
         throw new Error('Successfully parsed error result');
@@ -72,7 +72,7 @@ describe('#TerminalParser', () => {
       });
     });
     it('should throw an error when no host token in response', () => {
-      const uParser = new Parser('terminal:CreateTerminalSessionRsp', 'v36_0', {});
+      const uParser = new Parser('terminal:CreateTerminalSessionRsp', 'v47_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/createSessionBranchError.xml`).toString();
       const parseFunction = terminalParser.CREATE_SESSION;
       return uParser.parse(xml).then((json) => {
@@ -85,7 +85,7 @@ describe('#TerminalParser', () => {
       });
     });
     it('should parse token from normal response', () => {
-      const uParser = new Parser('terminal:CreateTerminalSessionRsp', 'v36_0', {});
+      const uParser = new Parser('terminal:CreateTerminalSessionRsp', 'v47_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/createSessionSuccess.xml`).toString();
       const parseFunction = terminalParser.CREATE_SESSION;
       return uParser.parse(xml).then((json) => {
@@ -96,7 +96,7 @@ describe('#TerminalParser', () => {
   });
   describe('executeCommand()', () => {
     it('should throw an error when no token provided in request', () => {
-      const uParser = new Parser('terminal:TerminalRsp', 'v36_0', {});
+      const uParser = new Parser('terminal:TerminalRsp', 'v47_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/executeCommandTokenMissing.xml`).toString();
       const parseFunction = terminalParser.TERMINAL_REQUEST;
       return uParser.parse(xml).then((json) => {
@@ -109,7 +109,7 @@ describe('#TerminalParser', () => {
       });
     });
     it('should throw an error when invalid token provided in request', () => {
-      const uParser = new Parser('terminal:TerminalRsp', 'v36_0', {});
+      const uParser = new Parser('terminal:TerminalRsp', 'v47_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/executeCommandTokenInvalid.xml`).toString();
       const parseFunction = terminalParser.TERMINAL_REQUEST;
       return uParser.parse(xml).then((json) => {
@@ -122,7 +122,7 @@ describe('#TerminalParser', () => {
       });
     });
     it('should return response for a valid command request', () => {
-      const uParser = new Parser('terminal:TerminalRsp', 'v36_0', {});
+      const uParser = new Parser('terminal:TerminalRsp', 'v47_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/executeCommandPccInvalid.xml`).toString();
       const parseFunction = terminalParser.TERMINAL_REQUEST;
       return uParser.parse(xml).then((json) => {
@@ -136,7 +136,7 @@ describe('#TerminalParser', () => {
   });
   describe('closeSession()', () => {
     it('should return an error when no token provided', () => {
-      const uParser = new Parser('terminal:EndTerminalSessionRsp', 'v36_0', {});
+      const uParser = new Parser('terminal:EndTerminalSessionRsp', 'v47_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/closeSessionTokenMissing.xml`).toString();
       const parseFunction = terminalParser.CLOSE_SESSION;
       return uParser.parse(xml).then((json) => {
@@ -149,7 +149,7 @@ describe('#TerminalParser', () => {
       });
     });
     it('should return an error when invalid token provided', () => {
-      const uParser = new Parser('terminal:EndTerminalSessionRsp', 'v36_0', {});
+      const uParser = new Parser('terminal:EndTerminalSessionRsp', 'v47_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/closeSessionTokenInvalid.xml`).toString();
       const parseFunction = terminalParser.CLOSE_SESSION;
       return uParser.parse(xml).then((json) => {
@@ -162,7 +162,7 @@ describe('#TerminalParser', () => {
       });
     });
     it('should return response for a valid close session request', () => {
-      const uParser = new Parser('terminal:EndTerminalSessionRsp', 'v36_0', {});
+      const uParser = new Parser('terminal:EndTerminalSessionRsp', 'v47_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/closeSessionSuccess.xml`).toString();
       const parseFunction = terminalParser.CLOSE_SESSION;
       return uParser.parse(xml).then((json) => {

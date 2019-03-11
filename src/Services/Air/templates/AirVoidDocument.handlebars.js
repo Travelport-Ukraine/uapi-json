@@ -1,8 +1,8 @@
 module.exports = `
 <soapenv:Envelope
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:air="http://www.travelport.com/schema/air_v39_0"
-  xmlns:com="http://www.travelport.com/schema/common_v39_0"
+  xmlns:air="http://www.travelport.com/schema/air_v47_0"
+  xmlns:com="http://www.travelport.com/schema/common_v47_0"
   >
   <soapenv:Header/>
   <soapenv:Body>

@@ -3,10 +3,10 @@ module.exports = `
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
     <soapenv:Body>
         <univ:HotelCreateReservationReq
-            xmlns:com="http://www.travelport.com/schema/common_v34_0"
-            xmlns:common_v34_0="http://www.travelport.com/schema/common_v34_0"
-            xmlns:hotel="http://www.travelport.com/schema/hotel_v34_0"
-            xmlns:univ="http://www.travelport.com/schema/universal_v34_0"
+            xmlns:com="http://www.travelport.com/schema/common_v47_0"
+            xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
+            xmlns:hotel="http://www.travelport.com/schema/hotel_v47_0"
+            xmlns:univ="http://www.travelport.com/schema/universal_v47_0"
             ProviderCode="TRM"
             TargetBranch="{{{TargetBranch}}}"
             UserAcceptance="true">
@@ -33,7 +33,7 @@ module.exports = `
             </com:BookingTraveler>
             {{/each}}
 
-           <!--  <com:ReservationName xmlns:com="http://www.travelport.com/schema/common_v34_0">
+           <!--  <com:ReservationName xmlns:com="http://www.travelport.com/schema/common_v47_0">
                 <com:BookingTravelerRef Key="1">
                 </com:BookingTravelerRef>
             </com:ReservationName> -->
@@ -41,25 +41,25 @@ module.exports = `
 
 
             {{#rates}}
-            <hotel:HotelRateDetail xmlns:hotel="http://www.travelport.com/schema/hotel_v34_0"  RatePlanType="{{& RatePlanType}}" RateSupplier="{{& RateSupplier}}" RateOfferId="{{& RateOfferId}}" Base="{{& Base.currency}}{{& Base.value}}" Tax="{{& Tax.currency}}{{& Tax.value}}" Total="{{& Total.currency}}{{& Total.value}}" Surcharge="{{& Surcharge.currency}}{{& Surcharge.value}}" />
+            <hotel:HotelRateDetail xmlns:hotel="http://www.travelport.com/schema/hotel_v47_0"  RatePlanType="{{& RatePlanType}}" RateSupplier="{{& RateSupplier}}" RateOfferId="{{& RateOfferId}}" Base="{{& Base.currency}}{{& Base.value}}" Tax="{{& Tax.currency}}{{& Tax.value}}" Total="{{& Total.currency}}{{& Total.value}}" Surcharge="{{& Surcharge.currency}}{{& Surcharge.value}}" />
             {{/rates}}
 
-            <hotel:HotelProperty xmlns:hotel="http://www.travelport.com/schema/hotel_v34_0" HotelChain="{{& HotelChain}}" HotelCode="{{& HotelCode}}" {{#if Name}} Name="{{Name}}" {{/if}}>
+            <hotel:HotelProperty xmlns:hotel="http://www.travelport.com/schema/hotel_v47_0" HotelChain="{{& HotelChain}}" HotelCode="{{& HotelCode}}" {{#if Name}} Name="{{Name}}" {{/if}}>
             </hotel:HotelProperty>
-            <hotel:HotelStay xmlns:hot="http://www.travelport.com/schema/hotel_v34_0">
+            <hotel:HotelStay xmlns:hot="http://www.travelport.com/schema/hotel_v47_0">
                 <hotel:CheckinDate>{{{startDate}}}</hotel:CheckinDate>
                 <hotel:CheckoutDate>{{{endDate}}}</hotel:CheckoutDate>
             </hotel:HotelStay>
             {{#Guarantee}}
             <com:Guarantee
-                    xmlns:com="http://www.travelport.com/schema/common_v34_0" Type="Guarantee">
+                    xmlns:com="http://www.travelport.com/schema/common_v47_0" Type="Guarantee">
                     <com:CreditCard Type="{{& CardType}}" Number="{{& CardNumber}}" ExpDate="{{& ExpDate}}" Name="{{& CardHolder}}" CVV="{{& CVV}}" BankName="{{& BankName}}" BankCountryCode="{{& BankCountryCode}}" />
             </com:Guarantee>
             {{/Guarantee}}
-            <common_v34_0:HostToken Host="TRM">
+            <common_v47_0:HostToken Host="TRM">
                 {{& HostToken}}
-            </common_v34_0:HostToken>
-           <hot:BookingGuestInformation xmlns:hot="http://www.travelport.com/schema/hotel_v34_0">
+            </common_v47_0:HostToken>
+           <hot:BookingGuestInformation xmlns:hot="http://www.travelport.com/schema/hotel_v47_0">
                 {{#roomsRefs}}
                <hot:Room>
                    <hot:Adults>{{& adults}}</hot:Adults>

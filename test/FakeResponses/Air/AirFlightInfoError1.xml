@@ -1,6 +1,6 @@
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <air:FlightInformationRsp xmlns:air="http://www.travelport.com/schema/air_v35_0" TransactionId="7B46FDCE0A076477032D7D02DF9A6671" ResponseTime="84">
+        <air:FlightInformationRsp xmlns:air="http://www.travelport.com/schema/air_v47_0" TransactionId="7B46FDCE0A076477032D7D02DF9A6671" ResponseTime="84">
             <air:FlightInfo CriteriaKey="2Ug8KxvVTMihQNhnZnjkcQ==" Carrier="OK" FlightNumber="51" DepartureDate="2016-12-16">
                 <air:FlightInfoErrorMessage Code="4" Type="Error">Flight not found</air:FlightInfoErrorMessage>
             </air:FlightInfo>
