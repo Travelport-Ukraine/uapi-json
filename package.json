@@ -36,7 +36,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "galileo-screen": "1.0.5",
-    "handlebars": "^4.0.5",
+    "handlebars": "^4.1.0",
     "handlebars-helper-equal": "^1.0.0",
     "joi": "^13.7.0",
     "moment": "^2.10.6",
@@ -51,7 +51,7 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
-    "nyc": "^13.1.0",
+    "nyc": "^13.3.0",
     "proxyquire": "^1.8.0",
     "readline2": "^1.0.1",
     "sinon": "^1.17.7",
