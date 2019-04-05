@@ -69,6 +69,7 @@ module.exports = `
                 {{{air:AirPricingSolution_XML.air:AirSegment_XML}}}
                 {{{air:AirPricingSolution_XML.air:AirPricingInfo_XML}}}
                 {{{air:AirPricingSolution_XML.air:FareNote_XML}}}
+                {{{air:AirPricingSolution_XML.common_v47_0:HostToken_XML}}}
             </air:AirPricingSolution>
 
             <com:ActionStatus Type="{{ActionStatusType}}" TicketDate="{{ticketDate}}" ProviderCode="{{provider}}" />
