@@ -37,7 +37,7 @@ module.exports = `
                 </air:AirSegment>
                 {{/segments}}
             </air:AirItinerary>
-            {{#if plattingCarrier}}
+            {{#if platingCarrier}}
               <air:AirPricingModifiers PlatingCarrier="{{platingCarrier}}"/>
             {{/if}}
             {{#if business}}
