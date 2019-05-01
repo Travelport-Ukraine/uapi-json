@@ -9,6 +9,11 @@ function travelOrderReducer(acc, { TravelOrder }) {
   return acc;
 }
 
+/**
+ * getBaggage -- get baggage information from LFS search
+ * @param baggageAllowance
+ * @returns {{amount: number, units: string}}
+ */
 function getBaggage(baggageAllowance) {
   // Checking for allowance
   if (
@@ -33,6 +38,51 @@ function getBaggage(baggageAllowance) {
     units: 'piece',
     amount: Number(baggageAllowance['air:NumberOfPieces']),
   };
+}
+
+/**
+ * getBaggageInfo -- get baggage information from airPrice
+ * @param info
+ * @returns {{amount: number, units: string}}
+ */
+function getBaggageInfo(info) {
+  // Checking for allowance
+  let baggageInfo = { units: 'piece', amount: 0 };
+
+  if (typeof info === 'undefined') {
+    return baggageInfo;
+  }
+
+  baggageInfo.detail = info['air:BagDetails'].map((detail) => {
+    return {
+      applicableBags: detail.ApplicableBags,
+      basePrice: detail.BasePrice,
+      totalPrice: detail.TotalPrice,
+      approximateBasePrice: detail.ApproximateBasePrice,
+      approximateTotalPrice: detail.ApproximateTotalPrice,
+      restrictionText: detail['air:BaggageRestriction']['air:TextInfo'],
+    };
+  });
+
+  if (info && info['air:TextInfo'].length > 0) {
+    const match = info['air:TextInfo'][0].match(/^(\d+)([KP]+)$/);
+
+    if (match) {
+      if (match[2] === 'P') {
+        baggageInfo = Object.assign(baggageInfo, { units: 'piece', amount: match[1] });
+      } else if (match[2] === 'K') {
+        baggageInfo = Object.assign(baggageInfo, { units: 'kilograms', amount: match[1] });
+      } else {
+        baggageInfo = Object.assign(baggageInfo, { units: 'unknown', amount: match[0] });
+      }
+    } else {
+      console.warn('Baggage information is not number and is not weight!', JSON.stringify(info));
+    }
+  } else {
+    console.warn('Unknown', JSON.stringify(info));
+  }
+
+  return baggageInfo;
 }
 
 function formatSegment(segment) {
@@ -92,6 +142,128 @@ function formatAirExchangeBundle(bundle) {
     changeFee: bundle.ChangeFee,
     exchangeAmount: bundle.ExchangeAmount,
     refund: bundle.Refund,
+  };
+}
+
+function formatPassengerCategories(pricingInfo) {
+  const passengerCounts = {};
+
+  const passengerCategories = Object.keys(pricingInfo)
+    .reduce((acc, key) => {
+      const passengerFare = pricingInfo[key];
+      let code = passengerFare['air:PassengerType'];
+
+      if (Object.prototype.toString.call(code) === '[object String]') { // air:PassengerType in fullCollapseList_obj ParserUapi param
+        passengerCounts[code] = 1;
+
+        // air:PassengerType in noCollapseList
+      } else if (Array.isArray(code) && code.constructor === Array) { // ParserUapi param
+        const count = code.length;
+        const list = Array.from(new Set((code.map((item) => {
+          if (Object.prototype.toString.call(item) === '[object String]') {
+            return item;
+          }
+          if (Object.prototype.toString.call(item) === '[object Object]' && item.Code) {
+            // air:PassengerType in fullCollapseList_obj like above,
+            // but there is Age or other info, except Code
+            return item.Code;
+          }
+          throw new AirParsingError.PTCIsNotSet();
+        }))));
+
+        [code] = list;
+        if (!list[0] || list.length !== 1) { // TODO throw error
+          console.log('Warning: different categories '
+            + list.join() + ' in single fare calculation ' + key + ' in fare ' + key);
+        }
+        passengerCounts[code] = count;
+      } else {
+        throw new AirParsingError.PTCTypeInvalid();
+      }
+
+      return {
+        ...acc,
+        [code]: passengerFare
+      };
+    }, {});
+
+  const passengerFares = Object.keys(passengerCategories)
+    .reduce(
+      (memo, ptc) => Object.assign(memo, {
+        [ptc]: {
+          totalPrice: passengerCategories[ptc].TotalPrice,
+          basePrice: passengerCategories[ptc].BasePrice,
+          equivalentBasePrice: passengerCategories[ptc].EquivalentBasePrice,
+          taxes: passengerCategories[ptc].Taxes,
+          fareCalc: passengerCategories[ptc].FareCalc,
+        },
+      }), {}
+    );
+
+  return {
+    passengerCounts,
+    passengerCategories,
+    passengerFares,
+  };
+}
+
+function formatFarePricingInfo(fare) {
+  const changePenalty = {};
+  const cancelPenalty = {};
+
+  if (Object.prototype.hasOwnProperty.call(fare, 'air:ChangePenalty')) {
+    const fareChangePenalty = fare['air:ChangePenalty'];
+
+    if (typeof fareChangePenalty['air:Amount'] !== 'undefined') {
+      changePenalty.amount = fareChangePenalty['air:Amount'];
+    }
+    if (typeof fareChangePenalty['air:Percentage'] !== 'undefined') {
+      changePenalty.percentage = fareChangePenalty['air:Percentage'];
+    }
+    if (typeof fareChangePenalty.PenaltyApplies !== 'undefined') {
+      changePenalty.penaltyApplies = fareChangePenalty.PenaltyApplies;
+    }
+  }
+
+  if (Object.prototype.hasOwnProperty.call(fare, 'air:CancelPenalty')) {
+    const fareCancelPenalty = fare['air:CancelPenalty'];
+
+    if (typeof fareCancelPenalty['air:Amount'] !== 'undefined') {
+      cancelPenalty.amount = fareCancelPenalty['air:Amount'];
+    }
+    if (typeof fareCancelPenalty['air:Percentage'] !== 'undefined') {
+      cancelPenalty.percentage = fareCancelPenalty['air:Percentage'];
+    }
+    if (typeof fareCancelPenalty.PenaltyApplies !== 'undefined') {
+      cancelPenalty.penaltyApplies = fareCancelPenalty.PenaltyApplies;
+    }
+  }
+
+  let refundable = false;
+
+  if (Object.prototype.hasOwnProperty.call(fare, 'Refundable')) {
+    refundable = fare.Refundable;
+  }
+
+  let latestTicketingTime = null;
+
+  if (Object.prototype.hasOwnProperty.call(fare, 'LatestTicketingTime')) {
+    latestTicketingTime = fare.LatestTicketingTime;
+  }
+
+  let eTicketability = false;
+
+  if (Object.prototype.hasOwnProperty.call(fare, 'eTicketability')) {
+    // eslint-disable-next-line prefer-destructuring
+    eTicketability = fare.eTicketability;
+  }
+
+  return {
+    latestTicketingTime,
+    eTicketability,
+    refundable,
+    changePenalty,
+    cancelPenalty,
   };
 }
 
@@ -300,6 +472,8 @@ function setIndexesForSegments(
 
 module.exports = {
   formatLowFaresSearch,
+  formatFarePricingInfo,
+  formatPassengerCategories,
   formatTrip,
   formatSegment,
   formatServiceSegment,
@@ -307,4 +481,5 @@ module.exports = {
   formatPrices,
   setIndexesForSegments,
   getBaggage,
+  getBaggageInfo,
 };
