@@ -41,6 +41,7 @@ Low Fare Shop functionality combines air availability and a fare quote request t
 | cabins | `Array<Cabin>` | See `Cabins array` description [below](#cabins). |
 | requestId | `string` | Trace id of this request. <i>Optional.</i> |
 | maxJourneyTime | `number` | Maximum travel time in hours 0-99. Total for all legs <i>Optional.</i> |
+| maxSolutions | `number` | Maximum number of solutions<i>Optional.</i> |.
 | carriers | `Array<String>` | Array of carriers' codes. <i>Optional.</i> |
 | preferredConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |
 | prohibitedConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |

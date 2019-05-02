@@ -34,6 +34,7 @@ const params = {
   cabins: ['Economy'], // ['Business'],
   requestId: '4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60',
   maxJourneyTime: 300,
+  maxSolutions: 200,
   pricing: {
     currency: 'USD',
     // eTicketability: true,
