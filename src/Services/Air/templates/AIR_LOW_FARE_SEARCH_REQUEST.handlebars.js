@@ -65,6 +65,9 @@ module.exports = `
                 {{#if maxJourneyTime}}
                     MaxJourneyTime="{{maxJourneyTime}}"
                 {{/if}}
+                {{#if maxSolutions}}
+                    MaxSolutions="{{maxSolutions}}"
+                {{/if}}
             >
                 <air:PreferredProviders>
                     <com:Provider Code="{{provider}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
