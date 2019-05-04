@@ -532,14 +532,21 @@ function airGetTicketsErrorHandler(rsp) {
   } catch (err) {
     throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
   }
+  // General Air Service error
+  if (code === '3000') {
+    if (
+      rsp.faultcode !== undefined
+      && rsp.faultstring !== undefined
+      && /has no tickets/.test(rsp.faultstring) === true
+    ) {
+      return rsp;
+    }
+  }
   switch (code) {
     case '345':
       throw new AirRuntimeError.NoAgreement({
         pcc: utils.getErrorPcc(rsp.faultstring),
       });
-    case '3000':
-      // Reservation has no tickets yet. This is going to be handled by parser
-      return rsp;
     default:
       throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
   }
@@ -549,9 +556,8 @@ function airGetTickets(obj) {
   // No tickets in PNR
   if (
     obj.faultcode !== undefined
-    && obj.detail
-    && obj.detail[`common_${this.uapi_version}:ErrorInfo`]
-    && obj.detail[`common_${this.uapi_version}:ErrorInfo`][`common_${this.uapi_version}:Code`] === '3000'
+    && obj.faultstring !== undefined
+    && /has no tickets/.test(obj.faultstring) === true
   ) {
     return [];
   }

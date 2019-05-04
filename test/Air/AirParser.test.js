@@ -9,6 +9,9 @@ const {
   AirRuntimeError,
   AirParsingError,
 } = require('../../src/Services/Air/AirErrors');
+const {
+  RequestRuntimeError
+} = require('../../src/Request/RequestErrors');
 const Parser = require('../../src/Request/uapi-parser');
 const errorsConfig = require('../../src/Request/errors-config');
 
@@ -231,6 +234,19 @@ describe('#AirParser', () => {
       } catch (err) {
         expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement);
         expect(err.data.pcc).to.be.equal('7J8J');
+      }
+    });
+    it.only('should correctly handle other errors', async () => {
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
+      const errorHandler = airParser.AIR_GET_TICKETS_ERROR_HANDLER;
+      const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-error-general.xml`).toString();
+
+      const rsp = await uParser.parse(xml);
+      try {
+        errorHandler.call(uParser, uParser.mergeLeafRecursive(rsp['SOAP:Fault'][0]));
+        throw new Error('Skipped NoAgreement error!');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(RequestRuntimeError.UnhandledError);
       }
     });
   });
