@@ -236,7 +236,7 @@ describe('#AirParser', () => {
         expect(err.data.pcc).to.be.equal('7J8J');
       }
     });
-    it.only('should correctly handle other errors', async () => {
+    it('should correctly handle other errors', async () => {
       const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
       const errorHandler = airParser.AIR_GET_TICKETS_ERROR_HANDLER;
       const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-error-general.xml`).toString();
