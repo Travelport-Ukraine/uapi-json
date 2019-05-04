@@ -48,9 +48,6 @@ const checkLowSearchFareXml = (filename) => {
                 ]);
                 expect(leg.from).to.match(/^[A-Z]{3}$/);
                 expect(leg.to).to.match(/^[A-Z]{3}$/);
-                if (!leg.platingCarrier) {
-                  console.log(leg);
-                }
                 expect(leg.platingCarrier).to.match(/^[A-Z0-9]{2}$/);
                 expect(leg.segments).to.be.an('array').and.to.have.length.above(0);
                 leg.segments.forEach(
@@ -193,16 +190,16 @@ describe('#AirParser', () => {
   });
 
   describe('getTickets', () => {
-    it('should return empty array if UR have no tickets', () => {
+    it('should return empty array if UR have no tickets', async () => {
       const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
-      const parseFunction = airParser.AIR_GET_TICKET;
+      const parseFunction = airParser.AIR_GET_TICKETS;
+      const errorHandler = airParser.AIR_GET_TICKETS_ERROR_HANDLER;
       const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-error-no-tickets.xml`).toString();
 
-      return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          expect(result).to.be.a('array').that.is.empty;
-        });
+      const rsp = await uParser.parse(xml);
+      const errRsp = errorHandler.call(uParser, uParser.mergeLeafRecursive(rsp['SOAP:Fault'][0]));
+      const res = parseFunction.call(uParser, errRsp);
+      expect(res).to.be.a('array').that.is.empty;
     });
   });
 

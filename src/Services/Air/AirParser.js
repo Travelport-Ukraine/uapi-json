@@ -505,17 +505,6 @@ const airGetTicket = function (obj) {
     throw new AirRuntimeError.TicketRetrieveError(obj);
   }
 
-  if (
-    obj['SOAP:Fault']
-    && obj['SOAP:Fault'][0]
-    && obj['SOAP:Fault'][0].detail[0]
-    && obj['SOAP:Fault'][0].detail[0][`common_${this.uapi_version}:ErrorInfo`][0]
-    && obj['SOAP:Fault'][0].detail[0][`common_${this.uapi_version}:ErrorInfo`][0][`common_${this.uapi_version}:Code`][0]
-    === '3000'
-  ) {
-    return [];
-  }
-
   const etr = obj['air:ETR'];
   if (!etr) {
     throw new AirRuntimeError.TicketRetrieveError(obj);
@@ -530,6 +519,49 @@ const airGetTicket = function (obj) {
 
   return getTicketFromEtr.call(this, etr, obj);
 };
+
+function airGetTicketsErrorHandler(rsp) {
+  let errorInfo;
+  let code;
+  try {
+    errorInfo = (
+      rsp.detail[`common_${this.uapi_version}:ErrorInfo`]
+      || rsp.detail['air:AvailabilityErrorInfo']
+    );
+    code = errorInfo[`common_${this.uapi_version}:Code`];
+  } catch (err) {
+    throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
+  }
+  switch (code) {
+    case '345':
+      throw new AirRuntimeError.NoAgreement({
+        pcc: utils.getErrorPcc(rsp.faultstring),
+      });
+    case '3000':
+      // Reservation has no tickets yet. This is going to be handled by parser
+      return rsp;
+    default:
+      throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
+  }
+}
+
+function airGetTickets(obj) {
+  // No tickets in PNR
+  if (
+    obj.faultcode !== undefined
+    && obj.detail
+    && obj.detail[`common_${this.uapi_version}:ErrorInfo`]
+    && obj.detail[`common_${this.uapi_version}:ErrorInfo`][`common_${this.uapi_version}:Code`] === '3000'
+  ) {
+    return [];
+  }
+  // Parsing response
+  const tickets = airGetTicket.call(this, obj);
+  if (Array.isArray(tickets)) {
+    return tickets;
+  }
+  return [tickets];
+}
 
 function airCancelTicket(obj) {
   if (
@@ -1126,6 +1158,8 @@ module.exports = {
   AIR_ERRORS: AirErrorHandler, // errors handling
   AIR_FLIGHT_INFORMATION: airFlightInfoRsp,
   AIR_GET_TICKET: airGetTicket,
+  AIR_GET_TICKETS: airGetTickets,
+  AIR_GET_TICKETS_ERROR_HANDLER: airGetTicketsErrorHandler,
   AIR_CANCEL_TICKET: airCancelTicket,
   AIR_CANCEL_PNR: airCancelPnr,
   AIR_EXCHANGE_QUOTE: exchangeQuote,
