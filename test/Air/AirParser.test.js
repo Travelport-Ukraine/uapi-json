@@ -201,6 +201,38 @@ describe('#AirParser', () => {
       const res = parseFunction.call(uParser, errRsp);
       expect(res).to.be.a('array').that.is.empty;
     });
+    it('should return array if UR have tickets', async () => {
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
+      const parseFunction = airParser.AIR_GET_TICKETS;
+      const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-several-tickets.xml`).toString();
+
+      const rsp = await uParser.parse(xml);
+      const res = parseFunction.call(uParser, rsp);
+      expect(res).to.be.a('array').and.to.have.lengthOf(2);
+    });
+    it('should return array if UR has one ticket', async () => {
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
+      const parseFunction = airParser.AIR_GET_TICKETS;
+      const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-one-ticket.xml`).toString();
+
+      const rsp = await uParser.parse(xml);
+      const res = parseFunction.call(uParser, rsp);
+      expect(res).to.be.a('array').and.to.have.lengthOf(1);
+    });
+    it('should correctly handle error of agreement', async () => {
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
+      const errorHandler = airParser.AIR_GET_TICKETS_ERROR_HANDLER;
+      const xml = fs.readFileSync(`${xmlFolder}/NoAgreementError.xml`).toString();
+
+      const rsp = await uParser.parse(xml);
+      try {
+        errorHandler.call(uParser, uParser.mergeLeafRecursive(rsp['SOAP:Fault'][0]));
+        throw new Error('Skipped NoAgreement error!');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement);
+        expect(err.data.pcc).to.be.equal('7J8J');
+      }
+    });
   });
 
   describe('getTicket', () => {
