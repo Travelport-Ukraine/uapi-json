@@ -520,6 +520,12 @@ const airGetTicket = function (obj) {
   return getTicketFromEtr.call(this, etr, obj);
 };
 
+const responseHasNoTickets = rsp => (
+  rsp.faultcode !== undefined
+  && rsp.faultstring !== undefined
+  && /has no tickets/.test(rsp.faultstring)
+);
+
 function airGetTicketsErrorHandler(rsp) {
   let errorInfo;
   let code;
@@ -534,11 +540,7 @@ function airGetTicketsErrorHandler(rsp) {
   }
   // General Air Service error
   if (code === '3000') {
-    if (
-      rsp.faultcode !== undefined
-      && rsp.faultstring !== undefined
-      && /has no tickets/.test(rsp.faultstring) === true
-    ) {
+    if (responseHasNoTickets(rsp)) {
       return rsp;
     }
   }
@@ -554,19 +556,14 @@ function airGetTicketsErrorHandler(rsp) {
 
 function airGetTickets(obj) {
   // No tickets in PNR
-  if (
-    obj.faultcode !== undefined
-    && obj.faultstring !== undefined
-    && /has no tickets/.test(obj.faultstring) === true
-  ) {
+  if (responseHasNoTickets(obj)) {
     return [];
   }
   // Parsing response
   const tickets = airGetTicket.call(this, obj);
-  if (Array.isArray(tickets)) {
-    return tickets;
-  }
-  return [tickets];
+  return Array.isArray(tickets)
+    ? tickets
+    : [tickets];
 }
 
 function airCancelTicket(obj) {
