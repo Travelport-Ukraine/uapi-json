@@ -1,6 +1,6 @@
 {
   "name": "uapi-json",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Travelport Universal API",
   "main": "src/",
   "files": [
@@ -36,7 +36,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "galileo-screen": "1.0.5",
-    "handlebars": "^4.1.0",
+    "handlebars": "^4.1.2",
     "handlebars-helper-equal": "^1.0.0",
     "joi": "^13.7.0",
     "moment": "^2.10.6",
