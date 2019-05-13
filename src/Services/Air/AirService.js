@@ -149,8 +149,8 @@ module.exports = function (settings) {
       templates.retrieveDocument,
       'air:AirRetrieveDocumentRsp',
       AirValidator.AIR_GET_TICKETS,
-      AirParser.AIR_ERRORS,
-      AirParser.AIR_GET_TICKET,
+      AirParser.AIR_GET_TICKETS_ERROR_HANDLER,
+      AirParser.AIR_GET_TICKETS,
       debug,
       options
     ),
