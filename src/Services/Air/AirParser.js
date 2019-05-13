@@ -31,7 +31,7 @@ const searchLowFaresValidate = (obj) => {
 
   rootArrays.forEach((name) => {
     const airName = 'air:' + name + 'List';
-    if (!Object.prototype.toString.call(obj[airName]) === '[object Object]') {
+    if (Object.prototype.toString.call(obj[airName]) !== '[object Object]') {
       throw new AirParsingError.ResponseDataMissing({ missing: airName });
     }
   });
