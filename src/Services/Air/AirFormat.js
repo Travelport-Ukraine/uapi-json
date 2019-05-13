@@ -49,22 +49,24 @@ function getBaggageInfo(info) {
   // Checking for allowance
   let baggageInfo = { units: 'piece', amount: 0 };
 
-  if (typeof info === 'undefined') {
+  if (typeof info === 'undefined' || info == null) {
     return baggageInfo;
   }
 
-  baggageInfo.detail = info['air:BagDetails'].map((detail) => {
-    return {
-      applicableBags: detail.ApplicableBags,
-      basePrice: detail.BasePrice,
-      totalPrice: detail.TotalPrice,
-      approximateBasePrice: detail.ApproximateBasePrice,
-      approximateTotalPrice: detail.ApproximateTotalPrice,
-      restrictionText: detail['air:BaggageRestriction']['air:TextInfo'],
-    };
-  });
+  if (Object.prototype.hasOwnProperty.call(info, 'air:BagDetails')) {
+    baggageInfo.detail = info['air:BagDetails'].map((detail) => {
+      return {
+        applicableBags: detail.ApplicableBags,
+        basePrice: detail.BasePrice,
+        totalPrice: detail.TotalPrice,
+        approximateBasePrice: detail.ApproximateBasePrice,
+        approximateTotalPrice: detail.ApproximateTotalPrice,
+        restrictionText: detail['air:BaggageRestriction']['air:TextInfo'],
+      };
+    });
+  }
 
-  if (info && info['air:TextInfo'].length > 0) {
+  if (Object.prototype.hasOwnProperty.call(info, 'air:TextInfo')) {
     const match = info['air:TextInfo'][0].match(/^(\d+)([KP]+)$/);
 
     if (match) {
@@ -72,8 +74,6 @@ function getBaggageInfo(info) {
         baggageInfo = Object.assign(baggageInfo, { units: 'piece', amount: match[1] });
       } else if (match[2] === 'K') {
         baggageInfo = Object.assign(baggageInfo, { units: 'kilograms', amount: match[1] });
-      } else {
-        baggageInfo = Object.assign(baggageInfo, { units: 'unknown', amount: match[0] });
       }
     } else {
       console.warn('Baggage information is not number and is not weight!', JSON.stringify(info));
