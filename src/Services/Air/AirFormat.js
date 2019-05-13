@@ -237,6 +237,9 @@ function formatFarePricingInfo(fare) {
     if (typeof fareCancelPenalty.PenaltyApplies !== 'undefined') {
       cancelPenalty.penaltyApplies = fareCancelPenalty.PenaltyApplies;
     }
+    if (typeof fareCancelPenalty.NoShow !== 'undefined') {
+      cancelPenalty.noShow = fareCancelPenalty.NoShow;
+    }
   }
 
   let refundable = false;
@@ -325,59 +328,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
       };
     }));
 
-
-    const passengerCounts = {};
-
-    const passengerCategories = Object.keys(price['air:AirPricingInfo'])
-      .reduce((acc, key) => {
-        const passengerFare = price['air:AirPricingInfo'][key];
-        let code = passengerFare['air:PassengerType'];
-
-        if (Object.prototype.toString.call(code) === '[object String]') { // air:PassengerType in fullCollapseList_obj ParserUapi param
-          passengerCounts[code] = 1;
-
-          // air:PassengerType in noCollapseList
-        } else if (Array.isArray(code) && code.constructor === Array) { // ParserUapi param
-          const count = code.length;
-          const list = Array.from(new Set((code.map((item) => {
-            if (Object.prototype.toString.call(item) === '[object String]') {
-              return item;
-            } if (Object.prototype.toString.call(item) === '[object Object]' && item.Code) {
-              // air:PassengerType in fullCollapseList_obj like above,
-              // but there is Age or other info, except Code
-              return item.Code;
-            }
-            throw new AirParsingError.PTCIsNotSet();
-          }))));
-
-          [code] = list;
-          if (!list[0] || list.length !== 1) { // TODO throw error
-            console.log('Warning: different categories '
-              + list.join() + ' in single fare calculation ' + key + ' in fare ' + fareKey);
-          }
-          passengerCounts[code] = count;
-        } else {
-          throw new AirParsingError.PTCTypeInvalid();
-        }
-
-        return { ...acc, [code]: passengerFare };
-      }, {});
-
-    if (Object.keys(passengerCategories).length
-      !== Object.keys(price['air:AirPricingInfo']).length
-    ) {
-      console.log('Warning: duplicate categories in passengerCategories map for fare ' + fareKey);
-    }
-
-    const passengerFares = Object.keys(passengerCategories).reduce(
-      (memo, ptc) => Object.assign(memo, {
-        [ptc]: {
-          totalPrice: passengerCategories[ptc].TotalPrice,
-          basePrice: passengerCategories[ptc].BasePrice,
-          taxes: passengerCategories[ptc].Taxes,
-        },
-      }), {}
-    );
+    const { passengerCounts, passengerFares } = this.formatPassengerCategories(price['air:AirPricingInfo']);
 
     const result = {
       totalPrice: price.TotalPrice,

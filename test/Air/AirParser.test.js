@@ -125,7 +125,7 @@ const checkLowSearchFareXml = (filename) => {
             expect(ptc).to.be.a('string');
             const fare = proposal.passengerFares[ptc];
             expect(fare).to.be.an('object');
-            expect(fare).to.have.all.keys([
+            expect(fare).to.have.include.all.keys([
               'totalPrice', 'basePrice', 'taxes',
             ]);
             expect(fare.totalPrice).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
