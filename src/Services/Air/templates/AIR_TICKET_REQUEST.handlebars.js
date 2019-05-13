@@ -16,6 +16,9 @@ module.exports = `
       <air:AirPricingInfoRef Key="{{key}}"/>
       {{/refs}}
       <air:AirTicketingModifiers>
+        {{#refs}}
+          <air:AirPricingInfoRef Key="{{key}}"/>
+        {{/refs}}
         {{#if commission}}
         <com:Commission Level="Fare"
           {{#if commission.percent}}
