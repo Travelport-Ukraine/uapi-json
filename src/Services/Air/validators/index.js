@@ -16,6 +16,7 @@ const segments = require('./segments');
 const reservationLocator = require('./reservation-locator');
 const exchangeToken = require('./exchange-token');
 const platingCarrier = require('./platingCarrier');
+const searchId = require('./search-id');
 
 module.exports = {
   legs,
@@ -36,4 +37,5 @@ module.exports = {
   reservationLocator,
   exchangeToken,
   platingCarrier,
+  searchId,
 };

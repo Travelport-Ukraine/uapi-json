@@ -55,6 +55,28 @@ describe('#AirService', () => {
       createAirService({ auth }).shop({});
       expect(searchLowFares.calledOnce).to.be.equal(true);
     });
+
+    it('should check if correct function from service is called with async option', () => {
+      const searchLowFaresAsync = sinon.spy(() => {});
+      const service = () => ({ searchLowFaresAsync });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).shop({ async: true });
+      expect(searchLowFaresAsync.calledOnce).to.be.equal(true);
+    });
+  });
+
+  describe('retrieve', () => {
+    it('should check if correct function from service is called', () => {
+      const searchLowFaresRetrieve = sinon.spy(() => {});
+      const service = () => ({ searchLowFaresRetrieve });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).retrieve({});
+      expect(searchLowFaresRetrieve.calledOnce).to.be.equal(true);
+    });
   });
 
   describe('availability', () => {

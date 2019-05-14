@@ -22,6 +22,28 @@ module.exports = function (settings) {
       debug,
       options
     ),
+    searchLowFaresAsync: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.lowFareSearchAsynch,
+      'air:LowFareSearchAsynchRsp',
+      AirValidator.AIR_LOW_FARE_SEARCH_REQUEST,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_LOW_FARE_SEARCH_REQUEST,
+      debug,
+      options
+    ),
+    searchLowFaresRetrieve: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.retrieveLowFareSearch,
+      'air:RetrieveLowFareSearchRsp',
+      AirValidator.AIR_RETRIEVE_LOW_FARE_SEARCH_REQUEST,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_LOW_FARE_SEARCH_REQUEST,
+      debug,
+      options
+    ),
     availability: uApiRequest(
       config.AirService.url,
       auth,

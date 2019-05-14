@@ -4,6 +4,8 @@ const exchangeQuote = require('./AIR_EXCHANGE_QUOTE.handlebars');
 const fareRules = require('./AIR_FARE_RULES_REQUEST.handlebars');
 const flightInformation = require('./AIR_FLIGHT_INFORMATION_REQUEST.handlebars');
 const lowFareSearch = require('./AIR_LOW_FARE_SEARCH_REQUEST.handlebars');
+const lowFareSearchAsynch = require('./AIR_LOW_FARE_SEARCH_ASYNCH_REQUEST.handlebars');
+const retrieveLowFareSearch = require('./AIR_RETRIEVE_LOW_FARE_SEARCH_REQUEST.handlebars');
 const price = require('./AIR_PRICE_REQ.handlebars');
 const ticket = require('./AIR_TICKET_REQUEST.handlebars');
 const cancel = require('./AirCancel.handlebars');
@@ -22,6 +24,8 @@ module.exports = {
   fareRules,
   flightInformation,
   lowFareSearch,
+  lowFareSearchAsynch,
+  retrieveLowFareSearch,
   price,
   ticket,
   cancel,
