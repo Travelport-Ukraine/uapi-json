@@ -97,6 +97,7 @@ function formatAirExchangeBundle(bundle) {
 
 function formatLowFaresSearch(searchRequest, searchResult) {
   const pricesList = searchResult['air:AirPricePointList'];
+  const solutionsList = searchResult['air:AirPricingSolution'];
   const fareInfos = searchResult['air:FareInfoList'];
   const segments = searchResult['air:AirSegmentList'];
   const flightDetails = searchResult['air:FlightDetailsList'];
@@ -108,14 +109,47 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 
   const fares = [];
 
-  Object.entries(pricesList).forEach(([fareKey, price]) => {
+  const results = typeof solutionsList !== 'undefined' ? solutionsList : pricesList;
+
+  Object.entries(results).forEach(([fareKey, price]) => {
     const [firstKey] = Object.keys(price['air:AirPricingInfo']);
     const thisFare = price['air:AirPricingInfo'][firstKey]; // get trips from first reservation
     if (!thisFare.PlatingCarrier) {
       return;
     }
 
-    const directions = thisFare['air:FlightOptionsList'].map(direction => Object.values(direction['air:Option']).map((option) => {
+    const directions = typeof solutionsList !== 'undefined' ? price['air:Journey'].map((leg) => {
+      const trips = leg['air:AirSegmentRef'].map((segmentRef) => {
+        const segment = segments[segmentRef];
+
+        const tripFlightDetails = segment['air:FlightDetailsRef'].map(flightDetailsRef => flightDetails[flightDetailsRef]);
+
+        const [bookingInfo] = thisFare['air:BookingInfo'].filter(info => info.SegmentRef === segmentRef);
+        const fareInfo = fareInfos[bookingInfo.FareInfoRef];
+
+        const seatsAvailable = Number(bookingInfo.BookingCount);
+
+        return Object.assign(
+          formatTrip(segment, tripFlightDetails),
+          {
+            serviceClass: bookingInfo.CabinClass,
+            bookingClass: bookingInfo.BookingCode,
+            baggage: [getBaggage(fareInfo['air:BaggageAllowance'])],
+            fareBasisCode: fareInfo.FareBasis,
+          },
+          seatsAvailable ? { seatsAvailable } : null
+        );
+      });
+
+      return [{
+        from: trips[0].from,
+        to: trips[trips.length - 1].to,
+        duration: leg.TravelTime,
+        // TODO get overnight stops, etc from connection
+        platingCarrier: thisFare.PlatingCarrier,
+        segments: trips,
+      }];
+    }) : thisFare['air:FlightOptionsList'].map(direction => Object.values(direction['air:Option']).map((option) => {
       const trips = option['air:BookingInfo'].map(
         (segmentInfo) => {
           const fareInfo = fareInfos[segmentInfo.FareInfoRef];

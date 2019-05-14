@@ -27,7 +27,12 @@ const parseFareCalculation = (str) => {
 
 const searchLowFaresValidate = (obj) => {
   // +List, e.g. AirPricePointList, see below
-  const rootArrays = ['AirPricePoint', 'AirSegment', 'FareInfo', 'FlightDetails', 'Route'];
+  if (Object.prototype.toString.call(obj['air:AirPricePointList']) !== '[object Object]'
+    && Object.prototype.toString.call(obj['air:AirPricingSolution']) !== '[object Object]') {
+    throw new AirParsingError.ResponseDataMissing({ missing: 'AirPricePoint or AirPricingSolution' });
+  }
+
+  const rootArrays = ['AirSegment', 'FareInfo', 'FlightDetails', 'Route'];
 
   rootArrays.forEach((name) => {
     const airName = 'air:' + name + 'List';
