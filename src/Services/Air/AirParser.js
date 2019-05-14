@@ -199,10 +199,12 @@ function airPrice(obj) {
   const priceKeys = Object.keys(pricingSolutions);
 
   let pricingSolution = 0;
-  if (pricingSolutions.length > 1) {
+  if (priceKeys.length > 1) {
     console.log('More than one solution found in booking. Resolving the cheapest one.');
-    [pricingSolution] = pricingSolutions.sort(
-      (a, b) => parseFloat(a.$.TotalPrice.slice(3)) - parseFloat(b.$.TotalPrice.slice(3))
+    const solutions = priceKeys.map(key => pricingSolutions[key]);
+
+    [pricingSolution] = solutions.sort(
+      (a, b) => parseFloat(a.TotalPrice.slice(3)) - parseFloat(b.TotalPrice.slice(3))
     );
   } else {
     pricingSolution = pricingSolutions[priceKeys[0]];
