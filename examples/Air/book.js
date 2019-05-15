@@ -40,8 +40,8 @@ AirService.shop(params)
         segments: fromSegments.concat(toSegments),
         rule: 'SIP',
         passengers: [{
-          lastName: 'ANAKIN',
-          firstName: 'SKYWALKER',
+          lastName: 'SKYWALKER',
+          firstName: 'ANAKIN',
           passCountry: 'UA',
           passNumber: 'ES221731',
           birthDate: '1968-07-25',
