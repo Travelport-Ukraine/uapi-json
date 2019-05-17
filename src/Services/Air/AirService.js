@@ -88,6 +88,17 @@ module.exports = function (settings) {
       debug,
       options
     ),
+    getUniversalRecord: uApiRequest(
+      config.UniversalRecord.url,
+      auth,
+      templates.universalRecordRetrieve,
+      'universal:UniversalRecordRetrieveRsp',
+      AirValidator.UNIVERSAL_RECORD_RETRIEVE,
+      AirParser.AIR_ERRORS,
+      AirParser.UNIVERSAL_RECORD_RETRIEVE_REQUEST,
+      debug,
+      options
+    ),
     gdsQueue: uApiRequest(
       config.GdsQueueService.url,
       auth,
