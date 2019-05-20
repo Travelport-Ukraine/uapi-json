@@ -13,7 +13,7 @@ module.exports = (settings) => {
   const log = (settings.options && settings.options.logFunction) || console.log;
   return {
     shop(options) {
-      if (typeof options.async !== 'undefined' && options.async === true) {
+      if (options.async === true) {
         return service.searchLowFaresAsync(options);
       }
       return service.searchLowFares(options);
