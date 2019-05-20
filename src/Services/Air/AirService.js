@@ -25,7 +25,7 @@ module.exports = function (settings) {
     searchLowFaresAsync: uApiRequest(
       config.AirService.url,
       auth,
-      templates.lowFareSearchAsynch,
+      templates.lowFareSearch,
       'air:LowFareSearchAsynchRsp',
       AirValidator.AIR_LOW_FARE_SEARCH_REQUEST,
       AirParser.AIR_ERRORS,
