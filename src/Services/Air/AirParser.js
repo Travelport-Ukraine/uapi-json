@@ -297,6 +297,7 @@ function airPrice(obj) {
     uapi_pricing_info_group: thisFare.AirPricingInfoGroup,
     farePricingMethod: thisFare.PricingMethod,
     farePricingType: thisFare.PricingType,
+    platingCarrier: thisFare.PlatingCarrier,
     totalPrice: pricingSolution.TotalPrice,
     basePrice: pricingSolution.BasePrice,
     equivalentBasePrice: pricingSolution.EquivalentBasePrice,
