@@ -179,7 +179,8 @@ function formatLowFaresSearch(searchRequest, searchResult) {
               },
               seatsAvailable ? { seatsAvailable } : null
             );
-          });
+          }
+        );
 
         return {
           from: direction.Origin,
