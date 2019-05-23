@@ -88,12 +88,18 @@ module.exports = `
                 {{#if pricing.currency}}
                 CurrencyType="{{pricing.currency}}"
                 {{/if}}
-
                 {{#if pricing.eTicketability}}
                 ETicketability="{{pricing.eTicketability}}"
                 {{/if}}
-            />
-            {{/if}}
+                {{#if platingCarrier}}
+                PlatingCarrier="{{platingCarrier}}"
+                {{/if}}
+                {{#if pricing.faresIndicator}}
+                FaresIndicator="{{pricing.faresIndicator}}"
+                {{else}}
+                FaresIndicator="PublicAndPrivateFares"
+                {{/if}}
+                />
             {{#passengers}}
                 <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
             {{/passengers}}

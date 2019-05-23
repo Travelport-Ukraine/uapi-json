@@ -13,7 +13,7 @@ module.exports = `
             {{/if}}
             xmlns:air="http://www.travelport.com/schema/air_v47_0"
             xmlns:com="http://www.travelport.com/schema/common_v47_0">
-            <com:BillingPointOfSaleInfo OriginApplication="UAPI" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
+            <com:BillingPointOfSaleInfo OriginApplication="UAPI" />
             <air:AirItinerary>
                 {{#segments}}
                 <air:AirSegment ArrivalTime="{{arrival}}"
@@ -37,17 +37,30 @@ module.exports = `
                 </air:AirSegment>
                 {{/segments}}
             </air:AirItinerary>
-            {{#if platingCarrier}}
-              <air:AirPricingModifiers PlatingCarrier="{{platingCarrier}}"/>
-            {{/if}}
+            
+            <air:AirPricingModifiers
+                {{#if pricing.currency}}
+                CurrencyType="{{pricing.currency}}"
+                {{/if}}
+                {{#if pricing.eTicketability}}
+                ETicketability="{{pricing.eTicketability}}"
+                {{/if}}
+                {{#if platingCarrier}}
+                PlatingCarrier="{{platingCarrier}}"
+                {{/if}}
+                {{#if pricing.faresIndicator}}
+                FaresIndicator="{{pricing.faresIndicator}}"
+                {{else}}
+                FaresIndicator="PublicAndPrivateFares"
+                {{/if}}
             {{#if business}}
-            <air:AirPricingModifiers InventoryRequestType="DirectAccess">
+            >
                 <air:PermittedCabins>
-                    <com:CabinClass Type="Business" xmlns:com="http://www.travelport.com/schema/common_v47_0" />
+                    <com:CabinClass Type="Business" />
                 </air:PermittedCabins>
-            </air:AirPricingModifiers>
+            </air:AirPricingModifiers>   
             {{else}}
-            <air:AirPricingModifiers InventoryRequestType="DirectAccess"/>
+            />
             {{/if}}
             {{#passengers}}
             <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}" {{#if child}}Age="9"{{else if Age}}Age="{{Age}}"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
