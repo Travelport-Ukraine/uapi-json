@@ -55,7 +55,13 @@ module.exports = `
             {{#if hasFareBasis}}
             <air:AirPricingCommand>
                 {{#segments}}
-                <air:AirSegmentPricingModifiers AirSegmentRef="{{@index}}" FareBasisCode="{{fareBasisCode}}"/>
+                <air:AirSegmentPricingModifiers AirSegmentRef="{{@index}}" FareBasisCode="{{fareBasisCode}}">
+                {{#if bookingClass}}
+                    <air:PermittedBookingCodes>
+                            <air:BookingCode Code="{{bookingClass}}" />
+                    </air:PermittedBookingCodes>
+                {{/if}}
+                </air:AirSegmentPricingModifiers>
                 {{/segments}}
             </air:AirPricingCommand>
             {{/if}}
