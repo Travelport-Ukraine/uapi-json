@@ -982,7 +982,7 @@ describe('#AirParser', () => {
           expect(segment).to.include.keys([
             'index', 'from', 'to', 'bookingClass', 'departure', 'arrival', 'airline',
             'flightNumber', 'serviceClass', 'status', 'plane', 'duration',
-            'techStops', 'group', 'uapi_segment_ref', 'codeshare'
+            'techStops', 'group', 'uapi_segment_ref', 'codeshare',
           ]);
           expect(segment.index).to.be.a('number');
           expect(segment.from).to.match(/^[A-Z]{3}$/);
