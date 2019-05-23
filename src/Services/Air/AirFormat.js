@@ -36,6 +36,17 @@ function getBaggage(baggageAllowance) {
 }
 
 function formatSegment(segment) {
+  const codeshare = (Object.prototype.toString.call(segment['air:CodeshareInfo']) === '[object Object]');
+  let codeshareInfo = {};
+
+  if (codeshare) {
+    codeshareInfo = {
+      operatingCarrier: segment['air:CodeshareInfo'].OperatingCarrier,
+      operatingCarrierName: segment['air:CodeshareInfo']._,
+      operatingFlightNumber: segment['air:CodeshareInfo'].OperatingFlightNumber,
+    };
+  }
+
   return {
     from: segment.Origin,
     to: segment.Destination,
@@ -45,6 +56,8 @@ function formatSegment(segment) {
     airline: segment.Carrier,
     flightNumber: segment.FlightNumber,
     uapi_segment_ref: segment.Key,
+    codeshare,
+    ...codeshareInfo
   };
 }
 
