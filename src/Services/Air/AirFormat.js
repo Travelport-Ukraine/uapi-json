@@ -109,7 +109,9 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 
   const fares = [];
 
-  const results = typeof solutionsList !== 'undefined' ? solutionsList : pricesList;
+  const isSolutionResult = typeof solutionsList !== 'undefined';
+
+  const results = isSolutionResult ? solutionsList : pricesList;
 
   Object.entries(results).forEach(([fareKey, price]) => {
     const [firstKey] = Object.keys(price['air:AirPricingInfo']);
@@ -119,7 +121,11 @@ function formatLowFaresSearch(searchRequest, searchResult) {
     }
 
     let directions = [];
-    if (typeof solutionsList !== 'undefined') {
+    if (isSolutionResult) {
+      if (Object.prototype.toString.call(price['air:Journey']) === '[object Object]') {
+        price['air:Journey'] = [price['air:Journey']];
+      }
+
       directions = price['air:Journey'].map((leg) => {
         const trips = leg['air:AirSegmentRef'].map((segmentRef) => {
           const segment = segments[segmentRef];
