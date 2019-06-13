@@ -39,6 +39,7 @@ module.exports = `
             </air:AirItinerary>
             
             <air:AirPricingModifiers
+                InventoryRequestType="DirectAccess"
                 {{#if pricing.currency}}
                 CurrencyType="{{pricing.currency}}"
                 {{/if}}
