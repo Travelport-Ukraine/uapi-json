@@ -35,9 +35,9 @@ module.exports = {
     ),
     transform(
       transformers.setBusinessFlag,
-      // transformers.setGroupsForSegments,
-      transformers.setHasFareBasisFlag,
-      transformers.convertPassengersObjectToArray
+      transformers.convertPassengersObjectToArray,
+      transformers.setGroupsForSegments,
+      transformers.setHasFareBasisFlag
     )
   ),
 

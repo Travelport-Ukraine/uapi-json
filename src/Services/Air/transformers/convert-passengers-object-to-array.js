@@ -7,7 +7,7 @@ module.exports = (params) => {
       for (let i = 0; i < number; i += 1) {
         list.push({
           ageCategory,
-          child: (ageCategory === 'CNN'), // quickfix
+          isChild: (ageCategory === 'CNN'), // quickfix
         });
       }
     }
