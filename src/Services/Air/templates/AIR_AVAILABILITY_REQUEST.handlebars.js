@@ -100,6 +100,7 @@ module.exports = `
                 FaresIndicator="PublicAndPrivateFares"
                 {{/if}}
                 />
+            {{/if}}
             {{#passengers}}
                 <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
             {{/passengers}}
