@@ -257,6 +257,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
       totalPrice: price.TotalPrice,
       basePrice: price.BasePrice,
       taxes: price.Taxes,
+      platingCarrier: thisFare.PlatingCarrier,
       directions,
       bookingComponents: [
         {
