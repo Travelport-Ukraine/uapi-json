@@ -1082,8 +1082,16 @@ function exchangeBooking(rsp) {
 
 function availability(rsp) {
   const itinerarySolution = utils.firstInObj(rsp['air:AirItinerarySolution']);
-  const connectedSegments = itinerarySolution['air:Connection']
-    ? itinerarySolution['air:Connection'].map(
+
+  // Sometimes might return an object instead of array
+  let airConnections = itinerarySolution['air:Connection'];
+
+  if (airConnections && !airConnections.length && Object.keys(airConnections).length !== 0) {
+    airConnections = [airConnections];
+  }
+
+  const connectedSegments = airConnections
+    ? airConnections.map(
       s => parseInt(s.SegmentIndex, 10)
     )
     : [];
