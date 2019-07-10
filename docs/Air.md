@@ -241,7 +241,6 @@ If the PNR contains no active segments it could not be imported into uAPI. Thus 
 
 ## .getUniversalRecord(params)
 <a name="getUniversalRecord"></a>
-> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 
 This method returns an array of all PNR objects, which are contained in Universal record, holding the PNR provided. If Universal record does not exists RuntimeError.AirRuntimeError "Record locator not found" will be raised.
 
