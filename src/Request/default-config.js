@@ -5,6 +5,7 @@
 module.exports = function defaultConfig(ver) {
   // do not collapse arrays with single objects or objects with single keys if they have this name
   const noCollapseList = [
+    'air:Connection',
     'air:BookingInfo',
     'air:FareRule',
     // there's one SSR per each airline (per each passenger), they are usually identical
