@@ -1,0 +1,35 @@
+<SOAP:Envelope 
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:AvailabilitySearchRsp TraceId="" TransactionId="D6F88A360A074253921E7E92C9F3E804" ResponseTime="552" DistanceUnits="MI" 
+      xmlns:air="http://www.travelport.com/schema/air_v47_0" 
+      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+      <common_v47_0:ResponseMessage Code="3051" Type="Warning">No more later flights.</common_v47_0:ResponseMessage>
+      <air:FlightDetailsList>
+        <air:FlightDetails Key="RwzPUvBAAA/B0LTrECAAAA==" Origin="PEK" Destination="DOH" DepartureTime="2019-10-10T01:50:00.000+08:00" ArrivalTime="2019-10-10T05:40:00.000+03:00" FlightTime="530" TravelTime="1040" GroundTime="0" Equipment="77W" OriginTerminal="3"/>
+        <air:FlightDetails Key="RwzPUvBAAA/B2LTrECAAAA==" Origin="DOH" Destination="PRG" DepartureTime="2019-10-10T08:15:00.000+03:00" ArrivalTime="2019-10-10T13:10:00.000+02:00" FlightTime="355" TravelTime="1040" GroundTime="0" Equipment="788" DestinationTerminal="1"/>
+      </air:FlightDetailsList>
+      <air:AirSegmentList>
+        <air:AirSegment Key="RwzPUvBAAA/B1LTrECAAAA==" Group="0" Carrier="QR" FlightNumber="895" Origin="PEK" Destination="DOH" DepartureTime="2019-10-10T01:50:00.000+08:00" ArrivalTime="2019-10-10T05:40:00.000+03:00" FlightTime="530" TravelTime="1040" ETicketability="Yes" Equipment="77W" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+          <air:AirAvailInfo ProviderCode="1G">
+            <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C9|D9|I9|R6"/>
+            <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|H9|K9|M9|L9|V9|S9|N9|Q9|T9|O9|W9"/>
+          </air:AirAvailInfo>
+          <air:FlightDetailsRef Key="RwzPUvBAAA/B0LTrECAAAA=="/>
+        </air:AirSegment>
+        <air:AirSegment Key="RwzPUvBAAA/B3LTrECAAAA==" Group="0" Carrier="QR" FlightNumber="291" Origin="DOH" Destination="PRG" DepartureTime="2019-10-10T08:15:00.000+03:00" ArrivalTime="2019-10-10T13:10:00.000+02:00" FlightTime="355" TravelTime="1040" ETicketability="Yes" Equipment="788" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="General">
+          <air:AirAvailInfo ProviderCode="1G">
+            <air:BookingCodeInfo CabinClass="Business" BookingCounts="J9|C9|D9|I9|R6"/>
+            <air:BookingCodeInfo CabinClass="Economy" BookingCounts="Y9|B9|H9|K9|M9|L9|V9|S9|N9|Q9|T9|O9|W9"/>
+          </air:AirAvailInfo>
+          <air:FlightDetailsRef Key="RwzPUvBAAA/B2LTrECAAAA=="/>
+        </air:AirSegment>
+      </air:AirSegmentList>
+      <air:AirItinerarySolution Key="RwzPUvBAAA/B4LTrECAAAA==">
+        <air:AirSegmentRef Key="RwzPUvBAAA/B1LTrECAAAA=="/>
+        <air:AirSegmentRef Key="RwzPUvBAAA/B3LTrECAAAA=="/>
+        <air:Connection SegmentIndex="0"/>
+      </air:AirItinerarySolution>
+    </air:AvailabilitySearchRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

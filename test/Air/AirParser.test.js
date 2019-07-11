@@ -1391,6 +1391,20 @@ describe('#AirParser', () => {
     });
   });
 
+  describe('UNIVERSAL_RECORD_RETRIEVE_REQUEST', () => {
+    it('should test parsing of universal record retrieve request', () => {
+      const uParser = new Parser('universal:UniversalRecordRetrieveRsp', 'v47_0', {});
+      const parseFunction = airParser.UNIVERSAL_RECORD_RETRIEVE_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordRetrieve.xml`)
+        .toString();
+      return uParser.parse(xml)
+        .then((json) => {
+          const jsonResult = parseFunction.call(uParser, json);
+          testBooking(jsonResult, false);
+        });
+    });
+  });
+
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
     it('should test parsing of universal record import request', () => {
       const uParser = new Parser('universal:UniversalRecordImportRsp', 'v47_0', { });
@@ -1886,6 +1900,20 @@ describe('#AirParser', () => {
 
       const parseFunction = airParser.AIR_AVAILABILITY;
       const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp2.xml`).toString();
+      return uParser
+        .parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testAvailability(result);
+          expect(result.nextResultReference).to.be.null;
+        });
+    });
+
+    it('should parse response with single connection', () => {
+      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {});
+
+      const parseFunction = airParser.AIR_AVAILABILITY;
+      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp-single-connection.xml`).toString();
       return uParser
         .parse(xml)
         .then(json => parseFunction.call(uParser, json))
