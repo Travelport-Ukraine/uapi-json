@@ -1909,6 +1909,20 @@ describe('#AirParser', () => {
         });
     });
 
+    it('should parse response with single connection', () => {
+      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {});
+
+      const parseFunction = airParser.AIR_AVAILABILITY;
+      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp-single-connection.xml`).toString();
+      return uParser
+        .parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testAvailability(result);
+          expect(result.nextResultReference).to.be.null;
+        });
+    });
+
     it('should parse response without 1G avail info', () => {
       const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {});
 
