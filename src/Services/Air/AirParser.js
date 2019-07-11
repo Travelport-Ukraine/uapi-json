@@ -606,6 +606,12 @@ function extractBookings(obj) {
     throw new AirRuntimeError.SegmentBookingFailed(obj);
   }
 
+  let responseMessage;
+
+  if (obj[`common_${this.uapi_version}:ResponseMessage`]) {
+    responseMessage = obj[`common_${this.uapi_version}:ResponseMessage`];
+  }
+
   const travelers = record['common_' + this.uapi_version + ':BookingTraveler'];
   const reservationInfo = record['universal:ProviderReservationInfo'];
   const remarksObj = record[`common_${this.uapi_version}:GeneralRemark`];
@@ -755,13 +761,17 @@ function extractBookings(obj) {
         (key) => {
           const pricingInfo = booking['air:AirPricingInfo'][key];
 
-          const uapiSegmentRefs = pricingInfo['air:BookingInfo'].map(
+          const uapiSegmentRefs = (pricingInfo['air:BookingInfo'] || []).map(
             segment => segment.SegmentRef
           );
 
           const uapiPassengerRefs = pricingInfo[`common_${this.uapi_version}:BookingTravelerRef`];
 
           const fareInfo = pricingInfo['air:FareInfo'];
+
+          if (!fareInfo) {
+            return null;
+          }
 
           const baggage = Object.keys(fareInfo).map(
             fareLegKey => format.getBaggage(fareInfo[fareLegKey]['air:BaggageAllowance'])
@@ -861,7 +871,7 @@ function extractBookings(obj) {
             parseFareCalculation(pricingInfo['air:FareCalc'])
           );
         }
-      );
+      ).filter(Boolean);
 
     const fareQuotesGrouped = pricingInfos.reduce(
       (acc, pricingInfo) => Object.assign(acc, {
@@ -915,7 +925,8 @@ function extractBookings(obj) {
       },
       splitBookings.length > 0
         ? { splitBookings }
-        : null
+        : null,
+      responseMessage ? { messages: responseMessage } : null,
     );
   });
 }
