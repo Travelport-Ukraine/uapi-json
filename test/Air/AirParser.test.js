@@ -1406,6 +1406,18 @@ describe('#AirParser', () => {
   });
 
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
+    it('should parse booking with malformed air price', () => {
+      const uParser = new Parser('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordMalformedAirPrice.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          testBooking(result);
+          expect(result[0].fareQuotes.length).to.be.eq(1);
+        });
+    });
+
     it('should test parsing of universal record import request', () => {
       const uParser = new Parser('universal:UniversalRecordImportRsp', 'v47_0', { });
       const parseFunction = airParser.AIR_IMPORT_REQUEST;

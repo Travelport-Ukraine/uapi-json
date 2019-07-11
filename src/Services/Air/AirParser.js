@@ -767,7 +767,7 @@ function extractBookings(obj) {
             fareLegKey => format.getBaggage(fareInfo[fareLegKey]['air:BaggageAllowance'])
           );
 
-          const passengersCount = pricingInfo['air:PassengerType']
+          const passengersCount = (pricingInfo['air:PassengerType'] || [])
             .reduce((acc, data) => Object.assign(acc, {
               [data.Code]: (acc[data.Code] || 0) + 1,
             }), {});
@@ -825,7 +825,7 @@ function extractBookings(obj) {
               : null
           );
 
-          const pricingInfoPassengers = uapiPassengerRefs.map(
+          const pricingInfoPassengers = (uapiPassengerRefs || []).map(
             (ref) => {
               const ticket = tickets.find(
                 t => t.uapi_passenger_ref === ref && t.uapi_pricing_info_ref === key
