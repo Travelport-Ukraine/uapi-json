@@ -925,6 +925,11 @@ function importRequest(data) {
   return response;
 }
 
+function universalRecordRetrieveRequest(data) {
+  const response = extractBookings.call(this, data);
+  return response;
+}
+
 function extractFareRules(obj) {
   const rulesList = obj['air:FareRule'];
   rulesList.forEach((item) => {
@@ -1156,6 +1161,7 @@ module.exports = {
   AIR_CREATE_RESERVATION_REQUEST: extractBookings,
   AIR_TICKET_REQUEST: ticketParse,
   AIR_IMPORT_REQUEST: importRequest,
+  UNIVERSAL_RECORD_RETRIEVE_REQUEST: universalRecordRetrieveRequest,
   GDS_QUEUE_PLACE_RESPONSE: gdsQueue,
   AIR_CANCEL_UR: nullParsing,
   UNIVERSAL_RECORD_FOID: nullParsing,

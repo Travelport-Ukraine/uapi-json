@@ -1391,6 +1391,20 @@ describe('#AirParser', () => {
     });
   });
 
+  describe('UNIVERSAL_RECORD_RETRIEVE_REQUEST', () => {
+    it('should test parsing of universal record retrieve request', () => {
+      const uParser = new Parser('universal:UniversalRecordRetrieveRsp', 'v47_0', {});
+      const parseFunction = airParser.UNIVERSAL_RECORD_RETRIEVE_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordRetrieve.xml`)
+        .toString();
+      return uParser.parse(xml)
+        .then((json) => {
+          const jsonResult = parseFunction.call(uParser, json);
+          testBooking(jsonResult, false);
+        });
+    });
+  });
+
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
     it('should test parsing of universal record import request', () => {
       const uParser = new Parser('universal:UniversalRecordImportRsp', 'v47_0', { });
