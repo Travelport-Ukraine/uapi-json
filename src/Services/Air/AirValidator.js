@@ -49,7 +49,8 @@ module.exports = {
     ),
     transform(
       transformers.setPassengersAge,
-      transformers.addMetaPassengersBooking
+      transformers.addMetaPassengersBooking,
+      transformers.setSSRSegmentRef
     )
   ),
 

@@ -53,9 +53,7 @@ module.exports = `
                     />
                 {{/if}}
                 {{#ssr}}
-                <com:SSR Type="{{type}}" FreeText="{{text}}"/>
-                <!--<com:SSR Carrier="F9" FreeText="P/IN/F1234567/IN/05Jan85/M/13Dec14/Jones/Stephen"-->
-                         <!--SegmentRef="IVaa0tGWQ+2grqSIL81xPQ==" Status="HK" Type="DOCS"/>-->
+                <com:SSR Type="{{type}}" {{#if carrier}}Carrier="{{carrier}}" {{/if}}{{#if segmentRef}}SegmentRef="{{{segmentRef}}}" {{/if}}FreeText="{{text}}" />
                 {{/ssr}}
                 {{#if isChild}}
                 <com:NameRemark Key="P_{{@index}}">

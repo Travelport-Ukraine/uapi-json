@@ -270,9 +270,12 @@ function airPriceRspPricingSolutionXML(obj) {
     resultXml[root + '_XML'] = lines.join('\n');
   });
 
+  const segs = this.mergeLeafRecursive(objCopy, 'air:AirPriceRsp')['air:AirPriceRsp']['air:AirItinerary']['air:AirSegment'];
+
   return {
     'air:AirPricingSolution': utils.clone(pricingSolution.$),
     'air:AirPricingSolution_XML': resultXml,
+    'air:AirSegment': segs,
   };
 }
 
