@@ -1,0 +1,149 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AirRetrieveDocumentRsp TransactionId="25DFA3540A074254B1A1EE674D794593" ResponseTime="1302" UniversalRecordLocatorCode="RG60VG"
+                                    xmlns:air="http://www.travelport.com/schema/air_v47_0"
+                                    xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+            <air:ETR Key="jNJRLwBAAA/B1vkv8IAAAA==" BasePrice="EUR759.00" Taxes="UAH9609.00" EquivalentBasePrice="UAH22189" Refundable="false" Exchangeable="false" IssuedDate="2019-07-22T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="ZXRNLU" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="AF">
+                <air:AirReservationLocatorCode>V4TT5N</air:AirReservationLocatorCode>
+                <common_v47_0:AgencyInfo>
+                    <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-07-21T22:00:00.000+00:00"/>
+                </common_v47_0:AgencyInfo>
+                <common_v47_0:BookingTraveler Key="OBZYLwmB0BKAFRtN1IAAAA==">
+                    <common_v47_0:BookingTravelerName First="BILBOMR" Last="SKKUWALKER"/>
+                    <common_v47_0:SSR Key="jNJRLwBAAA/Bknkv8IAAAA==" SegmentRef="OBZYLwmB0BKAretN1IAAAA==" Status="HK" Type="TKNE" FreeText="0579903453217C1/217-218" Carrier="AF" ProviderReservationInfoRef="OBZYLwmB0BKALjeN1IAAAA=="/>
+                    <common_v47_0:SSR Key="jNJRLwBAAA/B/qkv8IAAAA==" SegmentRef="OBZYLwmB0BKA7ftN1IAAAA==" Status="HK" Type="TKNE" FreeText="0579903453217C2/217-218" Carrier="AF" ProviderReservationInfoRef="OBZYLwmB0BKALjeN1IAAAA=="/>
+                </common_v47_0:BookingTraveler>
+                <common_v47_0:FormOfPayment Key="jNJRLwBAAA/Bsgkv8IAAAA==" Type="Cash" Reusable="false" ProfileKey="nKPFDNpCS96Sej75v3nGtA=="/>
+                <common_v47_0:Payment Key="jNJRLwBAAA/Bghkv8IAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="jNJRLwBAAA/Bsgkv8IAAAA=="/>
+                <common_v47_0:SupplierLocator SupplierCode="AZ" SupplierLocatorCode="JKNSSX"/>
+                <common_v47_0:SupplierLocator SupplierCode="AF" SupplierLocatorCode="WNWHGP"/>
+                <common_v47_0:SupplierLocator SupplierCode="KL" SupplierLocatorCode="WNWHGP"/>
+                <air:FareCalc>S-ROM AF X/PAR AF JNB 73.73 /-CPT KL X/AMS S2.25 AZ ROM 778.45 NUC854.43END ROE0.888299 XT PD500IT PD28MJ PD94VT PD137FR PD566QX PD47EV PD41UM PD355WC PD445ZA PD190CJ PD188RN PD878YQ PD5848YR</air:FareCalc>
+                <air:Ticket Key="jNJRLwBAAA/BK3lv8IAAAA==" TicketNumber="0579903453217" TicketStatus="N">
+                    <air:Coupon Key="jNJRLwBAAA/BL3lv8IAAAA==" CouponNumber="1" MarketingCarrier="AF" MarketingFlightNumber="1405" Origin="FCO" Destination="CDG" DepartureTime="2020-01-15T20:00:00.000+01:00" StopoverCode="true" BookingClass="L" FareBasis="X3PLIT" NotValidBefore="2020-01-16" NotValidAfter="2020-01-16" Status="O" SegmentGroup="0" MarriageGroup="3"/>
+                    <air:Coupon Key="jNJRLwBAAA/BM3lv8IAAAA==" CouponNumber="2" MarketingCarrier="AF" MarketingFlightNumber="990" Origin="CDG" Destination="JNB" DepartureTime="2020-01-15T23:35:00.000+01:00" StopoverCode="false" BookingClass="X" FareBasis="X3PLIT" NotValidBefore="2020-01-16" NotValidAfter="2020-01-16" Status="O" SegmentGroup="0" MarriageGroup="3"/>
+                    <air:Coupon Key="jNJRLwBAAA/BP3lv8IAAAA==" CouponNumber="4" MarketingCarrier="KL" MarketingFlightNumber="598" Origin="CPT" Destination="AMS" DepartureTime="2020-02-01T00:30:00.000+02:00" StopoverCode="true" BookingClass="M" FareBasis="MFFIT" NotValidBefore="2020-01-20" NotValidAfter="2020-04-16" Status="O"/>
+                </air:Ticket>
+                <air:Ticket Key="jNJRLwBAAA/BQ3lv8IAAAA==" TicketNumber="0579903453218" TicketStatus="N">
+                    <air:Coupon Key="jNJRLwBAAA/BR3lv8IAAAA==" CouponNumber="1" MarketingCarrier="AZ" MarketingFlightNumber="107" Origin="AMS" Destination="FCO" DepartureTime="2020-02-01T12:00:00.000+01:00" StopoverCode="false" BookingClass="H" FareBasis="MFFIT" NotValidBefore="2020-01-20" NotValidAfter="2020-04-16" Status="O"/>
+                    <air:ExchangedTicketInfo Number="0579903453215"/>
+                </air:Ticket>
+            </air:ETR>
+            <air:ETR Key="OBZYLwmB0BKAPgtN1IAAAA==" TotalPrice="UAH31798" BasePrice="EUR759.00" Taxes="UAH9609" EquivalentBasePrice="UAH22189" IssuedDate="2019-07-22T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="ZXRNLU" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="AF">
+                <air:AirReservationLocatorCode>V4TT5N</air:AirReservationLocatorCode>
+                <common_v47_0:AgencyInfo>
+                    <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-07-21T22:00:00.000+00:00"/>
+                </common_v47_0:AgencyInfo>
+                <common_v47_0:BookingTraveler Key="OBZYLwmB0BKAFRtN1IAAAA==">
+                    <common_v47_0:BookingTravelerName First="BILBOMR" Last="SKKUWALKER"/>
+                    <common_v47_0:SSR Key="jNJRLwBAAA/Bknkv8IAAAA==" SegmentRef="OBZYLwmB0BKAretN1IAAAA==" Status="HK" Type="TKNE" FreeText="0579903453217C1/217-218" Carrier="AF" ProviderReservationInfoRef="OBZYLwmB0BKALjeN1IAAAA=="/>
+                    <common_v47_0:SSR Key="jNJRLwBAAA/B/qkv8IAAAA==" SegmentRef="OBZYLwmB0BKA7ftN1IAAAA==" Status="HK" Type="TKNE" FreeText="0579903453217C2/217-218" Carrier="AF" ProviderReservationInfoRef="OBZYLwmB0BKALjeN1IAAAA=="/>
+                </common_v47_0:BookingTraveler>
+                <common_v47_0:FormOfPayment Key="OBZYLwmB0BKA8wtN1IAAAA==" Type="Cash" Reusable="false" ProfileKey="TyXA93Q7RZSFrPONug9ZNw=="/>
+                <common_v47_0:Payment Key="OBZYLwmB0BKA9wtN1IAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="OBZYLwmB0BKA8wtN1IAAAA=="/>
+                <common_v47_0:SupplierLocator SupplierCode="AZ" SupplierLocatorCode="JKNSSX"/>
+                <common_v47_0:SupplierLocator SupplierCode="AF" SupplierLocatorCode="WNWHGP"/>
+                <common_v47_0:SupplierLocator SupplierCode="KL" SupplierLocatorCode="WNWHGP"/>
+                <air:FareCalc>ROM AF X/PAR AF JNB 73.73 /-CPT KL X/AMS S2.25 AZ ROM 778.45 NUC854.43END ROE0.888299 XT 500IT28MJ94VT137FR566QX47EV41UM355WC445ZA190CJ188RN878YQ5848YR</air:FareCalc>
+                <air:Ticket Key="OBZYLwmB0BKARitN1IAAAA==" TicketNumber="0579903453215" TicketStatus="X">
+                    <air:Coupon Key="OBZYLwmB0BKA7vtN1IAAAA==" CouponNumber="1" MarketingCarrier="AF" MarketingFlightNumber="1405" Origin="FCO" Destination="CDG" DepartureTime="2020-01-16T20:00:00.000+01:00" StopoverCode="true" BookingClass="L" FareBasis="X3PLIT" NotValidBefore="2020-01-16" NotValidAfter="2020-01-16" Status="E"/>
+                    <air:Coupon Key="OBZYLwmB0BKA8vtN1IAAAA==" CouponNumber="2" MarketingCarrier="AF" MarketingFlightNumber="990" Origin="CDG" Destination="JNB" DepartureTime="2020-01-16T23:35:00.000+01:00" StopoverCode="false" BookingClass="X" FareBasis="X3PLIT" NotValidBefore="2020-01-16" NotValidAfter="2020-01-16" Status="E"/>
+                    <air:Coupon Key="OBZYLwmB0BKA9vtN1IAAAA==" CouponNumber="4" MarketingCarrier="KL" MarketingFlightNumber="598" Origin="CPT" Destination="AMS" DepartureTime="2020-02-01T00:30:00.000+02:00" StopoverCode="true" BookingClass="M" FareBasis="MFFIT" NotValidBefore="2020-01-20" NotValidAfter="2020-04-16" Status="E"/>
+                </air:Ticket>
+                <air:Ticket Key="OBZYLwmB0BKA+vtN1IAAAA==" TicketNumber="0579903453216" TicketStatus="X">
+                    <air:Coupon Key="OBZYLwmB0BKA/vtN1IAAAA==" CouponNumber="1" MarketingCarrier="AZ" MarketingFlightNumber="107" Origin="AMS" Destination="FCO" DepartureTime="2020-02-01T12:00:00.000+01:00" StopoverCode="false" BookingClass="H" FareBasis="MFFIT" NotValidBefore="2020-01-20" NotValidAfter="2020-04-16" Status="E"/>
+                </air:Ticket>
+                <air:BaggageAllowances>
+                    <air:BaggageAllowanceInfo TravelerType="ADT" Origin="ROM" Destination="JNB" Carrier="AF">
+                        <air:URLInfo>
+                            <air:URL>VIEWTRIP.TRAVELPORT.COM/BAGGAGEPOLICY/AF</air:URL>
+                        </air:URLInfo>
+                        <air:TextInfo>
+                            <air:Text>0P</air:Text>
+                            <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                        </air:TextInfo>
+                        <air:BagDetails ApplicableBags="1stChecked" BasePrice="EUR60.00" TotalPrice="EUR60.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:BagDetails>
+                        <air:BagDetails ApplicableBags="2ndChecked" BasePrice="EUR100.00" TotalPrice="EUR100.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:BagDetails>
+                    </air:BaggageAllowanceInfo>
+                    <air:BaggageAllowanceInfo TravelerType="ADT" Origin="CPT" Destination="ROM" Carrier="KL">
+                        <air:URLInfo>
+                            <air:URL>VIEWTRIP.TRAVELPORT.COM/BAGGAGEPOLICY/KL</air:URL>
+                        </air:URLInfo>
+                        <air:TextInfo>
+                            <air:Text>1P</air:Text>
+                            <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                        </air:TextInfo>
+                        <air:BagDetails ApplicableBags="1stChecked" BasePrice="EUR0.00" TotalPrice="EUR0.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:BagDetails>
+                        <air:BagDetails ApplicableBags="2ndChecked" BasePrice="ZAR980.00" TotalPrice="ZAR980.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO50LB/23KG AND UPTO62LI/158LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:BagDetails>
+                    </air:BaggageAllowanceInfo>
+                    <air:CarryOnAllowanceInfo Origin="ROM" Destination="PAR" Carrier="AF">
+                        <air:TextInfo>
+                            <air:Text>1P</air:Text>
+                        </air:TextInfo>
+                        <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" TotalPrice="EUR0.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:CarryOnDetails>
+                    </air:CarryOnAllowanceInfo>
+                    <air:CarryOnAllowanceInfo Origin="PAR" Destination="JNB" Carrier="AF">
+                        <air:TextInfo>
+                            <air:Text>1P</air:Text>
+                        </air:TextInfo>
+                        <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="EUR0.00" TotalPrice="EUR0.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:CarryOnDetails>
+                    </air:CarryOnAllowanceInfo>
+                    <air:CarryOnAllowanceInfo Origin="CPT" Destination="AMS" Carrier="KL">
+                        <air:TextInfo>
+                            <air:Text>1P</air:Text>
+                        </air:TextInfo>
+                        <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="ZAR0.00" TotalPrice="ZAR0.00">
+                            <air:BaggageRestriction>
+                                <air:TextInfo>
+                                    <air:Text>UPTO26LB/12KG AND UPTO45LI/115LCM</air:Text>
+                                </air:TextInfo>
+                            </air:BaggageRestriction>
+                        </air:CarryOnDetails>
+                    </air:CarryOnAllowanceInfo>
+                    <air:CarryOnAllowanceInfo Origin="AMS" Destination="ROM" Carrier="AZ">
+                        <air:TextInfo>
+                            <air:Text>BAGGAGE ALLOWANCE DATA NOT AVAILABLE</air:Text>
+                        </air:TextInfo>
+                    </air:CarryOnAllowanceInfo>
+                </air:BaggageAllowances>
+            </air:ETR>
+        </air:AirRetrieveDocumentRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

@@ -401,7 +401,7 @@ function getTicketFromEtr(etr, obj) {
               stopover: (
                 nextCoupon
                   ? nextCoupon.StopoverCode === 'true'
-                  : true
+                  : false
               ),
             },
             bookingInfo !== null

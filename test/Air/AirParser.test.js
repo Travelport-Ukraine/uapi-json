@@ -444,7 +444,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
-          const couponsStopover = [false, true, true, true];
+          const couponsStopover = [false, true, false, false];
           const coupons = result.tickets.reduce(
             (acc, ticket) => acc.concat(ticket.coupons),
             []
@@ -454,6 +454,38 @@ describe('#AirParser', () => {
           });
           expect(result.priceInfoDetailsAvailable).to.equal(true);
           expect(result.exchangedTickets).to.have.length.above(0);
+        });
+    });
+
+    it('should parse exchanged conjunction ticket stopovers properly', () => {
+      /*
+        X CTY CX FLT CL DATE  TIME ST FB  / TD        NVB   NVA   BG
+        . FCO AF1405  L 15JAN 2000 OK X9PLIT          15JAN 15JAN 0PC  1
+        X CDG AF 990  X 15JAN 2335 OK X9PLIT          15JAN 15JAN 0PC  2
+        O JNB        ARNK
+        O CPT KL 598  M 01FEB 0030 OK MFFIT           22JAN 15APR 1PC  3
+        X AMS AZ 107  H 01FEB 1200 OK MFFIT           22JAN 15APR 1PC  4
+        . FCO
+       */
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
+      const parseFunction = airParser.AIR_GET_TICKETS;
+      const xml = fs.readFileSync(`${xmlFolder}/Stopover/StopoverWithConjunctionAndArnk.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((tickets) => {
+          tickets.forEach((result) => {
+            testTicket(result);
+            const couponsStopover = [false, true, false, false];
+            const coupons = result.tickets.reduce(
+              (acc, ticket) => acc.concat(ticket.coupons),
+              []
+            );
+
+            coupons.forEach((coupon, index) => {
+              expect(coupon.stopover).to.be.equal(couponsStopover[index]);
+            });
+          });
         });
     });
 
