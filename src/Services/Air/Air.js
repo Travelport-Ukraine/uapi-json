@@ -80,6 +80,10 @@ module.exports = (settings) => {
         .then(response => [response]);
     },
 
+    getUniversalRecord(options) {
+      return service.getUniversalRecord(options);
+    },
+
     getUniversalRecordByPNR(options) {
       return service.getUniversalRecordByPNR(options)
         .catch((err) => {
