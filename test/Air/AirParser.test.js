@@ -444,11 +444,12 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
-          const couponsStopover = [false, true, false, false];
+          const couponsStopover = [false, true, false, true];
           const coupons = result.tickets.reduce(
             (acc, ticket) => acc.concat(ticket.coupons),
             []
           );
+          console.log(coupons.map(c => c.stopover));
           coupons.forEach((coupon, index) => {
             expect(coupon.stopover).to.be.equal(couponsStopover[index]);
           });
@@ -476,12 +477,13 @@ describe('#AirParser', () => {
         .then((tickets) => {
           tickets.forEach((result) => {
             testTicket(result);
-            const couponsStopover = [false, true, false, false];
+            const couponsStopover = [false, true, false, true];
             const coupons = result.tickets.reduce(
               (acc, ticket) => acc.concat(ticket.coupons),
               []
             );
 
+            console.log(coupons);
             coupons.forEach((coupon, index) => {
               expect(coupon.stopover).to.be.equal(couponsStopover[index]);
             });
