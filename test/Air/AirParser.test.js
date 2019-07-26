@@ -643,6 +643,7 @@ describe('#AirParser', () => {
               expect(coupon).to.have.all.keys([
                 'couponNumber', 'from', 'to', 'departure', 'airline', 'flightNumber',
                 'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter', 'bookingClass', 'stopover',
+                'key', 'ticketNumber',
               ]);
               expect(coupon.couponNumber).to.match(/\d+/i);
               expect(coupon.from).to.match(/[A-Z]{3}/i);
