@@ -346,12 +346,34 @@ function getTicketFromEtr(etr, obj) {
     ? utils.firstInObj(airPricingInfo['air:FareInfo'])
     : null;
 
-  const ticketsList = etr['air:Ticket'];
+  const ticketsList = Object.values(etr['air:Ticket']);
   const exchangedTickets = [];
 
-  const tickets = Object.keys(ticketsList).map(
-    (ticketKey) => {
-      const ticket = ticketsList[ticketKey];
+  const allCoupons = ticketsList.map((ticket) => {
+    return Object.entries(ticket['air:Coupon']).map(([couponKey, coupon]) => {
+      return {
+        key: couponKey,
+        ticketNumber: ticket.TicketNumber,
+        couponNumber: coupon.CouponNumber,
+        from: coupon.Origin,
+        to: coupon.Destination,
+        departure: coupon.DepartureTime,
+        airline: coupon.MarketingCarrier,
+        flightNumber: coupon.MarketingFlightNumber,
+        fareBasisCode: coupon.FareBasis,
+        status: coupon.Status,
+        notValidBefore: coupon.NotValidBefore,
+        notValidAfter: coupon.NotValidAfter,
+        bookingClass: coupon.BookingClass,
+        stopover: coupon.StopoverCode === 'true',
+      };
+    });
+  }).reduce((all, nextChunk) => {
+    return all.concat(nextChunk);
+  }, []);
+
+  const tickets = ticketsList.map(
+    (ticket) => {
       if (ticket['air:ExchangedTicketInfo']) {
         ticket['air:ExchangedTicketInfo'].forEach(
           t => exchangedTickets.push(t.Number)
@@ -359,10 +381,10 @@ function getTicketFromEtr(etr, obj) {
       }
 
       const coupons = Object.keys(ticket['air:Coupon']).map(
-        (couponKey, index, couponKeys) => {
-          const coupon = ticket['air:Coupon'][couponKey];
-          const nextCouponKey = couponKeys[index + 1];
-          const nextCoupon = nextCouponKey && ticket['air:Coupon'][nextCouponKey];
+        (couponKey) => {
+          const allCouponsIndex = allCoupons.findIndex(ac => ac.key === couponKey);
+          const coupon = allCoupons[allCouponsIndex];
+          const nextCoupon = allCoupons[allCouponsIndex + 1];
 
           let bookingInfo = null;
           // looking for fareInfo by it's fareBasis
@@ -385,31 +407,15 @@ function getTicketFromEtr(etr, obj) {
             );
           }
 
-          const couponInfo = Object.assign(
-            {
-              couponNumber: coupon.CouponNumber,
-              from: coupon.Origin,
-              to: coupon.Destination,
-              departure: coupon.DepartureTime,
-              airline: coupon.MarketingCarrier,
-              flightNumber: coupon.MarketingFlightNumber,
-              fareBasisCode: coupon.FareBasis,
-              status: coupon.Status,
-              notValidBefore: coupon.NotValidBefore,
-              notValidAfter: coupon.NotValidAfter,
-              bookingClass: coupon.BookingClass,
-              stopover: (
-                nextCoupon
-                  ? nextCoupon.StopoverCode === 'true'
-                  : true
-              ),
-            },
-            bookingInfo !== null
-              ? { serviceClass: bookingInfo.CabinClass }
-              : null
-          );
-
-          return couponInfo;
+          return {
+            ...coupon,
+            stopover: (
+              nextCoupon
+                ? nextCoupon.stopover
+                : true
+            ),
+            ...(bookingInfo !== null ? { serviceClass: bookingInfo.CabinClass } : null)
+          };
         }
       );
 
