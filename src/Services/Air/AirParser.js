@@ -769,11 +769,7 @@ function extractBookings(obj) {
 
           const fareInfo = pricingInfo['air:FareInfo'];
 
-          if (!fareInfo) {
-            return null;
-          }
-
-          const baggage = Object.keys(fareInfo).map(
+          const baggage = fareInfo && Object.keys(fareInfo).map(
             fareLegKey => format.getBaggage(fareInfo[fareLegKey]['air:BaggageAllowance'])
           );
 
@@ -815,9 +811,9 @@ function extractBookings(obj) {
 
           const firstFareInfo = utils.firstInObj(fareInfo);
 
-          const tourCode = firstFareInfo.TourCode || null;
+          const tourCode = fareInfo && (firstFareInfo.TourCode || null);
 
-          const endorsement = firstFareInfo[`common_${this.uapi_version}:Endorsement`]
+          const endorsement = fareInfo && firstFareInfo[`common_${this.uapi_version}:Endorsement`]
             ? firstFareInfo[`common_${this.uapi_version}:Endorsement`]
               .map(end => end.Value)
               .join(' ')
@@ -826,7 +822,7 @@ function extractBookings(obj) {
           fareQuotesCommon[pricingInfo.AirPricingInfoGroup] = Object.assign(
             {
               uapi_segment_refs: uapiSegmentRefs,
-              effectiveDate: firstFareInfo.EffectiveDate,
+              effectiveDate: fareInfo && firstFareInfo.EffectiveDate,
               endorsement,
               tourCode,
             },
@@ -926,7 +922,7 @@ function extractBookings(obj) {
       splitBookings.length > 0
         ? { splitBookings }
         : null,
-      responseMessage ? { messages: responseMessage } : null,
+      responseMessage ? { messages: responseMessage } : null
     );
   });
 }

@@ -1425,7 +1425,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml)
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
-          expect(result[0].fareQuotes.length).to.be.eq(0);
+          expect(result[0].fareQuotes.length).to.be.eq(1);
           expect(result[0].messages.length).to.be.eq(2);
           expect(result[0].messages[0]._).to.be.eq('Reservation is currently being updated by another process.');
           expect(result[0].messages[1]._).to.be.eq('Unable to map a stored fare to FareInfo.');
