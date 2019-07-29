@@ -612,6 +612,12 @@ function extractBookings(obj) {
     throw new AirRuntimeError.SegmentBookingFailed(obj);
   }
 
+  let responseMessage;
+
+  if (obj[`common_${this.uapi_version}:ResponseMessage`]) {
+    responseMessage = obj[`common_${this.uapi_version}:ResponseMessage`];
+  }
+
   const travelers = record['common_' + this.uapi_version + ':BookingTraveler'];
   const reservationInfo = record['universal:ProviderReservationInfo'];
   const remarksObj = record[`common_${this.uapi_version}:GeneralRemark`];
@@ -761,7 +767,7 @@ function extractBookings(obj) {
         (key) => {
           const pricingInfo = booking['air:AirPricingInfo'][key];
 
-          const uapiSegmentRefs = pricingInfo['air:BookingInfo'].map(
+          const uapiSegmentRefs = (pricingInfo['air:BookingInfo'] || []).map(
             segment => segment.SegmentRef
           );
 
@@ -769,7 +775,7 @@ function extractBookings(obj) {
 
           const fareInfo = pricingInfo['air:FareInfo'];
 
-          const baggage = Object.keys(fareInfo).map(
+          const baggage = fareInfo && Object.keys(fareInfo).map(
             fareLegKey => format.getBaggage(fareInfo[fareLegKey]['air:BaggageAllowance'])
           );
 
@@ -811,9 +817,9 @@ function extractBookings(obj) {
 
           const firstFareInfo = utils.firstInObj(fareInfo);
 
-          const tourCode = firstFareInfo.TourCode || null;
+          const tourCode = fareInfo && (firstFareInfo.TourCode || null);
 
-          const endorsement = firstFareInfo[`common_${this.uapi_version}:Endorsement`]
+          const endorsement = fareInfo && firstFareInfo[`common_${this.uapi_version}:Endorsement`]
             ? firstFareInfo[`common_${this.uapi_version}:Endorsement`]
               .map(end => end.Value)
               .join(' ')
@@ -822,7 +828,7 @@ function extractBookings(obj) {
           fareQuotesCommon[pricingInfo.AirPricingInfoGroup] = Object.assign(
             {
               uapi_segment_refs: uapiSegmentRefs,
-              effectiveDate: firstFareInfo.EffectiveDate,
+              effectiveDate: fareInfo && firstFareInfo.EffectiveDate,
               endorsement,
               tourCode,
             },
@@ -867,7 +873,7 @@ function extractBookings(obj) {
             parseFareCalculation(pricingInfo['air:FareCalc'])
           );
         }
-      );
+      ).filter(Boolean);
 
     const fareQuotesGrouped = pricingInfos.reduce(
       (acc, pricingInfo) => Object.assign(acc, {
@@ -921,7 +927,8 @@ function extractBookings(obj) {
       },
       splitBookings.length > 0
         ? { splitBookings }
-        : null
+        : null,
+      responseMessage ? { messages: responseMessage } : null
     );
   });
 }
