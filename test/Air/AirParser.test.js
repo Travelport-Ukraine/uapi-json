@@ -444,16 +444,50 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
-          const couponsStopover = [false, true, true, true];
+          const couponsStopover = [false, true, false, true];
           const coupons = result.tickets.reduce(
             (acc, ticket) => acc.concat(ticket.coupons),
             []
           );
+          console.log(coupons.map(c => c.stopover));
           coupons.forEach((coupon, index) => {
             expect(coupon.stopover).to.be.equal(couponsStopover[index]);
           });
           expect(result.priceInfoDetailsAvailable).to.equal(true);
           expect(result.exchangedTickets).to.have.length.above(0);
+        });
+    });
+
+    it('should parse exchanged conjunction ticket stopovers properly', () => {
+      /*
+        X CTY CX FLT CL DATE  TIME ST FB  / TD        NVB   NVA   BG
+        . FCO AF1405  L 15JAN 2000 OK X9PLIT          15JAN 15JAN 0PC  1
+        X CDG AF 990  X 15JAN 2335 OK X9PLIT          15JAN 15JAN 0PC  2
+        O JNB        ARNK
+        O CPT KL 598  M 01FEB 0030 OK MFFIT           22JAN 15APR 1PC  3
+        X AMS AZ 107  H 01FEB 1200 OK MFFIT           22JAN 15APR 1PC  4
+        . FCO
+       */
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
+      const parseFunction = airParser.AIR_GET_TICKETS;
+      const xml = fs.readFileSync(`${xmlFolder}/Stopover/StopoverWithConjunctionAndArnk.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((tickets) => {
+          tickets.forEach((result) => {
+            testTicket(result);
+            const couponsStopover = [false, true, false, true];
+            const coupons = result.tickets.reduce(
+              (acc, ticket) => acc.concat(ticket.coupons),
+              []
+            );
+
+            console.log(coupons);
+            coupons.forEach((coupon, index) => {
+              expect(coupon.stopover).to.be.equal(couponsStopover[index]);
+            });
+          });
         });
     });
 
@@ -609,6 +643,7 @@ describe('#AirParser', () => {
               expect(coupon).to.have.all.keys([
                 'couponNumber', 'from', 'to', 'departure', 'airline', 'flightNumber',
                 'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter', 'bookingClass', 'stopover',
+                'key', 'ticketNumber',
               ]);
               expect(coupon.couponNumber).to.match(/\d+/i);
               expect(coupon.from).to.match(/[A-Z]{3}/i);
@@ -1415,6 +1450,20 @@ describe('#AirParser', () => {
         .then((result) => {
           testBooking(result);
           expect(result[0].fareQuotes.length).to.be.eq(1);
+        });
+    });
+
+    it('should parse booking with warnings and missing fare info and should show messages', () => {
+      const uParser = new Parser('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordWithWarnings.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          expect(result[0].fareQuotes.length).to.be.eq(1);
+          expect(result[0].messages.length).to.be.eq(2);
+          expect(result[0].messages[0]._).to.be.eq('Reservation is currently being updated by another process.');
+          expect(result[0].messages[1]._).to.be.eq('Unable to map a stored fare to FareInfo.');
         });
     });
 
