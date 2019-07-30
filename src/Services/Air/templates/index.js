@@ -13,7 +13,8 @@ const gdsQueuePlace = require('./GDS_QUEUE_PLACE.handlebars');
 const universalRecordCancelUr = require('./UNIVERSAL_RECORD_CANCEL_UR.handlebars');
 const universalRecordFoid = require('./UNIVERSAL_RECORD_FOID.handlebars');
 const universalRecordImport = require('./UNIVERSAL_RECORD_IMPORT_REQUEST.handlebars');
-const availability = require('./AIR_AVAILABILITY_REQUEST.handlebars');
+const universalRecordRetrieve = require('./UNIVERSAL_RECORD_RETRIEVE_REQUEST.handlebars');
+const availability = require('./AIR_AVAILABILTIY_REQUEST.handlebars');
 
 module.exports = {
   createReservation,
@@ -31,5 +32,6 @@ module.exports = {
   universalRecordCancelUr,
   universalRecordFoid,
   universalRecordImport,
+  universalRecordRetrieve,
   availability,
 };

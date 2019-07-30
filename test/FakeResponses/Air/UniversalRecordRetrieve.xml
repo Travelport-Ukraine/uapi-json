@@ -1,0 +1,59 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <universal:UniversalRecordRetrieveRsp TraceId="1OWPUSHKG2ADT" TransactionId="C43991A50A07643BC1E6DC73A7EF8C4D" ResponseTime="842"
+                                              xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
+                                              xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
+                                              xmlns:air="http://www.travelport.com/schema/air_v47_0">
+            <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">NO FARES</common_v47_0:ResponseMessage>
+            <universal:UniversalRecord LocatorCode="KKK123" Version="1" Status="Active">
+                <common_v47_0:BookingTraveler Key="fynt3q3R2BKAw22ADAAAAA==" TravelerType="ADT" Age="30" DOB="1988-11-11" Gender="M">
+                    <common_v47_0:BookingTravelerName First="ONE" Last="SON"/>
+                    <common_v47_0:PhoneNumber Key="fynt3q3R2BKAD32ADAAAAA==" Type="Other" Location="SEL" CountryCode="82" Number="0000">
+                        <common_v47_0:ProviderReservationInfoRef Key="fynt3q3R2BKAFI3ADAAAAA=="/>
+                    </common_v47_0:PhoneNumber>
+                    <common_v47_0:SSR Key="fynt3q3R2BKAy22ADAAAAA==" Status="HK" Type="DOCS" FreeText="P/KR/000001111/KR/0000000/M/17MAY20/SON/ONE -1SON/ONE" Carrier="OZ" ProviderReservationInfoRef="fynt3q3R2BKAFI3ADAAAAA=="/>
+                </common_v47_0:BookingTraveler>
+                <common_v47_0:BookingTraveler Key="fynt3q3R2BKA122ADAAAAA==" TravelerType="ADT" Age="29" DOB="1989-11-11" Gender="F">
+                    <common_v47_0:BookingTravelerName First="TWO" Last="SON"/>
+                    <common_v47_0:PhoneNumber Key="fynt3q3R2BKAF32ADAAAAA==" Type="Other" Location="SEL" CountryCode="82" Number="0000">
+                        <common_v47_0:ProviderReservationInfoRef Key="fynt3q3R2BKAFI3ADAAAAA=="/>
+                    </common_v47_0:PhoneNumber>
+                    <common_v47_0:SSR Key="fynt3q3R2BKA322ADAAAAA==" Status="HK" Type="DOCS" FreeText="P/KR/000001112/KR/0000000/F/17MAY20/SON/TWO -1SON/TWO" Carrier="OZ" ProviderReservationInfoRef="fynt3q3R2BKAFI3ADAAAAA=="/>
+                </common_v47_0:BookingTraveler>
+                <common_v47_0:ActionStatus Key="fynt3q3R2BKAH32ADAAAAA==" Type="TAU" TicketDate="2019-05-18T23:59:00.000+09:00" ProviderReservationInfoRef="fynt3q3R2BKAFI3ADAAAAA==" ProviderCode="1G"/>
+                <universal:ProviderReservationInfo Key="fynt3q3R2BKAFI3ADAAAAA==" ProviderCode="1G" LocatorCode="4GVJJM" CreateDate="2019-05-17T05:17:38.239+00:00" ModifiedDate="2019-05-17T05:17:49.826+00:00" HostCreateDate="2019-05-17" OwningPCC="5OL3"/>
+                <air:AirReservation LocatorCode="RC1ZRT" CreateDate="2019-05-17T05:17:36.918+00:00" ModifiedDate="2019-05-17T05:17:49.826+00:00">
+                    <common_v47_0:SupplierLocator SupplierCode="OZ" SupplierLocatorCode="JJJ123" ProviderReservationInfoRef="fynt3q3R2BKAFI3ADAAAAA==" CreateDateTime="2019-05-17T05:17:00.000+00:00"/>
+                    <common_v47_0:BookingTravelerRef Key="fynt3q3R2BKAw22ADAAAAA=="/>
+                    <common_v47_0:BookingTravelerRef Key="fynt3q3R2BKA122ADAAAAA=="/>
+                    <common_v47_0:ProviderReservationInfoRef Key="fynt3q3R2BKAFI3ADAAAAA=="/>
+                    <air:AirSegment Key="fynt3q3R2BKAK22ADAAAAA==" Group="0" Carrier="OZ" CabinClass="Economy" FlightNumber="9741" ProviderCode="1G" Origin="PUS" Destination="HKG" DepartureTime="2019-10-10T21:35:00.000+09:00" ArrivalTime="2019-10-11T00:05:00.000+08:00" TravelTime="210" ClassOfService="Q" ETicketability="No" Equipment="321" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="fynt3q3R2BKAFI3ADAAAAA==" TravelOrder="1" ProviderSegmentOrder="1" OptionalServicesIndicator="false" LinkAvailability="true">
+                        <common_v47_0:SegmentRemark Key="fynt3q3R2BKAHI3ADAAAAA==">AIR BUSAN</common_v47_0:SegmentRemark>
+                        <air:CodeshareInfo OperatingCarrier="BX"/>
+                        <air:FlightDetails Key="fynt3q3R2BKAL22ADAAAAA==" Origin="PUS" Destination="HKG" DepartureTime="2019-10-10T21:35:00.000+09:00" ArrivalTime="2019-10-11T00:05:00.000+08:00" FlightTime="210" TravelTime="210" Equipment="321" OriginTerminal="I" DestinationTerminal="1" AutomatedCheckin="false"/>
+                        <common_v47_0:SellMessage>OPERATED BY AIR BUSAN</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>DEPARTS PUS TERMINAL I  - ARRIVES HKG TERMINAL 1</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>ADD ADVANCE PASSENGER INFORMATION SSRS DOCA/DOCO/DOCS</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>PERSONAL DATA WHICH IS PROVIDED TO US IN CONNECTION</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>WITH YOUR TRAVEL MAY BE PASSED TO GOVERNMENT AUTHORITIES</common_v47_0:SellMessage>
+                        <common_v47_0:SellMessage>FOR BORDER CONTROL AND AVIATION SECURITY PURPOSES</common_v47_0:SellMessage>
+                    </air:AirSegment>
+                </air:AirReservation>
+                <common_v47_0:GeneralRemark Key="GH7l3q7Q2BKAqR0DDAAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="fynt3q3R2BKAFI3ADAAAAA==" SupplierCode="OZ" Direction="Incoming" CreateDate="2019-05-17T05:17:00.000+00:00" ElStat="A">
+                    <common_v47_0:RemarkData>OZRSVN IS 1111-2222</common_v47_0:RemarkData>
+                </common_v47_0:GeneralRemark>
+                <common_v47_0:GeneralRemark Key="GH7l3q7Q2BKArR0DDAAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="fynt3q3R2BKAFI3ADAAAAA==" SupplierCode="OZ" Direction="Incoming" CreateDate="2019-05-17T05:17:00.000+00:00" ElStat="A">
+                    <common_v47_0:RemarkData>ADTK1GTOOZ BY 20MAY 1500 OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
+                </common_v47_0:GeneralRemark>
+                <common_v47_0:GeneralRemark Key="GH7l3q7Q2BKAsR0DDAAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="fynt3q3R2BKAFI3ADAAAAA==" SupplierCode="OZ" Direction="Incoming" CreateDate="2019-05-17T05:17:00.000+00:00" ElStat="A">
+                    <common_v47_0:RemarkData>BXPNR ADRS IS 1234567</common_v47_0:RemarkData>
+                </common_v47_0:GeneralRemark>
+                <common_v47_0:AgencyInfo>
+                    <common_v47_0:AgentAction ActionType="Created" AgentCode="uAPI" BranchCode="P0000" AgencyCode="1234" EventTime="2019-05-17T05:17:34.830+00:00"/>
+                    <common_v47_0:AgentAction ActionType="Modified" AgentCode="uAPI" BranchCode="P0000" AgencyCode="1234" EventTime="2019-05-17T05:17:49.826+00:00"/>
+                </common_v47_0:AgencyInfo>
+            </universal:UniversalRecord>
+        </universal:UniversalRecordRetrieveRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

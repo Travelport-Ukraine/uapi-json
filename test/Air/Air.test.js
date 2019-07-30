@@ -359,6 +359,18 @@ describe('#AirService', () => {
     });
   });
 
+  describe('retrieve UR', () => {
+    it('should check if correct function from service is called', () => {
+      const getUniversalRecord = sinon.spy(() => {});
+      const service = () => ({ getUniversalRecord });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).getUniversalRecord({});
+      expect(getUniversalRecord.calledOnce).to.be.equal(true);
+    });
+  });
+
   describe('importPNR', () => {
     const params = {
       pnr: 'PNR001',
