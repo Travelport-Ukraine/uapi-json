@@ -1,0 +1,92 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <universal:UniversalRecordImportRsp TraceId="" TransactionId="E03B1A750A074065745779842E0CB881" ResponseTime="1080"
+                                            xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
+                                            xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
+                                            xmlns:air="http://www.travelport.com/schema/air_v47_0">
+            <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record ZSUP8C</common_v47_0:ResponseMessage>
+            <universal:UniversalRecord LocatorCode="ZSUP8C" Version="7" Status="Active">
+                <common_v47_0:BookingTraveler Key="DDbVYvXc1BKAuSTONFAAAA==">
+                    <common_v47_0:BookingTravelerName First="YEVHENIIMR" Last="HUSELIETOV"/>
+                    <common_v47_0:SSR Key="DDbVYvXc1BKAvSTONFAAAA==" SegmentRef="DDbVYvXc1BKAkUTONFAAAA==" Status="HK" Type="TKNE" FreeText="0809903442012C1" Carrier="LO" ProviderReservationInfoRef="DDbVYvXc1BKAeNxNNFAAAA=="/>
+                </common_v47_0:BookingTraveler>
+                <common_v47_0:ActionStatus Key="DDbVYvXc1BKAXSTONFAAAA==" Type="ACTIVE" ProviderReservationInfoRef="DDbVYvXc1BKAeNxNNFAAAA==" ProviderCode="1G">
+                    <common_v47_0:Remark>QSB 11JUL0821Z WS AG</common_v47_0:Remark>
+                </common_v47_0:ActionStatus>
+                <universal:ProviderReservationInfo Key="DDbVYvXc1BKAeNxNNFAAAA==" ProviderCode="1G" LocatorCode="I4D8M0" CreateDate="2019-07-11T08:22:51.266+00:00" ModifiedDate="2019-07-11T08:51:38.634+00:00" HostCreateDate="2019-07-11" Imported="true" OwningPCC="7J8J"/>
+                <air:AirReservation LocatorCode="FGRLVM" CreateDate="2019-07-11T08:22:48.505+00:00" ModifiedDate="2019-07-11T08:49:48.642+00:00">
+                    <common_v47_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="QWSA7E" ProviderReservationInfoRef="DDbVYvXc1BKAeNxNNFAAAA==" CreateDateTime="2019-07-11T08:21:00.000+00:00"/>
+                    <air:DocumentInfo>
+                        <air:TicketInfo Number="0809903442012" TicketIssueDate="2019-07-11T00:00:00.000+02:00" IATANumber="99999992" TicketingAgentSignOn="ZV6U4WS" Status="N" BookingTravelerRef="DDbVYvXc1BKAuSTONFAAAA==">
+                            <common_v47_0:Name First="YEVHENIIMR" Last="HUSELIETOV"/>
+                        </air:TicketInfo>
+                    </air:DocumentInfo>
+                    <common_v47_0:BookingTravelerRef Key="DDbVYvXc1BKAuSTONFAAAA=="/>
+                    <common_v47_0:ProviderReservationInfoRef Key="DDbVYvXc1BKAeNxNNFAAAA=="/>
+                    <air:AirSegment Key="DDbVYvXc1BKAkUTONFAAAA==" Group="0" Carrier="LO" CabinClass="Economy" FlightNumber="756" ProviderCode="1G" Origin="IEV" Destination="WAW" DepartureTime="2019-10-19T06:05:00.000+03:00" ArrivalTime="2019-10-19T06:40:00.000+02:00" TravelTime="95" ClassOfService="Y" ETicketability="Yes" Equipment="738" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="DDbVYvXc1BKAeNxNNFAAAA==" TravelOrder="1" ProviderSegmentOrder="1" OptionalServicesIndicator="false">
+                        <air:FlightDetails Key="DDbVYvXc1BKAxVTONFAAAA==" Origin="IEV" Destination="WAW" DepartureTime="2019-10-19T06:05:00.000+03:00" ArrivalTime="2019-10-19T06:40:00.000+02:00" FlightTime="95" TravelTime="95" Equipment="738" AutomatedCheckin="false"/>
+                    </air:AirSegment>
+                    <air:AirPricingInfo Key="oTVOYvuB0BKAnNs5WFAAAA==" TotalPrice="UAH11834" BasePrice="USD461.00" EquivalentBasePrice="UAH11834" Taxes="UAH0" TrueLastDateToTicket="2019-07-18T23:59:00.000+02:00" PricingMethod="ManualFare" ETicketability="Yes" ProviderCode="1G" ProviderReservationInfoRef="DDbVYvXc1BKAeNxNNFAAAA==" AirPricingInfoGroup="1" PricingType="StoredFare" FareCalculationInd="B">
+                        <air:FareInfo Key="oTVOYvuB0BKA2Ps5WFAAAA==" FareBasis="Y1SAV0" PassengerTypeCode="ADT" Origin="IEV" Destination="WAW" EffectiveDate="2019-07-11T00:00:00.000+02:00" NotValidBefore="2019-10-19" NotValidAfter="2019-10-19" PseudoCityCode="7J8J">
+                            <common_v47_0:Endorsement Value="NONREF-NO CHNG"/>
+                            <air:BaggageAllowance>
+                                <air:NumberOfPieces>0</air:NumberOfPieces>
+                            </air:BaggageAllowance>
+                        </air:FareInfo>
+                        <air:BookingInfo BookingCode="Y" CabinClass="Economy" FareInfoRef="oTVOYvuB0BKA2Ps5WFAAAA==" SegmentRef="DDbVYvXc1BKAkUTONFAAAA=="/>
+                        <air:FareCalc>IEV LO WAW 311.00 NUC311.00END ROE1.0</air:FareCalc>
+                        <air:PaymentRef Key="oTVOYvuB0BKAdLs5WFAAAA=="/>
+                        <air:TicketingModifiersRef Key="oTVOYvuB0BKA1Os5WFAAAA=="/>
+                    </air:AirPricingInfo>
+                    <air:AirPricingInfo Key="w4j2XvBAAA/Bk/P0mFAAAA==" TotalPrice="UAH11834" BasePrice="USD461.00" EquivalentBasePrice="UAH11834" Taxes="UAH0" TrueLastDateToTicket="2019-07-18T23:59:00.000+02:00" PricingMethod="ManualFare" ETicketability="Yes" ProviderCode="1G" ProviderReservationInfoRef="DDbVYvXc1BKAeNxNNFAAAA==" AirPricingInfoGroup="1" PricingType="StoredFare" FareCalculationInd="B">
+                        <air:FareInfo Key="w4j2XvBAAA/BnHQ0mFAAAA==" FareBasis="Y1SAV0" PassengerTypeCode="ADT" Origin="IEV" Destination="WAW" EffectiveDate="2019-07-11T00:00:00.000+02:00" NotValidBefore="2019-10-19" NotValidAfter="2019-10-19" PseudoCityCode="7J8J">
+                            <common_v47_0:Endorsement Value="NONREF-NO CHNG"/>
+                            <air:BaggageAllowance>
+                                <air:NumberOfPieces>0</air:NumberOfPieces>
+                            </air:BaggageAllowance>
+                        </air:FareInfo>
+                        <air:BookingInfo BookingCode="Y" CabinClass="Economy" FareInfoRef="w4j2XvBAAA/BnHQ0mFAAAA==" SegmentRef="DDbVYvXc1BKAkUTONFAAAA=="/>
+                        <air:FareCalc>IEV LO WAW 311.00 NUC311.00END ROE1.0</air:FareCalc>
+                        <air:PassengerType Code="ADT" BookingTravelerRef="DDbVYvXc1BKAuSTONFAAAA==">
+                            <air:FareGuaranteeInfo GuaranteeType="ManualFare"/>
+                        </air:PassengerType>
+                        <common_v47_0:BookingTravelerRef Key="DDbVYvXc1BKAuSTONFAAAA=="/>
+                        <air:PaymentRef Key="w4j2XvBAAA/BX3P0mFAAAA=="/>
+                        <air:TicketingModifiersRef Key="w4j2XvBAAA/BmHQ0mFAAAA=="/>
+                    </air:AirPricingInfo>
+                    <common_v47_0:Payment Key="oTVOYvuB0BKAdLs5WFAAAA==" Type="Itinerary" Amount="UAH11834" FormOfPaymentRef="oTVOYvuB0BKATyr5WFAAAA=="/>
+                    <common_v47_0:Payment Key="w4j2XvBAAA/BX3P0mFAAAA==" Type="Itinerary" Amount="UAH11834" FormOfPaymentRef="w4j2XvBAAA/BW3P0mFAAAA=="/>
+                    <air:TicketingModifiers PlatingCarrier="LO" Key="oTVOYvuB0BKA1Os5WFAAAA==">
+                        <air:DocumentSelect IssueElectronicTicket="true"/>
+                    </air:TicketingModifiers>
+                    <air:TicketingModifiers PlatingCarrier="LO" Key="w4j2XvBAAA/BmHQ0mFAAAA==">
+                        <air:DocumentSelect IssueElectronicTicket="true"/>
+                    </air:TicketingModifiers>
+                </air:AirReservation>
+                <common_v47_0:GeneralRemark Key="DDbVYvXc1BKAqhTONFAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="DDbVYvXc1BKAeNxNNFAAAA==" CreateDate="2019-07-11T08:20:00.000+00:00">
+                    <common_v47_0:RemarkData>VIEWTRIPITIN</common_v47_0:RemarkData>
+                </common_v47_0:GeneralRemark>
+                <common_v47_0:GeneralRemark Key="DDbVYvXc1BKArhTONFAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="DDbVYvXc1BKAeNxNNFAAAA==" SupplierCode="LO" Direction="Incoming" CreateDate="2019-07-11T08:21:00.000+00:00">
+                    <common_v47_0:RemarkData>ADTK1GTOLO BY 18JUL 2300 IEV TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
+                </common_v47_0:GeneralRemark>
+                <common_v47_0:AgencyInfo>
+                    <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="257f/VZmSaKqfMsUWfwY6Q==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2019-07-11T08:22:48.259+00:00"/>
+                    <common_v47_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-07-11T08:49:48.664+00:00"/>
+                    <common_v47_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-07-11T08:22:51.263+00:00"/>
+                </common_v47_0:AgencyInfo>
+                <common_v47_0:AgencyContactInfo>
+                    <common_v47_0:PhoneNumber Key="DDbVYvXc1BKAjSTONFAAAA==" Type="Agency" Location="IEV" Number="380 44 9999999">
+                        <common_v47_0:ProviderReservationInfoRef Key="DDbVYvXc1BKAeNxNNFAAAA=="/>
+                    </common_v47_0:PhoneNumber>
+                </common_v47_0:AgencyContactInfo>
+                <common_v47_0:FormOfPayment Key="oTVOYvuB0BKATyr5WFAAAA==" Type="MiscFormOfPayment" Reusable="false" ProfileKey="AQp9zC70TyGz2D/cY2jeYg==">
+                    <common_v47_0:MiscFormOfPayment Text="0809903442012" Category="Exchange"/>
+                </common_v47_0:FormOfPayment>
+                <common_v47_0:FormOfPayment Key="w4j2XvBAAA/BW3P0mFAAAA==" Type="MiscFormOfPayment" Reusable="false" ProfileKey="R1DmsTTxRVSCGJcYfB9KFw==">
+                    <common_v47_0:MiscFormOfPayment Text="0809903442012" Category="Exchange"/>
+                </common_v47_0:FormOfPayment>
+            </universal:UniversalRecord>
+        </universal:UniversalRecordImportRsp>
+    </SOAP:Body>
+</SOAP:Envelope>
