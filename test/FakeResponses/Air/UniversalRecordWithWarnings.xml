@@ -1,0 +1,74 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <universal:UniversalRecordImportRsp TraceId="" TransactionId="E1217F130A07425CB76A139AA40A267B" ResponseTime="4779"
+                                            xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
+                                            xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
+                                            xmlns:air="http://www.travelport.com/schema/air_v47_0"
+                                            xmlns:passive="http://www.travelport.com/schema/passive_v47_0">
+            <common_v47_0:ResponseMessage Code="1400" Type="Warning" ProviderCode="1G">Reservation is currently being updated by another process.</common_v47_0:ResponseMessage>
+            <common_v47_0:ResponseMessage Code="4463" Type="Warning" ProviderCode="1G">Unable to map a stored fare to FareInfo.</common_v47_0:ResponseMessage>
+            <universal:UniversalRecord LocatorCode="UV2U3Q" Version="0" Status="Active">
+                <common_v47_0:BookingTraveler Key="IuD5XvBAAA/BFT92SGAAAA==" ElStat="A">
+                    <common_v47_0:BookingTravelerName First="FEDIRMR" Last="IVANOV"/>
+                </common_v47_0:BookingTraveler>
+                <common_v47_0:OSI Key="IuD5XvBAAA/BTb+2SGAAAA==" Carrier="1G" Text="SNC RLOC OD SIYNFV" ElStat="A" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA=="/>
+                <common_v47_0:ActionStatus Key="IuD5XvBAAA/BWy82SGAAAA==" Type="ACTIVE" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA==" ProviderCode="1G" ElStat="A"/>
+                <universal:ProviderReservationInfo Key="IuD5XvBAAA/B3X82SGAAAA==" ProviderCode="1G" LocatorCode="PJ714Q" CreateDate="2019-07-11T13:03:21.566+00:00" ModifiedDate="2019-07-11T13:03:21.566+00:00" HostCreateDate="2019-06-20" Imported="true" OwningPCC="7J8J"/>
+                <air:AirReservation LocatorCode="GPSKXA" CreateDate="2019-07-11T13:03:19.721+00:00" ModifiedDate="2019-07-11T13:03:21.566+00:00">
+                    <common_v47_0:SupplierLocator SupplierCode="OD" SupplierLocatorCode="SIYNFV" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA==" CreateDateTime="2019-06-20T10:26:00.000+00:00"/>
+                    <common_v47_0:BookingTravelerRef Key="IuD5XvBAAA/BFT92SGAAAA=="/>
+                    <common_v47_0:ProviderReservationInfoRef Key="IuD5XvBAAA/B3X82SGAAAA=="/>
+                    <air:AirSegment Key="IuD5XvBAAA/Biw92SGAAAA==" Group="0" Carrier="OD" CabinClass="Economy" FlightNumber="320" ProviderCode="1G" Origin="KUL" Destination="CGK" DepartureTime="2019-10-03T07:35:00.000+08:00" ArrivalTime="2019-10-03T08:45:00.000+07:00" TravelTime="130" ClassOfService="V" ETicketability="No" Equipment="738" Status="HX" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA==" TravelOrder="2" ProviderSegmentOrder="2" OptionalServicesIndicator="false" ElStat="A">
+                        <air:FlightDetails Key="IuD5XvBAAA/Bj792SGAAAA==" Origin="KUL" Destination="CGK" DepartureTime="2019-10-03T07:35:00.000+08:00" ArrivalTime="2019-10-03T08:45:00.000+07:00" FlightTime="130" TravelTime="130" Equipment="738" OriginTerminal="M" DestinationTerminal="2" AutomatedCheckin="false" ElStat="A"/>
+                    </air:AirSegment>
+                    <air:AirPricingInfo Key="IuD5XvBAAA/BfS92SGAAAA==" TotalPrice="UAH1399" BasePrice="MYR145.00" EquivalentBasePrice="UAH917" Taxes="UAH482" TrueLastDateToTicket="2019-06-24T23:59:00.000+02:00" PricingMethod="Guaranteed" ETicketability="Yes" ProviderCode="1G" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA==" AirPricingInfoGroup="1" PricingType="StoredFare" ElStat="A" FareCalculationInd="G">
+                        <air:TaxInfo Category="H8" Amount="UAH7" Key="IuD5XvBAAA/BhS92SGAAAA=="/>
+                        <air:TaxInfo Category="MY" Amount="UAH222" Key="IuD5XvBAAA/BjS92SGAAAA=="/>
+                        <air:TaxInfo Category="YQ" Amount="UAH253" Key="IuD5XvBAAA/BkS92SGAAAA=="/>
+                        <air:FareCalc>KUL OD JKT Q10.00 24.81VOWPROMO NUC34.81END ROE4.150169</air:FareCalc>
+                        <air:PassengerType Code="ADT" BookingTravelerRef="IuD5XvBAAA/BFT92SGAAAA==">
+                            <air:FareGuaranteeInfo GuaranteeType="Invalid"/>
+                        </air:PassengerType>
+                        <common_v47_0:BookingTravelerRef Key="IuD5XvBAAA/BFT92SGAAAA=="/>
+                        <air:TicketingModifiersRef Key="IuD5XvBAAA/BgS92SGAAAA=="/>
+                    </air:AirPricingInfo>
+                    <air:TicketingModifiers PlatingCarrier="GP" Key="IuD5XvBAAA/BgS92SGAAAA==" ElStat="A">
+                        <air:DocumentSelect IssueElectronicTicket="true"/>
+                    </air:TicketingModifiers>
+                </air:AirReservation>
+                <passive:PassiveReservation LocatorCode="KXKC4H" CreateDate="2019-07-11T13:03:21.566+00:00" ModifiedDate="2019-07-11T13:03:21.566+00:00" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA==">
+                    <common_v47_0:SupplierLocator SupplierCode="OD" SupplierLocatorCode="SIYNFV" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA==" CreateDateTime="2019-06-20T10:26:00.000+00:00"/>
+                    <common_v47_0:BookingTravelerRef Key="IuD5XvBAAA/BFT92SGAAAA=="/>
+                    <passive:PassiveSegment NumberOfItems="0" SegmentType="Tour" Status="BK" SupplierCode="ZZ" StartDate="2019-07-01T00:00:00.000+00:00" Key="IuD5XvBAAA/BWb+2SGAAAA==" Group="0" TravelOrder="1" ProviderSegmentOrder="1" ElStat="A"/>
+                    <passive:PassiveRemark PassiveSegmentRef="IuD5XvBAAA/BWb+2SGAAAA==">
+                        <passive:Text>**TL**</passive:Text>
+                    </passive:PassiveRemark>
+                </passive:PassiveReservation>
+                <common_v47_0:GeneralRemark Key="IuD5XvBAAA/Bl792SGAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA==" CreateDate="2019-06-20T10:19:00.000+00:00" ElStat="A">
+                    <common_v47_0:RemarkData>VIEWTRIPITIN</common_v47_0:RemarkData>
+                </common_v47_0:GeneralRemark>
+                <common_v47_0:GeneralRemark Key="IuD5XvBAAA/BLE+2SGAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA==" SupplierCode="OD" Direction="Incoming" CreateDate="2019-06-27T11:26:00.000+00:00" ElStat="A">
+                    <common_v47_0:RemarkData>HX/HXCANCELED DUE TO SYSTEM OR PASSENGER ACTION</common_v47_0:RemarkData>
+                </common_v47_0:GeneralRemark>
+                <common_v47_0:GeneralRemark Key="IuD5XvBAAA/BiM+2SGAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA==" SupplierCode="OD" Direction="Incoming" CreateDate="2019-06-27T11:26:00.000+00:00" ElStat="A">
+                    <common_v47_0:RemarkData>HX/HXDELETE HX SEGS FROM PNR TO KEEP RES IN SYNCH</common_v47_0:RemarkData>
+                </common_v47_0:GeneralRemark>
+                <common_v47_0:GeneralRemark Key="IuD5XvBAAA/BEb+2SGAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA==" SupplierCode="YY" Direction="Outgoing" CreateDate="2019-06-20T11:48:00.000+00:00" ElStat="A">
+                    <common_v47_0:RemarkData>ADTKYYPLS TICKET OR CANCEL BY 27JUN19 1326UA</common_v47_0:RemarkData>
+                </common_v47_0:GeneralRemark>
+                <common_v47_0:GeneralRemark Key="IuD5XvBAAA/BSb+2SGAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="IuD5XvBAAA/B3X82SGAAAA==" SupplierCode="YY" Direction="Outgoing" CreateDate="2019-06-27T11:26:00.000+00:00" ElStat="A">
+                    <common_v47_0:RemarkData>ADTKYYCANCELLED DUE TO EXPIRED TTL</common_v47_0:RemarkData>
+                </common_v47_0:GeneralRemark>
+                <common_v47_0:AgencyInfo>
+                    <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="257f/VZmSaKqfMsUWfwY6Q==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2019-07-11T13:03:17.394+00:00"/>
+                </common_v47_0:AgencyInfo>
+                <common_v47_0:AgencyContactInfo>
+                    <common_v47_0:PhoneNumber Key="IuD5XvBAAA/BYy82SGAAAA==" Type="Agency" Location="IEV" Number="380 44 9999999" ElStat="A">
+                        <common_v47_0:ProviderReservationInfoRef Key="IuD5XvBAAA/B3X82SGAAAA=="/>
+                    </common_v47_0:PhoneNumber>
+                </common_v47_0:AgencyContactInfo>
+            </universal:UniversalRecord>
+        </universal:UniversalRecordImportRsp>
+    </SOAP:Body>
+</SOAP:Envelope>
