@@ -170,5 +170,18 @@ describe('#TerminalParser', () => {
         expect(response).to.equal(true);
       });
     });
+
+    it('should return an error for HostAccessServiceResponse in null XML', () => {
+      const uParser = new Parser('terminal:TerminalRsp', 'v47_0', {});
+      const xml = fs.readFileSync(`${xmlFolder}/HostAccessServiceResponse.xml`).toString();
+      const parseFunction = terminalParser.TERMINAL_REQUEST;
+      return uParser.parse(xml).then((json) => {
+        try {
+          parseFunction.call(uParser, json);
+        } catch (e) {
+          expect(e.name).to.equal('TerminalParsingError.TerminalResponseMissing');
+        }
+      });
+    });
   });
 });

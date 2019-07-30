@@ -30,6 +30,7 @@ Object.assign(AirValidationError, createErrorsList({
   PhoneMissing: 'Missing phone in book request',
   IncorrectPhoneFormat: 'Incorrect phone format. Missing required fields. See data.',
   DeliveryInformation: 'Missing of delivery information fields. See data.',
+  UniversalRecordLocatorCode: 'Missing UniversalRecordLocatorCode in request. See data.',
   ReservationLocator: 'Missing uapi_reservation_locator/reservationLocatorCode in request. See data.',
   ExchangeToken: 'Missing exchangeToken in request. See data.',
   CreditCardMissing: 'Missing creditCard in request. See data.',

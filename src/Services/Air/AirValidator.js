@@ -95,6 +95,13 @@ module.exports = {
     transform()
   ),
 
+  UNIVERSAL_RECORD_RETRIEVE: compose(
+    validate(
+      validators.universalRecordLocator
+    ),
+    transform()
+  ),
+
   AIR_CANCEL_UR: params => params,
   UNIVERSAL_RECORD_FOID: params => params,
 
