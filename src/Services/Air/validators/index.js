@@ -14,6 +14,7 @@ const phone = require('./phone');
 const deliveryInfoOptional = require('./delivery-info-optional');
 const segments = require('./segments');
 const reservationLocator = require('./reservation-locator');
+const universalRecordLocator = require('./universal-record-locator-code');
 const exchangeToken = require('./exchange-token');
 const platingCarrier = require('./platingCarrier');
 const searchId = require('./search-id');
@@ -35,6 +36,7 @@ module.exports = {
   deliveryInfoOptional,
   segments,
   reservationLocator,
+  universalRecordLocator,
   exchangeToken,
   platingCarrier,
   searchId,

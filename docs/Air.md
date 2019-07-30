@@ -17,6 +17,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.getPNR(params)](#getPNR)
 * [.importPNR(params)](#importPNR)
 * [.getUniversalRecordByPNR(params)](#getUniversalRecordByPNR)
+* [.getUniversalRecord(params)](#getUniversalRecord)
 * [.flightInfo(params)](#flightInfo)
 * [.getPNRByTicketNumber(params)](#getPNRByTicketNumber)
 * [.searchBookingsByPassengerName(params)](#searchBookingsByPassengerName)
@@ -237,6 +238,20 @@ If the PNR contains no active segments it could not be imported into uAPI. Thus 
 | pnr | `String` | 1G PNR. |
 
 **See: <a href="../examples/Air/getUniversalRecordByPNR.js">Example</a>**
+
+## .getUniversalRecord(params)
+<a name="getUniversalRecord"></a>
+
+This method returns an array of all PNR objects, which are contained in Universal record, holding the PNR provided. If Universal record does not exists RuntimeError.AirRuntimeError "Record locator not found" will be raised.
+
+**Returns**: `Promise`. - All Information for requested Universal Record.
+**See**: [Retrieving a Universal Record with a Known Locator](https://support.travelport.com/webhelp/uapi/uAPI.htm#Booking/Retrieve/Retrieving_Universal_Records.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| universalRecordLocatorCode | `String` | uAPI Record Locator Code |
+
+**See: <a href="../examples/Air/getUniversalRecord.js">Example</a>**
 
 ## .getPNR(params)
 <a name="getPNR"></a>
