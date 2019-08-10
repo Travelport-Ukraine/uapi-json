@@ -31,4 +31,13 @@ describe('Air.validators.connections', () => {
 
     expect(fn).to.throw(AirValidationError.IncorrectConnectionsFormat);
   });
+
+  it('should pass', () => {
+    const fn = () => connections({
+      preferredConnectionPoints: ['AMS'],
+      permittedConnectionPoints: ['DME'],
+    });
+
+    expect(fn).to.not.throw();
+  });
 });

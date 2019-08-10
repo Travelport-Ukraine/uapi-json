@@ -1,3 +1,7 @@
+const Joi = require('@hapi/joi');
+const wrapJoi = require('../../../utils/joiWrapper');
+const iataCode = require('./schemas/iata-code');
+
 const { AirValidationError } = require('../AirErrors');
 
 const connectionsFields = [
@@ -6,18 +10,13 @@ const connectionsFields = [
   'prohibitedConnectionPoints',
 ];
 
-function isIata(str) {
-  return !!str.match(/^[A-Z]{3}$/);
-}
-
-function validateIsArray(params, prop) {
-  if (params[prop]
-    && (!Array.isArray(params[prop]) || params[prop].find(item => !isIata(item)))
-  ) {
-    throw new AirValidationError.IncorrectConnectionsFormat(params);
-  }
-}
-
-module.exports = (params) => {
-  connectionsFields.forEach(cf => validateIsArray(params, cf));
-};
+module.exports = wrapJoi(
+  Joi
+    .object()
+    .pattern(
+      Joi.string().valid(...connectionsFields), // dynamic keys validator
+      Joi.array().items(iataCode).min(1) // values validator
+    )
+    .unknown(),
+  AirValidationError.IncorrectConnectionsFormat
+);
