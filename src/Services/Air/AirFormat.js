@@ -234,19 +234,14 @@ function formatLowFaresSearch(searchRequest, searchResult) {
       fares
     };
     if ({}.hasOwnProperty.call(searchResult, 'TransactionId')) {
-      result.searchId = searchResult.TransactionId;
-    }
-    if ({}.hasOwnProperty.call(searchResult, 'ProviderCode')) {
-      result.providerCode = searchResult.ProviderCode;
+      result.transactionId = searchResult.TransactionId;
     }
     if ({}.hasOwnProperty.call(searchResult, 'SearchId')) {
       result.searchId = searchResult.SearchId;
     }
-    if ({}.hasOwnProperty.call(searchResult, 'PartNumber')) {
-      result.partNumber = searchResult.PartNumber;
-    }
     if ({}.hasOwnProperty.call(searchResult, 'air:AsyncProviderSpecificResponse')) {
       result.hasMoreResults = searchResult['air:AsyncProviderSpecificResponse'].MoreResults;
+      result.providerCode = searchResult['air:AsyncProviderSpecificResponse'].ProviderCode;
     }
     return result;
   }
