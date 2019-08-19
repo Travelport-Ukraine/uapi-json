@@ -19,7 +19,7 @@ module.exports = (settings) => {
       return service.searchLowFares(options);
     },
 
-    retrieve(options) {
+    retrieveShop(options) {
       return service.searchLowFaresRetrieve(options);
     },
 

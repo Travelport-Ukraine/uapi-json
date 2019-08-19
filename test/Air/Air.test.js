@@ -67,14 +67,14 @@ describe('#AirService', () => {
     });
   });
 
-  describe('retrieve', () => {
+  describe('retrieveShop', () => {
     it('should check if correct function from service is called', () => {
       const searchLowFaresRetrieve = sinon.spy(() => {});
       const service = () => ({ searchLowFaresRetrieve });
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': service,
       });
-      createAirService({ auth }).retrieve({});
+      createAirService({ auth }).retrieveShop({});
       expect(searchLowFaresRetrieve.calledOnce).to.be.equal(true);
     });
   });
