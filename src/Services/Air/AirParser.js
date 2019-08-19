@@ -67,7 +67,8 @@ const countHistogram = (arr) => {
 function lowFaresSearchRequest(obj) {
   return format.formatLowFaresSearch({
     debug: false,
-    provider: this.provider
+    provider: this.provider,
+    faresOnly: this.env.faresOnly !== false,
   }, searchLowFaresValidate.call(this, obj));
 }
 
