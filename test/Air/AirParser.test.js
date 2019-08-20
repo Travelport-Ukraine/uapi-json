@@ -32,7 +32,7 @@ const checkLowSearchFareXml = (filename) => {
       (proposal) => {
         expect(proposal).to.be.an('object');
         expect(proposal).to.have.all.keys([
-          'totalPrice', 'basePrice', 'taxes', 'directions', 'bookingComponents',
+          'totalPrice', 'basePrice', 'taxes', 'directions', 'bookingComponents', 'platingCarrier',
           'passengerFares', 'passengerCounts',
         ]);
         expect(proposal.totalPrice).to.be.a('string').and.to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
