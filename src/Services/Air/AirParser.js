@@ -909,7 +909,7 @@ function extractBookings(obj) {
       {
         type: 'uAPI',
         pnr: providerInfo.LocatorCode,
-        version: record.Version,
+        version: Number(record.Version),
         uapi_ur_locator: record.LocatorCode,
         uapi_reservation_locator: booking.LocatorCode,
         airlineLocatorInfo: supplierLocator.map(info => ({

@@ -12,6 +12,7 @@ const config = require('../testconfig');
 const uAPI = require('../../src');
 
 chai.use(sinonChai);
+process.setMaxListeners(20);
 
 const { Terminal: { TerminalRuntimeError } } = uAPI.errors;
 
@@ -168,18 +169,10 @@ const terminalEmulationFailed = proxyquire('../../src/Services/Terminal/Terminal
 describe('#Terminal', function terminalTest() {
   this.timeout(5000);
 
-  beforeEach(() => {
-    sinon.spy(console, 'log');
-  });
-
-  afterEach(() => {
-    console.log.restore();
-  });
-
   describe('Exit handlers', () => {
     it('should not close session in beforeExit for terminal with NONE state', (done) => {
       // Resetting spies
-      closeSession.reset();
+      closeSession.resetHistory();
 
       terminalOk({
         auth: config,
@@ -193,7 +186,7 @@ describe('#Terminal', function terminalTest() {
     });
     it('should throw an error when failed to close session', (done) => {
       // Resetting spies
-      closeSessionError.reset();
+      closeSessionError.resetHistory();
 
       const uAPITerminal = terminalCloseSessionError({
         auth: config,
@@ -214,7 +207,7 @@ describe('#Terminal', function terminalTest() {
     });
     it('should throw an error for terminal with READY state', (done) => {
       // Resetting spies
-      closeSession.reset();
+      closeSession.resetHistory();
 
       const uAPITerminal = terminalOk({
         auth: config,
@@ -234,9 +227,9 @@ describe('#Terminal', function terminalTest() {
   describe('Working with states', () => {
     it('Should return error when executing command on closed terminal', () => {
       // Resetting spies
-      getSessionToken.reset();
-      executeCommandOk.reset();
-      closeSession.reset();
+      getSessionToken.resetHistory();
+      executeCommandOk.resetHistory();
+      closeSession.resetHistory();
 
       const uAPITerminal = terminalOk({
         auth: config,
@@ -258,8 +251,8 @@ describe('#Terminal', function terminalTest() {
     });
     it('Should return error when executing command on busy terminal', () => {
       // Resetting spies
-      getSessionToken.reset();
-      executeCommandSlow.reset();
+      getSessionToken.resetHistory();
+      executeCommandSlow.resetHistory();
 
       const uAPITerminal = terminalSlow({
         auth: config,
@@ -281,9 +274,9 @@ describe('#Terminal', function terminalTest() {
   describe('Executing commands', () => {
     it('Should execute command', () => {
       // Resetting spies
-      getSessionToken.reset();
-      executeCommandOk.reset();
-      closeSession.reset();
+      getSessionToken.resetHistory();
+      executeCommandOk.resetHistory();
+      closeSession.resetHistory();
 
       const uAPITerminal = terminalOk({
         auth: config,
@@ -307,9 +300,9 @@ describe('#Terminal', function terminalTest() {
     });
     it('Should execute command with custop stopMD function', () => {
       // Resetting spies
-      getSessionToken.reset();
-      executeCommandOk.reset();
-      closeSession.reset();
+      getSessionToken.resetHistory();
+      executeCommandOk.resetHistory();
+      closeSession.resetHistory();
 
       const uAPITerminal = terminalOk({
         auth: config,
@@ -329,9 +322,9 @@ describe('#Terminal', function terminalTest() {
     });
     it('should concatenate command output with MD', () => {
       // Resetting spies
-      getSessionToken.reset();
-      executeCommandOk.reset();
-      closeSession.reset();
+      getSessionToken.resetHistory();
+      executeCommandOk.resetHistory();
+      closeSession.resetHistory();
 
       const uAPITerminal = terminalOk({
         auth: config,
@@ -356,9 +349,9 @@ describe('#Terminal', function terminalTest() {
     });
     it('should handle uapi MD issues', () => {
       // Resetting spies
-      getSessionToken.reset();
-      executeCommandOk.reset();
-      closeSession.reset();
+      getSessionToken.resetHistory();
+      executeCommandOk.resetHistory();
+      closeSession.resetHistory();
 
       const uAPITerminal = terminalMdIssues({
         auth: config,
@@ -376,8 +369,8 @@ describe('#Terminal', function terminalTest() {
   describe('Working with emulation', () => {
     it('Should fail if emulation failed', () => {
       // Resetting spies
-      getSessionToken.reset();
-      executeCommandEmulationFailed.reset();
+      getSessionToken.resetHistory();
+      executeCommandEmulationFailed.resetHistory();
 
       const emulatePcc = '7j8i';
       const emulateConfig = Object.assign({}, config, {
@@ -404,9 +397,9 @@ describe('#Terminal', function terminalTest() {
     });
     it('Should emulate pcc', () => {
       // Resetting spies
-      getSessionToken.reset();
-      executeCommandOk.reset();
-      closeSession.reset();
+      getSessionToken.resetHistory();
+      executeCommandOk.resetHistory();
+      closeSession.resetHistory();
 
       const emulatePcc = '7j8i';
       const emulateConfig = Object.assign({}, config, {
@@ -435,9 +428,9 @@ describe('#Terminal', function terminalTest() {
 
     it('Should work in stateless mod', () => {
       // Resetting spies
-      getSessionToken.reset();
-      executeCommandOk.reset();
-      closeSession.reset();
+      getSessionToken.resetHistory();
+      executeCommandOk.resetHistory();
+      closeSession.resetHistory();
 
       const emulatePcc = '7j8i';
 
