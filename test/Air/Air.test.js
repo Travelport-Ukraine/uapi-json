@@ -885,6 +885,7 @@ describe('#AirService', () => {
   describe('getTicket', () => {
     it('should fail when no itinerary present to import', () => {
       const AirService = () => ({
+        getUniversalRecordByPNR: () => Promise.reject(new AirRuntimeError()),
         getTicket: () => Promise.reject(new AirRuntimeError.TicketInfoIncomplete()),
         importPNR: () => Promise.reject(new AirRuntimeError()),
       });

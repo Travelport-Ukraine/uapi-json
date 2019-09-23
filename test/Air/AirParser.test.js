@@ -836,6 +836,24 @@ describe('#AirParser', () => {
     });
   });
 
+  it('should test a request with hosttoken', () => {
+    const passengers = [{
+      Age: 30,
+      ageCategory: 'ADT',
+    }];
+
+    const uParser = new Parser(null, 'v47_0', { passengers });
+    const parseFunction = airParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
+    const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution-with-host-token.ICNHKG.xml`).toString();
+    const jsonSaved = JSON.parse(
+      fs.readFileSync(`${xmlFolder}/AirPricingSolution-with-host-token.ICNHKG.json`).toString()
+    );
+    return uParser.parse(xml).then((json) => {
+      const jsonResult = parseFunction.call(uParser, json);
+      assert.deepEqual(jsonResult, jsonSaved, 'Result is not equivalent to expected');
+    }).catch(err => assert(false, 'Error during parsing' + err.stack));
+  });
+
   describe('AIR_PRICE_FARE_RULES()', () => {
     const test = (jsonResult) => {
       assert(Array.isArray(jsonResult), 'should return an array of rule sets');
