@@ -53,7 +53,11 @@ module.exports = `
                     />
                 {{/if}}
                 {{#ssr}}
-                <com:SSR Type="{{type}}" {{#if carrier}}Carrier="{{carrier}}" {{/if}}{{#if segmentRef}}SegmentRef="{{{segmentRef}}}" {{/if}}FreeText="{{text}}" />
+                    {{#equal type "FQTV"}}
+                        <com:LoyaltyCard Key="P_{{@index}}_FQTV" SupplierType="Air" SupplierCode="{{carrier}}" CardNumber="{{text}}" />
+                    {{else}}
+                        <com:SSR Type="{{type}}" {{#if carrier}}Carrier="{{carrier}}" {{/if}}{{#if segmentRef}}SegmentRef="{{{segmentRef}}}" {{/if}}FreeText="{{text}}" />
+                    {{/equal}}
                 {{/ssr}}
                 {{#if isChild}}
                 <com:NameRemark Key="P_{{@index}}">
