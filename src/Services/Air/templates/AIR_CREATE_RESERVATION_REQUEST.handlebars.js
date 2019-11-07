@@ -24,7 +24,7 @@ module.exports = `
             {{/if}}
             {{#each passengers}}
             <com:BookingTraveler Key="P_{{@index}}" Age="{{Age}}" DOB="{{DOB}}" Gender="{{gender}}" TravelerType="{{ageCategory}}">
-                <com:BookingTravelerName First="{{firstName}}" Last="{{lastName}}" {{#if Prefix}}Prefix="{{Prefix}}"{{/if}}/>
+                <com:BookingTravelerName First="{{firstName}}" Last="{{lastName}}" {{#if title}}Prefix="{{title}}"{{/if}}/>
                 {{#if ../deliveryInformation}}
                 <com:DeliveryInfo>
                     <com:ShippingAddress>
