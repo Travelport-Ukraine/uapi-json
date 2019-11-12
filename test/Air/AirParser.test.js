@@ -1233,6 +1233,20 @@ describe('#AirParser', () => {
         });
     });
 
+    it('should correclty parse segments order with service segment', () => {
+      const uParser = new Parser('universal:UniversalRecordImportRsp', 'v47_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getPNR-with-service-segments.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          const { segments } = result[0];
+          testBooking(result);
+          expect(segments[0].index).to.equal(1);
+          expect(segments[1].index).to.equal(2);
+        });
+    });
+
     it('should test parsing of create reservation 2ADT1CNN', () => {
       const uParser = new Parser('universal:AirCreateReservationRsp', 'v47_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
