@@ -68,9 +68,6 @@ const requestXMLError = proxyquire('../../src/Request/uapi-request', {
 
 describe('#Request', () => {
   describe('Request send', () => {
-    beforeEach(() => sinon.spy(console, 'log'));
-    afterEach(() => console.log.restore());
-
     it('should throw an SoapRequestError with underlying caused by Error', () => {
       const request = requestError(...serviceParams.concat(3));
       return request({})

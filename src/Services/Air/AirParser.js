@@ -67,7 +67,8 @@ const countHistogram = (arr) => {
 function lowFaresSearchRequest(obj) {
   return format.formatLowFaresSearch({
     debug: false,
-    provider: this.provider
+    provider: this.provider,
+    faresOnly: this.env.faresOnly !== false,
   }, searchLowFaresValidate.call(this, obj));
 }
 
@@ -249,7 +250,10 @@ function airPriceRspPricingSolutionXML(obj) {
   pricingSolution['air:AirPricingInfo'] = pricingInfos;
   const resultXml = {};
 
-  ['air:AirSegment', 'air:AirPricingInfo', 'air:FareNote'].forEach((root) => {
+  ['air:AirSegment', 'air:AirPricingInfo', 'air:FareNote', `common_${this.uapi_version}:HostToken`].forEach((root) => {
+    if (!pricingSolution[root]) {
+      return;
+    }
     const builder = new xml2js.Builder({
       headless: true,
       rootName: root,
@@ -906,7 +910,7 @@ function extractBookings(obj) {
       {
         type: 'uAPI',
         pnr: providerInfo.LocatorCode,
-        version: record.Version,
+        version: Number(record.Version),
         uapi_ur_locator: record.LocatorCode,
         uapi_reservation_locator: booking.LocatorCode,
         airlineLocatorInfo: supplierLocator.map(info => ({

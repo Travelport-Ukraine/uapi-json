@@ -4,12 +4,21 @@ module.exports = `
 <!--Air Low Fare Search For Galileo({{provider}}) Request-->
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
     <soap:Body>
+        {{#if async}}
+        <air:LowFareSearchAsynchReq
+            AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}"
+            ReturnUpsellFare="true"
+            xmlns:air="http://www.travelport.com/schema/air_v47_0"
+            xmlns:com="http://www.travelport.com/schema/common_v47_0"
+            >
+        {{else}}
         <air:LowFareSearchReq
             AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}"
             ReturnUpsellFare="true"
             xmlns:air="http://www.travelport.com/schema/air_v47_0"
             xmlns:com="http://www.travelport.com/schema/common_v47_0"
             >
+        {{/if}}
             <com:BillingPointOfSaleInfo OriginApplication="uAPI"/>
             {{#legs}}
             <air:SearchAirLeg>
@@ -99,7 +108,12 @@ module.exports = `
                 <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
             </air:PCC>
             {{/if}}
+
+        {{#if async}}
+        </air:LowFareSearchAsynchReq>
+        {{else}}
         </air:LowFareSearchReq>
+        {{/if}}
     </soap:Body>
 </soap:Envelope>
 `;

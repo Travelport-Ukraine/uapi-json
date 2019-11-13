@@ -13,6 +13,13 @@ module.exports = {
     )
   ),
 
+  AIR_RETRIEVE_LOW_FARE_SEARCH_REQUEST: compose(
+    validate(
+      validators.searchId
+    ),
+    transform()
+  ),
+
   AIR_PRICE_FARE_RULES_REQUEST: compose(
     validate(
       validators.segments,

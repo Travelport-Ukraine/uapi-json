@@ -46,15 +46,15 @@
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^5.16.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.18.0",
-    "mocha": "^6.1.4",
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.0",
     "nyc": "^14.1.1",
     "proxyquire": "^2.1.1",
     "readline2": "^1.0.1",
-    "sinon": "^1.17.7",
-    "sinon-chai": "^2.14.0"
+    "sinon": "^7.3.2",
+    "sinon-chai": "^3.3.0"
   }
 }

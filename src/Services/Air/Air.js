@@ -13,7 +13,14 @@ module.exports = (settings) => {
   const log = (settings.options && settings.options.logFunction) || console.log;
   return {
     shop(options) {
+      if (options.async === true) {
+        return service.searchLowFaresAsync(options);
+      }
       return service.searchLowFares(options);
+    },
+
+    retrieveShop(options) {
+      return service.searchLowFaresRetrieve(options);
     },
 
     availability(options) {

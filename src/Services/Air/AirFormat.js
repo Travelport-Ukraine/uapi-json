@@ -229,6 +229,22 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 
   fares.sort((a, b) => parseFloat(a.totalPrice.substr(3)) - parseFloat(b.totalPrice.substr(3)));
 
+  if (searchRequest.faresOnly === false) {
+    const result = {
+      fares
+    };
+    if ({}.hasOwnProperty.call(searchResult, 'TransactionId')) {
+      result.transactionId = searchResult.TransactionId;
+    }
+    if ({}.hasOwnProperty.call(searchResult, 'SearchId')) {
+      result.searchId = searchResult.SearchId;
+    }
+    if ({}.hasOwnProperty.call(searchResult, 'air:AsyncProviderSpecificResponse')) {
+      result.hasMoreResults = searchResult['air:AsyncProviderSpecificResponse'].MoreResults;
+      result.providerCode = searchResult['air:AsyncProviderSpecificResponse'].ProviderCode;
+    }
+    return result;
+  }
   return fares;
 }
 
