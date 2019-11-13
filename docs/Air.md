@@ -132,6 +132,7 @@ Please specify `transfer` field to mark connection segment.
 | --- | --- | --- |
 | lastName | `String` | Passenger last name. |
 | firstName | `String` | Passenger first name. |
+| title | `String` | One of `['MR', 'MS', 'MSTR', 'MISS']`. |
 | birthDate | `String` | Birth date in format `YYYY-MM-DD`. |
 | gender | `String` | One of `['M', 'F']`. |
 | ageCategory | `String` | One of `['ADT', 'CNN', 'INF']`. Or [other types](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Shared_Air_Topics/Passenger_Type_Codes.htm) |
