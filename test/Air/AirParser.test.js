@@ -125,7 +125,7 @@ const checkLowSearchFareXml = (filename) => {
             expect(ptc).to.be.a('string');
             const fare = proposal.passengerFares[ptc];
             expect(fare).to.be.an('object');
-            expect(fare).to.have.all.keys([
+            expect(fare).to.have.include.all.keys([
               'totalPrice', 'basePrice', 'taxes',
             ]);
             expect(fare.totalPrice).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
@@ -744,6 +744,81 @@ describe('#AirParser', () => {
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.InvalidRequestData);
         });
+    });
+  });
+
+  describe('AIR_PRICE_REQ()', () => {
+    const testPricing = (jsonResult) => {
+      assert(jsonResult.basePrice, 'No base price.');
+      assert(jsonResult.taxes, 'No taxes.');
+      assert(jsonResult.totalPrice, 'No total price.');
+      assert(jsonResult.directions, 'No Directions.');
+      assert(jsonResult.bookingComponents, 'No Booking components.');
+      assert(jsonResult.directions.length, 'Directions length not 2.');
+    };
+
+    const testSegments = (jsonResult, segmentCounts) => {
+      const { directions } = jsonResult;
+      assert(directions.length === segmentCounts.length, `From direction length should be ${segmentCounts.length}`);
+
+      segmentCounts.forEach((numberOfSegmentsInLeg, legIndex) => {
+        const [leg] = directions[legIndex];
+        assert(leg, `No segments in dir[${legIndex}]`);
+        assert(leg.segments.length === numberOfSegmentsInLeg, `Segments in direction ${legIndex} length should be ${numberOfSegmentsInLeg}`);
+
+        leg.segments.forEach((seg) => {
+          assert(seg.arrival, 'Segement should have arrival');
+          assert(seg.departure, 'Segement should have departure');
+          assert(seg.bookingClass, 'Segement should have bookingClass');
+          assert(seg.from, 'Segement should have from');
+          assert(seg.to, 'Segement should have to');
+        });
+      });
+    };
+
+    const passengers = [{
+      lastName: 'ENEKEN',
+      firstName: 'SKYWALKER',
+      passCountry: 'UA',
+      passNumber: 'ES221731',
+      birthDate: '19680725',
+      Age: 30,
+      gender: 'M',
+      ageCategory: 'ADT',
+    }];
+
+    const uParser = new Parser('air:AirPriceRsp', 'v47_0', { passengers });
+    const parseFunction = airParser.AIR_PRICE_REQUEST;
+
+    it('should test parser for correct work', () => {
+      const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.xml`).toString();
+
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testPricing(jsonResult);
+        testSegments(jsonResult, [2]);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should test another request with 2 adults and 1 child', () => {
+      const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.2ADT1CNN.xml`).toString();
+
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testPricing(jsonResult);
+        testSegments(jsonResult, [2]);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should test another request with 2 air priceing solutions', () => {
+      const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.2AirPrice.xml`).toString();
+
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testPricing(jsonResult);
+        // TODO: Shouldn't this example be seperated to 2 segment groups? (round-trip)
+        testSegments(jsonResult, [4]);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
   });
 

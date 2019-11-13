@@ -1787,4 +1787,16 @@ describe('#AirService', () => {
       });
     });
   });
+
+  describe('prcing', () => {
+    it('should check if correct function from service is called', () => {
+      const airPrice = sinon.spy(() => {});
+      const service = () => ({ airPrice });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).airPrice({});
+      expect(airPrice.calledOnce).to.be.equal(true);
+    });
+  });
 });
