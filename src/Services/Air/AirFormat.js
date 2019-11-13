@@ -1,8 +1,8 @@
 const parsers = require('../../utils/parsers');
 const { AirParsingError } = require('./AirErrors');
 
-function travelOrderReducer(acc, { TravelOrder }) {
-  const x = parseInt(TravelOrder, 10);
+function ProviderSegmentOrderReducer(acc, { ProviderSegmentOrder }) {
+  const x = parseInt(ProviderSegmentOrder, 10);
   if (x > acc) {
     return x;
   }
@@ -235,7 +235,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 /**
  * This function used to transform segments and service segments objects
  * to arrays. After that this function try to set indexes with same as in
- * terminal response order. So it needs to check `TravelOrder` field for that.
+ * terminal response order. So it needs to check `ProviderSegmentOrder` field for that.
  *
  * @param segmentsObject
  * @param serviceSegmentsObject
@@ -275,19 +275,21 @@ function setIndexesForSegments(
     return { segments, serviceSegments: serviceSegmentsNew };
   }
 
-  const maxSegmentsTravelOrder = segments.reduce(travelOrderReducer, 0);
-  const maxServiceSegmentsTravelOrder = serviceSegments.reduce(travelOrderReducer, 0);
+  const maxSegmentsSegmentOrder = segments.reduce(ProviderSegmentOrderReducer, 0);
+  const maxServiceSegmentsSegmentOrder = serviceSegments.reduce(ProviderSegmentOrderReducer, 0);
 
   const maxOrder = Math.max(
-    maxSegmentsTravelOrder,
-    maxServiceSegmentsTravelOrder
+    maxSegmentsSegmentOrder,
+    maxServiceSegmentsSegmentOrder
   );
 
   const allSegments = [];
 
   for (let i = 1; i <= maxOrder; i += 1) {
-    segments.forEach(s => (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
-    serviceSegments.forEach(s => (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
+    segments.forEach(s => (Number(s.ProviderSegmentOrder) === i ? allSegments.push(s) : null));
+    serviceSegments.forEach(s => (
+      Number(s.ProviderSegmentOrder) === i ? allSegments.push(s) : null
+    ));
   }
 
   const indexedSegments = allSegments.map((s, k) => ({ ...s, index: k + 1 }));
