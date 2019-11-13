@@ -55,6 +55,17 @@ module.exports = function (settings) {
       debug,
       options
     ),
+    airPrice: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.price,
+      'air:AirPriceRsp',
+      AirValidator.AIR_PRICE_REQUEST,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_PRICE_REQUEST,
+      debug,
+      options
+    ),
     lookupFareRules: uApiRequest(
       config.AirService.url,
       auth,

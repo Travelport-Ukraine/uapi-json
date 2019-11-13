@@ -34,6 +34,20 @@ module.exports = {
     )
   ),
 
+  AIR_PRICE_REQUEST: compose(
+    validate(
+      validators.segments,
+      validators.passengers,
+      validators.platingCarrier
+    ),
+    transform(
+      transformers.setBusinessFlag,
+      transformers.convertPassengersObjectToArray,
+      transformers.setGroupsForSegments,
+      transformers.setHasFareBasisFlag
+    )
+  ),
+
   AIR_PRICE: compose(
     validate(
       validators.segments,
