@@ -1,14 +1,19 @@
 const parsers = require('../../utils/parsers');
 const { AirParsingError } = require('./AirErrors');
 
-function travelOrderReducer(acc, { TravelOrder }) {
-  const x = parseInt(TravelOrder, 10);
+function ProviderSegmentOrderReducer(acc, { ProviderSegmentOrder }) {
+  const x = parseInt(ProviderSegmentOrder, 10);
   if (x > acc) {
     return x;
   }
   return acc;
 }
 
+/**
+ * getBaggage -- get baggage information from LFS search
+ * @param baggageAllowance
+ * @returns {{amount: number, units: string}}
+ */
 function getBaggage(baggageAllowance) {
   // Checking for allowance
   if (
@@ -33,6 +38,51 @@ function getBaggage(baggageAllowance) {
     units: 'piece',
     amount: Number(baggageAllowance['air:NumberOfPieces']),
   };
+}
+
+/**
+ * getBaggageInfo -- get baggage information from airPrice
+ * @param info
+ * @returns {{amount: number, units: string}}
+ */
+function getBaggageInfo(info) {
+  // Checking for allowance
+  let baggageInfo = { units: 'piece', amount: 0 };
+
+  if (typeof info === 'undefined' || info == null) {
+    return baggageInfo;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(info, 'air:BagDetails')) {
+    baggageInfo.detail = info['air:BagDetails'].map((detail) => {
+      return {
+        applicableBags: detail.ApplicableBags,
+        basePrice: detail.BasePrice,
+        totalPrice: detail.TotalPrice,
+        approximateBasePrice: detail.ApproximateBasePrice,
+        approximateTotalPrice: detail.ApproximateTotalPrice,
+        restrictionText: detail['air:BaggageRestriction']['air:TextInfo'],
+      };
+    });
+  }
+
+  if (Object.prototype.hasOwnProperty.call(info, 'air:TextInfo')) {
+    const match = info['air:TextInfo'][0].match(/^(\d+)([KP]+)$/);
+
+    if (match) {
+      if (match[2] === 'P') {
+        baggageInfo = Object.assign(baggageInfo, { units: 'piece', amount: match[1] });
+      } else if (match[2] === 'K') {
+        baggageInfo = Object.assign(baggageInfo, { units: 'kilograms', amount: match[1] });
+      }
+    } else {
+      console.warn('Baggage information is not number and is not weight!', JSON.stringify(info));
+    }
+  } else {
+    console.warn('Unknown', JSON.stringify(info));
+  }
+
+  return baggageInfo;
 }
 
 function formatSegment(segment) {
@@ -92,6 +142,131 @@ function formatAirExchangeBundle(bundle) {
     changeFee: bundle.ChangeFee,
     exchangeAmount: bundle.ExchangeAmount,
     refund: bundle.Refund,
+  };
+}
+
+function formatPassengerCategories(pricingInfo) {
+  const passengerCounts = {};
+
+  const passengerCategories = Object.keys(pricingInfo)
+    .reduce((acc, key) => {
+      const passengerFare = pricingInfo[key];
+      let code = passengerFare['air:PassengerType'];
+
+      if (Object.prototype.toString.call(code) === '[object String]') { // air:PassengerType in fullCollapseList_obj ParserUapi param
+        passengerCounts[code] = 1;
+
+        // air:PassengerType in noCollapseList
+      } else if (Array.isArray(code) && code.constructor === Array) { // ParserUapi param
+        const count = code.length;
+        const list = Array.from(new Set((code.map((item) => {
+          if (Object.prototype.toString.call(item) === '[object String]') {
+            return item;
+          }
+          if (Object.prototype.toString.call(item) === '[object Object]' && item.Code) {
+            // air:PassengerType in fullCollapseList_obj like above,
+            // but there is Age or other info, except Code
+            return item.Code;
+          }
+          throw new AirParsingError.PTCIsNotSet();
+        }))));
+
+        [code] = list;
+        if (!list[0] || list.length !== 1) { // TODO throw error
+          console.log('Warning: different categories '
+            + list.join() + ' in single fare calculation ' + key + ' in fare ' + key);
+        }
+        passengerCounts[code] = count;
+      } else {
+        throw new AirParsingError.PTCTypeInvalid();
+      }
+
+      return {
+        ...acc,
+        [code]: passengerFare
+      };
+    }, {});
+
+  const passengerFares = Object.keys(passengerCategories)
+    .reduce(
+      (memo, ptc) => Object.assign(memo, {
+        [ptc]: {
+          totalPrice: passengerCategories[ptc].TotalPrice,
+          basePrice: passengerCategories[ptc].BasePrice,
+          equivalentBasePrice: passengerCategories[ptc].EquivalentBasePrice,
+          taxes: passengerCategories[ptc].Taxes,
+          fareCalc: passengerCategories[ptc].FareCalc,
+        },
+      }), {}
+    );
+
+  return {
+    passengerCounts,
+    passengerCategories,
+    passengerFares,
+  };
+}
+
+function formatFarePricingInfo(fare) {
+  const changePenalty = {};
+  const cancelPenalty = {};
+
+  if (Object.prototype.hasOwnProperty.call(fare, 'air:ChangePenalty')) {
+    const fareChangePenalty = fare['air:ChangePenalty'];
+
+    if (typeof fareChangePenalty['air:Amount'] !== 'undefined') {
+      changePenalty.amount = fareChangePenalty['air:Amount'];
+    }
+    if (typeof fareChangePenalty['air:Percentage'] !== 'undefined') {
+      changePenalty.percentage = fareChangePenalty['air:Percentage'];
+    }
+    if (typeof fareChangePenalty.PenaltyApplies !== 'undefined') {
+      changePenalty.penaltyApplies = fareChangePenalty.PenaltyApplies;
+    }
+  }
+
+  if (Object.prototype.hasOwnProperty.call(fare, 'air:CancelPenalty')) {
+    const fareCancelPenalty = fare['air:CancelPenalty'];
+
+    if (typeof fareCancelPenalty['air:Amount'] !== 'undefined') {
+      cancelPenalty.amount = fareCancelPenalty['air:Amount'];
+    }
+    if (typeof fareCancelPenalty['air:Percentage'] !== 'undefined') {
+      cancelPenalty.percentage = fareCancelPenalty['air:Percentage'];
+    }
+    if (typeof fareCancelPenalty.PenaltyApplies !== 'undefined') {
+      cancelPenalty.penaltyApplies = fareCancelPenalty.PenaltyApplies;
+    }
+    if (typeof fareCancelPenalty.NoShow !== 'undefined') {
+      cancelPenalty.noShow = fareCancelPenalty.NoShow;
+    }
+  }
+
+  let refundable = false;
+
+  if (Object.prototype.hasOwnProperty.call(fare, 'Refundable')) {
+    refundable = fare.Refundable;
+  }
+
+  let latestTicketingTime = null;
+
+  if (Object.prototype.hasOwnProperty.call(fare, 'LatestTicketingTime')) {
+    latestTicketingTime = fare.LatestTicketingTime;
+  }
+
+  let eTicketability = false;
+
+  if (Object.prototype.hasOwnProperty.call(fare, 'eTicketability')) {
+    // eslint-disable-next-line prefer-destructuring
+    eTicketability = fare.eTicketability;
+  }
+
+  return {
+    latestTicketingTime,
+    eTicketability,
+    refundable,
+    changePenalty,
+    cancelPenalty,
   };
 }
 
@@ -199,59 +374,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
       }));
     }
 
-
-    const passengerCounts = {};
-
-    const passengerCategories = Object.keys(price['air:AirPricingInfo'])
-      .reduce((acc, key) => {
-        const passengerFare = price['air:AirPricingInfo'][key];
-        let code = passengerFare['air:PassengerType'];
-
-        if (Object.prototype.toString.call(code) === '[object String]') { // air:PassengerType in fullCollapseList_obj ParserUapi param
-          passengerCounts[code] = 1;
-
-          // air:PassengerType in noCollapseList
-        } else if (Array.isArray(code) && code.constructor === Array) { // ParserUapi param
-          const count = code.length;
-          const list = Array.from(new Set((code.map((item) => {
-            if (Object.prototype.toString.call(item) === '[object String]') {
-              return item;
-            } if (Object.prototype.toString.call(item) === '[object Object]' && item.Code) {
-              // air:PassengerType in fullCollapseList_obj like above,
-              // but there is Age or other info, except Code
-              return item.Code;
-            }
-            throw new AirParsingError.PTCIsNotSet();
-          }))));
-
-          [code] = list;
-          if (!list[0] || list.length !== 1) { // TODO throw error
-            console.log('Warning: different categories '
-              + list.join() + ' in single fare calculation ' + key + ' in fare ' + fareKey);
-          }
-          passengerCounts[code] = count;
-        } else {
-          throw new AirParsingError.PTCTypeInvalid();
-        }
-
-        return { ...acc, [code]: passengerFare };
-      }, {});
-
-    if (Object.keys(passengerCategories).length
-      !== Object.keys(price['air:AirPricingInfo']).length
-    ) {
-      console.log('Warning: duplicate categories in passengerCategories map for fare ' + fareKey);
-    }
-
-    const passengerFares = Object.keys(passengerCategories).reduce(
-      (memo, ptc) => Object.assign(memo, {
-        [ptc]: {
-          totalPrice: passengerCategories[ptc].TotalPrice,
-          basePrice: passengerCategories[ptc].BasePrice,
-          taxes: passengerCategories[ptc].Taxes,
-        },
-      }), {}
-    );
+    const { passengerCounts, passengerFares } = this.formatPassengerCategories(price['air:AirPricingInfo']);
 
     const result = {
       totalPrice: price.TotalPrice,
@@ -276,13 +399,29 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 
   fares.sort((a, b) => parseFloat(a.totalPrice.substr(3)) - parseFloat(b.totalPrice.substr(3)));
 
+  if (searchRequest.faresOnly === false) {
+    const result = {
+      fares
+    };
+    if ({}.hasOwnProperty.call(searchResult, 'TransactionId')) {
+      result.transactionId = searchResult.TransactionId;
+    }
+    if ({}.hasOwnProperty.call(searchResult, 'SearchId')) {
+      result.searchId = searchResult.SearchId;
+    }
+    if ({}.hasOwnProperty.call(searchResult, 'air:AsyncProviderSpecificResponse')) {
+      result.hasMoreResults = searchResult['air:AsyncProviderSpecificResponse'].MoreResults;
+      result.providerCode = searchResult['air:AsyncProviderSpecificResponse'].ProviderCode;
+    }
+    return result;
+  }
   return fares;
 }
 
 /**
  * This function used to transform segments and service segments objects
  * to arrays. After that this function try to set indexes with same as in
- * terminal response order. So it needs to check `TravelOrder` field for that.
+ * terminal response order. So it needs to check `ProviderSegmentOrder` field for that.
  *
  * @param segmentsObject
  * @param serviceSegmentsObject
@@ -322,19 +461,21 @@ function setIndexesForSegments(
     return { segments, serviceSegments: serviceSegmentsNew };
   }
 
-  const maxSegmentsTravelOrder = segments.reduce(travelOrderReducer, 0);
-  const maxServiceSegmentsTravelOrder = serviceSegments.reduce(travelOrderReducer, 0);
+  const maxSegmentsSegmentOrder = segments.reduce(ProviderSegmentOrderReducer, 0);
+  const maxServiceSegmentsSegmentOrder = serviceSegments.reduce(ProviderSegmentOrderReducer, 0);
 
   const maxOrder = Math.max(
-    maxSegmentsTravelOrder,
-    maxServiceSegmentsTravelOrder
+    maxSegmentsSegmentOrder,
+    maxServiceSegmentsSegmentOrder
   );
 
   const allSegments = [];
 
   for (let i = 1; i <= maxOrder; i += 1) {
-    segments.forEach(s => (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
-    serviceSegments.forEach(s => (Number(s.TravelOrder) === i ? allSegments.push(s) : null));
+    segments.forEach(s => (Number(s.ProviderSegmentOrder) === i ? allSegments.push(s) : null));
+    serviceSegments.forEach(s => (
+      Number(s.ProviderSegmentOrder) === i ? allSegments.push(s) : null
+    ));
   }
 
   const indexedSegments = allSegments.map((s, k) => ({ ...s, index: k + 1 }));
@@ -347,6 +488,8 @@ function setIndexesForSegments(
 
 module.exports = {
   formatLowFaresSearch,
+  formatFarePricingInfo,
+  formatPassengerCategories,
   formatTrip,
   formatSegment,
   formatServiceSegment,
@@ -354,4 +497,5 @@ module.exports = {
   formatPrices,
   setIndexesForSegments,
   getBaggage,
+  getBaggageInfo,
 };

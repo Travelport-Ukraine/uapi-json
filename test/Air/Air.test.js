@@ -55,6 +55,28 @@ describe('#AirService', () => {
       createAirService({ auth }).shop({});
       expect(searchLowFares.calledOnce).to.be.equal(true);
     });
+
+    it('should check if correct function from service is called with async option', () => {
+      const searchLowFaresAsync = sinon.spy(() => {});
+      const service = () => ({ searchLowFaresAsync });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).shop({ async: true });
+      expect(searchLowFaresAsync.calledOnce).to.be.equal(true);
+    });
+  });
+
+  describe('retrieveShop', () => {
+    it('should check if correct function from service is called', () => {
+      const searchLowFaresRetrieve = sinon.spy(() => {});
+      const service = () => ({ searchLowFaresRetrieve });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).retrieveShop({});
+      expect(searchLowFaresRetrieve.calledOnce).to.be.equal(true);
+    });
   });
 
   describe('availability', () => {
@@ -863,6 +885,7 @@ describe('#AirService', () => {
   describe('getTicket', () => {
     it('should fail when no itinerary present to import', () => {
       const AirService = () => ({
+        getUniversalRecordByPNR: () => Promise.reject(new AirRuntimeError()),
         getTicket: () => Promise.reject(new AirRuntimeError.TicketInfoIncomplete()),
         importPNR: () => Promise.reject(new AirRuntimeError()),
       });
@@ -1784,6 +1807,18 @@ describe('#AirService', () => {
       }).then(() => {
         expect(fetch).to.have.callCount(1);
       });
+    });
+  });
+
+  describe('prcing', () => {
+    it('should check if correct function from service is called', () => {
+      const airPrice = sinon.spy(() => {});
+      const service = () => ({ airPrice });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).airPrice({});
+      expect(airPrice.calledOnce).to.be.equal(true);
     });
   });
 });

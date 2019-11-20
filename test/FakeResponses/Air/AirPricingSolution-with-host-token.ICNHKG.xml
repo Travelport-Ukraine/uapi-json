@@ -1,0 +1,98 @@
+<SOAP:Envelope
+        xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:AirPriceRsp TransactionId="60698A6C0A07643C8313D31757B178BF" ResponseTime="1381"
+                         xmlns:air="http://www.travelport.com/schema/air_v47_0"
+                         xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+            <common_v47_0:ResponseMessage Code="710401" Type="Warning" ProviderCode="1G">Taxes returned at the FareInfo level are for informational purposes only, and may differ from those returned at the Itinerary/Passenger Type levels.</common_v47_0:ResponseMessage>
+            <common_v47_0:ResponseMessage Code="701848" Type="Warning" ProviderCode="1G">Validate Inventory is not supported without a booking code or for more than 8 segments.</common_v47_0:ResponseMessage>
+            <air:AirItinerary>
+                <air:AirSegment Key="Nra0Sx8Q2BKA+louAAAAAA==" Group="0" Carrier="OZ" FlightNumber="9661" ProviderCode="1G" Origin="ICN" Destination="HKG" DepartureTime="2019-10-20T20:10:00.000+09:00" ArrivalTime="2019-10-20T22:50:00.000+08:00" FlightTime="220" TravelTime="220" Distance="1295" ClassOfService="V" Equipment="321" ChangeOfPlane="false" OptionalServicesIndicator="true" LinkAvailability="true" AvailabilityDisplayType="Fare Specific Fare Quote Unbooked">
+                    <air:CodeshareInfo OperatingCarrier="RS">Air Seoul</air:CodeshareInfo>
+                    <air:FlightDetails Key="Nra0Sx8Q2BKA/louAAAAAA==" Origin="ICN" Destination="HKG" DepartureTime="2019-10-20T20:10:00.000+09:00" ArrivalTime="2019-10-20T22:50:00.000+08:00" FlightTime="220" TravelTime="220" Equipment="321" OriginTerminal="1" AutomatedCheckin="false">
+                        <air:Meals>FoodForPurchase</air:Meals>
+                        <air:InFlightServices>Non-smoking</air:InFlightServices>
+                    </air:FlightDetails>
+                </air:AirSegment>
+            </air:AirItinerary>
+            <air:AirPriceResult>
+                <air:AirPricingSolution Key="Nra0Sx8Q2BKAAmouAAAAAA==" TotalPrice="KRW169600" BasePrice="KRW123000" ApproximateTotalPrice="KRW169600" ApproximateBasePrice="KRW123000" Taxes="KRW46600" Fees="KRW0" ApproximateTaxes="KRW46600" QuoteDate="2019-08-05">
+                    <air:AirSegmentRef Key="Nra0Sx8Q2BKA+louAAAAAA=="/>
+                    <air:AirPricingInfo Key="Nra0Sx8Q2BKACmouAAAAAA==" TotalPrice="KRW169600" BasePrice="KRW123000" ApproximateTotalPrice="KRW169600" ApproximateBasePrice="KRW123000" ApproximateTaxes="KRW46600" Taxes="KRW46600" LatestTicketingTime="2019-10-20T23:59:00.000+09:00" PricingMethod="Guaranteed" Refundable="true" IncludesVAT="false" ETicketability="Yes" PlatingCarrier="OZ" ProviderCode="1G">
+                        <air:FareInfo Key="Nra0Sx8Q2BKAFmouAAAAAA==" FareBasis="VOKSRS" PassengerTypeCode="ADT" Origin="ICN" Destination="HKG" EffectiveDate="2019-08-05T15:13:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW123000" TaxAmount="KRW46600">
+                            <common_v47_0:Endorsement Value="NONENDS"/>
+                            <air:FareRuleKey FareInfoRef="Nra0Sx8Q2BKAFmouAAAAAA==" ProviderCode="1G">6UUVoSldxwg2dUYsesQ+pMbKj3F8T9EyxsqPcXxP0TLGyo9xfE/RMsuWFfXVd1OAly5qxZ3qLwOXLmrFneovA5cuasWd6i8Dly5qxZ3qLwOXLmrFneovAx/NmtRjpRAh4bHmxr88+l3zd/VTAJtvZU+uJGSiGIApXx4rTxheIZkoW3UNpGWfosv0NSyuaPKTJv6h47S9eU4Jszk7vWu+4MCIbRqMTJch6v9tEaRJgF5C/YIEuJEelreO5wqoheley9Vj4NNrL11JTyB5x9tYSQLWhthMb3jlDMIzPikBnwTbR/K/DB5fKuaoyaIUYH00ly5qxZ3qLwOXLmrFneovA5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA2+QKPIWaRvq6oxE1UL944DjaSte7T4ddDlN7mTMg9Nhkv5egk7/PczVY7LrKHgXcufz7VT4VPmwosmMaNBEpBo=</air:FareRuleKey>
+                            <air:Brand Key="Nra0Sx8Q2BKAFmouAAAAAA==" BrandFound="false" UpSellBrandFound="false"/>
+                        </air:FareInfo>
+                        <air:BookingInfo BookingCode="V" CabinClass="Economy" FareInfoRef="Nra0Sx8Q2BKAFmouAAAAAA==" SegmentRef="Nra0Sx8Q2BKA+louAAAAAA==" HostTokenRef="Nra0Sx8Q2BKABmouAAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000" Key="Nra0Sx8Q2BKADmouAAAAAA=="/>
+                        <air:TaxInfo Category="YQ" Amount="KRW18600" Key="Nra0Sx8Q2BKAEmouAAAAAA=="/>
+                        <air:FareCalc>SEL OZ HKG 104.93VOKSRS NUC104.93END ROE1172.20778</air:FareCalc>
+                        <air:PassengerType Code="ADT" Age="35"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Amount>KRW70000</air:Amount>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Before Departure">
+                            <air:Amount>KRW110000</air:Amount>
+                        </air:CancelPenalty>
+                        <air:BaggageAllowances>
+                            <air:BaggageAllowanceInfo TravelerType="ADT" Origin="SEL" Destination="HKG" Carrier="RS">
+                                <air:URLInfo>
+                                    <air:URL>VIEWTRIP.TRAVELPORT.COM/BAGGAGEPOLICY/RS</air:URL>
+                                </air:URLInfo>
+                                <air:TextInfo>
+                                    <air:Text>1P</air:Text>
+                                    <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.</air:Text>
+                                </air:TextInfo>
+                                <air:BagDetails ApplicableBags="1stChecked" BasePrice="KRW0" ApproximateBasePrice="KRW0" TotalPrice="KRW0" ApproximateTotalPrice="KRW0">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>UPTO33LB/15KG</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                                <air:BagDetails ApplicableBags="2ndChecked">
+                                    <air:BaggageRestriction>
+                                        <air:TextInfo>
+                                            <air:Text>BAGGAGE CHARGES DATA NOT AVAILABLE</air:Text>
+                                        </air:TextInfo>
+                                    </air:BaggageRestriction>
+                                </air:BagDetails>
+                            </air:BaggageAllowanceInfo>
+                            <air:CarryOnAllowanceInfo Origin="SEL" Destination="HKG" Carrier="RS">
+                                <air:TextInfo>
+                                    <air:Text>BAGGAGE ALLOWANCE DATA NOT AVAILABLE</air:Text>
+                                </air:TextInfo>
+                            </air:CarryOnAllowanceInfo>
+                        </air:BaggageAllowances>
+                    </air:AirPricingInfo>
+                    <air:FareNote Key="Nra0Sx8Q2BKAImouAAAAAA==">LAST DATE TO PURCHASE TICKET: 20OCT19</air:FareNote>
+                    <air:FareNote Key="Nra0Sx8Q2BKAJmouAAAAAA==">TICKETING AGENCY 0000</air:FareNote>
+                    <air:FareNote Key="Nra0Sx8Q2BKAKmouAAAAAA==">DEFAULT PLATING CARRIER OZ</air:FareNote>
+                    <air:FareNote Key="Nra0Sx8Q2BKALmouAAAAAA==">E-TKT REQUIRED</air:FareNote>
+                    <air:FareNote Key="Nra0Sx8Q2BKAMmouAAAAAA==">TICKETING FEES MAY APPLY</air:FareNote>
+                    <common_v47_0:HostToken Key="Nra0Sx8Q2BKABmouAAAAAA==">GFB10101ADT00  01VOKSRS                                010001#GFB200010101NADTV3008KS50001000019958#</common_v47_0:HostToken>
+                    <air:OptionalServices>
+                        <air:OptionalServicesTotal/>
+                        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="KRW30000" SupplierCode="OZ" PerTraveler="false" CreateDate="2019-08-05T06:13:46.590+00:00" ServiceStatus="Offered" SequenceNumber="105863" ServiceSubCode="0B5" SSRCode="SEAT" IssuanceReason="A" Key="Nra0Sx8Q2BKANmouAAAAAA==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="KRW30000" ApproximateTotalPrice="KRW30000" ApproximateBasePrice="KRW30000" Taxes="KRW0" OptionalServicesRuleRef="Nra0Sx8Q2BKAOmouAAAAAA==">
+                            <common_v47_0:ServiceData BookingTravelerRef="Nra0Sx8Q2BKA3fouAAAAAA==" AirSegmentRef="Nra0Sx8Q2BKA+louAAAAAA==" TravelerType="ADT"/>
+                            <common_v47_0:ServiceInfo>
+                                <common_v47_0:Description>PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Description>
+                            </common_v47_0:ServiceInfo>
+                            <common_v47_0:Remark>OZ 9661 - KRW30000.00 PER PASSENGER PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Remark>
+                            <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+                            <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
+                            <air:BrandingInfo Key="BI1" CommercialName="PRE RESERVED SEAT ASSIGNMENT">
+                                <air:Title Type="External" LanguageCode="EN">PRE RESERVED SEAT ASSIGNMENT</air:Title>
+                                <air:AirSegmentRef Key="Nra0Sx8Q2BKA+louAAAAAA=="/>
+                            </air:BrandingInfo>
+                        </air:OptionalService>
+                        <air:OptionalServiceRules Key="Nra0Sx8Q2BKAOmouAAAAAA==">
+                            <common_v47_0:ApplicationRules RequiredForAllTravelers="false"/>
+                        </air:OptionalServiceRules>
+                    </air:OptionalServices>
+                </air:AirPricingSolution>
+            </air:AirPriceResult>
+        </air:AirPriceRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

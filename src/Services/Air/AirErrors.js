@@ -35,7 +35,8 @@ Object.assign(AirValidationError, createErrorsList({
   ExchangeToken: 'Missing exchangeToken in request. See data.',
   CreditCardMissing: 'Missing creditCard in request. See data.',
   IncorrectConnectionsFormat: 'Connections should be an array with IATA codes.',
-  PlatingCarrierInvalid: 'Plating Carrier Invalid'
+  PlatingCarrierInvalid: 'Plating Carrier Invalid',
+  SearchIdMissing: 'SearchId is missing'
 }, AirValidationError));
 
 const GdsValidationError = createErrorClass(
@@ -72,6 +73,7 @@ Object.assign(AirParsingError, createErrorsList({
   BookingInfoError: 'air:BookingInfo should be an array',
   PlatingCarriersError: 'Plating carriers do not coincide across all passenger reservations',
   PTCIsNotSet: 'Code is not set for PassengerTypeCode item',
+  PlatingCarrierNotSet: 'PlatingCarrier is not set for AirPricingInfo item',
   PTCTypeInvalid: 'PassengerTypeCode is supposed to be a string or array of PassengerTypeCode items',
   HistogramTypeInvalid: 'PassengerType is supposed to be an array',
   MultiplePricingSolutionsNotAllowed: 'Expected only one pricing solution, need to clarify search?',
