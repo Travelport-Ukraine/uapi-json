@@ -146,6 +146,7 @@ Please specify `transfer` field to mark connection segment.
 | --- | --- | --- |
 | type | `String` | SSR Type code eg. `CHLD, CTCR, DOCS, DOCA, FOID`. |
 | carrier | `String` | Optional. 2-letter IATA Code of airline, default is `YY` |
+| status | `String` | Optional. Status eg. `NN, PN, UN, HK` |
 | freeText | `String` | SSR FreeText |
 
 ### Phone object
