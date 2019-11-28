@@ -1993,7 +1993,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then(() => parseFunction.call(uParser, {})).then(() => {
         throw new Error('Cant return result');
       }).catch((e) => {
-        expect(e).to.be.instanceof(AirRuntimeError.CantDetectExchangeReponse);
+        expect(e).to.be.instanceof(AirRuntimeError.CantDetectExchangeResponse);
       });
     });
   });
