@@ -49,6 +49,11 @@ const requestError = proxyquire('../../src/Request/uapi-request', {
     request: () => Promise.reject({ response: { status: 300, data: 3 } }),
   },
 });
+const requestUnexpectedError = proxyquire('../../src/Request/uapi-request', {
+  axios: {
+    request: () => Promise.reject({ code: 'ECONNRESET', message: 'write ECONNRESET', name: 'Error' }),
+  },
+});
 const requestJsonResponse = proxyquire('../../src/Request/uapi-request', {
   axios: {
     request: () => Promise.resolve({ data: '{"error": "Some error"}' }),
@@ -77,6 +82,15 @@ describe('#Request', () => {
           expect(err.data.status).to.be.equal(300);
           expect(err.data.data).to.be.equal(3);
           expect(console.log).to.have.callCount(4);
+        });
+    });
+    it('should throw an SoapUnexpectedError with underlying caused by Error without response', () => {
+      const request = requestUnexpectedError(...serviceParams.concat(3));
+      return request({})
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(RequestSoapError.SoapUnexpectedError);
+          expect(err.data).to.not.equal(null);
+          expect(err.data.code).to.equal('ECONNRESET');
         });
     });
     it('should throw SoapServerError when JSON received', () => {
