@@ -10,6 +10,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 
 **AirService**
 * [.shop(params)](#shop)
+* [.retrieveShop(params)](#retrieve-shop)
 * [.availability(params)](#shop) (same params as `.shop(params)`)
 * [.book(params)](#book)
 * [.ticket(params)](#ticket)
@@ -47,9 +48,12 @@ Low Fare Shop functionality combines air availability and a fare quote request t
 | preferredConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |
 | prohibitedConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |
 | permittedConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |
+| async | `Boolean` | Use this flag to use LowFareSearchAsynch. Default value is `false`.<i>Optional.</i> See [Low Fare Shopping (Asynchronous)](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Low_Fare_Shopping/Low_Fare_Shopping_(Asynchronous).htm)|
+| faresOnly | `Boolean` | Use this flag to retrieve traceId, searchId, hasMoreResult with the fare data. Default value is `false`. <i>Optional.</i> |
 
 ### Pricing object
 <a name="pricing_mod"></a>
+
 | Param | Type | Description |
 | --- | --- | --- |
 | currency | `String` | Currency to convert results prices. |
@@ -83,6 +87,12 @@ The cabins array lists requested cabin types, currently `Economy` or `Business` 
 
 **See: <a href="../examples/Air/shop.js">Shop example</a>**
 
+## .retrieveShop(params)
+<a name="retrieve-shop"></a>
+If Low Fare Shop Async request has more results in cache, use this method to retrieve remaining results. This method should return the data in a format similar to a standard shop() results.
+
+**Returns**: `Promise`
+**See**: [Retrieving Low Fare Search Data](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Low_Fare_Shopping/Retrieving_Low_Fare_Search_Data.htm%3FTocPath%3DAir%7CAir%2520Shopping%2520and%2520Booking%7CLow%2520Fare%2520Shopping%7CLow%2520Fare%2520Shopping%2520(Asynchronous)%7C_____1)
 
 ## .book(params)
 <a name="book"></a>
@@ -132,6 +142,7 @@ Please specify `transfer` field to mark connection segment.
 | --- | --- | --- |
 | lastName | `String` | Passenger last name. |
 | firstName | `String` | Passenger first name. |
+| title | `String` | One of `['MR', 'MS', 'MSTR', 'MISS']`. |
 | birthDate | `String` | Birth date in format `YYYY-MM-DD`. |
 | gender | `String` | One of `['M', 'F']`. |
 | ageCategory | `String` | One of `['ADT', 'CNN', 'INF']`. Or [other types](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Shared_Air_Topics/Passenger_Type_Codes.htm) |

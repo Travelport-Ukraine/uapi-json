@@ -1,0 +1,19 @@
+<SOAP:Envelope 
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <SOAP:Fault>
+      <faultcode>Server.System</faultcode>
+      <faultstring>Could not find tag: HostAccessServiceResponse in null value for XML</faultstring>
+      <detail>
+        <common_v33_0:ErrorInfo 
+          xmlns:common_v33_0="http://www.travelport.com/schema/common_v33_0">
+          <common_v33_0:Code>6119</common_v33_0:Code>
+          <common_v33_0:Service>PNRSVC</common_v33_0:Service>
+          <common_v33_0:Type>System</common_v33_0:Type>
+          <common_v33_0:Description>Host system error.</common_v33_0:Description>
+          <common_v33_0:TransactionId>FAE5D5260A074265B59340198C0908D2</common_v33_0:TransactionId>
+        </common_v33_0:ErrorInfo>
+      </detail>
+    </SOAP:Fault>
+  </SOAP:Body>
+</SOAP:Envelope>
