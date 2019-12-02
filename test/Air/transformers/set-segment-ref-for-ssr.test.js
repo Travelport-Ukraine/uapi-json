@@ -19,7 +19,7 @@ describe('Air.transformers.setsSegmentRefForSSR', () => {
       ],
     };
     const converted = convert(params);
-    console.log(converted.passengers[0].ssr)
+
     expect(converted.passengers[0].ssr[0].segmentRef).to.be.equal('DummySegmentRefA===');
     expect(converted.passengers[0].ssr[1].segmentRef).to.be.equal('DummySegmentRefB===');
   });
