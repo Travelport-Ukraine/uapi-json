@@ -69,7 +69,7 @@ module.exports = (settings) => {
       });
     },
 
-    getPNR(options) {
+    getBooking(options) {
       return this.getUniversalRecordByPNR(options)
         .then(
           ur => getBookingFromUr(ur, options.pnr)
@@ -86,16 +86,26 @@ module.exports = (settings) => {
         });
     },
 
-    importPNR(options) {
+    getPNR(options) {
+      console.warn('DEPRECATED, will be dropped in next major version, use getBooking');
+      return this.getBooking(options);
+    },
+
+    importBooking(options) {
       return this.getPNR(options)
         .then(response => [response]);
+    },
+
+    importPNR(options) {
+      console.warn('DEPRECATED, will be dropped in next major version, use importBooking');
+      return this.importBooking(options);
     },
 
     getUniversalRecord(options) {
       return service.getUniversalRecord(options);
     },
 
-    getUniversalRecordByPNR(options) {
+    getUniversalRecordByBooking(options) {
       return service.getUniversalRecordByPNR(options)
         .catch((err) => {
           // Checking for error type
@@ -222,7 +232,7 @@ module.exports = (settings) => {
       );
     },
 
-    getPNRByTicketNumber(options) {
+    getBookingByTicketNumber(options) {
       const terminal = createTerminalService(settings);
       return terminal.executeCommand(`*TE/${options.ticketNumber}`)
         .then(
@@ -233,6 +243,11 @@ module.exports = (settings) => {
         .catch(
           err => Promise.reject(new AirRuntimeError.GetPnrError(options, err))
         );
+    },
+
+    getPNRByTicketNumber(options) {
+      console.warn('DEPRECATED, will be dropped in next major version, use getBookingByTicketNumber');
+      return this.getBookingByTicketNumber(options);
     },
 
     searchBookingsByPassengerName(options) {
@@ -351,11 +366,15 @@ module.exports = (settings) => {
             : this.getTickets(record).then(checkTickets)
           )
             .then(() => this.getPNR(options))
-            .then(booking => service.cancelPNR(booking))
+            .then(booking => service.cancelBooking(booking))
             .catch(
               err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
             );
         });
+    },
+
+    cancelBooking(options) {
+      return this.cancelBooking(options);
     },
 
     getExchangeInformation(options) {
