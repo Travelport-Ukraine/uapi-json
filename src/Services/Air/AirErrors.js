@@ -126,7 +126,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   ExchangeTokenIncorrect: 'Can\'t parse exchange token. Please resolve it again.',
   DuplicateTicketFound: 'Duplicate ticket number found. Provide PNR, UR locator',
   NoPNRFoundInUR: ['No PNR found in Universal record', 404],
-  NoAgreement: 'There is no agreement between current pcc, and one you try to reach',
+  NoAgreement: ['There is no agreement between current pcc, and one you try to reach', 403],
   UnableToRetrieve: ['Unable to retrieve PNR. Please contact your local Travelport Helpdesk.', 404],
 }, AirRuntimeError));
 

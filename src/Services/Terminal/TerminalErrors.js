@@ -7,7 +7,7 @@ const errorTypes = require('../../error-types');
 // Validation errors
 const TerminalValidationError = createErrorClass(
   'TerminalValidationError',
-  'Terminal service validation error',
+  ['Terminal service validation error', 200],
   errorTypes.ValidationError
 );
 Object.assign(TerminalValidationError, createErrorsList({
@@ -24,7 +24,7 @@ Object.assign(TerminalValidationError, createErrorsList({
 // Parsing errors
 const TerminalParsingError = createErrorClass(
   'TerminalParsingError',
-  'Terminal service parsing error',
+  ['Terminal service parsing error', 598],
   errorTypes.ParsingError
 );
 Object.assign(TerminalParsingError, createErrorsList({
@@ -35,7 +35,7 @@ Object.assign(TerminalParsingError, createErrorsList({
 // Runtime errors
 const TerminalRuntimeError = createErrorClass(
   'TerminalRuntimeError',
-  'Terminal service runtime error',
+  ['Terminal service runtime error', 598],
   errorTypes.RuntimeError
 );
 Object.assign(TerminalRuntimeError, createErrorsList({
@@ -44,7 +44,7 @@ Object.assign(TerminalRuntimeError, createErrorsList({
   TerminalIsBusy: 'Terminal is busy',
   TerminalIsClosed: 'Terminal is closed',
   ErrorClosingSession: 'Error closing session',
-  NoAgreement: 'There is no agreement between current pcc and you trying to reach',
+  NoAgreement: ['There is no agreement between current pcc and you trying to reach', 403],
 }, TerminalRuntimeError));
 
 module.exports = {
