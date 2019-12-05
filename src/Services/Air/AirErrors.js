@@ -3,11 +3,12 @@ const {
   createErrorsList,
 } = require('node-errors-helpers');
 const errorTypes = require('../../error-types');
+const errorCodes = require('../../error-codes');
 
 // Validation errors
 const AirValidationError = createErrorClass(
   'AirValidationError',
-  ['Air service validation error', 200],
+  ['Air service validation error', errorCodes.Validation],
   errorTypes.ValidationError
 );
 Object.assign(AirValidationError, createErrorsList({
@@ -41,7 +42,7 @@ Object.assign(AirValidationError, createErrorsList({
 
 const GdsValidationError = createErrorClass(
   'GdsValidationError',
-  ['Gds service validation error', 200],
+  ['Gds service validation error', errorCodes.Validation],
   errorTypes.ValidationError
 );
 Object.assign(GdsValidationError, createErrorsList({
@@ -52,7 +53,7 @@ Object.assign(GdsValidationError, createErrorsList({
 
 const AirFlightInfoValidationError = createErrorClass(
   'AirFlightInfoValidationError',
-  ['Air FlightInfo service validation error', 200],
+  ['Air FlightInfo service validation error', errorCodes.Validation],
   errorTypes.ValidationError
 );
 Object.assign(AirFlightInfoValidationError, createErrorsList({
@@ -105,7 +106,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   TravelersListError: 'Not all BookingTravelers present in list or wrong lookup keys provided',
   PnrParseError: 'Failed to parse PNR from ticket information request response',
   GetPnrError: 'Failed to obtain PNR from ticket information',
-  UnableToRetrieveTickets: ['Unable to retrieve tickets list', 404],
+  UnableToRetrieveTickets: ['Unable to retrieve tickets list', errorCodes.NotFound],
   TicketRetrieveError: 'Unable to retrieve ticket',
   TicketInfoIncomplete: 'Ticket information is incomplete',
   RequestInconsistency: 'Request faced race condition. Please retry again',
@@ -125,14 +126,14 @@ Object.assign(AirRuntimeError, createErrorsList({
   CantDetectExchangeResponse: 'Exchange response is unknown.',
   ExchangeTokenIncorrect: 'Can\'t parse exchange token. Please resolve it again.',
   DuplicateTicketFound: 'Duplicate ticket number found. Provide PNR, UR locator',
-  NoPNRFoundInUR: ['No PNR found in Universal record', 404],
-  NoAgreement: ['There is no agreement between current pcc, and one you try to reach', 403],
-  UnableToRetrieve: ['Unable to retrieve PNR. Please contact your local Travelport Helpdesk.', 404],
+  NoPNRFoundInUR: ['No PNR found in Universal record', errorCodes.NotFound],
+  NoAgreement: ['There is no agreement between current pcc, and one you try to reach', errorCodes.Unauthorized],
+  UnableToRetrieve: ['Unable to retrieve PNR. Please contact your local Travelport Helpdesk.', errorCodes.NotFound],
 }, AirRuntimeError));
 
 const AirFlightInfoRuntimeError = createErrorClass(
   'AirFlightInfoRuntimeError',
-  ['Air flight info service runtime error', 598],
+  ['Air flight info service runtime error', errorCodes.UapiFailure],
   errorTypes.RuntimeError
 );
 Object.assign(AirFlightInfoRuntimeError, createErrorsList({
@@ -143,7 +144,7 @@ Object.assign(AirFlightInfoRuntimeError, createErrorsList({
 
 const GdsRuntimeError = createErrorClass(
   'GdsRuntimeError',
-  ['Gds service runtime error', 599],
+  ['Gds service runtime error', errorCodes.GdsFailure],
   errorTypes.RuntimeError
 );
 Object.assign(GdsRuntimeError, createErrorsList({
