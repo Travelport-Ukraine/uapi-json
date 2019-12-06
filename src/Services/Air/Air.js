@@ -54,8 +54,10 @@ module.exports = (settings) => {
           ActionStatusType: 'TAU',
         }, data, options);
         return service.createReservation(bookingParams).catch((err) => {
-          if (err instanceof AirRuntimeError.SegmentBookingFailed
-              || err instanceof AirRuntimeError.NoValidFare) {
+          if (
+            err.data.faultcode !== "Server.Business" 
+            && (err instanceof AirRuntimeError.SegmentBookingFaile || err instanceof AirRuntimeError.NoValidFare)
+          ) {
             if (options.allowWaitlist) { // will not have a UR if waitlisting restricted
               const code = err.data['universal:UniversalRecord'].LocatorCode;
               return service.cancelUR({
