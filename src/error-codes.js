@@ -1,5 +1,5 @@
 module.exports = {
-  Validation: 200,
+  Validation: 400,
   Unauthenticated: 401,
   Unauthorized: 403,
   NotFound: 404,
