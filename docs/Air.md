@@ -16,7 +16,6 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.ticket(params)](#ticket)
 * [.toQueue(params)](#toQueue)
 * [.getBooking(params)](#getBooking)
-* [.importPNR(params)](#importPNR)
 * [.getUniversalRecordByPNR(params)](#getUniversalRecordByPNR)
 * [.getUniversalRecord(params)](#getUniversalRecord)
 * [.flightInfo(params)](#flightInfo)
@@ -278,24 +277,6 @@ This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and t
 | pnr | `String` | 1G PNR. |
 
 **See: <a href="../examples/Air/getBooking.js">getBooking example</a>**
-
-## .importPNR(params)
-<a name="importPNR"></a>
-> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
-
-**This method will be DEPRECATED in version 1.0.0, USE [`getBooking`](#getBooking) instead**
-
-This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and then returns an array, containing single PNR object.
-
-**Returns**: `Promise`. - All Information for requested PNR.
-**See**: [Importing PNR](https://support.travelport.com/webhelp/uapi/uAPI.htm#Booking/UniversalRecord/Importing_PNRs.htm)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| pnr | `String` | 1G PNR. |
-
-**See: <a href="../examples/Air/import.js">Import example</a>**
-
 
 ## .flightInfo(params)
 <a name="flightInfo"></a>

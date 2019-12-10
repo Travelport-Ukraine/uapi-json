@@ -410,35 +410,6 @@ describe('#AirService', () => {
       `1. ${segment.airline} OPEN ${segment.class}  ${segment.date} ${segment.from}${segment.to} ${segment.comment}`
     ).toUpperCase();
 
-    it('should return array of one element', () => {
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURByPNRSampleBooked));
-      const airService = () => ({ getUniversalRecordByPNR });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-      });
-      return createAirService({ auth })
-        .importBooking({ pnr: 'PNR001' })
-        .then((response) => {
-          expect(getUniversalRecordByPNR).to.have.callCount(1);
-          expect(response).to.be.an('array').and.to.have.lengthOf(1);
-          expect(response[0].pnr).to.equal('PNR001');
-        });
-    });
-    it('should throw error when pnr not in list', () => {
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURByPNRSampleBooked));
-      const airService = () => ({ getUniversalRecordByPNR });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-      });
-      return createAirService({ auth })
-        .importBooking({ pnr: 'PNR003' })
-        .then(
-          () => Promise.reject(new Error('No error throwned')),
-          (err) => {
-            expect(err).to.be.an.instanceOf(AirRuntimeError.NoPNRFoundInUR);
-          }
-        );
-    });
     it('should check if correct function from service is called', () => {
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve({}));
       const airService = () => ({ getUniversalRecordByPNR });

@@ -86,19 +86,9 @@ module.exports = (settings) => {
         });
     },
 
-    getPnr(options) {
+    getPNR(options) {
       console.warn('DEPRECATED, will be dropped in next major version, use getBooking');
       return this.getBooking(options);
-    },
-
-    importBooking(options) {
-      return this.getBooking(options)
-        .then(response => [response]);
-    },
-
-    importPNR(options) {
-      console.warn('DEPRECATED, will be dropped in next major version, use importBooking');
-      return this.importBooking(options);
     },
 
     getUniversalRecord(options) {
