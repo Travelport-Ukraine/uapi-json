@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-const convert = require('../../../src/Services/Air/transformers/set-segment-ref-for-ssr');
+const { setSegmentRefForSSR } = require('../../../src/Services/Air/transformers/index');
 
 describe('Air.transformers.setsSegmentRefForSSR', () => {
   it('should set segmentRef from segment index', () => {
@@ -18,7 +18,7 @@ describe('Air.transformers.setsSegmentRefForSSR', () => {
         },
       ],
     };
-    const converted = convert(params);
+    const converted = setSegmentRefForSSR(params);
 
     expect(converted.passengers[0].ssr[0].segmentRef).to.be.equal('DummySegmentRefA===');
     expect(converted.passengers[0].ssr[1].segmentRef).to.be.equal('DummySegmentRefB===');
