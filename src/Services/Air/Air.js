@@ -364,6 +364,7 @@ module.exports = (settings) => {
     },
 
     cancelPNR(options) {
+      console.warn('DEPRECATED, will be dropped in next major version, use cancelBooking');
       return this.cancelBooking(options);
     },
 
