@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-const { setSegmentRefForSSR } = require('../../../src/Services/Air/transformers/index');
+const { setSegmentRefForSSR } = require('../../../src/Services/Air/transformers');
 
 describe('Air.transformers.setsSegmentRefForSSR', () => {
   it('should set segmentRef from segment index', () => {
