@@ -12,7 +12,7 @@ const params = {
   pnr: 'BMNMLK',
 };
 
-AirService.getPNR(params).then(
+AirService.getBooking(params).then(
   data => console.log(data),
   err => console.log(err)
 );
