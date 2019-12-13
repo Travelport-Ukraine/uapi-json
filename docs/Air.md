@@ -15,17 +15,16 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.book(params)](#book)
 * [.ticket(params)](#ticket)
 * [.toQueue(params)](#toQueue)
-* [.getPNR(params)](#getPNR)
-* [.importPNR(params)](#importPNR)
+* [.getBooking(params)](#getBooking)
 * [.getUniversalRecordByPNR(params)](#getUniversalRecordByPNR)
 * [.getUniversalRecord(params)](#getUniversalRecord)
 * [.flightInfo(params)](#flightInfo)
-* [.getPNRByTicketNumber(params)](#getPNRByTicketNumber)
+* [.getBookingByTicketNumber(params)](#getBookingByTicketNumber)
 * [.searchBookingsByPassengerName(params)](#searchBookingsByPassengerName)
 * [.getTicket(params)](#getTicket)
 * [.getTickets(params)](#getTickets)
 * [.cancelTicket(params)](#cancelTicket)
-* [.cancelPNR(params)](#cancelPNR)
+* [.cancelBooking(params)](#cancelBooking)
 
 ## .shop(params)
 <a name="shop"></a>
@@ -191,7 +190,7 @@ To see the list of all available formats, please use the following [documentatio
 
 ## .ticket(params)
 <a name="ticket"></a>
-**This library is designed to do `getPNR` right after ticketing is finished with success.**
+**This library is designed to do `getBooking` right after ticketing is finished with success.**
 Ticketing is typically included as a follow-on request to an Air Booking response.
 Any number of tickets can be issued from one Stored Fare Quote when a booking has multiple passengers. Tickets can also be issued when there is more than one Stored Fare Quote in the PNR.
 Ticketing function returns `true` if the process is finished with success or `Error`.
@@ -264,8 +263,8 @@ This method returns an array of all PNR objects, which are contained in Universa
 
 **See: <a href="../examples/Air/getUniversalRecord.js">Example</a>**
 
-## .getPNR(params)
-<a name="getPNR"></a>
+## .getBooking(params)
+<a name="getBooking"></a>
 > May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 
 This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and then returns single PNR object from its output.
@@ -277,25 +276,7 @@ This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and t
 | --- | --- | --- |
 | pnr | `String` | 1G PNR. |
 
-**See: <a href="../examples/Air/getPNR.js">getPNR example</a>**
-
-## .importPNR(params)
-<a name="importPNR"></a>
-> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
-
-**This method will be DEPRECATED in version 1.0.0, USE [`getPNR`](#getPNR) instead**
-
-This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and then returns an array, containing single PNR object.
-
-**Returns**: `Promise`. - All Information for requested PNR.
-**See**: [Importing PNR](https://support.travelport.com/webhelp/uapi/uAPI.htm#Booking/UniversalRecord/Importing_PNRs.htm)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| pnr | `String` | 1G PNR. |
-
-**See: <a href="../examples/Air/import.js">Import example</a>**
-
+**See: <a href="../examples/Air/getBooking.js">getBooking example</a>**
 
 ## .flightInfo(params)
 <a name="flightInfo"></a>
@@ -312,8 +293,8 @@ Request for the flight information.
 
 **See: <a href="../examples/Air/flightInfo1.js">FlightInfo basic example</a>**, **<a href="../examples/Air/flightInfo2.js">FlightInfo multiple items example</a>**
 
-## .getPNRByTicketNumber(params)
-<a name="getPNRByTicketNumber"></a>
+## .getBookingByTicketNumber(params)
+<a name="getBookingByTicketNumber"></a>
 > Requires Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 
 Request for the ticket information.
@@ -326,7 +307,7 @@ This function executes terminal command to get PNR from `*TE` command response.
 | --- | --- | --- |
 | ticketNumber | `String` | The number of the ticket. |
 
-**See: <a href="../examples/Air/getPNRByTicketNumber.js">getPNRByTicketNumber example</a>**
+**See: <a href="../examples/Air/getBookingByTicketNumber.js">getBookingByTicketNumber example</a>**
 
 ## .getTicket(params)
 <a name="getTicket"></a>
@@ -387,7 +368,7 @@ Example of list response:
 
 When `type` equals `pnr` than data field contains pnr string.
 
-**See: <a href="../examples/Air/searchBookingsByPassengerName.js">getPNRByTicketNumber example</a>**
+**See: <a href="../examples/Air/searchBookingsByPassengerName.js">getBookingByTicketNumber example</a>**
 
 
 ## .cancelTicket(params)
@@ -404,8 +385,8 @@ Gets ticket information with [`getTicket`](#getTicket) and then tries to cancel 
 
 **See: <a href="../examples/Air/cancelTicket.js">cancelTicket example</a>**
 
-## .cancelPNR(params)
-<a name="cancelPNR"></a>
+## .cancelBooking(params)
+<a name="cancelBooking"></a>
 > May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 
 Gets pnr information and tickets list from [`importPNR`](#importPNR) and then do one of following actions:
@@ -424,4 +405,4 @@ Gets pnr information and tickets list from [`importPNR`](#importPNR) and then do
 | cancelTickets | `Boolean` | Defines if tickets should be cancelled or not |
 | ignoreTickets | `Boolean` | Defines if tickets should be ignored. The default value is `false` |
 
-**See: <a href="../examples/Air/cancelPNR.js">cancelPNR example</a>**
+**See: <a href="../examples/Air/cancelBooking.js">cancelBooking example</a>**

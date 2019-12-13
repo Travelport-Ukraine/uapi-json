@@ -8,6 +8,7 @@ const airErrors = require('./Services/Air/AirErrors');
 const hotelsErrors = require('./Services/Hotels/HotelsErrors');
 const utilsErrors = require('./Services/Utils/UtilsErrors');
 const terminalErrors = require('./Services/Terminal/TerminalErrors');
+const errorCodes = require('./error-codes.js');
 
 const uAPI = {
   createUtilsService,
@@ -22,6 +23,7 @@ const uAPI = {
     Utils: utilsErrors,
     Terminal: terminalErrors,
   },
+  errorCodes,
 };
 
 module.exports = uAPI;

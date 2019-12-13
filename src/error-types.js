@@ -9,9 +9,9 @@ Object.assign(ServiceError, createErrorsList({
 }, ServiceError));
 
 const errors = {
-  RuntimeError: createErrorClass('RuntimeError', 'Runtime error occured'),
-  ValidationError: createErrorClass('ValidationError', 'Validation error occured'),
-  ParsingError: createErrorClass('ParsingError', 'Parsing error occured'),
+  RuntimeError: createErrorClass('RuntimeError', 'Runtime error occurred'),
+  ValidationError: createErrorClass('ValidationError', 'Validation error occurred'),
+  ParsingError: createErrorClass('ParsingError', 'Parsing error occurred'),
   SoapError: createErrorClass('SoapError', 'Error occurred while executing SOAP call'),
   ServiceError,
 };
