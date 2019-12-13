@@ -147,6 +147,17 @@ Please specify `transfer` field to mark connection segment.
 | ageCategory | `String` | One of `['ADT', 'CNN', 'INF']`. Or [other types](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Shared_Air_Topics/Passenger_Type_Codes.htm) |
 | passNumber| `String` | Pass number. |
 | passCountry| `String` | 2-letter code of country. |
+| ssr | `Array<SSR>` | Optional. SSR requests. See `SSR` description [below](#ssr).. |
+
+### SSR object
+<a name="ssr"></a>
+
+| Param | Type | Description |
+| --- | --- | --- |
+| type | `String` | SSR Type code eg. `CHLD, CTCR, DOCS, DOCA, FOID`. |
+| carrier | `String` | Optional. 2-letter IATA Code of airline, default is `YY` |
+| status | `String` | Optional. Status eg. `NN, PN, UN, HK` |
+| freeText | `String` | SSR FreeText |
 
 ### Phone object
 <a name="phone"></a>
