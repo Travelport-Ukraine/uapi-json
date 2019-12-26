@@ -1,7 +1,6 @@
 const uAPI = require('../../index');
 const config = require('../../test/testconfig');
 
-
 const AirService = uAPI.createAirService({
   auth: config,
   debug: 2,

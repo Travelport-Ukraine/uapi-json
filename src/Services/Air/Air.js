@@ -69,7 +69,7 @@ module.exports = (settings) => {
       });
     },
 
-    getPNR(options) {
+    getBooking(options) {
       return this.getUniversalRecordByPNR(options)
         .then(
           ur => getBookingFromUr(ur, options.pnr)
@@ -86,9 +86,9 @@ module.exports = (settings) => {
         });
     },
 
-    importPNR(options) {
-      return this.getPNR(options)
-        .then(response => [response]);
+    getPNR(options) {
+      console.warn('DEPRECATED, will be dropped in next major version, use getBooking');
+      return this.getBooking(options);
     },
 
     getUniversalRecord(options) {
@@ -158,7 +158,7 @@ module.exports = (settings) => {
             )
             .then(() => terminal.closeSession())
             .then(() => service.getUniversalRecordByPNR(options))
-            .then(ur => service.cancelPNR(getBookingFromUr(ur, options.pnr)))
+            .then(ur => service.cancelBooking(getBookingFromUr(ur, options.pnr)))
             .then(() => service.getUniversalRecordByPNR(options));
         });
     },
@@ -166,7 +166,7 @@ module.exports = (settings) => {
     ticket(options) {
       return (options.ReservationLocator
         ? Promise.resolve(options.ReservationLocator)
-        : this.getPNR(options).then(booking => booking.uapi_reservation_locator)
+        : this.getBooking(options).then(booking => booking.uapi_reservation_locator)
       )
         .then(ReservationLocator => retry({ retries: 3 }, (again, number) => {
           if (settings.debug && number > 1) {
@@ -178,7 +178,7 @@ module.exports = (settings) => {
           })
             .catch((err) => {
               if (err instanceof AirRuntimeError.TicketingFoidRequired) {
-                return this.getPNR(options)
+                return this.getBooking(options)
                   .then(updatedBooking => service.foid(updatedBooking))
                   .then(() => again(err));
               }
@@ -207,7 +207,7 @@ module.exports = (settings) => {
           return this.getPNRByTicketNumber({
             ticketNumber: options.ticketNumber,
           })
-            .then(pnr => this.getPNR({ pnr }))
+            .then(pnr => this.getBooking({ pnr }))
             .then(booking => service.getTicket({
               ...options,
               pnr: booking.pnr,
@@ -222,7 +222,7 @@ module.exports = (settings) => {
       );
     },
 
-    getPNRByTicketNumber(options) {
+    getBookingByTicketNumber(options) {
       const terminal = createTerminalService(settings);
       return terminal.executeCommand(`*TE/${options.ticketNumber}`)
         .then(
@@ -233,6 +233,11 @@ module.exports = (settings) => {
         .catch(
           err => Promise.reject(new AirRuntimeError.GetPnrError(options, err))
         );
+    },
+
+    getPNRByTicketNumber(options) {
+      console.warn('DEPRECATED, will be dropped in next major version, use getBookingByTicketNumber');
+      return this.getBookingByTicketNumber(options);
     },
 
     searchBookingsByPassengerName(options) {
@@ -297,7 +302,7 @@ module.exports = (settings) => {
         );
     },
 
-    cancelPNR(options) {
+    cancelBooking(options) {
       const ignoreTickets = typeof options.ignoreTickets === 'undefined'
         ? false // default value
         : options.ignoreTickets;
@@ -350,16 +355,21 @@ module.exports = (settings) => {
             ? Promise.resolve([])
             : this.getTickets(record).then(checkTickets)
           )
-            .then(() => this.getPNR(options))
-            .then(booking => service.cancelPNR(booking))
+            .then(() => this.getBooking(options))
+            .then(booking => service.cancelBooking(booking))
             .catch(
               err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
             );
         });
     },
 
+    cancelPNR(options) {
+      console.warn('DEPRECATED, will be dropped in next major version, use cancelBooking');
+      return this.cancelBooking(options);
+    },
+
     getExchangeInformation(options) {
-      return this.getPNR(options)
+      return this.getBooking(options)
         .then(booking => service.exchangeQuote({
           ...options,
           bookingDate: moment(booking.createdAt).format('YYYY-MM-DD'),
@@ -367,7 +377,7 @@ module.exports = (settings) => {
     },
 
     exchangeBooking(options) {
-      return this.getPNR(options)
+      return this.getBooking(options)
         .then(booking => service.exchangeBooking({
           ...options,
           uapi_reservation_locator: booking.uapi_reservation_locator,
