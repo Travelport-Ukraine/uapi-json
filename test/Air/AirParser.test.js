@@ -697,6 +697,32 @@ describe('#AirParser', () => {
     });
 
 
+    it('Should throw ResponseDataMissing if any of mandatory attribute is missing from LFS ', () => {
+      const dummyObj1 = {
+        AirSegment: null, FareInfo: null, FlightDetails: null, Route: null
+      };
+      const dummyObj2 = {
+        'air:AirPricePointList': null, FareInfo: null, FlightDetails: null
+      };
+
+      const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', { faresOnly: true });
+      const parseFunction = airParser.AIR_LOW_FARE_SEARCH_REQUEST;
+
+      try {
+        parseFunction.call(uParser, dummyObj1);
+        assert().fail('Failed to throw an exception');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(AirParsingError.ResponseDataMissing);
+      }
+
+      try {
+        parseFunction.call(uParser, dummyObj2);
+        assert().fail('Failed to throw an exception');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(AirParsingError.ResponseDataMissing);
+      }
+    });
+
     it('Should properly parse xml files', (done) => {
       Promise.all(
         [
