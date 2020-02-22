@@ -41,4 +41,20 @@ describe('#UtilsValidator', () => {
       expect(params).not.equal(undefined);
     });
   });
+  describe('.REFERENCE_DATATYPE', () => {
+    it('should throw error for undefined', () => {
+      const fn = () => UtilsValidator.REFERENCE_DATATYPE({});
+      expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.DataTypeMissing);
+    });
+
+    it('should throw error for null', () => {
+      const fn = () => UtilsValidator.REFERENCE_DATATYPE({ DataType: null });
+      expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.DataTypeMissing);
+    });
+
+    it('should throw error if DataType not in list reference-data-types.js', () => {
+      const fn = () => UtilsValidator.REFERENCE_DATATYPE({ DataType: 'CountryStateDistrict' });
+      expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.DataTypeMissing);
+    });
+  });
 });
