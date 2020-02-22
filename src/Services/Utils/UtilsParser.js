@@ -20,6 +20,10 @@ function currencyConvertParse(json) {
   return json;
 }
 
+function dataTypeParse(json) {
+  return json['util:ReferenceDataItem'];
+}
+
 const errorHandler = function (rsp) {
   let errorInfo;
   let code;
@@ -38,4 +42,5 @@ const errorHandler = function (rsp) {
 module.exports = {
   UTILS_ERROR: errorHandler,
   CURRENCY_CONVERSION: currencyConvertParse,
+  REFERENCE_DATATYPE: dataTypeParse,
 };
