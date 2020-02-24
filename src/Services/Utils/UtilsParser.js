@@ -21,13 +21,7 @@ function currencyConvertParse(json) {
 }
 
 function dataTypeParse(json) {
-  try {
-    json = json['util:ReferenceDataItem'];
-  } catch (e) {
-    throw new UtilsParsingError(json);
-  }
-  
-  return json;
+  return json['util:ReferenceDataItem'];
 }
 
 const errorHandler = function (rsp) {
