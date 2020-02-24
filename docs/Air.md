@@ -12,6 +12,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.shop(params)](#shop)
 * [.retrieveShop(params)](#retrieve-shop)
 * [.availability(params)](#shop) (same params as `.shop(params)`)
+* [.fareRules(params)](#fareRules)
 * [.book(params)](#book)
 * [.ticket(params)](#ticket)
 * [.toQueue(params)](#toQueue)
@@ -93,6 +94,21 @@ If Low Fare Shop Async request has more results in cache, use this method to ret
 
 **Returns**: `Promise`
 **See**: [Retrieving Low Fare Search Data](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Low_Fare_Shopping/Retrieving_Low_Fare_Search_Data.htm%3FTocPath%3DAir%7CAir%2520Shopping%2520and%2520Booking%7CLow%2520Fare%2520Shopping%7CLow%2520Fare%2520Shopping%2520(Asynchronous)%7C_____1)
+
+## .fareRules(params)
+<a name="fareRules"></a>
+For fetching detailed fare rules after itinerary selection this method is used.
+
+**Returns**: `Promise`
+
+| Param | Type | Description |
+| --- | --- | --- |
+| segments | `Array<Segment>` | See `Segment` description [below](#segment). |
+| passengers | `Book Passengers` | See `Book Passengers` description [below](#book-passengers). |
+| long | `boolean`  | true to fetch long explanations, false to fetch short ones. |
+| requestId | `String` | Unique ID to identify request and response in profiler logs |
+
+**See: <a href="../examples/Air/fareRules.js">farerules example</a>**
 
 ## .book(params)
 <a name="book"></a>
