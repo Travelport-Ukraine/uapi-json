@@ -100,7 +100,7 @@ If Low Fare Shop Async request has more results in cache, use this method to ret
 For fetching detailed fare rules after itinerary selection this method is used.
 
 **Returns**: `Promise`
-
+**See**: [Fare Rules](https://support.travelport.com/webhelp/uapi/Content/Air/Fare_Rules/Fare_Rules.htm)
 | Param | Type | Description |
 | --- | --- | --- |
 | segments | `Array<Segment>` | See `Segment` description [below](#segment). |
