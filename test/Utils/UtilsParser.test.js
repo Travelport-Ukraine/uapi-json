@@ -86,7 +86,24 @@ describe('#utilsParser', () => {
     it('should test error handling', () => {
       const parseFunction = utilsParser.UTILS_ERROR;
       const uParser = new Parser('util:ReferenceDataRetrieveRsp', 'v47_0', {});
-      const xml = fs.readFileSync(`${xmlFolder}/../Other/UnableToFareQuoteError.xml`).toString(); // any error
+      const xml = fs.readFileSync(`${xmlFolder}/../Other/ReferenceDataError.xml`).toString(); // any error
+      return uParser
+        .parse(xml)
+        .then((json) => {
+          const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]);
+          return parseFunction.call(uParser, errData);
+        })
+        .then(() => assert(false, 'Error should be thrown'))
+        .catch((err) => {
+          expect(err).to.be.an.instanceOf(RequestError.RequestRuntimeError.UnhandledError);
+          expect(err.causedBy).to.be.an.instanceOf(UtilsError.UtilsRuntimeError);
+        });
+    });
+
+    it('should test error handling', () => {
+      const parseFunction = utilsParser.UTILS_ERROR;
+      const uParser = new Parser('SOAP:Fault', 'v47_0', {});
+      const xml = fs.readFileSync(`${xmlFolder}/../Other/ReferenceDataError.xml`).toString(); // any error
       return uParser
         .parse(xml)
         .then((json) => {
