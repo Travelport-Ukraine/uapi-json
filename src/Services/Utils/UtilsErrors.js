@@ -12,7 +12,7 @@ const UtilsValidationError = createErrorClass(
 );
 Object.assign(UtilsValidationError, createErrorsList({
   CurrenciesMissing: 'Missing currencies',
-  dataTypeMissing: 'Missing dataType',
+  DataTypeMissing: 'Missing dataType',
 }, UtilsValidationError));
 
 // Parsing errors

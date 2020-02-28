@@ -28,8 +28,8 @@ function dataTypeParse(json) {
   }
 
   const props = Object.getOwnPropertyNames(json[0]);
-  json = json.map(curr => {
-    let r = {};
+  json = json.map((curr) => {
+    const r = {};
     props.forEach((p) => {
       r[p.toLowerCase()] = curr[p];
     });
@@ -42,7 +42,7 @@ function dataTypeParse(json) {
 const errorHandler = function (rsp) {
   let errorInfo;
   let code;
-  
+
   try {
     errorInfo = rsp.detail[`common_${this.uapi_version}:ErrorInfo`];
     code = errorInfo[`common_${this.uapi_version}:Code`];

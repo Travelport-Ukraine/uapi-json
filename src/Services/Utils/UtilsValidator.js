@@ -30,15 +30,15 @@ Validator.prototype.currencies = function () {
 
 Validator.prototype.datatype = function () {
   if (Object.prototype.toString.call(this.params.dataType) !== '[object String]') {
-    throw new UtilsValidationError.dataTypeMissing(this.params);
+    throw new UtilsValidationError.DataTypeMissing(this.params);
   }
 
   if (this.params.dataType.length <= 0) {
-    throw new UtilsValidationError.dataTypeMissing(this.params);
+    throw new UtilsValidationError.DataTypeMissing(this.params);
   }
 
   if (referencedatatypes.indexOf(this.params.dataType) === -1) {
-    throw new UtilsValidationError.dataTypeMissing(this.params);
+    throw new UtilsValidationError.DataTypeMissing(this.params);
   }
 
   return this;
