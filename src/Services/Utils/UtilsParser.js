@@ -33,6 +33,7 @@ function dataTypeParse(json) {
 const errorHandler = function (rsp) {
   let errorInfo;
   let code;
+  
   try {
     errorInfo = rsp.detail[`common_${this.uapi_version}:ErrorInfo`];
     code = errorInfo[`common_${this.uapi_version}:Code`];

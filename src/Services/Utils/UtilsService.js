@@ -24,10 +24,10 @@ module.exports = function (settings) {
       debug,
       options
     ),
-    referenceDataReq: uApiRequest(
+    referenceData: uApiRequest(
       config.UtilService.url,
       auth,
-      templates.referenceDataReq,
+      templates.referenceData,
       'util:ReferenceDataRetrieveRsp',
       UtilsValidator.REFERENCE_DATATYPE,
       UtilsParser.UTILS_ERROR,

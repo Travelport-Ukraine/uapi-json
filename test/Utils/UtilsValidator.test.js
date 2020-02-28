@@ -44,27 +44,27 @@ describe('#UtilsValidator', () => {
   describe('.REFERENCE_DATATYPE', () => {
     it('should throw error for undefined', () => {
       const fn = () => UtilsValidator.REFERENCE_DATATYPE({});
-      expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.DataTypeMissing);
+      expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.dataTypeMissing);
     });
 
     it('should throw error for null', () => {
-      const fn = () => UtilsValidator.REFERENCE_DATATYPE({ DataType: null });
-      expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.DataTypeMissing);
+      const fn = () => UtilsValidator.REFERENCE_DATATYPE({ dataType: null });
+      expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.dataTypeMissing);
     });
 
     it('should throw error for zero length', () => {
-      const fn = () => UtilsValidator.REFERENCE_DATATYPE({ DataType: '' });
-      expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.DataTypeMissing);
+      const fn = () => UtilsValidator.REFERENCE_DATATYPE({ dataType: '' });
+      expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.dataTypeMissing);
     });
 
-    it('should throw error if DataType not in list reference-data-types.js', () => {
-      const fn = () => UtilsValidator.REFERENCE_DATATYPE({ DataType: 'CountryStateDistrict' });
-      expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.DataTypeMissing);
+    it('should throw error if dataType not in list reference-data-types.js', () => {
+      const fn = () => UtilsValidator.REFERENCE_DATATYPE({ dataType: 'CountryStateDistrict' });
+      expect(fn).to.throw(uAPI.errors.Utils.UtilsValidationError.dataTypeMissing);
     });
 
-    it('should check DataType exists and is present in list reference-data-types.js', () => {
+    it('should check dataType exists and is present in list reference-data-types.js', () => {
       const params = UtilsValidator.REFERENCE_DATATYPE(
-        { DataType: 'Country' }
+        { dataType: 'Country' }
       );
       expect(params).not.equal(undefined);
     });

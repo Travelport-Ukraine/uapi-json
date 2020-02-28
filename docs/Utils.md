@@ -6,7 +6,7 @@ Some powerfull utils that can help you build best products.
 
 **UtilsService**
 * [.currencyConvert(params)](#currency)
-* [.referenceDataReq(params)](#refdata)
+* [.referenceData(params)](#refdata)
 
 <a name="currency"></a>
 ## .currencyConvert(params)
@@ -22,7 +22,7 @@ Return list of currencies exchange rates.
 **See: <a href="../examples/Utils/currencyConvert.js">Currency convert example</a>**
 
 <a name="refdata"></a>
-## .referenceDataReq(params)
+## .referenceData(params)
 Returns list of Reference Data 
 
 **Returns**: `Promise`
@@ -30,7 +30,7 @@ Returns list of Reference Data
 
 | Param | Type | Description |
 | --- | --- | --- |
-| DataType | `String` | Types of Reference Data as specified from the support page. <a href="./ReferenceDataTypes.md">See List</a> |
+| dataType | `String` | Types of Reference Data as specified from the support page. <a href="./ReferenceDataTypes.md">See List</a> |
 | TraceId  | `String` | Random string or uuid to identify the request |
 
-**See: <a href="../examples/Utils/referenceDataReq.js">Reference Data request example</a>**
+**See: <a href="../examples/Utils/referenceData.js">Reference Data request example</a>**

@@ -62,7 +62,7 @@ describe('#utilsParser', () => {
         });
     });
   });
-  describe('referenceDataReq()', () => {
+  describe('referenceData()', () => {
     it('should parse sample data response for Country', () => {
       const uParser = new Parser('util:ReferenceDataRetrieveRsp', 'v47_0', {});
       const parseFunction = utilsParser.REFERENCE_DATATYPE;
