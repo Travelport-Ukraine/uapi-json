@@ -69,6 +69,12 @@ describe('#Utils', () => {
       const res = utils.renameProperty(obj, 'a', 'b');
       expect(res).to.deep.equal({ b: 1 });
     });
+
+    it('should rename property', () => {
+      const obj = { b: 1 };
+      const res = utils.renameProperty(obj, 'a', 'b');
+      expect(res).to.deep.equal({ b: 1 });
+    });
   });
 
   describe('.validate', () => {

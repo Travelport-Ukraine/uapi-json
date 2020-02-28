@@ -27,6 +27,15 @@ function dataTypeParse(json) {
     throw new UtilsParsingError(json);
   }
 
+  const props = Object.getOwnPropertyNames(json[0]);
+  json = json.map(curr => {
+    let r = {};
+    props.forEach((p) => {
+      r[p.toLowerCase()] = curr[p];
+    });
+    return r;
+  });
+
   return json;
 }
 

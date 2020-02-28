@@ -70,7 +70,7 @@ describe('#utilsParser', () => {
       return uParser.parse(xml).then((json) => {
         const result = parseFunction.call(uParser, json);
         expect(result).to.be.an('array').and.to.have.lengthOf(3);
-        result.forEach(c => expect(c).to.be.an('object').and.to.have.all.keys(['Code', 'Name', 'Deprecated']));
+        result.forEach(c => expect(c).to.be.an('object').and.to.have.all.keys(['code', 'name', 'deprecated']));
       });
     });
 
