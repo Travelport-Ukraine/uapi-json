@@ -74,6 +74,28 @@ describe('#utilsParser', () => {
       });
     });
 
+    it('should parse sample data response for Hotel Amenities', () => {
+      const uParser = new Parser('util:ReferenceDataRetrieveRsp', 'v47_0', {});
+      const parseFunction = utilsParser.REFERENCE_DATATYPE;
+      const xml = fs.readFileSync(`${xmlFolder}/hotelAmenities-data.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const result = parseFunction.call(uParser, json);
+        expect(result).to.be.an('array').and.to.have.lengthOf(3);
+        result.forEach(c => expect(c).to.be.an('object').and.to.have.all.keys(['code', 'name','description', 'deprecated', 'additionalInfo']));
+      });
+    });
+
+    it('should parse sample data response for Payment Type', () => {
+      const uParser = new Parser('util:ReferenceDataRetrieveRsp', 'v47_0', {});
+      const parseFunction = utilsParser.REFERENCE_DATATYPE;
+      const xml = fs.readFileSync(`${xmlFolder}/paymentType-data.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const result = parseFunction.call(uParser, json);
+        expect(result).to.be.an('array').and.to.have.lengthOf(3);
+        result.forEach(c => expect(c).to.be.an('object').and.to.have.all.keys(['code', 'name','description', 'deprecated', 'additionalInfo']));
+      });
+    });
+
     it('should throw parsing error', () => {
       const parseFunction = utilsParser.REFERENCE_DATATYPE;
       try {

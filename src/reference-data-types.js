@@ -5,15 +5,12 @@ module.exports = [
   'AirAndRailMiscType',
   'AirAndRailSupplierType',
   'BusinessType',
-  //  'Carrier', //
   'City',
   'CityAirport',
   'Country',
   'Currency',
   'EmailType',
-  //  'Equipment', //
   'FulfillmentType',
-  //  'GeoPoliticalArea', //
   'HotelAmenities',
   'HotelMealPlans',
   'HotelMiscType',
@@ -28,14 +25,10 @@ module.exports = [
   'PaymentType',
   'PosChannel',
   'PersonGenderType',
-  //  'ReferencePointSearch', //
   'ResourceCategoryType',
   'RoleCategoryType',
-  //  'SsrType', //
-  //  'State', //
   'StateProvince',
   'SupplierType',
-  //  'TaxCategory', //
   'Title',
   'VehicleMiscType',
   'VehicleSpecialEquipment',

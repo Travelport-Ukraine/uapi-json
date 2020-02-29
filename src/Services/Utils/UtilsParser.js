@@ -6,6 +6,7 @@ const {
   RequestRuntimeError,
 } = require('../../Request/RequestErrors');
 
+
 function currencyConvertParse(json) {
   try {
     json = json['util:CurrencyConversion'].map(curr => ({
@@ -27,13 +28,34 @@ function dataTypeParse(json) {
     throw new UtilsParsingError(json);
   }
 
-  const props = Object.getOwnPropertyNames(json[0]);
-  json = json.map((curr) => {
-    const r = {};
-    props.forEach((p) => {
-      r[p.toLowerCase()] = curr[p];
-    });
-    return r;
+  json = json.map((referenceItem) => {
+    const item = {};
+
+    if (Object.prototype.toString.call(referenceItem.Code) === '[object String]') {
+      item.code = referenceItem.Code;
+    }
+    if (Object.prototype.toString.call(referenceItem.Deprecated) === '[object String]') {
+      if (referenceItem.Deprecated === 'false') {
+        item.deprecated = false;
+      } else {
+        item.deprecated = true;
+      }
+    }
+    if (Object.prototype.toString.call(referenceItem.Name) === '[object String]') {
+      item.name = referenceItem.Name;
+    }
+    if (Object.prototype.toString.call(referenceItem.Description) === '[object String]') {
+      item.description = referenceItem.Description;
+    }
+    if (Object.prototype.toString.call(referenceItem['util:AdditionalInfo']) === '[object Object]') {
+      if (Object.prototype.toString.call(referenceItem['util:AdditionalInfo'].Type) === '[object String]') {
+        item.additionalInfo = referenceItem['util:AdditionalInfo'].Type;
+      }
+    }
+    if (Object.prototype.toString.call(referenceItem['util:AdditionalInfo']) === '[object String]') {
+      item.additionalInfo = referenceItem['util:AdditionalInfo'];
+    }
+    return item;
   });
 
   return json;
