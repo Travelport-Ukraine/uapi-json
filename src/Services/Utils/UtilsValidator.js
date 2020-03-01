@@ -1,5 +1,5 @@
 const { UtilsValidationError } = require('./UtilsErrors');
-const referencedatatypes = require('../../reference-data-types');
+const referenceDataTypes = require('../../reference-data-types');
 
 function Validator(params) {
   this.params = params;
@@ -37,7 +37,7 @@ Validator.prototype.datatype = function () {
     throw new UtilsValidationError.DataTypeMissing(this.params);
   }
 
-  if (referencedatatypes.indexOf(this.params.dataType) === -1) {
+  if (!referenceDataTypes.includes(this.params.dataType)) {
     throw new UtilsValidationError.DataTypeMissing(this.params);
   }
 

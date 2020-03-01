@@ -35,11 +35,7 @@ function dataTypeParse(json) {
       item.code = referenceItem.Code;
     }
     if (Object.prototype.toString.call(referenceItem.Deprecated) === '[object String]') {
-      if (referenceItem.Deprecated === 'false') {
-        item.deprecated = false;
-      } else {
-        item.deprecated = true;
-      }
+      item.deprecated = referenceItem.Deprecated === 'false';
     }
     if (Object.prototype.toString.call(referenceItem.Name) === '[object String]') {
       item.name = referenceItem.Name;
