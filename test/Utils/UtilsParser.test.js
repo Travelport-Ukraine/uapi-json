@@ -102,7 +102,9 @@ describe('#utilsParser', () => {
         parseFunction({});
       } catch (e) {
         assert(e instanceof UtilsError.UtilsParsingError, 'Incorrect error thrown');
-      }
+        return;
+      } 
+      should.fail("No error was thrown");
     });
 
     it('should test error handling', () => {
