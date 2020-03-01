@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { expect } = require('chai');
+const { expect, should } = require('chai');
 const fs = require('fs');
 const uAPI = require('../../src');
 const Parser = require('../../src/Request/uapi-parser');
@@ -42,7 +42,9 @@ describe('#utilsParser', () => {
         parseFunction({});
       } catch (e) {
         assert(e instanceof UtilsError.UtilsParsingError, 'Incorrect error thrown');
+        return;
       }
+      should.fail('No error was thrown');
     });
 
     it('should test error handling', () => {
@@ -103,8 +105,8 @@ describe('#utilsParser', () => {
       } catch (e) {
         assert(e instanceof UtilsError.UtilsParsingError, 'Incorrect error thrown');
         return;
-      } 
-      should.fail("No error was thrown");
+      }
+      should.fail('No error was thrown');
     });
 
     it('should test error handling', () => {
