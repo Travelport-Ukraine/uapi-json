@@ -52,6 +52,38 @@ describe('#AirFormat', () => {
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
 
+    it('should return an array with solutionResult = true', () => {
+      const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
+      const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.1ADTSELIEV.solutionResult.xml`).toString();
+
+      return uParser.parse(xml).then((json) => {
+        const result = AirFormat.formatLowFaresSearch({
+          provider: '1G',
+          solutionResult: true,
+        }, json);
+
+        expect(result).to.be.an('array').and.to.have.length.above(0);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should return an object with fares with solutionResult = true and faresOnly=false', () => {
+      const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
+      const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.1ADTSELIEV.solutionResult.xml`).toString();
+
+      return uParser.parse(xml).then((json) => {
+        const result = AirFormat.formatLowFaresSearch({
+          provider: '1G',
+          solutionResult: true,
+          faresOnly: false,
+        }, json);
+
+        expect(result).to.be.an('object');
+        expect(result).to.have.all.keys('transactionId', 'fares');
+        expect(result.transactionId).to.be.equal('EEEEEEEEEEEE59CD33ED7BE13D945FEE');
+        expect(result.fares).to.be.an('array').and.to.have.length(55);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+
     it('should return an object with fares with faresOnly=false', () => {
       const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.xml`).toString();
