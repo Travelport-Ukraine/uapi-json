@@ -15,6 +15,9 @@ module.exports = `
         <air:LowFareSearchReq
             AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}"
             ReturnUpsellFare="true"
+            {{#if solutionResult}}
+            SolutionResult="true"
+            {{/if}}
             xmlns:air="http://www.travelport.com/schema/air_v47_0"
             xmlns:com="http://www.travelport.com/schema/common_v47_0"
             >

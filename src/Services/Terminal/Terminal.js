@@ -97,10 +97,11 @@ module.exports = function (settings) {
 
   const terminal = {
     getToken: getSessionToken,
-    executeCommand: (command, stopMD = defaultStopMD) => new Promise(async (resolve, reject) => {
+    executeCommand: (rawCommand, stopMD = defaultStopMD) => new Promise(async (resolve, reject) => {
       try {
         const sessionToken = await getSessionToken();
         const terminalId = getTerminalId(sessionToken);
+        const command = rawCommand.replace(/;/g, '\t');
 
         if (debug) {
           log(`[${terminalId}] Terminal request:\n${command}`);
