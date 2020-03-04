@@ -1,0 +1,12 @@
+>*EX **TICKET FOR**: KLIMO/JOSEFMR                 PSGR  1/ 1
+  NEW FARE: EUR     15.00  EQUIV:;CZK      383                 
+TX1:        6DE TX2:      141OY TX3:            TX4:           
+
+ *EXCH TICKET*: TICKET NUMBER   THRU  TICKET NUMBER  NO. CPNS
+               ;06499035610314  ;.   ;..............   ;02
+  COUPONS FOR  TKT1:;12..   TKT2:;....  TKT3:;....  TKT4:;....
+ TTL VALUE:;CZK1080..... BSR:;...... ORIG FOP:;S.............. 
+ *ORIG ISSUE*: TICKET NUMBER   ORG/DES  CITY  DATE   IATA CODE
+              ;06499035241160 ;PRG/PRG  ;PRG ;31OCT19 ;9999999
+;
+><

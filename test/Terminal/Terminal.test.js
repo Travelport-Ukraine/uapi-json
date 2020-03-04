@@ -3,6 +3,7 @@
 */
 
 const fs = require('fs');
+const path = require('path');
 const sinon = require('sinon');
 const chai = require('chai');
 const { expect } = require('chai');
@@ -14,6 +15,7 @@ const uAPI = require('../../src');
 chai.use(sinonChai);
 process.setMaxListeners(20);
 
+const terminalPath = path.join(__dirname, '../../src/Services/Terminal/Terminal');
 const { Terminal: { TerminalRuntimeError } } = uAPI.errors;
 
 const DumbErrorClosingSession = sinon.spy(() => true);
@@ -26,9 +28,13 @@ const wait = time => new Promise((resolve) => {
 });
 const rTrim = str => str.replace(/\s*$/, '');
 
-const getTerminalResponse = path => new Promise((resolve, reject) => {
+const getTerminalRequest = p => fs.readFileSync(
+  `${__dirname}/TerminalRequests/${p}.txt`
+).toString().trim();
+
+const getTerminalResponse = p => new Promise((resolve, reject) => {
   fs.readFile(
-    `${__dirname}/TerminalResponses/${path}.txt`,
+    `${__dirname}/TerminalResponses/${p}.txt`,
     (err, data) => {
       if (err) {
         reject(err);
@@ -146,22 +152,22 @@ const terminalServiceEmulationFailed = () => ({
   executeCommand: executeCommandEmulationFailed,
   closeSession,
 });
-const terminalCloseSessionError = proxyquire('../../src/Services/Terminal/Terminal', {
+const terminalCloseSessionError = proxyquire(terminalPath, {
   './TerminalService': terminalServiceCloseSessionError,
   './TerminalErrors': {
     TerminalRuntimeError: ModifiedTerminalRuntimeError,
   },
 });
-const terminalSlow = proxyquire('../../src/Services/Terminal/Terminal', {
+const terminalSlow = proxyquire(terminalPath, {
   './TerminalService': terminalServiceSlow,
 });
-const terminalOk = proxyquire('../../src/Services/Terminal/Terminal', {
+const terminalOk = proxyquire(terminalPath, {
   './TerminalService': terminalServiceOk,
 });
-const terminalMdIssues = proxyquire('../../src/Services/Terminal/Terminal', {
+const terminalMdIssues = proxyquire(terminalPath, {
   './TerminalService': terminalServiceMdIssues,
 });
-const terminalEmulationFailed = proxyquire('../../src/Services/Terminal/Terminal', {
+const terminalEmulationFailed = proxyquire(terminalPath, {
   './TerminalService': terminalServiceEmulationFailed,
 });
 
@@ -364,6 +370,26 @@ describe('#Terminal', function terminalTest() {
         .then(([response, composed]) => {
           expect(rTrim(response)).to.equal(rTrim(composed.join('\n')));
         });
+    });
+    it('should replace ; with \t in commands', async () => {
+      const executeCommand = sinon.stub();
+      executeCommand.resolves(['']);
+      const Terminal = proxyquire(
+        terminalPath,
+        {
+          './TerminalService': () => ({
+            getSessionToken,
+            executeCommand,
+            closeSession,
+          })
+        }
+      );
+      const t = new Terminal({
+        auth: config,
+      });
+      const command = getTerminalRequest('request.01');
+      await t.executeCommand(command);
+      expect(executeCommand.getCall(0).args[0].command).not.to.include(';');
     });
   });
   describe('Working with emulation', () => {
