@@ -350,9 +350,9 @@ module.exports = (settings) => {
 
       return this.getUniversalRecordByPNR(options)
         .then((ur) => {
-          ur = Array.isArray(ur) ? ur[0] : ur;
+          const urr = Array.isArray(ur) ? ur[0] : ur;
           const record = {
-            reservationLocatorCode: ur.uapi_reservation_locator
+            reservationLocatorCode: urr.uapi_reservation_locator
           };
           return (ignoreTickets
             ? Promise.resolve([])
