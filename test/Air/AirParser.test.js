@@ -1133,7 +1133,7 @@ describe('#AirParser', () => {
       result.segments.forEach(
         (segment) => {
           expect(segment).to.be.an('object');
-          expect(segment).to.have.all.keys([
+          expect(segment).to.have.include.keys([
             'index', 'from', 'to', 'bookingClass', 'departure', 'arrival', 'airline',
             'flightNumber', 'serviceClass', 'status', 'plane', 'duration',
             'techStops', 'group', 'uapi_segment_ref',

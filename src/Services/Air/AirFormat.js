@@ -86,7 +86,7 @@ function getBaggageInfo(info) {
 }
 
 function formatSegment(segment) {
-  return {
+  const seg = {
     from: segment.Origin,
     to: segment.Destination,
     group: Number(segment.Group),
@@ -96,6 +96,29 @@ function formatSegment(segment) {
     flightNumber: segment.FlightNumber,
     uapi_segment_ref: segment.Key,
   };
+
+  if (segment['air:FlightDetails']) {
+    Object.assign(seg, {
+      details: Object.keys(segment['air:FlightDetails'])
+        .map((flightKey) => {
+          const detail = segment['air:FlightDetails'][flightKey];
+
+          return {
+            origin: detail.Origin,
+            originTerminal: detail.DepartureTerminal,
+            destination: detail.Destination,
+            destinationTerminal: detail.DestinationTerminal,
+            departure: detail.DepartureTime,
+            flightTime: detail.FlightTime,
+            travelTime: detail.TravelTime,
+            equipment: detail.Equipment,
+            stat: detail.ElStat
+          };
+        })
+    });
+  }
+
+  return seg;
 }
 
 function formatServiceSegment(segment, remark) {
