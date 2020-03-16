@@ -105,7 +105,7 @@ function formatSegment(segment) {
 
           return {
             origin: detail.Origin,
-            originTerminal: detail.DepartureTerminal,
+            originTerminal: detail.OriginTerminal,
             destination: detail.Destination,
             destinationTerminal: detail.DestinationTerminal,
             departure: detail.DepartureTime,
