@@ -2153,7 +2153,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml)
         .then((json) => {
           const jsonResult = parseFunction.call(uParser, json);
-          testBooking(jsonResult, false);
+          testBooking(jsonResult);
         });
     });
   });
