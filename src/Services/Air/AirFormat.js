@@ -150,6 +150,9 @@ function formatTrip(segment, flightDetails) {
   const plane = flightInfo.map(details => details.Equipment || 'Unknown');
   const duration = flightInfo.map(details => details.FlightTime || 0);
   const techStops = flightInfo.slice(1).map(details => details.Origin);
+
+  segment['air:FlightDetails'] = flightInfo;
+
   return {
     ...formatSegment(segment),
     serviceClass: segment.CabinClass,
