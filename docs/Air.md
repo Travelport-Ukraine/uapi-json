@@ -26,6 +26,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.getTickets(params)](#getTickets)
 * [.cancelTicket(params)](#cancelTicket)
 * [.cancelBooking(params)](#cancelBooking)
+* [.ackScheduleChange(params)](#ackScheduleChange)
 
 ## .shop(params)
 <a name="shop"></a>
@@ -434,3 +435,18 @@ Gets pnr information and tickets list from [`importPNR`](#importPNR) and then do
 | ignoreTickets | `Boolean` | Defines if tickets should be ignored. The default value is `false` |
 
 **See: <a href="../examples/Air/cancelBooking.js">cancelBooking example</a>**
+
+## .ackScheduleChange(params)
+<a name="ackScheduleChange"></a>
+
+This method sends ack to all schedule changes. TK statuses will be updated to HK, and returns updated Universal record.
+
+**Returns**: `Promise`. - Revised record for requested Universal Record.
+**See**: [Accepting All Schedule Changes](https://support.travelport.com/webhelp/uapi/uAPI.htm#Booking/Modify/Schedule_Changes/Accepting_All_Schedule_Changes.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| universalRecordLocatorCode | `String` | UniversalRecord Locator Code |
+| version | `String` | UniversalRecord Version |
+
+**See: <a href="../examples/Air/getUniversalRecord.js">Example</a>**

@@ -153,6 +153,13 @@ module.exports = {
     transform()
   ),
 
+  ACK_SCHEDULE_CHANGE: compose(
+    validate(
+      validators.universalRecordLocator
+    ),
+    transform()
+  ),
+
   AIR_EXCHANGE_QUOTE: compose(
     validate(
       validators.segments,

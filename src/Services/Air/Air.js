@@ -379,6 +379,10 @@ module.exports = (settings) => {
         }));
     },
 
+    ackScheduleChange(options) {
+      return service.ackScheduleChange(options);
+    },
+
     exchangeBooking(options) {
       return this.getBooking(options)
         .then(booking => service.exchangeBooking({

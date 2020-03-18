@@ -1133,6 +1133,11 @@ function gdsQueue(req) {
   return true;
 }
 
+function ackScheduleChange(data) {
+  const response = extractBookings.call(this, data);
+  return response;
+}
+
 function exchangeQuote(req) {
   const root = 'air:AirExchangeQuoteRsp';
   const xml = req[root][0];
@@ -1327,6 +1332,7 @@ module.exports = {
   AIR_GET_TICKETS_ERROR_HANDLER: airGetTicketsErrorHandler,
   AIR_CANCEL_TICKET: airCancelTicket,
   AIR_CANCEL_PNR: airCancelPnr,
+  ACK_SCHEDULE_CHANGE: ackScheduleChange,
   AIR_EXCHANGE_QUOTE: exchangeQuote,
   AIR_EXCHANGE: exchangeBooking,
   AIR_AVAILABILITY: availability,

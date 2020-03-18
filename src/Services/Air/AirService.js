@@ -220,7 +220,17 @@ module.exports = function (settings) {
       debug,
       options
     ),
-
+    ackScheduleChange: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.cancel,
+      'universal:AckScheduleChangeRsp',
+      AirValidator.ACK_SCHEDULE_CHANGE,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_CANCEL_PNR,
+      debug,
+      options
+    ),
     exchangeQuote: uApiRequest(
       config.AirService.url,
       auth,
