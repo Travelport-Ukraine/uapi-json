@@ -58,7 +58,7 @@ const checkLowSearchFareXml = (filename) => {
                     expect(segment).to.be.an('object');
                     expect(segment).to.include.keys([
                       'from', 'to', 'departure', 'arrival', 'airline', 'flightNumber', 'serviceClass',
-                      'plane', 'duration', 'techStops', 'bookingClass', 'codeshare', 'baggage',
+                      'plane', 'duration', 'techStops', 'bookingClass', 'isCodeshare', 'baggage',
                       'fareBasisCode', 'group', 'uapi_segment_ref',
                     ]);
                     expect(segment.from).to.match(/^[A-Z]{3}$/);
@@ -1017,7 +1017,7 @@ describe('#AirParser', () => {
           expect(segment).to.include.keys([
             'index', 'from', 'to', 'bookingClass', 'departure', 'arrival', 'airline',
             'flightNumber', 'serviceClass', 'status', 'plane', 'duration',
-            'techStops', 'group', 'uapi_segment_ref', 'codeshare',
+            'techStops', 'group', 'uapi_segment_ref', 'isCodeshare',
           ]);
           expect(segment.index).to.be.a('number');
           expect(segment.from).to.match(/^[A-Z]{3}$/);
@@ -1759,7 +1759,7 @@ describe('#AirParser', () => {
           'airline',
           'arrival',
           'bookingClass',
-          'codeshare',
+          'isCodeshare',
           'departure',
           'flightNumber',
           'from',
@@ -1903,7 +1903,7 @@ describe('#AirParser', () => {
           expect(segment).to.include.keys([
             'from', 'to', 'departure', 'arrival', 'airline',
             'flightNumber', 'plane', 'duration',
-            'uapi_segment_ref', 'group', 'availability', 'codeshare',
+            'uapi_segment_ref', 'group', 'availability', 'isCodeshare',
           ]);
           expect(segment.from).to.match(/^[A-Z]{3}$/);
           expect(segment.to).to.match(/^[A-Z]{3}$/);
