@@ -112,7 +112,7 @@ module.exports = {
 
   PROVIDER_RESERVATION_DIVIDE: compose(
     validate(
-      validators.pnr,
+      validators.pnr
     ),
     transform()
   ),
