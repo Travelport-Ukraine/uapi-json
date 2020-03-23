@@ -1084,6 +1084,29 @@ function universalRecordRetrieveRequest(data) {
   return response;
 }
 
+function formatProviderReservationInfo(data) {
+  return {
+    traveler: data['common_v47_0:BookingTravelerName'].map((travelerDetails) => {
+      return {
+        firstName: travelerDetails.First.concat(travelerDetails.Prefix || ''),
+        lastName: travelerDetails.Last
+      };
+    }),
+    provider: data.ProviderCode,
+    pnr: data.ProviderLocatorCode,
+    uapi_ur_locator: data.UniversalLocatorCode
+  };
+}
+
+function providerReservationDivideRequest(rsp) {
+  return {
+    parent: formatProviderReservationInfo(rsp['universal:ParentProviderReservationInfo']),
+    child: formatProviderReservationInfo(rsp['universal:ChildProviderReservationInfo']),
+    transactionId: rsp.TransactionId,
+    responseTime: rsp.ResponseTime
+  };
+}
+
 function extractFareRules(obj) {
   const rulesList = obj['air:FareRule'];
   rulesList.forEach((item) => {
@@ -1317,6 +1340,7 @@ module.exports = {
   AIR_TICKET_REQUEST: ticketParse,
   AIR_IMPORT_REQUEST: importRequest,
   UNIVERSAL_RECORD_RETRIEVE_REQUEST: universalRecordRetrieveRequest,
+  PROVIDER_RESERVATION_DIVIDE: providerReservationDivideRequest,
   GDS_QUEUE_PLACE_RESPONSE: gdsQueue,
   AIR_CANCEL_UR: nullParsing,
   UNIVERSAL_RECORD_FOID: nullParsing,

@@ -1740,6 +1740,26 @@ describe('#AirService', () => {
     });
   });
 
+  describe('providerReservationDivide', () => {
+    it('should check if correct function from service is called', () => {
+      const providerReservationDivide = sinon.spy(() => {});
+      const service = () => ({ providerReservationDivide });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).providerReservationDivide({
+        uapi_ur_locator: 'AAABBB',
+        version: '1',
+        provider: '1G',
+        pnr: '456ABC',
+        passengers: [
+          { uapi_ref_key: 'XX/ADFH2345AGJDS245IGJSDifgjoai22343s==' },
+        ]
+      });
+      expect(providerReservationDivide.calledOnce).to.be.equal(true);
+    });
+  });
+
   describe('fareRules', () => {
     it('should check function to be called', () => {
       const fetch = sinon.spy(({ segments, passengers, fetchFareRules }) => {

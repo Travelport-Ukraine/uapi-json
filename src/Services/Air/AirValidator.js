@@ -110,6 +110,13 @@ module.exports = {
     transform()
   ),
 
+  PROVIDER_RESERVATION_DIVIDE: compose(
+    validate(
+      validators.pnr,
+    ),
+    transform()
+  ),
+
   AIR_CANCEL_UR: params => params,
   UNIVERSAL_RECORD_FOID: params => params,
 
