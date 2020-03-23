@@ -1780,6 +1780,32 @@ describe('#AirParser', () => {
     });
   });
 
+  describe('PROVIDER_RESERVATION_DIVIDE', () => {
+    it('parse ProviderReservationDivideRsp', () => {
+      const uParser = new Parser('universal:ProviderReservationDivideRsp', 'v47_0', { });
+      const parseFunction = airParser.PROVIDER_RESERVATION_DIVIDE;
+      const xml = fs.readFileSync(`${xmlFolder}/ProviderReservationDivideRsp.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+
+        expect(jsonResult.parent).to.be.an('object');
+        expect(jsonResult.parent).to.have.all.keys([
+          'traveler',
+          'provider',
+          'pnr',
+          'uapi_ur_locator',
+        ]);
+        expect(jsonResult.child).to.be.an('object');
+        expect(jsonResult.child).to.have.all.keys([
+          'traveler',
+          'provider',
+          'pnr',
+          'uapi_ur_locator',
+        ]);
+      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    });
+  });
+
   describe('FLIGHT_INFORMATION', () => {
     it('should parse flight info', () => {
       const uParser = new Parser('air:FlightInformationRsp', 'v47_0', { });
