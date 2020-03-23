@@ -815,7 +815,7 @@ function extractBookings(obj) {
         if (!traveler) {
           throw new AirRuntimeError.TravelersListError();
         }
-        const name = traveler[`common_${this.uapi_version}:BookingTravelerName`];
+        const [name] = traveler[`common_${this.uapi_version}:BookingTravelerName`];
         const travelerEmails = traveler[`common_${this.uapi_version}:Email`];
         if (travelerEmails) {
           Object.keys(travelerEmails).forEach(

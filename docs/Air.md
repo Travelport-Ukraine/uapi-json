@@ -434,3 +434,21 @@ Gets pnr information and tickets list from [`importPNR`](#importPNR) and then do
 | ignoreTickets | `Boolean` | Defines if tickets should be ignored. The default value is `false` |
 
 **See: <a href="../examples/Air/cancelBooking.js">cancelBooking example</a>**
+
+## .providerReservationDivide(params)
+<a name="providerReservationDivide"></a>
+
+Sends a pnr divide request and returns parent and child reservation information with divided passenger list.
+
+**Returns**: `Promise` 
+
+**See**: [Dividing Universal Records](https://support.travelport.com/webhelp/uapi/uapi.htm#Booking/UniversalRecord/Dividing_Universal_Records.htm%3FTocPath%3DUniversal%2520Records%2520and%2520Bookings%7C_____5)
+and <a href="../examples/Air/divide.js">providerReservationDivide example</a>**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| uapi_ur_locator | `Object` | Universal Record Locator |
+| provider | `String` | GDS provider code eg. '1G' |
+| pnr | `String` | PNR |
+| passengers | `Array` | List of passenger objects containing uapi_passenger_ref |
+
