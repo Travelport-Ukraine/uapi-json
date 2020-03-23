@@ -25,6 +25,9 @@ function urls(region, production = true) {
     TerminalService: {
       url: `${url}/TerminalService`,
     },
+    UtilService: {
+      url: `${url}/UtilService`,
+    },
   };
 }
 

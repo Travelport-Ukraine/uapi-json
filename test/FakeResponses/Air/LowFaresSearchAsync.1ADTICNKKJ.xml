@@ -1,0 +1,792 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:LowFareSearchAsynchRsp TraceId="" TransactionId="A93F11A30A076478EAD0520D3E91FDC7" ResponseTime="3655" DistanceUnits="MI" SearchId="A93F11A30A076478EAD0520D3E91FDC7_OICNKKJ20Oct19Economyfnull-1f-1-1tftnull300-1-1MI1GnullfADTKRWnullnullnullnullnullnullnullnullnullfff2124774" CurrencyType="KRW"
+                                    xmlns:air="http://www.travelport.com/schema/air_v47_0">
+            <air:FlightDetailsList>
+                <air:FlightDetails Key="jsXfwx4R2BKADnbpFAAAAA==" Origin="ICN" Destination="KKJ" DepartureTime="2019-10-20T07:10:00.000+09:00" ArrivalTime="2019-10-20T08:35:00.000+09:00" FlightTime="85" Equipment="738" OriginTerminal="1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAFnbpFAAAAA==" Origin="ICN" Destination="KKJ" DepartureTime="2019-10-20T16:10:00.000+09:00" ArrivalTime="2019-10-20T17:35:00.000+09:00" FlightTime="85" Equipment="738" OriginTerminal="1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAHnbpFAAAAA==" Origin="ICN" Destination="HND" DepartureTime="2019-10-20T21:10:00.000+09:00" ArrivalTime="2019-10-20T23:30:00.000+09:00" FlightTime="140" Equipment="321" OriginTerminal="1" DestinationTerminal="I"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAJnbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-21T07:40:00.000+09:00" ArrivalTime="2019-10-21T09:20:00.000+09:00" FlightTime="100" Equipment="320" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKALnbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-21T09:15:00.000+09:00" ArrivalTime="2019-10-21T10:55:00.000+09:00" FlightTime="100" Equipment="320" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKANnbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-21T11:15:00.000+09:00" ArrivalTime="2019-10-21T12:55:00.000+09:00" FlightTime="100" Equipment="320" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAPnbpFAAAAA==" Origin="ICN" Destination="NRT" DepartureTime="2019-10-20T15:45:00.000+09:00" ArrivalTime="2019-10-20T18:15:00.000+09:00" FlightTime="150" Equipment="321" OriginTerminal="1" DestinationTerminal="1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKARnbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T22:00:00.000+09:00" ArrivalTime="2019-10-20T23:40:00.000+09:00" FlightTime="100" Equipment="320" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKATnbpFAAAAA==" Origin="ICN" Destination="NRT" DepartureTime="2019-10-20T09:00:00.000+09:00" ArrivalTime="2019-10-20T11:20:00.000+09:00" FlightTime="140" Equipment="333" OriginTerminal="1" DestinationTerminal="1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAVnbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T15:25:00.000+09:00" ArrivalTime="2019-10-20T17:05:00.000+09:00" FlightTime="100" Equipment="320" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAXnbpFAAAAA==" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T08:00:00.000+09:00" ArrivalTime="2019-10-20T10:10:00.000+09:00" FlightTime="130" Equipment="788" OriginTerminal="I" DestinationTerminal="I"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAZnbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T14:15:00.000+09:00" ArrivalTime="2019-10-20T15:55:00.000+09:00" FlightTime="100" Equipment="73H" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAbnbpFAAAAA==" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T12:00:00.000+09:00" ArrivalTime="2019-10-20T14:10:00.000+09:00" FlightTime="130" Equipment="772" OriginTerminal="I" DestinationTerminal="I"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAenbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T18:35:00.000+09:00" ArrivalTime="2019-10-20T20:15:00.000+09:00" FlightTime="100" Equipment="73H" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAgnbpFAAAAA==" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T19:20:00.000+09:00" ArrivalTime="2019-10-20T21:30:00.000+09:00" FlightTime="130" Equipment="772" OriginTerminal="I" DestinationTerminal="I"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAinbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-21T06:20:00.000+09:00" ArrivalTime="2019-10-21T08:00:00.000+09:00" FlightTime="100" Equipment="73H" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAknbpFAAAAA==" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T07:45:00.000+09:00" ArrivalTime="2019-10-20T09:55:00.000+09:00" FlightTime="130" Equipment="788" OriginTerminal="I" DestinationTerminal="I"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAmnbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T11:15:00.000+09:00" ArrivalTime="2019-10-20T12:55:00.000+09:00" FlightTime="100" Equipment="320" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAonbpFAAAAA==" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T12:45:00.000+09:00" ArrivalTime="2019-10-20T15:00:00.000+09:00" FlightTime="135" Equipment="788" OriginTerminal="I" DestinationTerminal="I"/>
+                <air:FlightDetails Key="jsXfwx4R2BKArnbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T17:15:00.000+09:00" ArrivalTime="2019-10-20T18:50:00.000+09:00" FlightTime="95" Equipment="320" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAtnbpFAAAAA==" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T20:00:00.000+09:00" ArrivalTime="2019-10-20T22:15:00.000+09:00" FlightTime="135" Equipment="788" OriginTerminal="I" DestinationTerminal="I"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAvnbpFAAAAA==" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T15:30:00.000+09:00" ArrivalTime="2019-10-20T17:35:00.000+09:00" FlightTime="125" Equipment="333" OriginTerminal="I" DestinationTerminal="I"/>
+                <air:FlightDetails Key="jsXfwx4R2BKAynbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T20:15:00.000+09:00" ArrivalTime="2019-10-20T21:55:00.000+09:00" FlightTime="100" Equipment="320" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKA0nbpFAAAAA==" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T16:15:00.000+09:00" ArrivalTime="2019-10-20T18:30:00.000+09:00" FlightTime="135" Equipment="773" OriginTerminal="I" DestinationTerminal="I"/>
+                <air:FlightDetails Key="jsXfwx4R2BKA2nbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T21:00:00.000+09:00" ArrivalTime="2019-10-20T22:40:00.000+09:00" FlightTime="100" Equipment="320" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKA4nbpFAAAAA==" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T09:05:00.000+09:00" ArrivalTime="2019-10-20T11:10:00.000+09:00" FlightTime="125" Equipment="773" OriginTerminal="I" DestinationTerminal="I"/>
+                <air:FlightDetails Key="jsXfwx4R2BKA6nbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T14:15:00.000+09:00" ArrivalTime="2019-10-20T15:50:00.000+09:00" FlightTime="95" Equipment="320" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKA8nbpFAAAAA==" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T20:25:00.000+09:00" ArrivalTime="2019-10-20T22:05:00.000+09:00" FlightTime="100" Equipment="73H" OriginTerminal="D1"/>
+                <air:FlightDetails Key="jsXfwx4R2BKA+nbpFAAAAA==" Origin="ICN" Destination="HND" DepartureTime="2019-10-20T20:30:00.000+09:00" ArrivalTime="2019-10-20T22:50:00.000+09:00" FlightTime="140" Equipment="73H" OriginTerminal="2" DestinationTerminal="I"/>
+            </air:FlightDetailsList>
+            <air:AirSegmentList>
+                <air:AirSegment Key="jsXfwx4R2BKACnbpFAAAAA==" Group="0" Carrier="LJ" FlightNumber="261" Origin="ICN" Destination="KKJ" DepartureTime="2019-10-20T07:10:00.000+09:00" ArrivalTime="2019-10-20T08:35:00.000+09:00" FlightTime="85" Distance="352" ETicketability="Yes" Equipment="738" ChangeOfPlane="false" ParticipantLevel="Standard AVS" LinkAvailability="true" PolledAvailabilityOption="No polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKADnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAEnbpFAAAAA==" Group="0" Carrier="LJ" FlightNumber="263" Origin="ICN" Destination="KKJ" DepartureTime="2019-10-20T16:10:00.000+09:00" ArrivalTime="2019-10-20T17:35:00.000+09:00" FlightTime="85" Distance="352" ETicketability="Yes" Equipment="738" ChangeOfPlane="false" ParticipantLevel="Standard AVS" LinkAvailability="true" PolledAvailabilityOption="No polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAFnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAGnbpFAAAAA==" Group="0" Carrier="OZ" FlightNumber="178" Origin="ICN" Destination="HND" DepartureTime="2019-10-20T21:10:00.000+09:00" ArrivalTime="2019-10-20T23:30:00.000+09:00" FlightTime="140" Distance="758" ETicketability="Yes" Equipment="321" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAHnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAInbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="3873" Origin="HND" Destination="KKJ" DepartureTime="2019-10-21T07:40:00.000+09:00" ArrivalTime="2019-10-21T09:20:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="7G">STAR FLYER INC</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAJnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAKnbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="3875" Origin="HND" Destination="KKJ" DepartureTime="2019-10-21T09:15:00.000+09:00" ArrivalTime="2019-10-21T10:55:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="7G">STAR FLYER INC</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKALnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAMnbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="3877" Origin="HND" Destination="KKJ" DepartureTime="2019-10-21T11:15:00.000+09:00" ArrivalTime="2019-10-21T12:55:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="7G">STAR FLYER INC</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKANnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAOnbpFAAAAA==" Group="0" Carrier="OZ" FlightNumber="106" Origin="ICN" Destination="NRT" DepartureTime="2019-10-20T15:45:00.000+09:00" ArrivalTime="2019-10-20T18:15:00.000+09:00" FlightTime="150" Distance="758" ETicketability="Yes" Equipment="321" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAPnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAQnbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="3893" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T22:00:00.000+09:00" ArrivalTime="2019-10-20T23:40:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="7G">STAR FLYER INC</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKARnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKASnbpFAAAAA==" Group="0" Carrier="OZ" FlightNumber="102" Origin="ICN" Destination="NRT" DepartureTime="2019-10-20T09:00:00.000+09:00" ArrivalTime="2019-10-20T11:20:00.000+09:00" FlightTime="140" Distance="758" ETicketability="Yes" Equipment="333" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKATnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAUnbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="3883" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T15:25:00.000+09:00" ArrivalTime="2019-10-20T17:05:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="7G">STAR FLYER INC</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAVnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAWnbpFAAAAA==" Group="0" Carrier="JL" FlightNumber="90" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T08:00:00.000+09:00" ArrivalTime="2019-10-20T10:10:00.000+09:00" FlightTime="130" Distance="758" ETicketability="Yes" Equipment="788" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAXnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAYnbpFAAAAA==" Group="0" Carrier="JL" FlightNumber="375" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T14:15:00.000+09:00" ArrivalTime="2019-10-20T15:55:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="73H" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAZnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAanbpFAAAAA==" Group="0" Carrier="JL" FlightNumber="92" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T12:00:00.000+09:00" ArrivalTime="2019-10-20T14:10:00.000+09:00" FlightTime="130" Distance="758" ETicketability="Yes" Equipment="772" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAbnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAdnbpFAAAAA==" Group="0" Carrier="JL" FlightNumber="377" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T18:35:00.000+09:00" ArrivalTime="2019-10-20T20:15:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="73H" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAenbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAfnbpFAAAAA==" Group="0" Carrier="JL" FlightNumber="94" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T19:20:00.000+09:00" ArrivalTime="2019-10-20T21:30:00.000+09:00" FlightTime="130" Distance="758" ETicketability="Yes" Equipment="772" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAgnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAhnbpFAAAAA==" Group="0" Carrier="JL" FlightNumber="371" Origin="HND" Destination="KKJ" DepartureTime="2019-10-21T06:20:00.000+09:00" ArrivalTime="2019-10-21T08:00:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="73H" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAinbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAjnbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="862" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T07:45:00.000+09:00" ArrivalTime="2019-10-20T09:55:00.000+09:00" FlightTime="130" Distance="758" ETicketability="Yes" Equipment="788" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAknbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAlnbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="3877" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T11:15:00.000+09:00" ArrivalTime="2019-10-20T12:55:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="7G">STAR FLYER INC</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAmnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAnnbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="864" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T12:45:00.000+09:00" ArrivalTime="2019-10-20T15:00:00.000+09:00" FlightTime="135" Distance="758" ETicketability="Yes" Equipment="788" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAonbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAqnbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="3885" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T17:15:00.000+09:00" ArrivalTime="2019-10-20T18:50:00.000+09:00" FlightTime="95" Distance="534" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="7G">STAR FLYER INC</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKArnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAsnbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="868" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T20:00:00.000+09:00" ArrivalTime="2019-10-20T22:15:00.000+09:00" FlightTime="135" Distance="758" ETicketability="Yes" Equipment="788" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAtnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAunbpFAAAAA==" Group="0" Carrier="OZ" FlightNumber="1045" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T15:30:00.000+09:00" ArrivalTime="2019-10-20T17:35:00.000+09:00" FlightTime="125" Distance="758" ETicketability="Yes" Equipment="333" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAvnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAxnbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="3889" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T20:15:00.000+09:00" ArrivalTime="2019-10-20T21:55:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="7G">STAR FLYER INC</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAynbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKApnbpFAAAAA==" Group="0" Carrier="OZ" FlightNumber="9102" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T12:45:00.000+09:00" ArrivalTime="2019-10-20T15:00:00.000+09:00" FlightTime="135" Distance="758" ETicketability="Yes" Equipment="788" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail exists" OptionalServicesIndicator="false" AvailabilitySource="A" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="NH" OperatingFlightNumber="864">ALL NIPPON AIRWAYS COMPA</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAonbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAznbpFAAAAA==" Group="0" Carrier="KE" FlightNumber="709" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T16:15:00.000+09:00" ArrivalTime="2019-10-20T18:30:00.000+09:00" FlightTime="135" Distance="758" ETicketability="Yes" Equipment="773" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKA0nbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKA1nbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="3891" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T21:00:00.000+09:00" ArrivalTime="2019-10-20T22:40:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="7G">STAR FLYER INC</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKA2nbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKA3nbpFAAAAA==" Group="0" Carrier="KE" FlightNumber="707" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T09:05:00.000+09:00" ArrivalTime="2019-10-20T11:10:00.000+09:00" FlightTime="125" Distance="758" ETicketability="Yes" Equipment="773" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKA4nbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKA5nbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="3881" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T14:15:00.000+09:00" ArrivalTime="2019-10-20T15:50:00.000+09:00" FlightTime="95" Distance="534" ETicketability="Yes" Equipment="320" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="7G">STAR FLYER INC</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKA6nbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAcnbpFAAAAA==" Group="0" Carrier="KE" FlightNumber="5707" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T12:00:00.000+09:00" ArrivalTime="2019-10-20T14:10:00.000+09:00" FlightTime="130" Distance="758" ETicketability="Yes" Equipment="772" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="JL" OperatingFlightNumber="92">JAPAN AIRLINES INTL</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAbnbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKA7nbpFAAAAA==" Group="0" Carrier="JL" FlightNumber="379" Origin="HND" Destination="KKJ" DepartureTime="2019-10-20T20:25:00.000+09:00" ArrivalTime="2019-10-20T22:05:00.000+09:00" FlightTime="100" Distance="534" ETicketability="Yes" Equipment="73H" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKA8nbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKA9nbpFAAAAA==" Group="0" Carrier="JL" FlightNumber="5256" Origin="ICN" Destination="HND" DepartureTime="2019-10-20T20:30:00.000+09:00" ArrivalTime="2019-10-20T22:50:00.000+09:00" FlightTime="140" Distance="758" ETicketability="Yes" Equipment="73H" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="KE" OperatingFlightNumber="719">KOREAN AIR LINES CO LTD</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKA+nbpFAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="jsXfwx4R2BKAwnbpFAAAAA==" Group="0" Carrier="NH" FlightNumber="6970" Origin="GMP" Destination="HND" DepartureTime="2019-10-20T15:30:00.000+09:00" ArrivalTime="2019-10-20T17:35:00.000+09:00" FlightTime="125" Distance="758" ETicketability="Yes" Equipment="333" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="OZ" OperatingFlightNumber="1045">ASIANA AIRLINES INC</air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="jsXfwx4R2BKAvnbpFAAAAA=="/>
+                </air:AirSegment>
+            </air:AirSegmentList>
+            <air:FareInfoList>
+                <air:FareInfo Key="jsXfwx4R2BKA/nbpFAAAAA==" FareBasis="RK1SP" PassengerTypeCode="ADT" Origin="ICN" Destination="KKJ" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW25000" NegotiatedFare="false" NotValidBefore="2019-10-20" NotValidAfter="2019-10-20">
+                    <air:BaggageAllowance>
+                        <air:MaxWeight Value="15" Unit="Kilograms"/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKA/nbpFAAAAA==" ProviderCode="1G">gws-eJxNTkEKwzAMe0zR3XIZbW4pzcqalDC67dDL/v+M2ekGMySSLUdKjFGFQUaG+F8d3t2WUV8zUKF2SslQ6gW05oCIjNgLH3e4AUXF5rVpJ7JtJS69AZKmcEpeONq9ztWNmq0h4bFwai/wI9eb0TqlZ+7LbrEWxWH6ijLA/vkBK1UrCQ==</air:FareRuleKey>
+                    <air:Brand Key="jsXfwx4R2BKAbqbpFAAAAA==" BrandID="160517" UpSellBrandID="160515" BrandTier="0001">
+                        <air:UpsellBrand FareBasis="NK1LJ" FareInfoRef="jsXfwx4R2BKAzpbpFAAAAA=="/>
+                    </air:Brand>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKAIobpFAAAAA==" FareBasis="KLOKJ" PassengerTypeCode="ADT" Origin="ICN" Destination="HND" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW180000" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKAIobpFAAAAA==" ProviderCode="1G">gws-eJxNTkEOwkAIfEwzd8CsbW9rSpvabehFD/Xg/58h7GoiCTAwMJBzFuKRBh7zv3V4d8cL9pwAg7ivpuB0oSvYqxNENKDsR9kQCkxC3rfKtcx1SkXZE5a0UKPCcNZ4n8y5JuuCjLiLgL6BH5hXh3bTR9lSnHUX0S9JPfzRD2DFK0U=</air:FareRuleKey>
+                    <air:Brand Key="jsXfwx4R2BKAcqbpFAAAAA==" BrandFound="false" UpSellBrandFound="false"/>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKANobpFAAAAA==" FareBasis="KNNDJ" PassengerTypeCode="ADT" Origin="HND" Destination="KKJ" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-21" Amount="KRW118700" NegotiatedFare="false" NotValidBefore="2019-10-21" NotValidAfter="2019-10-21">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKANobpFAAAAA==" ProviderCode="1G">gws-eJxNTssKAzEI/Jhl7mNo2eSWsi6EBDy1h730/z+jmrRQQR2d8VFrTZTCLKX+24b3Zg32OgBDch+jQ8jCWV2gpBPDTDtigzCJ921yK0uoqPcje8JxU1lUGK4Zm6lzay0dIO4ioE/gB87m0B76tKadzKEs7Utyhz/6AWAZK18=</air:FareRuleKey>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKAXobpFAAAAA==" FareBasis="KLOKJ" PassengerTypeCode="ADT" Origin="ICN" Destination="NRT" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW200000" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKAXobpFAAAAA==" ProviderCode="1G">gws-eJxNTkEKw0AIfEyYuwohyW1LtiHNFgMlPaSH/v8ZHXdbqKCOzDiaUjLRSUad0n90eHf7C/6cAYcx/XFAB5EByumEiIwo971sCAcVk1BVrnWtqmxZ2bD0izQqAmett9nJNVsaKuIuAnIDP3BdCf2Sj7L1cZZplr8kN/noB3CtK18=</air:FareRuleKey>
+                    <air:Brand Key="jsXfwx4R2BKAdqbpFAAAAA==" BrandFound="false" UpSellBrandFound="false"/>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKAoobpFAAAAA==" FareBasis="KNNDJ" PassengerTypeCode="ADT" Origin="HND" Destination="KKJ" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW118700" NegotiatedFare="false" NotValidBefore="2019-10-20" NotValidAfter="2019-10-20">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKAoobpFAAAAA==" ProviderCode="1G">gws-eJxNTssKAzEI/Jhl7mNo2eSWsi6EBDy1h730/z+jmrRQQR2d8VFrTZTCLKX+24b3Zg32OgBDch+jQ8jCWV2gpBPDTDtigzDR+za5lSVU1PuRPeG4qSwqDNeMzdS5tZYOEHcR0CfwA2dzaA99WtNO5lCW9iW5wx/9AF+dK14=</air:FareRuleKey>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKA2obpFAAAAA==" FareBasis="HLN0OGDD" PassengerTypeCode="ADT" Origin="GMP" Destination="KKJ" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW336000" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>2</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKA2obpFAAAAA==" ProviderCode="1G">gws-eJxNjrEOwyAMRD8muv1MSCEbVSiJkpR2aIcs/f/PiIFWqiXbZz04O4RgKCO9jOE/Ony6dUd+T0CG0dy2FcYPzkB0OkDSY9kzH3OMKCZCQ0W54talPkw2OW1IfZKGSuCodb4/lTVn9RSU1ShSf+AnbovKfI0v63rRzaQdLtMX0kFvPQHvaCvg</air:FareRuleKey>
+                    <air:Brand Key="jsXfwx4R2BKAeqbpFAAAAA==" BrandFound="false" UpSellBrandFound="false"/>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKAEpbpFAAAAA==" FareBasis="MRFD0O" PassengerTypeCode="ADT" Origin="GMP" Destination="KKJ" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW358000" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>2</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKAEpbpFAAAAA==" ProviderCode="1G">gws-eJxNjtEKwjAMRT9m3PebrMP1rWKtw7EqRZG9+P+fYdoqGEhyw2lvEkJQiucsPvzHgPeQF+TnCchQy3W9YqRzI8SmHSRnbCVF3lAthEoDucHepT2LPnprSJq0oxrYW71sd2Pd1xwFdTGqtB/4ifNiMh/joxRV26t00/T6Qh5gl34AiOIrlQ==</air:FareRuleKey>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKASpbpFAAAAA==" FareBasis="KLOKJ" PassengerTypeCode="ADT" Origin="GMP" Destination="HND" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW270000" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKASpbpFAAAAA==" ProviderCode="1G">gws-eJxNTkEOwkAIfEwz94Gk2r2tcW2brm496KEe/P8zhF2blAQYGBiIMSolcJAQj9bh260flPcVKFDzuSSohhMhVm0gOSDf17zAFYRK65fKtSx1KmkSSxj7kY1yw1bj9Hga12RNUOB34dA2sIPbbLBc0isvvZ+lr6Q/yTPs0R9m/ytX</air:FareRuleKey>
+                    <air:Brand Key="jsXfwx4R2BKAfqbpFAAAAA==" BrandFound="false" UpSellBrandFound="false"/>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKAapbpFAAAAA==" FareBasis="KLOKJNH" PassengerTypeCode="ADT" Origin="GMP" Destination="HND" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW276000" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKAapbpFAAAAA==" ProviderCode="1G">gws-eJxNjkEOwkAIRQ/T/D2gTdvdGLFOOkpd6KIuvP8xCjOaSMLwJw8+pJSEeKKRp/QfHT7d+oa9zoBBPLMp5HAcCOy/DUQ0otzWslhGeDAJObFKW+Xap6LsBXM/U0MR2Op7vT+cNWO3ZMRmhPQJ/MQlu7STPsvSx2JPYf1CGuCn7tGNK+Y=</air:FareRuleKey>
+                    <air:Brand Key="jsXfwx4R2BKAgqbpFAAAAA==" BrandFound="false" UpSellBrandFound="false"/>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKAhobpFAAAAA==" FareBasis="YOW" PassengerTypeCode="ADT" Origin="GMP" Destination="HND" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW368500" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKAhobpFAAAAA==" ProviderCode="1G">gws-eJxNjrEOwyAMRD8mut0GkcJG1YREqko7tKpY+v+f0bOzxBK+g8cZaq1BtEjWUs814TfdV/TPDegIXHtfEDXGGcrdgIhkjOcXllcJwtPu5FD1Oy01oaAJ1ZEVhvft8SI7hnKcwl6FWSZg5pIy1p22X5d3cpCtzRthkQKG+M0/9FIqlA==</air:FareRuleKey>
+                    <air:Brand Key="jsXfwx4R2BKAhqbpFAAAAA==" BrandID="167096" UpSellBrandFound="false" BrandTier="0002"/>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKAcobpFAAAAA==" FareBasis="YKJL" PassengerTypeCode="ADT" Origin="HND" Destination="KKJ" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW413300" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKAcobpFAAAAA==" ProviderCode="1G">gws-eJxNTrsOwzAI/Jjo9sNOVWdz1MSK4oqpHbz0/z+jYDdSkYCDOx4550BZmGTJ/zbhM51P6PsBKIJ5rSfiTea5Vw2UsKNVE/kCYaC1tVMji4tYYhFLKCwclBtaj4duxo2tJAV+Fg5tAhfYD4O6bq8oXidXpvVH8g574QsstirF</air:FareRuleKey>
+                    <air:Brand Key="jsXfwx4R2BKAiqbpFAAAAA==" BrandID="167415" UpSellBrandFound="false" BrandTier="0003"/>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKAipbpFAAAAA==" FareBasis="BNN0OGED" PassengerTypeCode="ADT" Origin="ICN" Destination="HND" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW330000" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>2</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKAipbpFAAAAA==" ProviderCode="1G">gws-eJxNjrEOwjAMRD+muv2cpk26BdKGgpBZYOjC/38GTgISlmyf9ZKzU0qOsjDKkv5jwHu43aGvDCic5a4rXOTsIDYdIBlxVuXjshkxE6GjIW24d2kPiy/BGspYpKMaOFq9ZjXWnc1TUFejSvuBn9h2k3panz6MYptJP835Cxlgt34A4g0rwQ==</air:FareRuleKey>
+                    <air:Brand Key="jsXfwx4R2BKAjqbpFAAAAA==" BrandID="167402" UpSellBrandFound="false" BrandTier="0001"/>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKAnpbpFAAAAA==" FareBasis="YKJL" PassengerTypeCode="ADT" Origin="HND" Destination="KKJ" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-21" Amount="KRW413300" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>2</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKAnpbpFAAAAA==" ProviderCode="1G">gws-eJxNTrsOwzAI/Jjo9sNOVWdz1MSK4oqpHbz0/z+jYDdSkYCDOx4550BZmGTJ/zbhM51P6PsBKIJ5rSfiTea5Vw2UsKNVE/kCYRBra6dGFhexxCKWUFg4KDe0Hg/djBtbSQr8LBzaBC6wHwZ13V5RvE6uTOuP5B32whctMirG</air:FareRuleKey>
+                    <air:Brand Key="jsXfwx4R2BKAkqbpFAAAAA==" BrandID="167415" UpSellBrandFound="false" BrandTier="0003"/>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKArpbpFAAAAA==" FareBasis="YOWDJ" PassengerTypeCode="ADT" Origin="GMP" Destination="HND" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW368500" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>2</air:NumberOfPieces>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKArpbpFAAAAA==" ProviderCode="1G">gws-eJxNjsEOAiEMRD9mM/cWsivcMIsrMbF60Bgu/v9nOIWLTaDTPjqllBJEsyTN5T8WfBdrsPcOGAJPs4qoMW5QVh0iktAfn3qDO6gEYd8Gm1nHq0OOwIS67mkiD/RxX+9PsmlLQ4XvhUtOwMVpTbg0SjvXlwRrXOt0E8IsGRziR39lTStP</air:FareRuleKey>
+                </air:FareInfo>
+                <air:FareInfo Key="jsXfwx4R2BKAzpbpFAAAAA==" FareBasis="NK1LJ" PassengerTypeCode="ADT" Origin="ICN" Destination="KKJ" EffectiveDate="2019-08-19T18:39:00.000+09:00" DepartureDate="2019-10-20" Amount="KRW65000" NegotiatedFare="false" NotValidBefore="2019-10-20" NotValidAfter="2019-10-20">
+                    <air:BaggageAllowance>
+                        <air:MaxWeight Value="15" Unit="Kilograms"/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="jsXfwx4R2BKAzpbpFAAAAA==" ProviderCode="1G">gws-eJxNTkEOwjAMe8zkexJp2norWkGjRTlscNiF/z8DpwOJSK2dOLWbczbRJLOm/F8D3sOjwl8L4DCe1irG0SYomwMiMsObcikMVEw4966dqH2r6M0IKFbSKUXh6Pd98TDqtkRFxCIoX+BHriupX8qzWtsYKxG4f0WZwC98ACqmKxw=</air:FareRuleKey>
+                    <air:Brand Key="jsXfwx4R2BKAlqbpFAAAAA==" BrandID="160515" UpSellBrandFound="false" BrandTier="0002"/>
+                </air:FareInfo>
+            </air:FareInfoList>
+            <air:RouteList>
+                <air:Route Key="jsXfwx4R2BKA7pbpFAAAAA==">
+                    <air:Leg Key="jsXfwx4R2BKAHobpFAAAAA==" Group="0" Origin="SEL" Destination="KKJ"/>
+                </air:Route>
+            </air:RouteList>
+            <air:AirPricePointList>
+                <air:AirPricePoint Key="jsXfwx4R2BKA8pbpFAAAAA==" TotalPrice="KRW60200" BasePrice="KRW25000" ApproximateTotalPrice="KRW60200" ApproximateBasePrice="KRW25000" Taxes="KRW35200" ApproximateTaxes="KRW35200" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKAAobpFAAAAA==" TotalPrice="KRW60200" BasePrice="KRW25000" ApproximateTotalPrice="KRW60200" ApproximateBasePrice="KRW25000" Taxes="KRW35200" LatestTicketingTime="2019-08-31" PricingMethod="Guaranteed" Refundable="true" ETicketability="Yes" PlatingCarrier="LJ" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKA/nbpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="YR" Amount="KRW7200"/>
+                        <air:FareCalc>SEL LJ KKJ 21.25RK1SP NUC21.25END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Amount>KRW50000</air:Amount>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Amount>KRW60000</air:Amount>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKADobpFAAAAA==" TravelTime="P0DT1H25M0S">
+                                    <air:BookingInfo BookingCode="R" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKA/nbpFAAAAA==" SegmentRef="jsXfwx4R2BKACnbpFAAAAA=="/>
+                                </air:Option>
+                                <air:Option Key="jsXfwx4R2BKAFobpFAAAAA==" TravelTime="P0DT1H25M0S">
+                                    <air:BookingInfo BookingCode="R" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKA/nbpFAAAAA==" SegmentRef="jsXfwx4R2BKAEnbpFAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKA9pbpFAAAAA==" TotalPrice="KRW341600" BasePrice="KRW298700" ApproximateTotalPrice="KRW341600" ApproximateBasePrice="KRW298700" Taxes="KRW42900" ApproximateTaxes="KRW42900" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKAJobpFAAAAA==" TotalPrice="KRW341600" BasePrice="KRW298700" ApproximateTotalPrice="KRW341600" ApproximateBasePrice="KRW298700" Taxes="KRW42900" LatestTicketingTime="2019-08-20" PricingMethod="Guaranteed" ETicketability="Yes" PlatingCarrier="OZ" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKAIobpFAAAAA=="/>
+                        <air:FareInfoRef Key="jsXfwx4R2BKANobpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YQ" Amount="KRW10600"/>
+                        <air:FareCalc>SEL OZ TYO 153.06KLOKJ NH KKJ 100.90KNNDJ NUC253.96END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKAOobpFAAAAA==" TravelTime="P0DT12H10M0S">
+                                    <air:BookingInfo BookingCode="K" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAIobpFAAAAA==" SegmentRef="jsXfwx4R2BKAGnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="K" BookingCount="1" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKANobpFAAAAA==" SegmentRef="jsXfwx4R2BKAInbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                                <air:Option Key="jsXfwx4R2BKARobpFAAAAA==" TravelTime="P0DT13H45M0S">
+                                    <air:BookingInfo BookingCode="K" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAIobpFAAAAA==" SegmentRef="jsXfwx4R2BKAGnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="K" BookingCount="1" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKANobpFAAAAA==" SegmentRef="jsXfwx4R2BKAKnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                                <air:Option Key="jsXfwx4R2BKAUobpFAAAAA==" TravelTime="P0DT15H45M0S">
+                                    <air:BookingInfo BookingCode="K" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAIobpFAAAAA==" SegmentRef="jsXfwx4R2BKAGnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="K" BookingCount="1" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKANobpFAAAAA==" SegmentRef="jsXfwx4R2BKAMnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKA+pbpFAAAAA==" TotalPrice="KRW361600" BasePrice="KRW318700" ApproximateTotalPrice="KRW361600" ApproximateBasePrice="KRW318700" Taxes="KRW42900" ApproximateTaxes="KRW42900" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKA/pbpFAAAAA==" TotalPrice="KRW361600" BasePrice="KRW318700" ApproximateTotalPrice="KRW361600" ApproximateBasePrice="KRW318700" Taxes="KRW42900" LatestTicketingTime="2019-08-20" PricingMethod="Guaranteed" ETicketability="Yes" PlatingCarrier="OZ" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKAXobpFAAAAA=="/>
+                        <air:FareInfoRef Key="jsXfwx4R2BKAoobpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YQ" Amount="KRW10600"/>
+                        <air:FareCalc>SEL OZ TYO 170.07KLOKJ NH KKJ 100.90KNNDJ NUC270.97END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKADqbpFAAAAA==" TravelTime="P0DT7H55M0S">
+                                    <air:BookingInfo BookingCode="K" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAXobpFAAAAA==" SegmentRef="jsXfwx4R2BKAOnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="K" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAoobpFAAAAA==" SegmentRef="jsXfwx4R2BKAQnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                                <air:Option Key="jsXfwx4R2BKAGqbpFAAAAA==" TravelTime="P0DT8H5M0S">
+                                    <air:BookingInfo BookingCode="K" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAXobpFAAAAA==" SegmentRef="jsXfwx4R2BKASnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="K" BookingCount="6" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAoobpFAAAAA==" SegmentRef="jsXfwx4R2BKAUnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKAJqbpFAAAAA==" TotalPrice="KRW379300" BasePrice="KRW336000" ApproximateTotalPrice="KRW379300" ApproximateBasePrice="KRW336000" Taxes="KRW43300" ApproximateTaxes="KRW43300" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKA3obpFAAAAA==" TotalPrice="KRW379300" BasePrice="KRW336000" ApproximateTotalPrice="KRW379300" ApproximateBasePrice="KRW336000" Taxes="KRW43300" LatestTicketingTime="2019-08-26" PricingMethod="Guaranteed" Refundable="true" ETicketability="Yes" PlatingCarrier="JL" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKA2obpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YQ" Amount="KRW11000"/>
+                        <air:FareCalc>SEL JL X/TYO JL KKJ 285.72HLN0OGDD NUC285.72END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Before Departure">
+                            <air:Amount>KRW30000</air:Amount>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKA7obpFAAAAA==" TravelTime="P0DT7H55M0S">
+                                    <air:BookingInfo BookingCode="H" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKA2obpFAAAAA==" SegmentRef="jsXfwx4R2BKAWnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="Y" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKA2obpFAAAAA==" SegmentRef="jsXfwx4R2BKAYnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                                <air:Option Key="jsXfwx4R2BKA+obpFAAAAA==" TravelTime="P0DT8H15M0S">
+                                    <air:BookingInfo BookingCode="H" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKA2obpFAAAAA==" SegmentRef="jsXfwx4R2BKAanbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="Y" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKA2obpFAAAAA==" SegmentRef="jsXfwx4R2BKAdnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                                <air:Option Key="jsXfwx4R2BKABpbpFAAAAA==" TravelTime="P0DT12H40M0S">
+                                    <air:BookingInfo BookingCode="H" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKA2obpFAAAAA==" SegmentRef="jsXfwx4R2BKAfnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="Y" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKA2obpFAAAAA==" SegmentRef="jsXfwx4R2BKAhnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKAKqbpFAAAAA==" TotalPrice="KRW398700" BasePrice="KRW358000" ApproximateTotalPrice="KRW398700" ApproximateBasePrice="KRW358000" Taxes="KRW40700" ApproximateTaxes="KRW40700" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKAFpbpFAAAAA==" TotalPrice="KRW398700" BasePrice="KRW358000" ApproximateTotalPrice="KRW398700" ApproximateBasePrice="KRW358000" Taxes="KRW40700" LatestTicketingTime="2019-09-02" PricingMethod="Guaranteed" Refundable="true" ETicketability="Yes" PlatingCarrier="NH" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKAEpbpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YQ" Amount="KRW8400"/>
+                        <air:FareCalc>SEL NH X/TYO NH KKJ 304.43MRFD0O NUC304.43END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty NoShow="true" PenaltyApplies="Anytime">
+                            <air:Amount>KRW30000</air:Amount>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKAJpbpFAAAAA==" TravelTime="P0DT5H10M0S">
+                                    <air:BookingInfo BookingCode="M" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAEpbpFAAAAA==" SegmentRef="jsXfwx4R2BKAjnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="M" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAEpbpFAAAAA==" SegmentRef="jsXfwx4R2BKAlnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                                <air:Option Key="jsXfwx4R2BKAMpbpFAAAAA==" TravelTime="P0DT6H5M0S">
+                                    <air:BookingInfo BookingCode="M" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAEpbpFAAAAA==" SegmentRef="jsXfwx4R2BKAnnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="M" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAEpbpFAAAAA==" SegmentRef="jsXfwx4R2BKAqnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                                <air:Option Key="jsXfwx4R2BKAPpbpFAAAAA==" TravelTime="P0DT13H20M0S">
+                                    <air:BookingInfo BookingCode="M" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAEpbpFAAAAA==" SegmentRef="jsXfwx4R2BKAsnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="M" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAEpbpFAAAAA==" SegmentRef="jsXfwx4R2BKAInbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKALqbpFAAAAA==" TotalPrice="KRW431600" BasePrice="KRW388700" ApproximateTotalPrice="KRW431600" ApproximateBasePrice="KRW388700" Taxes="KRW42900" ApproximateTaxes="KRW42900" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKAMqbpFAAAAA==" TotalPrice="KRW431600" BasePrice="KRW388700" ApproximateTotalPrice="KRW431600" ApproximateBasePrice="KRW388700" Taxes="KRW42900" LatestTicketingTime="2019-08-20" PricingMethod="Guaranteed" ETicketability="Yes" PlatingCarrier="OZ" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKASpbpFAAAAA=="/>
+                        <air:FareInfoRef Key="jsXfwx4R2BKAoobpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YQ" Amount="KRW10600"/>
+                        <air:FareCalc>SEL OZ TYO 229.60KLOKJ NH KKJ 100.90KNNDJ NUC330.50END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKAQqbpFAAAAA==" TravelTime="P0DT6H25M0S">
+                                    <air:BookingInfo BookingCode="K" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKASpbpFAAAAA==" SegmentRef="jsXfwx4R2BKAunbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="K" BookingCount="6" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAoobpFAAAAA==" SegmentRef="jsXfwx4R2BKAxnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKATqbpFAAAAA==" TotalPrice="KRW437600" BasePrice="KRW394700" ApproximateTotalPrice="KRW437600" ApproximateBasePrice="KRW394700" Taxes="KRW42900" ApproximateTaxes="KRW42900" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKAbpbpFAAAAA==" TotalPrice="KRW437600" BasePrice="KRW394700" ApproximateTotalPrice="KRW437600" ApproximateBasePrice="KRW394700" Taxes="KRW42900" LatestTicketingTime="2019-08-20" PricingMethod="Guaranteed" ETicketability="Yes" PlatingCarrier="OZ" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKAapbpFAAAAA=="/>
+                        <air:FareInfoRef Key="jsXfwx4R2BKAoobpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YQ" Amount="KRW10600"/>
+                        <air:FareCalc>SEL OZ TYO 234.70KLOKJNH NH KKJ 100.90KNNDJ NUC335.60END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKAfpbpFAAAAA==" TravelTime="P0DT6H5M0S">
+                                    <air:BookingInfo BookingCode="K" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAapbpFAAAAA==" SegmentRef="jsXfwx4R2BKApnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="K" BookingCount="6" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAoobpFAAAAA==" SegmentRef="jsXfwx4R2BKAqnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKAUqbpFAAAAA==" TotalPrice="KRW530300" BasePrice="KRW487200" ApproximateTotalPrice="KRW530300" ApproximateBasePrice="KRW487200" Taxes="KRW43100" ApproximateTaxes="KRW43100" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKApobpFAAAAA==" TotalPrice="KRW530300" BasePrice="KRW487200" ApproximateTotalPrice="KRW530300" ApproximateBasePrice="KRW487200" Taxes="KRW43100" LatestTicketingTime="2019-08-20" PricingMethod="Guaranteed" ETicketability="Yes" PlatingCarrier="KE" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKAhobpFAAAAA=="/>
+                        <air:FareInfoRef Key="jsXfwx4R2BKAoobpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YR" Amount="KRW10800"/>
+                        <air:FareCalc>SEL KE TYO 313.36YOW NH KKJ 100.90KNNDJ NUC414.26END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKAtobpFAAAAA==" TravelTime="P0DT6H25M0S">
+                                    <air:BookingInfo BookingCode="Y" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAhobpFAAAAA==" SegmentRef="jsXfwx4R2BKAznbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="K" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAoobpFAAAAA==" SegmentRef="jsXfwx4R2BKA1nbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                                <air:Option Key="jsXfwx4R2BKAwobpFAAAAA==" TravelTime="P0DT6H45M0S">
+                                    <air:BookingInfo BookingCode="Y" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAhobpFAAAAA==" SegmentRef="jsXfwx4R2BKA3nbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="K" BookingCount="7" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAoobpFAAAAA==" SegmentRef="jsXfwx4R2BKA5nbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                                <air:Option Key="jsXfwx4R2BKAzobpFAAAAA==" TravelTime="P0DT6H50M0S">
+                                    <air:BookingInfo BookingCode="Y" BookingCount="4" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAhobpFAAAAA==" SegmentRef="jsXfwx4R2BKAcnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="K" BookingCount="6" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAoobpFAAAAA==" SegmentRef="jsXfwx4R2BKAqnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKAVqbpFAAAAA==" TotalPrice="KRW656200" BasePrice="KRW613300" ApproximateTotalPrice="KRW656200" ApproximateBasePrice="KRW613300" Taxes="KRW42900" ApproximateTaxes="KRW42900" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKAYobpFAAAAA==" TotalPrice="KRW656200" BasePrice="KRW613300" ApproximateTotalPrice="KRW656200" ApproximateBasePrice="KRW613300" Taxes="KRW42900" LatestTicketingTime="2019-10-20" PricingMethod="Guaranteed" Refundable="true" ETicketability="Yes" PlatingCarrier="OZ" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKAXobpFAAAAA=="/>
+                        <air:FareInfoRef Key="jsXfwx4R2BKAcobpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YQ" Amount="KRW10600"/>
+                        <air:FareCalc>SEL OZ TYO 170.07KLOKJ JL KKJ 351.44YKJL NUC521.51END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Amount>KRW70000</air:Amount>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Before Departure">
+                            <air:Amount>KRW110000</air:Amount>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKAlobpFAAAAA==" TravelTime="P0DT11H15M0S">
+                                    <air:BookingInfo BookingCode="K" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAXobpFAAAAA==" SegmentRef="jsXfwx4R2BKASnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="G" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAcobpFAAAAA==" SegmentRef="jsXfwx4R2BKAdnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKAWqbpFAAAAA==" TotalPrice="KRW726200" BasePrice="KRW683300" ApproximateTotalPrice="KRW726200" ApproximateBasePrice="KRW683300" Taxes="KRW42900" ApproximateTaxes="KRW42900" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKATpbpFAAAAA==" TotalPrice="KRW726200" BasePrice="KRW683300" ApproximateTotalPrice="KRW726200" ApproximateBasePrice="KRW683300" Taxes="KRW42900" LatestTicketingTime="2019-10-20" PricingMethod="Guaranteed" Refundable="true" ETicketability="Yes" PlatingCarrier="OZ" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKASpbpFAAAAA=="/>
+                        <air:FareInfoRef Key="jsXfwx4R2BKAcobpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YQ" Amount="KRW10600"/>
+                        <air:FareCalc>SEL OZ TYO 229.60KLOKJ JL KKJ 351.44YKJL NUC581.04END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Amount>KRW70000</air:Amount>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Before Departure">
+                            <air:Amount>KRW110000</air:Amount>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKAXpbpFAAAAA==" TravelTime="P0DT6H35M0S">
+                                    <air:BookingInfo BookingCode="K" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKASpbpFAAAAA==" SegmentRef="jsXfwx4R2BKAunbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="G" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAcobpFAAAAA==" SegmentRef="jsXfwx4R2BKA7nbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKAXqbpFAAAAA==" TotalPrice="KRW786600" BasePrice="KRW743300" ApproximateTotalPrice="KRW786600" ApproximateBasePrice="KRW743300" Taxes="KRW43300" ApproximateTaxes="KRW43300" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKAjpbpFAAAAA==" TotalPrice="KRW786600" BasePrice="KRW743300" ApproximateTotalPrice="KRW786600" ApproximateBasePrice="KRW743300" Taxes="KRW43300" LatestTicketingTime="2019-08-26" PricingMethod="Guaranteed" Refundable="true" ETicketability="Yes" PlatingCarrier="JL" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKAipbpFAAAAA=="/>
+                        <air:FareInfoRef Key="jsXfwx4R2BKAnpbpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YQ" Amount="KRW11000"/>
+                        <air:FareCalc>SEL JL TYO 280.62BNN0OGED JL KKJ 351.44YKJL NUC632.06END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Before Departure">
+                            <air:Amount>KRW30000</air:Amount>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKAopbpFAAAAA==" TravelTime="P0DT11H30M0S">
+                                    <air:BookingInfo BookingCode="B" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAipbpFAAAAA==" SegmentRef="jsXfwx4R2BKA9nbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="G" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAnpbpFAAAAA==" SegmentRef="jsXfwx4R2BKAhnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKAYqbpFAAAAA==" TotalPrice="KRW822500" BasePrice="KRW781800" ApproximateTotalPrice="KRW822500" ApproximateBasePrice="KRW781800" Taxes="KRW40700" ApproximateTaxes="KRW40700" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKAspbpFAAAAA==" TotalPrice="KRW822500" BasePrice="KRW781800" ApproximateTotalPrice="KRW822500" ApproximateBasePrice="KRW781800" Taxes="KRW40700" LatestTicketingTime="2019-10-20" PricingMethod="Guaranteed" Refundable="true" ETicketability="Yes" PlatingCarrier="NH" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKArpbpFAAAAA=="/>
+                        <air:FareInfoRef Key="jsXfwx4R2BKAcobpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YQ" Amount="KRW8400"/>
+                        <air:FareCalc>SEL NH TYO 313.36YOWDJ JL KKJ 351.44YKJL NUC664.80END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKAwpbpFAAAAA==" TravelTime="P0DT6H35M0S">
+                                    <air:BookingInfo BookingCode="Y" BookingCount="4" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKArpbpFAAAAA==" SegmentRef="jsXfwx4R2BKAwnbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="G" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAcobpFAAAAA==" SegmentRef="jsXfwx4R2BKA7nbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKAZqbpFAAAAA==" TotalPrice="KRW824900" BasePrice="KRW781800" ApproximateTotalPrice="KRW824900" ApproximateBasePrice="KRW781800" Taxes="KRW43100" ApproximateTaxes="KRW43100" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKAdobpFAAAAA==" TotalPrice="KRW824900" BasePrice="KRW781800" ApproximateTotalPrice="KRW824900" ApproximateBasePrice="KRW781800" Taxes="KRW43100" LatestTicketingTime="2019-10-20" PricingMethod="Guaranteed" Refundable="true" ETicketability="Yes" PlatingCarrier="KE" ProviderCode="1G" Cat35Indicator="false">
+                        <air:FareInfoRef Key="jsXfwx4R2BKAhobpFAAAAA=="/>
+                        <air:FareInfoRef Key="jsXfwx4R2BKAcobpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="HJ" Amount="KRW4300"/>
+                        <air:TaxInfo Category="YR" Amount="KRW10800"/>
+                        <air:FareCalc>SEL KE TYO 313.36YOW JL KKJ 351.44YKJL NUC664.80END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKAiobpFAAAAA==" TravelTime="P0DT6H50M0S">
+                                    <air:BookingInfo BookingCode="Y" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAhobpFAAAAA==" SegmentRef="jsXfwx4R2BKA3nbpFAAAAA=="/>
+                                    <air:BookingInfo BookingCode="G" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAcobpFAAAAA==" SegmentRef="jsXfwx4R2BKAYnbpFAAAAA=="/>
+                                    <air:Connection SegmentIndex="0"/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="jsXfwx4R2BKAaqbpFAAAAA==" TotalPrice="KRW100200" BasePrice="KRW65000" ApproximateTotalPrice="KRW100200" ApproximateBasePrice="KRW65000" Taxes="KRW35200" ApproximateTaxes="KRW35200" CompleteItinerary="true">
+                    <air:AirPricingInfo Key="jsXfwx4R2BKA0pbpFAAAAA==" TotalPrice="KRW100200" BasePrice="KRW65000" ApproximateTotalPrice="KRW100200" ApproximateBasePrice="KRW65000" Taxes="KRW35200" LatestTicketingTime="2019-10-20" PricingMethod="Guaranteed" Refundable="true" ProviderCode="1G">
+                        <air:FareInfoRef Key="jsXfwx4R2BKAzpbpFAAAAA=="/>
+                        <air:TaxInfo Category="BP" Amount="KRW28000"/>
+                        <air:TaxInfo Category="YR" Amount="KRW7200"/>
+                        <air:FareCalc>SEL LJ KKJ 55.27NK1LJ NUC55.27END ROE1175.95286</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Amount>KRW40000</air:Amount>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Amount>KRW60000</air:Amount>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="jsXfwx4R2BKAHobpFAAAAA==" Destination="KKJ" Origin="SEL">
+                                <air:Option Key="jsXfwx4R2BKA3pbpFAAAAA==" TravelTime="P0DT1H25M0S">
+                                    <air:BookingInfo BookingCode="N" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAzpbpFAAAAA==" SegmentRef="jsXfwx4R2BKACnbpFAAAAA=="/>
+                                </air:Option>
+                                <air:Option Key="jsXfwx4R2BKA5pbpFAAAAA==" TravelTime="P0DT1H25M0S">
+                                    <air:BookingInfo BookingCode="N" BookingCount="9" CabinClass="Economy" FareInfoRef="jsXfwx4R2BKAzpbpFAAAAA==" SegmentRef="jsXfwx4R2BKAEnbpFAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+            </air:AirPricePointList>
+            <air:AsyncProviderSpecificResponse ProviderCode="1G" MoreResults="false"/>
+            <air:BrandList>
+                <air:Brand Key="jsXfwx4R2BKAmqbpFAAAAA==" BrandID="160517" Name="SUPER LOW" BrandedDetailsAvailable="true" Carrier="LJ">
+                    <air:Title Type="External" LanguageCode="EN">SUPER LOW</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">SUPER LOW</air:Title>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">SUPER LOW FARE includes:
+
+                        - 15 KG checked baggage (20 KG to/from China routes)
+                        - 2 PCS of 23 KG each for US route, 1 PC of 23 KG for Cairns route
+                        - 12 KG handcarry
+                        - Light meal on selected routes
+                        - Seat reservation can be made with a fee
+                        - Rebooking and refunds** permitted with a fee
+
+                        **Fare rules vary in case of promotions, please check the fare rule again for more details.</air:Text>
+                    <air:Text Type="Strapline" LanguageCode="EN">SUPER LOW</air:Text>
+                    <air:ImageLocation Type="Agent" ImageWidth="150" ImageHeight="150">https://cdn.travelport.com/jinair/LJ_general_medium_80874.jpg</air:ImageLocation>
+                    <air:ImageLocation Type="Consumer" ImageWidth="1400" ImageHeight="800">https://cdn.travelport.com/jinair/LJ_general_large_80875.jpg</air:ImageLocation>
+                </air:Brand>
+                <air:Brand Key="jsXfwx4R2BKAnqbpFAAAAA==" BrandID="167096" Name="Economy Class Flexible" BrandedDetailsAvailable="true" Carrier="KE">
+                    <air:Title Type="External" LanguageCode="EN">Economy Class Refund/Changes Allowed</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">Econ Flex</air:Title>
+                    <air:Text Type="Upsell" LanguageCode="EN">Enjoy more ticketing flexibility</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">Affordable luxury features highest-quality service from departure to arrival. Great design, more personal space, this 18-inch wide seat with 121-degree reclining back support has 34 inches of space between you and the next row of seats, and provides personal comfort unlike any other economy-class seat.
+
+                        An 8.4-inch high-resolution LCD wide screen with state-of-the-art audio and video on demand (AVOD) makes channel selection easy and your flight more enjoyable.
+
+                        - Include carry on bag 12KG
+                        - Include checked baggage 23KG
+                        - Include inflight meal
+                        - Include seat selection
+                        - Rebooking and Refunds permitted FOC
+                        - Include inflight entertainment
+
+                        Note: Type and size of seat and its available features may vary depending on the flight route, time and aircraft.
+
+                        *Services may not be available when the fare contains a codeshare or interline connection</air:Text>
+                    <air:Text Type="Strapline" LanguageCode="EN">Enjoy more ticketing flexibility</air:Text>
+                    <air:ImageLocation Type="Agent" ImageWidth="150" ImageHeight="150">https://cdn.travelport.com/koreanair/KE_general_medium_1228.jpg</air:ImageLocation>
+                    <air:ImageLocation Type="Consumer" ImageWidth="1333" ImageHeight="800">https://cdn.travelport.com/koreanair/KE_general_large_45850.jpg</air:ImageLocation>
+                </air:Brand>
+                <air:Brand Key="jsXfwx4R2BKAoqbpFAAAAA==" BrandID="167402" Name="JL operated by codesharer partners" BrandedDetailsAvailable="true" Carrier="JL">
+                    <air:Title Type="External" LanguageCode="EN">JL operated by other airline</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">op by oa</air:Title>
+                    <air:Text Type="Upsell" LanguageCode="EN">JL OPERATED BY PARTNER AIRLINES
+
+                        Airport and in-flight services are provided by JAL partner aircraft and crew.
+                        Check-in at JAL partner airlines' check-in counter.</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">JL OPERATED BY PARTNER AIRLINES
+
+                        Airport and in-flight services are provided by JAL partner aircraft and crew.
+                        Check-in at JAL partner airlines' check-in counter.
+                        &#8226; Please note that if the flight is operated by another airline then the onboard product or service maybe different to that described above.</air:Text>
+                    <air:Text Type="Strapline" LanguageCode="EN">JL operated by other airline</air:Text>
+                    <air:ImageLocation Type="Upsell" ImageWidth="113" ImageHeight="120">https://cdn.travelport.com/japanairlines/JL_general_medium_4852.png</air:ImageLocation>
+                    <air:ImageLocation Type="Agent" ImageWidth="113" ImageHeight="120">https://cdn.travelport.com/japanairlines/JL_general_medium_4852.png</air:ImageLocation>
+                    <air:ImageLocation Type="Consumer" ImageWidth="113" ImageHeight="120">https://cdn.travelport.com/japanairlines/JL_general_medium_4852.png</air:ImageLocation>
+                </air:Brand>
+                <air:Brand Key="jsXfwx4R2BKApqbpFAAAAA==" BrandID="167415" Name="JAL SKYNEXT Y 73H" BrandedDetailsAvailable="true" Carrier="JL">
+                    <air:Title Type="External" LanguageCode="EN">JAL Economy Class (Japan Domestic routes)</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">Y class</air:Title>
+                    <air:Text Type="Upsell" LanguageCode="EN">Quality beverages, free of charge&#12288;
+                        Unlimited Wi-Fi video viewing on smartphone&#12288;
+                        Inflight internet&#12288;
+                        Genuine leather seats (JAL SKY NEXT aircraft)&#12288;</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">Quality beverages, free of charge&#12288;
+                        Unlimited Wi-Fi video viewing on smartphone&#12288;
+                        Inflight internet&#12288;
+                        Genuine leather seats (JAL SKY NEXT aircraft)&#12288;
+                        &#8226; Please note that if the flight is operated by another airline then the onboard product or service maybe different to that described above.</air:Text>
+                    <air:Text Type="Strapline" LanguageCode="EN">JAL Economy Class (Japan Domestic routes)</air:Text>
+                    <air:ImageLocation Type="Agent" ImageWidth="117" ImageHeight="120">https://cdn.travelport.com/japanairlines/JL_general_medium_4831.png</air:ImageLocation>
+                    <air:ImageLocation Type="Consumer" ImageWidth="117" ImageHeight="120">https://cdn.travelport.com/japanairlines/JL_general_medium_4831.png</air:ImageLocation>
+                    <air:ImageLocation Type="Upsell" ImageWidth="117" ImageHeight="120">https://cdn.travelport.com/japanairlines/JL_general_medium_4831.png</air:ImageLocation>
+                </air:Brand>
+                <air:Brand Key="jsXfwx4R2BKAqqbpFAAAAA==" BrandID="160515" Name="FLEX" BrandedDetailsAvailable="true" Carrier="LJ">
+                    <air:Title Type="External" LanguageCode="EN">FLEX</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">FLEX</air:Title>
+                    <air:Text Type="Upsell" LanguageCode="EN">CHOOSE Smart bundle for
+                        JINI FRONT Seat and Snack</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">FLEX FARE includes:
+
+                        - 15 KG checked baggage (20 KG to/from China routes)
+                        - 2 PCS of 23 KG each for US route, 1 PC of 23 KG for Cairns route
+                        - 12 KG handcarry
+                        - Light meal on selected routes
+                        - Seat reservation can be made with a fee
+                        - Rebooking and refunds permitted with a fee</air:Text>
+                    <air:Text Type="Strapline" LanguageCode="EN">FLEX</air:Text>
+                    <air:ImageLocation Type="Agent" ImageWidth="150" ImageHeight="150">https://cdn.travelport.com/jinair/LJ_general_medium_80872.jpg</air:ImageLocation>
+                    <air:ImageLocation Type="Consumer" ImageWidth="1400" ImageHeight="800">https://cdn.travelport.com/jinair/LJ_general_large_80873.jpg</air:ImageLocation>
+                </air:Brand>
+            </air:BrandList>
+        </air:LowFareSearchAsynchRsp>
+    </SOAP:Body>
+</SOAP:Envelope>

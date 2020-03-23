@@ -24,7 +24,7 @@ module.exports = `
             {{/if}}
             {{#each passengers}}
             <com:BookingTraveler Key="P_{{@index}}" Age="{{Age}}" DOB="{{DOB}}" Gender="{{gender}}" TravelerType="{{ageCategory}}">
-                <com:BookingTravelerName First="{{firstName}}" Last="{{lastName}}" {{#if Prefix}}Prefix="{{title}}"{{/if}}/>
+                <com:BookingTravelerName First="{{firstName}}" Last="{{lastName}}" {{#if title}}Prefix="{{title}}"{{/if}}/>
                 {{#if ../deliveryInformation}}
                 <com:DeliveryInfo>
                     <com:ShippingAddress>
@@ -53,9 +53,11 @@ module.exports = `
                     />
                 {{/if}}
                 {{#ssr}}
-                <com:SSR Type="{{type}}" FreeText="{{text}}"/>
-                <!--<com:SSR Carrier="F9" FreeText="P/IN/F1234567/IN/05Jan85/M/13Dec14/Jones/Stephen"-->
-                         <!--SegmentRef="IVaa0tGWQ+2grqSIL81xPQ==" Status="HK" Type="DOCS"/>-->
+                    {{#equal type "FQTV"}}
+                        <com:LoyaltyCard Key="P_{{@index}}_FQTV" SupplierType="Air" SupplierCode="{{carrier}}" CardNumber="{{text}}" />
+                    {{else}}
+                        <com:SSR Type="{{type}}"{{#if carrier}} Carrier="{{carrier}}"{{/if}}{{#if segmentRef}} SegmentRef="{{{segmentRef}}}"{{/if}}{{#if status}} Status="{{{status}}}"{{/if}} FreeText="{{text}}" />
+                    {{/equal}}
                 {{/ssr}}
                 {{#if isChild}}
                 <com:NameRemark Key="P_{{@index}}">

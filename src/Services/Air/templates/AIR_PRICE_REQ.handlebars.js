@@ -52,13 +52,17 @@ module.exports = `
             {{#passengers}}
             <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}" {{#if child}}Age="9"{{else if Age}}Age="{{Age}}"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
             {{/passengers}}
-            {{#if hasFareBasis}}
             <air:AirPricingCommand>
                 {{#segments}}
-                <air:AirSegmentPricingModifiers AirSegmentRef="{{@index}}" FareBasisCode="{{fareBasisCode}}"/>
+                <air:AirSegmentPricingModifiers AirSegmentRef="{{@index}}"{{#if fareBasisCode}} FareBasisCode="{{fareBasisCode}}"{{/if}}>
+                {{#if bookingClass}}
+                    <air:PermittedBookingCodes>
+                            <air:BookingCode Code="{{bookingClass}}" />
+                    </air:PermittedBookingCodes>
+                {{/if}}
+                </air:AirSegmentPricingModifiers>
                 {{/segments}}
             </air:AirPricingCommand>
-            {{/if}}
             {{#if emulatePcc}}
             <air:PCC>
                 <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>

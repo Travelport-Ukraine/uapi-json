@@ -1,4 +1,5 @@
 const { UtilsValidationError } = require('./UtilsErrors');
+const referenceDataTypes = require('../../reference-data-types');
 
 function Validator(params) {
   this.params = params;
@@ -27,11 +28,31 @@ Validator.prototype.currencies = function () {
   return this;
 };
 
+Validator.prototype.datatype = function () {
+  if (Object.prototype.toString.call(this.params.dataType) !== '[object String]') {
+    throw new UtilsValidationError.DataTypeMissing(this.params);
+  }
+
+  if (this.params.dataType.length <= 0) {
+    throw new UtilsValidationError.DataTypeMissing(this.params);
+  }
+
+  if (!referenceDataTypes.includes(this.params.dataType)) {
+    throw new UtilsValidationError.DataTypeMissing(this.params);
+  }
+
+  return this;
+};
 
 module.exports = {
   CURRENCY_CONVERSION(params) {
     return new Validator(params)
       .currencies()
+      .end();
+  },
+  REFERENCE_DATATYPE(params) {
+    return new Validator(params)
+      .datatype()
       .end();
   },
 };

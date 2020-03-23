@@ -24,5 +24,16 @@ module.exports = function (settings) {
       debug,
       options
     ),
+    referenceData: uApiRequest(
+      config.UtilService.url,
+      auth,
+      templates.referenceData,
+      'util:ReferenceDataRetrieveRsp',
+      UtilsValidator.REFERENCE_DATATYPE,
+      UtilsParser.UTILS_ERROR,
+      UtilsParser.REFERENCE_DATATYPE,
+      debug,
+      options
+    ),
   };
 };

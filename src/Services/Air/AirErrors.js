@@ -3,11 +3,12 @@ const {
   createErrorsList,
 } = require('node-errors-helpers');
 const errorTypes = require('../../error-types');
+const errorCodes = require('../../error-codes');
 
 // Validation errors
 const AirValidationError = createErrorClass(
   'AirValidationError',
-  'Air service validation error',
+  ['Air service validation error', errorCodes.Validation],
   errorTypes.ValidationError
 );
 Object.assign(AirValidationError, createErrorsList({
@@ -35,12 +36,13 @@ Object.assign(AirValidationError, createErrorsList({
   ExchangeToken: 'Missing exchangeToken in request. See data.',
   CreditCardMissing: 'Missing creditCard in request. See data.',
   IncorrectConnectionsFormat: 'Connections should be an array with IATA codes.',
-  PlatingCarrierInvalid: 'Plating Carrier Invalid'
+  PlatingCarrierInvalid: 'Plating Carrier Invalid',
+  SearchIdMissing: 'SearchId is missing'
 }, AirValidationError));
 
 const GdsValidationError = createErrorClass(
   'GdsValidationError',
-  'Gds service validation error',
+  ['Gds service validation error', errorCodes.Validation],
   errorTypes.ValidationError
 );
 Object.assign(GdsValidationError, createErrorsList({
@@ -51,7 +53,7 @@ Object.assign(GdsValidationError, createErrorsList({
 
 const AirFlightInfoValidationError = createErrorClass(
   'AirFlightInfoValidationError',
-  'Air FlightInfo service validation error',
+  ['Air FlightInfo service validation error', errorCodes.Validation],
   errorTypes.ValidationError
 );
 Object.assign(AirFlightInfoValidationError, createErrorsList({
@@ -71,7 +73,8 @@ Object.assign(AirParsingError, createErrorsList({
   ReservationsMissing: 'Reservations missing in response',
   BookingInfoError: 'air:BookingInfo should be an array',
   PlatingCarriersError: 'Plating carriers do not coincide across all passenger reservations',
-  PTCIsNotSet: 'Code is not set for PassengerTypeCode item',
+  PTCIsNotSet: 'Code not set for PassengerTypeCode item',
+  PlatingCarrierNotSet: 'PlatingCarrier is not set for AirPricingInfo item',
   PTCTypeInvalid: 'PassengerTypeCode is supposed to be a string or array of PassengerTypeCode items',
   HistogramTypeInvalid: 'PassengerType is supposed to be an array',
   MultiplePricingSolutionsNotAllowed: 'Expected only one pricing solution, need to clarify search?',
@@ -84,7 +87,7 @@ Object.assign(AirParsingError, createErrorsList({
 // Runtime errors
 const AirRuntimeError = createErrorClass(
   'AirRuntimeError',
-  'Air service runtime error',
+  ['Air service runtime error', 598],
   errorTypes.RuntimeError
 );
 Object.assign(AirRuntimeError, createErrorsList({
@@ -92,8 +95,8 @@ Object.assign(AirRuntimeError, createErrorsList({
   SegmentWaitlisted: 'One or more segments is waitlisted, not allowed',
   TicketingFailed: 'Ticketing failed',
   TicketingFoidRequired: 'FOID required for the PC selected',
-  TicketingPNRBusy: 'Reservation is being modified, unable to ticket now',
-  TicketingFOPUnavailable: 'Selected FOP is not available for this carrier',
+  TicketingPNRBusy: 'The reservation has been modified, unable to ticket now',
+  TicketingFOPUnavailable: 'The selected FOP is not available for this carrier',
   TicketingCreditCardRejected: 'Credit card rejected by the airline',
   TicketingResponseMissing: 'Response message text doesn\'t contain OK:Ticket issued',
   TicketingTicketsMissing: 'Tickets not found in ticketing response',
@@ -103,7 +106,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   TravelersListError: 'Not all BookingTravelers present in list or wrong lookup keys provided',
   PnrParseError: 'Failed to parse PNR from ticket information request response',
   GetPnrError: 'Failed to obtain PNR from ticket information',
-  UnableToRetrieveTickets: 'Unable to retrieve tickets list',
+  UnableToRetrieveTickets: ['Unable to retrieve tickets list', errorCodes.NotFound],
   TicketRetrieveError: 'Unable to retrieve ticket',
   TicketInfoIncomplete: 'Ticket information is incomplete',
   RequestInconsistency: 'Request faced race condition. Please retry again',
@@ -116,21 +119,21 @@ Object.assign(AirRuntimeError, createErrorsList({
   NoReservationToImport: 'No reservation to import',
   UnableToImportPnr: 'Unable to import requested PNR',
   UnableToOpenPNRInTerminal: 'Unable to open requested PNR in Terminal',
-  UnableToAddExtraSegment: 'Unable to add extra segment to PNR',
+  UnableToAddExtraSegment: 'Unable to add an extra segment to PNR',
   UnableToSaveBookingWithExtraSegment: 'Unable to save booking with extra segment',
-  NoResidualValue: 'Original ticket has no residual value for this specific itinerary. Issue a new ticket using current fares.',
+  NoResidualValue: 'The original ticket has no residual value for this specific itinerary. Issue a new ticket using current fares.',
   TicketsNotIssued: 'Host error during ticket retrieve.',
-  CantDetectExchangeReponse: 'Exchange response is unknown.',
+  CantDetectExchangeResponse: 'Exchange response is unknown.',
   ExchangeTokenIncorrect: 'Can\'t parse exchange token. Please resolve it again.',
   DuplicateTicketFound: 'Duplicate ticket number found. Provide PNR, UR locator',
-  NoPNRFoundInUR: 'No PNR found in Universal record',
-  NoAgreement: 'There is no agreement between current pcc and you trying to reach',
-  UnableToRetrieve: 'Unable to retrieve PNR. Please contact your local Travelport Helpdesk.',
+  NoPNRFoundInUR: ['No PNR found in Universal record', errorCodes.NotFound],
+  NoAgreement: ['There is no agreement between current pcc, and one you try to reach', errorCodes.Unauthorized],
+  UnableToRetrieve: ['Unable to retrieve PNR. Please contact your local Travelport Helpdesk.', errorCodes.NotFound],
 }, AirRuntimeError));
 
 const AirFlightInfoRuntimeError = createErrorClass(
   'AirFlightInfoRuntimeError',
-  'Air flight info service runtime error',
+  ['Air flight info service runtime error', errorCodes.UapiFailure],
   errorTypes.RuntimeError
 );
 Object.assign(AirFlightInfoRuntimeError, createErrorsList({
@@ -141,7 +144,7 @@ Object.assign(AirFlightInfoRuntimeError, createErrorsList({
 
 const GdsRuntimeError = createErrorClass(
   'GdsRuntimeError',
-  'Gds service runtime error',
+  ['Gds service runtime error', errorCodes.GdsFailure],
   errorTypes.RuntimeError
 );
 Object.assign(GdsRuntimeError, createErrorsList({

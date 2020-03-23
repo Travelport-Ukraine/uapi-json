@@ -102,6 +102,15 @@ module.exports = function uapiRequest(
         })
         .catch((e) => {
           const rsp = e.response;
+
+          if (!rsp) {
+            if (debugMode) {
+              log('Unexpected Error: ', pd.json(e));
+            }
+
+            return Promise.reject(new RequestSoapError.SoapUnexpectedError(e));
+          }
+
           const error = {
             status: rsp.status,
             data: rsp.data,
