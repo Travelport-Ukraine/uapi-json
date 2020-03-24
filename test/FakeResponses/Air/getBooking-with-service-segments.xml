@@ -1,0 +1,74 @@
+<SOAP:Envelope 
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <universal:UniversalRecordImportRsp TraceId="" TransactionId="5F1091D10A07571313C7C2F625225F53" ResponseTime="897" 
+      xmlns:universal="http://www.travelport.com/schema/universal_v47_0" 
+      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" 
+      xmlns:air="http://www.travelport.com/schema/air_v47_0" 
+      xmlns:passive="http://www.travelport.com/schema/passive_v47_0">
+      <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record CY4LZS</common_v47_0:ResponseMessage>
+      <universal:UniversalRecord LocatorCode="CY4LZS" Version="42" Status="Active">
+        <common_v47_0:BookingTraveler Key="bapPb3BAAA/BnaO0UMAAAA==">
+          <common_v47_0:BookingTravelerName First="DAVIDMR" Last="PANEL"/>
+          <common_v47_0:SSR Key="j8YWb3cc1BKAneHXJNAAAA==" SegmentRef="bapPb3BAAA/BqaO0UMAAAA==" Status="HK" Type="TKNE" FreeText="0809903542921C2" Carrier="LO" ProviderReservationInfoRef="bapPb3BAAA/Bq+G0UMAAAA=="/>
+        </common_v47_0:BookingTraveler>
+        <common_v47_0:ActionStatus Key="bapPb3BAAA/BzAM0UMAAAA==" Type="ACTIVE" ProviderReservationInfoRef="bapPb3BAAA/Bq+G0UMAAAA==" ProviderCode="1G">
+          <common_v47_0:Remark>QSB 21OCT1340Z WS AG</common_v47_0:Remark>
+        </common_v47_0:ActionStatus>
+        <universal:ProviderReservationInfo Key="bapPb3BAAA/Bq+G0UMAAAA==" ProviderCode="1G" LocatorCode="IBGVFI" CreateDate="2019-10-21T09:09:12.068+00:00" ModifiedDate="2019-11-12T10:02:32.448+00:00" HostCreateDate="2019-10-21" Imported="true" OwningPCC="7J8J"/>
+        <air:AirReservation LocatorCode="1G43RA" CreateDate="2019-10-21T09:09:11.531+00:00" ModifiedDate="2019-11-12T10:02:32.546+00:00">
+          <common_v47_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="ROIRXQ" ProviderReservationInfoRef="bapPb3BAAA/Bq+G0UMAAAA==" CreateDateTime="2019-10-21T09:08:00.000+00:00"/>
+          <air:DocumentInfo>
+            <air:TicketInfo Number="0809903542920" TicketIssueDate="2019-10-21T00:00:00.000+02:00" IATANumber="99999992" TicketingAgentSignOn="N315696" Status="X" BookingTravelerRef="bapPb3BAAA/BnaO0UMAAAA==">
+              <common_v47_0:Name First="DAVIDMR" Last="PANEL"/>
+            </air:TicketInfo>
+            <air:TicketInfo Number="0809903542921" TicketIssueDate="2019-10-21T00:00:00.000+02:00" IATANumber="99999992" TicketingAgentSignOn="ZV6U4WS" Status="N" BookingTravelerRef="bapPb3BAAA/BnaO0UMAAAA==">
+              <common_v47_0:Name First="DAVIDMR" Last="PANEL"/>
+              <air:ExchangedTicketInfo Number="0809903542920"/>
+            </air:TicketInfo>
+          </air:DocumentInfo>
+          <common_v47_0:BookingTravelerRef Key="bapPb3BAAA/BnaO0UMAAAA=="/>
+          <common_v47_0:ProviderReservationInfoRef Key="bapPb3BAAA/Bq+G0UMAAAA=="/>
+          <air:AirSegment Key="XhqIb3BAAA/Bw4ygUNAAAA==" Group="0" Carrier="LO" CabinClass="Economy" FlightNumber="766" ProviderCode="1G" Origin="LWO" Destination="WAW" DepartureTime="2020-05-03T15:45:00.000+03:00" ArrivalTime="2020-05-03T15:45:00.000+02:00" TravelTime="60" ClassOfService="W" ETicketability="Yes" Status="HX" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="bapPb3BAAA/Bq+G0UMAAAA==" TravelOrder="3" ProviderSegmentOrder="1" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="lclPb3BAAA/BsB7/VUAAAA==" Origin="LWO" Destination="WAW" DepartureTime="2020-05-03T15:45:00.000+03:00" ArrivalTime="2020-05-03T15:45:00.000+02:00" FlightTime="60" TravelTime="60" Equipment="E95" AutomatedCheckin="false"/>
+          </air:AirSegment>
+          <air:AirSegment Key="bapPb3BAAA/BqaO0UMAAAA==" Group="1" Carrier="LO" CabinClass="Economy" FlightNumber="765" ProviderCode="1G" Origin="WAW" Destination="LWO" DepartureTime="2020-05-30T12:55:00.000+02:00" ArrivalTime="2020-05-30T14:55:00.000+03:00" TravelTime="60" ClassOfService="W" ETicketability="Yes" Equipment="738" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="bapPb3BAAA/Bq+G0UMAAAA==" TravelOrder="1" ProviderSegmentOrder="2" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="bapPb3BAAA/BraO0UMAAAA==" Origin="WAW" Destination="LWO" DepartureTime="2020-05-30T12:55:00.000+02:00" ArrivalTime="2020-05-30T14:55:00.000+03:00" FlightTime="60" TravelTime="60" Equipment="738" AutomatedCheckin="false"/>
+          </air:AirSegment>
+        </air:AirReservation>
+        <passive:PassiveReservation LocatorCode="CY9ZT1" CreateDate="2019-10-21T13:39:46.025+00:00" ModifiedDate="2019-10-23T10:17:05.156+00:00" ProviderReservationInfoRef="bapPb3BAAA/Bq+G0UMAAAA==">
+          <common_v47_0:BookingTravelerRef Key="bapPb3BAAA/BnaO0UMAAAA=="/>
+          <passive:PassiveSegment NumberOfItems="1" SegmentType="Service" Status="EK" SupplierCode="LO" Origin="LWO" StartDate="2020-06-01T00:00:00.000+03:00" Key="7QYWb3Uc1BKAjN5uJNAAAA==" Group="0" TravelOrder="2" ProviderSegmentOrder="3"/>
+          <passive:PassiveRemark PassiveSegmentRef="7QYWb3Uc1BKAjN5uJNAAAA==">
+            <passive:Text>-D/993/REBOOKING FEE/NM-1PANEL/DAVIDMR//10/UAH</passive:Text>
+          </passive:PassiveRemark>
+        </passive:PassiveReservation>
+        <common_v47_0:GeneralRemark Key="bapPb3BAAA/BtaO0UMAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="bapPb3BAAA/Bq+G0UMAAAA==" CreateDate="2019-10-21T09:08:00.000+00:00">
+          <common_v47_0:RemarkData>VIEWTRIPITIN</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="bapPb3BAAA/BuaO0UMAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="bapPb3BAAA/Bq+G0UMAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2019-10-21T09:09:00.000+00:00">
+          <common_v47_0:RemarkData>ADTK1GTOLO BY 23OCT 1201 IEV TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="EzBMb3BAAA/BlxJLjMAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="bapPb3BAAA/Bq+G0UMAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2019-10-21T10:02:00.000+00:00">
+          <common_v47_0:RemarkData>ADTK1GTOLO BY 23OCT 1208 IEV TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="XhqIb3BAAA/Bv4ygUNAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="bapPb3BAAA/Bq+G0UMAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2019-10-21T13:43:00.000+00:00">
+          <common_v47_0:RemarkData>ADTK1GTOLO BY 23OCT 1208 IEV TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="lclPb3BAAA/BrB7/VUAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="bapPb3BAAA/Bq+G0UMAAAA==" SupplierCode="LO" Direction="Incoming" CreateDate="2019-10-23T09:09:00.000+00:00">
+          <common_v47_0:RemarkData>LOCANCELLATION DUE TO NO TICKET</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:AgencyInfo>
+          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="257f/VZmSaKqfMsUWfwY6Q==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2019-10-21T09:09:11.035+00:00"/>
+          <common_v47_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-11-12T10:02:32.552+00:00"/>
+          <common_v47_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-10-21T10:04:25.842+00:00"/>
+        </common_v47_0:AgencyInfo>
+        <common_v47_0:AgencyContactInfo>
+          <common_v47_0:PhoneNumber Key="bapPb3BAAA/BTBM0UMAAAA==" Type="Agency" Location="IEV" Number="380 44 9999999">
+            <common_v47_0:ProviderReservationInfoRef Key="bapPb3BAAA/Bq+G0UMAAAA=="/>
+          </common_v47_0:PhoneNumber>
+        </common_v47_0:AgencyContactInfo>
+      </universal:UniversalRecord>
+    </universal:UniversalRecordImportRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

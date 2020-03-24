@@ -1,0 +1,18 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <SOAP:Fault>
+            <faultcode>Server.Business</faultcode>
+            <faultstring>Invalid Type requested. Please provide a valid TypeCode.</faultstring>
+            <detail>
+                <common_v47_0:ErrorInfos xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+                    <common_v47_0:Codex>10024</common_v47_0:Code>
+                    <common_v47_0:Service>UTLSVC</common_v47_0:Service>
+                    <common_v47_0:Type>Business</common_v47_0:Type>
+                    <common_v47_0:Description>Invalid Type requested. Please provide a valid TypeCode.</common_v47_0:Description>
+                    <common_v47_0:TransactionId>7AA11CDB0A076477375385D47058DEF6</common_v47_0:TransactionId>
+                    <common_v47_0:TraceId>5e54a41c</common_v47_0:TraceId>
+                </common_v47_0:ErrorInfos>
+            </detail>
+        </SOAP:Fault>
+    </SOAP:Body>
+</SOAP:Envelope>

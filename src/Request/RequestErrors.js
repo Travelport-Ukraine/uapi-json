@@ -37,6 +37,7 @@ const RequestSoapError = createErrorClass(
   errorTypes.SoapError
 );
 Object.assign(RequestSoapError, createErrorsList({
+  SoapUnexpectedError: 'Unexpected error during soap request',
   SoapRequestError: 'Error during request to SOAP API. Check url validity',
   SoapParsingError: 'SOAP response parsing failed',
   SoapServerError: 'SOAP server error. Check auth and other data',

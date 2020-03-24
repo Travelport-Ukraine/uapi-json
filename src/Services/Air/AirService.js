@@ -22,6 +22,28 @@ module.exports = function (settings) {
       debug,
       options
     ),
+    searchLowFaresAsync: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.lowFareSearch,
+      'air:LowFareSearchAsynchRsp',
+      AirValidator.AIR_LOW_FARE_SEARCH_REQUEST,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_LOW_FARE_SEARCH_REQUEST,
+      debug,
+      options
+    ),
+    searchLowFaresRetrieve: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.retrieveLowFareSearch,
+      'air:RetrieveLowFareSearchRsp',
+      AirValidator.AIR_RETRIEVE_LOW_FARE_SEARCH_REQUEST,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_LOW_FARE_SEARCH_REQUEST,
+      debug,
+      options
+    ),
     availability: uApiRequest(
       config.AirService.url,
       auth,
@@ -30,6 +52,17 @@ module.exports = function (settings) {
       AirValidator.AIR_LOW_FARE_SEARCH_REQUEST,
       AirParser.AIR_ERRORS,
       AirParser.AIR_AVAILABILITY,
+      debug,
+      options
+    ),
+    airPrice: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.price,
+      'air:AirPriceRsp',
+      AirValidator.AIR_PRICE_REQUEST,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_PRICE_REQUEST,
       debug,
       options
     ),
@@ -176,7 +209,7 @@ module.exports = function (settings) {
       debug,
       options
     ),
-    cancelPNR: uApiRequest(
+    cancelBooking: uApiRequest(
       config.AirService.url,
       auth,
       templates.cancel,

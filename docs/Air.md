@@ -10,21 +10,22 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 
 **AirService**
 * [.shop(params)](#shop)
+* [.retrieveShop(params)](#retrieve-shop)
 * [.availability(params)](#shop) (same params as `.shop(params)`)
+* [.fareRules(params)](#fareRules)
 * [.book(params)](#book)
 * [.ticket(params)](#ticket)
 * [.toQueue(params)](#toQueue)
-* [.getPNR(params)](#getPNR)
-* [.importPNR(params)](#importPNR)
+* [.getBooking(params)](#getBooking)
 * [.getUniversalRecordByPNR(params)](#getUniversalRecordByPNR)
 * [.getUniversalRecord(params)](#getUniversalRecord)
 * [.flightInfo(params)](#flightInfo)
-* [.getPNRByTicketNumber(params)](#getPNRByTicketNumber)
+* [.getBookingByTicketNumber(params)](#getBookingByTicketNumber)
 * [.searchBookingsByPassengerName(params)](#searchBookingsByPassengerName)
 * [.getTicket(params)](#getTicket)
 * [.getTickets(params)](#getTickets)
 * [.cancelTicket(params)](#cancelTicket)
-* [.cancelPNR(params)](#cancelPNR)
+* [.cancelBooking(params)](#cancelBooking)
 
 ## .shop(params)
 <a name="shop"></a>
@@ -42,14 +43,18 @@ Low Fare Shop functionality combines air availability and a fare quote request t
 | cabins | `Array<Cabin>` | See `Cabins array` description [below](#cabins). |
 | requestId | `string` | Trace id of this request. <i>Optional.</i> |
 | maxJourneyTime | `number` | Maximum travel time in hours 0-99. Total for all legs <i>Optional.</i> |
-| maxSolutions | `number` | Maximum number of solutions<i>Optional.</i> |.
+| solutionResult | `Boolean` | Set true to retrieve [AirPricingSolution](https://support.travelport.com/webhelp/uapi/Content/Air/Low_Fare_Shopping/Low_Fare_Shopping_(Synchronous).htm#AirPricingSolutions), default is False (retrieves [AirPricePoint](https://support.travelport.com/webhelp/uapi/Content/Air/Low_Fare_Shopping/Low_Fare_Shopping_by_Price_Points.htm). <i>Optional.</i> |.
+| maxSolutions | `number` | Maximum number of solutions. <i>Optional.</i> |.
 | carriers | `Array<String>` | Array of carriers' codes. <i>Optional.</i> |
 | preferredConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |
 | prohibitedConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |
 | permittedConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |
+| async | `Boolean` | Use this flag to use LowFareSearchAsynch. Default value is `false`.<i>Optional.</i> See [Low Fare Shopping (Asynchronous)](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Low_Fare_Shopping/Low_Fare_Shopping_(Asynchronous).htm)|
+| faresOnly | `Boolean` | Use this flag to retrieve traceId, searchId, hasMoreResult with the fare data. Default value is `false`. <i>Optional.</i> |
 
 ### Pricing object
 <a name="pricing_mod"></a>
+
 | Param | Type | Description |
 | --- | --- | --- |
 | currency | `String` | Currency to convert results prices. |
@@ -83,6 +88,27 @@ The cabins array lists requested cabin types, currently `Economy` or `Business` 
 
 **See: <a href="../examples/Air/shop.js">Shop example</a>**
 
+## .retrieveShop(params)
+<a name="retrieve-shop"></a>
+If Low Fare Shop Async request has more results in cache, use this method to retrieve remaining results. This method should return the data in a format similar to a standard shop() results.
+
+**Returns**: `Promise`
+**See**: [Retrieving Low Fare Search Data](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Low_Fare_Shopping/Retrieving_Low_Fare_Search_Data.htm%3FTocPath%3DAir%7CAir%2520Shopping%2520and%2520Booking%7CLow%2520Fare%2520Shopping%7CLow%2520Fare%2520Shopping%2520(Asynchronous)%7C_____1)
+
+## .fareRules(params)
+<a name="fareRules"></a>
+For fetching detailed fare rules after itinerary selection this method is used.
+
+**Returns**: `Promise`
+**See**: [Fare Rules](https://support.travelport.com/webhelp/uapi/Content/Air/Fare_Rules/Fare_Rules.htm)
+| Param | Type | Description |
+| --- | --- | --- |
+| segments | `Array<Segment>` | See `Segment` description [below](#segment). |
+| passengers | `Book Passengers` | See `Book Passengers` description [below](#book-passengers). |
+| long | `boolean`  | true to fetch long explanations, false to fetch short ones. |
+| requestId | `String` | Unique ID to identify request and response in profiler logs |
+
+**See: <a href="../examples/Air/fareRules.js">farerules example</a>**
 
 ## .book(params)
 <a name="book"></a>
@@ -132,11 +158,23 @@ Please specify `transfer` field to mark connection segment.
 | --- | --- | --- |
 | lastName | `String` | Passenger last name. |
 | firstName | `String` | Passenger first name. |
+| title | `String` | One of `['MR', 'MS', 'MSTR', 'MISS']`. |
 | birthDate | `String` | Birth date in format `YYYY-MM-DD`. |
 | gender | `String` | One of `['M', 'F']`. |
 | ageCategory | `String` | One of `['ADT', 'CNN', 'INF']`. Or [other types](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Shared_Air_Topics/Passenger_Type_Codes.htm) |
 | passNumber| `String` | Pass number. |
 | passCountry| `String` | 2-letter code of country. |
+| ssr | `Array<SSR>` | Optional. SSR requests. See `SSR` description [below](#ssr).. |
+
+### SSR object
+<a name="ssr"></a>
+
+| Param | Type | Description |
+| --- | --- | --- |
+| type | `String` | SSR Type code eg. `CHLD, CTCR, DOCS, DOCA, FOID`. |
+| carrier | `String` | Optional. 2-letter IATA Code of airline, default is `YY` |
+| status | `String` | Optional. Status eg. `NN, PN, UN, HK` |
+| freeText | `String` | SSR FreeText |
 
 ### Phone object
 <a name="phone"></a>
@@ -180,7 +218,7 @@ To see the list of all available formats, please use the following [documentatio
 
 ## .ticket(params)
 <a name="ticket"></a>
-**This library is designed to do `getPNR` right after ticketing is finished with success.**
+**This library is designed to do `getBooking` right after ticketing is finished with success.**
 Ticketing is typically included as a follow-on request to an Air Booking response.
 Any number of tickets can be issued from one Stored Fare Quote when a booking has multiple passengers. Tickets can also be issued when there is more than one Stored Fare Quote in the PNR.
 Ticketing function returns `true` if the process is finished with success or `Error`.
@@ -253,8 +291,8 @@ This method returns an array of all PNR objects, which are contained in Universa
 
 **See: <a href="../examples/Air/getUniversalRecord.js">Example</a>**
 
-## .getPNR(params)
-<a name="getPNR"></a>
+## .getBooking(params)
+<a name="getBooking"></a>
 > May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 
 This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and then returns single PNR object from its output.
@@ -266,25 +304,7 @@ This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and t
 | --- | --- | --- |
 | pnr | `String` | 1G PNR. |
 
-**See: <a href="../examples/Air/getPNR.js">getPNR example</a>**
-
-## .importPNR(params)
-<a name="importPNR"></a>
-> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
-
-**This method will be DEPRECATED in version 1.0.0, USE [`getPNR`](#getPNR) instead**
-
-This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and then returns an array, containing single PNR object.
-
-**Returns**: `Promise`. - All Information for requested PNR.
-**See**: [Importing PNR](https://support.travelport.com/webhelp/uapi/uAPI.htm#Booking/UniversalRecord/Importing_PNRs.htm)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| pnr | `String` | 1G PNR. |
-
-**See: <a href="../examples/Air/import.js">Import example</a>**
-
+**See: <a href="../examples/Air/getBooking.js">getBooking example</a>**
 
 ## .flightInfo(params)
 <a name="flightInfo"></a>
@@ -301,8 +321,8 @@ Request for the flight information.
 
 **See: <a href="../examples/Air/flightInfo1.js">FlightInfo basic example</a>**, **<a href="../examples/Air/flightInfo2.js">FlightInfo multiple items example</a>**
 
-## .getPNRByTicketNumber(params)
-<a name="getPNRByTicketNumber"></a>
+## .getBookingByTicketNumber(params)
+<a name="getBookingByTicketNumber"></a>
 > Requires Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 
 Request for the ticket information.
@@ -315,7 +335,7 @@ This function executes terminal command to get PNR from `*TE` command response.
 | --- | --- | --- |
 | ticketNumber | `String` | The number of the ticket. |
 
-**See: <a href="../examples/Air/getPNRByTicketNumber.js">getPNRByTicketNumber example</a>**
+**See: <a href="../examples/Air/getBookingByTicketNumber.js">getBookingByTicketNumber example</a>**
 
 ## .getTicket(params)
 <a name="getTicket"></a>
@@ -376,7 +396,7 @@ Example of list response:
 
 When `type` equals `pnr` than data field contains pnr string.
 
-**See: <a href="../examples/Air/searchBookingsByPassengerName.js">getPNRByTicketNumber example</a>**
+**See: <a href="../examples/Air/searchBookingsByPassengerName.js">getBookingByTicketNumber example</a>**
 
 
 ## .cancelTicket(params)
@@ -393,8 +413,8 @@ Gets ticket information with [`getTicket`](#getTicket) and then tries to cancel 
 
 **See: <a href="../examples/Air/cancelTicket.js">cancelTicket example</a>**
 
-## .cancelPNR(params)
-<a name="cancelPNR"></a>
+## .cancelBooking(params)
+<a name="cancelBooking"></a>
 > May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 
 Gets pnr information and tickets list from [`importPNR`](#importPNR) and then do one of following actions:
@@ -413,4 +433,4 @@ Gets pnr information and tickets list from [`importPNR`](#importPNR) and then do
 | cancelTickets | `Boolean` | Defines if tickets should be cancelled or not |
 | ignoreTickets | `Boolean` | Defines if tickets should be ignored. The default value is `false` |
 
-**See: <a href="../examples/Air/cancelPNR.js">cancelPNR example</a>**
+**See: <a href="../examples/Air/cancelBooking.js">cancelBooking example</a>**
