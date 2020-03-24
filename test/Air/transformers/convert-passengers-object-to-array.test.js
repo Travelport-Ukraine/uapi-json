@@ -10,7 +10,7 @@ describe('Air.transformers.convertPassengersObjectToArray', () => {
     converted.passengers.map((passenger) => {
       expect(passenger).to.have.all.keys(['ageCategory', 'child']);
       if (passenger.ageCategory === 'CNN') {
-        expect(passenger.isChild).to.be.true;
+        expect(passenger.child).to.be.true;
       }
 
       return null;
