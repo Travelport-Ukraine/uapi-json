@@ -9,8 +9,5 @@ module.exports = function (encodedString) {
   };
   return encodedString.replace(translateRe, (match, entity) => {
     return translate[entity];
-  }).replace(/&#(\d+);/gi, (match, numStr) => {
-    const num = parseInt(numStr, 10);
-    return String.fromCharCode(num);
   });
 };
