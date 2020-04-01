@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const unescapeHtml = require('../../src/utils/unescape-html');
 
-describe.only('#unescapeHtml', () => {
+describe('#unescapeHtml', () => {
   it('should properly transform lt, newline and gt', () => {
     const source = 'UNABLE TO RETRIEVE - RESTRICTED BF   \n&gt;&lt;';
     expect(unescapeHtml(source)).to.be.eq('UNABLE TO RETRIEVE - RESTRICTED BF   \n><');
