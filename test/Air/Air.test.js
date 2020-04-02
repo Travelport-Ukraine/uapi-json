@@ -1793,18 +1793,18 @@ describe('#AirService', () => {
     });
   });
 
-  describe('ackScheduleChange', () => {
+  describe('acknowledgeScheduleChange', () => {
     it('should check if correct function from service is called', () => {
-      const ackScheduleChange = sinon.spy(() => {});
-      const service = () => ({ ackScheduleChange });
+      const acknowledgeScheduleChange = sinon.spy(() => {});
+      const service = () => ({ acknowledgeScheduleChange });
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': service,
       });
-      createAirService({ auth }).ackScheduleChange({
+      createAirService({ auth }).acknowledgeScheduleChange({
         universalRecordLocatorCode: 'AABBCC',
         version: 2
       });
-      expect(ackScheduleChange.calledOnce).to.be.equal(true);
+      expect(acknowledgeScheduleChange.calledOnce).to.be.equal(true);
     });
   });
 });

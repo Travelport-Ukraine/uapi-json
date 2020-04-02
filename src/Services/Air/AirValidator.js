@@ -153,7 +153,7 @@ module.exports = {
     transform()
   ),
 
-  ACK_SCHEDULE_CHANGE: compose(
+  ACKNOWLEDGE_SCHEDULE_CHANGE: compose(
     validate(
       validators.universalRecordLocator
     ),

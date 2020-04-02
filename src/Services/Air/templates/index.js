@@ -15,7 +15,7 @@ const universalRecordCancelUr = require('./UNIVERSAL_RECORD_CANCEL_UR.handlebars
 const universalRecordFoid = require('./UNIVERSAL_RECORD_FOID.handlebars');
 const universalRecordImport = require('./UNIVERSAL_RECORD_IMPORT_REQUEST.handlebars');
 const universalRecordRetrieve = require('./UNIVERSAL_RECORD_RETRIEVE_REQUEST.handlebars');
-const ackScheduleChange = require('./ACK_SCHEDULE_CHANGE_REQ.handlebars');
+const acknowledgeScheduleChange = require('./AIR_ACK_SCHEDULE_CHANGE_REQ.handlebars');
 const availability = require('./AIR_AVAILABILTIY_REQUEST.handlebars');
 
 module.exports = {
@@ -36,6 +36,6 @@ module.exports = {
   universalRecordFoid,
   universalRecordImport,
   universalRecordRetrieve,
-  ackScheduleChange,
+  acknowledgeScheduleChange,
   availability,
 };

@@ -26,7 +26,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.getTickets(params)](#getTickets)
 * [.cancelTicket(params)](#cancelTicket)
 * [.cancelBooking(params)](#cancelBooking)
-* [.ackScheduleChange(params)](#ackScheduleChange)
+* [.acknowledgeScheduleChange(params)](#acknowledgeScheduleChange)
 
 ## .shop(params)
 <a name="shop"></a>
@@ -436,10 +436,10 @@ Gets pnr information and tickets list from [`importPNR`](#importPNR) and then do
 
 **See: <a href="../examples/Air/cancelBooking.js">cancelBooking example</a>**
 
-## .ackScheduleChange(params)
-<a name="ackScheduleChange"></a>
+## .acknowledgeScheduleChange(params)
+<a name="acknowledgeScheduleChange"></a>
 
-This method sends ack to all schedule changes. TK statuses will be updated to HK, and returns updated Universal record.
+This method sends a acknowledge request to all schedule changes. TK statuses will be updated to HK, and returns updated Universal record.
 
 **Returns**: `Promise`. - Revised record for requested Universal Record.
 **See**: [Accepting All Schedule Changes](https://support.travelport.com/webhelp/uapi/uAPI.htm#Booking/Modify/Schedule_Changes/Accepting_All_Schedule_Changes.htm)
