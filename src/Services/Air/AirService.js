@@ -225,9 +225,9 @@ module.exports = function (settings) {
       auth,
       templates.acknowledgeScheduleChange,
       'universal:AckScheduleChangeRsp',
-      AirValidator.ACKNOWLEDGE_SCHEDULE_CHANGE,
+      AirValidator.AIR_ACKNOWLEDGE_SCHEDULE_CHANGE,
       AirParser.AIR_ERRORS,
-      AirParser.ACKNOWLEDGE_SCHEDULE_CHANGE,
+      AirParser.AIR_ACKNOWLEDGE_SCHEDULE_CHANGE,
       debug,
       options
     ),
