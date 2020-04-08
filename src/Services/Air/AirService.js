@@ -209,7 +209,7 @@ module.exports = function (settings) {
       debug,
       options
     ),
-    cancelPNR: uApiRequest(
+    cancelBooking: uApiRequest(
       config.AirService.url,
       auth,
       templates.cancel,

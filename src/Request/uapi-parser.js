@@ -1,5 +1,6 @@
 const xml2js = require('xml2js');
 const defaultConfig = require('./default-config');
+const unescapeJson = require('../utils/unescape-json');
 
 const {
   RequestSoapError,
@@ -12,10 +13,10 @@ const parseString = xml => new Promise((resolve, reject) => {
       reject(err);
       return;
     }
-    resolve(json);
+
+    resolve(unescapeJson(json));
   });
 });
-
 // common func for all XML keyed
 // air:*List types (FlightDetailsList, AirSegmentList, FareInfoList, RouteList, AirPricePointList)
 // TODO: for branded fares, air:Brand is referred by BrandID

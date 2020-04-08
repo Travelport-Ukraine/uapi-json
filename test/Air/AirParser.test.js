@@ -58,7 +58,7 @@ const checkLowSearchFareXml = (filename) => {
                     expect(segment).to.be.an('object');
                     expect(segment).to.have.all.keys([
                       'from', 'to', 'departure', 'arrival', 'airline', 'flightNumber', 'serviceClass',
-                      'plane', 'duration', 'techStops', 'bookingClass', 'baggage',
+                      'plane', 'details', 'duration', 'techStops', 'bookingClass', 'baggage',
                       'fareBasisCode', 'group', 'uapi_segment_ref',
                     ]);
                     expect(segment.from).to.match(/^[A-Z]{3}$/);
@@ -1133,7 +1133,7 @@ describe('#AirParser', () => {
       result.segments.forEach(
         (segment) => {
           expect(segment).to.be.an('object');
-          expect(segment).to.have.all.keys([
+          expect(segment).to.have.include.keys([
             'index', 'from', 'to', 'bookingClass', 'departure', 'arrival', 'airline',
             'flightNumber', 'serviceClass', 'status', 'plane', 'duration',
             'techStops', 'group', 'uapi_segment_ref',
