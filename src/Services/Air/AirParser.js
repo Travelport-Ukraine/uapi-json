@@ -735,25 +735,6 @@ function airCancelPnr(obj) {
   throw new AirParsingError.CancelResponseNotFound();
 }
 
-function buildPassenger(name, traveler) {
-  return Object.assign(
-    {
-      lastName: name.Last,
-      firstName: name.First,
-      uapi_passenger_ref: traveler.Key,
-    },
-    traveler.DOB ? {
-      birthDate: moment(traveler.DOB).format('YYYY-MM-DD'),
-    } : null,
-    traveler.TravelerType ? {
-      ageCategory: traveler.TravelerType,
-    } : null,
-    traveler.Gender ? {
-      gender: traveler.Gender,
-    } : null
-  );
-}
-
 function extractBookings(obj) {
   const record = obj['universal:UniversalRecord'];
   const messages = obj[`common_${this.uapi_version}:ResponseMessage`] || [];
@@ -775,7 +756,7 @@ function extractBookings(obj) {
   }
 
   const travelers = record['common_' + this.uapi_version + ':BookingTraveler'];
-  const hasTravelers = !!Object.keys(travelers).length;
+  const hasTravelers = !!travelers && !!Object.keys(travelers).length;
   const hasAirReservation = Array.isArray(record['air:AirReservation']) && !!record['air:AirReservation'].length;
 
   if (!hasTravelers && !hasAirReservation) {
@@ -803,11 +784,11 @@ function extractBookings(obj) {
   if (!hasAirReservation) {
     return Object.keys(reservationInfo).map((key) => {
       const providerInfo = reservationInfo[key];
-      const passengers = Object.keys(record['common_v47_0:BookingTraveler']).map((travelerKey) => {
-        const traveler = record['common_v47_0:BookingTraveler'][travelerKey];
-        const name = traveler['common_v47_0:BookingTravelerName'];
+      const passengers = Object.keys(record[`common_${this.uapi_version}:BookingTraveler`]).map((travelerKey) => {
+        const traveler = record[`common_${this.uapi_version}:BookingTraveler`][travelerKey];
+        const name = traveler[`common_${this.uapi_version}:BookingTravelerName`];
 
-        return buildPassenger(name, traveler);
+        return format.buildPassenger(name, traveler);
       });
 
       return {
@@ -841,7 +822,7 @@ function extractBookings(obj) {
     )
       ? resRemarks.reduce(
         (acc, remark) => {
-          const splitMatch = remark['common_v47_0:RemarkData'].match(/^SPLIT\s.*([A-Z0-9]{6})$/);
+          const splitMatch = remark[`common_${this.uapi_version}:RemarkData`].match(/^SPLIT\s.*([A-Z0-9]{6})$/);
           if (!splitMatch) {
             return acc;
           }
@@ -881,7 +862,7 @@ function extractBookings(obj) {
           );
         }
 
-        return buildPassenger(name, traveler);
+        return format.buildPassenger(name, traveler);
       }
     );
 
@@ -1154,7 +1135,7 @@ function gdsQueue(req) {
 
   let data = null;
   try {
-    [data] = req['common_v47_0:ResponseMessage'];
+    [data] = req[`common_${this.uapi_version}:ResponseMessage`];
   } catch (e) {
     throw new GdsRuntimeError.PlacingInQueueError(req);
   }
