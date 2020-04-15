@@ -1242,6 +1242,18 @@ describe('#AirParser', () => {
           expect(passenger.uapi_passenger_ref).to.equal('Q4mT6BhYlDKA+D4IsGAAAA==');
         });
     });
+
+    it('should return AirParsingError.ReservationsMissing error', () => {
+      const uParser = new Parser('universal:UniversalRecordImportRsp', 'v47_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/GetBooking-no-itinerary-no-passengers.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .catch(err => (
+          assert(err instanceof AirParsingError.ReservationsMissing, 'Should be SegmentBookingFailed error.')
+        ));
+    });
+
     it('should parse booking with no details on some segments', () => {
       const uParser = new Parser('universal:UniversalRecordImportRsp', 'v47_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
