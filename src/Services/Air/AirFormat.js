@@ -1,3 +1,4 @@
+const moment = require('moment');
 const parsers = require('../../utils/parsers');
 const { AirParsingError } = require('./AirErrors');
 
@@ -512,6 +513,25 @@ function setIndexesForSegments(
   };
 }
 
+function buildPassenger(name, traveler) {
+  return Object.assign(
+    {
+      lastName: name.Last,
+      firstName: name.First,
+      uapi_passenger_ref: traveler.Key,
+    },
+    traveler.DOB ? {
+      birthDate: moment(traveler.DOB).format('YYYY-MM-DD'),
+    } : null,
+    traveler.TravelerType ? {
+      ageCategory: traveler.TravelerType,
+    } : null,
+    traveler.Gender ? {
+      gender: traveler.Gender,
+    } : null
+  );
+}
+
 module.exports = {
   formatLowFaresSearch,
   formatFarePricingInfo,
@@ -524,4 +544,5 @@ module.exports = {
   setIndexesForSegments,
   getBaggage,
   getBaggageInfo,
+  buildPassenger,
 };
