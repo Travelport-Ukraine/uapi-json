@@ -1753,7 +1753,7 @@ describe('#AirService', () => {
         provider: '1G',
         pnr: '456ABC',
         passengers: [
-          { uapi_ref_key: 'XX/ADFH2345AGJDS245IGJSDifgjoai22343s==' },
+          { uapi_passenger_key: 'XX/ADFH2345AGJDS245IGJSDifgjoai22343s==' },
         ]
       });
       expect(providerReservationDivide.calledOnce).to.be.equal(true);

@@ -1086,10 +1086,10 @@ function universalRecordRetrieveRequest(data) {
 
 function formatProviderReservationInfo(data) {
   return {
-    traveler: data['common_v47_0:BookingTravelerName'].map((travelerDetails) => {
+    passengers: data['common_v47_0:BookingTravelerName'].map((bookingtTravelerName) => {
       return {
-        firstName: travelerDetails.First.concat(travelerDetails.Prefix || ''),
-        lastName: travelerDetails.Last
+        firstName: bookingtTravelerName.First.concat(bookingtTravelerName.Prefix || ''),
+        lastName: bookingtTravelerName.Last
       };
     }),
     provider: data.ProviderCode,
