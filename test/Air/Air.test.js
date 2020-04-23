@@ -91,6 +91,18 @@ describe('#AirService', () => {
     });
   });
 
+  describe('addSegments', () => {
+    it('should check if correct function from service is called', () => {
+      const addSegments = sinon.spy(() => {});
+      const service = () => ({ addSegments });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).addSegments({});
+      expect(addSegments.calledOnce).to.be.equal(true);
+    });
+  });
+
   describe('toQueue', () => {
     it('should check if correct function from service is called', () => {
       const gdsQueue = sinon.spy(() => {});
