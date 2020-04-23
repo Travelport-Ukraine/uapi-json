@@ -45,6 +45,10 @@ module.exports = (settings) => {
       return service.gdsQueue(options);
     },
 
+    addSegments(options) {
+      return service.addSegments(options);
+    },
+
     book(options) {
       return service.airPricePricingSolutionXML(options).then((data) => {
         const tauDate = moment(options.tau || null);

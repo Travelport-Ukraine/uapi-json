@@ -112,6 +112,7 @@ module.exports = {
 
   AIR_CANCEL_UR: params => params,
   UNIVERSAL_RECORD_FOID: params => params,
+  UNIVERSAL_RECORD_MODIFY: params => params,
 
   AIR_FLIGHT_INFORMATION: compose(
     validate(
