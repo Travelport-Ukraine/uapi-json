@@ -447,7 +447,7 @@ Add segments to an existing reservation record.
 | --- | --- | --- |
 | pnr | `String` | PNR |
 | version | `Number` | Current uAPI record version |
-| uapi_ur_locator | `String` | uAPI universal locator |
-| uapi_reservation_locator | `String` | uAPI reservation locator code |
-| uapi_ref_key | `String` | uAPI booking traveler reference key |
-| segments | `Array` | Array of segments |
+| universalRecordLocatorCode | `String` | uAPI universal locator code |
+| reservationLocatorCode | `String` | uAPI reservation locator code |
+| bookingTravelerRef | `String` | uAPI booking traveler reference key |
+| segments | `Array` | Segments required to add |
