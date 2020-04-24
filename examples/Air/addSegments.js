@@ -11,11 +11,11 @@ const AirService = uAPI.createAirService(
 
 
 const params = {
-  pnr: 'FMRBLQ',
-  version: 167,
-  uapi_ur_locator: 'ZKT506',
-  uapi_reservation_locator: 'VHJYP7',
-  uapi_ref_key: 'EUH4b+eB0BKA1TBv0JAAAA==',
+  pnr: 'PNR000',
+  version: 5,
+  universalRecordLocatorCode: 'URLC00',
+  reservationLocatorCode: 'RLC00',
+  bookingTravelerRef: 'BTREF',
   segments: [{
     from: 'WAW',
     to: 'KBP',
