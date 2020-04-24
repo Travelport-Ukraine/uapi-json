@@ -18,6 +18,8 @@ const universalRecordLocator = require('./universal-record-locator-code');
 const exchangeToken = require('./exchange-token');
 const platingCarrier = require('./platingCarrier');
 const searchId = require('./search-id');
+const version = require('./version');
+const bookingTravelerRef = require('./booking-traveler-ref');
 
 module.exports = {
   legs,
@@ -40,4 +42,6 @@ module.exports = {
   exchangeToken,
   platingCarrier,
   searchId,
+  version,
+  bookingTravelerRef,
 };

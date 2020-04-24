@@ -12,9 +12,9 @@ module.exports = `
       {{#if emulatePcc}}
         <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
       {{/if}}
-      <univ:RecordIdentifier ProviderCode="{{provider}}" ProviderLocatorCode="{{pnr}}" UniversalLocatorCode="{{uapi_ur_locator}}"/>
+      <univ:RecordIdentifier ProviderCode="{{provider}}" ProviderLocatorCode="{{pnr}}" UniversalLocatorCode="{{universalRecordLocatorCode}}"/>
       <univ:UniversalModifyCmd Key="BOOKING_MODIFY_SEGMENTS"> 
-        <univ:AirAdd ReservationLocatorCode="{{uapi_reservation_locator}}" BookingTravelerRef="{{uapi_ref_key}}" > 
+        <univ:AirAdd ReservationLocatorCode="{{reservationLocatorCode}}" BookingTravelerRef="{{bookingTravelerRef}}" > 
           {{#segments}}
           <air:AirSegment
             ArrivalTime="{{arrival}}"
