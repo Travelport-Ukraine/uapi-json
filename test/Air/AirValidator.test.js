@@ -76,22 +76,12 @@ describe('#AirValidator', () => {
       });
       expect(fn).to.throw(uAPI.errors.Air.AirValidationError.reservationLocatorCode);
     });
-    it('should fail if bookingTravelerRef is not provided', () => {
-      const fn = () => AirValidator.UNIVERSAL_RECORD_MODIFY({
-        pnr: 'PNR000',
-        version: 2,
-        universalRecordLocatorCode: 'UR_LOCATOR_CODE',
-        reservationLocatorCode: 'RESERVATION_LOCATOR_CODE',
-      });
-      expect(fn).to.throw(uAPI.errors.Air.AirValidationError.BookingTravelerMissing);
-    });
     it('should fail if segments are incorrect', () => {
       const fn = () => AirValidator.UNIVERSAL_RECORD_MODIFY({
         pnr: 'PNR000',
         version: 2,
         universalRecordLocatorCode: 'UR_LOCATOR_CODE',
         reservationLocatorCode: 'RESERVATION_LOCATOR_CODE',
-        bookingTravelerRef: 'BOOKING_TRAVELER_REF',
         segments: [{ from: 'FROM', to: 'TO' }],
       });
       expect(fn).to.throw(uAPI.errors.Air.AirValidationError.SegmentsMissing);
