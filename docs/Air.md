@@ -450,3 +450,5 @@ Add segments to an existing reservation record.
 | version | `Number` | Optional. Current uAPI record version |
 | universalRecordLocatorCode | `String` | Optional. uAPI universal locator code |
 | reservationLocatorCode | `String` | Optional. uAPI reservation locator code |
+
+It is recommended to pass `version` param in order to ensure that the last version of the PNR was reviewed before modification.

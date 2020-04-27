@@ -63,7 +63,7 @@ module.exports = (settings) => {
               ),
             };
 
-            return service.addSegments(Object.assign(options, missedOptions));
+            return service.addSegments(Object.assign({}, options, missedOptions));
           });
       }
 

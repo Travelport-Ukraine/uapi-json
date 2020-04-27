@@ -14,7 +14,7 @@ const params = {
   pnr: 'PNR000',
   version: 5, // Optional
   universalRecordLocatorCode: 'URLC00', // Optional
-  reservationLocatorCode: 'RLC00', // Optionals
+  reservationLocatorCode: 'RLC00', // Optional
   segments: [{
     from: 'WAW',
     to: 'KBP',
