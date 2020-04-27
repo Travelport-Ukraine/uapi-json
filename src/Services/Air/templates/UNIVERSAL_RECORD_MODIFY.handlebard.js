@@ -14,7 +14,7 @@ module.exports = `
       {{/if}}
       <univ:RecordIdentifier ProviderCode="{{provider}}" ProviderLocatorCode="{{pnr}}" UniversalLocatorCode="{{universalRecordLocatorCode}}"/>
       <univ:UniversalModifyCmd Key="BOOKING_MODIFY_SEGMENTS"> 
-        <univ:AirAdd ReservationLocatorCode="{{reservationLocatorCode}}" BookingTravelerRef="{{bookingTravelerRef}}" > 
+        <univ:AirAdd ReservationLocatorCode="{{reservationLocatorCode}}" > 
           {{#segments}}
           <air:AirSegment
             ArrivalTime="{{arrival}}"

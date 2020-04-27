@@ -118,7 +118,6 @@ module.exports = {
       validators.version,
       validators.universalRecordLocator,
       validators.reservationLocator,
-      validators.bookingTravelerRef,
       validators.segments
     ),
     transform()

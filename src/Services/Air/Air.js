@@ -46,6 +46,23 @@ module.exports = (settings) => {
     },
 
     addSegments(options) {
+      if (
+        !options.version
+        || !options.universalRecordLocatorCode
+        || !options.reservationLocatorCode
+      ) {
+        return this.getBooking({ pnr: options.pnr })
+          .then((booking) => {
+            const missedOptions = {
+              version: booking.version,
+              reservationLocatorCode: booking.uapi_reservation_locator,
+              universalRecordLocatorCode: booking.uapi_ur_locator,
+            };
+
+            return service.addSegments(Object.assign(options, missedOptions));
+          });
+      }
+
       return service.addSegments(options);
     },
 
