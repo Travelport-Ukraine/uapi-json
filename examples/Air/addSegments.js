@@ -15,7 +15,6 @@ const params = {
   version: 5,
   universalRecordLocatorCode: 'URLC00',
   reservationLocatorCode: 'RLC00',
-  bookingTravelerRef: 'BTREF',
   segments: [{
     from: 'WAW',
     to: 'KBP',
