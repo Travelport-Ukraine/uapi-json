@@ -39,7 +39,6 @@ Object.assign(AirValidationError, createErrorsList({
   PlatingCarrierInvalid: 'Plating Carrier Invalid',
   SearchIdMissing: 'SearchId is missing',
   VersionMissing: 'Version is missing in request',
-  BookingTravelerMissing: 'Booking traveler reference is missing in request',
 }, AirValidationError));
 
 const GdsValidationError = createErrorClass(

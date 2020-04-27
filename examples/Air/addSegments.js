@@ -12,9 +12,9 @@ const AirService = uAPI.createAirService(
 
 const params = {
   pnr: 'PNR000',
-  version: 5,
-  universalRecordLocatorCode: 'URLC00',
-  reservationLocatorCode: 'RLC00',
+  version: 5, // Optional
+  universalRecordLocatorCode: 'URLC00', // Optional
+  reservationLocatorCode: 'RLC00', // Optionals
   segments: [{
     from: 'WAW',
     to: 'KBP',
@@ -29,7 +29,7 @@ const params = {
   }],
 };
 
-AirService.availability(params)
+AirService.addSegments(params)
   .then(
     res => console.log(res),
     err => console.log(err)
