@@ -1212,6 +1212,48 @@ describe('#AirParser', () => {
   }
 
   describe('AIR_CREATE_RESERVATION()', () => {
+    it('should parse booking with no itinerary', () => {
+      const uParser = new Parser('universal:UniversalRecordImportRsp', 'v47_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/GetBooking-no-itinerary.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then((result) => {
+          const [booking] = result;
+
+          expect(booking.type).to.equal('uAPI');
+          expect(booking.pnr).to.equal('NLVMJW');
+          expect(booking.version).to.equal(0);
+          expect(booking.uapi_ur_locator).to.equal('31S7OX');
+          expect(new Date(booking.createDate)).to.be.instanceof(Date);
+          expect(new Date(booking.modifiedAt)).to.be.instanceof(Date);
+          expect(booking.hostCreatedAt).to.equal('2019-11-08');
+          expect(booking.fareQuotes).to.has.lengthOf(0);
+          expect(booking.segments).to.has.lengthOf(0);
+          expect(booking.serviceSegments).to.has.lengthOf(0);
+          expect(booking.passengers).to.has.lengthOf(1);
+          expect(booking.emails).to.has.lengthOf(0);
+          expect(booking.bookingPCC).to.equal('7J8J');
+
+          const [passenger] = booking.passengers;
+
+          expect(passenger.firstName).to.equal('IANINAMRS');
+          expect(passenger.lastName).to.equal('IVANOVA');
+          expect(passenger.uapi_passenger_ref).to.equal('Q4mT6BhYlDKA+D4IsGAAAA==');
+        });
+    });
+
+    it('should return AirParsingError.ReservationsMissing error', () => {
+      const uParser = new Parser('universal:UniversalRecordImportRsp', 'v47_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/GetBooking-no-itinerary-no-passengers.xml`).toString();
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .catch(err => (
+          assert(err instanceof AirParsingError.ReservationsMissing, 'Should be SegmentBookingFailed error.')
+        ));
+    });
+
     it('should parse booking with no details on some segments', () => {
       const uParser = new Parser('universal:UniversalRecordImportRsp', 'v47_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
