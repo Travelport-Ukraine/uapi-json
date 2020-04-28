@@ -13,6 +13,7 @@ const voidDocument = require('./AirVoidDocument.handlebars');
 const gdsQueuePlace = require('./GDS_QUEUE_PLACE.handlebars');
 const universalRecordCancelUr = require('./UNIVERSAL_RECORD_CANCEL_UR.handlebars');
 const universalRecordFoid = require('./UNIVERSAL_RECORD_FOID.handlebars');
+const universalRecordModify = require('./UNIVERSAL_RECORD_MODIFY.handlebard');
 const universalRecordImport = require('./UNIVERSAL_RECORD_IMPORT_REQUEST.handlebars');
 const universalRecordRetrieve = require('./UNIVERSAL_RECORD_RETRIEVE_REQUEST.handlebars');
 const providerReservationDivide = require('./PROVIDER_RESERVATION_DIVIDE_REQ.handlebars');
@@ -34,6 +35,7 @@ module.exports = {
   gdsQueuePlace,
   universalRecordCancelUr,
   universalRecordFoid,
+  universalRecordModify,
   universalRecordImport,
   universalRecordRetrieve,
   providerReservationDivide,

@@ -745,10 +745,6 @@ function extractBookings(obj) {
     }
   });
 
-  if (!record['air:AirReservation'] || record['air:AirReservation'].length === 0) {
-    throw new AirParsingError.ReservationsMissing();
-  }
-
   if (obj['air:AirSegmentSellFailureInfo']) {
     throw new AirRuntimeError.SegmentBookingFailed(obj);
   }
@@ -760,6 +756,13 @@ function extractBookings(obj) {
   }
 
   const travelers = record['common_' + this.uapi_version + ':BookingTraveler'];
+  const hasTravelers = !!travelers && !!Object.keys(travelers).length;
+  const hasAirReservation = Array.isArray(record['air:AirReservation']) && !!record['air:AirReservation'].length;
+
+  if (!hasTravelers && !hasAirReservation) {
+    throw new AirParsingError.ReservationsMissing();
+  }
+
   const reservationInfo = record['universal:ProviderReservationInfo'];
   const remarksObj = record[`common_${this.uapi_version}:GeneralRemark`];
   const remarks = remarksObj
@@ -778,6 +781,34 @@ function extractBookings(obj) {
       )
     : {};
 
+  if (!hasAirReservation) {
+    return Object.keys(reservationInfo).map((key) => {
+      const providerInfo = reservationInfo[key];
+      const passengers = Object.keys(record[`common_${this.uapi_version}:BookingTraveler`]).map((travelerKey) => {
+        const traveler = record[`common_${this.uapi_version}:BookingTraveler`][travelerKey];
+        const name = traveler[`common_${this.uapi_version}:BookingTravelerName`];
+
+        return format.buildPassenger(name, traveler);
+      });
+
+      return {
+        type: 'uAPI',
+        pnr: reservationInfo[key].LocatorCode,
+        version: Number(record.Version),
+        uapi_ur_locator: record.LocatorCode,
+        createdAt: providerInfo.CreateDate,
+        hostCreatedAt: providerInfo.HostCreateDate,
+        modifiedAt: providerInfo.ModifiedDate,
+        fareQuotes: [],
+        segments: [],
+        serviceSegments: [],
+        passengers,
+        emails: [],
+        bookingPCC: providerInfo.OwningPCC,
+      };
+    });
+  }
+
   return record['air:AirReservation'].map((booking) => {
     const resKey = `common_${this.uapi_version}:ProviderReservationInfoRef`;
     const providerInfo = reservationInfo[booking[resKey]];
@@ -791,7 +822,7 @@ function extractBookings(obj) {
     )
       ? resRemarks.reduce(
         (acc, remark) => {
-          const splitMatch = remark['common_v47_0:RemarkData'].match(/^SPLIT\s.*([A-Z0-9]{6})$/);
+          const splitMatch = remark[`common_${this.uapi_version}:RemarkData`].match(/^SPLIT\s.*([A-Z0-9]{6})$/);
           if (!splitMatch) {
             return acc;
           }
@@ -831,22 +862,7 @@ function extractBookings(obj) {
           );
         }
 
-        return Object.assign(
-          {
-            lastName: name.Last,
-            firstName: name.First,
-            uapi_passenger_ref: traveler.Key,
-          },
-          traveler.DOB ? {
-            birthDate: moment(traveler.DOB).format('YYYY-MM-DD'),
-          } : null,
-          traveler.TravelerType ? {
-            ageCategory: traveler.TravelerType,
-          } : null,
-          traveler.Gender ? {
-            gender: traveler.Gender,
-          } : null
-        );
+        return format.buildPassenger(name, traveler);
       }
     );
 
@@ -1142,7 +1158,7 @@ function gdsQueue(req) {
 
   let data = null;
   try {
-    [data] = req['common_v47_0:ResponseMessage'];
+    [data] = req[`common_${this.uapi_version}:ResponseMessage`];
   } catch (e) {
     throw new GdsRuntimeError.PlacingInQueueError(req);
   }
@@ -1344,6 +1360,7 @@ module.exports = {
   GDS_QUEUE_PLACE_RESPONSE: gdsQueue,
   AIR_CANCEL_UR: nullParsing,
   UNIVERSAL_RECORD_FOID: nullParsing,
+  UNIVERSAL_RECORD_MODIFY: nullParsing,
   AIR_ERRORS: AirErrorHandler, // errors handling
   AIR_FLIGHT_INFORMATION: airFlightInfoRsp,
   AIR_GET_TICKET: airGetTicket,
