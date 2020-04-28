@@ -55,4 +55,36 @@ describe('#AirValidator', () => {
       expect(fn).not.to.throw(Error);
     });
   });
+  describe('addSegments', () => {
+    it('should fail if pnr is not provided', () => {
+      const fn = () => AirValidator.UNIVERSAL_RECORD_MODIFY();
+      expect(fn).to.throw(uAPI.errors.Air.AirValidationError.PnrMissing);
+    });
+    it('should fail if version is not provided', () => {
+      const fn = () => AirValidator.UNIVERSAL_RECORD_MODIFY({ pnr: 'PNR000' });
+      expect(fn).to.throw(uAPI.errors.Air.AirValidationError.VersionMissing);
+    });
+    it('should fail if universalRecordLocator is not provided', () => {
+      const fn = () => AirValidator.UNIVERSAL_RECORD_MODIFY({ pnr: 'PNR000', version: 2 });
+      expect(fn).to.throw(uAPI.errors.Air.AirValidationError.UniversalRecordLocatorCode);
+    });
+    it('should fail if reservationLocator is not provided', () => {
+      const fn = () => AirValidator.UNIVERSAL_RECORD_MODIFY({
+        pnr: 'PNR000',
+        version: 2,
+        universalRecordLocatorCode: 'UR_LOCATOR_CODE',
+      });
+      expect(fn).to.throw(uAPI.errors.Air.AirValidationError.reservationLocatorCode);
+    });
+    it('should fail if segments are incorrect', () => {
+      const fn = () => AirValidator.UNIVERSAL_RECORD_MODIFY({
+        pnr: 'PNR000',
+        version: 2,
+        universalRecordLocatorCode: 'UR_LOCATOR_CODE',
+        reservationLocatorCode: 'RESERVATION_LOCATOR_CODE',
+        segments: [{ from: 'FROM', to: 'TO' }],
+      });
+      expect(fn).to.throw(uAPI.errors.Air.AirValidationError.SegmentsMissing);
+    });
+  });
 });

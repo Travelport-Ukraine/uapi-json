@@ -37,7 +37,8 @@ Object.assign(AirValidationError, createErrorsList({
   CreditCardMissing: 'Missing creditCard in request. See data.',
   IncorrectConnectionsFormat: 'Connections should be an array with IATA codes.',
   PlatingCarrierInvalid: 'Plating Carrier Invalid',
-  SearchIdMissing: 'SearchId is missing'
+  SearchIdMissing: 'SearchId is missing',
+  VersionMissing: 'Version is missing in request',
 }, AirValidationError));
 
 const GdsValidationError = createErrorClass(
