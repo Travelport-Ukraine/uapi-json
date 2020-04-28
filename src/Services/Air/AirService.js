@@ -154,6 +154,17 @@ module.exports = function (settings) {
       debug,
       options
     ),
+    addSegments: uApiRequest(
+      config.UniversalRecord.url,
+      auth,
+      templates.universalRecordModify,
+      'universal:UniversalRecordModifyRsp',
+      AirValidator.UNIVERSAL_RECORD_MODIFY,
+      AirParser.AIR_ERRORS,
+      AirParser.UNIVERSAL_RECORD_MODIFY,
+      debug,
+      options
+    ),
     cancelUR: uApiRequest(
       config.UniversalRecord.url,
       auth,

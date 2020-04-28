@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <universal:UniversalRecordImportRsp xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" xmlns:vehicle="http://www.travelport.com/schema/vehicle_v47_0" TraceId="" TransactionId="780EB58E0A0759BB993F97A4E335CC92" ResponseTime="244">
+      <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record 31S7OX</common_v47_0:ResponseMessage>
+      <universal:UniversalRecord LocatorCode="31S7OX" Version="0" Status="Active">
+        <universal:ProviderReservationInfo Key="Q4mT6BhYlDKAAE4IsGAAAA==" ProviderCode="1G" LocatorCode="NLVMJW" CreateDate="2020-02-27T11:25:59.237+00:00" ModifiedDate="2020-04-14T09:39:22.320+00:00" HostCreateDate="2019-11-08" Imported="true" OwningPCC="7J8J" />
+        <vehicle:VehicleReservation SupplierCode="ZI" BookingConfirmation="24281303US4" LocatorCode="00HC7LD5" Status="HK" CreateDate="2020-02-27T11:25:58.909+00:00" ModifiedDate="2020-02-27T11:25:59.237+00:00" ProviderReservationInfoRef="Q4mT6BhYlDKAAE4IsGAAAA==" TravelOrder="1" ProviderSegmentOrder="1">
+          <common_v47_0:BookingTravelerRef Key="Q4mT6BhYlDKA+D4IsGAAAA==" />
+          <common_v47_0:ReservationName>
+            <common_v47_0:BookingTravelerRef Key="Q4mT6BhYlDKA+D4IsGAAAA==" />
+          </common_v47_0:ReservationName>
+          <vehicle:VehicleDateLocation PickupDateTime="2020-07-02T15:00:00.000+02:00" PickupLocation="PRG" PickupLocationType="Terminal" PickupLocationNumber="1" ReturnDateTime="2020-07-03T15:00:00.000+02:00" />
+          <vehicle:Vehicle VendorCode="ZI" AirConditioning="true" TransmissionType="Manual" VehicleClass="Intermediate" Category="Car" DoorCount="FourToFiveDoors" AcrissVehicleCode="IDMR">
+            <vehicle:VehicleRate RatePeriod="Daily" UnlimitedMileage="true" Units="MI" RequiredCharges="USD62.64" RateCode="0ZI" RateGuaranteed="true" RateGuaranteeType="Rate Guaranteed">
+              <vehicle:SupplierRate RateForPeriod="USD74.96" EstimatedTotalAmount="USD137.60" />
+              <vehicle:HourlyLateCharge RateForPeriod="USD89.50" UnlimitedMileage="true" ExtraMileageCharge="USD0.00" Units="MI" />
+            </vehicle:VehicleRate>
+          </vehicle:Vehicle>
+          <common_v47_0:BookingSource Type="IataNumber" Code="99999992" />
+        </vehicle:VehicleReservation>
+        <common_v47_0:GeneralRemark Key="Q4mT6BhYlDKA/D4IsGAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="Q4mT6BhYlDKAAE4IsGAAAA==" CreateDate="2019-11-08T12:13:00.000+00:00">
+          <common_v47_0:RemarkData>VIEWTRIPITIN</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:AgencyInfo>
+          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="257f/VZmSaKqfMsUWfwY6Q==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2020-02-27T11:25:58.818+00:00" />
+        </common_v47_0:AgencyInfo>
+        <common_v47_0:AgencyContactInfo>
+          <common_v47_0:PhoneNumber Key="Q4mT6BhYlDKA9D4IsGAAAA==" Type="Agency" Location="IEV" Number="380 44 9999999">
+            <common_v47_0:ProviderReservationInfoRef Key="Q4mT6BhYlDKAAE4IsGAAAA==" />
+          </common_v47_0:PhoneNumber>
+        </common_v47_0:AgencyContactInfo>
+      </universal:UniversalRecord>
+    </universal:UniversalRecordImportRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

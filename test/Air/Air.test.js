@@ -91,6 +91,33 @@ describe('#AirService', () => {
     });
   });
 
+  describe('addSegments', () => {
+    it('should check if correct function from service is called', () => {
+      const addSegments = sinon.spy(() => {});
+      const service = () => ({ addSegments });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).addSegments({
+        version: 1,
+        universalRecordLocatorCode: 'CODE',
+        reservationLocatorCode: 'CODE'
+      });
+      expect(addSegments.calledOnce).to.be.equal(true);
+    });
+    it('should check if correct function from service is called when no details provided', () => {
+      const addSegments = sinon.spy(() => {});
+      const getBooking = sinon.spy(() => {});
+      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{ pnr: 'PNR000' }]));
+      const service = () => ({ addSegments, getBooking, getUniversalRecordByPNR });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).addSegments({ pnr: 'PNR000' });
+      expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
+    });
+  });
+
   describe('toQueue', () => {
     it('should check if correct function from service is called', () => {
       const gdsQueue = sinon.spy(() => {});

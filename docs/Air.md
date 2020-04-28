@@ -26,6 +26,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.getTickets(params)](#getTickets)
 * [.cancelTicket(params)](#cancelTicket)
 * [.cancelBooking(params)](#cancelBooking)
+* [.addSegments(params)](#addSegments)
 
 ## .shop(params)
 <a name="shop"></a>
@@ -434,3 +435,20 @@ Gets pnr information and tickets list from [`importPNR`](#importPNR) and then do
 | ignoreTickets | `Boolean` | Defines if tickets should be ignored. The default value is `false` |
 
 **See: <a href="../examples/Air/cancelBooking.js">cancelBooking example</a>**
+
+## .addSegments(params)
+<a name="addSegments"></a>
+
+Add segments to an existing reservation record.
+
+**Returns**: `Promise` which is resolved with response message.
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pnr | `String` | PNR |
+| segments | `Array` | Segments required to add |
+| version | `Number` | Optional. Current uAPI record version |
+| universalRecordLocatorCode | `String` | Optional. uAPI universal locator code |
+| reservationLocatorCode | `String` | Optional. uAPI reservation locator code |
+
+It is recommended to pass `version` param in order to ensure that the last version of the PNR was reviewed before modification.
