@@ -590,6 +590,7 @@ describe('#AirParser', () => {
             'ticketingPcc',
             'issuedAt',
             'fareCalculation',
+            'firstOrigin',
             'roe',
             'farePricingMethod',
             'farePricingType',
@@ -615,7 +616,10 @@ describe('#AirParser', () => {
           expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
           expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
           expect(result.issuedAt).to.match(timestampRegexp);
-          expect(result.fareCalculation).to.be.a('string').and.to.have.length.above(0);
+          expect(result.fareCalculation).to.equal('IEV OK PRG 39.00 NUC39.00');
+          expect(result.roe).to.equal('1.0');
+          expect(result.firstOrigin).to.equal('IEV');
+
           // Price info
           expect(result.priceInfoDetailsAvailable).to.equal(false);
           expect(result.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
@@ -1962,6 +1966,7 @@ describe('#AirParser', () => {
           'bookingInfo',
           'equivalentBasePrice',
           'fareCalculation',
+          'firstOrigin',
           'roe',
           'taxes',
           'totalPrice',
