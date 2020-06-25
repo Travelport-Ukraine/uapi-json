@@ -15,30 +15,37 @@ const autoCloseTerminals = [];
 
 // Adding event handler on beforeExit and exit process events to process open terminals
 process.on('beforeExit', () => {
-  autoCloseTerminals.forEach(({ state, terminal, log }) => {
-    switch (state.terminalState) {
-      case TERMINAL_STATE_BUSY:
-      case TERMINAL_STATE_READY:
-      case TERMINAL_STATE_ERROR:
-        if (state.terminalState === TERMINAL_STATE_BUSY) {
-          log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
-        }
-        if (state.sessionToken !== null) {
-          log('UAPI-JSON WARNING: Process left TerminalService session open');
-          log('UAPI-JSON WARNING: Session closing');
-          terminal.closeSession().then(
-            () => log('UAPI-JSON WARNING: Session closed')
-          ).catch(
-            () => {
-              throw new TerminalRuntimeError.ErrorClosingSession();
+  Promise.all(
+    autoCloseTerminals.map(
+      ({ state, terminal, log }) => {
+        switch (state.terminalState) {
+          case TERMINAL_STATE_BUSY:
+          case TERMINAL_STATE_READY:
+          case TERMINAL_STATE_ERROR:
+            if (state.terminalState === TERMINAL_STATE_BUSY) {
+              log('UAPI-JSON WARNING: Process exited before completing TerminalService request');
             }
-          );
+            if (state.sessionToken !== null) {
+              log('UAPI-JSON WARNING: Process left TerminalService session open');
+              log('UAPI-JSON WARNING: Session closing');
+              return terminal.closeSession()
+                .then(() => log('UAPI-JSON WARNING: Session closed'))
+                .then(() => true)
+                .catch(() => false);
+            }
+            return true;
+          default:
+            return true;
         }
-        break;
-      default:
-        break;
+      }
+    )
+  ).then(
+    (results) => {
+      if (results.indexOf(false) !== -1) {
+        throw new TerminalRuntimeError.ErrorClosingSession();
+      }
     }
-  });
+  );
 });
 /* istanbul ignore next */
 process.on('exit', () => {
