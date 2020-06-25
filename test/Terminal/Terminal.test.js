@@ -241,7 +241,7 @@ describe('#Terminal', function terminalTest() {
           expect(console.log).to.have.callCount(8);
           done();
         }, 100);
-      });  
+      });
     });
     it('should throw an error for terminal with READY state', (done) => {
       // Resetting spies
