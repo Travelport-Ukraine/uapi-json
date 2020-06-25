@@ -211,7 +211,7 @@ describe('#Terminal', function terminalTest() {
           }, 100);
         });
     });
-    it.only('should autoclose more than one terminal', (done) => {
+    it('should autoclose more than one terminal', (done) => {
       // Resetting spies
       closeSessionError.resetHistory();
 
@@ -219,7 +219,7 @@ describe('#Terminal', function terminalTest() {
         auth: config,
         debug: 1,
       });
-      const uAPITerminal2 = terminalCloseSessionError({
+      const uAPITerminal2 = terminalOk({
         auth: config,
         debug: 1,
       });
@@ -236,9 +236,9 @@ describe('#Terminal', function terminalTest() {
       ]).then(() => {
         process.emit('beforeExit');
         setTimeout(() => {
-          expect(closeSessionError).to.have.callCount(2);
-          expect(DumbErrorClosingSession).to.have.callCount(2);
-          expect(console.log).to.have.callCount(8);
+          expect(closeSessionError).to.have.callCount(1);
+          expect(DumbErrorClosingSession).to.have.callCount(1);
+          expect(console.log).to.have.callCount(9);
           done();
         }, 100);
       });
