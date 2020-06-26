@@ -237,7 +237,7 @@ describe('#Terminal', function terminalTest() {
         process.emit('beforeExit');
         setTimeout(() => {
           expect(closeSessionError).to.have.callCount(1);
-          expect(DumbErrorClosingSession).to.have.callCount(3);
+          expect(DumbErrorClosingSession).to.have.callCount(2);
           expect(console.log).to.have.callCount(12);
           done();
         }, 100);
