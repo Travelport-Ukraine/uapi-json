@@ -211,6 +211,38 @@ describe('#Terminal', function terminalTest() {
           }, 100);
         });
     });
+    it('should autoclose more than one terminal', (done) => {
+      // Resetting spies
+      closeSessionError.resetHistory();
+
+      const uAPITerminal1 = terminalCloseSessionError({
+        auth: config,
+        debug: 1,
+      });
+      const uAPITerminal2 = terminalOk({
+        auth: config,
+        debug: 1,
+      });
+
+      Promise.all([
+        uAPITerminal1.executeCommand('I')
+          .then(() => {
+            expect(closeSession.callCount).to.equal(0);
+          }),
+        uAPITerminal2.executeCommand('I')
+          .then(() => {
+            expect(closeSession.callCount).to.equal(0);
+          }),
+      ]).then(() => {
+        process.emit('beforeExit');
+        setTimeout(() => {
+          expect(closeSessionError).to.have.callCount(1);
+          expect(DumbErrorClosingSession).to.have.callCount(2);
+          expect(console.log).to.have.callCount(12);
+          done();
+        }, 100);
+      });
+    });
     it('should throw an error for terminal with READY state', (done) => {
       // Resetting spies
       closeSession.resetHistory();
