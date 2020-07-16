@@ -2196,6 +2196,13 @@ describe('#AirParser', () => {
         .then((json) => {
           const jsonResult = parseFunction.call(uParser, json);
           testBooking(jsonResult);
+
+          const [firstReservation] = jsonResult;
+
+          expect(firstReservation.pnr).to.be.equal('4GVJJM');
+
+          expect(firstReservation.segments).to.be.an('array').and.have.length.above(0);
+          expect(firstReservation.segments[0].status).to.be.equal('HK');
         });
     });
   });
