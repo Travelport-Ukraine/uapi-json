@@ -2187,10 +2187,10 @@ describe('#AirParser', () => {
     });
   });
 
-  describe('AIR_ACKNOWLEDGE_SCHEDULE_CHANGE', () => {
+  describe('AIR_ACCEPT_SCHEDULE_CHANGE', () => {
     it('should test parsing of universal record retrieve request', () => {
       const uParser = new Parser('universal:AckScheduleChangeRsp', 'v47_0', {});
-      const parseFunction = airParser.AIR_ACKNOWLEDGE_SCHEDULE_CHANGE;
+      const parseFunction = airParser.AIR_ACCEPT_SCHEDULE_CHANGE;
       const xml = fs.readFileSync(`${xmlFolder}/AckScheduleChangeRsp.xml`).toString();
       return uParser.parse(xml)
         .then((json) => {

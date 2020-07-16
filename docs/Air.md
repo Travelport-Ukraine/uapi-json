@@ -27,7 +27,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.cancelTicket(params)](#cancelTicket)
 * [.cancelBooking(params)](#cancelBooking)
 * [.addSegments(params)](#addSegments)
-* [.acknowledgeScheduleChange(params)](#acknowledgeScheduleChange)
+* [.acceptScheduleChange(params)](#acceptScheduleChange)
 
 ## .shop(params)
 <a name="shop"></a>
@@ -454,8 +454,8 @@ Add segments to an existing reservation record.
 
 It is recommended to pass `version` param in order to ensure that the last version of the PNR was reviewed before modification.
 
-## .acknowledgeScheduleChange(params)
-<a name="acknowledgeScheduleChange"></a>
+## .acceptScheduleChange(params)
+<a name="acceptScheduleChange"></a>
 
 This method sends a acknowledge request to all schedule changes. TK statuses will be updated to HK, and returns updated Universal record.
 

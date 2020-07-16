@@ -163,7 +163,7 @@ module.exports = {
     transform()
   ),
 
-  AIR_ACKNOWLEDGE_SCHEDULE_CHANGE: compose(
+  AIR_ACCEPT_SCHEDULE_CHANGE: compose(
     validate(
       validators.universalRecordLocator
     ),

@@ -404,8 +404,8 @@ module.exports = (settings) => {
         }));
     },
 
-    acknowledgeScheduleChange(options) {
-      return service.acknowledgeScheduleChange(options);
+    acceptScheduleChange(options) {
+      return service.acceptScheduleChange(options);
     },
 
     exchangeBooking(options) {

@@ -1149,7 +1149,7 @@ function gdsQueue(req) {
   return true;
 }
 
-function acknowledgeScheduleChange(data) {
+function acceptScheduleChange(data) {
   const response = extractBookings.call(this, data);
   return response;
 }
@@ -1349,7 +1349,7 @@ module.exports = {
   AIR_GET_TICKETS_ERROR_HANDLER: airGetTicketsErrorHandler,
   AIR_CANCEL_TICKET: airCancelTicket,
   AIR_CANCEL_PNR: airCancelPnr,
-  AIR_ACKNOWLEDGE_SCHEDULE_CHANGE: acknowledgeScheduleChange,
+  AIR_ACCEPT_SCHEDULE_CHANGE: acceptScheduleChange,
   AIR_EXCHANGE_QUOTE: exchangeQuote,
   AIR_EXCHANGE: exchangeBooking,
   AIR_AVAILABILITY: availability,
