@@ -222,7 +222,7 @@ describe('#AirParser', () => {
       const res = parseFunction.call(uParser, rsp);
       expect(res).to.be.a('array').and.to.have.lengthOf(1);
     });
-    it('should correctly handle error of agreement', async () => {
+    it('should correctly handle error of agreement 1', async () => {
       const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
       const errorHandler = airParser.AIR_GET_TICKETS_ERROR_HANDLER;
       const xml = fs.readFileSync(`${xmlFolder}/NoAgreementError.xml`).toString();
@@ -2210,7 +2210,7 @@ describe('#AirParser', () => {
           }
         );
     });
-    it('should correctly handle error of agreement', () => {
+    it('should correctly handle error of agreement 2', () => {
       const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
       const parseFunction = airParser.AIR_ERRORS;
       const xml = fs.readFileSync(`${xmlFolder}/NoAgreementError.xml`).toString();

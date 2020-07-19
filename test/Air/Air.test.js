@@ -1064,7 +1064,7 @@ describe('#AirService', () => {
   });
 
   describe('getTickets', () => {
-    it('should throw an error when some function fails', (done) => {
+    it('should throw an error when some function fails', async () => {
       const AirService = () => ({
         getUniversalRecordByPNR: () => Promise.resolve({ uapi_reservation_locator: 'RLC001' }),
         getTickets: () => Promise.reject(new Error('Some error')),
@@ -1074,13 +1074,13 @@ describe('#AirService', () => {
       });
       const service = createAirService({ auth });
 
-      service.getTickets({ uapi_reservation_locator: 'RLC001' })
-        .then(() => done(new Error('Error has not occured')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieveTickets);
-          expect(err.causedBy).to.be.an.instanceof(Error);
-          done();
-        });
+      try {
+        await service.getTickets({ uapi_reservation_locator: 'RLC001' });
+        throw new Error('No error thrown!');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieveTickets);
+        expect(err.causedBy).to.be.an.instanceof(Error);
+      }
     });
     it('should work with right responses', (done) => {
       const importBookingVoidResponse = JSON.parse(
@@ -1371,7 +1371,7 @@ describe('#AirService', () => {
           pnr: 'PNR001',
         })
         .then(() => {
-          expect(getUniversalRecordByPNR).to.have.callCount(2);
+          expect(getUniversalRecordByPNR).to.have.callCount(3);
           expect(getTicket).to.have.callCount(0);
           expect(cancelBooking).to.have.callCount(1);
         });
@@ -1405,7 +1405,7 @@ describe('#AirService', () => {
           pnr: 'PNR001',
         })
         .then(() => {
-          expect(getUniversalRecordByPNR).to.have.callCount(2);
+          expect(getUniversalRecordByPNR).to.have.callCount(3);
           expect(getTickets).to.have.callCount(1);
           expect(cancelBooking).to.have.callCount(1);
         });
@@ -1454,7 +1454,7 @@ describe('#AirService', () => {
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
           expect(err.causedBy).to.be.an.instanceof(AirRuntimeError.PNRHasOpenTickets);
-          expect(getUniversalRecordByPNR).to.have.callCount(1);
+          expect(getUniversalRecordByPNR).to.have.callCount(2);
           expect(getTickets).to.have.callCount(1);
           expect(cancelBooking).to.have.callCount(0);
         });
@@ -1493,7 +1493,7 @@ describe('#AirService', () => {
           pnr: 'PNR001',
         })
         .then(() => {
-          expect(getUniversalRecordByPNR).to.have.callCount(2);
+          expect(getUniversalRecordByPNR).to.have.callCount(3);
           expect(getTickets).to.have.callCount(1);
           expect(cancelBooking).to.have.callCount(1);
         });
@@ -1541,7 +1541,7 @@ describe('#AirService', () => {
           pnr: 'PNR001',
         })
         .then(() => {
-          expect(getUniversalRecordByPNR).to.have.callCount(2);
+          expect(getUniversalRecordByPNR).to.have.callCount(3);
           expect(getTickets).to.have.callCount(1);
           expect(cancelBooking).to.have.callCount(1);
         });
@@ -1596,7 +1596,7 @@ describe('#AirService', () => {
           cancelTickets: true,
         })
         .then(() => {
-          expect(getUniversalRecordByPNR).to.have.callCount(2);
+          expect(getUniversalRecordByPNR).to.have.callCount(3);
           expect(getTickets).to.have.callCount(1);
           expect(cancelBooking).to.have.callCount(1);
           expect(cancelTicket).to.have.callCount(1);
@@ -1647,7 +1647,7 @@ describe('#AirService', () => {
           expect(err.causedBy).to.be.an.instanceof(
             AirRuntimeError.UnableToCancelTicketStatusNotOpen
           );
-          expect(getUniversalRecordByPNR).to.have.callCount(1);
+          expect(getUniversalRecordByPNR).to.have.callCount(2);
           expect(getTickets).to.have.callCount(1);
           expect(cancelBooking).to.have.callCount(0);
         });
@@ -1696,7 +1696,7 @@ describe('#AirService', () => {
         })
         .then((result) => {
           expect(result).to.equal(true);
-          expect(getUniversalRecordByPNR).to.have.callCount(2);
+          expect(getUniversalRecordByPNR).to.have.callCount(3);
           expect(getTickets).to.have.callCount(1);
           expect(cancelTicket).to.have.callCount(1);
           expect(cancelBooking).to.have.callCount(1);
@@ -1741,9 +1741,9 @@ describe('#AirService', () => {
         () => Promise.resolve(getURbyPNRSampleTicketed)
       );
 
-      const exchange = sinon.spy(({ exchangeToken, uapi_reservation_locator }) => {
+      const exchange = sinon.spy(({ exchangeToken, uapi_reservation_locator: locator }) => {
         expect(exchangeToken).to.be.equal('token');
-        expect(uapi_reservation_locator).to.be.equal('ABCDEF');
+        expect(locator).to.be.equal('ABCDEF');
       });
 
       const airService = () => ({
