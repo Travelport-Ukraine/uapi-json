@@ -2206,40 +2206,28 @@ describe('#AirParser', () => {
   });
 
   describe('AIR_ERROR', () => {
-    it('should correctly handle archived booking', () => {
-      const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
-      const parseFunction = airParser.AIR_ERRORS;
-      const xml = fs.readFileSync(`${xmlFolder}/UnableToRetrieve.xml`).toString();
-      return uParser.parse(xml)
-        .then(
-          (json) => {
-            const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]); // parse error data
-            return parseFunction.call(uParser, errData);
-          }
-        )
-        .catch(
-          (err) => {
-            expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieve);
-          }
+    it('should correctly handle archived booking', async () => {
+      try {
+        await getParseResponse(
+          'air:LowFareSearchRsp', 'UnableToRetrieve.xml',
+          airParser.AIR_LOW_FARE_SEARCH_REQUEST, airParser.AIR_ERRORS
         );
+        throw new Error('Error not thrown');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieve);
+      }
     });
-    it('should correctly handle error of agreement 2', () => {
-      const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
-      const parseFunction = airParser.AIR_ERRORS;
-      const xml = fs.readFileSync(`${xmlFolder}/NoAgreementError.xml`).toString();
-      return uParser.parse(xml)
-        .then(
-          (json) => {
-            const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]); // parse error data
-            return parseFunction.call(uParser, errData);
-          }
-        )
-        .catch(
-          (err) => {
-            expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement);
-            expect(err.data.pcc).to.be.equal('7J8J');
-          }
+    it('should correctly handle error of agreement 2', async () => {
+      try {
+        await getParseResponse(
+          'air:LowFareSearchRsp', 'NoAgreementError.xml',
+          airParser.AIR_LOW_FARE_SEARCH_REQUEST, airParser.AIR_ERRORS
         );
+        throw new Error('Error not thrown');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement);
+        expect(err.data.pcc).to.be.equal('7J8J');
+      }
     });
   });
 });
