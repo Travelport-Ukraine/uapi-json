@@ -2134,74 +2134,50 @@ describe('#AirParser', () => {
         });
     });
 
-    it('should parse response with A and C availability', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {
-        cabins: ['Economy'],
-      });
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp3.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          testAvailability(result);
-        });
+    it('should parse response with A and C availability', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp3.xml',
+        airParser.AIR_AVAILABILITY, airParser.AIR_ERRORS,
+        { cabins: ['Economy'] }
+      );
+      testAvailability(res);
     });
 
-    it('should parse response without connections', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {});
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp2.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          testAvailability(result);
-          expect(result.nextResultReference).to.be.null;
-        });
+    it('should parse response without connections', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp2.xml',
+        airParser.AIR_AVAILABILITY
+      );
+      testAvailability(res);
+      expect(res.nextResultReference).to.be.null;
     });
 
-    it('should parse response with single connection', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {});
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp-single-connection.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          testAvailability(result);
-          expect(result.nextResultReference).to.be.null;
-        });
+    it('should parse response with single connection', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp-single-connection.xml',
+        airParser.AIR_AVAILABILITY
+      );
+      testAvailability(res);
+      expect(res.nextResultReference).to.be.null;
     });
 
-    it('should parse response without 1G avail info', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {});
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp4-NO1G.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          expect(result.legs.length).to.be.equal(0);
-        });
+    it('should parse response without 1G avail info', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp4-NO1G.xml',
+        airParser.AIR_AVAILABILITY
+      );
+      testAvailability(res);
+      expect(res.legs.length).to.be.equal(0);
     });
 
-    it('should parse response without 1G avail info', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {});
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp5.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          expect(result.legs).to.have.length(7);
-          expect(result.legs[0]).to.have.length(2);
-        });
+    it('should parse response without 1G avail info', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp5.xml',
+        airParser.AIR_AVAILABILITY
+      );
+      testAvailability(res);
+      expect(res.legs).to.have.length(7);
+      expect(res.legs[0]).to.have.length(2);
     });
   });
 
