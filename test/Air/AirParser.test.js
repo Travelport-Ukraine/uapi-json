@@ -2116,22 +2116,14 @@ describe('#AirParser', () => {
           });
         });
       });
-
-      return true;
     }
-    it('should parse simple response', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {
-        cabins: ['Economy'],
-      });
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          testAvailability(result);
-        });
+    it('should parse simple response', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp.xml',
+        airParser.AIR_AVAILABILITY, airParser.AIR_ERRORS,
+        { cabins: ['Economy'] }
+      );
+      testAvailability(res);
     });
 
     it('should parse response with A and C availability', async () => {
