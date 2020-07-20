@@ -1,6 +1,6 @@
 {
   "name": "uapi-json",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "Travelport Universal API",
   "main": "src/",
   "files": [
