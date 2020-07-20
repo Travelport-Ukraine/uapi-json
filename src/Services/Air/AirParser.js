@@ -436,12 +436,15 @@ const AirErrorHandler = function (rsp) {
   } catch (err) {
     throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
   }
+  const pcc = utils.getErrorPcc(rsp.faultstring);
   switch (code) {
     case '345':
-      throw new AirRuntimeError.NoAgreement({
-        pcc: utils.getErrorPcc(rsp.faultstring),
-      });
     case '1512':
+      if (pcc !== null) {
+        throw new AirRuntimeError.NoAgreement({
+          pcc: utils.getErrorPcc(rsp.faultstring),
+        });
+      }
       throw new AirRuntimeError.UnableToRetrieve(rsp);
     case '4454':
       throw new AirRuntimeError.NoResidualValue(rsp);
