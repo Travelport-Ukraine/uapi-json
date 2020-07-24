@@ -53,16 +53,22 @@ module.exports = `
                 FaresIndicator="{{pricing.faresIndicator}}"
                 {{else}}
                 FaresIndicator="PublicAndPrivateFares"
+                {{/if}}>
+                {{#if business}}
+                    <air:PermittedCabins>
+                        <com:CabinClass Type="Business" />
+                    </air:PermittedCabins>
+                {{else}}
+                    {{#if cabins}}
+                    <air:PermittedCabins>
+                        {{#each cabins}}
+                        <com:CabinClass Type="{{this}}"/>
+                        {{/each}}
+                    </air:PermittedCabins>
+                    {{/if}}
                 {{/if}}
-            {{#if business}}
-            >
-                <air:PermittedCabins>
-                    <com:CabinClass Type="Business" />
-                </air:PermittedCabins>
-            </air:AirPricingModifiers>   
-            {{else}}
-            />
-            {{/if}}
+            </air:AirPricingModifiers>
+
             {{#passengers}}
             <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}" {{#if child}}Age="9"{{else if Age}}Age="{{Age}}"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
             {{/passengers}}
