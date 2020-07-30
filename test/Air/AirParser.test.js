@@ -138,19 +138,43 @@ const checkLowSearchFareXml = (filename) => {
   });
 };
 
+function shouldParseWithError(parser, data, error) {
+  const parse = () => parser.call({ uapi_version: 'v47_0' }, data);
+  expect(parse).to.throw(error);
+}
+
+async function getParseResponse(root, file, parser = null, errorHandler = null, data = {}) {
+  const uParser = new Parser(root, 'v47_0', data);
+  const xml = fs.readFileSync(`${xmlFolder}/${file}`).toString();
+  const rsp = await uParser.parse(xml);
+
+  if (!Object.keys(rsp).includes('SOAP:Fault')) {
+    return parser && parser.call(uParser, rsp);
+  }
+
+  const errRsp = errorHandler.call(uParser, uParser.mergeLeafRecursive(rsp['SOAP:Fault'][0]));
+  return parser && parser.call(uParser, errRsp);
+}
+
 describe('#AirParser', () => {
   describe('AIR_CANCEL_TICKET', () => {
     it('should return error when no VoidResultInfo available', () => {
-      const check = () => airParser.AIR_CANCEL_TICKET({});
-      expect(check).to.throw(AirRuntimeError.TicketCancelResultUnknown);
+      shouldParseWithError(
+        airParser.AIR_CANCEL_TICKET,
+        {},
+        AirRuntimeError.TicketCancelResultUnknown
+      );
     });
     it('should return error when no VoidResultInfo Result type is not Success', () => {
-      const check = () => airParser.AIR_CANCEL_TICKET({
-        'air:VoidResultInfo': {
-          ResultType: 'Fail',
+      shouldParseWithError(
+        airParser.AIR_CANCEL_TICKET,
+        {
+          'air:VoidResultInfo': {
+            ResultType: 'Fail',
+          },
         },
-      });
-      expect(check).to.throw(AirRuntimeError.TicketCancelResultUnknown);
+        AirRuntimeError.TicketCancelResultUnknown
+      );
     });
     it('should return true if everything is ok', () => {
       const check = () => airParser.AIR_CANCEL_TICKET({
@@ -163,22 +187,23 @@ describe('#AirParser', () => {
   });
   describe('AIR_CANCEL_PNR', () => {
     it('should return error when no messages available', () => {
-      const check = () => airParser.AIR_CANCEL_PNR.call({
-        uapi_version: 'v47_0',
-      }, {});
-      expect(check).to.throw(AirParsingError.CancelResponseNotFound);
+      shouldParseWithError(
+        airParser.AIR_CANCEL_PNR,
+        {},
+        AirParsingError.CancelResponseNotFound
+      );
     });
     it('should return error when message do not contain Success message', () => {
-      const check = () => airParser.AIR_CANCEL_PNR.call({
-        uapi_version: 'v47_0',
-      }, {
-        'common_v47_0:ResponseMessage': [{
-          _: 'Some message',
-        }, {
-          _: 'Another message',
-        }],
-      });
-      expect(check).to.throw(AirParsingError.CancelResponseNotFound);
+      shouldParseWithError(
+        airParser.AIR_CANCEL_PNR,
+        {
+          'common_v47_0:ResponseMessage': [
+            { _: 'Some message' },
+            { _: 'Another message' },
+          ],
+        },
+        AirParsingError.CancelResponseNotFound
+      );
     });
     it('should return true if everything is ok', () => {
       const check = () => airParser.AIR_CANCEL_PNR.call({
@@ -194,57 +219,45 @@ describe('#AirParser', () => {
 
   describe('getTickets', () => {
     it('should return empty array if UR have no tickets', async () => {
-      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
-      const parseFunction = airParser.AIR_GET_TICKETS;
-      const errorHandler = airParser.AIR_GET_TICKETS_ERROR_HANDLER;
-      const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-error-no-tickets.xml`).toString();
-
-      const rsp = await uParser.parse(xml);
-      const errRsp = errorHandler.call(uParser, uParser.mergeLeafRecursive(rsp['SOAP:Fault'][0]));
-      const res = parseFunction.call(uParser, errRsp);
+      const res = await getParseResponse(
+        'air:AirRetrieveDocumentRsp', 'AirGetTickets-error-no-tickets.xml',
+        airParser.AIR_GET_TICKETS, airParser.AIR_GET_TICKETS_ERROR_HANDLER
+      );
       expect(res).to.be.a('array').that.is.empty;
     });
     it('should return array if UR have tickets', async () => {
-      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
-      const parseFunction = airParser.AIR_GET_TICKETS;
-      const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-several-tickets.xml`).toString();
-
-      const rsp = await uParser.parse(xml);
-      const res = parseFunction.call(uParser, rsp);
+      const res = await getParseResponse(
+        'air:AirRetrieveDocumentRsp', 'AirGetTickets-several-tickets.xml',
+        airParser.AIR_GET_TICKETS
+      );
       expect(res).to.be.a('array').and.to.have.lengthOf(2);
     });
     it('should return array if UR has one ticket', async () => {
-      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
-      const parseFunction = airParser.AIR_GET_TICKETS;
-      const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-one-ticket.xml`).toString();
-
-      const rsp = await uParser.parse(xml);
-      const res = parseFunction.call(uParser, rsp);
+      const res = await getParseResponse(
+        'air:AirRetrieveDocumentRsp', 'AirGetTickets-one-ticket.xml',
+        airParser.AIR_GET_TICKETS
+      );
       expect(res).to.be.a('array').and.to.have.lengthOf(1);
     });
-    it('should correctly handle error of agreement', async () => {
-      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
-      const errorHandler = airParser.AIR_GET_TICKETS_ERROR_HANDLER;
-      const xml = fs.readFileSync(`${xmlFolder}/NoAgreementError.xml`).toString();
-
-      const rsp = await uParser.parse(xml);
+    it('should correctly handle error of agreement 1', async () => {
       try {
-        errorHandler.call(uParser, uParser.mergeLeafRecursive(rsp['SOAP:Fault'][0]));
-        throw new Error('Skipped NoAgreement error!');
+        await getParseResponse(
+          'air:AirRetrieveDocumentRsp', 'NoAgreementError.xml',
+          airParser.AIR_GET_TICKETS, airParser.AIR_GET_TICKETS_ERROR_HANDLER
+        );
+        throw new Error('Skipped error!');
       } catch (err) {
         expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement);
         expect(err.data.pcc).to.be.equal('7J8J');
       }
     });
     it('should correctly handle other errors', async () => {
-      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
-      const errorHandler = airParser.AIR_GET_TICKETS_ERROR_HANDLER;
-      const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-error-general.xml`).toString();
-
-      const rsp = await uParser.parse(xml);
       try {
-        errorHandler.call(uParser, uParser.mergeLeafRecursive(rsp['SOAP:Fault'][0]));
-        throw new Error('Skipped NoAgreement error!');
+        await getParseResponse(
+          'air:AirRetrieveDocumentRsp', 'AirGetTickets-error-general.xml',
+          airParser.AIR_GET_TICKETS, airParser.AIR_GET_TICKETS_ERROR_HANDLER
+        );
+        throw new Error('Skipped error!');
       } catch (err) {
         expect(err).to.be.an.instanceof(RequestRuntimeError.UnhandledError);
       }
@@ -590,6 +603,7 @@ describe('#AirParser', () => {
             'ticketingPcc',
             'issuedAt',
             'fareCalculation',
+            'firstOrigin',
             'roe',
             'farePricingMethod',
             'farePricingType',
@@ -615,7 +629,10 @@ describe('#AirParser', () => {
           expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
           expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
           expect(result.issuedAt).to.match(timestampRegexp);
-          expect(result.fareCalculation).to.be.a('string').and.to.have.length.above(0);
+          expect(result.fareCalculation).to.equal('IEV OK PRG 39.00 NUC39.00');
+          expect(result.roe).to.equal('1.0');
+          expect(result.firstOrigin).to.equal('IEV');
+
           // Price info
           expect(result.priceInfoDetailsAvailable).to.equal(false);
           expect(result.totalPrice).to.match(/[A-Z]{3}(?:\d+\.)?\d+/i);
@@ -1962,6 +1979,7 @@ describe('#AirParser', () => {
           'bookingInfo',
           'equivalentBasePrice',
           'fareCalculation',
+          'firstOrigin',
           'roe',
           'taxes',
           'totalPrice',
@@ -2098,130 +2116,86 @@ describe('#AirParser', () => {
           });
         });
       });
-
-      return true;
     }
-    it('should parse simple response', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {
-        cabins: ['Economy'],
-      });
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          testAvailability(result);
-        });
+    it('should parse simple response', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp.xml',
+        airParser.AIR_AVAILABILITY, airParser.AIR_ERRORS,
+        { cabins: ['Economy'] }
+      );
+      testAvailability(res);
     });
 
-    it('should parse response with A and C availability', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {
-        cabins: ['Economy'],
-      });
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp3.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          testAvailability(result);
-        });
+    it('should parse response with A and C availability', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp3.xml',
+        airParser.AIR_AVAILABILITY, airParser.AIR_ERRORS,
+        { cabins: ['Economy'] }
+      );
+      testAvailability(res);
     });
 
-    it('should parse response without connections', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {});
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp2.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          testAvailability(result);
-          expect(result.nextResultReference).to.be.null;
-        });
+    it('should parse response without connections', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp2.xml',
+        airParser.AIR_AVAILABILITY
+      );
+      testAvailability(res);
+      expect(res.nextResultReference).to.be.null;
     });
 
-    it('should parse response with single connection', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {});
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp-single-connection.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          testAvailability(result);
-          expect(result.nextResultReference).to.be.null;
-        });
+    it('should parse response with single connection', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp-single-connection.xml',
+        airParser.AIR_AVAILABILITY
+      );
+      testAvailability(res);
+      expect(res.nextResultReference).to.be.null;
     });
 
-    it('should parse response without 1G avail info', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {});
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp4-NO1G.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          expect(result.legs.length).to.be.equal(0);
-        });
+    it('should parse response without 1G avail info', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp4-NO1G.xml',
+        airParser.AIR_AVAILABILITY
+      );
+      testAvailability(res);
+      expect(res.legs.length).to.be.equal(0);
     });
 
-    it('should parse response without 1G avail info', () => {
-      const uParser = new Parser('air:AvailabilitySearchRsp', 'v47_0', {});
-
-      const parseFunction = airParser.AIR_AVAILABILITY;
-      const xml = fs.readFileSync(`${xmlFolder}/AirAvailabilityRsp5.xml`).toString();
-      return uParser
-        .parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then((result) => {
-          expect(result.legs).to.have.length(7);
-          expect(result.legs[0]).to.have.length(2);
-        });
+    it('should parse response without 1G avail info', async () => {
+      const res = await getParseResponse(
+        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp5.xml',
+        airParser.AIR_AVAILABILITY
+      );
+      testAvailability(res);
+      expect(res.legs).to.have.length(7);
+      expect(res.legs[0]).to.have.length(2);
     });
   });
 
   describe('AIR_ERROR', () => {
-    it('should correctly handle archived booking', () => {
-      const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
-      const parseFunction = airParser.AIR_ERRORS;
-      const xml = fs.readFileSync(`${xmlFolder}/UnableToRetrieve.xml`).toString();
-      return uParser.parse(xml)
-        .then(
-          (json) => {
-            const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]); // parse error data
-            return parseFunction.call(uParser, errData);
-          }
-        )
-        .catch(
-          (err) => {
-            expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieve);
-          }
+    it('should correctly handle archived booking', async () => {
+      try {
+        await getParseResponse(
+          'air:LowFareSearchRsp', 'UnableToRetrieve.xml',
+          airParser.AIR_LOW_FARE_SEARCH_REQUEST, airParser.AIR_ERRORS
         );
+        throw new Error('Error not thrown');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieve);
+      }
     });
-    it('should correctly handle error of agreement', () => {
-      const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
-      const parseFunction = airParser.AIR_ERRORS;
-      const xml = fs.readFileSync(`${xmlFolder}/NoAgreementError.xml`).toString();
-      return uParser.parse(xml)
-        .then(
-          (json) => {
-            const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]); // parse error data
-            return parseFunction.call(uParser, errData);
-          }
-        )
-        .catch(
-          (err) => {
-            expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement);
-            expect(err.data.pcc).to.be.equal('7J8J');
-          }
+    it('should correctly handle error of agreement 2', async () => {
+      try {
+        await getParseResponse(
+          'air:LowFareSearchRsp', 'NoAgreementError.xml',
+          airParser.AIR_LOW_FARE_SEARCH_REQUEST, airParser.AIR_ERRORS
         );
+        throw new Error('Error not thrown');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement);
+        expect(err.data.pcc).to.be.equal('7J8J');
+      }
     });
   });
 });
