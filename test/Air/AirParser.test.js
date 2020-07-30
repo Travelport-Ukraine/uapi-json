@@ -1832,14 +1832,14 @@ describe('#AirParser', () => {
 
         expect(jsonResult.parent).to.be.an('object');
         expect(jsonResult.parent).to.have.all.keys([
-          'traveler',
+          'passengers',
           'provider',
           'pnr',
           'uapi_ur_locator',
         ]);
         expect(jsonResult.child).to.be.an('object');
         expect(jsonResult.child).to.have.all.keys([
-          'traveler',
+          'passengers',
           'provider',
           'pnr',
           'uapi_ur_locator',
