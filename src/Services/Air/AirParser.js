@@ -12,13 +12,20 @@ const {
   RequestRuntimeError,
 } = require('../../Request/RequestErrors');
 
+const fareCalculationPattern = /^([\s\S]+)END($|\s)/;
+const firstOriginPattern = /^(?:s-)?(?:\d{2}[a-z]{3}\d{2}\s+)?([a-z]{3})/i;
+
 const parseFareCalculation = (str) => {
-  const fareCalculation = str.match(/^([\s\S]+)END($|\s)/)[1];
+  const fareCalculation = str.match(fareCalculationPattern)[1];
+  const firstOrigin = str.match(firstOriginPattern);
   const roe = str.match(/ROE((?:\d+\.)?\d+)/);
   return Object.assign(
     {
       fareCalculation,
     },
+    firstOrigin
+      ? { firstOrigin: firstOrigin[1] }
+      : null,
     roe
       ? { roe: roe[1] }
       : null
@@ -429,12 +436,15 @@ const AirErrorHandler = function (rsp) {
   } catch (err) {
     throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
   }
+  const pcc = utils.getErrorPcc(rsp.faultstring);
   switch (code) {
     case '345':
-      throw new AirRuntimeError.NoAgreement({
-        pcc: utils.getErrorPcc(rsp.faultstring),
-      });
     case '1512':
+      if (pcc !== null) {
+        throw new AirRuntimeError.NoAgreement({
+          pcc: utils.getErrorPcc(rsp.faultstring),
+        });
+      }
       throw new AirRuntimeError.UnableToRetrieve(rsp);
     case '4454':
       throw new AirRuntimeError.NoResidualValue(rsp);
