@@ -66,10 +66,17 @@ module.exports = `
                     {{#if ../cabins}}
                     <air:PreferredCabins>
                         {{#each ../cabins}}
-                        <com:CabinClass Type="{{this}}"/>
+                        <com:CabinClass Type="{{capitalize this}}"/>
                         {{/each}}
                     </air:PreferredCabins>
                     {{/if}}
+                    {{#if ../bookingClass}}
+                    <air:PermittedBookingCodes>
+                        {{#each ../bookingClass}}
+                            <air:BookingCode Code="{{this}}" />
+                        {{/each}}
+                    </air:PermittedBookingCodes>
+                    {{/if}}    
                 </air:AirLegModifiers>
             </air:SearchAirLeg>
             {{/legs}}
@@ -82,18 +89,18 @@ module.exports = `
                 {{/if}}
             >
                 <air:PreferredProviders>
-                    <com:Provider Code="{{provider}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
+                    <com:Provider Code="{{provider}}" />
                 </air:PreferredProviders>
                 {{#if carriers}}
                 <air:PermittedCarriers>
                     {{#carriers}}
-                        <com:Carrier Code="{{.}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
+                        <com:Carrier Code="{{.}}" />
                     {{/carriers}}
                 </air:PermittedCarriers>
                 {{/if}}
             </air:AirSearchModifiers>
             {{#passengers}}
-            <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
+            <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} />
             {{/passengers}}
             <air:AirPricingModifiers
               {{#if pricing}}
@@ -120,7 +127,7 @@ module.exports = `
                     {{#if cabins}}
                     <air:PermittedCabins>
                         {{#each cabins}}
-                        <com:CabinClass Type="{{this}}"/>
+                        <com:CabinClass Type="{{capitalize this}}"/>
                         {{/each}}
                     </air:PermittedCabins>
                     {{/if}}
