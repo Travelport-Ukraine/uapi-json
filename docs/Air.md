@@ -358,13 +358,14 @@ Request for the ticket information.
 > May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 
 Request for the ticket information for all tickets in PNR.
+First gets information about PNR, which allows to tell if credentials are allowed to list tickets for the PNR. Also automatically fetched UR locator, so PNR only should be provided.
 
 **Returns**: `Promise`
 **See**: [Ticket Information](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Air_Ticketing/Displaying_Ticket_Information.htm)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| reservationLocatorCode | `String` | uAPI reservation code. |
+| pnr | `String` | 1G PNR. |
 
 **See: <a href="../examples/Air/getTickets.js">getTickets example</a>**
 
