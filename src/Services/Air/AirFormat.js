@@ -515,6 +515,15 @@ function setIndexesForSegments(
 }
 
 function buildPassenger(name, traveler) {
+  if (traveler.TravelerType === 'INF') {
+    const infantGender = name.First.match(/MSTR|MISS$/gi);
+
+    if (infantGender && (!traveler.Gender)) {
+      name.First = name.First.replace(/MSTR|MISS$/gi, '');
+      traveler.Gender = infantGender === 'MSTR' ? 'M' : 'F';
+    }
+  }
+
   return Object.assign(
     {
       lastName: name.Last,
