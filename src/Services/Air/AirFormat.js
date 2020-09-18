@@ -519,9 +519,10 @@ function buildPassenger(name, traveler) {
     if (name.First && typeof name.First === 'string') {
       const infantGender = name.First.match(/MSTR|MISS$/gi);
 
-      if (infantGender && (!traveler.Gender)) {
+      if (infantGender[0] && (!traveler.Gender)) {
         name.First = name.First.replace(/MSTR|MISS$/gi, '');
-        traveler.Gender = infantGender === 'MSTR' ? 'M' : 'F';
+        console.log('infantGender:', infantGender[0]);
+        traveler.Gender = infantGender[0] === 'MSTR' ? 'M' : 'F';
       }
     }
   }

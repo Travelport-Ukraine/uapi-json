@@ -1846,7 +1846,7 @@ describe('#AirParser', () => {
         const [booking] = jsonResult;
         expect(booking.passengers[3].firstName).to.be.equal('YUNJUN');
         expect(booking.passengers[3].ageCategory).to.be.equal('INF');
-        expect(booking.passengers[3].gender).to.be.equal('F');
+        expect(booking.passengers[3].gender).to.be.equal('M');
       });
   });
 
