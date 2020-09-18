@@ -516,7 +516,7 @@ function setIndexesForSegments(
 
 function buildPassenger(name, traveler) {
   if (traveler.TravelerType && traveler.TravelerType === 'INF') {
-    if (name.First && String.isString(name.First)) {
+    if (name.First && typeof name.First === 'string') {
       const infantGender = name.First.match(/MSTR|MISS$/gi);
 
       if (infantGender && (!traveler.Gender)) {
