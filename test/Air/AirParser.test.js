@@ -1835,6 +1835,21 @@ describe('#AirParser', () => {
     });
   });
 
+  it('should test parsing of universal record retrieve request with infant passengers', () => {
+    const uParser = new Parser('universal:UniversalRecordImportRsp', 'v47_0', {});
+    const parseFunction = airParser.AIR_IMPORT_REQUEST;
+    const xml = fs.readFileSync(`${xmlFolder}/getBooking-with-infant-passenger.xml`);
+    return uParser.parse(xml)
+      .then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult, false);
+        const [booking] = jsonResult;
+        expect(booking.passengers[3].firstName).to.be.equal('YUNJUN');
+        expect(booking.passengers[3].ageCategory).to.be.equal('INF');
+        expect(booking.passengers[3].gender).to.be.equal('F');
+      });
+  });
+
   describe('AIR_CANCEL_UR', () => {
     it('parse cancel by UR', () => {
       const uParser = new Parser(null, 'v47_0', { });
