@@ -521,7 +521,6 @@ function buildPassenger(name, traveler) {
 
       if (infantGender[0] && (!traveler.Gender)) {
         name.First = name.First.replace(/MSTR|MISS$/gi, '');
-        console.log('infantGender:', infantGender[0]);
         traveler.Gender = infantGender[0] === 'MSTR' ? 'M' : 'F';
       }
     }
