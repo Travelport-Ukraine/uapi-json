@@ -245,10 +245,16 @@ module.exports = (settings) => {
         });
     },
 
-    getTickets(options) {
-      return service.getTickets(options).catch(
-        err => Promise.reject(new AirRuntimeError.UnableToRetrieveTickets(options, err))
-      );
+    async getTickets(options) {
+      const { pnr } = options;
+      const ur = await this.getUniversalRecordByPNR({ pnr });
+      const urData = Array.isArray(ur) ? ur[0] : ur;
+      const { uapi_reservation_locator: reservationLocatorCode } = urData;
+      try {
+        return await service.getTickets({ reservationLocatorCode });
+      } catch (err) {
+        throw new AirRuntimeError.UnableToRetrieveTickets(options, err);
+      }
     },
 
     getBookingByTicketNumber(options) {
