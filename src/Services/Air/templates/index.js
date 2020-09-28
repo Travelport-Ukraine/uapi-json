@@ -16,7 +16,7 @@ const universalRecordFoid = require('./UNIVERSAL_RECORD_FOID.handlebars');
 const universalRecordModify = require('./UNIVERSAL_RECORD_MODIFY.handlebard');
 const universalRecordImport = require('./UNIVERSAL_RECORD_IMPORT_REQUEST.handlebars');
 const universalRecordRetrieve = require('./UNIVERSAL_RECORD_RETRIEVE_REQUEST.handlebars');
-const availability = require('./AIR_AVAILABILTIY_REQUEST.handlebars');
+const availability = require('./AIR_AVAILABILITY_REQUEST.handlebars');
 
 module.exports = {
   createReservation,

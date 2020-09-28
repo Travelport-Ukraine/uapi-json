@@ -13,6 +13,10 @@ const configInit = require('../config');
 
 handlebars.registerHelper('equal', require('handlebars-helper-equal'));
 
+handlebars.registerHelper('capitalize', (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+});
+
 /**
  * basic function for requests/responses
  * @param  {string} service          service url for current response (gateway)
