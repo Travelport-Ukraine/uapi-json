@@ -514,14 +514,22 @@ function setIndexesForSegments(
   };
 }
 
-function buildPassenger(name, traveler) {
-  if (traveler.TravelerType && traveler.TravelerType === 'INF') {
-    if (name.First) {
-      const infantGender = name.First.match(/MSTR|MISS$/gi);
+function buildPassenger(nameObject, travelerObject) {
+  const traveler = travelerObject;
+  const name = nameObject;
+  let gender = null;
 
-      if (infantGender[0] && (!traveler.Gender)) {
-        name.First = name.First.replace(/MSTR|MISS$/gi, '');
-        traveler.Gender = infantGender[0] === 'MSTR' ? 'M' : 'F';
+  if (traveler.Gender) {
+    gender = traveler.Gender;
+  } else {
+    const matchedGender = name.First.match(/(?:MSTR|MISS|MRS|MR|)$/gi);
+
+    if (matchedGender[0]) {
+      name.First = name.First.replace(/(?:MSTR|MISS|MRS|MR)$/gi, '');
+      if (matchedGender[0] === 'MR' || matchedGender[0] === 'MSTR') {
+        gender = 'M';
+      } else if (matchedGender[0] === 'MISS' || matchedGender[0] === 'MRS') {
+        gender = 'F';
       }
     }
   }
@@ -538,9 +546,7 @@ function buildPassenger(name, traveler) {
     traveler.TravelerType ? {
       ageCategory: traveler.TravelerType,
     } : null,
-    traveler.Gender ? {
-      gender: traveler.Gender,
-    } : null
+    { gender }
   );
 }
 
