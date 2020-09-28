@@ -427,3 +427,38 @@ describe('#AirFormat', () => {
     });
   });
 });
+
+describe('.setReferencesForSegments', () => {
+  it('should add nextSegmentReference', () => {
+    const segments = [
+      {
+        group: 0,
+        uapi_segment_ref: 'EFmoUIBAAA/B1NrWrDAAAA==',
+        uapiSegmentReference: 'EFmoUIBAAA/B1NrWrDAAAA==',
+      },
+      {
+        group: 0,
+        uapi_segment_ref: 'EFmoUIBAAA/B3NrWrDAAAA==',
+        uapiSegmentReference: 'EFmoUIBAAA/B3NrWrDAAAA==',
+      },
+      {
+        group: 1,
+        uapi_segment_ref: 'H57jFKkJ0BKADVIflJAAAA==',
+        uapiSegmentReference: 'H57jFKkJ0BKADVIflJAAAA==',
+      },
+      {
+        group: 2,
+        uapi_segment_ref: 'D1cSNQBAAA/BF/bRSAAAAA==',
+        uapiSegmentReference: 'D1cSNQBAAA/BF/bRSAAAAA==',
+      },
+    ];
+
+    const referencedSegments = AirFormat.setReferencesForSegments(segments);
+
+    expect(referencedSegments).to.have.lengthOf(4);
+    expect(referencedSegments[0].nextSegmentReference).to.be.equal('EFmoUIBAAA/B3NrWrDAAAA==');
+    expect(referencedSegments[1].nextSegmentReference).to.be.equal(null);
+    expect(referencedSegments[2].nextSegmentReference).to.be.equal(null);
+    expect(referencedSegments[3].nextSegmentReference).to.be.equal(null);
+  });
+});
