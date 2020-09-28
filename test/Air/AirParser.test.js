@@ -59,7 +59,7 @@ const checkLowSearchFareXml = (filename) => {
                     expect(segment).to.have.all.keys([
                       'from', 'to', 'departure', 'arrival', 'airline', 'flightNumber', 'serviceClass',
                       'plane', 'details', 'duration', 'techStops', 'bookingClass', 'baggage',
-                      'fareBasisCode', 'group', 'uapi_segment_ref',
+                      'fareBasisCode', 'group', 'uapi_segment_ref', 'uapiSegmentReference',
                     ]);
                     expect(segment.from).to.match(/^[A-Z]{3}$/);
                     expect(segment.to).to.match(/^[A-Z]{3}$/);
@@ -1153,7 +1153,7 @@ describe('#AirParser', () => {
           expect(segment).to.have.include.keys([
             'index', 'from', 'to', 'bookingClass', 'departure', 'arrival', 'airline',
             'flightNumber', 'serviceClass', 'status', 'plane', 'duration',
-            'techStops', 'group', 'uapi_segment_ref',
+            'techStops', 'group', 'uapi_segment_ref', 'uapiSegmentReference',
           ]);
           expect(segment.index).to.be.a('number');
           expect(segment.from).to.match(/^[A-Z]{3}$/);
@@ -1180,6 +1180,14 @@ describe('#AirParser', () => {
           segment.techStops.forEach(stop => expect(stop).to.match(/^[A-Z]{3}$/));
           // Segment reference
           expect(segment.uapi_segment_ref).to.be.a('string');
+          // Next segment reference
+          if (segment.nextSegmentReference === null) {
+            expect(segment.nextSegmentReference).to.be.a('null');
+          }
+
+          if (segment.nextSegmentReference) {
+            expect(segment.nextSegmentReference).to.be.a('string');
+          }
         }
       );
 
@@ -1958,6 +1966,7 @@ describe('#AirParser', () => {
           'serviceClass',
           'to',
           'uapi_segment_ref',
+          'uapiSegmentReference',
         ]);
         expect(segment.from).to.match(/^[A-Z]{3}$/);
         expect(segment.to).to.match(/^[A-Z]{3}$/);
@@ -2095,7 +2104,7 @@ describe('#AirParser', () => {
           expect(segment).to.have.all.keys([
             'from', 'to', 'departure', 'arrival', 'airline',
             'flightNumber', 'plane', 'duration',
-            'uapi_segment_ref', 'group', 'availability',
+            'uapi_segment_ref', 'group', 'availability', 'uapiSegmentReference',
           ]);
           expect(segment.from).to.match(/^[A-Z]{3}$/);
           expect(segment.to).to.match(/^[A-Z]{3}$/);
