@@ -11,9 +11,7 @@ module.exports = `
                 <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
             {{/if}}
             {{#nextResultReference}}
-                <com:NextResultReference ProviderCode="{{provider}}" >
-                    {{nextResultReference}}
-                </com:NextResultReference>
+                <com:NextResultReference ProviderCode="{{../provider}}">{{{.}}}</com:NextResultReference>
             {{/nextResultReference}}
             {{#legs}}
             <air:SearchAirLeg>
@@ -97,7 +95,6 @@ module.exports = `
             {{#passengers}}
                 <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
             {{/passengers}}
-
         </air:AvailabilitySearchReq>
     </soap:Body>
 </soap:Envelope>
