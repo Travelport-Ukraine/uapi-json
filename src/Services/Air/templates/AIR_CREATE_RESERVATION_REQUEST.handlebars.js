@@ -67,6 +67,8 @@ module.exports = `
             </com:BookingTraveler>
             {{/each}}
 
+            {{#if overrideContinuityCheck}}<com:ContinuityCheckOverride>yes</com:ContinuityCheckOverride>{{/if}}
+
             <air:AirPricingSolution {{#each air:AirPricingSolution}}{{@key}}="{{{this}}}" {{/each}}>
                 {{{air:AirPricingSolution_XML.air:AirSegment_XML}}}
                 {{{air:AirPricingSolution_XML.air:AirPricingInfo_XML}}}
