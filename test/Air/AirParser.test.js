@@ -1262,7 +1262,7 @@ describe('#AirParser', () => {
 
           const [passenger] = booking.passengers;
 
-          expect(passenger.firstName).to.equal('IANINAMRS');
+          expect(passenger.firstName).to.equal('IANINA');
           expect(passenger.lastName).to.equal('IVANOVA');
           expect(passenger.uapi_passenger_ref).to.equal('Q4mT6BhYlDKA+D4IsGAAAA==');
         });
