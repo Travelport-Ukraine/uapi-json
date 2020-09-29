@@ -517,19 +517,17 @@ function setIndexesForSegments(
 function buildPassenger(nameObject, travelerObject) {
   const traveler = travelerObject;
   const name = nameObject;
-  let gender = null;
 
-  if (traveler.Gender) {
-    gender = traveler.Gender;
-  } else {
+
+  if (!traveler.Gender) {
     const matchedGender = name.First.match(/(?:MSTR|MISS|MRS|MR|)$/gi);
 
     if (matchedGender[0]) {
       name.First = name.First.replace(/(?:MSTR|MISS|MRS|MR)$/gi, '');
       if (matchedGender[0] === 'MR' || matchedGender[0] === 'MSTR') {
-        gender = 'M';
+        traveler.Gender = 'M';
       } else if (matchedGender[0] === 'MISS' || matchedGender[0] === 'MRS') {
-        gender = 'F';
+        traveler.Gender = 'F';
       }
     }
   }
@@ -541,12 +539,15 @@ function buildPassenger(nameObject, travelerObject) {
       uapi_passenger_ref: traveler.Key,
     },
     traveler.DOB ? {
-      birthDate: moment(traveler.DOB).format('YYYY-MM-DD'),
+      birthDate: moment(traveler.DOB)
+        .format('YYYY-MM-DD'),
     } : null,
     traveler.TravelerType ? {
       ageCategory: traveler.TravelerType,
     } : null,
-    { gender }
+    {
+      gender: traveler.Gender ? traveler.Gender : null
+    }
   );
 }
 
