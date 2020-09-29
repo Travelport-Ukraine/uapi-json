@@ -515,9 +515,8 @@ function setIndexesForSegments(
 }
 
 function buildPassenger(nameObject, travelerObject) {
-  const traveler = travelerObject;
-  const name = nameObject;
-
+  const traveler = Object.assign({}, travelerObject);
+  const name = Object.assign({}, nameObject);
 
   if (!traveler.Gender) {
     const matchedGender = name.First.match(/(?:MSTR|MISS|MRS|MR|)$/gi);
