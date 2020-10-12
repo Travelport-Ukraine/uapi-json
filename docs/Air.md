@@ -128,6 +128,8 @@ After searching for air segments and fares, air bookings are created using the r
 | deliveryInformation | `Delivery Information` | Optional. See `Delivery Information` description [below](#delivery-info). |
 | tau | `String`/`Date`/`Array<Number>` | Optional. Takes  See `TAU` description [below](#tau). The default value is 3 hours from the current timestamp.|
 | platingCarrier | `String` | Optional. PlatingCarrier. |
+| overrideContinuityCheck | `Boolean` | Optional. Sets ContinuityCheckOverride. |
+
 
 ### Segment object
 <a name="segment"></a>

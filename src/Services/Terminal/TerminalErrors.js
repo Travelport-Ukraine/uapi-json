@@ -45,7 +45,7 @@ Object.assign(TerminalRuntimeError, createErrorsList({
   TerminalIsBusy: 'Terminal is busy',
   TerminalIsClosed: 'Terminal is closed',
   ErrorClosingSession: 'Error closing session',
-  NoAgreement: ['There is no agreement between current pcc and you trying to reach', errorCodes.Unauthorized],
+  NoAgreement: ['There is no agreement between current pcc and you trying to reach', errorCodes.Validation],
 }, TerminalRuntimeError));
 
 module.exports = {
