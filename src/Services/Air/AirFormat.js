@@ -521,7 +521,7 @@ function buildPassenger(nameObject, travelerObject) {
   if (!traveler.Gender) {
     const matchedGender = name.First.match(/(?:MSTR|MISS|MRS|MR|)$/gi);
 
-    if (matchedGender && matchedGender[0]) {
+    if (matchedGender) {
       name.First = name.First.replace(/(?:MSTR|MISS|MRS|MR)$/gi, '');
       if (matchedGender[0] === 'MR' || matchedGender[0] === 'MSTR') {
         traveler.Gender = 'M';
