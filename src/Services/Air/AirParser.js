@@ -667,7 +667,7 @@ const airGetTicket = function (obj) {
   const hasNoAgreementResponse = responseMessages.find(({ _: message, Code }) => Code === '12009' && noAgreementPattern.test(message));
 
   if (hasNoAgreementResponse) {
-    throw new AirRuntimeError.NoAgreement({ message: hasNoAgreementResponse._ });
+    throw new AirRuntimeError.NoAgreement({ screen: hasNoAgreementResponse._ });
   }
 
   const etr = obj['air:ETR'];
