@@ -14,6 +14,7 @@ const {
 
 const fareCalculationPattern = /^([\s\S]+)END($|\s)/;
 const firstOriginPattern = /^(?:s-)?(?:\d{2}[a-z]{3}\d{2}\s+)?([a-z]{3})/i;
+const noAgreementPattern = /NO AGENCY AGREEMENT/ig;
 
 const parseFareCalculation = (str) => {
   const fareCalculation = str.match(fareCalculationPattern)[1];
@@ -660,6 +661,13 @@ const airGetTicket = function (obj) {
       throw new AirRuntimeError.DuplicateTicketFound(obj);
     }
     throw new AirRuntimeError.TicketRetrieveError(obj);
+  }
+
+  const responseMessages = obj[`common_${this.uapi_version}:ResponseMessage`] || [];
+  const hasNoAgreementResponse = responseMessages.find(({ _: message, Code }) => Code === '12009' && noAgreementPattern.test(message));
+
+  if (hasNoAgreementResponse) {
+    throw new AirRuntimeError.NoAgreement({ screen: hasNoAgreementResponse._ });
   }
 
   const etr = obj['air:ETR'];

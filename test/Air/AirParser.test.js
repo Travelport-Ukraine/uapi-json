@@ -517,6 +517,19 @@ describe('#AirParser', () => {
         });
     });
 
+    it('should return no agreement error if present in response message', () => {
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_NO_AGREEMENT_RESPONSE_MESSAGE.xml`).toString();
+
+      return uParser.parse(xml)
+        .then(json => parseFunction.call(uParser, json))
+        .then(() => Promise.reject(new Error('Error has not occured')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement);
+        });
+    });
+
     it('should return error when not available to return ticket', (done) => {
       const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
