@@ -249,6 +249,10 @@ module.exports = (settings) => {
       try {
         return await service.getTickets({ reservationLocatorCode });
       } catch (err) {
+        if (err instanceof AirRuntimeError.NoAgreement) {
+          throw err;
+        }
+
         throw new AirRuntimeError.UnableToRetrieveTickets(options, err);
       }
     },
