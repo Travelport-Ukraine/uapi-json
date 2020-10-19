@@ -1065,22 +1065,38 @@ describe('#AirService', () => {
 
   describe('getTickets', () => {
     it('should throw an error when some function fails', async () => {
-      const AirService = () => ({
-        getUniversalRecordByPNR: () => Promise.resolve({ uapi_reservation_locator: 'RLC001' }),
-        getTickets: () => Promise.reject(new Error('Some error')),
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': AirService,
-      });
-      const service = createAirService({ auth });
+      const errorCases = [
+        {
+          InstanceError: AirRuntimeError.UnableToRetrieveTickets,
+          CausedByInstanceError: Error
+        },
+        {
+          InstanceError: AirRuntimeError.NoAgreement,
+          CausedByInstanceError: AirRuntimeError.NoAgreement
+        }];
 
-      try {
-        await service.getTickets({ uapi_reservation_locator: 'RLC001' });
-        throw new Error('No error thrown!');
-      } catch (err) {
-        expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieveTickets);
-        expect(err.causedBy).to.be.an.instanceof(Error);
-      }
+      await Promise.all(errorCases.map(async ({ InstanceError, CausedByInstanceError }) => {
+        const AirService = () => ({
+          getUniversalRecordByPNR: () => Promise.resolve({ uapi_reservation_locator: 'RLC001' }),
+          getTickets: () => Promise.reject(new CausedByInstanceError('Some error')),
+        });
+        const createAirService = proxyquire('../../src/Services/Air/Air', {
+          './AirService': AirService,
+        });
+        const service = createAirService({ auth });
+
+        try {
+          await service.getTickets({ uapi_reservation_locator: 'RLC001' });
+          throw new Error('No error thrown!');
+        } catch (err) {
+          console.log(err);
+          expect(err).to.be.an.instanceof(InstanceError);
+
+          if (err.causedBy) {
+            expect(err.causedBy).to.be.an.instanceof(CausedByInstanceError);
+          }
+        }
+      }));
     });
     it('should work with right responses', (done) => {
       const importBookingVoidResponse = JSON.parse(
