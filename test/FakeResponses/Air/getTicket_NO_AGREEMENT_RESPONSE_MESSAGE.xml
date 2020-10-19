@@ -1,0 +1,12 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:AirRetrieveDocumentRsp TransactionId="3F973FD60A07571DECEA472BA3D8CBDC" ResponseTime="651"
+                                UniversalRecordLocatorCode="2LEIQJ"
+                                xmlns:air="http://www.travelport.com/schema/air_v47_0"
+                                xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+      <common_v47_0:ResponseMessage Code="12009" Type="Error" ProviderCode="1G">Host error during ticket retrieve.-
+        Ticket Number 5669903558585- UNABLE TO PROCESS NO AGENCY AGREEMENT
+      </common_v47_0:ResponseMessage>
+    </air:AirRetrieveDocumentRsp>
+  </SOAP:Body>
+</SOAP:Envelope>
