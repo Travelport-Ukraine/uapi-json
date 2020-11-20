@@ -1,0 +1,77 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:AirRetrieveDocumentRsp TransactionId="AC8CB20A0A0E5633E0DC4033A9D0DB54" ResponseTime="553"
+                                UniversalRecordLocatorCode="7XC9IB"
+                                xmlns:air="http://www.travelport.com/schema/air_v47_0"
+                                xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+      <air:ETR Key="SGNQhOBAAA/Bi2KYVCAAAA==" TotalPrice="UAH9641" BasePrice="USD312.00" Taxes="UAH1015"
+               EquivalentBasePrice="UAH8626" Refundable="false" Exchangeable="false"
+               IssuedDate="2020-07-31T00:00:00.000+02:00" ProviderCode="1G"
+               IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="LO">
+        <air:AirReservationLocatorCode>7XC9IC</air:AirReservationLocatorCode>
+        <common_v47_0:AgencyInfo>
+          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F"
+                                    BranchCode="P2731609" AgencyCode="S1473516"
+                                    EventTime="2020-07-30T22:00:00.000+00:00"/>
+        </common_v47_0:AgencyInfo>
+        <common_v47_0:BookingTraveler Key="SGNQhOBAAA/Be2KYVCAAAA==">
+          <common_v47_0:BookingTravelerName First="MARKMR" Last="OMARO"/>
+          <common_v47_0:SSR Key="BAFllTmJ0BKAesqdKCAAAA==" SegmentRef="ApumlTZYlDKASUsgKCAAAA==" Status="HK"
+                            Type="TKNE" FreeText="0809903654990C1" Carrier="LO"
+                            ProviderReservationInfoRef="SGNQhOBAAA/BnpKYVCAAAA=="/>
+        </common_v47_0:BookingTraveler>
+        <common_v47_0:FormOfPayment Key="SGNQhOBAAA/Bq2KYVCAAAA==" Type="Cash" Reusable="false"
+                                    ProfileKey="uxXmOeceT/+1chcubif2xg=="/>
+        <common_v47_0:Payment Key="SGNQhOBAAA/Bs2KYVCAAAA==" Type="Itinerary" Amount="UAH9641"
+                              FormOfPaymentRef="SGNQhOBAAA/Bq2KYVCAAAA=="/>
+        <common_v47_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="Q9BSVF"/>
+        <air:FareCalc>IEV LO WAW 312.00 NUC312.00END ROE1.0 XT 360YK488YQ</air:FareCalc>
+        <air:Ticket Key="SGNQhOBAAA/Bm2KYVCAAAA==" TicketNumber="0809903654876" TicketStatus="N">
+          <air:Coupon Key="SGNQhOBAAA/Bn2KYVCAAAA==" CouponNumber="1" MarketingCarrier="LO"
+                      MarketingFlightNumber="752" Origin="KBP" Destination="WAW"
+                      DepartureTime="2021-05-15T14:50:00.000+03:00" StopoverCode="true" BookingClass="Y"
+                      FareBasis="Y1SAV0" NotValidBefore="2021-05-15" NotValidAfter="2021-05-15" Status="O"/>
+        </air:Ticket>
+        <air:BaggageAllowances>
+          <air:BaggageAllowanceInfo TravelerType="ADT" Origin="KBP" Destination="WAW" Carrier="LO">
+            <air:URLInfo>
+              <air:URL>VIEWTRIP.TRAVELPORT.COM/BAGGAGEPOLICY/LO</air:URL>
+            </air:URLInfo>
+            <air:TextInfo>
+              <air:Text>0P</air:Text>
+              <air:Text>BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF
+                PAYMENT/MILITARY/ETC.
+              </air:Text>
+            </air:TextInfo>
+            <air:BagDetails ApplicableBags="1stChecked">
+              <air:BaggageRestriction>
+                <air:TextInfo>
+                  <air:Text>BAGGAGE CHARGES DATA NOT AVAILABLE</air:Text>
+                </air:TextInfo>
+              </air:BaggageRestriction>
+            </air:BagDetails>
+            <air:BagDetails ApplicableBags="2ndChecked">
+              <air:BaggageRestriction>
+                <air:TextInfo>
+                  <air:Text>BAGGAGE CHARGES DATA NOT AVAILABLE</air:Text>
+                </air:TextInfo>
+              </air:BaggageRestriction>
+            </air:BagDetails>
+          </air:BaggageAllowanceInfo>
+          <air:CarryOnAllowanceInfo Origin="KBP" Destination="WAW" Carrier="LO">
+            <air:TextInfo>
+              <air:Text>1P</air:Text>
+            </air:TextInfo>
+            <air:CarryOnDetails ApplicableCarryOnBags="1" BasePrice="UAH0" TotalPrice="UAH0">
+              <air:BaggageRestriction>
+                <air:TextInfo>
+                  <air:Text>UPTO18LB/8KG AND UPTO46LI/118LCM</air:Text>
+                </air:TextInfo>
+              </air:BaggageRestriction>
+            </air:CarryOnDetails>
+          </air:CarryOnAllowanceInfo>
+        </air:BaggageAllowances>
+      </air:ETR>
+    </air:AirRetrieveDocumentRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

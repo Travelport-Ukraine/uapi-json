@@ -124,13 +124,13 @@ module.exports = function uapiRequest(
         });
     };
 
-    const parseResponse = function (response) {
+    const parseResponse = function (response, parseParams) {
       // if there are web server or HTTP auth errors, uAPI returns a JSON
       let data = null;
       try {
         data = JSON.parse(response);
       } catch (err) {
-        return uParser.parse(response);
+        return uParser.parse(response, parseParams);
       }
 
       // TODO parse JSON errors
@@ -181,7 +181,7 @@ module.exports = function uapiRequest(
       .then(sendRequest)
       .then(parseResponse)
       .then(validateSOAP)
-      .then(parseFunction.bind(uParser)) // TODO: merge Hotels
+      .then(res => parseFunction.call(uParser, res, params))
       .then(handleSuccess);
   };
 };
