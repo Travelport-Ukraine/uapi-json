@@ -471,9 +471,9 @@ const AirErrorHandler = function (rsp) {
   }
 };
 
-function getTicketFromEtr(etr, obj) {
+function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false) {
   // Checking if pricing info exists
-  if (!etr.ProviderLocatorCode) {
+  if (!allowNoProviderLocatorCodeRetrieval && !etr.ProviderLocatorCode) {
     throw new AirRuntimeError.TicketInfoIncomplete(etr);
   }
 
@@ -654,7 +654,9 @@ function getTicketFromEtr(etr, obj) {
   return response;
 }
 
-const airGetTicket = function (obj) {
+const airGetTicket = function (obj, parseParams = {
+  allowNoProviderLocatorCodeRetrieval: false
+}) {
   const failure = obj['air:DocumentFailureInfo'];
   if (failure) {
     if (failure.Code === '3273') {
@@ -679,10 +681,13 @@ const airGetTicket = function (obj) {
 
   if (multipleTickets) {
     return Object.values(etr)
-      .map(innerEtr => getTicketFromEtr.call(this, innerEtr, obj));
+      .map(innerEtr => (
+        getTicketFromEtr.call(this, innerEtr, obj, parseParams.allowNoProviderLocatorCodeRetrieval)
+      ));
   }
 
-  return getTicketFromEtr.call(this, etr, obj);
+
+  return getTicketFromEtr.call(this, etr, obj, parseParams.allowNoProviderLocatorCodeRetrieval);
 };
 
 const responseHasNoTickets = rsp => (
