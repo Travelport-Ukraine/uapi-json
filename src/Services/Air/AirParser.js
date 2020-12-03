@@ -433,7 +433,6 @@ const processUAPIError = (rsp) => {
   throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
 };
 
-
 const AirErrorHandler = function (rsp) {
   let errorInfo;
   let code;
