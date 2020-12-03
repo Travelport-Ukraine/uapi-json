@@ -272,6 +272,14 @@ describe('#AirParser', () => {
       }
     });
   });
+  it('should correctly handle errors without faultstring', async () => {
+    try {
+      airParser.AIR_GET_TICKETS_ERROR_HANDLER.uapi_version = 'v47_0';
+      airParser.AIR_GET_TICKETS_ERROR_HANDLER({ faultcode: 'Server.Security' });
+    } catch (err) {
+      expect(err).to.be.an.instanceof(RequestRuntimeError.UnhandledError);
+    }
+  });
 
   describe('getTicket', () => {
     function testTicket(result) {
