@@ -271,14 +271,14 @@ describe('#AirParser', () => {
         });
       }
     });
-  });
-  it('should correctly handle errors without faultstring', async () => {
-    try {
-      airParser.AIR_GET_TICKETS_ERROR_HANDLER.uapi_version = 'v47_0';
-      airParser.AIR_GET_TICKETS_ERROR_HANDLER({ faultcode: 'Server.Security' });
-    } catch (err) {
-      expect(err).to.be.an.instanceof(RequestRuntimeError.UnhandledError);
-    }
+    it('should correctly handle errors without faultstring', async () => {
+      try {
+        airParser.AIR_GET_TICKETS_ERROR_HANDLER.uapi_version = 'v47_0';
+        airParser.AIR_GET_TICKETS_ERROR_HANDLER({ faultcode: 'Server.Security' });
+      } catch (err) {
+        expect(err).to.be.an.instanceof(RequestRuntimeError.UnhandledError);
+      }
+    });
   });
 
   describe('getTicket', () => {
@@ -881,6 +881,40 @@ describe('#AirParser', () => {
         .catch(
           err => expect(err).to.be.an.instanceof(AirRuntimeError.NoResultsFound)
         );
+    });
+
+    it('should handle uapi error', async () => {
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
+      const parseFunction = airParser.AIR_ERRORS;
+      const xml = fs.readFileSync(`${xmlFolder}/AirGetTickets-error-general.xml`).toString();
+      return uParser.parse(xml)
+        .then(
+          (json) => {
+            const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]); // parse error data
+            return parseFunction.call(uParser, errData);
+          }
+        )
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
+          expect(err.data).to.deep.eq({
+            faultcode: 'Server.Business',
+            faultstring: 'Record locator not found.',
+            detail: {
+              'common_v47_0:ErrorInfo': {
+                'common_v47_0:Code': '3130', 'common_v47_0:Service': 'WEBSVC', 'common_v47_0:Type': 'Business', 'common_v47_0:Description': 'Record locator not found.', 'common_v47_0:TransactionId': '838261280A07425809813A4629F6C7D1', 'xmlns:common_v47_0': 'http://www.travelport.com/schema/common_v47_0'
+              }
+            }
+          });
+        });
+    });
+
+    it('should correctly handle errors without faultstring', async () => {
+      try {
+        airParser.AIR_ERRORS.uapi_version = 'v47_0';
+        airParser.AIR_ERRORS({ faultcode: 'Server.Security' });
+      } catch (err) {
+        expect(err).to.be.an.instanceof(RequestRuntimeError.UnhandledError);
+      }
     });
 
     it('should throw AirRuntimeError.NoResultsFound error2', () => {
