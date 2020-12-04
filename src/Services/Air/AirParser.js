@@ -425,6 +425,14 @@ function airPriceRspPricingSolutionXML(obj) {
   };
 }
 
+const processUAPIError = (rsp) => {
+  if (rsp.faultstring) {
+    throw new RequestRuntimeError.UAPIServiceError(rsp);
+  }
+
+  throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
+};
+
 const AirErrorHandler = function (rsp) {
   let errorInfo;
   let code;
@@ -435,7 +443,7 @@ const AirErrorHandler = function (rsp) {
     );
     code = errorInfo[`common_${this.uapi_version}:Code`];
   } catch (err) {
-    throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
+    processUAPIError(rsp);
   }
   const pcc = utils.getErrorPcc(rsp.faultstring);
   switch (code) {
@@ -467,7 +475,7 @@ const AirErrorHandler = function (rsp) {
     case '3037': // No availability on chosen flights, unable to fare quote
       throw new AirRuntimeError.NoResultsFound(rsp);
     default:
-      throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
+      processUAPIError(rsp);
   }
 };
 
@@ -706,7 +714,7 @@ function airGetTicketsErrorHandler(rsp) {
     );
     code = errorInfo[`common_${this.uapi_version}:Code`];
   } catch (err) {
-    throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
+    processUAPIError(rsp);
   }
   // General Air Service error
   if (code === '3000') {
@@ -720,7 +728,7 @@ function airGetTicketsErrorHandler(rsp) {
         pcc: utils.getErrorPcc(rsp.faultstring),
       });
     default:
-      throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
+      return processUAPIError(rsp);
   }
 }
 
