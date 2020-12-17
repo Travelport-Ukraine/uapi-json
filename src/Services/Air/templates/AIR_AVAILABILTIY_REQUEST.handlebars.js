@@ -22,12 +22,20 @@ module.exports = `
                     <com:CityOrAirport Code="{{to}}" PreferCity="true"/>
                 </air:SearchDestination>
                 <air:SearchDepTime PreferredTime="{{departureDate}}"/>
-                <air:AirLegModifiers>
+                <air:AirLegModifiers {{#if ../allowDirectAccess}}AllowDirectAccess="true"{{/if}}>
                     {{#*inline "connectionPoint"}}
                       <com:ConnectionPoint>
                         <com:CityOrAirport Code="{{connection}}" />
                       </com:ConnectionPoint>
                     {{/inline}}
+
+                    {{#if ../carriers}}
+                    <air:PermittedCarriers>
+                    {{#each ../carriers as |carrier|}}
+                        <com:Carrier Code="{{carrier}}" />
+                    {{/each}}
+                    </air:PermittedCarriers>
+                    {{/if}}
 
                     {{#if ../permittedConnectionPoints}}
                     <air:PermittedConnectionPoints>

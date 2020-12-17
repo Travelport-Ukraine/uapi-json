@@ -6,7 +6,8 @@ module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: compose(
     validate(
       validators.passengers,
-      validators.legs
+      validators.legs,
+      validators.allowDirectAccess
     ),
     transform(
       transformers.convertPassengersObjectToArray
