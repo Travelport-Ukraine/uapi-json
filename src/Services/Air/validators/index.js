@@ -19,12 +19,14 @@ const exchangeToken = require('./exchange-token');
 const platingCarrier = require('./platingCarrier');
 const searchId = require('./search-id');
 const version = require('./version');
+const allowDirectAccess = require('./allow-direct-access');
 
 module.exports = {
   legs,
   passengers,
   pricingSolutionXml,
   paramsIsObject,
+  allowDirectAccess,
   fop,
   fopCreditCard,
   pnr,
