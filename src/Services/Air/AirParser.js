@@ -427,7 +427,10 @@ function airPriceRspPricingSolutionXML(obj) {
 
 const processUAPIError = (rsp) => {
   if (rsp.faultstring) {
-    throw new RequestRuntimeError.UAPIServiceError(rsp);
+    throw new RequestRuntimeError.UAPIServiceError({
+      ...rsp,
+      faultstring: rsp.faultstring.toUpperCase()
+    });
   }
 
   throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));

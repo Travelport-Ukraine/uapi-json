@@ -262,7 +262,7 @@ describe('#AirParser', () => {
         expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
         expect(err.data).to.deep.eq({
           faultcode: 'Server.Business',
-          faultstring: 'Record locator not found.',
+          faultstring: 'RECORD LOCATOR NOT FOUND.',
           detail: {
             'common_v47_0:ErrorInfo': {
               'common_v47_0:Code': '3130', 'common_v47_0:Service': 'WEBSVC', 'common_v47_0:Type': 'Business', 'common_v47_0:Description': 'Record locator not found.', 'common_v47_0:TransactionId': '838261280A07425809813A4629F6C7D1', 'xmlns:common_v47_0': 'http://www.travelport.com/schema/common_v47_0'
@@ -898,7 +898,7 @@ describe('#AirParser', () => {
           expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
           expect(err.data).to.deep.eq({
             faultcode: 'Server.Business',
-            faultstring: 'Record locator not found.',
+            faultstring: 'RECORD LOCATOR NOT FOUND.',
             detail: {
               'common_v47_0:ErrorInfo': {
                 'common_v47_0:Code': '3130', 'common_v47_0:Service': 'WEBSVC', 'common_v47_0:Type': 'Business', 'common_v47_0:Description': 'Record locator not found.', 'common_v47_0:TransactionId': '838261280A07425809813A4629F6C7D1', 'xmlns:common_v47_0': 'http://www.travelport.com/schema/common_v47_0'
