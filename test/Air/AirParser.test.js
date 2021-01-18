@@ -387,7 +387,7 @@ describe('#AirParser', () => {
           expect(result.priceInfoDetailsAvailable).to.equal(false);
           expect(result.noAdc).to.equal(true);
           expect(result.totalPrice).to.equal('UAH0');
-          expect(result.commission).to.be.deep.equal({ percent: 0.1 });
+          expect(result.commission).to.be.deep.equal({ type: 'Z', value: 0.1 });
         });
     });
 
@@ -437,7 +437,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
-          expect(result.commission).to.be.deep.equal({ amount: 0 });
+          expect(result.commission).to.be.deep.equal({ type: 'ZA', value: 0 });
           expect(result.tourCode).to.be.equal('IT151920');
         });
     });
@@ -450,7 +450,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
-          expect(result.commission).to.be.deep.equal({ percent: 0.1 });
+          expect(result.commission).to.be.deep.equal({ type: 'Z', value: 0.1 });
         });
     });
 
