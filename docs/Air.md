@@ -231,7 +231,7 @@ Ticketing function returns `true` if the process is finished with success or `Er
 
 | Param | Type | Description |
 | --- | --- | --- |
-| commission | <code>Object{amount&#124;percent}</code> | If amount is passed than it should be provided with currency. Ex: `{ comission: { amount: 'UAH10' }}`. If percent - it should be string with float number |
+| commission | <code>Object {type: String "Z"&#124;ZA", value: Number 50&#124;String "UAH10" }</code> | If amount is passed than it should be provided with currency. Ex: `{ commission: { type: ZA, value: 'UAH10' }}`. Without currency: `{ commission: { type: 'ZA', value: 10 } }` If percent: `{ commission: { type: Z, value: 50 } }`. |
 | fop | `Form Of Payment` | See `Form Of Payment` description [below](#fop). |
 | pnr | `String` | 1G PNR. |
 
