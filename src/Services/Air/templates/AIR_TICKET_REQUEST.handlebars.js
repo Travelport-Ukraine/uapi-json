@@ -25,7 +25,7 @@ module.exports = `
             Type="PercentBase" Percentage="{{commission.value}}"
           {{/equal}}
           {{#equal commission.type "ZA"}}
-            Type="Flat" Amount="{{commission.value}}"
+            Type="Flat" Amount="{{currency}}{{commission.value}}"
           {{/equal}}
         />
         {{/if}}

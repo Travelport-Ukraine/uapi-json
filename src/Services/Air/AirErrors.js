@@ -132,6 +132,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   NoPNRFoundInUR: ['No PNR found in Universal record', errorCodes.NotFound],
   NoAgreement: ['There is no agreement between current pcc, and one you try to reach', errorCodes.Validation],
   UnableToRetrieve: ['Unable to retrieve PNR. Please contact your local Travelport Helpdesk.', errorCodes.NotFound],
+  CouldNotRetrieveCurrency: 'We could not retrieve currency for commission from any fare in the booking. Please check fare quotes.'
 }, AirRuntimeError));
 
 const AirFlightInfoRuntimeError = createErrorClass(
