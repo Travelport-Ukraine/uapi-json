@@ -714,6 +714,33 @@ describe('#AirService', () => {
       });
     });
 
+    it('should throw an error when currency is not found in totalPrice', () => {
+      const params = { pnr: 'PNR001' };
+
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketed.map(booking => ({
+          ...booking,
+          fareQuotes: [{
+            pricingInfos: [{
+              totalPrice: '10',
+            }]
+          }]
+        })))
+      );
+      const ticket = sinon.spy(() => Promise.reject(new Error('No Call')));
+      const foid = sinon.spy(() => Promise.reject(new Error('No Call')));
+
+      const air = getAirServiceMock({ methods: { getUniversalRecordByPNR, foid, ticket } });
+
+      return air.ticket(params)
+        .catch((err) => {
+          expect(err).to.be.instanceOf(AirRuntimeError.CouldNotRetrieveCurrency);
+          expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
+          expect(ticket.calledOnce).to.be.equal(false);
+          expect(foid.calledOnce).to.be.equal(false);
+        });
+    });
+
     it('should throw an error when currency is not found', () => {
       const params = { pnr: 'PNR001' };
 

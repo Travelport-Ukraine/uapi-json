@@ -174,6 +174,7 @@ module.exports = function uapiRequest(
       return result;
     };
 
+
     return validateInput()
       .then(handlebars.compile)
       .then(template => prepareRequest(template, auth, params))

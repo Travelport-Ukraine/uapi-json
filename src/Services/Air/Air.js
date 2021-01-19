@@ -210,7 +210,7 @@ module.exports = (settings) => {
             }, null);
           }, null);
 
-          if (!currency) {
+          if (!currency || !/[A-Z]{3}/i.test(currency)) {
             return Promise.reject(new AirRuntimeError.CouldNotRetrieveCurrency(options));
           }
 
