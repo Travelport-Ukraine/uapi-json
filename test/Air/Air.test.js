@@ -810,15 +810,23 @@ describe('#AirService', () => {
       });
 
       const foid = sinon.spy(() => Promise.resolve({}));
+      const log = sinon.spy(() => {});
       const service = () => ({ getUniversalRecordByPNR, ticket, foid });
 
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': service,
       });
 
-      return createAirService({ auth }).ticket(params).then(() => {
+      return createAirService({
+        auth,
+        debug: true,
+        options: {
+          logFunction: log,
+        }
+      }).ticket(params).then(() => {
         expect(getUniversalRecordByPNR.calledTwice).to.be.equal(true);
         expect(ticket.calledTwice).to.be.equal(true);
+        expect(log.calledOnce).to.be.equal(true);
         expect(foid.calledOnce).to.be.equal(true);
       });
     });
