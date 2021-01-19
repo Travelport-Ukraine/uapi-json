@@ -704,6 +704,60 @@ describe('#AirService', () => {
   });
 
   describe('ticket', () => {
+    it('should automatically get currency for commission', () => {
+      const params = { pnr: 'PNR001' };
+
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketed.map(booking => ({
+          ...booking,
+          fareQuotes: [{
+            pricingInfos: [{
+              totalPrice: 'UAH10',
+            }]
+          }]
+        })))
+      );
+      const ticket = sinon.spy((options) => {
+        expect(options.currency).to.be.equal('UAH');
+        expect(options.ReservationLocator).to.be.equal('ABCDEF');
+        return Promise.resolve();
+      });
+      const foid = sinon.spy(() => {});
+      const service = () => ({ getUniversalRecordByPNR, ticket, foid });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth }).ticket(params).then(() => {
+        expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
+        expect(ticket.calledOnce).to.be.equal(true);
+        expect(foid.calledOnce).to.be.equal(false);
+      });
+    });
+
+    it('should throw an error when currency is not found', () => {
+      const params = { pnr: 'PNR001' };
+
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketed)
+      );
+      const ticket = sinon.spy(() => Promise.reject(new Error('Should not be called')));
+      const foid = sinon.spy(() => Promise.reject(new Error('Should not be called')));
+      const service = () => ({ getUniversalRecordByPNR, ticket, foid });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+
+      return createAirService({ auth }).ticket(params).catch((err) => {
+        expect(err).to.be.instanceOf(AirRuntimeError.CouldNotRetrieveCurrency);
+        expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
+        expect(ticket.calledOnce).to.be.equal(false);
+        expect(foid.calledOnce).to.be.equal(false);
+      });
+    });
+
     it('should check if correct function from service is called', () => {
       const params = { pnr: 'PNR001' };
 
