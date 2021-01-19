@@ -43,13 +43,17 @@ describe('#AirService', () => {
       ],
     },
   ];
+  const fq = {
+    pricingInfos: [{
+      totalPrice: 'UAH10',
+    },
+    {
+      totalPrice: 'UAH11',
+    }]
+  };
   const getURbyPNRSampleWithCurrency = getURbyPNRSampleTicketed.map(booking => ({
     ...booking,
-    fareQuotes: [{
-      pricingInfos: [{
-        totalPrice: 'UAH10',
-      }]
-    }]
+    fareQuotes: [fq, fq]
   }));
   const getURbyPNRSampleTicketedWithEmptyTickets = [
     {
