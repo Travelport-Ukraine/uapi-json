@@ -11,7 +11,7 @@ const AirService = uAPI.createAirService({
 const params = {
   commission: {
     type: 'ZA',
-    value: 'UAH1',
+    value: 10,
   },
   fop: {
     type: 'Cash',
