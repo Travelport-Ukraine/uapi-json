@@ -189,17 +189,45 @@ module.exports = (settings) => {
     },
 
     ticket(options) {
-      return (options.ReservationLocator
-        ? Promise.resolve(options.ReservationLocator)
-        : this.getBooking(options).then(booking => booking.uapi_reservation_locator)
-      )
-        .then(ReservationLocator => retry({ retries: 3 }, (again, number) => {
+      return this.getBooking(options)
+        .then((booking) => {
+          const { fareQuotes = [] } = booking;
+          const currency = fareQuotes.reduce((accCurrency, fq) => {
+            if (accCurrency !== null) {
+              return accCurrency;
+            }
+
+            const { pricingInfos = [] } = fq;
+
+            return pricingInfos.reduce((totalPriceCurrency, pricingInfo) => {
+              if (totalPriceCurrency !== null) {
+                return totalPriceCurrency;
+              }
+
+              return pricingInfo.totalPrice
+                ? pricingInfo.totalPrice.slice(0, 3).trim()
+                : null;
+            }, null);
+          }, null);
+
+          if (!currency || !/[A-Z]{3}/i.test(currency)) {
+            return Promise.reject(new AirRuntimeError.CouldNotRetrieveCurrency(options));
+          }
+
+          return {
+            ReservationLocator: booking.uapi_reservation_locator,
+            currency,
+          };
+        })
+        .then(({ ReservationLocator, currency }) => retry({ retries: 3 }, (again, number) => {
           if (settings.debug && number > 1) {
             log(`ticket ${options.pnr} issue attempt number ${number}`);
           }
+
           return service.ticket({
             ...options,
             ReservationLocator,
+            currency
           })
             .catch((err) => {
               if (err instanceof AirRuntimeError.TicketingFoidRequired) {

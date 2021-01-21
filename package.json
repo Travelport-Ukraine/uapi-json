@@ -1,6 +1,6 @@
 {
   "name": "uapi-json",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "Travelport Universal API",
   "main": "src/",
   "files": [
@@ -35,7 +35,7 @@
   "license": "MIT",
   "dependencies": {
     "@hapi/joi": "^15.1.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "galileo-screen": "1.0.5",
     "handlebars": "^4.7.6",
     "handlebars-helper-equal": "^1.0.0",
