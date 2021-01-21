@@ -15,6 +15,13 @@ chai.use(sinonChai);
 const responsesDir = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const terminalResponsesDir = path.join(__dirname, '..', 'FakeResponses', 'Terminal');
 
+const getAirServiceMock = ({ methods = {}, options = {} }) => {
+  const createAirService = proxyquire('../../src/Services/Air/Air', {
+    './AirService': () => ({ ...methods }),
+  });
+
+  return createAirService({ auth, ...options });
+};
 
 describe('#AirService', () => {
   const getURByPNRSampleBooked = [
@@ -36,6 +43,18 @@ describe('#AirService', () => {
       ],
     },
   ];
+  const fq = {
+    pricingInfos: [{
+      totalPrice: 'UAH10',
+    },
+    {
+      totalPrice: 'UAH11',
+    }]
+  };
+  const getURbyPNRSampleWithCurrency = getURbyPNRSampleTicketed.map(booking => ({
+    ...booking,
+    fareQuotes: [fq, fq]
+  }));
   const getURbyPNRSampleTicketedWithEmptyTickets = [
     {
       pnr: 'PNR001',
@@ -45,24 +64,19 @@ describe('#AirService', () => {
       tickets: [],
     },
   ];
+
   describe('shop', () => {
     it('should check if correct function from service is called', () => {
       const searchLowFares = sinon.spy(() => {});
-      const service = () => ({ searchLowFares });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-      createAirService({ auth }).shop({});
+      const air = getAirServiceMock({ methods: { searchLowFares } });
+      air.shop({});
       expect(searchLowFares.calledOnce).to.be.equal(true);
     });
 
     it('should check if correct function from service is called with async option', () => {
       const searchLowFaresAsync = sinon.spy(() => {});
-      const service = () => ({ searchLowFaresAsync });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-      createAirService({ auth }).shop({ async: true });
+      const air = getAirServiceMock({ methods: { searchLowFaresAsync } });
+      air.shop({ async: true });
       expect(searchLowFaresAsync.calledOnce).to.be.equal(true);
     });
   });
@@ -70,11 +84,8 @@ describe('#AirService', () => {
   describe('retrieveShop', () => {
     it('should check if correct function from service is called', () => {
       const searchLowFaresRetrieve = sinon.spy(() => {});
-      const service = () => ({ searchLowFaresRetrieve });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-      createAirService({ auth }).retrieveShop({});
+      const air = getAirServiceMock({ methods: { searchLowFaresRetrieve } });
+      air.retrieveShop({});
       expect(searchLowFaresRetrieve.calledOnce).to.be.equal(true);
     });
   });
@@ -82,11 +93,8 @@ describe('#AirService', () => {
   describe('availability', () => {
     it('should check if correct function from service is called', () => {
       const availability = sinon.spy(() => {});
-      const service = () => ({ availability });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-      createAirService({ auth }).availability({});
+      const air = getAirServiceMock({ methods: { availability } });
+      air.availability({});
       expect(availability.calledOnce).to.be.equal(true);
     });
   });
@@ -94,11 +102,8 @@ describe('#AirService', () => {
   describe('addSegments', () => {
     it('should check if correct function from service is called', () => {
       const addSegments = sinon.spy(() => {});
-      const service = () => ({ addSegments });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-      createAirService({ auth }).addSegments({
+      const air = getAirServiceMock({ methods: { addSegments } });
+      air.addSegments({
         version: 1,
         universalRecordLocatorCode: 'CODE',
         reservationLocatorCode: 'CODE'
@@ -109,11 +114,14 @@ describe('#AirService', () => {
       const addSegments = sinon.spy(() => {});
       const getBooking = sinon.spy(() => {});
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve([{ pnr: 'PNR000' }]));
-      const service = () => ({ addSegments, getBooking, getUniversalRecordByPNR });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
+      const air = getAirServiceMock({
+        methods: {
+          addSegments,
+          getBooking,
+          getUniversalRecordByPNR
+        }
       });
-      createAirService({ auth }).addSegments({ pnr: 'PNR000' });
+      air.addSegments({ pnr: 'PNR000' });
       expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
     });
   });
@@ -121,11 +129,8 @@ describe('#AirService', () => {
   describe('toQueue', () => {
     it('should check if correct function from service is called', () => {
       const gdsQueue = sinon.spy(() => {});
-      const service = () => ({ gdsQueue });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-      createAirService({ auth }).toQueue({});
+      const air = getAirServiceMock({ methods: { gdsQueue } });
+      air.toQueue({});
       expect(gdsQueue.calledOnce).to.be.equal(true);
     });
   });
@@ -141,20 +146,21 @@ describe('#AirService', () => {
         () => Promise.resolve({ foo: 123 })
       );
       const createReservation = sinon.spy((options) => {
-        expect(options.foo).to.be.equal(123);
         expect(options.ActionStatusType).to.be.equal('TAU');
+        expect(options.foo).to.be.equal(123);
         expect(options.rule).to.be.equal(params.rule);
         expect(options.passengers).to.be.equal(params.passengers);
         return Promise.resolve();
       });
       const cancelUR = sinon.spy(() => {});
-      const service = () => ({ airPricePricingSolutionXML, createReservation });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
+      const air = getAirServiceMock({
+        methods: {
+          airPricePricingSolutionXML, createReservation
+        }
       });
 
-      return createAirService({ auth }).book(params).then(() => {
+      return air.book(params).then(() => {
         expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
         expect(createReservation.calledOnce).to.be.equal(true);
         expect(cancelUR.calledOnce).to.be.equal(false);
@@ -180,13 +186,10 @@ describe('#AirService', () => {
         return Promise.resolve();
       });
       const cancelUR = sinon.spy(() => {});
-      const service = () => ({ airPricePricingSolutionXML, createReservation });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
+      const air = getAirServiceMock({ methods: { airPricePricingSolutionXML, createReservation } });
 
-      return createAirService({ auth }).book(params).then(() => {
+      return air.book(params).then(() => {
         expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
         expect(createReservation.calledOnce).to.be.equal(true);
         expect(cancelUR.calledOnce).to.be.equal(false);
@@ -207,17 +210,16 @@ describe('#AirService', () => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
       });
-      const service = () => ({
-        airPricePricingSolutionXML,
-        createReservation,
-        cancelUR,
+
+      const air = getAirServiceMock({
+        methods: {
+          airPricePricingSolutionXML,
+          createReservation,
+          cancelUR
+        }
       });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-
-      return createAirService({ auth }).book(params)
+      return air.book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
@@ -243,17 +245,16 @@ describe('#AirService', () => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
       });
-      const service = () => ({
-        airPricePricingSolutionXML,
-        createReservation,
-        cancelUR,
+
+      const air = getAirServiceMock({
+        methods: {
+          cancelUR,
+          airPricePricingSolutionXML,
+          createReservation,
+        }
       });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-
-      return createAirService({ auth }).book(params)
+      return air.book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
@@ -279,17 +280,16 @@ describe('#AirService', () => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
       });
-      const service = () => ({
-        airPricePricingSolutionXML,
-        createReservation,
-        cancelUR,
+
+      const air = getAirServiceMock({
+        methods: {
+          createReservation,
+          airPricePricingSolutionXML,
+          cancelUR
+        }
       });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-
-      return createAirService({ auth }).book(params)
+      return air.book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
@@ -315,17 +315,16 @@ describe('#AirService', () => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
       });
-      const service = () => ({
-        airPricePricingSolutionXML,
-        createReservation,
-        cancelUR,
+
+      const air = getAirServiceMock({
+        methods: {
+          airPricePricingSolutionXML,
+          createReservation,
+          cancelUR
+        }
       });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-
-      return createAirService({ auth }).book(params)
+      return air.book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
@@ -349,17 +348,12 @@ describe('#AirService', () => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
       });
-      const service = () => ({
-        airPricePricingSolutionXML,
-        createReservation,
-        cancelUR,
+
+      const air = getAirServiceMock({
+        methods: { airPricePricingSolutionXML, createReservation, cancelUR }
       });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-
-      return createAirService({ auth }).book(params)
+      return air.book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
@@ -385,17 +379,12 @@ describe('#AirService', () => {
         expect(options.LocatorCode).to.be.equal(123);
         return Promise.resolve();
       });
-      const service = () => ({
-        airPricePricingSolutionXML,
-        createReservation,
-        cancelUR,
+
+      const air = getAirServiceMock({
+        methods: { createReservation, airPricePricingSolutionXML, cancelUR }
       });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-
-      return createAirService({ auth }).book(params)
+      return air.book(params)
         .then(() => {
           throw new Error('Cant be success.');
         })
@@ -411,11 +400,8 @@ describe('#AirService', () => {
   describe('retrieve UR', () => {
     it('should check if correct function from service is called', () => {
       const getUniversalRecord = sinon.spy(() => {});
-      const service = () => ({ getUniversalRecord });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-      createAirService({ auth }).getUniversalRecord({});
+      const air = getAirServiceMock({ methods: { getUniversalRecord } });
+      air.getUniversalRecord({});
       expect(getUniversalRecord.calledOnce).to.be.equal(true);
     });
   });
@@ -704,27 +690,106 @@ describe('#AirService', () => {
   });
 
   describe('ticket', () => {
-    it('should check if correct function from service is called', () => {
+    it('should automatically get currency for commission', () => {
+      const params = { pnr: 'PNR001' };
+
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleWithCurrency)
+      );
+      const foid = sinon.spy(() => {});
+      const ticket = sinon.spy((options) => {
+        expect(options.currency).to.be.equal('UAH');
+        expect(options.ReservationLocator).to.be.equal('ABCDEF');
+        return Promise.resolve();
+      });
+
+      const air = getAirServiceMock({
+        methods: {
+          getUniversalRecordByPNR,
+          ticket,
+          foid,
+        }
+      });
+
+      return air.ticket(params).then(() => {
+        expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
+        expect(ticket.calledOnce).to.be.equal(true);
+        expect(foid.calledOnce).to.be.equal(false);
+      });
+    });
+
+    it('should throw an error when currency is not found in totalPrice', () => {
+      const params = { pnr: 'PNR001' };
+
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleTicketed.map(booking => ({
+          ...booking,
+          fareQuotes: [{
+            pricingInfos: [{
+              totalPrice: '10',
+            }]
+          }]
+        })))
+      );
+      const ticket = sinon.spy(() => Promise.reject(new Error('No Call')));
+      const foid = sinon.spy(() => Promise.reject(new Error('No Call')));
+
+      const air = getAirServiceMock({ methods: { getUniversalRecordByPNR, foid, ticket } });
+
+      return air.ticket(params)
+        .catch((err) => {
+          expect(err).to.be.instanceOf(AirRuntimeError.CouldNotRetrieveCurrency);
+          expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
+          expect(ticket.calledOnce).to.be.equal(false);
+          expect(foid.calledOnce).to.be.equal(false);
+        });
+    });
+
+    it('should throw an error when currency is not found', () => {
       const params = { pnr: 'PNR001' };
 
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.resolve(getURbyPNRSampleTicketed)
+      );
+      const ticket = sinon.spy(() => Promise.reject(new Error('Should not be called')));
+      const foid = sinon.spy(() => Promise.reject(new Error('Should not be called')));
+
+      const air = getAirServiceMock({
+        methods: {
+          foid,
+          getUniversalRecordByPNR,
+          ticket,
+        }
+      });
+
+      return air.ticket(params).catch((err) => {
+        expect(err).to.be.instanceOf(AirRuntimeError.CouldNotRetrieveCurrency);
+        expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
+        expect(ticket.calledOnce).to.be.equal(false);
+        expect(foid.calledOnce).to.be.equal(false);
+      });
+    });
+
+    it('should check if correct function from service is called', () => {
+      const params = { pnr: 'PNR001' };
+
+      const getUniversalRecordByPNR = sinon.spy(
+        () => Promise.resolve(getURbyPNRSampleWithCurrency)
       );
       const ticket = sinon.spy((options) => {
         expect(options.ReservationLocator).to.be.equal('ABCDEF');
         return Promise.resolve();
       });
       const foid = sinon.spy(() => {});
-      const service = () => ({ getUniversalRecordByPNR, ticket, foid });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
+      const air = getAirServiceMock({
+        methods: { foid, ticket, getUniversalRecordByPNR }
       });
 
-      return createAirService({ auth }).ticket(params).then(() => {
-        expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
+      return air.ticket(params).then(() => {
         expect(ticket.calledOnce).to.be.equal(true);
         expect(foid.calledOnce).to.be.equal(false);
+        expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
       });
     });
 
@@ -732,7 +797,7 @@ describe('#AirService', () => {
       const params = { pnr: 'PNR001' };
 
       const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.resolve(getURbyPNRSampleTicketed)
+        () => Promise.resolve(getURbyPNRSampleWithCurrency)
       );
       const ticketResponses = [
         Promise.resolve(),
@@ -745,15 +810,23 @@ describe('#AirService', () => {
       });
 
       const foid = sinon.spy(() => Promise.resolve({}));
+      const log = sinon.spy(() => {});
       const service = () => ({ getUniversalRecordByPNR, ticket, foid });
 
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': service,
       });
 
-      return createAirService({ auth }).ticket(params).then(() => {
+      return createAirService({
+        auth,
+        debug: true,
+        options: {
+          logFunction: log,
+        }
+      }).ticket(params).then(() => {
         expect(getUniversalRecordByPNR.calledTwice).to.be.equal(true);
         expect(ticket.calledTwice).to.be.equal(true);
+        expect(log.calledOnce).to.be.equal(true);
         expect(foid.calledOnce).to.be.equal(true);
       });
     });
@@ -763,7 +836,7 @@ describe('#AirService', () => {
       const params = { pnr: 'PNR001' };
 
       const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.resolve(getURbyPNRSampleTicketed)
+        () => Promise.resolve(getURbyPNRSampleWithCurrency)
       );
       const ticketResponses = [
         Promise.resolve(),
@@ -775,13 +848,10 @@ describe('#AirService', () => {
         return ticketResponses.pop();
       });
 
-      const service = () => ({ getUniversalRecordByPNR, ticket });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
+      const air = getAirServiceMock({ methods: { getUniversalRecordByPNR, ticket } });
 
-      return createAirService({ auth, debug: 1 }).ticket(params).then(() => {
+      return air.ticket(params).then(() => {
         expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
         expect(ticket.calledTwice).to.be.equal(true);
       });
@@ -793,7 +863,7 @@ describe('#AirService', () => {
       const params = { pnr: 'PNR001' };
 
       const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.resolve(getURbyPNRSampleTicketed)
+        () => Promise.resolve(getURbyPNRSampleWithCurrency)
       );
       const ticketResponses = [
         () => Promise.resolve(),
@@ -807,13 +877,10 @@ describe('#AirService', () => {
       });
 
       const foid = sinon.spy(() => Promise.resolve({}));
-      const service = () => ({ getUniversalRecordByPNR, ticket, foid });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
+      const air = getAirServiceMock({ methods: { getUniversalRecordByPNR, ticket, foid } });
 
-      return createAirService({ auth, debug: 1 }).ticket(params).then(() => {
+      return air.ticket(params).then(() => {
         expect(getUniversalRecordByPNR.callCount).to.be.equal(2);
         expect(foid.calledOnce).to.be.equal(true);
         expect(ticket.callCount).to.be.equal(3);
@@ -824,7 +891,7 @@ describe('#AirService', () => {
       const params = { pnr: 'PNR001' };
 
       const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.resolve(getURbyPNRSampleTicketed)
+        () => Promise.resolve(getURbyPNRSampleWithCurrency)
       );
       const ticketResponses = [
         Promise.reject(new AirRuntimeError.NoValidFare()),
@@ -858,11 +925,8 @@ describe('#AirService', () => {
         expect(options.flightInfoCriteria).to.be.an('array');
       });
 
-      const service = () => ({ flightInfo });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-      createAirService({ auth }).flightInfo({});
+      const air = getAirServiceMock({ methods: { flightInfo } });
+      air.flightInfo({});
       expect(flightInfo.calledOnce).to.be.equal(true);
     });
 
@@ -871,11 +935,12 @@ describe('#AirService', () => {
         expect(options.flightInfoCriteria).to.be.an('array');
       });
 
-      const service = () => ({ flightInfo });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
+      const air = getAirServiceMock({
+        methods: {
+          flightInfo
+        }
       });
-      createAirService({ auth }).flightInfo([{}]);
+      air.flightInfo([{}]);
       expect(flightInfo.calledOnce).to.be.equal(true);
     });
   });
@@ -919,17 +984,16 @@ describe('#AirService', () => {
       const getBookingByTicketNumber = sinon.spy(() => Promise.resolve('PNR001'));
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       // Services
-      const service = () => ({
-        getTicket,
-        cancelTicket,
-        getUniversalRecordByPNR,
+
+      const air = getAirServiceMock({
+        methods: {
+          getTicket,
+          cancelTicket,
+          getUniversalRecordByPNR
+        }
       });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-
-      const AirService = createAirService({ auth });
+      const AirService = air;
       AirService.getBookingByTicketNumber = getBookingByTicketNumber.bind(AirService);
 
       return AirService.getTicket({ ticketNumber: '0649902789376' })
@@ -962,16 +1026,14 @@ describe('#AirService', () => {
         return Promise.resolve(getURbyPNRSampleTicketed);
       });
 
-      const service = () => ({
-        getTicket,
-        getUniversalRecordByPNR,
+      const air = getAirServiceMock({
+        methods: {
+          getTicket,
+          getUniversalRecordByPNR
+        }
       });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-
-      const AirService = createAirService({ auth });
+      const AirService = air;
       AirService.getBookingByTicketNumber = getBookingByTicketNumber.bind(AirService);
       AirService.importBooking = getUniversalRecordByPNR.bind(AirService);
 
@@ -1252,15 +1314,11 @@ describe('#AirService', () => {
 
   describe('cancelTicket', () => {
     it('should throw a general error', () => {
-      const service = () => ({
-        getTicket: () => Promise.reject(new Error('Some error')),
+      const air = getAirServiceMock({
+        methods: { getTicket: () => Promise.reject(new Error('Some error')) }
       });
 
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-
-      return createAirService({ auth })
+      return air
         .cancelTicket()
         .then(() => Promise.reject(new Error('Error has not occured')))
         .catch((err) => {
@@ -1824,14 +1882,11 @@ describe('#AirService', () => {
     });
   });
 
-  describe('prcing', () => {
+  describe('pricing', () => {
     it('should check if correct function from service is called', () => {
       const airPrice = sinon.spy(() => {});
-      const service = () => ({ airPrice });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': service,
-      });
-      createAirService({ auth }).airPrice({});
+      const air = getAirServiceMock({ methods: { airPrice } });
+      air.airPrice({});
       expect(airPrice.calledOnce).to.be.equal(true);
     });
   });

@@ -265,7 +265,7 @@ describe('#AirParser', () => {
           faultstring: 'RECORD LOCATOR NOT FOUND.',
           detail: {
             'common_v47_0:ErrorInfo': {
-              'common_v47_0:Code': '3130', 'common_v47_0:Service': 'WEBSVC', 'common_v47_0:Type': 'Business', 'common_v47_0:Description': 'Record locator not found.', 'common_v47_0:TransactionId': '838261280A07425809813A4629F6C7D1', 'xmlns:common_v47_0': 'http://www.travelport.com/schema/common_v47_0'
+              'common_v47_0:Code': '3130', 'common_v47_0:Service': 'WEBSVC', 'common_v47_0:Type': 'Business', 'common_v47_0:Description': 'Record locator not found.', 'common_v47_0:TransactionId': '838261280A07425809813A4629F6C7D1', 'xmlns:common_v47_0': 'https://www.travelport.com/schema/common_v47_0'
             }
           }
         });
@@ -387,7 +387,7 @@ describe('#AirParser', () => {
           expect(result.priceInfoDetailsAvailable).to.equal(false);
           expect(result.noAdc).to.equal(true);
           expect(result.totalPrice).to.equal('UAH0');
-          expect(result.commission).to.be.deep.equal({ percent: 0.1 });
+          expect(result.commission).to.be.deep.equal({ type: 'Z', value: 0.1 });
         });
     });
 
@@ -437,7 +437,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
-          expect(result.commission).to.be.deep.equal({ amount: 0 });
+          expect(result.commission).to.be.deep.equal({ type: 'ZA', value: 0 });
           expect(result.tourCode).to.be.equal('IT151920');
         });
     });
@@ -450,7 +450,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
-          expect(result.commission).to.be.deep.equal({ percent: 0.1 });
+          expect(result.commission).to.be.deep.equal({ type: 'Z', value: 0.1 });
         });
     });
 
@@ -901,7 +901,7 @@ describe('#AirParser', () => {
             faultstring: 'RECORD LOCATOR NOT FOUND.',
             detail: {
               'common_v47_0:ErrorInfo': {
-                'common_v47_0:Code': '3130', 'common_v47_0:Service': 'WEBSVC', 'common_v47_0:Type': 'Business', 'common_v47_0:Description': 'Record locator not found.', 'common_v47_0:TransactionId': '838261280A07425809813A4629F6C7D1', 'xmlns:common_v47_0': 'http://www.travelport.com/schema/common_v47_0'
+                'common_v47_0:Code': '3130', 'common_v47_0:Service': 'WEBSVC', 'common_v47_0:Type': 'Business', 'common_v47_0:Description': 'Record locator not found.', 'common_v47_0:TransactionId': '838261280A07425809813A4629F6C7D1', 'xmlns:common_v47_0': 'https://www.travelport.com/schema/common_v47_0'
               }
             }
           });
