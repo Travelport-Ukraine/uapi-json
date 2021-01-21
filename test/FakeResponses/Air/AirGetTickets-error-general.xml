@@ -1,12 +1,12 @@
-<SOAP:Envelope 
+<SOAP:Envelope
   xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP:Body>
     <SOAP:Fault>
       <faultcode>Server.Business</faultcode>
       <faultstring>Record locator not found.</faultstring>
       <detail>
-        <common_v47_0:ErrorInfo 
-          xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+        <common_v47_0:ErrorInfo
+          xmlns:common_v47_0="https://www.travelport.com/schema/common_v47_0">
           <common_v47_0:Code>3130</common_v47_0:Code>
           <common_v47_0:Service>WEBSVC</common_v47_0:Service>
           <common_v47_0:Type>Business</common_v47_0:Type>

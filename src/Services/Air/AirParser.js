@@ -642,10 +642,10 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
     commission
       ? {
         commission: {
-          [commission.Type === 'PercentBase' ? 'percent' : 'amount']:
-            commission.Type === 'PercentBase'
-              ? parseFloat(commission.Percentage)
-              : parseFloat(commission.Amount.slice(3)),
+          type: commission.Type === 'PercentBase' ? 'Z' : 'ZA',
+          value: commission.Type === 'PercentBase'
+            ? parseFloat(commission.Percentage)
+            : parseFloat(commission.Amount.slice(3))
         },
       }
       : null,

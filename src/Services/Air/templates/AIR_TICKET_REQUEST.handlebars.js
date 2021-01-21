@@ -21,11 +21,12 @@ module.exports = `
         {{/refs}}
         {{#if commission}}
         <com:Commission Level="Fare"
-          {{#if commission.percent}}
-            Type="PercentBase" Percentage="{{commission.percent}}"
-          {{else}}
-            Type="Flat" Amount="{{commission.amount}}"
-          {{/if}}
+          {{#equal commission.type "Z"}}
+            Type="PercentBase" Percentage="{{commission.value}}"
+          {{/equal}}
+          {{#equal commission.type "ZA"}}
+            Type="Flat" Amount="{{currency}}{{commission.value}}"
+          {{/equal}}
         />
         {{/if}}
         <com:FormOfPayment Type="{{fop.type}}">
