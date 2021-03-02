@@ -1646,6 +1646,21 @@ describe('#AirParser', () => {
       });
     });
 
+    it('should test parsing of errors if code 3000 does not contain AirSegmentError', () => {
+      const uParser = new Parser('universal:AirCreateReservationRsp', 'v47_0', { }, false, errorsConfig());
+      const parseFunction = airParser.AIR_ERRORS;
+      const xml = fs.readFileSync(`${xmlFolder}/AirGetTicket-reservation-code-error.xml`).toString();
+      return uParser.parseXML(xml).then((obj) => {
+        const json = uParser.mergeLeafRecursive(obj, 'SOAP:Fault')['SOAP:Fault'];
+        return parseFunction.call(uParser, json);
+      }).then(() => {
+        assert(false, 'Should throw Waitlisted error.');
+      }).catch((err) => {
+        assert(err, 'No error returned');
+        assert(err instanceof AirRuntimeError.TicketInfoIncomplete, 'Should be AirRuntimeError.TicketInfoIncomplete error.');
+      });
+    });
+
     it('should test parsing of a failed reservation (waitlist open, SOAP:Fault)', () => {
       const uParser = new Parser('universal:AirCreateReservationRsp', 'v47_0', { }, false, errorsConfig());
       const parseFunction = airParser.AIR_ERRORS;
