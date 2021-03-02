@@ -467,10 +467,18 @@ const AirErrorHandler = function (rsp) {
     case '3003':
       throw new AirRuntimeError.InvalidRequestData(rsp);
     case '3000': {
-      const messages = errorInfo['air:AirSegmentError'].map(err => err['air:ErrorMessage']);
+      const airSegmentError = errorInfo['air:AirSegmentError'];
+
+      if (!airSegmentError) {
+        throw new AirRuntimeError.TicketInfoIncomplete(rsp);
+      }
+
+      const messages = airSegmentError.map(err => err['air:ErrorMessage']);
+
       if (messages.indexOf('Booking is not complete due to waitlisted segment') !== -1) {
         throw new AirRuntimeError.SegmentWaitlisted(rsp);
       }
+
       // else // unknown error, fall back to SegmentBookingFailed
       throw new AirRuntimeError.SegmentBookingFailed(rsp);
     }
