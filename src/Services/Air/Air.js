@@ -257,6 +257,7 @@ module.exports = (settings) => {
             && !(err instanceof AirRuntimeError.DuplicateTicketFound)) {
             return Promise.reject(err);
           }
+
           return this.getPNRByTicketNumber({
             ticketNumber: options.ticketNumber,
           })
@@ -265,6 +266,7 @@ module.exports = (settings) => {
               ...options,
               pnr: booking.pnr,
               uapi_ur_locator: booking.uapi_ur_locator,
+              reservationLocatorCode: booking.uapi_reservation_locator
             }));
         });
     },
