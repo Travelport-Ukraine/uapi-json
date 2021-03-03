@@ -1,1 +1,8 @@
-<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SOAP:Body><air:AirRetrieveDocumentRsp TransactionId="EDFB3AD00A07425F57C7745B54827BE2" ResponseTime="215" xmlns:air="http://www.travelport.com/schema/air_v47_0"><air:DocumentFailureInfo Code="931203910231" Message="Unknown failure."/></air:AirRetrieveDocumentRsp></SOAP:Body></SOAP:Envelope>
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:AirRetrieveDocumentRsp TransactionId="EDFB3AD00A07425F57C7745B54827BE2" ResponseTime="215"
+                                xmlns:air="http://www.travelport.com/schema/air_v47_0">
+      <air:DocumentFailureInfo Code="931203910231" Message="Unknown failure."/>
+    </air:AirRetrieveDocumentRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

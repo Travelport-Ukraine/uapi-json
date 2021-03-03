@@ -1,0 +1,19 @@
+<SOAP:Envelope
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <SOAP:Fault>
+      <faultcode>Server.null</faultcode>
+      <faultstring>At least one valid locator code or ticket number or tcr number or service fee info should have been specified</faultstring>
+      <detail>
+        <common_v47_0:ErrorInfo
+          xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+          <common_v47_0:Code>3000</common_v47_0:Code>
+          <common_v47_0:Service>PROVISIONINGSERVICE</common_v47_0:Service>
+          <common_v47_0:Type/>
+          <common_v47_0:Description>At least one valid locator code or ticket number or tcr number or service fee info should have been specified</common_v47_0:Description>
+          <common_v47_0:TransactionId>398A05290A0E7C971A42D6A18CA9E0F9</common_v47_0:TransactionId>
+        </common_v47_0:ErrorInfo>
+      </detail>
+    </SOAP:Fault>
+  </SOAP:Body>
+</SOAP:Envelope>
