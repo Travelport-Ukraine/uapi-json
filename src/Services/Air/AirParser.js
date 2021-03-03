@@ -425,16 +425,39 @@ function airPriceRspPricingSolutionXML(obj) {
   };
 }
 
-const processUAPIError = (rsp) => {
-  if (rsp.faultstring) {
+function processUAPIError(source = {}, fallbackMessage = 'UAPI Service resulted in an error') {
+  if (source.faultstring) {
     throw new RequestRuntimeError.UAPIServiceError({
-      ...rsp,
-      faultstring: rsp.faultstring.toUpperCase()
+      ...source,
+      faultstring: source.faultstring.toUpperCase()
     });
   }
 
-  throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(rsp));
-};
+  const responseMessages = source[`common_${this.uapi_version}:ResponseMessage`];
+
+  if (Array.isArray(responseMessages) && responseMessages.length) {
+    const [responseMessage = {}] = responseMessages;
+    const { _: message = fallbackMessage } = responseMessage;
+
+    throw new RequestRuntimeError.UAPIServiceError({
+      ...source,
+      faultstring: message.toUpperCase()
+    });
+  }
+
+  const documentFailureInfo = source['air:DocumentFailureInfo'];
+
+  if (documentFailureInfo) {
+    const { Message: message = fallbackMessage } = documentFailureInfo;
+
+    throw new RequestRuntimeError.UAPIServiceError({
+      ...source,
+      faultstring: message.toUpperCase()
+    });
+  }
+
+  throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(source));
+}
 
 const AirErrorHandler = function (rsp) {
   let errorInfo;
@@ -446,7 +469,7 @@ const AirErrorHandler = function (rsp) {
     );
     code = errorInfo[`common_${this.uapi_version}:Code`];
   } catch (err) {
-    processUAPIError(rsp);
+    processUAPIError.call(this, rsp);
   }
   const pcc = utils.getErrorPcc(rsp.faultstring);
   switch (code) {
@@ -485,7 +508,7 @@ const AirErrorHandler = function (rsp) {
     case '3037': // No availability on chosen flights, unable to fare quote
       throw new AirRuntimeError.NoResultsFound(rsp);
     default:
-      processUAPIError(rsp);
+      processUAPIError.call(this, rsp);
   }
 };
 
@@ -676,11 +699,13 @@ const airGetTicket = function (obj, parseParams = {
   allowNoProviderLocatorCodeRetrieval: false
 }) {
   const failure = obj['air:DocumentFailureInfo'];
+
   if (failure) {
     if (failure.Code === '3273') {
       throw new AirRuntimeError.DuplicateTicketFound(obj);
     }
-    throw new AirRuntimeError.TicketRetrieveError(obj);
+
+    processUAPIError.call(this, obj, 'Unable to retrieve ticket');
   }
 
   const responseMessages = obj[`common_${this.uapi_version}:ResponseMessage`] || [];
@@ -691,8 +716,9 @@ const airGetTicket = function (obj, parseParams = {
   }
 
   const etr = obj['air:ETR'];
+
   if (!etr) {
-    throw new AirRuntimeError.TicketRetrieveError(obj);
+    processUAPIError.call(this, obj, 'Unable to retrieve ticket');
   }
 
   const multipleTickets = !!etr[Object.keys(etr)[0]].ProviderLocatorCode;
@@ -724,7 +750,7 @@ function airGetTicketsErrorHandler(rsp) {
     );
     code = errorInfo[`common_${this.uapi_version}:Code`];
   } catch (err) {
-    processUAPIError(rsp);
+    processUAPIError.call(this, rsp);
   }
   // General Air Service error
   if (code === '3000') {
@@ -738,7 +764,7 @@ function airGetTicketsErrorHandler(rsp) {
         pcc: utils.getErrorPcc(rsp.faultstring),
       });
     default:
-      return processUAPIError(rsp);
+      return processUAPIError.call(this, rsp);
   }
 }
 
