@@ -467,13 +467,12 @@ const AirErrorHandler = function (rsp) {
     case '3003':
       throw new AirRuntimeError.InvalidRequestData(rsp);
     case '3000': {
-      const airSegmentError = errorInfo['air:AirSegmentError'];
-
-      if (!airSegmentError) {
+      if (rsp.faultstring === 'At least one valid locator code or ticket number or tcr number or service fee info should have been specified') {
         throw new AirRuntimeError.TicketInfoIncomplete(rsp);
       }
 
-      const messages = airSegmentError.map(err => err['air:ErrorMessage']);
+      const airSegmentErrors = errorInfo['air:AirSegmentError'] || [];
+      const messages = airSegmentErrors.map(err => err['air:ErrorMessage']);
 
       if (messages.indexOf('Booking is not complete due to waitlisted segment') !== -1) {
         throw new AirRuntimeError.SegmentWaitlisted(rsp);
