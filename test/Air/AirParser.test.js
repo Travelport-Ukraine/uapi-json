@@ -530,7 +530,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then(() => Promise.reject(new Error('Error has not occurred')))
         .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.TicketRetrieveError);
+          expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
         });
     });
 
@@ -555,7 +555,7 @@ describe('#AirParser', () => {
         .then(json => parseFunction.call(uParser, json))
         .then(() => done(new Error('Error has not occurred')))
         .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.TicketRetrieveError);
+          expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
           done();
         });
     });
