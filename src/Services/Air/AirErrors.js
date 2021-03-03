@@ -110,7 +110,6 @@ Object.assign(AirRuntimeError, createErrorsList({
   PnrParseError: 'Failed to parse PNR from ticket information request response',
   GetPnrError: 'Failed to obtain PNR from ticket information',
   UnableToRetrieveTickets: ['Unable to retrieve tickets list', errorCodes.NotFound],
-  TicketRetrieveError: 'Unable to retrieve ticket',
   TicketInfoIncomplete: 'Ticket information is incomplete',
   RequestInconsistency: 'Request faced race condition. Please retry again',
   MissingPaxListAndBooking: 'Cant find anything for your request. List and booking are missing',
