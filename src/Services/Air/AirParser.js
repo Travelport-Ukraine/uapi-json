@@ -429,7 +429,7 @@ function processUAPIError(source = {}, fallbackMessage = 'UAPI Service resulted 
   if (source.faultstring) {
     throw new RequestRuntimeError.UAPIServiceError({
       ...source,
-      faultstring: source.faultstring.toUpperCase() || fallbackMessage
+      faultstring: source.faultstring.toUpperCase()
     });
   }
 
