@@ -1336,7 +1336,8 @@ function availability(rsp) {
   itinerarySolution['air:AirSegmentRef'].forEach((segmentRef, key) => {
     const segment = rsp['air:AirSegmentList'][segmentRef];
     const isConnected = connectedSegments.find(s => s === key);
-    const availInfo = segment['air:AirAvailInfo'].find(info => info.ProviderCode === this.provider);
+    const availInfoList = segment['air:AirAvailInfo'] || [];
+    const availInfo = availInfoList.find(info => info.ProviderCode === this.provider);
 
     if (!availInfo) {
       return;
