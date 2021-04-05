@@ -287,24 +287,18 @@ module.exports = (settings) => {
       }
     },
 
-    getBookingByTicketNumber(options) {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const terminal = createTerminalService(settings);
-          const screen = await terminal.executeCommand(`*TE/${options.ticketNumber}`) || '';
-          const [_, pnr = null] = screen.match(/RLOC [^\s]{2} ([^\s]{6})/) || [];
+    async getBookingByTicketNumber(options) {
+      const terminal = createTerminalService(settings);
+      const screen = await terminal.executeCommand(`*TE/${options.ticketNumber}`);
+      const [_, pnr = null] = screen.match(/RLOC [^\s]{2} ([^\s]{6})/) || [];
 
-          await terminal.closeSession().catch(() => null);
+      await terminal.closeSession().catch(() => null);
 
-          if (!pnr) {
-            reject(new AirRuntimeError.ParseTicketPNRError({ options, screen }));
-          }
+      if (!pnr) {
+        throw new AirRuntimeError.ParseTicketPNRError({ options, screen });
+      }
 
-          resolve(pnr);
-        } catch (err) {
-          reject(new AirRuntimeError.GetBookingByTicketNumberError({ options }));
-        }
-      });
+      return pnr;
     },
 
     getPNRByTicketNumber(options) {

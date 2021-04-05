@@ -1082,7 +1082,7 @@ describe('#AirService', () => {
         await service.getBookingByTicketNumber({ ticketNumber: '0649902789000' });
         expect('should be rejected').to.be.eq('but not rejected');
       } catch (err) {
-        expect(err).to.be.instanceof(AirRuntimeError.GetBookingByTicketNumberError);
+        expect(err).to.be.instanceof(Error);
       }
     });
     it('should fail when something fails in closeSession', (done) => {
