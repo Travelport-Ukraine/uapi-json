@@ -258,7 +258,7 @@ module.exports = (settings) => {
             return Promise.reject(err);
           }
 
-          return this.getPNRByTicketNumber({
+          return this.getBookingByTicketNumber({
             ticketNumber: options.ticketNumber,
           })
             .then(pnr => this.getBooking({ pnr }))
@@ -287,17 +287,24 @@ module.exports = (settings) => {
       }
     },
 
-    getBookingByTicketNumber(options) {
-      const terminal = createTerminalService(settings);
-      return terminal.executeCommand(`*TE/${options.ticketNumber}`)
-        .then(
-          response => terminal.closeSession()
-            .then(() => response.match(/RLOC [^\s]{2} ([^\s]{6})/)[1])
-            .catch(() => Promise.reject(new AirRuntimeError.PnrParseError(response)))
-        )
-        .catch(
-          err => Promise.reject(new AirRuntimeError.GetPnrError(options, err))
-        );
+    async getBookingByTicketNumber(options) {
+      return new Promise(async (resolve, reject) => {
+        try {
+          const terminal = createTerminalService(settings);
+          const screen = await terminal.executeCommand(`*TE/${options.ticketNumber}`) || '';
+          const [_, pnr = null] = screen.match(/RLOC [^\s]{2} ([^\s]{6})/) || [];
+
+          await terminal.closeSession().catch(() => null);
+
+          if (!pnr) {
+            reject(new AirRuntimeError.ParseTicketPNRError({ options, screen }));
+          }
+
+          resolve(pnr);
+        } catch (err) {
+          reject(new AirRuntimeError.GetBookingByTicketNumberError({ options }));
+        }
+      });
     },
 
     getPNRByTicketNumber(options) {
