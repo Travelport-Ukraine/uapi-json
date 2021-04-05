@@ -1046,7 +1046,7 @@ describe('#AirService', () => {
   });
 
   describe('getBookingByTicketNumber', () => {
-    it('should fail when ticket data not available by ticket number', (done) => {
+    it('should fail when ticket data not available by ticket number', async () => {
       const response = fs.readFileSync(
         path.join(terminalResponsesDir, 'getTicketNotExists.txt')
       ).toString();
@@ -1059,15 +1059,15 @@ describe('#AirService', () => {
         '../Terminal/Terminal': createTerminalService,
       });
       const service = createAirService({ auth });
-      service.getBookingByTicketNumber({ ticketNumber: '0649902789000' })
-        .then(() => done(new Error('Error has not occured')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.GetPnrError);
-          expect(err.causedBy).to.be.an.instanceof(AirRuntimeError.PnrParseError);
-          done();
-        });
+
+      try {
+        await service.getBookingByTicketNumber({ ticketNumber: '0649902789000' });
+        expect('should be rejected').to.be.eq('but not rejected');
+      } catch (err) {
+        expect(err).to.be.instanceof(AirRuntimeError.ParseTicketPNRError);
+      }
     });
-    it('should fail when something fails in executeCommand', (done) => {
+    it('should fail when something fails in executeCommand', async () => {
       const createTerminalService = () => ({
         // The only command is executed, no analyze needed
         executeCommand: () => Promise.reject(new Error('Some error')),
@@ -1077,13 +1077,13 @@ describe('#AirService', () => {
         '../Terminal/Terminal': createTerminalService,
       });
       const service = createAirService({ auth });
-      service.getBookingByTicketNumber({ ticketNumber: '0649902789000' })
-        .then(() => done(new Error('Error has not occured')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.GetPnrError);
-          expect(err.causedBy).to.be.an.instanceof(Error);
-          done();
-        });
+
+      try {
+        await service.getBookingByTicketNumber({ ticketNumber: '0649902789000' });
+        expect('should be rejected').to.be.eq('but not rejected');
+      } catch (err) {
+        expect(err).to.be.instanceof(AirRuntimeError.GetBookingByTicketNumberError);
+      }
     });
     it('should fail when something fails in closeSession', (done) => {
       const createTerminalService = () => ({
@@ -1102,8 +1102,7 @@ describe('#AirService', () => {
           done();
         });
     });
-    it('should fail when no TerminalService enabled for uAPI credentials');
-    it('should return PNR when response is OK', (done) => {
+    it('should return PNR when response is OK', async () => {
       const response = fs.readFileSync(
         path.join(terminalResponsesDir, 'getTicketVoid.txt')
       ).toString();
@@ -1116,12 +1115,9 @@ describe('#AirService', () => {
         '../Terminal/Terminal': createTerminalService,
       });
       const service = createAirService({ auth });
-      service.getBookingByTicketNumber({ ticketNumber: '0649902789376' })
-        .then((pnr) => {
-          expect(pnr).to.equal('8167L2');
-          done();
-        })
-        .catch(err => done(err));
+
+      const pnr = await service.getBookingByTicketNumber({ ticketNumber: '0649902789000' });
+      expect(pnr).to.equal('8167L2');
     });
   });
 
