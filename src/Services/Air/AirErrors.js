@@ -90,7 +90,7 @@ Object.assign(AirParsingError, createErrorsList({
 // Runtime errors
 const AirRuntimeError = createErrorClass(
   'AirRuntimeError',
-  ['Air service runtime error', 598],
+  ['Air service runtime error', errorCodes.UapiFailure],
   errorTypes.RuntimeError
 );
 Object.assign(AirRuntimeError, createErrorsList({
@@ -107,8 +107,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   InvalidRequestData: 'Request data is invalid',
   NoValidFare: 'No valid fare for input criteria.',
   TravelersListError: 'Not all BookingTravelers present in list or wrong lookup keys provided',
-  PnrParseError: 'Failed to parse PNR from ticket information request response',
-  GetPnrError: 'Failed to obtain PNR from ticket information',
+  ParseTicketPNRError: ['Failed to parse PNR from ticket information', errorCodes.Validation],
   UnableToRetrieveTickets: ['Unable to retrieve tickets list', errorCodes.NotFound],
   TicketInfoIncomplete: 'Ticket information is incomplete',
   RequestInconsistency: 'Request faced race condition. Please retry again',
