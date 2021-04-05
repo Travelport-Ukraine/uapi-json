@@ -258,7 +258,7 @@ module.exports = (settings) => {
             return Promise.reject(err);
           }
 
-          return this.getBookingByTicketNumber({
+          return this.getPNRByTicketNumber({
             ticketNumber: options.ticketNumber,
           })
             .then(pnr => this.getBooking({ pnr }))
