@@ -287,7 +287,7 @@ module.exports = (settings) => {
       }
     },
 
-    async getBookingByTicketNumber(options) {
+    getBookingByTicketNumber(options) {
       return new Promise(async (resolve, reject) => {
         try {
           const terminal = createTerminalService(settings);
