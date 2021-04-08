@@ -947,7 +947,7 @@ describe('#AirService', () => {
   });
 
   describe('getTicket', () => {
-    it.only('should fail if service fails with error', async () => {
+    it('should fail if service fails with error', async () => {
       const getTicket = sinon.stub().rejects(new RequestSoapError.SoapUnexpectedError());
       const AirService = () => ({ getTicket });
       const createAirService = proxyquire('../../src/Services/Air/Air', {
