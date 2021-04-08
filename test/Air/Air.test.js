@@ -8,6 +8,7 @@ const assert = require('assert');
 const moment = require('moment');
 const auth = require('../testconfig');
 const { AirRuntimeError } = require('../../src/Services/Air/AirErrors');
+const { RequestSoapError } = require('../../src/Request/RequestErrors');
 
 const { expect } = chai;
 chai.use(sinonChai);
@@ -946,6 +947,21 @@ describe('#AirService', () => {
   });
 
   describe('getTicket', () => {
+    it.only('should fail if service fails with error', async () => {
+      const getTicket = sinon.stub().rejects(new RequestSoapError.SoapUnexpectedError());
+      const AirService = () => ({ getTicket });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': AirService,
+      });
+      const air = createAirService({ auth });
+      try {
+        await air.getTicket({ ticketNumber: '0649902789376' });
+        throw new Error('Error was not thrown');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(RequestSoapError);
+        expect(getTicket).to.be.calledOnceWith({ ticketNumber: '0649902789376' });
+      }
+    });
     it('should fail when no itinerary present to import', () => {
       const AirService = () => ({
         getUniversalRecordByPNR: () => Promise.reject(new AirRuntimeError()),
