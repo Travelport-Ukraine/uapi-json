@@ -8,6 +8,7 @@ const assert = require('assert');
 const moment = require('moment');
 const auth = require('../testconfig');
 const { AirRuntimeError } = require('../../src/Services/Air/AirErrors');
+const { RequestSoapError } = require('../../src/Request/RequestErrors');
 
 const { expect } = chai;
 chai.use(sinonChai);
@@ -946,6 +947,21 @@ describe('#AirService', () => {
   });
 
   describe('getTicket', () => {
+    it('should fail if service fails with error', async () => {
+      const getTicket = sinon.stub().rejects(new RequestSoapError.SoapUnexpectedError());
+      const AirService = () => ({ getTicket });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': AirService,
+      });
+      const air = createAirService({ auth });
+      try {
+        await air.getTicket({ ticketNumber: '0649902789376' });
+        throw new Error('Error was not thrown');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(RequestSoapError);
+        expect(getTicket).to.be.calledOnceWith({ ticketNumber: '0649902789376' });
+      }
+    });
     it('should fail when no itinerary present to import', () => {
       const AirService = () => ({
         getUniversalRecordByPNR: () => Promise.reject(new AirRuntimeError()),
@@ -969,83 +985,42 @@ describe('#AirService', () => {
     });
 
     it('should get ticket data if duplicate ticket found', () => {
-      const getTicket = sinon.stub();
-      getTicket.onCall(0).returns(
-        Promise.reject(new AirRuntimeError.DuplicateTicketFound())
-      );
-      getTicket.onCall(1).returns(
-        Promise.resolve({
-          pnr: 'PNR001',
-          ticketNumber: '1234567890123',
-        })
-      );
+      const getTicket = sinon.stub().rejects(new AirRuntimeError.DuplicateTicketFound());
+      const getTickets = sinon.stub().resolves([{
+        pnr: 'PNR001',
+        ticketNumber: '0649902789376',
+      }]);
       // Spies
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
-      const getBookingByTicketNumber = sinon.spy(() => Promise.resolve('PNR001'));
+      const getPNRByTicketNumber = sinon.spy(() => Promise.resolve('PNR001'));
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       // Services
 
       const air = getAirServiceMock({
         methods: {
           getTicket,
+          getTickets,
           cancelTicket,
           getUniversalRecordByPNR
         }
       });
 
       const AirService = air;
-      AirService.getBookingByTicketNumber = getBookingByTicketNumber.bind(AirService);
+      AirService.getPNRByTicketNumber = getPNRByTicketNumber.bind(AirService);
 
       return AirService.getTicket({ ticketNumber: '0649902789376' })
         .then((res) => {
           expect(res).to.be.an('object').and.to.have.property('ticketNumber');
-          expect(res.ticketNumber).to.equal('1234567890123');
-          expect(getTicket.calledTwice).to.be.equal(true);
-          expect(getBookingByTicketNumber.calledOnce).to.be.equal(true);
+          expect(res.ticketNumber).to.equal('0649902789376');
+          expect(getTicket.calledOnce).to.be.equal(true);
+          expect(getTickets.calledOnce).to.be.equal(true);
+          expect(getPNRByTicketNumber.calledOnce).to.be.equal(true);
           expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
         });
     });
-
-    it('should test if getBookingByTicketNumber is called when not complete', () => {
-      const params = { ticketNumber: 123, pnr: 'PNR001' };
-
-      const getTicketResults = [
-        Promise.resolve(),
-        Promise.reject(new AirRuntimeError.TicketInfoIncomplete()),
-      ];
-
-      const getTicket = sinon.spy(() => getTicketResults.pop());
-
-      const getBookingByTicketNumber = sinon.spy((options) => {
-        expect(options.ticketNumber).to.be.equal(123);
-        return Promise.resolve('PNR001');
-      });
-
-      const getUniversalRecordByPNR = sinon.spy((options) => {
-        expect(options.pnr).to.be.equal('PNR001');
-        return Promise.resolve(getURbyPNRSampleTicketed);
-      });
-
-      const air = getAirServiceMock({
-        methods: {
-          getTicket,
-          getUniversalRecordByPNR
-        }
-      });
-
-      const AirService = air;
-      AirService.getBookingByTicketNumber = getBookingByTicketNumber.bind(AirService);
-      AirService.importBooking = getUniversalRecordByPNR.bind(AirService);
-
-      return AirService.getTicket(params).then(() => {
-        expect(getTicket.calledTwice).to.be.equal(true);
-        expect(getBookingByTicketNumber.calledOnce).to.be.equal(true);
-        expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
-      });
-    });
   });
 
-  describe('getBookingByTicketNumber', () => {
+  describe('getPNRByTicketNumber', () => {
     it('should fail when ticket data not available by ticket number', async () => {
       const response = fs.readFileSync(
         path.join(terminalResponsesDir, 'getTicketNotExists.txt')
@@ -1061,7 +1036,7 @@ describe('#AirService', () => {
       const service = createAirService({ auth });
 
       try {
-        await service.getBookingByTicketNumber({ ticketNumber: '0649902789000' });
+        await service.getPNRByTicketNumber({ ticketNumber: '0649902789000' });
         expect('should be rejected').to.be.eq('but not rejected');
       } catch (err) {
         expect(err).to.be.instanceof(AirRuntimeError.ParseTicketPNRError);
@@ -1079,7 +1054,7 @@ describe('#AirService', () => {
       const service = createAirService({ auth });
 
       try {
-        await service.getBookingByTicketNumber({ ticketNumber: '0649902789000' });
+        await service.getPNRByTicketNumber({ ticketNumber: '0649902789000' });
         expect('should be rejected').to.be.eq('but not rejected');
       } catch (err) {
         expect(err).to.be.instanceof(Error);
@@ -1095,7 +1070,7 @@ describe('#AirService', () => {
         '../Terminal/Terminal': createTerminalService,
       });
       const service = createAirService({ auth });
-      service.getBookingByTicketNumber({ ticketNumber: '0649902789000' })
+      service.getPNRByTicketNumber({ ticketNumber: '0649902789000' })
         .then(() => done(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(Error);
@@ -1116,7 +1091,7 @@ describe('#AirService', () => {
       });
       const service = createAirService({ auth });
 
-      const pnr = await service.getBookingByTicketNumber({ ticketNumber: '0649902789000' });
+      const pnr = await service.getPNRByTicketNumber({ ticketNumber: '0649902789000' });
       expect(pnr).to.equal('8167L2');
     });
   });
@@ -1348,18 +1323,13 @@ describe('#AirService', () => {
           expect(cancelTicket).to.have.callCount(1);
         });
     });
-    it('should get ticket data if incomplete and be OK', () => {
+    it('should get ticket data if incomplete and be OK', async () => {
       // Get ticket stub to return 2 different values on different calls
-      const getTicket = sinon.stub();
-      getTicket.onCall(0).returns(
-        Promise.reject(new AirRuntimeError.TicketInfoIncomplete())
-      );
-      getTicket.onCall(1).returns(
-        Promise.resolve({
-          pnr: 'PNR001',
-          ticketNumber: '1234567890123',
-        })
-      );
+      const getTicket = sinon.stub().rejects(new AirRuntimeError.TicketInfoIncomplete());
+      const getTickets = sinon.stub().resolves([{
+        pnr: 'PNR001',
+        ticketNumber: '1234567890123',
+      }]);
       // Spies
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURByPNRSampleBooked));
@@ -1368,6 +1338,7 @@ describe('#AirService', () => {
       // Services
       const airService = () => ({
         getTicket,
+        getTickets,
         cancelTicket,
         getUniversalRecordByPNR,
       });
@@ -1381,17 +1352,14 @@ describe('#AirService', () => {
       });
 
       const service = createAirService({ auth });
+      await service.cancelTicket({ ticketNumber: '1234567890123' });
 
-      return service.cancelTicket({
-        ticketNumber: '1234567890123',
-      })
-        .then(() => {
-          expect(getTicket).to.have.callCount(2);
-          expect(cancelTicket).to.have.callCount(1);
-          expect(getUniversalRecordByPNR).to.have.callCount(1);
-          expect(executeCommand).to.have.callCount(1);
-          expect(closeSession).to.have.callCount(1);
-        });
+      expect(getTicket).to.have.callCount(1);
+      expect(getTickets).to.have.callCount(1);
+      expect(cancelTicket).to.have.callCount(1);
+      expect(getUniversalRecordByPNR).to.have.callCount(1);
+      expect(executeCommand).to.have.callCount(1);
+      expect(closeSession).to.have.callCount(1);
     });
   });
   describe('cancelBooking', () => {

@@ -8,6 +8,11 @@ const createTerminalService = require('../Terminal/Terminal');
 const { AirRuntimeError } = require('./AirErrors');
 const validateServiceSettings = require('../../utils/validate-service-settings');
 
+const RETRYABLE_GET_TICKET_ERRORS = [
+  AirRuntimeError.TicketInfoIncomplete,
+  AirRuntimeError.DuplicateTicketFound,
+];
+
 module.exports = (settings) => {
   const service = airService(validateServiceSettings(settings));
   const log = (settings.options && settings.options.logFunction) || console.log;
@@ -250,25 +255,18 @@ module.exports = (settings) => {
       return service.flightInfo(parameters);
     },
 
-    getTicket(options) {
-      return service.getTicket(options)
-        .catch((err) => {
-          if (!(err instanceof AirRuntimeError.TicketInfoIncomplete)
-            && !(err instanceof AirRuntimeError.DuplicateTicketFound)) {
-            return Promise.reject(err);
-          }
-
-          return this.getPNRByTicketNumber({
-            ticketNumber: options.ticketNumber,
-          })
-            .then(pnr => this.getBooking({ pnr }))
-            .then(booking => service.getTicket({
-              ...options,
-              pnr: booking.pnr,
-              uapi_ur_locator: booking.uapi_ur_locator,
-              reservationLocatorCode: booking.uapi_reservation_locator
-            }));
-        });
+    async getTicket(options) {
+      const { ticketNumber } = options;
+      try {
+        return await service.getTicket({ ticketNumber });
+      } catch (err) {
+        if (!RETRYABLE_GET_TICKET_ERRORS.some(ErrorClass => err instanceof ErrorClass)) {
+          throw err;
+        }
+        const pnr = await this.getPNRByTicketNumber({ ticketNumber });
+        const tickets = await this.getTickets({ pnr });
+        return tickets.find(t => t.ticketNumber === ticketNumber);
+      }
     },
 
     async getTickets(options) {
@@ -287,7 +285,7 @@ module.exports = (settings) => {
       }
     },
 
-    async getBookingByTicketNumber(options) {
+    async getPNRByTicketNumber(options) {
       const terminal = createTerminalService(settings);
       const screen = await terminal.executeCommand(`*TE/${options.ticketNumber}`);
       const [_, pnr = null] = screen.match(/RLOC [^\s]{2} ([^\s]{6})/) || [];
@@ -299,11 +297,6 @@ module.exports = (settings) => {
       }
 
       return pnr;
-    },
-
-    getPNRByTicketNumber(options) {
-      console.warn('DEPRECATED, will be dropped in next major version, use getBookingByTicketNumber');
-      return this.getBookingByTicketNumber(options);
     },
 
     searchBookingsByPassengerName(options) {
