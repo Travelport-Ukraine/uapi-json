@@ -959,7 +959,7 @@ describe('#AirService', () => {
         throw new Error('Error was not thrown');
       } catch (err) {
         expect(err).to.be.an.instanceof(RequestSoapError);
-        expect(getTicket).to.be.calledOnceWith({ ticketNumber: '0649902789376' });
+        expect(getTicket).to.be.calledOnceWith({ ticketNumber: '0649902789376', allowNoProviderLocatorCodeRetrieval: false });
       }
     });
     it('should fail when no itinerary present to import', () => {
