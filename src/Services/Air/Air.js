@@ -256,9 +256,9 @@ module.exports = (settings) => {
     },
 
     async getTicket(options) {
-      const { ticketNumber } = options;
+      const { ticketNumber, allowNoProviderLocatorCodeRetrieval = false } = options;
       try {
-        return await service.getTicket({ ticketNumber });
+        return await service.getTicket({ ticketNumber, allowNoProviderLocatorCodeRetrieval });
       } catch (err) {
         if (!RETRYABLE_GET_TICKET_ERRORS.some(ErrorClass => err instanceof ErrorClass)) {
           throw err;
