@@ -1,0 +1,116 @@
+<SOAP:Envelope
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <universal:UniversalRecordImportRsp TraceId="" TransactionId="9FAFE92C0A0759D7FD9BB8F5176EE24A" ResponseTime="829"
+                                        xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
+                                        xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
+                                        xmlns:air="http://www.travelport.com/schema/air_v47_0">
+      <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record 93WFI2</common_v47_0:ResponseMessage>
+      <universal:UniversalRecord LocatorCode="93WFI2" Version="2" Status="Active">
+        <common_v47_0:BookingTraveler Key="o7sgdSBAAA/B12rYIAAAAA==" TravelerType="ADT" DOB="1988-01-31" Gender="M">
+          <common_v47_0:BookingTravelerName Prefix="MR" First="HYUNGSIK" Last="KANG"/>
+          <common_v47_0:PhoneNumber Key="o7sgdSBAAA/BP3rYIAAAAA==" Type="Other" Location="SEL" CountryCode="82" Number="01026132146">
+            <common_v47_0:ProviderReservationInfoRef Key="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          </common_v47_0:PhoneNumber>
+          <common_v47_0:Email Key="o7sgdSBAAA/BS3rYIAAAAA==" Type="Other" EmailID="seungseunghee@sharevaluecorp.com">
+            <common_v47_0:ProviderReservationInfoRef Key="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          </common_v47_0:Email>
+          <common_v47_0:SSR Key="o7sgdSBAAA/B42rYIAAAAA==" Status="HK" Type="DOCS" FreeText="P/KR/UNDEFINED/KR/31JAN88/M/18SEP21/KANG/HYUNGSIK -1KANG/HYUNGSIKMR" Carrier="OZ" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          <common_v47_0:SSR Key="o7sgdSBAAA/BR3rYIAAAAA==" Status="HK" Type="DOCS" FreeText="P/KR/UNDEFINED/KR/31JAN88/M/18SEP21/KANG/HYUNGSIK -1KANG/HYUNGSIKMR" Carrier="BA" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          <common_v47_0:SSR Key="yYtgdSBAAA/BWQT7IAAAAA==" SegmentRef="um0pdSpB0BKApx0UHAAAAA==" Status="KK" Type="INFT" FreeText="KANG/YUNJUNMSTR 20MAR20" Carrier="OZ" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          <common_v47_0:SSR Key="yYtgdSBAAA/BXQT7IAAAAA==" SegmentRef="um0pdSpB0BKArx0UHAAAAA==" Status="KK" Type="INFT" FreeText="KANG/YUNJUNMSTR 20MAR20" Carrier="BA" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          <common_v47_0:SSR Key="yYtgdSBAAA/BYQT7IAAAAA==" SegmentRef="um0pdSpB0BKAtx0UHAAAAA==" Status="KK" Type="INFT" FreeText="KANG/YUNJUNMSTR 20MAR20" Carrier="BA" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          <common_v47_0:SSR Key="yYtgdSBAAA/BZQT7IAAAAA==" SegmentRef="um0pdSpB0BKAvx0UHAAAAA==" Status="KK" Type="INFT" FreeText="KANG/YUNJUNMSTR 20MAR20" Carrier="BA" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          <common_v47_0:SSR Key="yYtgdSBAAA/BaQT7IAAAAA==" SegmentRef="um0pdSpB0BKAxx0UHAAAAA==" Status="KK" Type="INFT" FreeText="KANG/YUNJUNMSTR 20MAR20" Carrier="BA" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+        </common_v47_0:BookingTraveler>
+        <common_v47_0:BookingTraveler Key="o7sgdSBAAA/B62rYIAAAAA==" TravelerType="ADT" DOB="2000-01-31" Gender="M">
+          <common_v47_0:BookingTravelerName Prefix="MR" First="SEONGHYUN" Last="CHOI"/>
+          <common_v47_0:PhoneNumber Key="o7sgdSBAAA/BT3rYIAAAAA==" Type="Other" Location="SEL" CountryCode="82" Number="01026132146">
+            <common_v47_0:ProviderReservationInfoRef Key="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          </common_v47_0:PhoneNumber>
+          <common_v47_0:Email Key="o7sgdSBAAA/BW3rYIAAAAA==" Type="Other" EmailID="seungseunghee@sharevaluecorp.com">
+            <common_v47_0:ProviderReservationInfoRef Key="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          </common_v47_0:Email>
+          <common_v47_0:SSR Key="o7sgdSBAAA/B92rYIAAAAA==" Status="HK" Type="DOCS" FreeText="P/KR/UNDEFINED/KR/31JAN00/M/18SEP21/CHOI/SEONGHYUN -1CHOI/SEONGHYUNMR" Carrier="OZ" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          <common_v47_0:SSR Key="o7sgdSBAAA/BV3rYIAAAAA==" Status="HK" Type="DOCS" FreeText="P/KR/UNDEFINED/KR/31JAN00/M/18SEP21/CHOI/SEONGHYUN -1CHOI/SEONGHYUNMR" Carrier="BA" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+        </common_v47_0:BookingTraveler>
+        <common_v47_0:BookingTraveler Key="o7sgdSBAAA/B/2rYIAAAAA==" TravelerType="ADT" DOB="1995-01-31" Gender="F">
+          <common_v47_0:BookingTravelerName Prefix="MS" First="MINJI" Last="PARK"/>
+          <common_v47_0:PhoneNumber Key="o7sgdSBAAA/BX3rYIAAAAA==" Type="Other" Location="SEL" CountryCode="82" Number="01026132146">
+            <common_v47_0:ProviderReservationInfoRef Key="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          </common_v47_0:PhoneNumber>
+          <common_v47_0:Email Key="o7sgdSBAAA/Ba3rYIAAAAA==" Type="Other" EmailID="seungseunghee@sharevaluecorp.com">
+            <common_v47_0:ProviderReservationInfoRef Key="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          </common_v47_0:Email>
+          <common_v47_0:SSR Key="o7sgdSBAAA/BC3rYIAAAAA==" Status="HK" Type="DOCS" FreeText="P/KR/UNDEFINED/KR/31JAN95/F/18SEP21/PARK/MINJI -1PARK/MINJIMS" Carrier="OZ" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          <common_v47_0:SSR Key="o7sgdSBAAA/BZ3rYIAAAAA==" Status="HK" Type="DOCS" FreeText="P/KR/UNDEFINED/KR/31JAN95/F/18SEP21/PARK/MINJI -1PARK/MINJIMS" Carrier="BA" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+        </common_v47_0:BookingTraveler>
+        <common_v47_0:BookingTraveler Key="yYtgdSBAAA/BSQT7IAAAAA==" TravelerType="INF" DOB="2020-03-20">
+          <common_v47_0:BookingTravelerName First="YUNJUNMSTR" Last="KANG"/>
+          <common_v47_0:NameRemark Key="yYtgdSBAAA/BTQT7IAAAAA==">
+            <common_v47_0:RemarkData>20MAR20</common_v47_0:RemarkData>
+            <common_v47_0:ProviderReservationInfoRef Key="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          </common_v47_0:NameRemark>
+        </common_v47_0:BookingTraveler>
+        <common_v47_0:ActionStatus Key="o7sgdSBAAA/Bb3rYIAAAAA==" Type="TAU" TicketDate="2020-09-20T23:59:00.000+09:00" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA==" ProviderCode="1G"/>
+        <universal:ProviderReservationInfo Key="o7sgdSBAAA/BTd0YIAAAAA==" ProviderCode="1G" LocatorCode="M0Z5JZ" CreateDate="2020-09-18T01:56:49.588+00:00" ModifiedDate="2020-09-18T05:29:00.308+00:00" HostCreateDate="2020-09-18" OwningPCC="5OL3"/>
+        <air:AirReservation LocatorCode="93WFIE" CreateDate="2020-09-18T01:56:49.027+00:00" ModifiedDate="2020-09-18T04:48:19.268+00:00">
+          <common_v47_0:SupplierLocator SupplierCode="OZ" SupplierLocatorCode="TPT9AN" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA==" CreateDateTime="2020-09-18T01:56:00.000+00:00"/>
+          <common_v47_0:SupplierLocator SupplierCode="BA" SupplierLocatorCode="TPT9AN" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA==" CreateDateTime="2020-09-18T01:56:00.000+00:00"/>
+          <common_v47_0:BookingTravelerRef Key="o7sgdSBAAA/B12rYIAAAAA=="/>
+          <common_v47_0:BookingTravelerRef Key="o7sgdSBAAA/B62rYIAAAAA=="/>
+          <common_v47_0:BookingTravelerRef Key="o7sgdSBAAA/B/2rYIAAAAA=="/>
+          <common_v47_0:BookingTravelerRef Key="yYtgdSBAAA/BSQT7IAAAAA=="/>
+          <common_v47_0:ProviderReservationInfoRef Key="o7sgdSBAAA/BTd0YIAAAAA=="/>
+          <air:AirSegment Key="um0pdSpB0BKApx0UHAAAAA==" Group="0" Carrier="OZ" CabinClass="Economy" FlightNumber="751" ProviderCode="1G" Origin="ICN" Destination="SIN" DepartureTime="2020-10-16T16:10:00.000+09:00" ArrivalTime="2020-10-16T21:30:00.000+08:00" TravelTime="380" Distance="2883" ClassOfService="K" ETicketability="No" Equipment="77L" Status="HX" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA==" TravelOrder="5" ProviderSegmentOrder="1" OptionalServicesIndicator="false" AvailabilitySource="S" LinkAvailability="true" PolledAvailabilityOption="O and D cache or polled status used with different local status">
+            <air:FlightDetails Key="pH3pdSmB0BKAceCXLAAAAA==" Origin="ICN" Destination="SIN" DepartureTime="2020-10-16T16:10:00.000+09:00" ArrivalTime="2020-10-16T21:30:00.000+08:00" FlightTime="380" TravelTime="380" Equipment="77L" OriginTerminal="1" DestinationTerminal="3" AutomatedCheckin="false"/>
+            <air:Connection Duration="65"/>
+            <common_v47_0:SellMessage>DEPARTS ICN TERMINAL 1  - ARRIVES SIN TERMINAL 3</common_v47_0:SellMessage>
+            <common_v47_0:SellMessage>*OZ ECONOMY CLASS*</common_v47_0:SellMessage>
+          </air:AirSegment>
+          <air:AirSegment Key="um0pdSpB0BKArx0UHAAAAA==" Group="0" Carrier="BA" CabinClass="Economy" FlightNumber="16" ProviderCode="1G" Origin="SIN" Destination="LHR" DepartureTime="2020-10-16T22:35:00.000+08:00" ArrivalTime="2020-10-17T05:05:00.000+01:00" TravelTime="810" Distance="6742" ClassOfService="V" ETicketability="Yes" Equipment="777" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA==" TravelOrder="1" ProviderSegmentOrder="2" OptionalServicesIndicator="false" AvailabilitySource="S" LinkAvailability="true" PolledAvailabilityOption="O and D cache or polled status used with different local status">
+            <air:FlightDetails Key="o7sgdSBAAA/BP8yYIAAAAA==" Origin="SIN" Destination="LHR" DepartureTime="2020-10-16T22:35:00.000+08:00" ArrivalTime="2020-10-17T05:05:00.000+01:00" FlightTime="810" TravelTime="810" Equipment="777" OriginTerminal="1" DestinationTerminal="5" AutomatedCheckin="false"/>
+            <air:Connection Duration="195"/>
+            <common_v47_0:SellMessage>DEPARTS SIN TERMINAL 1  - ARRIVES LHR TERMINAL 5</common_v47_0:SellMessage>
+          </air:AirSegment>
+          <air:AirSegment Key="um0pdSpB0BKAtx0UHAAAAA==" Group="0" Carrier="BA" CabinClass="Economy" FlightNumber="548" ProviderCode="1G" Origin="LHR" Destination="FCO" DepartureTime="2020-10-17T08:20:00.000+01:00" ArrivalTime="2020-10-17T12:00:00.000+02:00" TravelTime="160" Distance="894" ClassOfService="S" ETicketability="Yes" Equipment="319" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA==" TravelOrder="2" ProviderSegmentOrder="3" OptionalServicesIndicator="false" AvailabilitySource="S" LinkAvailability="true" PolledAvailabilityOption="O and D cache or polled status used with different local status">
+            <air:FlightDetails Key="o7sgdSBAAA/BQ8yYIAAAAA==" Origin="LHR" Destination="FCO" DepartureTime="2020-10-17T08:20:00.000+01:00" ArrivalTime="2020-10-17T12:00:00.000+02:00" FlightTime="160" TravelTime="160" Equipment="319" OriginTerminal="5" DestinationTerminal="3" AutomatedCheckin="false"/>
+            <common_v47_0:SellMessage>DEPARTS LHR TERMINAL 5  - ARRIVES FCO TERMINAL 3</common_v47_0:SellMessage>
+          </air:AirSegment>
+          <air:AirSegment Key="um0pdSpB0BKAvx0UHAAAAA==" Group="1" Carrier="BA" CabinClass="Economy" FlightNumber="559" ProviderCode="1G" Origin="FCO" Destination="LHR" DepartureTime="2020-10-29T17:15:00.000+01:00" ArrivalTime="2020-10-29T19:00:00.000+00:00" TravelTime="165" Distance="894" ClassOfService="S" ETicketability="Yes" Equipment="319" MarriageGroup="1" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA==" TravelOrder="3" ProviderSegmentOrder="4" OptionalServicesIndicator="false" AvailabilitySource="S" LinkAvailability="true" PolledAvailabilityOption="O and D cache or polled status used with different local status">
+            <air:FlightDetails Key="o7sgdSBAAA/BR8yYIAAAAA==" Origin="FCO" Destination="LHR" DepartureTime="2020-10-29T17:15:00.000+01:00" ArrivalTime="2020-10-29T19:00:00.000+00:00" FlightTime="165" TravelTime="165" Equipment="319" OriginTerminal="3" DestinationTerminal="5" AutomatedCheckin="false"/>
+            <common_v47_0:SellMessage>DEPARTS FCO TERMINAL 3  - ARRIVES LHR TERMINAL 5</common_v47_0:SellMessage>
+            <common_v47_0:SellMessage>**** FAVOURABLE AVAILABILITY GIVEN - FLIGHTS MARRIED ****</common_v47_0:SellMessage>
+          </air:AirSegment>
+          <air:AirSegment Key="um0pdSpB0BKAxx0UHAAAAA==" Group="2" Carrier="BA" CabinClass="Economy" FlightNumber="17" ProviderCode="1G" Origin="LHR" Destination="ICN" DepartureTime="2020-10-30T12:45:00.000+00:00" ArrivalTime="2020-10-31T08:40:00.000+09:00" TravelTime="655" Distance="5646" ClassOfService="V" ETicketability="Yes" Equipment="788" MarriageGroup="1" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA==" TravelOrder="4" ProviderSegmentOrder="5" OptionalServicesIndicator="false" AvailabilitySource="S" LinkAvailability="true" PolledAvailabilityOption="O and D cache or polled status used with different local status">
+            <air:FlightDetails Key="um0pdSpB0BKAyx0UHAAAAA==" Origin="LHR" Destination="ICN" DepartureTime="2020-10-30T12:45:00.000+00:00" ArrivalTime="2020-10-31T08:40:00.000+09:00" FlightTime="655" TravelTime="655" Equipment="788" OriginTerminal="5" DestinationTerminal="1" AutomatedCheckin="false"/>
+            <common_v47_0:SellMessage>DEPARTS LHR TERMINAL 5  - ARRIVES ICN TERMINAL 1</common_v47_0:SellMessage>
+            <common_v47_0:SellMessage>ADD ADVANCE PASSENGER INFORMATION SSRS DOCA/DOCO/DOCS</common_v47_0:SellMessage>
+            <common_v47_0:SellMessage>PERSONAL DATA WHICH IS PROVIDED TO US IN CONNECTION</common_v47_0:SellMessage>
+            <common_v47_0:SellMessage>WITH YOUR TRAVEL MAY BE PASSED TO GOVERNMENT AUTHORITIES</common_v47_0:SellMessage>
+            <common_v47_0:SellMessage>FOR BORDER CONTROL AND AVIATION SECURITY PURPOSES</common_v47_0:SellMessage>
+          </air:AirSegment>
+        </air:AirReservation>
+        <common_v47_0:GeneralRemark Key="yYtgdSBAAA/BUQT7IAAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2020-09-18T01:56:00.000+00:00">
+          <common_v47_0:RemarkData>OZRSVN IS 4850-6423</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yYtgdSBAAA/BVQT7IAAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2020-09-18T01:56:00.000+00:00">
+          <common_v47_0:RemarkData>ADTK1GTOOZ BY 18SEP 1156 SEL TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="pH3pdSmB0BKAbeCXLAAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA==" SupplierCode="OZ" Direction="Incoming" CreateDate="2020-09-18T02:57:00.000+00:00">
+          <common_v47_0:RemarkData>OZCANCELLATION DUE TO NO TICKET</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:AgencyInfo>
+          <common_v47_0:AgentAction ActionType="Created" AgentCode="uAPI3520885586-c4df7423" BranchCode="P3441108" AgencyCode="S3441096" EventTime="2020-09-18T01:56:45.206+00:00"/>
+          <common_v47_0:AgentAction ActionType="Modified" AgentCode="uAPI3520885586-c4df7423" BranchCode="P3441108" AgencyCode="S3441096" EventTime="2020-09-18T04:48:19.268+00:00"/>
+        </common_v47_0:AgencyInfo>
+        <common_v47_0:SSR Key="o7sgdSBAAA/BT8yYIAAAAA==" Status="HK" Type="FOID" FreeText="/PPKRUNDEFINED-1KANG/HYUNGSIKMR" Carrier="OZ" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+        <common_v47_0:SSR Key="o7sgdSBAAA/BU8yYIAAAAA==" Status="HK" Type="FOID" FreeText="/PPKRUNDEFINED-1KANG/HYUNGSIKMR" Carrier="BA" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+        <common_v47_0:SSR Key="o7sgdSBAAA/BV8yYIAAAAA==" Status="HK" Type="FOID" FreeText="/PPKRUNDEFINED-1CHOI/SEONGHYUNMR" Carrier="OZ" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+        <common_v47_0:SSR Key="o7sgdSBAAA/BW8yYIAAAAA==" Status="HK" Type="FOID" FreeText="/PPKRUNDEFINED-1CHOI/SEONGHYUNMR" Carrier="BA" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+        <common_v47_0:SSR Key="o7sgdSBAAA/BX8yYIAAAAA==" Status="HK" Type="FOID" FreeText="/PPKRUNDEFINED-1PARK/MINJIMS" Carrier="OZ" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+        <common_v47_0:SSR Key="o7sgdSBAAA/BY8yYIAAAAA==" Status="HK" Type="FOID" FreeText="/PPKRUNDEFINED-1PARK/MINJIMS" Carrier="BA" ProviderReservationInfoRef="o7sgdSBAAA/BTd0YIAAAAA=="/>
+      </universal:UniversalRecord>
+    </universal:UniversalRecordImportRsp>
+  </SOAP:Body>
+</SOAP:Envelope>
