@@ -1,4 +1,4 @@
-const { createErrorClass, createErrorsList } = require('node-errors-helpers');
+const { createErrorClass, createErrorsList } = require('./node-errors-helpers');
 
 const ServiceError = createErrorClass('ServiceError', 'General service error');
 Object.assign(ServiceError, createErrorsList({

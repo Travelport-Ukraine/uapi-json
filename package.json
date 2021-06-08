@@ -1,6 +1,6 @@
 {
   "name": "uapi-json",
-  "version": "1.9.6",
+  "version": "1.9.7",
   "description": "Travelport Universal API",
   "main": "src/",
   "files": [
@@ -30,17 +30,18 @@
   "contributors": [
     "Dmitry Chertousov <d.chertousov@gmail.com>",
     "Artem Pylypchuk <articicejuice@gmail.com>",
-    "Yevhenii Huselietov <d46k16@gmail.com>"
+    "Yevhenii Huselietov <d46k16@gmail.com>",
+    "Mark Omarov <dev.mark.omarov@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
     "@hapi/joi": "^15.1.0",
     "axios": "^0.21.1",
     "galileo-screen": "1.0.5",
-    "handlebars": "^4.7.6",
+    "handlebars": "^4.7.7",
     "handlebars-helper-equal": "^1.0.0",
     "moment": "^2.24.0",
-    "node-errors-helpers": "^0.3.0",
+    "node-errors-helpers": "^1.0.0",
     "pretty-data": "^0.40.0",
     "promise-retry": "^1.1.1",
     "xml2js": "^0.4.19"

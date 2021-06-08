@@ -1,7 +1,7 @@
 const {
   createErrorClass,
   createErrorsList,
-} = require('node-errors-helpers');
+} = require('../../node-errors-helpers');
 const errorTypes = require('../../error-types');
 
 // Validation errors
