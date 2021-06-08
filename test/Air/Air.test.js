@@ -1854,4 +1854,19 @@ describe('#AirService', () => {
       expect(airPrice.calledOnce).to.be.equal(true);
     });
   });
+
+  describe('acceptScheduleChange', () => {
+    it('should check if correct function from service is called', () => {
+      const acceptScheduleChange = sinon.spy(() => {});
+      const service = () => ({ acceptScheduleChange });
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': service,
+      });
+      createAirService({ auth }).acceptScheduleChange({
+        universalRecordLocatorCode: 'AABBCC',
+        version: 2
+      });
+      expect(acceptScheduleChange.calledOnce).to.be.equal(true);
+    });
+  });
 });

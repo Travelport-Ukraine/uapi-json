@@ -438,6 +438,10 @@ module.exports = (settings) => {
         }));
     },
 
+    acceptScheduleChange(options) {
+      return service.acceptScheduleChange(options);
+    },
+
     exchangeBooking(options) {
       return this.getBooking(options)
         .then(booking => service.exchangeBooking({

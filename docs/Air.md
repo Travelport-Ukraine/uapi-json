@@ -27,6 +27,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.cancelTicket(params)](#cancelTicket)
 * [.cancelBooking(params)](#cancelBooking)
 * [.addSegments(params)](#addSegments)
+* [.acceptScheduleChange(params)](#acceptScheduleChange)
 
 ## .shop(params)
 <a name="shop"></a>
@@ -456,3 +457,18 @@ Add segments to an existing reservation record.
 | reservationLocatorCode | `String` | Optional. uAPI reservation locator code |
 
 It is recommended to pass `version` param in order to ensure that the last version of the PNR was reviewed before modification.
+
+## .acceptScheduleChange(params)
+<a name="acceptScheduleChange"></a>
+
+This method sends a acknowledge request to all schedule changes. TK statuses will be updated to HK, and returns updated Universal record.
+
+**Returns**: `Promise`. - Revised record for requested Universal Record.
+**See**: [Accepting All Schedule Changes](https://support.travelport.com/webhelp/uapi/uAPI.htm#Booking/Modify/Schedule_Changes/Accepting_All_Schedule_Changes.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| universalRecordLocatorCode | `String` | UniversalRecord Locator Code |
+| version | `String` | UniversalRecord Version |
+
+**See: <a href="../examples/Air/getUniversalRecord.js">Example</a>**
