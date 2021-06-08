@@ -87,6 +87,8 @@ function getBaggageInfo(info) {
 }
 
 function formatSegment(segment) {
+  const isCodeshare = (Object.prototype.toString.call(segment['air:CodeshareInfo']) === '[object Object]');
+
   const seg = {
     from: segment.Origin,
     to: segment.Destination,
@@ -97,7 +99,16 @@ function formatSegment(segment) {
     flightNumber: segment.FlightNumber,
     uapi_segment_ref: segment.Key,
     uapiSegmentReference: segment.Key,
+    isCodeshare
   };
+
+  if (isCodeshare) {
+    Object.assign(seg, {
+      operatingCarrier: segment['air:CodeshareInfo'].OperatingCarrier,
+      operatingCarrierName: segment['air:CodeshareInfo']._,
+      operatingFlightNumber: segment['air:CodeshareInfo'].OperatingFlightNumber,
+    });
+  }
 
   if (segment['air:FlightDetails']) {
     Object.assign(seg, {
