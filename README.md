@@ -60,8 +60,8 @@ AirService.importPNR().catch((err) => {
 });
 ```
 
-As [`node-errors-helpers`](https://github.com/Travelport-Ukraine/errors-helpers) library
-is used for errors generating, we strongly reccomend you to tak a look at it.
+As the [`node-errors-helpers`](https://github.com/Travelport-Ukraine/errors-helpers) library used for error generating,
+we strongly recommend you to take a look at it.
 It also has several useful helpers to handle errors.
 
 # Settings
