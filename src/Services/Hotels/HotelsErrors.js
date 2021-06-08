@@ -1,7 +1,7 @@
 const {
   createErrorClass,
   createErrorsList,
-} = require('node-errors-helpers');
+} = require('node-errors-helpers')('uapi-json');
 const errorTypes = require('../../error-types');
 
 // Validation errors
