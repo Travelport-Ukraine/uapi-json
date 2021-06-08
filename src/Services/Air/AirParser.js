@@ -523,7 +523,7 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
   const passengersList = etr[`common_${this.uapi_version}:BookingTraveler`];
   const passengers = Object.keys(passengersList).map(
     (passengerKey) => {
-      const travelerDetails = passengersList[passengerKey][`common_${this.uapi_version}:BookingTravelerName`];
+      const [travelerDetails] = passengersList[passengerKey][`common_${this.uapi_version}:BookingTravelerName`];
       const firstName = travelerDetails.First.concat(travelerDetails.Prefix || '');
       const lastName = travelerDetails.Last;
 
@@ -853,7 +853,7 @@ function extractBookings(obj) {
       const providerInfo = reservationInfo[key];
       const passengers = Object.keys(record[`common_${this.uapi_version}:BookingTraveler`]).map((travelerKey) => {
         const traveler = record[`common_${this.uapi_version}:BookingTraveler`][travelerKey];
-        const name = traveler[`common_${this.uapi_version}:BookingTravelerName`];
+        const [name] = traveler[`common_${this.uapi_version}:BookingTravelerName`];
 
         return format.buildPassenger(name, traveler);
       });
@@ -913,7 +913,7 @@ function extractBookings(obj) {
         if (!traveler) {
           throw new AirRuntimeError.TravelersListError();
         }
-        const name = traveler[`common_${this.uapi_version}:BookingTravelerName`];
+        const [name] = traveler[`common_${this.uapi_version}:BookingTravelerName`];
         const travelerEmails = traveler[`common_${this.uapi_version}:Email`];
         if (travelerEmails) {
           Object.keys(travelerEmails).forEach(
@@ -1167,6 +1167,29 @@ function universalRecordRetrieveRequest(data) {
   return response;
 }
 
+function formatProviderReservationInfo(parser, data) {
+  return {
+    passengers: data[`common_${parser.uapi_version}:BookingTravelerName`].map((bookingtTravelerName) => {
+      return {
+        firstName: bookingtTravelerName.First.concat(bookingtTravelerName.Prefix || ''),
+        lastName: bookingtTravelerName.Last
+      };
+    }),
+    provider: data.ProviderCode,
+    pnr: data.ProviderLocatorCode,
+    uapi_ur_locator: data.UniversalLocatorCode
+  };
+}
+
+function providerReservationDivideRequest(rsp) {
+  return {
+    parent: formatProviderReservationInfo(this, rsp['universal:ParentProviderReservationInfo']),
+    child: formatProviderReservationInfo(this, rsp['universal:ChildProviderReservationInfo']),
+    transactionId: rsp.TransactionId,
+    responseTime: rsp.ResponseTime
+  };
+}
+
 function extractFareRules(obj) {
   const rulesList = obj['air:FareRule'];
   rulesList.forEach((item) => {
@@ -1401,6 +1424,7 @@ module.exports = {
   AIR_TICKET_REQUEST: ticketParse,
   AIR_IMPORT_REQUEST: importRequest,
   UNIVERSAL_RECORD_RETRIEVE_REQUEST: universalRecordRetrieveRequest,
+  PROVIDER_RESERVATION_DIVIDE: providerReservationDivideRequest,
   GDS_QUEUE_PLACE_RESPONSE: gdsQueue,
   AIR_CANCEL_UR: nullParsing,
   UNIVERSAL_RECORD_FOID: nullParsing,

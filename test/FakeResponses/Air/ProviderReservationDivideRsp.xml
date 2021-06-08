@@ -1,0 +1,12 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <universal:ProviderReservationDivideRsp TransactionId="F1E271130A0E562D00F0610E9C9EB9CE" ResponseTime="3767" xmlns:universal="http://www.travelport.com/schema/universal_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+      <universal:ParentProviderReservationInfo ProviderCode="1G" ProviderLocatorCode="NABOO1" UniversalLocatorCode="3CPOG0">
+        <common_v47_0:BookingTravelerName Prefix="MR" First="ANAKIN" Last="SKYWALKER"/>
+      </universal:ParentProviderReservationInfo>
+      <universal:ChildProviderReservationInfo ProviderCode="1G" ProviderLocatorCode="SPEEDR" UniversalLocatorCode="R2D2G0">
+        <common_v47_0:BookingTravelerName Prefix="MR" First="LUKE" Last="SKYWALKER"/>
+      </universal:ChildProviderReservationInfo>
+    </universal:ProviderReservationDivideRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

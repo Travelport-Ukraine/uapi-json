@@ -132,6 +132,17 @@ module.exports = function (settings) {
       debug,
       options
     ),
+    providerReservationDivide: uApiRequest(
+      config.UniversalRecord.url,
+      auth,
+      templates.providerReservationDivide,
+      'universal:ProviderReservationDivideRsp',
+      AirValidator.PROVIDER_RESERVATION_DIVIDE,
+      AirParser.AIR_ERRORS,
+      AirParser.PROVIDER_RESERVATION_DIVIDE,
+      debug,
+      options
+    ),
     gdsQueue: uApiRequest(
       config.GdsQueueService.url,
       auth,

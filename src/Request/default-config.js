@@ -18,6 +18,7 @@ module.exports = function defaultConfig(ver) {
     'air:AirExchangeBundle',
     'common_' + ver + ':ResponseMessage',
     'common_' + ver + ':BookingTraveler',
+    'common_' + ver + ':BookingTravelerName',
     'air:BaggageAllowanceInfo',
     'air:CarryOnAllowanceInfo',
     'hotel:RateInfo',

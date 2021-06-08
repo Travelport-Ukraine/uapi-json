@@ -46,6 +46,10 @@ module.exports = (settings) => {
       return service.lookupFareRules(request);
     },
 
+    providerReservationDivide(options) {
+      return service.providerReservationDivide(options);
+    },
+
     toQueue(options) {
       return service.gdsQueue(options);
     },
