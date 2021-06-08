@@ -1,7 +1,7 @@
 const {
   createErrorClass,
   createErrorsList,
-} = require('node-errors-helpers')('uapi-json');
+} = require('../../node-errors-helpers');
 const errorTypes = require('../../error-types');
 const errorCodes = require('../../error-codes');
 
