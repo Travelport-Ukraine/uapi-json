@@ -1018,6 +1018,37 @@ describe('#AirService', () => {
           expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
         });
     });
+    it('should get ticket data with additional queries in case of TicketInfoIncomplete', async () => {
+      const completeInfo = {
+        pnr: 'PNR001',
+        ticketNumber: '0649902789376',
+        taxesInfo: []
+      };
+
+      const getTicket = sinon.stub();
+
+      getTicket.onCall(0).throws(new AirRuntimeError.TicketInfoIncomplete());
+      getTicket.onCall(1).resolves(completeInfo);
+
+      const getPNRByTicketNumber = sinon.stub().resolves('PNR001');
+      const getTickets = sinon.stub().resolves([{
+        pnr: 'PNR001',
+        ticketNumber: '0649902789375',
+      }]);
+      const getUniversalRecordByPNR = sinon.stub().resolves(getURbyPNRSampleTicketed);
+
+      const air = getAirServiceMock({
+        methods: {
+          getTicket,
+          getTickets,
+          getUniversalRecordByPNR,
+        }
+      });
+      air.getPNRByTicketNumber = getPNRByTicketNumber.bind(air);
+
+      const res = await air.getTicket({ ticketNumber: '0649902789376' });
+      expect(res).to.be.equal(completeInfo);
+    });    
   });
 
   describe('getPNRByTicketNumber', () => {

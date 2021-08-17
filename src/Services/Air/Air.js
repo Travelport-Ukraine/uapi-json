@@ -265,7 +265,16 @@ module.exports = (settings) => {
         }
         const pnr = await this.getPNRByTicketNumber({ ticketNumber });
         const tickets = await this.getTickets({ pnr });
-        return tickets.find(t => t.ticketNumber === ticketNumber);
+        const ticket = tickets.find(t => t.ticketNumber === ticketNumber);
+
+        if (!ticket) {
+          return service.getTicket({
+            ticketNumber,
+            allowNoProviderLocatorCodeRetrieval: true,
+          });
+        }
+
+        return ticket;
       }
     },
 
