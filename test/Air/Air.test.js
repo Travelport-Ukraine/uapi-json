@@ -1048,7 +1048,7 @@ describe('#AirService', () => {
 
       const res = await air.getTicket({ ticketNumber: '0649902789376' });
       expect(res).to.be.equal(completeInfo);
-    });    
+    });
   });
 
   describe('getPNRByTicketNumber', () => {
