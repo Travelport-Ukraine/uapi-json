@@ -1046,8 +1046,11 @@ describe('#AirService', () => {
       });
       air.getPNRByTicketNumber = getPNRByTicketNumber.bind(air);
 
-      const res = await air.getTicket({ ticketNumber: '0649902789376' });
-      expect(res).to.be.equal(completeInfo);
+      try {
+        await air.getTicket({ ticketNumber: '0649902789376' });
+      } catch (err) {
+        expect(err).to.be.an.instanceof(AirRuntimeError.TicketInfoIncomplete);
+      }
     });
   });
 
