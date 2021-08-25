@@ -263,9 +263,16 @@ module.exports = (settings) => {
         if (!RETRYABLE_GET_TICKET_ERRORS.some(ErrorClass => err instanceof ErrorClass)) {
           throw err;
         }
+
         const pnr = await this.getPNRByTicketNumber({ ticketNumber });
         const tickets = await this.getTickets({ pnr });
-        return tickets.find(t => t.ticketNumber === ticketNumber);
+        const ticket = tickets.find(t => t.ticketNumber === ticketNumber);
+
+        if (!ticket) {
+          throw err;
+        }
+
+        return ticket;
       }
     },
 
