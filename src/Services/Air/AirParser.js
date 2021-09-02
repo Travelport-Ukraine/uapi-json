@@ -1392,6 +1392,20 @@ function availability(rsp) {
   };
 }
 
+function getEMDListItem(obj){
+  console.log('getEMDListItem', obj);
+}
+
+function getEMDList(obj) {
+  const eMDItem = obj['air:EMDSummaryInfo'];
+
+  if (!eMDItem) {
+    processUAPIError.call(this, obj, 'Unable to retrieve EMD list');
+  }
+
+  return Object.values(eMDItem).map((val) => (getEMDListItem.call(this, val)));
+}
+
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: lowFaresSearchRequest,
   AIR_PRICE_REQUEST: airPrice,
@@ -1415,4 +1429,5 @@ module.exports = {
   AIR_EXCHANGE_QUOTE: exchangeQuote,
   AIR_EXCHANGE: exchangeBooking,
   AIR_AVAILABILITY: availability,
+  AIR_EMD_LIST: getEMDList,
 };
