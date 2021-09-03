@@ -2372,4 +2372,52 @@ describe('#AirParser', () => {
       }
     });
   });
+
+  describe('AIR_EMD_LIST', () => {
+    it('should correctly handle errors', async () => {
+      try {
+        await getParseResponse(
+          'air:EMDRetrieveRsp', 'AirEMDListNoItemsError.xml',
+          airParser.AIR_EMD_LIST, airParser.AIR_ERRORS
+        );
+        throw new Error('Skipped error!');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
+        expect(err.data).to.deep.eq({
+          faultcode: 'Server.Business',
+          faultstring: 'NO EMD LIST DATA FOUND',
+          detail: {
+            'common_v51_0:ErrorInfo': {
+              'common_v51_0:Code': '13041', 'common_v51_0:Service': 'URSVC', 'common_v51_0:Type': 'Business', 'common_v51_0:Description': 'EMD validation error', 'common_v51_0:TraceId': '', 'common_v51_0:TransactionId': 'AB9DF5A00A0E7C85D480D8743422B95B', 'xmlns:common_v51_0': 'https://www.travelport.com/schema/common_v51_0'
+            }
+          }
+        });
+      }
+    });
+    it('check correct response parsing', async () => {
+      const res = await getParseResponse(
+        'air:EMDRetrieveRsp', 'AirEMDList.xml',
+        airParser.AIR_EMD_LIST
+      );
+      expect(res.length).to.be.equal(3);
+      res.forEach((item) => {
+        expect(item).to.be.an('object');
+        expect(item).to.have.all.keys(['summary', 'passenger']);
+        expect(item.summary).to.be.a('object');
+        expect(item.passenger).to.be.a('object');
+
+        expect(item.summary).to.have.all.keys(['coupon', 'uapi_emd_ref', 'number',
+          'isPrimaryDocument', 'associatedTicket', 'platingCarrier', 'issuedAt']);
+        expect(item.summary.coupon).to.be.a('object');
+
+        expect(item.passenger).to.have.all.keys(['lastName', 'firstName', 'travelerType', 'age']);
+
+        expect(item.summary.coupon.count).to.be.a('number');
+        expect(item.summary.coupon.consumedAtIssuanceInd).to.be.a('boolean');
+        expect(item.summary.coupon.isRefundable).to.be.a('boolean');
+
+        expect(item.summary.isPrimaryDocument).to.be.a('boolean');
+      });
+    });
+  });
 });

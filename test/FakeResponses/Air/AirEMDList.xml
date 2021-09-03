@@ -1,0 +1,32 @@
+<SOAP:Envelope 
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:EMDRetrieveRsp TraceId="" TransactionId="A6978EDB0A0E7CFE37B5EE806527572B" ResponseTime="1164" 
+      xmlns:air="http://www.travelport.com/schema/air_v51_0">
+      <air:EMDSummaryInfo Key="QrNDEuOynDKA4/LnJKAAAA==">
+        <air:EMDSummary Key="QrNDEuOynDKA5/LnJKAAAA==" Number="0809991187189" PrimaryDocumentIndicator="true" AssociatedTicketNumber="0809904202926" PlatingCarrier="LO" IssueDate="2021-09-01T00:00:00.000+00:00">
+          <air:EMDCoupon Key="QdQAEuF0nDKAQVlWNKAAAA==" Number="1" Status="Void" ConsumedAtIssuanceInd="true" RFIC="D" RFISC="0L7" RFIDescription="Financial Impact" Origin="WAW" NonRefundableInd="true"/>
+        </air:EMDSummary>
+        <air:EMDTravelerInfo TravelerType="ADT" Age="0">
+          <air:NameInfo First="LOTEMDMR" Last="DUVANOV"/>
+        </air:EMDTravelerInfo>
+      </air:EMDSummaryInfo>
+      <air:EMDSummaryInfo Key="axT+Du+znDKAn0lVVKAAAA==">
+        <air:EMDSummary Key="axT+Du+znDKA+5lVVKAAAA==" Number="0809991187191" PrimaryDocumentIndicator="true" AssociatedTicketNumber="0809904202926" PlatingCarrier="LO" IssueDate="2021-09-01T09:27:09.000+00:00">
+          <air:EMDCoupon Key="axT+Du+znDKAm+lVVKAAAA==" Number="1" Status="Void" SvcDescription="CHEESE TAPAS" ConsumedAtIssuanceInd="false" RFIC="G" RFISC="019" RFIDescription="Inflight Services" Origin="WAW" Destination="POZ" FlightNumber="3943" NonRefundableInd="true"/>
+        </air:EMDSummary>
+        <air:EMDTravelerInfo TravelerType="ADT" Age="0">
+          <air:NameInfo First="LOTEMDMR" Last="DUVANOV"/>
+        </air:EMDTravelerInfo>
+      </air:EMDSummaryInfo>
+      <air:EMDSummaryInfo Key="axT+Du+znDKA9AmVVKAAAA==">
+        <air:EMDSummary Key="axT+Du+znDKANDmVVKAAAA==" Number="0809991187192" PrimaryDocumentIndicator="true" AssociatedTicketNumber="0809904202926" PlatingCarrier="LO" IssueDate="2021-09-01T09:27:09.000+00:00">
+          <air:EMDCoupon Key="axT+Du+znDKAIEmVVKAAAA==" Number="1" Status="Void" SvcDescription="MEAT TAPAS" ConsumedAtIssuanceInd="false" RFIC="G" RFISC="018" RFIDescription="Inflight Services" Origin="WAW" Destination="POZ" FlightNumber="3943" NonRefundableInd="true"/>
+        </air:EMDSummary>
+        <air:EMDTravelerInfo TravelerType="ADT" Age="0">
+          <air:NameInfo First="LOTEMDMR" Last="DUVANOV"/>
+        </air:EMDTravelerInfo>
+      </air:EMDSummaryInfo>
+    </air:EMDRetrieveRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

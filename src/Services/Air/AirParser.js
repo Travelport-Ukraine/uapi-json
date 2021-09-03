@@ -1392,8 +1392,47 @@ function availability(rsp) {
   };
 }
 
-function getEMDListItem(obj){
-  console.log('getEMDListItem', obj);
+function getEMDListItem(obj) {
+  const summaryBlock = obj['air:EMDSummary'];
+  const passenger = obj['air:EMDTravelerInfo'];
+
+  const [key] = Object.keys(summaryBlock);
+  const summary = summaryBlock[key];
+  const couponBlock = summary['air:EMDCoupon'];
+  
+  const [couponKey] = Object.keys(couponBlock);
+  const coupon = couponBlock[couponKey];
+
+  return {
+    summary: {
+      coupon: {
+        uapi_emd_coupon_ref: coupon.Key,
+        count: parseInt(coupon.Number, 10),
+        status: coupon.Status,
+        svcDesc: coupon.SvcDescription,
+        consumedAtIssuanceInd: coupon.ConsumedAtIssuanceInd === 'true',
+        rfiCode: coupon.RFIC,
+        rfiSubcode: coupon.RFISC,
+        rfiDesc: coupon.RFIDescription,
+        origin: coupon.Origin,
+        destination: coupon.Destination,
+        flightNumber: coupon.FlightNumber,
+        isRefundable: coupon.NonRefundableInd === 'true',
+      },
+      uapi_emd_ref: summary.Key,
+      number: summary.Number,
+      isPrimaryDocument: summary.PrimaryDocumentIndicator === 'true',
+      associatedTicket: summary.AssociatedTicketNumber,
+      platingCarrier: summary.PlatingCarrier,
+      issuedAt: summary.IssueDate,
+    },
+    passenger: {
+      lastName: passenger['air:NameInfo'].Last,
+      firstName: passenger['air:NameInfo'].First,
+      travelerType: passenger.TravelerType,
+      age: passenger.Age,
+    }
+  };
 }
 
 function getEMDList(obj) {
@@ -1403,7 +1442,7 @@ function getEMDList(obj) {
     processUAPIError.call(this, obj, 'Unable to retrieve EMD list');
   }
 
-  return Object.values(eMDItem).map((val) => (getEMDListItem.call(this, val)));
+  return Object.values(eMDItem).map(val => (getEMDListItem.call(this, val)));
 }
 
 module.exports = {
