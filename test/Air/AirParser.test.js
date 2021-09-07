@@ -2410,9 +2410,9 @@ describe('#AirParser', () => {
           'isPrimaryDocument', 'associatedTicket', 'platingCarrier', 'issuedAt']);
         expect(item.summary.coupon).to.be.a('object');
 
-        expect(item.passenger).to.have.all.keys(['lastName', 'firstName', 'travelerType', 'age']);
+        expect(item.passenger).to.have.all.keys(['lastName', 'firstName', 'ageCategory', 'age']);
 
-        expect(item.summary.coupon.count).to.be.a('number');
+        expect(item.summary.coupon.number).to.be.a('number');
         expect(item.summary.coupon.consumedAtIssuanceInd).to.be.a('boolean');
         expect(item.summary.coupon.isRefundable).to.be.a('boolean');
 

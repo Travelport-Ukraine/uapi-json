@@ -1399,7 +1399,7 @@ function getEMDListItem(obj) {
   const [key] = Object.keys(summaryBlock);
   const summary = summaryBlock[key];
   const couponBlock = summary['air:EMDCoupon'];
-  
+
   const [couponKey] = Object.keys(couponBlock);
   const coupon = couponBlock[couponKey];
 
@@ -1407,7 +1407,7 @@ function getEMDListItem(obj) {
     summary: {
       coupon: {
         uapi_emd_coupon_ref: coupon.Key,
-        count: parseInt(coupon.Number, 10),
+        number: parseInt(coupon.Number, 10),
         status: coupon.Status,
         svcDesc: coupon.SvcDescription,
         consumedAtIssuanceInd: coupon.ConsumedAtIssuanceInd === 'true',
@@ -1417,7 +1417,7 @@ function getEMDListItem(obj) {
         origin: coupon.Origin,
         destination: coupon.Destination,
         flightNumber: coupon.FlightNumber,
-        isRefundable: coupon.NonRefundableInd === 'true',
+        isRefundable: coupon.NonRefundableInd !== 'true',
       },
       uapi_emd_ref: summary.Key,
       number: summary.Number,
@@ -1429,7 +1429,7 @@ function getEMDListItem(obj) {
     passenger: {
       lastName: passenger['air:NameInfo'].Last,
       firstName: passenger['air:NameInfo'].First,
-      travelerType: passenger.TravelerType,
+      ageCategory: passenger.TravelerType,
       age: passenger.Age,
     }
   };
