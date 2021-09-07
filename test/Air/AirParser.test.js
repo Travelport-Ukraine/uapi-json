@@ -156,6 +156,19 @@ async function getParseResponse(root, file, parser = null, errorHandler = null, 
   return parser && parser.call(uParser, errRsp);
 }
 
+function checkEMDError(err, errString, transId) {
+  expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
+  expect(err.data).to.deep.eq({
+    faultcode: 'Server.Business',
+    faultstring: errString,
+    detail: {
+      'common_v51_0:ErrorInfo': {
+        'common_v51_0:Code': '13041', 'common_v51_0:Service': 'URSVC', 'common_v51_0:Type': 'Business', 'common_v51_0:Description': 'EMD validation error', 'common_v51_0:TraceId': '', 'common_v51_0:TransactionId': transId, 'xmlns:common_v51_0': 'https://www.travelport.com/schema/common_v51_0'
+      }
+    }
+  });
+}
+
 describe('#AirParser', () => {
   describe('AIR_CANCEL_TICKET', () => {
     it('should return error when no VoidResultInfo available', () => {
@@ -2382,16 +2395,7 @@ describe('#AirParser', () => {
         );
         throw new Error('Skipped error!');
       } catch (err) {
-        expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
-        expect(err.data).to.deep.eq({
-          faultcode: 'Server.Business',
-          faultstring: 'NO EMD LIST DATA FOUND',
-          detail: {
-            'common_v51_0:ErrorInfo': {
-              'common_v51_0:Code': '13041', 'common_v51_0:Service': 'URSVC', 'common_v51_0:Type': 'Business', 'common_v51_0:Description': 'EMD validation error', 'common_v51_0:TraceId': '', 'common_v51_0:TransactionId': 'AB9DF5A00A0E7C85D480D8743422B95B', 'xmlns:common_v51_0': 'https://www.travelport.com/schema/common_v51_0'
-            }
-          }
-        });
+        checkEMDError(err, 'NO EMD LIST DATA FOUND', 'AB9DF5A00A0E7C85D480D8743422B95B');
       }
     });
     it('check correct response parsing', async () => {
@@ -2430,16 +2434,7 @@ describe('#AirParser', () => {
         );
         throw new Error('Skipped error!');
       } catch (err) {
-        expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
-        expect(err.data).to.deep.eq({
-          faultcode: 'Server.Business',
-          faultstring: 'ERC-364-INVALID DOCUMENT NUMBER',
-          detail: {
-            'common_v51_0:ErrorInfo': {
-              'common_v51_0:Code': '13041', 'common_v51_0:Service': 'URSVC', 'common_v51_0:Type': 'Business', 'common_v51_0:Description': 'EMD validation error', 'common_v51_0:TraceId': '', 'common_v51_0:TransactionId': 'BA7B12270A0E7C619482FC789D9B4030', 'xmlns:common_v51_0': 'https://www.travelport.com/schema/common_v51_0'
-            }
-          }
-        });
+        checkEMDError(err, 'ERC-364-INVALID DOCUMENT NUMBER', 'BA7B12270A0E7C619482FC789D9B4030');
       }
     });
     it('check correct response parsing', async () => {
