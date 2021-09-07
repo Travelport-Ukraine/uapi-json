@@ -1436,13 +1436,13 @@ function getEMDListItem(obj) {
 }
 
 function getEMDList(obj) {
-  const eMDItem = obj['air:EMDSummaryInfo'];
+  const eMDSummaryInfo = obj['air:EMDSummaryInfo'];
 
-  if (!eMDItem) {
+  if (!eMDSummaryInfo) {
     processUAPIError.call(this, obj, 'Unable to retrieve EMD list');
   }
 
-  return Object.values(eMDItem).map(val => (getEMDListItem.call(this, val)));
+  return Object.values(eMDSummaryInfo).map(val => (getEMDListItem.call(this, val)));
 }
 
 module.exports = {
