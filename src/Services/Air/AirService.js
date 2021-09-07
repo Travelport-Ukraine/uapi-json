@@ -266,6 +266,18 @@ module.exports = function (settings) {
       AirParser.AIR_EMD_LIST,
       debug,
       options
+    ),
+
+    getEMDItem: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.emdList,
+      'air:EMDRetrieveRsp',
+      AirValidator.AIR_EMD_ITEM,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_EMD_ITEM,
+      debug,
+      options
     )
   };
 };

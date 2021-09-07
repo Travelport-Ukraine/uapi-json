@@ -9,7 +9,9 @@ module.exports = `
          {{/if}}
          {{#if emdNumber}}
          <air:DetailRetrieve>
+            {{#if pnr}}
             <com:ProviderReservationDetail ProviderCode="{{provider}}" ProviderLocatorCode="{{pnr}}" />
+            {{/if}}
             <air:EMDNumber>{{emdNumber}}</air:EMDNumber>
          </air:DetailRetrieve>
          {{else}}

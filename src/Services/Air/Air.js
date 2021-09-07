@@ -456,5 +456,9 @@ module.exports = (settings) => {
     getEMDList(options) {
       return service.getEMDList(options);
     },
+
+    getEMDItem(options) {
+      return service.getEMDItem(options);
+    },
   };
 };

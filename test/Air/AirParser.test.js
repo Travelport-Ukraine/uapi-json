@@ -2420,4 +2420,60 @@ describe('#AirParser', () => {
       });
     });
   });
+
+  describe('AIR_EMD_ITEM', () => {
+    it('should correctly handle errors', async () => {
+      try {
+        await getParseResponse(
+          'air:EMDRetrieveRsp', 'AirEMDItemError.xml',
+          airParser.AIR_EMD_ITEM, airParser.AIR_ERRORS
+        );
+        throw new Error('Skipped error!');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
+        expect(err.data).to.deep.eq({
+          faultcode: 'Server.Business',
+          faultstring: 'ERC-364-INVALID DOCUMENT NUMBER',
+          detail: {
+            'common_v51_0:ErrorInfo': {
+              'common_v51_0:Code': '13041', 'common_v51_0:Service': 'URSVC', 'common_v51_0:Type': 'Business', 'common_v51_0:Description': 'EMD validation error', 'common_v51_0:TraceId': '', 'common_v51_0:TransactionId': 'BA7B12270A0E7C619482FC789D9B4030', 'xmlns:common_v51_0': 'https://www.travelport.com/schema/common_v51_0'
+            }
+          }
+        });
+      }
+    });
+    it('check correct response parsing', async () => {
+      const res = await getParseResponse(
+        'air:EMDRetrieveRsp', 'AirEMDItem.xml',
+        airParser.AIR_EMD_ITEM
+      );
+
+      const mainObjects = ['passenger', 'details',
+        'payment', 'fop', 'pricingInfo'];
+
+      expect(res).to.be.an('object');
+      expect(res).to.have.all.keys([...mainObjects, 'airlineLocatorInfo', 'uapi_emd_ref']);
+
+      expect(res.airlineLocatorInfo).to.be.an('array');
+      mainObjects.forEach((val) => {
+        expect(res[val]).to.be.an('object');
+      });
+
+      expect(res.details).to.have.all.keys(['coupon', 'uapi_emd_ref', 'number', 'status',
+        'isPrimaryDocument', 'associatedTicket', 'platingCarrier', 'issuedAt']);
+      expect(res.details.coupon).to.be.a('object');
+
+      expect(res.passenger).to.have.all.keys(['lastName', 'firstName', 'ageCategory', 'age']);
+
+      expect(res.details.coupon.number).to.be.a('number');
+      expect(res.details.coupon.consumedAtIssuanceInd).to.be.a('boolean');
+      expect(res.details.coupon.isRefundable).to.be.a('boolean');
+
+      expect(res.details.isPrimaryDocument).to.be.a('boolean');
+
+      expect(res.payment).to.have.all.keys(['uapi_payment_ref', 'type', 'amount', 'uapi_fop_ref']);
+      expect(res.fop).to.have.all.keys(['uapi_fop_ref', 'type', 'reusable', 'profileKey']);
+      expect(res.pricingInfo).to.have.all.keys(['taxInfo', 'baseFare', 'totalFare', 'totalTax']);
+    });
+  });
 });

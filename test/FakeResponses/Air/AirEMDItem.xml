@@ -1,0 +1,23 @@
+<SOAP:Envelope 
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:EMDRetrieveRsp TraceId="" TransactionId="BA2D38D20A0E7C7D8D9AA2AB89F5109A" ResponseTime="1694" 
+      xmlns:air="https://www.travelport.com/schema/air_v51_0" 
+      xmlns:common_v51_0="https://www.travelport.com/schema/common_v51_0">
+      <air:EMDInfo Key="axT+Du+znDKA9AmVVKAAAA==" ProviderCode="1G" ProviderLocatorCode="03TLGV">
+        <air:EMDTravelerInfo TravelerType="ADT">
+          <air:NameInfo First="LOTEMDMR" Last="DUVANOV"/>
+        </air:EMDTravelerInfo>
+        <common_v51_0:SupplierLocator SupplierCode="1A" SupplierLocatorCode="RT8G2B"/>
+        <air:ElectronicMiscDocument Key="axT+Du+znDKANDmVVKAAAA==" IssueDate="2021-09-01T09:27:09.000+00:00" Number="0809991187192" Status="Void" PrimaryDocumentIndicator="true" AssociatedTicketNumber="0809904202926" PlatingCarrier="LO">
+          <air:EMDCoupon Key="axT+Du+znDKAIEmVVKAAAA==" Number="1" Status="Void" SvcDescription="MEAT TAPAS" ConsumedAtIssuanceInd="false" RFIC="G" RFISC="018" RFIDescription="Inflight Services" Origin="WAW" Destination="POZ" FlightNumber="3943" NonRefundableInd="true"/>
+        </air:ElectronicMiscDocument>
+        <common_v51_0:Payment Key="7ptDou9xnDKAFspsHGAAAA==" Type="OptionalService" Amount="UAH222" FormOfPaymentRef="7ptDou9xnDKAEspsHGAAAA=="/>
+        <common_v51_0:FormOfPayment Key="7ptDou9xnDKAEspsHGAAAA==" Type="Cash" Reusable="false" ProfileKey="MbfXVz7jT/i6ePf617S+RQ=="/>
+        <air:EMDPricingInfo BaseFare="UAH206" TotalFare="UAH222" TotalTax="UAH16.00">
+          <air:TaxInfo Amount="UAH16" Category="XX"/>
+        </air:EMDPricingInfo>
+      </air:EMDInfo>
+    </air:EMDRetrieveRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

@@ -189,4 +189,11 @@ module.exports = {
     ),
     transform()
   ),
+  AIR_EMD_ITEM: compose(
+    validate(
+      validators.paramsIsObject,
+      validators.emdNumber
+    ),
+    transform()
+  ),
 };

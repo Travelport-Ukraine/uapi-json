@@ -2,7 +2,7 @@
   xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP:Body>
     <air:EMDRetrieveRsp TraceId="" TransactionId="A6978EDB0A0E7CFE37B5EE806527572B" ResponseTime="1164" 
-      xmlns:air="http://www.travelport.com/schema/air_v51_0">
+      xmlns:air="https://www.travelport.com/schema/air_v51_0">
       <air:EMDSummaryInfo Key="QrNDEuOynDKA4/LnJKAAAA==">
         <air:EMDSummary Key="QrNDEuOynDKA5/LnJKAAAA==" Number="0809991187189" PrimaryDocumentIndicator="true" AssociatedTicketNumber="0809904202926" PlatingCarrier="LO" IssueDate="2021-09-01T00:00:00.000+00:00">
           <air:EMDCoupon Key="QdQAEuF0nDKAQVlWNKAAAA==" Number="1" Status="Void" ConsumedAtIssuanceInd="true" RFIC="D" RFISC="0L7" RFIDescription="Financial Impact" Origin="WAW" NonRefundableInd="true"/>
