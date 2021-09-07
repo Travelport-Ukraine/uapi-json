@@ -802,6 +802,14 @@ function airCancelPnr(obj) {
   throw new AirParsingError.CancelResponseNotFound();
 }
 
+function formSupplierLocatorBlock(supplierLocator) {
+  return supplierLocator.map(info => ({
+    createDate: info.CreateDateTime,
+    supplierCode: info.SupplierCode,
+    locatorCode: info.SupplierLocatorCode,
+  }));
+}
+
 function extractBookings(obj) {
   const record = obj['universal:UniversalRecord'];
   const messages = obj[`common_${this.uapi_version}:ResponseMessage`] || [];
@@ -1133,11 +1141,7 @@ function extractBookings(obj) {
         version: Number(record.Version),
         uapi_ur_locator: record.LocatorCode,
         uapi_reservation_locator: booking.LocatorCode,
-        airlineLocatorInfo: supplierLocator.map(info => ({
-          createDate: info.CreateDateTime,
-          supplierCode: info.SupplierCode,
-          locatorCode: info.SupplierLocatorCode,
-        })),
+        airlineLocatorInfo: formSupplierLocatorBlock(supplierLocator),
         createdAt: providerInfo.CreateDate,
         hostCreatedAt: providerInfo.HostCreateDate,
         modifiedAt: providerInfo.ModifiedDate,
@@ -1467,11 +1471,7 @@ function getEMDItem(obj) {
 
   return {
     passenger: formPassengerBlock(passenger),
-    airlineLocatorInfo: supplierLocator.map(info => ({
-      createDate: info.CreateDateTime,
-      supplierCode: info.SupplierCode,
-      locatorCode: info.SupplierLocatorCode,
-    })),
+    airlineLocatorInfo: formSupplierLocatorBlock(supplierLocator),
     details: {
       coupon: formCouponBlock(coupon),
       uapi_emd_ref: emd.Key,
