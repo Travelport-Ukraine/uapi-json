@@ -6,6 +6,7 @@
       <air:EMDSummaryInfo Key="QrNDEuOynDKA4/LnJKAAAA==">
         <air:EMDSummary Key="QrNDEuOynDKA5/LnJKAAAA==" Number="0809991187189" PrimaryDocumentIndicator="true" AssociatedTicketNumber="0809904202926" PlatingCarrier="LO" IssueDate="2021-09-01T00:00:00.000+00:00">
           <air:EMDCoupon Key="QdQAEuF0nDKAQVlWNKAAAA==" Number="1" Status="Void" ConsumedAtIssuanceInd="true" RFIC="D" RFISC="0L7" RFIDescription="Financial Impact" Origin="WAW" NonRefundableInd="true"/>
+          <air:EMDCoupon Key="QdQAEuF0nDKBQVlWNKAAAA==" Number="2" Status="Void" ConsumedAtIssuanceInd="true" RFIC="D" RFISC="0L7" RFIDescription="Financial Impact" Origin="WAW" NonRefundableInd="true"/>
         </air:EMDSummary>
         <air:EMDTravelerInfo TravelerType="ADT" Age="0">
           <air:NameInfo First="LOTEMDMR" Last="DUVANOV"/>

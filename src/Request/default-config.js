@@ -72,6 +72,9 @@ module.exports = function defaultConfig(ver) {
     // 'air:ChangePenalty', //TODO can be a list of penalties both amount and percent?
     'air:TextInfo',
     'air:FareNote', // removes useless keys
+    'air:EMDSummary',
+    'air:EMDInfo',
+    'air:ElectronicMiscDocument',
   ];
 
   // NOTE: for air:PassengerType '$' with one member will get collapsed

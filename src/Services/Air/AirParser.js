@@ -1396,28 +1396,23 @@ function availability(rsp) {
   };
 }
 
-function getKeyObject(obj, blockKey) {
-  const block = obj[blockKey];
-  const [key] = Object.keys(block);
-
-  return block[key];
-}
-
-function formCouponBlock(coupon) {
-  return {
-    uapi_emd_coupon_ref: coupon.Key,
-    number: parseInt(coupon.Number, 10),
-    status: coupon.Status,
-    svcDesc: coupon.SvcDescription,
-    consumedAtIssuanceInd: coupon.ConsumedAtIssuanceInd === 'true',
-    rfiCode: coupon.RFIC,
-    rfiSubcode: coupon.RFISC,
-    rfiDesc: coupon.RFIDescription,
-    origin: coupon.Origin,
-    destination: coupon.Destination,
-    flightNumber: coupon.FlightNumber,
-    isRefundable: coupon.NonRefundableInd !== 'true',
-  };
+function formCouponsBlock(coupons) {
+  return Object.values(coupons).map((coupon) => {
+    return {
+      uapi_emd_coupon_ref: coupon.Key,
+      number: parseInt(coupon.Number, 10),
+      status: coupon.Status,
+      svcDesc: coupon.SvcDescription,
+      consumedAtIssuanceInd: coupon.ConsumedAtIssuanceInd === 'true',
+      rfiCode: coupon.RFIC,
+      rfiSubcode: coupon.RFISC,
+      rfiDesc: coupon.RFIDescription,
+      origin: coupon.Origin,
+      destination: coupon.Destination,
+      flightNumber: coupon.FlightNumber,
+      isRefundable: coupon.NonRefundableInd !== 'true',
+    };
+  });
 }
 
 function formPassengerBlock(passenger) {
@@ -1431,14 +1426,13 @@ function formPassengerBlock(passenger) {
 
 function getEMDListItem(obj) {
   const passenger = obj['air:EMDTravelerInfo'];
-  const summary = getKeyObject(obj, 'air:EMDSummary');
-  const coupon = getKeyObject(summary, 'air:EMDCoupon');
+  const summary = obj['air:EMDSummary'];
 
   return {
     summary: {
-      coupon: formCouponBlock(coupon),
+      coupons: formCouponsBlock(summary['air:EMDCoupon']),
       uapi_emd_ref: summary.Key,
-      number: parseInt(summary.Number, 10),
+      number: summary.Number,
       isPrimaryDocument: summary.PrimaryDocumentIndicator === 'true',
       associatedTicket: summary.AssociatedTicketNumber,
       platingCarrier: summary.PlatingCarrier,
@@ -1459,41 +1453,44 @@ function getEMDList(obj) {
 }
 
 function getEMDItem(obj) {
-  const emdInfo = getKeyObject(obj, 'air:EMDInfo');
+  const emdInfo = obj['air:EMDInfo'];
 
   const passenger = emdInfo['air:EMDTravelerInfo'];
   const supplierLocator = emdInfo[`common_${this.uapi_version}:SupplierLocator`] || [];
-  const emd = getKeyObject(emdInfo, 'air:ElectronicMiscDocument');
-  const coupon = getKeyObject(emd, 'air:EMDCoupon');
-  const payment = getKeyObject(emdInfo, `common_${this.uapi_version}:Payment`);
-  const fop = getKeyObject(emdInfo, `common_${this.uapi_version}:FormOfPayment`);
+  const emd = emdInfo['air:ElectronicMiscDocument'];
+  const payment = Object.values(emdInfo[`common_${this.uapi_version}:Payment`]).map((item) => {
+    return {
+      uapi_payment_ref: item.Key,
+      type: item.Type,
+      amount: item.Amount,
+      uapi_fop_ref: item.FormOfPaymentRef,
+    };
+  });
+  const fop = Object.values(emdInfo[`common_${this.uapi_version}:FormOfPayment`]).map((item) => {
+    return {
+      uapi_fop_ref: item.Key,
+      type: item.Type,
+      reusable: item.Reusable === 'true',
+      profileKey: item.ProfileKey,
+    };
+  });
   const pricingInfo = emdInfo['air:EMDPricingInfo'];
 
   return {
     passenger: formPassengerBlock(passenger),
     airlineLocatorInfo: formSupplierLocatorBlock(supplierLocator),
     details: {
-      coupon: formCouponBlock(coupon),
+      coupons: formCouponsBlock(emd['air:EMDCoupon']),
       uapi_emd_ref: emd.Key,
       issuedAt: emd.IssueDate,
-      number: parseInt(emd.Number, 10),
+      number: emd.Number,
       status: emd.Status,
       isPrimaryDocument: emd.PrimaryDocumentIndicator === 'true',
       associatedTicket: emd.AssociatedTicketNumber,
       platingCarrier: emd.PlatingCarrier,
     },
-    payment: {
-      uapi_payment_ref: payment.Key,
-      type: payment.Type,
-      amount: payment.Amount,
-      uapi_fop_ref: payment.FormOfPaymentRef,
-    },
-    fop: {
-      uapi_fop_ref: fop.Key,
-      type: fop.Type,
-      reusable: fop.Reusable === 'true',
-      profileKey: fop.ProfileKey,
-    },
+    payment,
+    fop,
     pricingInfo: {
       taxInfo: pricingInfo['air:TaxInfo'] ? {
         amount: pricingInfo['air:TaxInfo'].Amount,

@@ -2410,15 +2410,17 @@ describe('#AirParser', () => {
         expect(item.summary).to.be.a('object');
         expect(item.passenger).to.be.a('object');
 
-        expect(item.summary).to.have.all.keys(['coupon', 'uapi_emd_ref', 'number',
+        expect(item.summary).to.have.all.keys(['coupons', 'uapi_emd_ref', 'number',
           'isPrimaryDocument', 'associatedTicket', 'platingCarrier', 'issuedAt']);
-        expect(item.summary.coupon).to.be.a('object');
+        expect(item.summary.coupons).to.be.a('array');
 
         expect(item.passenger).to.have.all.keys(['lastName', 'firstName', 'ageCategory', 'age']);
 
-        expect(item.summary.coupon.number).to.be.a('number');
-        expect(item.summary.coupon.consumedAtIssuanceInd).to.be.a('boolean');
-        expect(item.summary.coupon.isRefundable).to.be.a('boolean');
+        item.summary.coupons.forEach((coupon) => {
+          expect(coupon.number).to.be.a('number');
+          expect(coupon.consumedAtIssuanceInd).to.be.a('boolean');
+          expect(coupon.isRefundable).to.be.a('boolean');
+        });
 
         expect(item.summary.isPrimaryDocument).to.be.a('boolean');
       });
@@ -2442,32 +2444,43 @@ describe('#AirParser', () => {
         'air:EMDRetrieveRsp', 'AirEMDItem.xml',
         airParser.AIR_EMD_ITEM
       );
-
-      const mainObjects = ['passenger', 'details',
-        'payment', 'fop', 'pricingInfo'];
+      const mainObjects = ['passenger', 'details', 'pricingInfo'];
+      const mainArrays = ['payment', 'fop', 'airlineLocatorInfo'];
 
       expect(res).to.be.an('object');
-      expect(res).to.have.all.keys([...mainObjects, 'airlineLocatorInfo', 'uapi_emd_ref']);
+      expect(res).to.have.all.keys([...mainObjects, ...mainArrays, 'uapi_emd_ref']);
 
       expect(res.airlineLocatorInfo).to.be.an('array');
       mainObjects.forEach((val) => {
         expect(res[val]).to.be.an('object');
       });
 
-      expect(res.details).to.have.all.keys(['coupon', 'uapi_emd_ref', 'number', 'status',
+      mainArrays.forEach((val) => {
+        expect(res[val]).to.be.an('array');
+      });
+
+      expect(res.details).to.have.all.keys(['coupons', 'uapi_emd_ref', 'number', 'status',
         'isPrimaryDocument', 'associatedTicket', 'platingCarrier', 'issuedAt']);
-      expect(res.details.coupon).to.be.a('object');
+      expect(res.details.coupons).to.be.a('array');
 
       expect(res.passenger).to.have.all.keys(['lastName', 'firstName', 'ageCategory', 'age']);
 
-      expect(res.details.coupon.number).to.be.a('number');
-      expect(res.details.coupon.consumedAtIssuanceInd).to.be.a('boolean');
-      expect(res.details.coupon.isRefundable).to.be.a('boolean');
+      res.details.coupons.forEach((coupon) => {
+        expect(coupon.number).to.be.a('number');
+        expect(coupon.consumedAtIssuanceInd).to.be.a('boolean');
+        expect(coupon.isRefundable).to.be.a('boolean');
+      });
 
       expect(res.details.isPrimaryDocument).to.be.a('boolean');
 
-      expect(res.payment).to.have.all.keys(['uapi_payment_ref', 'type', 'amount', 'uapi_fop_ref']);
-      expect(res.fop).to.have.all.keys(['uapi_fop_ref', 'type', 'reusable', 'profileKey']);
+      res.payment.forEach((item) => {
+        expect(item).to.have.all.keys(['uapi_payment_ref', 'type', 'amount', 'uapi_fop_ref']);
+      });
+
+      res.fop.forEach((item) => {
+        expect(item).to.have.all.keys(['uapi_fop_ref', 'type', 'reusable', 'profileKey']);
+      });
+
       expect(res.pricingInfo).to.have.all.keys(['taxInfo', 'baseFare', 'totalFare', 'totalTax']);
     });
   });

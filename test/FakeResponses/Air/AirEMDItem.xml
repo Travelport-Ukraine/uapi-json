@@ -14,9 +14,10 @@
         </air:ElectronicMiscDocument>
         <common_v51_0:Payment Key="7ptDou9xnDKAFspsHGAAAA==" Type="OptionalService" Amount="UAH222" FormOfPaymentRef="7ptDou9xnDKAEspsHGAAAA=="/>
         <common_v51_0:FormOfPayment Key="7ptDou9xnDKAEspsHGAAAA==" Type="Cash" Reusable="false" ProfileKey="MbfXVz7jT/i6ePf617S+RQ=="/>
+        <common_v51_0:FormOfPayment Key="222222222222222222222222" Type="Card" Reusable="false" ProfileKey="111111111111111111111111"/>
         <air:EMDPricingInfo BaseFare="UAH206" TotalFare="UAH222" TotalTax="UAH16.00">
           <air:TaxInfo Amount="UAH16" Category="XX"/>
-        </air:EMDPricingInfo>
+        </air:EMDPricingInfo>    
       </air:EMDInfo>
     </air:EMDRetrieveRsp>
   </SOAP:Body>

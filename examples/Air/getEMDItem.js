@@ -9,7 +9,7 @@ const AirService = uAPI.createAirService({
 });
 
 const params = {
-  // pnr: '03TLGV',
+  pnr: '03TLGV',
   emdNumber: '0809991187192',
 };
 
