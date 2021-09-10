@@ -169,6 +169,14 @@ function checkEMDError(err, errString, transId) {
   });
 }
 
+function checkEMDCoupons(coupons) {
+  coupons.forEach((coupon) => {
+    expect(coupon.number).to.be.a('number');
+    expect(coupon.consumedAtIssuanceInd).to.be.a('boolean');
+    expect(coupon.isRefundable).to.be.a('boolean');
+  });
+}
+
 describe('#AirParser', () => {
   describe('AIR_CANCEL_TICKET', () => {
     it('should return error when no VoidResultInfo available', () => {
@@ -2413,14 +2421,9 @@ describe('#AirParser', () => {
         expect(item.summary).to.have.all.keys(['coupons', 'uapi_emd_ref', 'number',
           'isPrimaryDocument', 'associatedTicket', 'platingCarrier', 'issuedAt']);
         expect(item.summary.coupons).to.be.a('array');
-
         expect(item.passenger).to.have.all.keys(['lastName', 'firstName', 'ageCategory', 'age']);
 
-        item.summary.coupons.forEach((coupon) => {
-          expect(coupon.number).to.be.a('number');
-          expect(coupon.consumedAtIssuanceInd).to.be.a('boolean');
-          expect(coupon.isRefundable).to.be.a('boolean');
-        });
+        checkEMDCoupons(item.summary.coupons);
 
         expect(item.summary.isPrimaryDocument).to.be.a('boolean');
       });
@@ -2462,14 +2465,9 @@ describe('#AirParser', () => {
       expect(res.details).to.have.all.keys(['coupons', 'uapi_emd_ref', 'number', 'status',
         'isPrimaryDocument', 'associatedTicket', 'platingCarrier', 'issuedAt']);
       expect(res.details.coupons).to.be.a('array');
-
       expect(res.passenger).to.have.all.keys(['lastName', 'firstName', 'ageCategory', 'age']);
 
-      res.details.coupons.forEach((coupon) => {
-        expect(coupon.number).to.be.a('number');
-        expect(coupon.consumedAtIssuanceInd).to.be.a('boolean');
-        expect(coupon.isRefundable).to.be.a('boolean');
-      });
+      checkEMDCoupons(res.details.coupons);
 
       expect(res.details.isPrimaryDocument).to.be.a('boolean');
 
