@@ -485,7 +485,7 @@ Request for the emd information. You can get any type (EMD-S/EMD-A) by number.
 | Param | Type | Description |
 | --- | --- | --- |
 | pnr | `String` | 1G PNR. |
-| emdMumber | `String` | EMD Mumber. |
+| emdNumber | `String` | EMD Number. |
 
 **See: <a href="../examples/Air/getEMDItem.js">getEMDItem example</a>**
 
