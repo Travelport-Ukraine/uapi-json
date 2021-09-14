@@ -156,6 +156,27 @@ async function getParseResponse(root, file, parser = null, errorHandler = null, 
   return parser && parser.call(uParser, errRsp);
 }
 
+function checkEMDError(err, errString, transId) {
+  expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
+  expect(err.data).to.deep.eq({
+    faultcode: 'Server.Business',
+    faultstring: errString,
+    detail: {
+      'common_v51_0:ErrorInfo': {
+        'common_v51_0:Code': '13041', 'common_v51_0:Service': 'URSVC', 'common_v51_0:Type': 'Business', 'common_v51_0:Description': 'EMD validation error', 'common_v51_0:TraceId': '', 'common_v51_0:TransactionId': transId, 'xmlns:common_v51_0': 'https://www.travelport.com/schema/common_v51_0'
+      }
+    }
+  });
+}
+
+function checkEMDCoupons(coupons) {
+  coupons.forEach((coupon) => {
+    expect(coupon.number).to.be.a('number');
+    expect(coupon.consumedAtIssuanceInd).to.be.a('boolean');
+    expect(coupon.isRefundable).to.be.a('boolean');
+  });
+}
+
 describe('#AirParser', () => {
   describe('AIR_CANCEL_TICKET', () => {
     it('should return error when no VoidResultInfo available', () => {
@@ -2370,6 +2391,95 @@ describe('#AirParser', () => {
         expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement);
         expect(err.data.pcc).to.be.equal('7J8J');
       }
+    });
+  });
+
+  describe('AIR_EMD_LIST', () => {
+    it('should correctly handle errors', async () => {
+      try {
+        await getParseResponse(
+          'air:EMDRetrieveRsp', 'AirEMDListNoItemsError.xml',
+          airParser.AIR_EMD_LIST, airParser.AIR_ERRORS
+        );
+        throw new Error('Skipped error!');
+      } catch (err) {
+        checkEMDError(err, 'NO EMD LIST DATA FOUND', 'AB9DF5A00A0E7C85D480D8743422B95B');
+      }
+    });
+    it('check correct response parsing', async () => {
+      const res = await getParseResponse(
+        'air:EMDRetrieveRsp', 'AirEMDList.xml',
+        airParser.AIR_EMD_LIST
+      );
+      expect(res.length).to.be.equal(3);
+      res.forEach((item) => {
+        expect(item).to.be.an('object');
+        expect(item).to.have.all.keys(['summary', 'passenger']);
+        expect(item.summary).to.be.a('object');
+        expect(item.passenger).to.be.a('object');
+
+        expect(item.summary).to.have.all.keys(['coupons', 'uapi_emd_ref', 'number',
+          'isPrimaryDocument', 'associatedTicket', 'platingCarrier', 'issuedAt']);
+        expect(item.summary.coupons).to.be.a('array');
+        expect(item.passenger).to.have.all.keys(['lastName', 'firstName', 'ageCategory', 'age']);
+
+        checkEMDCoupons(item.summary.coupons);
+
+        expect(item.summary.isPrimaryDocument).to.be.a('boolean');
+      });
+    });
+  });
+
+  describe('AIR_EMD_ITEM', () => {
+    it('should correctly handle errors', async () => {
+      try {
+        await getParseResponse(
+          'air:EMDRetrieveRsp', 'AirEMDItemError.xml',
+          airParser.AIR_EMD_ITEM, airParser.AIR_ERRORS
+        );
+        throw new Error('Skipped error!');
+      } catch (err) {
+        checkEMDError(err, 'ERC-364-INVALID DOCUMENT NUMBER', 'BA7B12270A0E7C619482FC789D9B4030');
+      }
+    });
+    it('check correct response parsing', async () => {
+      const res = await getParseResponse(
+        'air:EMDRetrieveRsp', 'AirEMDItem.xml',
+        airParser.AIR_EMD_ITEM
+      );
+      const mainObjects = ['passenger', 'details', 'pricingInfo'];
+      const mainArrays = ['payment', 'fop', 'airlineLocatorInfo'];
+
+      expect(res).to.be.an('object');
+      expect(res).to.have.all.keys([...mainObjects, ...mainArrays, 'uapi_emd_ref']);
+
+      expect(res.airlineLocatorInfo).to.be.an('array');
+      mainObjects.forEach((val) => {
+        expect(res[val]).to.be.an('object');
+      });
+
+      mainArrays.forEach((val) => {
+        expect(res[val]).to.be.an('array');
+      });
+
+      expect(res.details).to.have.all.keys(['coupons', 'uapi_emd_ref', 'number', 'status',
+        'isPrimaryDocument', 'associatedTicket', 'platingCarrier', 'issuedAt']);
+      expect(res.details.coupons).to.be.a('array');
+      expect(res.passenger).to.have.all.keys(['lastName', 'firstName', 'ageCategory', 'age']);
+
+      checkEMDCoupons(res.details.coupons);
+
+      expect(res.details.isPrimaryDocument).to.be.a('boolean');
+
+      res.payment.forEach((item) => {
+        expect(item).to.have.all.keys(['uapi_payment_ref', 'type', 'amount', 'uapi_fop_ref']);
+      });
+
+      res.fop.forEach((item) => {
+        expect(item).to.have.all.keys(['uapi_fop_ref', 'type', 'reusable', 'profileKey']);
+      });
+
+      expect(res.pricingInfo).to.have.all.keys(['taxInfo', 'baseFare', 'totalFare', 'totalTax']);
     });
   });
 });

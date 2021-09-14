@@ -41,6 +41,7 @@ Object.assign(AirValidationError, createErrorsList({
   VersionMissing: 'Version is missing in request',
   AllowDirectAccessInvalid: 'Invalid value provided for allowDirectAccess',
   AllowDirectAccessCarriersNotSpecified: 'Carriers not specified for carrier specific display',
+  EMDItemNumberMissing: 'Missing EMD number. See data.',
 }, AirValidationError));
 
 const GdsValidationError = createErrorClass(

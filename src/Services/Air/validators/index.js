@@ -20,6 +20,7 @@ const platingCarrier = require('./platingCarrier');
 const searchId = require('./search-id');
 const version = require('./version');
 const allowDirectAccess = require('./allow-direct-access');
+const emdNumber = require('./emd-number');
 
 module.exports = {
   legs,
@@ -44,4 +45,5 @@ module.exports = {
   platingCarrier,
   searchId,
   version,
+  emdNumber,
 };

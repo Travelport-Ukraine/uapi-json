@@ -182,4 +182,18 @@ module.exports = {
       transformers.decodeExchangeToken
     )
   ),
+  AIR_EMD_LIST: compose(
+    validate(
+      validators.paramsIsObject,
+      validators.pnr
+    ),
+    transform()
+  ),
+  AIR_EMD_ITEM: compose(
+    validate(
+      validators.paramsIsObject,
+      validators.emdNumber
+    ),
+    transform()
+  ),
 };

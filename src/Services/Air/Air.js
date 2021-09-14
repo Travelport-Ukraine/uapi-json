@@ -452,5 +452,13 @@ module.exports = (settings) => {
           uapi_reservation_locator: booking.uapi_reservation_locator,
         }));
     },
+
+    getEMDList(options) {
+      return service.getEMDList(options);
+    },
+
+    getEMDItem(options) {
+      return service.getEMDItem(options);
+    },
   };
 };
