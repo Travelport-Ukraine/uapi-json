@@ -802,6 +802,14 @@ function airCancelPnr(obj) {
   throw new AirParsingError.CancelResponseNotFound();
 }
 
+function formSupplierLocatorBlock(supplierLocator) {
+  return supplierLocator.map(info => ({
+    createDate: info.CreateDateTime,
+    supplierCode: info.SupplierCode,
+    locatorCode: info.SupplierLocatorCode,
+  }));
+}
+
 function extractBookings(obj) {
   const record = obj['universal:UniversalRecord'];
   const messages = obj[`common_${this.uapi_version}:ResponseMessage`] || [];
@@ -1133,11 +1141,7 @@ function extractBookings(obj) {
         version: Number(record.Version),
         uapi_ur_locator: record.LocatorCode,
         uapi_reservation_locator: booking.LocatorCode,
-        airlineLocatorInfo: supplierLocator.map(info => ({
-          createDate: info.CreateDateTime,
-          supplierCode: info.SupplierCode,
-          locatorCode: info.SupplierLocatorCode,
-        })),
+        airlineLocatorInfo: formSupplierLocatorBlock(supplierLocator),
         createdAt: providerInfo.CreateDate,
         hostCreatedAt: providerInfo.HostCreateDate,
         modifiedAt: providerInfo.ModifiedDate,
@@ -1392,6 +1396,114 @@ function availability(rsp) {
   };
 }
 
+function formCouponsBlock(coupons) {
+  return Object.values(coupons).map((coupon) => {
+    return {
+      uapi_emd_coupon_ref: coupon.Key,
+      number: parseInt(coupon.Number, 10),
+      status: coupon.Status,
+      svcDesc: coupon.SvcDescription,
+      consumedAtIssuanceInd: coupon.ConsumedAtIssuanceInd === 'true',
+      rfiCode: coupon.RFIC,
+      rfiSubcode: coupon.RFISC,
+      rfiDesc: coupon.RFIDescription,
+      origin: coupon.Origin,
+      destination: coupon.Destination,
+      flightNumber: coupon.FlightNumber,
+      isRefundable: coupon.NonRefundableInd !== 'true',
+    };
+  });
+}
+
+function formPassengerBlock(passenger) {
+  return {
+    lastName: passenger['air:NameInfo'].Last,
+    firstName: passenger['air:NameInfo'].First,
+    ageCategory: passenger.TravelerType,
+    age: passenger.Age,
+  };
+}
+
+function getEMDListItem(obj) {
+  const passenger = obj['air:EMDTravelerInfo'];
+  const summary = obj['air:EMDSummary'];
+
+  return {
+    summary: {
+      coupons: formCouponsBlock(summary['air:EMDCoupon']),
+      uapi_emd_ref: summary.Key,
+      number: summary.Number,
+      isPrimaryDocument: summary.PrimaryDocumentIndicator === 'true',
+      associatedTicket: summary.AssociatedTicketNumber,
+      platingCarrier: summary.PlatingCarrier,
+      issuedAt: summary.IssueDate,
+    },
+    passenger: formPassengerBlock(passenger)
+  };
+}
+
+function getEMDList(obj) {
+  const eMDSummaryInfo = obj['air:EMDSummaryInfo'];
+
+  if (!eMDSummaryInfo) {
+    processUAPIError.call(this, obj, 'Unable to retrieve EMD list');
+  }
+
+  return Object.values(eMDSummaryInfo).map(val => (getEMDListItem.call(this, val)));
+}
+
+function getEMDItem(obj) {
+  const emdInfo = obj['air:EMDInfo'];
+
+  const passenger = emdInfo['air:EMDTravelerInfo'];
+  const supplierLocator = emdInfo[`common_${this.uapi_version}:SupplierLocator`] || [];
+  const emd = emdInfo['air:ElectronicMiscDocument'];
+  const payment = Object.values(emdInfo[`common_${this.uapi_version}:Payment`]).map((item) => {
+    return {
+      uapi_payment_ref: item.Key,
+      type: item.Type,
+      amount: item.Amount,
+      uapi_fop_ref: item.FormOfPaymentRef,
+    };
+  });
+  const fop = Object.values(emdInfo[`common_${this.uapi_version}:FormOfPayment`]).map((item) => {
+    return {
+      uapi_fop_ref: item.Key,
+      type: item.Type,
+      reusable: item.Reusable === 'true',
+      profileKey: item.ProfileKey,
+    };
+  });
+  const pricingInfo = emdInfo['air:EMDPricingInfo'];
+
+  return {
+    passenger: formPassengerBlock(passenger),
+    airlineLocatorInfo: formSupplierLocatorBlock(supplierLocator),
+    details: {
+      coupons: formCouponsBlock(emd['air:EMDCoupon']),
+      uapi_emd_ref: emd.Key,
+      issuedAt: emd.IssueDate,
+      number: emd.Number,
+      status: emd.Status,
+      isPrimaryDocument: emd.PrimaryDocumentIndicator === 'true',
+      associatedTicket: emd.AssociatedTicketNumber,
+      platingCarrier: emd.PlatingCarrier,
+    },
+    payment,
+    fop,
+    pricingInfo: {
+      taxInfo: pricingInfo['air:TaxInfo'] ? {
+        amount: pricingInfo['air:TaxInfo'].Amount,
+        category: pricingInfo['air:TaxInfo'].Category,
+      } : undefined,
+      baseFare: pricingInfo.BaseFare,
+      totalFare: pricingInfo.TotalFare,
+      totalTax: pricingInfo.TotalTax,
+    },
+    uapi_emd_ref: emdInfo.Key,
+  };
+}
+
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: lowFaresSearchRequest,
   AIR_PRICE_REQUEST: airPrice,
@@ -1415,4 +1527,6 @@ module.exports = {
   AIR_EXCHANGE_QUOTE: exchangeQuote,
   AIR_EXCHANGE: exchangeBooking,
   AIR_AVAILABILITY: availability,
+  AIR_EMD_LIST: getEMDList,
+  AIR_EMD_ITEM: getEMDItem,
 };

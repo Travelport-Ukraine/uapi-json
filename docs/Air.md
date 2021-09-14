@@ -456,3 +456,36 @@ Add segments to an existing reservation record.
 | reservationLocatorCode | `String` | Optional. uAPI reservation locator code |
 
 It is recommended to pass `version` param in order to ensure that the last version of the PNR was reviewed before modification.
+
+## .getEMDList(params)
+<a name="getEMDList"></a>
+> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
+
+Request for the EMD information for all issued EMD in PNR.
+You will get both: EMD-S/EMD-A 
+
+**Returns**: `Promise`
+**See**: [Ticket Information](https://support.travelport.com/webhelp/uapi/uapi.htm#Standalone_Merchandising/EMDRetrieval.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pnr | `String` | 1G PNR. |
+
+**See: <a href="../examples/Air/getEMDList.js">getEMDList example</a>**
+
+## .getEMDItem(params)
+<a name="getEMDItem"></a>
+> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
+
+Request for the emd information. You can get any type (EMD-S/EMD-A) by number.
+
+**Returns**: `Promise`
+**See**: [Ticket Information](https://support.travelport.com/webhelp/uapi/uapi.htm#Standalone_Merchandising/EMDRetrieval.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pnr | `String` | 1G PNR. |
+| emdNumber | `String` | EMD Number. |
+
+**See: <a href="../examples/Air/getEMDItem.js">getEMDItem example</a>**
+

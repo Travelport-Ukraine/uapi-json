@@ -9,10 +9,10 @@ const AirService = uAPI.createAirService({
 });
 
 const params = {
-  pnr: 'RLC001',
+  pnr: '03TLGV',
 };
 
-AirService.getTickets(params).then(
+AirService.getEMDList(params).then(
   data => console.log(data),
   err => console.log(err)
 );

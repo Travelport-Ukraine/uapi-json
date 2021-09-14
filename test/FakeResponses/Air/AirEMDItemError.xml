@@ -1,0 +1,20 @@
+<SOAP:Envelope 
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <SOAP:Fault>
+      <faultcode>Server.Business</faultcode>
+      <faultstring>ERC-364-INVALID DOCUMENT NUMBER</faultstring>
+      <detail>
+        <common_v51_0:ErrorInfo 
+          xmlns:common_v51_0="https://www.travelport.com/schema/common_v51_0">
+          <common_v51_0:Code>13041</common_v51_0:Code>
+          <common_v51_0:Service>URSVC</common_v51_0:Service>
+          <common_v51_0:Type>Business</common_v51_0:Type>
+          <common_v51_0:Description>EMD validation error</common_v51_0:Description>
+          <common_v51_0:TransactionId>BA7B12270A0E7C619482FC789D9B4030</common_v51_0:TransactionId>
+          <common_v51_0:TraceId/>
+        </common_v51_0:ErrorInfo>
+      </detail>
+    </SOAP:Fault>
+  </SOAP:Body>
+</SOAP:Envelope>
