@@ -2451,7 +2451,7 @@ describe('#AirParser', () => {
       const mainArrays = ['payment', 'fop', 'airlineLocatorInfo'];
 
       expect(res).to.be.an('object');
-      expect(res).to.have.all.keys([...mainObjects, ...mainArrays, 'uapi_emd_ref']);
+      expect(res).to.have.all.keys([...mainObjects, ...mainArrays, 'uapi_emd_ref', 'pnr']);
 
       expect(res.airlineLocatorInfo).to.be.an('array');
       mainObjects.forEach((val) => {
