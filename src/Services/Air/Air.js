@@ -458,7 +458,14 @@ module.exports = (settings) => {
     },
 
     getEMDItem(options) {
-      return service.getEMDItem(options);
+      return service.getEMDItem(options)
+        .then((result) => {
+          if (options.pnr) {
+            return result;
+          }
+
+          return service.getEMDItem({ ...options, pnr: result.pnr });
+        });
     },
   };
 };
