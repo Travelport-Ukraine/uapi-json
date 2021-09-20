@@ -1501,6 +1501,7 @@ function getEMDItem(obj) {
       totalTax: pricingInfo.TotalTax,
     },
     uapi_emd_ref: emdInfo.Key,
+    pnr: emdInfo.ProviderLocatorCode,
   };
 }
 
