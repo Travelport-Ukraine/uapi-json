@@ -113,6 +113,17 @@ module.exports = function (settings) {
     getUniversalRecordByPNR: uApiRequest(
       config.UniversalRecord.url,
       auth,
+      templates.universalRecordRetrieve,
+      'universal:UniversalRecordRetrieveRsp',
+      AirValidator.AIR_REQUEST_BY_PNR, // checks for PNR
+      AirParser.AIR_ERRORS,
+      AirParser.UNIVERSAL_RECORD_RETRIEVE_REQUEST,
+      debug,
+      options
+    ),
+    importUniversalRecordByPNR: uApiRequest(
+      config.UniversalRecord.url,
+      auth,
       templates.universalRecordImport,
       'universal:UniversalRecordImportRsp',
       AirValidator.AIR_REQUEST_BY_PNR, // checks for PNR
