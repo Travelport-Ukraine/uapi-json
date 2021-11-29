@@ -985,22 +985,35 @@ describe('#AirService', () => {
     });
 
     it('should get ticket data if duplicate ticket found', () => {
-      const getTicket = sinon.stub().rejects(new AirRuntimeError.DuplicateTicketFound());
-      const getTickets = sinon.stub().resolves([{
-        pnr: 'PNR001',
-        ticketNumber: '0649902789376',
-      }]);
-      // Spies
-      const cancelTicket = sinon.spy(() => Promise.resolve(true));
-      const getPNRByTicketNumber = sinon.spy(() => Promise.resolve('PNR001'));
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
-      // Services
+      const originalURbyPNR = [
+        {
+          pnr: 'PNR101',
+          uapi_ur_locator: 'UAPI101',
+          uapi_reservation_locator: 'ABCDEF101',
+          splitBookings: ['PNR202'],
+        },
+      ];
+
+      const splittedURbyPNR = [
+        {
+          pnr: 'PNR202',
+          uapi_ur_locator: 'UAPI202',
+          uapi_reservation_locator: 'ABCDEF202',
+        },
+      ];
+
+      const getUniversalRecordByPNR = sinon.stub();
+      getUniversalRecordByPNR.onCall(0).resolves(originalURbyPNR);
+      getUniversalRecordByPNR.onCall(1).resolves(splittedURbyPNR);
+
+      const getTicket = sinon.stub();
+      getTicket.onCall(0).rejects(new AirRuntimeError.DuplicateTicketFound());
+      getTicket.onCall(1).resolves({ ticketNumber: '0649902789376' });
+      const getPNRByTicketNumber = sinon.spy(() => Promise.resolve('PNR101'));
 
       const air = getAirServiceMock({
         methods: {
           getTicket,
-          getTickets,
-          cancelTicket,
           getUniversalRecordByPNR
         }
       });
@@ -1012,10 +1025,9 @@ describe('#AirService', () => {
         .then((res) => {
           expect(res).to.be.an('object').and.to.have.property('ticketNumber');
           expect(res.ticketNumber).to.equal('0649902789376');
-          expect(getTicket.calledOnce).to.be.equal(true);
-          expect(getTickets.calledOnce).to.be.equal(true);
+          expect(getTicket.calledTwice).to.be.equal(true);
           expect(getPNRByTicketNumber.calledOnce).to.be.equal(true);
-          expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
+          expect(getUniversalRecordByPNR.calledTwice).to.be.equal(true);
         });
     });
     it('should get ticket data with additional queries in case of TicketInfoIncomplete', async () => {
