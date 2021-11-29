@@ -259,6 +259,33 @@ module.exports = (settings) => {
       return service.flightInfo(parameters);
     },
 
+    async getTicketFromTicketsList(pnr, ticketNumber) {
+      const tickets = await this.getTickets({ pnr });
+      return tickets.find(t => t.ticketNumber === ticketNumber);
+    },
+
+    async getTicketDuplicateTicketFoundCase({
+      pnr,
+      ticketNumber,
+      allowNoProviderLocatorCodeRetrieval
+    }) {
+      const { splitBookings } = await this.getBooking({ pnr });
+      if (!splitBookings) {
+        return this.getTicketFromTicketsList(pnr, ticketNumber);
+      }
+
+      /* eslint-disable camelcase */
+      const [splitBookingPNR] = splitBookings;
+      const { uapi_ur_locator } = await this.getBooking({ pnr: splitBookingPNR });
+
+      return service.getTicket({
+        ticketNumber,
+        allowNoProviderLocatorCodeRetrieval,
+        uapi_ur_locator,
+        pnr: splitBookingPNR
+      });
+    },
+
     async getTicket(options) {
       const { ticketNumber, allowNoProviderLocatorCodeRetrieval = false } = options;
       try {
@@ -269,8 +296,9 @@ module.exports = (settings) => {
         }
 
         const pnr = await this.getPNRByTicketNumber({ ticketNumber });
-        const tickets = await this.getTickets({ pnr });
-        const ticket = tickets.find(t => t.ticketNumber === ticketNumber);
+        const ticket = err instanceof AirRuntimeError.DuplicateTicketFound
+          ? await this.getTicketDuplicateTicketFoundCase({ pnr, ...options })
+          : await this.getTicketFromTicketsList(pnr, ticketNumber);
 
         if (!ticket) {
           throw err;
