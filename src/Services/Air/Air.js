@@ -8,11 +8,6 @@ const createTerminalService = require('../Terminal/Terminal');
 const { AirRuntimeError } = require('./AirErrors');
 const validateServiceSettings = require('../../utils/validate-service-settings');
 
-const RETRYABLE_GET_TICKET_ERRORS = [
-  AirRuntimeError.TicketInfoIncomplete,
-  AirRuntimeError.DuplicateTicketFound,
-];
-
 module.exports = (settings) => {
   const service = airService(validateServiceSettings(settings));
   const log = (settings.options && settings.options.logFunction) || console.log;
@@ -123,6 +118,10 @@ module.exports = (settings) => {
 
     getUniversalRecord(options) {
       return service.getUniversalRecord(options);
+    },
+
+    importUniversalRecordByPNR(options) {
+      return service.importUniversalRecordByPNR(options);
     },
 
     getUniversalRecordByPNR(options) {
@@ -255,18 +254,38 @@ module.exports = (settings) => {
       return service.flightInfo(parameters);
     },
 
+    retryableTicketErrorHandlers: {
+      'AirRuntimeError.TicketInfoIncomplete': async function (ticketNumber) {
+        const pnr = await this.getPNRByTicketNumber({ ticketNumber });
+        const tickets = await this.getTickets({ pnr });
+        return tickets.find(t => t.ticketNumber === ticketNumber);
+      },
+      'AirRuntimeError.DuplicateTicketFound': async function (ticketNumber) {
+        const pnr = await this.getPNRByTicketNumber({ ticketNumber });
+        const { splitBookings } = await this.getBooking({ pnr });
+        if (!splitBookings) {
+          return null;
+        }
+
+        const [splitBookingPNR] = splitBookings;
+        const { uapi_ur_locator: urLocator } = await this.getBooking({ pnr: splitBookingPNR });
+
+        return service.getTicket({
+          ticketNumber,
+          uapi_ur_locator: urLocator,
+          pnr: splitBookingPNR,
+        });
+      },
+    },
+
     async getTicket(options) {
       const { ticketNumber, allowNoProviderLocatorCodeRetrieval = false } = options;
       try {
         return await service.getTicket({ ticketNumber, allowNoProviderLocatorCodeRetrieval });
       } catch (err) {
-        if (!RETRYABLE_GET_TICKET_ERRORS.some(ErrorClass => err instanceof ErrorClass)) {
-          throw err;
-        }
-
-        const pnr = await this.getPNRByTicketNumber({ ticketNumber });
-        const tickets = await this.getTickets({ pnr });
-        const ticket = tickets.find(t => t.ticketNumber === ticketNumber);
+        const retryableErrorHandler = this.retryableTicketErrorHandlers[err.name];
+        const ticket = await (retryableErrorHandler
+          && retryableErrorHandler.call(this, ticketNumber));
 
         if (!ticket) {
           throw err;

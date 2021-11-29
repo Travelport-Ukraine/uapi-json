@@ -9,11 +9,15 @@ Air Universal Record Retrieve For Galileo(1G) LFS Request
   <soapenv:Body>
     <univ:UniversalRecordRetrieveReq AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}">
     <com:BillingPointOfSaleInfo OriginApplication="UAPI"/>
-    <univ:UniversalRecordLocatorCode>{{universalRecordLocatorCode}}</univ:UniversalRecordLocatorCode>
-    
     {{#if emulatePcc}}
     <com:OverridePCC ProviderCode="{{provider}}" PseudoCityCode="{{emulatePcc}}"/>
     {{/if}}
+    {{#if universalRecordLocatorCode}}
+    <univ:UniversalRecordLocatorCode>{{universalRecordLocatorCode}}</univ:UniversalRecordLocatorCode>
+    {{/if}}
+    {{#if pnr}}
+    <univ:ProviderReservationInfo ProviderCode="{{provider}}" ProviderLocatorCode="{{pnr}}" />
+    {{/if}} 
     </univ:UniversalRecordRetrieveReq>
   </soapenv:Body>
 </soapenv:Envelope>
