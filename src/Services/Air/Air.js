@@ -125,6 +125,10 @@ module.exports = (settings) => {
       return service.getUniversalRecord(options);
     },
 
+    importUniversalRecordByPNR(options) {
+      return service.importUniversalRecordByPNR(options);
+    },
+
     getUniversalRecordByPNR(options) {
       return service.getUniversalRecordByPNR(options)
         .catch((err) => {
