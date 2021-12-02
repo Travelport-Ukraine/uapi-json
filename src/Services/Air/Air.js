@@ -254,17 +254,21 @@ module.exports = (settings) => {
       return service.flightInfo(parameters);
     },
 
+    async getTicketFromTicketsList(pnr, ticketNumber) {
+      const tickets = await this.getTickets({ pnr });
+      return tickets.find(t => t.ticketNumber === ticketNumber);
+    },
+
     retryableTicketErrorHandlers: {
       'AirRuntimeError.TicketInfoIncomplete': async function (ticketNumber) {
         const pnr = await this.getPNRByTicketNumber({ ticketNumber });
-        const tickets = await this.getTickets({ pnr });
-        return tickets.find(t => t.ticketNumber === ticketNumber);
+        return this.getTicketFromTicketsList(pnr, ticketNumber);
       },
       'AirRuntimeError.DuplicateTicketFound': async function (ticketNumber) {
         const pnr = await this.getPNRByTicketNumber({ ticketNumber });
         const { splitBookings } = await this.getBooking({ pnr });
         if (!splitBookings) {
-          return null;
+          return this.getTicketFromTicketsList(pnr, ticketNumber);
         }
 
         const [splitBookingPNR] = splitBookings;
