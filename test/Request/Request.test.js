@@ -46,12 +46,22 @@ const serviceParamsReturningString = [
 
 const requestError = proxyquire('../../src/Request/uapi-request', {
   axios: {
-    request: () => Promise.reject({ response: { status: 300, data: 3 } }),
+    request: () => {
+      const err = new Error();
+      err.response = { status: 300, data: 3 };
+      return Promise.reject(err);
+    }
   },
 });
 const requestUnexpectedError = proxyquire('../../src/Request/uapi-request', {
   axios: {
-    request: () => Promise.reject({ code: 'ECONNRESET', message: 'write ECONNRESET', name: 'Error' }),
+    request: () => {
+      const err = new Error();
+      err.code = 'ECONNRESET';
+      err.message = 'write ECONNRESET';
+      err.name = 'Error';
+      return Promise.reject(err);
+    }
   },
 });
 const requestJsonResponse = proxyquire('../../src/Request/uapi-request', {
