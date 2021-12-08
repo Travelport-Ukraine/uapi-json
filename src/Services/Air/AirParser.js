@@ -646,6 +646,10 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
     || (fareInfo && fareInfo[`common_${this.uapi_version}:Commission`])
     || null;
 
+  const fareCalcSource = etr['air:FareCalc'].match(fareCalculationPattern)
+    ? etr['air:FareCalc']
+    : airPricingInfo['air:FareCalc'];
+
   const response = Object.assign(
     {
       uapi_ur_locator: obj.UniversalRecordLocatorCode,
@@ -668,7 +672,7 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
       isConjunctionTicket: tickets.length > 1,
       tourCode,
     },
-    parseFareCalculation(etr['air:FareCalc']),
+    parseFareCalculation(fareCalcSource),
     commission
       ? {
         commission: {
