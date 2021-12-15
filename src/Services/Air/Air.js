@@ -266,19 +266,25 @@ module.exports = (settings) => {
       },
       'AirRuntimeError.DuplicateTicketFound': async function (ticketNumber) {
         const pnr = await this.getPNRByTicketNumber({ ticketNumber });
-        const { splitBookings } = await this.getBooking({ pnr });
-        if (!splitBookings) {
+
+        try {
           return this.getTicketFromTicketsList(pnr, ticketNumber);
+        } catch (e) {
+          const { splitBookings } = await this.getBooking({ pnr });
+
+          if (!splitBookings) {
+            throw e;
+          }
+
+          const [splitBookingPNR] = splitBookings;
+          const { uapi_ur_locator: urLocator } = await this.getBooking({ pnr: splitBookingPNR });
+
+          return service.getTicket({
+            ticketNumber,
+            uapi_ur_locator: urLocator,
+            pnr: splitBookingPNR,
+          });
         }
-
-        const [splitBookingPNR] = splitBookings;
-        const { uapi_ur_locator: urLocator } = await this.getBooking({ pnr: splitBookingPNR });
-
-        return service.getTicket({
-          ticketNumber,
-          uapi_ur_locator: urLocator,
-          pnr: splitBookingPNR,
-        });
       },
     },
 

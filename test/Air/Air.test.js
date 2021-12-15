@@ -1007,13 +1007,16 @@ describe('#AirService', () => {
       getUniversalRecordByPNR.onCall(1).resolves(splittedURbyPNR);
 
       const getTicket = sinon.stub();
+      const getTickets = sinon.stub();
+
       getTicket.onCall(0).rejects(new AirRuntimeError.DuplicateTicketFound());
-      getTicket.onCall(1).resolves({ ticketNumber: '0649902789376' });
+      getTickets.onCall(0).resolves([{ ticketNumber: '0649902789376' }]);
       const getPNRByTicketNumber = sinon.spy(() => Promise.resolve('PNR101'));
 
       const air = getAirServiceMock({
         methods: {
           getTicket,
+          getTickets,
           getUniversalRecordByPNR
         }
       });
@@ -1025,9 +1028,10 @@ describe('#AirService', () => {
         .then((res) => {
           expect(res).to.be.an('object').and.to.have.property('ticketNumber');
           expect(res.ticketNumber).to.equal('0649902789376');
-          expect(getTicket.calledTwice).to.be.equal(true);
+          expect(getTicket.calledOnce).to.be.equal(true);
+          expect(getTickets.calledOnce).to.be.equal(true);
           expect(getPNRByTicketNumber.calledOnce).to.be.equal(true);
-          expect(getUniversalRecordByPNR.calledTwice).to.be.equal(true);
+          expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
         });
     });
     it('should get ticket data with additional queries in case of TicketInfoIncomplete', async () => {
