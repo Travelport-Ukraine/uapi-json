@@ -990,21 +990,11 @@ describe('#AirService', () => {
           pnr: 'PNR101',
           uapi_ur_locator: 'UAPI101',
           uapi_reservation_locator: 'ABCDEF101',
-          splitBookings: ['PNR202'],
-        },
-      ];
-
-      const splittedURbyPNR = [
-        {
-          pnr: 'PNR202',
-          uapi_ur_locator: 'UAPI202',
-          uapi_reservation_locator: 'ABCDEF202',
         },
       ];
 
       const getUniversalRecordByPNR = sinon.stub();
       getUniversalRecordByPNR.onCall(0).resolves(originalURbyPNR);
-      getUniversalRecordByPNR.onCall(1).resolves(splittedURbyPNR);
 
       const getTicket = sinon.stub();
       const getTickets = sinon.stub();
@@ -1034,6 +1024,44 @@ describe('#AirService', () => {
           expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
         });
     });
+
+
+    it('should rethrow getTickets error in case of duplicate ticket found and no split booking data', () => {
+      const originalURbyPNR = [
+        {
+          pnr: 'PNR101',
+          uapi_ur_locator: 'UAPI101',
+          uapi_reservation_locator: 'ABCDEF101',
+        },
+      ];
+
+      const getUniversalRecordByPNR = sinon.stub().resolves(originalURbyPNR);
+
+      const getTicket = sinon.stub();
+      const getTickets = sinon.stub();
+
+      getTicket.onCall(0).rejects(new AirRuntimeError.DuplicateTicketFound());
+      getTickets.onCall(0).rejects(new Error('some getTickets error'));
+      const getPNRByTicketNumber = sinon.spy(() => Promise.resolve('PNR101'));
+
+      const air = getAirServiceMock({
+        methods: {
+          getTicket,
+          getTickets,
+          getUniversalRecordByPNR
+        }
+      });
+
+      const AirService = air;
+      AirService.getPNRByTicketNumber = getPNRByTicketNumber.bind(AirService);
+
+      return AirService.getTicket({ ticketNumber: '0649902789376' })
+        .then(() => Promise.reject(new Error('Error has not occured')))
+        .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieveTickets);
+        });
+    });
+
     it('should get ticket data with additional queries in case of TicketInfoIncomplete', async () => {
       const completeInfo = {
         pnr: 'PNR001',

@@ -266,9 +266,8 @@ module.exports = (settings) => {
       },
       'AirRuntimeError.DuplicateTicketFound': async function (ticketNumber) {
         const pnr = await this.getPNRByTicketNumber({ ticketNumber });
-
         try {
-          return this.getTicketFromTicketsList(pnr, ticketNumber);
+          return await this.getTicketFromTicketsList(pnr, ticketNumber);
         } catch (e) {
           const { splitBookings } = await this.getBooking({ pnr });
 
