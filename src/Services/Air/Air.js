@@ -267,22 +267,41 @@ module.exports = (settings) => {
       'AirRuntimeError.DuplicateTicketFound': async function (ticketNumber) {
         const pnr = await this.getPNRByTicketNumber({ ticketNumber });
         try {
-          return await this.getTicketFromTicketsList(pnr, ticketNumber);
+          const ticket = await this.getTicketFromTicketsList(pnr, ticketNumber);
+
+          if (!ticket) {
+            throw new AirRuntimeError.TicketNotFound({ ticketNumber });
+          }
+
+          return ticket;
         } catch (e) {
           const { splitBookings } = await this.getBooking({ pnr });
-
           if (!splitBookings) {
             throw e;
           }
 
-          const [splitBookingPNR] = splitBookings;
-          const { uapi_ur_locator: urLocator } = await this.getBooking({ pnr: splitBookingPNR });
+          const results = await Promise.all(splitBookings.map(async (splitPnr) => {
+            try {
+              const { uapi_ur_locator: urLocator } = await this.getBooking({ pnr: splitPnr });
 
-          return service.getTicket({
-            ticketNumber,
-            uapi_ur_locator: urLocator,
-            pnr: splitBookingPNR,
-          });
+              const ticket = await service.getTicket({
+                ticketNumber,
+                uapi_ur_locator: urLocator,
+                pnr: splitPnr,
+              });
+
+              if (!ticket || ticket.ticketNumber !== ticketNumber) {
+                return null;
+              }
+
+              return ticket;
+            } catch (err) {
+              return null;
+            }
+          }));
+
+          const [ticket = null] = results.filter(result => result);
+          return ticket;
         }
       },
     },
@@ -295,7 +314,6 @@ module.exports = (settings) => {
         const retryableErrorHandler = this.retryableTicketErrorHandlers[err.name];
         const ticket = await (retryableErrorHandler
           && retryableErrorHandler.call(this, ticketNumber));
-
         if (!ticket) {
           throw err;
         }
