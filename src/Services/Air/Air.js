@@ -280,33 +280,28 @@ module.exports = (settings) => {
             throw e;
           }
 
-          return splitBookings.reduce(async (acc, splitPnr) => {
+          const results = await Promise.all(splitBookings.map(async (splitPnr) => {
             try {
-              await acc;
-
-              if (acc.ticketNumber) {
-                return acc;
-              }
-
               const { uapi_ur_locator: urLocator } = await this.getBooking({ pnr: splitPnr });
+
               const ticket = await service.getTicket({
                 ticketNumber,
                 uapi_ur_locator: urLocator,
                 pnr: splitPnr,
               });
 
-              if (ticket && ticket.ticketNumber === ticketNumber) {
-                return {
-                  ...acc,
-                  ...ticket,
-                };
+              if (!ticket || ticket.ticketNumber !== ticketNumber) {
+                return null;
               }
 
-              return acc;
+              return ticket;
             } catch (err) {
-              return acc;
+              return null;
             }
-          }, Promise.resolve({}));
+          }));
+
+          const [ticket = null] = results.filter(result => result);
+          return ticket;
         }
       },
     },
