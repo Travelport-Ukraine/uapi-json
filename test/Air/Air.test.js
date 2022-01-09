@@ -439,6 +439,65 @@ NOTE-
       `1. ${segment.airline} OPEN ${segment.class}  ${segment.date} ${segment.from}${segment.to} ${segment.comment}`
     ).toUpperCase();
 
+    const testOkProcess = (pnrResponse) => {
+      const getUniversalRecordByPNR = sinon.stub();
+      getUniversalRecordByPNR.onCall(0).returns(
+        Promise.reject(new AirRuntimeError.NoReservationToImport())
+      );
+      getUniversalRecordByPNR.onCall(1).returns(Promise.resolve(getURByPNRSampleBooked));
+      getUniversalRecordByPNR.onCall(2).returns(Promise.resolve(getURByPNRSampleBooked));
+      const cancelBooking = sinon.spy(() => Promise.resolve(true));
+      const executeCommand = sinon.stub();
+      executeCommand.onCall(0).returns(
+        Promise.resolve(pnrResponse)
+      );
+      executeCommand.onCall(1).returns(
+        Promise.resolve(segmentResult)
+      );
+      executeCommand.onCall(2).returns(
+        Promise.resolve(true)
+      );
+      executeCommand.onCall(3).returns(
+        Promise.resolve(true)
+      );
+      executeCommand.onCall(4).returns(
+        Promise.resolve([
+          pnrString,
+          segmentResult,
+        ].join('\n'))
+      );
+      const closeSession = sinon.spy(
+        () => Promise.resolve(true)
+      );
+
+      // Services
+      const airService = () => ({
+        getUniversalRecordByPNR,
+        cancelBooking,
+      });
+      const terminalService = () => ({
+        executeCommand,
+        closeSession,
+      });
+
+      const createAirService = proxyquire('../../src/Services/Air/Air', {
+        './AirService': airService,
+        '../Terminal/Terminal': terminalService,
+      });
+
+      return createAirService({ auth })
+        .getUniversalRecordByPNR(params)
+        .catch((error) => {
+          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
+          expect(error.causedBy).to.be.an.instanceOf(
+            AirRuntimeError.UnableToSaveBookingWithExtraSegment
+          );
+          expect(getUniversalRecordByPNR).to.have.callCount(1);
+          expect(executeCommand).to.have.callCount(5);
+          expect(closeSession).to.have.callCount(1);
+        });
+    };
+
     it('should check if correct function from service is called', () => {
       const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve({}));
       const airService = () => ({ getUniversalRecordByPNR });
@@ -647,121 +706,8 @@ NOTE-
     });
 
     it('should run to the end if everything is OK', () => {
-      const getUniversalRecordByPNR = sinon.stub();
-      getUniversalRecordByPNR.onCall(0).returns(
-        Promise.reject(new AirRuntimeError.NoReservationToImport())
-      );
-      getUniversalRecordByPNR.onCall(1).returns(Promise.resolve(getURByPNRSampleBooked));
-      getUniversalRecordByPNR.onCall(2).returns(Promise.resolve(getURByPNRSampleBooked));
-      const cancelBooking = sinon.spy(() => Promise.resolve(true));
-      const executeCommand = sinon.stub();
-      executeCommand.onCall(0).returns(
-        Promise.resolve(pnrString)
-      );
-      executeCommand.onCall(1).returns(
-        Promise.resolve(segmentResult)
-      );
-      executeCommand.onCall(2).returns(
-        Promise.resolve(true)
-      );
-      executeCommand.onCall(3).returns(
-        Promise.resolve(true)
-      );
-      executeCommand.onCall(4).returns(
-        Promise.resolve([
-          pnrString,
-          segmentResult,
-        ].join('\n'))
-      );
-      const closeSession = sinon.spy(
-        () => Promise.resolve(true)
-      );
-
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
-        cancelBooking,
-      });
-      const terminalService = () => ({
-        executeCommand,
-        closeSession,
-      });
-
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-        '../Terminal/Terminal': terminalService,
-      });
-
-      return createAirService({ auth })
-        .getUniversalRecordByPNR(params)
-        .catch((error) => {
-          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
-          expect(error.causedBy).to.be.an.instanceOf(
-            AirRuntimeError.UnableToSaveBookingWithExtraSegment
-          );
-          expect(getUniversalRecordByPNR).to.have.callCount(1);
-          expect(executeCommand).to.have.callCount(5);
-          expect(closeSession).to.have.callCount(1);
-        });
-    });
-
-    it('should run to the end when AirRuntimeError.NoReservationToImport for non-iata', () => {
-      const getUniversalRecordByPNR = sinon.stub();
-      getUniversalRecordByPNR.onCall(0).returns(
-        Promise.reject(new AirRuntimeError.NoReservationToImport())
-      );
-      getUniversalRecordByPNR.onCall(1).returns(Promise.resolve(getURByPNRSampleBooked));
-      getUniversalRecordByPNR.onCall(2).returns(Promise.resolve(getURByPNRSampleBooked));
-      const cancelBooking = sinon.spy(() => Promise.resolve(true));
-      const executeCommand = sinon.stub();
-      executeCommand.onCall(0).returns(
-        Promise.resolve(nonIataPnrString)
-      );
-      executeCommand.onCall(1).returns(
-        Promise.resolve(segmentResult)
-      );
-      executeCommand.onCall(2).returns(
-        Promise.resolve(true)
-      );
-      executeCommand.onCall(3).returns(
-        Promise.resolve(true)
-      );
-      executeCommand.onCall(4).returns(
-        Promise.resolve([
-          pnrString,
-          segmentResult,
-        ].join('\n'))
-      );
-      const closeSession = sinon.spy(
-        () => Promise.resolve(true)
-      );
-
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
-        cancelBooking,
-      });
-      const terminalService = () => ({
-        executeCommand,
-        closeSession,
-      });
-
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-        '../Terminal/Terminal': terminalService,
-      });
-
-      return createAirService({ auth })
-        .getUniversalRecordByPNR(params)
-        .catch((error) => {
-          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
-          expect(error.causedBy).to.be.an.instanceOf(
-            AirRuntimeError.UnableToSaveBookingWithExtraSegment
-          );
-          expect(getUniversalRecordByPNR).to.have.callCount(1);
-          expect(executeCommand).to.have.callCount(5);
-          expect(closeSession).to.have.callCount(1);
-        });
+      testOkProcess(pnrString);
+      testOkProcess(nonIataPnrString);
     });
   });
 
