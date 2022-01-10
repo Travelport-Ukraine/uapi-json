@@ -451,6 +451,19 @@ NOTE-
       return call;
     };
 
+    const getEmulatedTerminal = (results) => {
+      const executeCommand = stubAsyncCall(results);
+      const closeSession = sinon.spy(() => Promise.resolve(true));
+      return {
+        terminal: () => ({
+          executeCommand,
+          closeSession,
+        }),
+        executeCommand,
+        closeSession,
+      };
+    };
+
     const checkError = (err, settings) => {
       if (settings.instanceOf) {
         expect(err).to.be.an.instanceOf(settings.instanceOf);
@@ -468,30 +481,22 @@ NOTE-
     };
 
     const testOkProcess = (pnrResponse) => {
-      const getUniversalRecordByPNR = sinon.stub();
-      getUniversalRecordByPNR.onCall(0).returns(
-        Promise.reject(new AirRuntimeError.NoReservationToImport())
-      );
-      getUniversalRecordByPNR.onCall(1).returns(Promise.resolve(getURByPNRSampleBooked));
-      getUniversalRecordByPNR.onCall(2).returns(Promise.resolve(getURByPNRSampleBooked));
-      const cancelBooking = sinon.spy(() => Promise.resolve(true));
-      const executeCommand = stubAsyncCall([
-        pnrResponse, segmentResult, true, true,
-        [pnrString, segmentResult].join('\n'),
+      const getUniversalRecordByPNR = stubAsyncCall([
+        new AirRuntimeError.NoReservationToImport(),
+        getURByPNRSampleBooked,
+        getURByPNRSampleBooked,
       ]);
-      const closeSession = sinon.spy(
-        () => Promise.resolve(true)
-      );
+      const cancelBooking = sinon.spy(() => Promise.resolve(true));
 
       // Services
       const airService = () => ({
         getUniversalRecordByPNR,
         cancelBooking,
       });
-      const terminalService = () => ({
-        executeCommand,
-        closeSession,
-      });
+      const { terminal: terminalService, executeCommand, closeSession } = getEmulatedTerminal([
+        pnrResponse, segmentResult, true, true,
+        [pnrString, segmentResult].join('\n'),
+      ]);
 
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': airService,
@@ -543,19 +548,12 @@ NOTE-
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
-      const executeCommand = stubAsyncCall(['FINISH OR IGNORE']);
-      const closeSession = sinon.spy(
-        () => Promise.resolve(true)
-      );
 
       // Services
       const airService = () => ({
         getUniversalRecordByPNR,
       });
-      const terminalService = () => ({
-        executeCommand,
-        closeSession,
-      });
+      const { terminal: terminalService, executeCommand, closeSession } = getEmulatedTerminal(['FINISH OR IGNORE']);
 
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': airService,
@@ -581,21 +579,14 @@ NOTE-
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
-      const executeCommand = stubAsyncCall([
-        pnrString, 'ERR: FORMAT',
-      ]);
-      const closeSession = sinon.spy(
-        () => Promise.resolve(true)
-      );
 
       // Services
       const airService = () => ({
         getUniversalRecordByPNR,
       });
-      const terminalService = () => ({
-        executeCommand,
-        closeSession,
-      });
+      const { terminal: terminalService, executeCommand, closeSession } = getEmulatedTerminal([
+        pnrString, 'ERR: FORMAT',
+      ]);
 
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': airService,
@@ -620,22 +611,15 @@ NOTE-
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
-      const executeCommand = stubAsyncCall([
-        pnrString, segmentResult, true, true,
-        [pnrString].join('\n'),
-      ]);
-      const closeSession = sinon.spy(
-        () => Promise.resolve(true)
-      );
 
       // Services
       const airService = () => ({
         getUniversalRecordByPNR,
       });
-      const terminalService = () => ({
-        executeCommand,
-        closeSession,
-      });
+      const { terminal: terminalService, executeCommand, closeSession } = getEmulatedTerminal([
+        pnrString, segmentResult, true, true,
+        [pnrString].join('\n'),
+      ]);
 
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': airService,
@@ -660,22 +644,15 @@ NOTE-
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
-      const executeCommand = stubAsyncCall([
-        pnrString, segmentResult, true, true,
-        [segmentResult].join('\n'),
-      ]);
-      const closeSession = sinon.spy(
-        () => Promise.resolve(true)
-      );
 
       // Services
       const airService = () => ({
         getUniversalRecordByPNR,
       });
-      const terminalService = () => ({
-        executeCommand,
-        closeSession,
-      });
+      const { terminal: terminalService, executeCommand, closeSession } = getEmulatedTerminal([
+        pnrString, segmentResult, true, true,
+        [segmentResult].join('\n'),
+      ]);
 
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': airService,
