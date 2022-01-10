@@ -480,24 +480,25 @@ NOTE-
       }
     };
 
-    const testOkProcess = (pnrResponse) => {
-      const getUniversalRecordByPNR = stubAsyncCall([
-        new AirRuntimeError.NoReservationToImport(),
-        getURByPNRSampleBooked,
-        getURByPNRSampleBooked,
-      ]);
-      const cancelBooking = sinon.spy(() => Promise.resolve(true));
-
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
-        cancelBooking,
-      });
-      const { terminal: terminalService, executeCommand, closeSession } = getEmulatedTerminal([
-        pnrResponse, segmentResult, true, true,
-        [pnrString, segmentResult].join('\n'),
-      ]);
-
+    const assertServiceError = ({
+      airFunctions,
+      terminalResults,
+      terminalCallCounts,
+      instanceOf,
+      causedBy,
+    }) => {
+      const airService = () => airFunctions.reduce(
+        (acc, { name, func }) => ({
+          ...acc,
+          [name]: func,
+        }),
+        {}
+      );
+      const {
+        terminal: terminalService,
+        executeCommand,
+        closeSession,
+      } = getEmulatedTerminal(terminalResults);
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': airService,
         '../Terminal/Terminal': terminalService,
@@ -507,15 +508,41 @@ NOTE-
         .getUniversalRecordByPNR(params)
         .catch((error) => {
           checkError(error, {
-            instanceOf: AirRuntimeError.UnableToImportPnr,
-            causedBy: AirRuntimeError.UnableToSaveBookingWithExtraSegment,
+            instanceOf,
+            causedBy,
             callCounts: [
-              { func: getUniversalRecordByPNR, count: 1 },
-              { func: executeCommand, count: 5 },
-              { func: closeSession, count: 1 },
+              ...airFunctions,
+              { func: executeCommand, count: terminalCallCounts.executeCommand },
+              { func: closeSession, count: terminalCallCounts.closeSession },
             ]
           });
         });
+    };
+
+    const testOkProcess = (pnrResponse) => {
+      const getUniversalRecordByPNR = stubAsyncCall([
+        new AirRuntimeError.NoReservationToImport(),
+        getURByPNRSampleBooked,
+        getURByPNRSampleBooked,
+      ]);
+      const cancelBooking = sinon.spy(() => Promise.resolve(true));
+
+      return assertServiceError({
+        airFunctions: [
+          { func: getUniversalRecordByPNR, name: 'getUniversalRecordByPNR', count: 1 },
+          { func: cancelBooking, name: 'cancelBooking', count: 1 },
+        ],
+        terminalResults: [
+          pnrResponse, segmentResult, true, true,
+          [pnrString, segmentResult].join('\n'),
+        ],
+        terminalCallCounts: {
+          executeCommand: 5,
+          closeSession: 1,
+        },
+        instanceOf: AirRuntimeError.UnableToImportPnr,
+        causedBy: AirRuntimeError.UnableToSaveBookingWithExtraSegment,
+      });
     };
 
     it('should check if correct function from service is called', () => {
@@ -549,30 +576,18 @@ NOTE-
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
 
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
+      return assertServiceError({
+        airFunctions: [
+          { func: getUniversalRecordByPNR, name: 'getUniversalRecordByPNR', count: 1 },
+        ],
+        terminalResults: ['FINISH OR IGNORE'],
+        terminalCallCounts: {
+          executeCommand: 1,
+          closeSession: 1,
+        },
+        instanceOf: AirRuntimeError.UnableToImportPnr,
+        causedBy: AirRuntimeError.UnableToOpenPNRInTerminal,
       });
-      const { terminal: terminalService, executeCommand, closeSession } = getEmulatedTerminal(['FINISH OR IGNORE']);
-
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-        '../Terminal/Terminal': terminalService,
-      });
-
-      return createAirService({ auth })
-        .getUniversalRecordByPNR(params)
-        .catch((error) => {
-          checkError(error, {
-            instanceOf: AirRuntimeError.UnableToImportPnr,
-            causedBy: AirRuntimeError.UnableToOpenPNRInTerminal,
-            callCounts: [
-              { func: getUniversalRecordByPNR, count: 1 },
-              { func: executeCommand, count: 1 },
-              { func: closeSession, count: 1 },
-            ]
-          });
-        });
     });
 
     it('should throw an error when it is unable to add an extra segment', () => {
@@ -580,98 +595,62 @@ NOTE-
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
 
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
+      return assertServiceError({
+        airFunctions: [
+          { func: getUniversalRecordByPNR, name: 'getUniversalRecordByPNR', count: 1 },
+        ],
+        terminalResults: [
+          pnrString, 'ERR: FORMAT',
+        ],
+        terminalCallCounts: {
+          executeCommand: 2,
+          closeSession: 1,
+        },
+        instanceOf: AirRuntimeError.UnableToImportPnr,
+        causedBy: AirRuntimeError.UnableToAddExtraSegment,
       });
-      const { terminal: terminalService, executeCommand, closeSession } = getEmulatedTerminal([
-        pnrString, 'ERR: FORMAT',
-      ]);
-
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-        '../Terminal/Terminal': terminalService,
-      });
-
-      return createAirService({ auth })
-        .getUniversalRecordByPNR(params)
-        .catch((error) => {
-          checkError(error, {
-            instanceOf: AirRuntimeError.UnableToImportPnr,
-            causedBy: AirRuntimeError.UnableToAddExtraSegment,
-            callCounts: [
-              { func: getUniversalRecordByPNR, count: 1 },
-              { func: executeCommand, count: 2 },
-              { func: closeSession, count: 1 },
-            ]
-          });
-        });
     });
     it('should throw an error when it is unable to add an extra segment (no segment added)', () => {
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
 
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
+      return assertServiceError({
+        airFunctions: [
+          { func: getUniversalRecordByPNR, name: 'getUniversalRecordByPNR', count: 1 },
+        ],
+        terminalResults: [
+          pnrString, segmentResult, true, true,
+          [pnrString].join('\n'),
+        ],
+        terminalCallCounts: {
+          executeCommand: 5,
+          closeSession: 1,
+        },
+        instanceOf: AirRuntimeError.UnableToImportPnr,
+        causedBy: AirRuntimeError.UnableToSaveBookingWithExtraSegment,
       });
-      const { terminal: terminalService, executeCommand, closeSession } = getEmulatedTerminal([
-        pnrString, segmentResult, true, true,
-        [pnrString].join('\n'),
-      ]);
-
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-        '../Terminal/Terminal': terminalService,
-      });
-
-      return createAirService({ auth })
-        .getUniversalRecordByPNR(params)
-        .catch((error) => {
-          checkError(error, {
-            instanceOf: AirRuntimeError.UnableToImportPnr,
-            causedBy: AirRuntimeError.UnableToSaveBookingWithExtraSegment,
-            callCounts: [
-              { func: getUniversalRecordByPNR, count: 1 },
-              { func: executeCommand, count: 5 },
-              { func: closeSession, count: 1 },
-            ]
-          });
-        });
     });
     it('should throw an error when it is unable to add an extra segment (no PNR parsed)', () => {
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
 
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
+      return assertServiceError({
+        airFunctions: [
+          { func: getUniversalRecordByPNR, name: 'getUniversalRecordByPNR', count: 1 },
+        ],
+        terminalResults: [
+          pnrString, segmentResult, true, true,
+          [segmentResult].join('\n'),
+        ],
+        terminalCallCounts: {
+          executeCommand: 5,
+          closeSession: 1,
+        },
+        instanceOf: AirRuntimeError.UnableToImportPnr,
+        causedBy: AirRuntimeError.UnableToSaveBookingWithExtraSegment,
       });
-      const { terminal: terminalService, executeCommand, closeSession } = getEmulatedTerminal([
-        pnrString, segmentResult, true, true,
-        [segmentResult].join('\n'),
-      ]);
-
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-        '../Terminal/Terminal': terminalService,
-      });
-
-      return createAirService({ auth })
-        .getUniversalRecordByPNR(params)
-        .catch((error) => {
-          checkError(error, {
-            instanceOf: AirRuntimeError.UnableToImportPnr,
-            causedBy: AirRuntimeError.UnableToSaveBookingWithExtraSegment,
-            callCounts: [
-              { func: getUniversalRecordByPNR, count: 1 },
-              { func: executeCommand, count: 5 },
-              { func: closeSession, count: 1 },
-            ]
-          });
-        });
     });
 
     it('should run to the end if everything is OK', () => {
