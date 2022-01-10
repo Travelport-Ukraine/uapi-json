@@ -451,6 +451,22 @@ NOTE-
       return call;
     };
 
+    const checkError = (err, settings) => {
+      if (settings.instanceOf) {
+        expect(err).to.be.an.instanceOf(settings.instanceOf);
+      }
+      if (settings.causedBy) {
+        expect(err.causedBy).to.be.an.instanceOf(settings.causedBy);
+      }
+      if (settings.callCounts) {
+        settings.callCounts.forEach(
+          ({ func, count }) => {
+            expect(func).to.have.callCount(count);
+          }
+        );
+      }
+    };
+
     const testOkProcess = (pnrResponse) => {
       const getUniversalRecordByPNR = sinon.stub();
       getUniversalRecordByPNR.onCall(0).returns(
@@ -485,13 +501,15 @@ NOTE-
       return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
-          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
-          expect(error.causedBy).to.be.an.instanceOf(
-            AirRuntimeError.UnableToSaveBookingWithExtraSegment
-          );
-          expect(getUniversalRecordByPNR).to.have.callCount(1);
-          expect(executeCommand).to.have.callCount(5);
-          expect(closeSession).to.have.callCount(1);
+          checkError(error, {
+            instanceOf: AirRuntimeError.UnableToImportPnr,
+            causedBy: AirRuntimeError.UnableToSaveBookingWithExtraSegment,
+            callCounts: [
+              { func: getUniversalRecordByPNR, count: 1 },
+              { func: executeCommand, count: 5 },
+              { func: closeSession, count: 1 },
+            ]
+          });
         });
     };
 
@@ -547,11 +565,15 @@ NOTE-
       return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
-          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
-          expect(error.causedBy).to.be.an.instanceOf(AirRuntimeError.UnableToOpenPNRInTerminal);
-          expect(getUniversalRecordByPNR).to.have.callCount(1);
-          expect(executeCommand).to.have.callCount(1);
-          expect(closeSession).to.have.callCount(1);
+          checkError(error, {
+            instanceOf: AirRuntimeError.UnableToImportPnr,
+            causedBy: AirRuntimeError.UnableToOpenPNRInTerminal,
+            callCounts: [
+              { func: getUniversalRecordByPNR, count: 1 },
+              { func: executeCommand, count: 1 },
+              { func: closeSession, count: 1 },
+            ]
+          });
         });
     });
 
@@ -583,11 +605,15 @@ NOTE-
       return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
-          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
-          expect(error.causedBy).to.be.an.instanceOf(AirRuntimeError.UnableToAddExtraSegment);
-          expect(getUniversalRecordByPNR).to.have.callCount(1);
-          expect(executeCommand).to.have.callCount(2);
-          expect(closeSession).to.have.callCount(1);
+          checkError(error, {
+            instanceOf: AirRuntimeError.UnableToImportPnr,
+            causedBy: AirRuntimeError.UnableToAddExtraSegment,
+            callCounts: [
+              { func: getUniversalRecordByPNR, count: 1 },
+              { func: executeCommand, count: 2 },
+              { func: closeSession, count: 1 },
+            ]
+          });
         });
     });
     it('should throw an error when it is unable to add an extra segment (no segment added)', () => {
@@ -619,13 +645,15 @@ NOTE-
       return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
-          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
-          expect(error.causedBy).to.be.an.instanceOf(
-            AirRuntimeError.UnableToSaveBookingWithExtraSegment
-          );
-          expect(getUniversalRecordByPNR).to.have.callCount(1);
-          expect(executeCommand).to.have.callCount(5);
-          expect(closeSession).to.have.callCount(1);
+          checkError(error, {
+            instanceOf: AirRuntimeError.UnableToImportPnr,
+            causedBy: AirRuntimeError.UnableToSaveBookingWithExtraSegment,
+            callCounts: [
+              { func: getUniversalRecordByPNR, count: 1 },
+              { func: executeCommand, count: 5 },
+              { func: closeSession, count: 1 },
+            ]
+          });
         });
     });
     it('should throw an error when it is unable to add an extra segment (no PNR parsed)', () => {
@@ -657,13 +685,15 @@ NOTE-
       return createAirService({ auth })
         .getUniversalRecordByPNR(params)
         .catch((error) => {
-          expect(error).to.be.an.instanceOf(AirRuntimeError.UnableToImportPnr);
-          expect(error.causedBy).to.be.an.instanceOf(
-            AirRuntimeError.UnableToSaveBookingWithExtraSegment
-          );
-          expect(getUniversalRecordByPNR).to.have.callCount(1);
-          expect(executeCommand).to.have.callCount(5);
-          expect(closeSession).to.have.callCount(1);
+          checkError(error, {
+            instanceOf: AirRuntimeError.UnableToImportPnr,
+            causedBy: AirRuntimeError.UnableToSaveBookingWithExtraSegment,
+            callCounts: [
+              { func: getUniversalRecordByPNR, count: 1 },
+              { func: executeCommand, count: 5 },
+              { func: closeSession, count: 1 },
+            ]
+          });
         });
     });
 
