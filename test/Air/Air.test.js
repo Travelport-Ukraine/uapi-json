@@ -438,6 +438,18 @@ NOTE-
     const segmentResult = (
       `1. ${segment.airline} OPEN ${segment.class}  ${segment.date} ${segment.from}${segment.to} ${segment.comment}`
     ).toUpperCase();
+    const stubAsyncCall = (results) => {
+      const call = sinon.stub();
+      results.forEach((result, i) => {
+        if (result instanceof Error) {
+          call.onCall(i).rejects(result);
+        } else {
+          call.onCall(i).resolves(result);
+        }
+      });
+
+      return call;
+    };
 
     const testOkProcess = (pnrResponse) => {
       const getUniversalRecordByPNR = sinon.stub();
@@ -447,25 +459,10 @@ NOTE-
       getUniversalRecordByPNR.onCall(1).returns(Promise.resolve(getURByPNRSampleBooked));
       getUniversalRecordByPNR.onCall(2).returns(Promise.resolve(getURByPNRSampleBooked));
       const cancelBooking = sinon.spy(() => Promise.resolve(true));
-      const executeCommand = sinon.stub();
-      executeCommand.onCall(0).returns(
-        Promise.resolve(pnrResponse)
-      );
-      executeCommand.onCall(1).returns(
-        Promise.resolve(segmentResult)
-      );
-      executeCommand.onCall(2).returns(
-        Promise.resolve(true)
-      );
-      executeCommand.onCall(3).returns(
-        Promise.resolve(true)
-      );
-      executeCommand.onCall(4).returns(
-        Promise.resolve([
-          pnrString,
-          segmentResult,
-        ].join('\n'))
-      );
+      const executeCommand = stubAsyncCall([
+        pnrResponse, segmentResult, true, true,
+        [pnrString, segmentResult].join('\n'),
+      ]);
       const closeSession = sinon.spy(
         () => Promise.resolve(true)
       );
@@ -528,10 +525,7 @@ NOTE-
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
-      const executeCommand = sinon.stub();
-      executeCommand.onCall(0).returns(
-        Promise.resolve('FINISH OR IGNORE')
-      );
+      const executeCommand = stubAsyncCall(['FINISH OR IGNORE']);
       const closeSession = sinon.spy(
         () => Promise.resolve(true)
       );
@@ -565,13 +559,9 @@ NOTE-
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
-      const executeCommand = sinon.stub();
-      executeCommand.onCall(0).returns(
-        Promise.resolve(pnrString)
-      );
-      executeCommand.onCall(1).returns(
-        Promise.resolve('ERR: FORMAT')
-      );
+      const executeCommand = stubAsyncCall([
+        pnrString, 'ERR: FORMAT',
+      ]);
       const closeSession = sinon.spy(
         () => Promise.resolve(true)
       );
@@ -604,24 +594,10 @@ NOTE-
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
-      const executeCommand = sinon.stub();
-      executeCommand.onCall(0).returns(
-        Promise.resolve(pnrString)
-      );
-      executeCommand.onCall(1).returns(
-        Promise.resolve(segmentResult)
-      );
-      executeCommand.onCall(2).returns(
-        Promise.resolve(true)
-      );
-      executeCommand.onCall(3).returns(
-        Promise.resolve(true)
-      );
-      executeCommand.onCall(4).returns(
-        Promise.resolve([
-          pnrString,
-        ].join('\n'))
-      );
+      const executeCommand = stubAsyncCall([
+        pnrString, segmentResult, true, true,
+        [pnrString].join('\n'),
+      ]);
       const closeSession = sinon.spy(
         () => Promise.resolve(true)
       );
@@ -656,24 +632,10 @@ NOTE-
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
-      const executeCommand = sinon.stub();
-      executeCommand.onCall(0).returns(
-        Promise.resolve(pnrString)
-      );
-      executeCommand.onCall(1).returns(
-        Promise.resolve(segmentResult)
-      );
-      executeCommand.onCall(2).returns(
-        Promise.resolve(true)
-      );
-      executeCommand.onCall(3).returns(
-        Promise.resolve(true)
-      );
-      executeCommand.onCall(4).returns(
-        Promise.resolve([
-          segmentResult,
-        ].join('\n'))
-      );
+      const executeCommand = stubAsyncCall([
+        pnrString, segmentResult, true, true,
+        [segmentResult].join('\n'),
+      ]);
       const closeSession = sinon.spy(
         () => Promise.resolve(true)
       );
