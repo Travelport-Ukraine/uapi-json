@@ -8,6 +8,9 @@ const createTerminalService = require('../Terminal/Terminal');
 const { AirRuntimeError } = require('./AirErrors');
 const validateServiceSettings = require('../../utils/validate-service-settings');
 
+const bookingInUseRegexp = '(?:\\*\\* THIS BF IS CURRENTLY IN USE \\*\\*\\s*)?';
+const nonIataLineRegexp = '(?:[ A-Z0-9][A-Z0-9]{3}-[^\\n]+[A-Z]{3}\\s*)?';
+
 module.exports = (settings) => {
   const service = airService(validateServiceSettings(settings));
   const log = (settings.options && settings.options.logFunction) || console.log;
@@ -147,7 +150,7 @@ module.exports = (settings) => {
           const segmentResult = (
             `1. ${segment.airline} OPEN ${segment.class}  ${segment.date} ${segment.from}${segment.to} ${segment.comment}`
           ).toUpperCase();
-          const pnrRegExp = new RegExp(`^(?:\\*\\* THIS BF IS CURRENTLY IN USE \\*\\*\\s*)?${options.pnr}`);
+          const pnrRegExp = new RegExp(`^${bookingInUseRegexp}${nonIataLineRegexp}${options.pnr}`);
           return terminal.executeCommand(`*${options.pnr}`)
             .then((response) => {
               if (!response.match(pnrRegExp)) {
