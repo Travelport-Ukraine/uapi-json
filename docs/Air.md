@@ -26,6 +26,7 @@ The Air workflow allows you to do what most travel agents did in the past and wh
 * [.getTickets(params)](#getTickets)
 * [.cancelTicket(params)](#cancelTicket)
 * [.cancelPNR(params)](#cancelPNR)
+* [.seat(params)](#seat)
 
 ## .shop(params)
 <a name="shop"></a>
@@ -148,6 +149,16 @@ Please specify `transfer` field to mark connection segment.
 | ageCategory | `String` | One of `['ADT', 'CNN', 'INF']`. Or [other types](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Shared_Air_Topics/Passenger_Type_Codes.htm) |
 | passNumber| `String` | Pass number. |
 | passCountry| `String` | 2-letter code of country. |
+| seatAssigned| `Array<seatAssigned>` | See `Seat Assigned` description [below](#book-seatAssigned). |
+
+### Seat Assigned object
+<a name="book-seatAssigned"></a>
+
+| Param | Type | Description |
+| --- | --- | --- |
+| from | `String` | IATA code. |
+| to | `String` | IATA code. |
+| seat | `String` | Seat Code. |
 
 ### Phone object
 <a name="phone"></a>
@@ -425,3 +436,43 @@ Gets pnr information and tickets list from [`importPNR`](#importPNR) and then do
 | ignoreTickets | `Boolean` | Defines if tickets should be ignored. The default value is `false` |
 
 **See: <a href="../examples/Air/cancelPNR.js">cancelPNR example</a>**
+
+
+## .seat(params)
+<a name="seat"></a>
+> May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
+
+After searching for air segments and fares, air seatmaps can be reterived for a specified segment detail returned from Low Fare Shop results.
+
+
+**Returns**: `Promise`
+**See**: [SeatMap Model](https://support.travelport.com/webhelp/uapi/uAPI.htm#Seat%20Maps/Seat_Maps.htm)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| seatSegment | `Array<Segment>` | See `Segment` description [below](#seatSegment). |
+
+### Seat Segment object
+<a name="seatSegment"></a>
+Each search response has `Directions` array which represents different variations of the same trip (with same price), but with the different flight options. Each index of `Directions` array represents leg index. For example if you have IEV-PAR-IEV roundtrip search request it will have IEV-PAR, PAR-IEV legs. And `Directions` array will have length 2. Under `Directions[0]` and `Directions[1]` will be different options for the flight.
+So under `Directions[0][1]` you will find `Segments` array. This segments are used for booking.
+Please specify `transfer` field to mark connection segment.
+
+`Segment` object sample.
+```json
+{
+  "from": "KBP",
+  "to": "AMS",
+  "bookingClass": "G",
+  "departure": "2016-11-10T19:40:00.000+02:00",
+  "arrival": "2016-11-10T21:45:00.000+01:00",
+  "airline": "KL",
+  "flightNumber": "3098",
+  "serviceClass": "Economy",
+  "plane": "E90",
+  "fareBasisCode": "GSRUA",
+  "group": 0
+}
+```
+
+**See: <a href="../examples/Air/seatAvailability.js">seatAvailability example</a>**
