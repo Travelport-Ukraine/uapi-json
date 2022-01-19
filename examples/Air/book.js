@@ -47,6 +47,11 @@ AirService.shop(params)
           birthDate: '1968-07-25',
           gender: 'M',
           ageCategory: 'ADT',
+          seatAssigned : [{
+            from : "IEV",
+            to : "PAR",
+            seat : '12-A'
+          }]
         }],
         phone: {
           countryCode: '38',

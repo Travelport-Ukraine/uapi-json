@@ -402,10 +402,23 @@ function airPriceRspPricingSolutionXML(obj) {
     // return
     resultXml[root + '_XML'] = lines.join('\n');
   });
-
+  const mergedSegments = this.mergeLeafRecursive(objCopy, 'air:AirPriceRsp')['air:AirPriceRsp']['air:AirItinerary']['air:AirSegment'];
+  let segmentsForSeat = [];
+  if (mergedSegments.length > 0) {
+    Object.entries(mergedSegments).forEach((segmentKey) => {
+      let segmentObj = {};
+      let segment = mergedSegments[segmentKey];
+      segmentObj.from = segment.Origin;
+      segmentObj.to = segment.Destination;
+      segmentObj.segmentRef = segment.Key;
+      segmentsForSeat.push(segmentObj);
+    });
+  }
   return {
     'air:AirPricingSolution': utils.clone(pricingSolution.$),
     'air:AirPricingSolution_XML': resultXml,
+    'air:AirSegment': mergedSegments,
+    'air:segmentsForSeat': segmentsForSeat
   };
 }
 

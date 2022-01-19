@@ -1,7 +1,7 @@
 const { AirValidationError } = require('../AirErrors');
 const hasAllFields = require('../../../utils/has-all-required-fields');
 
-module.exports = (params) => {  
+module.exports = (params) => {
   if (params.seatSegment) {
     if (Object.prototype.toString.call(params.seatSegment) !== '[object Array]') {
       throw new AirValidationError.SegmentsMissing(params.seatSegment);
@@ -17,7 +17,7 @@ module.exports = (params) => {
         'flightNumber',
         'plane',
         'uapi_segment_ref',
-        'group',        
+        'group',
       ];
       hasAllFields(
         segment,

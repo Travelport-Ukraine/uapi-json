@@ -73,7 +73,24 @@ module.exports = `
             </air:AirPricingSolution>
 
             <com:ActionStatus Type="{{ActionStatusType}}" TicketDate="{{ticketDate}}" ProviderCode="{{provider}}" />
+            
+            {{#each passengers}}
 
+                {{#each seatAssigned}}
+                    
+                    {{#each ../../air:segmentsForSeat}}
+                    
+                        {{#equal from ../from }} 
+
+                            <SpecificSeatAssignment xmlns="http://www.travelport.com/schema/air_v47_0"  BookingTravelerRef="P_{{@../../index}}" SegmentRef="{{{./segmentRef}}}" SeatId="{{../seat}}" /> 
+
+                        {{/equal}}
+
+                    {{/each}}
+
+                {{/each}}
+
+            {{/each}}
         </univ:AirCreateReservationReq>
     </soap:Body>
 </soap:Envelope>
