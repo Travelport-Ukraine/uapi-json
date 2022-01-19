@@ -149,10 +149,10 @@ Please specify `transfer` field to mark connection segment.
 | ageCategory | `String` | One of `['ADT', 'CNN', 'INF']`. Or [other types](https://support.travelport.com/webhelp/uapi/uAPI.htm#Air/Shared_Air_Topics/Passenger_Type_Codes.htm) |
 | passNumber| `String` | Pass number. |
 | passCountry| `String` | 2-letter code of country. |
-| seatAssigned| `Array<seatAssigned>` | See `Seat Assigned` description [below](#book-seatAssigned). |
+| seatAssigned| `Array<seatAssigned>` | See `Seat Assigned` description [below](#seatAssigned). |
 
 ### Seat Assigned object
-<a name="book-seatAssigned"></a>
+<a name="seatAssigned"></a>
 
 | Param | Type | Description |
 | --- | --- | --- |
