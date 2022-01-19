@@ -244,5 +244,16 @@ module.exports = function (settings) {
       debug,
       options
     ),
+    searchSeatMap: uApiRequest(
+      config.AirService.url,
+      auth,
+      templates.seatmap,
+      'air:SeatMapRsp',
+      AirValidator.AIR_SEATMAP,
+      AirParser.AIR_ERRORS,
+      AirParser.AIR_SEATMAP_REQUEST,
+      debug,
+      options
+    ),
   };
 };

@@ -1,0 +1,1440 @@
+<SOAP:Envelope
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:SeatMapRsp TraceId="trace" TransactionId="725EBE8D0A0E7D0680BF7D01F73FA7C3" ResponseTime="961"
+      xmlns:air="http://www.travelport.com/schema/air_v47_0"
+      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+      <common_v47_0:ResponseMessage Code="101001" Type="Warning">Unable to process fare host token, seat pricing may differ at the time of booking.</common_v47_0:ResponseMessage>
+      <air:AirSegment Key="MxzYH5AqWDKADt34EAAAAA==" Group="0" Carrier="MS" FlightNumber="852" ProviderCode="1G" Origin="ADD" Destination="CAI" DepartureTime="2022-02-15T04:05:00.000+03:00" ArrivalTime="2022-02-15T06:40:00.000+02:00" FlightTime="255" Distance="1552" ClassOfService="S" ETicketability="Yes" Equipment="738" Status="NN" ChangeOfPlane="false" SupplierCode="MS" OptionalServicesIndicator="false" AvailabilitySource="P" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Cached status used. Polled avail exists">
+        <air:AirAvailInfo ProviderCode="1G"/>
+      </air:AirSegment>
+      <air:AirSegment Key="MxzYH5AqWDKAFt34EAAAAA==" Group="0" Carrier="MS" FlightNumber="737" ProviderCode="1G" Origin="CAI" Destination="IST" DepartureTime="2022-02-15T09:40:00.000+02:00" ArrivalTime="2022-02-15T13:00:00.000+03:00" FlightTime="255" Distance="1552" ClassOfService="S" ETicketability="Yes" Equipment="32N" Status="NN" ChangeOfPlane="false" SupplierCode="MS" OptionalServicesIndicator="false" AvailabilitySource="P" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Cached status used. Polled avail exists">
+        <air:AirAvailInfo ProviderCode="1G"/>
+      </air:AirSegment>
+      <air:SearchTraveler Key="gK3MV5G0nDKArKwArKAAAA==" Code="ADT">
+        <common_v47_0:Name Prefix="Mr" First="Arkajyoti" Last="Mallick"/>
+      </air:SearchTraveler>
+      <air:OptionalServices>
+        <air:OptionalServicesTotal/>
+        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="ETB1262" SupplierCode="MS" CreateDate="2022-01-19T12:45:19.819+00:00" SequenceNumber="6294" ServiceSubCode="0B5" SSRCode="SEAT" IssuanceReason="A" Key="gK3MV5G0nDKAqKwArKAAAA==" InclusiveOfTax="true" InterlineSettlementAllowed="true" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" Quantity="1" BasePrice="ETB1262" Taxes="ETB0" IsRepriceRequired="false">
+          <common_v47_0:ServiceData BookingTravelerRef="gK3MV5G0nDKArKwArKAAAA==" AirSegmentRef="MxzYH5AqWDKADt34EAAAAA==">
+            <common_v47_0:SeatAttributes>
+              <common_v47_0:SeatAttribute Value="K"/>
+            </common_v47_0:SeatAttributes>
+          </common_v47_0:ServiceData>
+          <common_v47_0:ServiceInfo>
+            <common_v47_0:Description>PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Description>
+          </common_v47_0:ServiceInfo>
+          <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="true" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+          <air:FeeApplication Code="4">Per travel</air:FeeApplication>
+        </air:OptionalService>
+        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="ETB757" SupplierCode="MS" CreateDate="2022-01-19T12:45:19.819+00:00" SequenceNumber="7092" ServiceSubCode="0B5" SSRCode="SEAT" IssuanceReason="A" Key="gK3MV5G0nDKAsKwArKAAAA==" InclusiveOfTax="true" InterlineSettlementAllowed="true" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" Quantity="1" BasePrice="ETB757" Taxes="ETB0" IsRepriceRequired="false">
+          <common_v47_0:ServiceData BookingTravelerRef="gK3MV5G0nDKArKwArKAAAA==" AirSegmentRef="MxzYH5AqWDKADt34EAAAAA==">
+            <common_v47_0:SeatAttributes>
+              <common_v47_0:SeatAttribute Value="W"/>
+            </common_v47_0:SeatAttributes>
+          </common_v47_0:ServiceData>
+          <common_v47_0:ServiceInfo>
+            <common_v47_0:Description>PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Description>
+          </common_v47_0:ServiceInfo>
+          <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="true" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+          <air:FeeApplication Code="4">Per travel</air:FeeApplication>
+        </air:OptionalService>
+        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="ETB505" SupplierCode="MS" CreateDate="2022-01-19T12:45:19.819+00:00" SequenceNumber="7592" ServiceSubCode="0B5" SSRCode="SEAT" IssuanceReason="A" Key="gK3MV5G0nDKAtKwArKAAAA==" InclusiveOfTax="true" InterlineSettlementAllowed="true" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" Quantity="1" BasePrice="ETB505" Taxes="ETB0" IsRepriceRequired="false">
+          <common_v47_0:ServiceData BookingTravelerRef="gK3MV5G0nDKArKwArKAAAA==" AirSegmentRef="MxzYH5AqWDKADt34EAAAAA=="/>
+          <common_v47_0:ServiceInfo>
+            <common_v47_0:Description>PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Description>
+          </common_v47_0:ServiceInfo>
+          <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="true" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+          <air:FeeApplication Code="4">Per travel</air:FeeApplication>
+        </air:OptionalService>
+        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="ETB1010" SupplierCode="MS" CreateDate="2022-01-19T12:45:19.819+00:00" SequenceNumber="6592" ServiceSubCode="0B5" SSRCode="SEAT" IssuanceReason="A" Key="gK3MV5G0nDKAuKwArKAAAA==" InclusiveOfTax="true" InterlineSettlementAllowed="true" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" Quantity="1" BasePrice="ETB1010" Taxes="ETB0" IsRepriceRequired="false">
+          <common_v47_0:ServiceData BookingTravelerRef="gK3MV5G0nDKArKwArKAAAA==" AirSegmentRef="MxzYH5AqWDKADt34EAAAAA==">
+            <common_v47_0:SeatAttributes>
+              <common_v47_0:SeatAttribute Value="A"/>
+            </common_v47_0:SeatAttributes>
+          </common_v47_0:ServiceData>
+          <common_v47_0:ServiceInfo>
+            <common_v47_0:Description>PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Description>
+          </common_v47_0:ServiceInfo>
+          <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="true" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+          <air:FeeApplication Code="4">Per travel</air:FeeApplication>
+        </air:OptionalService>
+        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="ETB1262" SupplierCode="MS" CreateDate="2022-01-19T12:45:19.819+00:00" SequenceNumber="6338" ServiceSubCode="0B5" SSRCode="SEAT" IssuanceReason="A" Key="gK3MV5G0nDKAvKwArKAAAA==" InclusiveOfTax="true" InterlineSettlementAllowed="true" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" Quantity="1" BasePrice="ETB1262" Taxes="ETB0" IsRepriceRequired="false">
+          <common_v47_0:ServiceData BookingTravelerRef="gK3MV5G0nDKArKwArKAAAA==" AirSegmentRef="MxzYH5AqWDKADt34EAAAAA==">
+            <common_v47_0:SeatAttributes>
+              <common_v47_0:SeatAttribute Value="E"/>
+            </common_v47_0:SeatAttributes>
+          </common_v47_0:ServiceData>
+          <common_v47_0:ServiceInfo>
+            <common_v47_0:Description>PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Description>
+          </common_v47_0:ServiceInfo>
+          <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="true" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+          <air:FeeApplication Code="4">Per travel</air:FeeApplication>
+        </air:OptionalService>
+        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="ETB1767" SupplierCode="MS" CreateDate="2022-01-19T12:45:19.819+00:00" SequenceNumber="6147" ServiceSubCode="0B5" SSRCode="SEAT" IssuanceReason="A" Key="gK3MV5G0nDKAwKwArKAAAA==" InclusiveOfTax="true" InterlineSettlementAllowed="true" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" Quantity="1" BasePrice="ETB1767" Taxes="ETB0" IsRepriceRequired="false">
+          <common_v47_0:ServiceData BookingTravelerRef="gK3MV5G0nDKArKwArKAAAA==" AirSegmentRef="MxzYH5AqWDKAFt34EAAAAA==">
+            <common_v47_0:SeatAttributes>
+              <common_v47_0:SeatAttribute Value="K"/>
+            </common_v47_0:SeatAttributes>
+          </common_v47_0:ServiceData>
+          <common_v47_0:ServiceInfo>
+            <common_v47_0:Description>PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Description>
+          </common_v47_0:ServiceInfo>
+          <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="true" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+          <air:FeeApplication Code="4">Per travel</air:FeeApplication>
+        </air:OptionalService>
+        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="ETB757" SupplierCode="MS" CreateDate="2022-01-19T12:45:19.819+00:00" SequenceNumber="7092" ServiceSubCode="0B5" SSRCode="SEAT" IssuanceReason="A" Key="gK3MV5G0nDKAxKwArKAAAA==" InclusiveOfTax="true" InterlineSettlementAllowed="true" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" Quantity="1" BasePrice="ETB757" Taxes="ETB0" IsRepriceRequired="false">
+          <common_v47_0:ServiceData BookingTravelerRef="gK3MV5G0nDKArKwArKAAAA==" AirSegmentRef="MxzYH5AqWDKAFt34EAAAAA==">
+            <common_v47_0:SeatAttributes>
+              <common_v47_0:SeatAttribute Value="W"/>
+            </common_v47_0:SeatAttributes>
+          </common_v47_0:ServiceData>
+          <common_v47_0:ServiceInfo>
+            <common_v47_0:Description>PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Description>
+          </common_v47_0:ServiceInfo>
+          <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="true" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+          <air:FeeApplication Code="4">Per travel</air:FeeApplication>
+        </air:OptionalService>
+        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="ETB505" SupplierCode="MS" CreateDate="2022-01-19T12:45:19.819+00:00" SequenceNumber="7592" ServiceSubCode="0B5" SSRCode="SEAT" IssuanceReason="A" Key="gK3MV5G0nDKAyKwArKAAAA==" InclusiveOfTax="true" InterlineSettlementAllowed="true" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" Quantity="1" BasePrice="ETB505" Taxes="ETB0" IsRepriceRequired="false">
+          <common_v47_0:ServiceData BookingTravelerRef="gK3MV5G0nDKArKwArKAAAA==" AirSegmentRef="MxzYH5AqWDKAFt34EAAAAA=="/>
+          <common_v47_0:ServiceInfo>
+            <common_v47_0:Description>PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Description>
+          </common_v47_0:ServiceInfo>
+          <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="true" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+          <air:FeeApplication Code="4">Per travel</air:FeeApplication>
+        </air:OptionalService>
+        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="ETB1010" SupplierCode="MS" CreateDate="2022-01-19T12:45:19.819+00:00" SequenceNumber="6592" ServiceSubCode="0B5" SSRCode="SEAT" IssuanceReason="A" Key="gK3MV5G0nDKAzKwArKAAAA==" InclusiveOfTax="true" InterlineSettlementAllowed="true" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" Quantity="1" BasePrice="ETB1010" Taxes="ETB0" IsRepriceRequired="false">
+          <common_v47_0:ServiceData BookingTravelerRef="gK3MV5G0nDKArKwArKAAAA==" AirSegmentRef="MxzYH5AqWDKAFt34EAAAAA==">
+            <common_v47_0:SeatAttributes>
+              <common_v47_0:SeatAttribute Value="A"/>
+            </common_v47_0:SeatAttributes>
+          </common_v47_0:ServiceData>
+          <common_v47_0:ServiceInfo>
+            <common_v47_0:Description>PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Description>
+          </common_v47_0:ServiceInfo>
+          <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="true" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+          <air:FeeApplication Code="4">Per travel</air:FeeApplication>
+        </air:OptionalService>
+        <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="ETB1262" SupplierCode="MS" CreateDate="2022-01-19T12:45:19.819+00:00" SequenceNumber="6338" ServiceSubCode="0B5" SSRCode="SEAT" IssuanceReason="A" Key="gK3MV5G0nDKA0KwArKAAAA==" InclusiveOfTax="true" InterlineSettlementAllowed="true" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" Quantity="1" BasePrice="ETB1262" Taxes="ETB0" IsRepriceRequired="false">
+          <common_v47_0:ServiceData BookingTravelerRef="gK3MV5G0nDKArKwArKAAAA==" AirSegmentRef="MxzYH5AqWDKAFt34EAAAAA==">
+            <common_v47_0:SeatAttributes>
+              <common_v47_0:SeatAttribute Value="E"/>
+            </common_v47_0:SeatAttributes>
+          </common_v47_0:ServiceData>
+          <common_v47_0:ServiceInfo>
+            <common_v47_0:Description>PRE RESERVED SEAT ASSIGNMENT</common_v47_0:Description>
+          </common_v47_0:ServiceInfo>
+          <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="true" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
+          <air:FeeApplication Code="4">Per travel</air:FeeApplication>
+        </air:OptionalService>
+      </air:OptionalServices>
+      <air:Rows SegmentRef="MxzYH5AqWDKADt34EAAAAA==">
+        <air:Row Number="20" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="20-A" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAqKwArKAAAA==">
+            <air:Characteristic Value="Bassinet" PADISCode="B"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Seat suitable for adult with an infant" PADISCode="I"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="20-B" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAqKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="20-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAqKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="20-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAqKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="20-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAqKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="20-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAqKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="21" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="21-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="21-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="21-C" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="21-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="21-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="21-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="22" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="22-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="22-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="22-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="22-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="22-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="22-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="23" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="23-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="23-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="23-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="23-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="23-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="23-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="24" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="24-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="24-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="24-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="24-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="24-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="24-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="25" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="25-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="25-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="25-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="25-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="25-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="25-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="26" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="26-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="26-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="26-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="26-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="26-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="26-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Exit row" PADISCode="E"/>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="27" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="27-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="27-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="27-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="27-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="27-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="27-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAvKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Exit row" PADISCode="E"/>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="28" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="28-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="28-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="28-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="28-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="28-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="28-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="29" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="29-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="29-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="29-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="29-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="29-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="29-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="30" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="30-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="30-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="30-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="30-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="30-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="30-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="31" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="31-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="31-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="31-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="31-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Handicapped" PADISCode="H"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="31-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="31-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="32" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="32-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="32-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="32-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="32-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="32-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="32-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="33" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="33-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="33-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="33-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="33-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="33-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="33-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="34" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="34-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="34-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="34-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="34-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="34-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="34-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="35" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="35-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="35-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="35-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="35-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="35-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="35-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="36" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="36-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="36-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="36-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="36-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="36-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="36-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="37" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="37-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="37-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="37-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="37-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="37-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="37-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="38" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="38-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="38-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="38-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="38-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="38-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="38-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="39" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="39-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="39-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="39-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="39-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="39-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="39-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="40" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="40-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="40-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="40-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="40-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="40-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="40-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="41" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="41-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="41-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="41-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="41-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="41-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="41-K" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="42" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="42-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="42-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="42-C" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="42-H" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAuKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="42-J" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAtKwArKAAAA==">
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="42-K" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAsKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+      </air:Rows>
+      <air:Rows SegmentRef="MxzYH5AqWDKAFt34EAAAAA==">
+        <air:Row Number="20" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="20-A" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAwKwArKAAAA==">
+            <air:Characteristic Value="Bassinet" PADISCode="B"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="20-B" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAwKwArKAAAA==">
+            <air:Characteristic Value="Bassinet" PADISCode="B"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="20-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAwKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="Bassinet" PADISCode="B"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="20-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAwKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="Bassinet" PADISCode="B"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="20-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAwKwArKAAAA==">
+            <air:Characteristic Value="Bassinet" PADISCode="B"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="20-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAwKwArKAAAA==">
+            <air:Characteristic Value="Bassinet" PADISCode="B"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Bulkhead" PADISCode="K"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="21" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="21-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="21-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="21-C" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="21-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="21-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="21-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="22" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="22-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="22-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="22-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="22-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="22-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="22-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="23" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="23-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="23-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="23-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="23-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="23-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="23-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Exit row" PADISCode="E"/>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="24" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="24-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="24-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="24-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="24-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="24-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="24-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKA0KwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="ExitRow" PADISCode="E"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Exit row" PADISCode="E"/>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="25" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="25-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="25-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="25-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="25-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="25-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="25-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="26" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="26-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="26-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="26-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="26-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="26-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="26-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="27" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="27-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="27-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="27-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="27-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="27-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="27-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="28" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="28-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="28-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="28-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="28-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="28-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="28-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="29" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="29-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="29-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="29-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="29-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="29-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="29-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="30" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="30-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="30-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="30-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="30-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="30-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="30-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="31" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="31-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="31-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="31-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="31-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="31-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="31-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="32" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="32-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="32-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="32-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="32-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="32-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="32-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="33" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="33-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="33-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="33-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="33-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="33-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="33-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="34" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="34-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="34-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="34-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="34-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="34-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="34-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="35" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="35-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="35-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="35-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="35-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="35-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="35-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="36" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="36-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="36-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="36-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="36-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="36-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="36-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="37" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="37-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="37-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="37-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="37-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="37-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="37-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="38" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="38-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="38-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="38-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="38-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="38-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="38-K" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="39" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="39-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="39-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="39-C" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="39-H" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="39-J" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="39-K" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+        <air:Row Number="40" SearchTravelerRef="gK3MV5G0nDKArKwArKAAAA==">
+          <air:Facility Type="Seat" SeatCode="40-A" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="40-B" Availability="Available" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="40-C" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Aisle"/>
+          <air:Facility Type="Seat" SeatCode="40-H" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAzKwArKAAAA==">
+            <air:Characteristic Value="Aisle" PADISCode="A"/>
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="40-J" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAyKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Center seat (not window, not aisle)" PADISCode="9"/>
+          </air:Facility>
+          <air:Facility Type="Seat" SeatCode="40-K" Availability="Blocked" Paid="true" OptionalServiceRef="gK3MV5G0nDKAxKwArKAAAA==">
+            <air:Characteristic Value="PaidGeneralSeat" PADISCode="CH"/>
+            <air:Characteristic Value="Window" PADISCode="W"/>
+          </air:Facility>
+          <air:Characteristic Value="Maindeck row" PADISCode="M"/>
+        </air:Row>
+      </air:Rows>
+    </air:SeatMapRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

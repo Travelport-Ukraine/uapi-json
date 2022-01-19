@@ -170,4 +170,10 @@ module.exports = {
       transformers.decodeExchangeToken
     )
   ),
+  AIR_SEATMAP : compose(
+    validate(
+      validators.seatmap
+    ),
+    transform()
+  )
 };

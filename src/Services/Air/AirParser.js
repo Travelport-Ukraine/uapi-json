@@ -1300,6 +1300,63 @@ function availability(rsp) {
   };
 }
 
+function seatmapRequest(obj) {
+  const rows = obj['air:Rows'];
+  let seatsTotal = {};
+  let seatObj = {};
+  let seats = {};
+  let seatResult;
+
+  if (rows.length > 1 && rows[0]['air:Row']) {
+    rows.forEach((rowing, index) => {
+      let row = rowing['air:Row'];
+      seats = [];
+      row.forEach((facility) => {
+        seatObj = {};
+        let seatRowCollection = [];
+        facility['air:Facility'].forEach((seat) => {
+          let seatRow = {};
+          seatRow.Type = seat.Type;
+          seatRow.SeatCode = seat.SeatCode;
+          seatRow.Availability = seat.Availability;
+          if (seat.Paid) {
+            seatRow.Paid = seat.Paid;
+          }
+
+          seatRow.characterstics = seat['air:Characteristic'];
+          seatRowCollection.push(seatRow);
+        });
+        seatObj.rowNum = facility.Number;
+        seatObj.seats = seatRowCollection;
+        seats.push(seatObj);
+      });
+      seatsTotal[(Object.keys(obj['air:AirSegment'])[index])] = (seats);
+    });
+    seatResult = seatsTotal;
+  } else {
+    let seatRowCollection = [];
+    rows.forEach((facility) => {
+      facility['air:Facility'].forEach((seat) => {
+        let seatRow = {};
+        seatRow.Type = seat.Type;
+        seatRow.SeatCode = seat.SeatCode;
+        seatRow.Availability = seat.Availability;
+        if (seat.Paid) {
+          seatRow.Paid = seat.Paid;
+        }
+
+        seatRow.characterstics = seat['air:Characteristic'];
+        seatRowCollection.push(seatRow);
+      });
+      seatObj.rowNum = facility.Number;
+      seatObj.seats = seatRowCollection;
+    });
+    seats[(Object.keys(obj['air:AirSegment']))[0]] = (seatObj);
+    seatResult = seats;
+  }
+  return seatResult;
+}
+
 module.exports = {
   AIR_LOW_FARE_SEARCH_REQUEST: lowFaresSearchRequest,
   AIR_PRICE_REQUEST: airPrice,
@@ -1322,4 +1379,5 @@ module.exports = {
   AIR_EXCHANGE_QUOTE: exchangeQuote,
   AIR_EXCHANGE: exchangeBooking,
   AIR_AVAILABILITY: availability,
+  AIR_SEATMAP_REQUEST: seatmapRequest
 };
