@@ -127,7 +127,7 @@ module.exports = (settings) => {
       return service.importUniversalRecordByPNR(options);
     },
 
-    async handleNoReservationError(options) {
+    async addFakeSegmentToBooking(options) {
       const terminal = createTerminalService(settings);
 
       try {
@@ -176,6 +176,10 @@ module.exports = (settings) => {
       }
 
       await terminal.closeSession();
+    },
+
+    async handleNoReservationError(options) {
+      await this.addFakeSegmentToBooking(options);
       const ur = await service.getUniversalRecordByPNR(options);
       await service.cancelBooking(getBookingFromUr(ur, options.pnr));
 
