@@ -278,7 +278,7 @@ If the PNR contains no active segments it could not be imported into uAPI. Thus 
 | Param | Type | Description |
 | --- | --- | --- |
 | pnr | `String` | 1G PNR. |
-| viewOnly | `Boolean` | When `true` is passed, allows to get bookings from other accessible PCCs. Default is false |
+| viewOnly | `Boolean` | When `true` is passed, booking is retrieved in UR Format, but doesn't create an actual UR in UAPI. When `false` is passed, R is created and booking is retrieved from actual UR. Default `false`. |
 
 **See: <a href="../examples/Air/getUniversalRecordByPNR.js">Example</a>**
 
@@ -308,7 +308,7 @@ This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and t
 | Param | Type | Description |
 | --- | --- | --- |
 | pnr | `String` | 1G PNR. |
-| viewOnly | `Boolean` | When `true` is passed, allows to get bookings from other accessible PCCs. Default is false |
+| viewOnly | `Boolean` | When `true` is passed, booking is retrieved in UR Format, but doesn't create an actual UR in UAPI. When `false` is passed, R is created and booking is retrieved from actual UR. Default `false`. |
 
 **See: <a href="../examples/Air/getBooking.js">getBooking example</a>**
 
