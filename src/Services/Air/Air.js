@@ -192,7 +192,7 @@ module.exports = (settings) => {
         return await service.getUniversalRecordByPNR({ ...options, viewOnly });
       } catch (err) {
         if (err instanceof AirRuntimeError.NoReservationToImport) {
-          return this.handleNoReservationError();
+          return this.handleNoReservationError(options);
         }
         if (
           viewOnly === false
