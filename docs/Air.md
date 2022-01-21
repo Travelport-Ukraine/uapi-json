@@ -278,6 +278,7 @@ If the PNR contains no active segments it could not be imported into uAPI. Thus 
 | Param | Type | Description |
 | --- | --- | --- |
 | pnr | `String` | 1G PNR. |
+| viewOnly | `Boolean` | When `true` is passed, booking is retrieved in UR Format, but doesn't create an actual UR in UAPI. When `false` is passed, UR is created and booking is retrieved from actual UR. Default `false`. |
 
 **See: <a href="../examples/Air/getUniversalRecordByPNR.js">Example</a>**
 
@@ -307,6 +308,7 @@ This method executes [`getUniversalRecordByPNR`](#getUniversalRecordByPNR) and t
 | Param | Type | Description |
 | --- | --- | --- |
 | pnr | `String` | 1G PNR. |
+| viewOnly | `Boolean` | When `true` is passed, booking is retrieved in UR Format, but doesn't create an actual UR in UAPI. When `false` is passed, UR is created and booking is retrieved from actual UR. Default `false`. |
 
 **See: <a href="../examples/Air/getBooking.js">getBooking example</a>**
 
@@ -462,7 +464,7 @@ It is recommended to pass `version` param in order to ensure that the last versi
 > May require Terminal access enabled in uAPI. See [TerminalService](Terminal.md)
 
 Request for the EMD information for all issued EMD in PNR.
-You will get both: EMD-S/EMD-A 
+You will get both: EMD-S/EMD-A
 
 **Returns**: `Promise`
 **See**: [Ticket Information](https://support.travelport.com/webhelp/uapi/uapi.htm#Standalone_Merchandising/EMDRetrieval.htm)
@@ -488,4 +490,3 @@ Request for the emd information. You can get any type (EMD-S/EMD-A) by number.
 | emdNumber | `String` | EMD Number. |
 
 **See: <a href="../examples/Air/getEMDItem.js">getEMDItem example</a>**
-
