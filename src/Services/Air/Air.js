@@ -8,9 +8,6 @@ const createTerminalService = require('../Terminal/Terminal');
 const { AirRuntimeError } = require('./AirErrors');
 const validateServiceSettings = require('../../utils/validate-service-settings');
 
-const bookingInUseRegexp = '(?:\\*\\* THIS BF IS CURRENTLY IN USE \\*\\*\\s*)?';
-const nonIataLineRegexp = '(?:[ A-Z0-9][A-Z0-9]{3}-[^\\n]+[A-Z]{3}\\s*)?';
-
 module.exports = (settings) => {
   const service = airService(validateServiceSettings(settings));
   const log = (settings.options && settings.options.logFunction) || console.log;
@@ -127,73 +124,11 @@ module.exports = (settings) => {
       return service.importUniversalRecordByPNR(options);
     },
 
-    async addFakeSegmentToBooking(options) {
-      const terminal = createTerminalService(settings);
-
-      try {
-        // Creating passive segment to import PNR
-        const segment = {
-          date: moment().add(42, 'days').format('DDMMM'),
-          airline: 'OK',
-          from: 'DOH',
-          to: 'ODM',
-          comment: 'NO1',
-          class: 'Y',
-        };
-        const ticketingDate = moment().add(10, 'days').format('DDMMM');
-
-        const segmentCommand = (
-          `0${segment.airline}OPEN${segment.class}${segment.date}${segment.from}${segment.to}${segment.comment}`
-        ).toUpperCase();
-        const segmentResult = (
-          `1. ${segment.airline} OPEN ${segment.class}  ${segment.date} ${segment.from}${segment.to} ${segment.comment}`
-        ).toUpperCase();
-        const pnrRegExp = new RegExp(`^${bookingInUseRegexp}${nonIataLineRegexp}${options.pnr}`);
-
-        const openpPnrResponse = await terminal.executeCommand(`*${options.pnr}`);
-        if (!openpPnrResponse.match(pnrRegExp)) {
-          throw new AirRuntimeError.UnableToOpenPNRInTerminal();
-        }
-
-        const segmentResponse = await terminal.executeCommand(segmentCommand);
-        if (segmentResponse.indexOf(segmentResult) === -1) {
-          throw new AirRuntimeError.UnableToAddExtraSegment();
-        }
-
-        await terminal.executeCommand(`T.TAU/${ticketingDate}`);
-        await terminal.executeCommand('R.UAPI+ER');
-        const savePnrResponse = await terminal.executeCommand('ER');
-
-        if (
-          (!savePnrResponse.match(pnrRegExp))
-          || (savePnrResponse.indexOf(segmentResult) === -1)
-        ) {
-          throw new AirRuntimeError.UnableToSaveBookingWithExtraSegment();
-        }
-      } catch (importErr) {
-        await terminal.closeSession();
-        throw new AirRuntimeError.UnableToImportPnr(options, importErr);
-      }
-
-      await terminal.closeSession();
-    },
-
-    async handleNoReservationError(options) {
-      await this.addFakeSegmentToBooking(options);
-      const ur = await service.getUniversalRecordByPNR(options);
-      await service.cancelBooking(getBookingFromUr(ur, options.pnr));
-
-      return service.getUniversalRecordByPNR(options);
-    },
-
     async getUniversalRecordByPNR(options) {
       const { viewOnly = false } = options;
       try {
         return await service.getUniversalRecordByPNR({ ...options, viewOnly });
       } catch (err) {
-        if (err instanceof AirRuntimeError.NoReservationToImport) {
-          return this.handleNoReservationError(options);
-        }
         if (
           viewOnly === false
           && err.data
