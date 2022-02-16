@@ -571,7 +571,7 @@ NOTE-
           expect(importError).to.equal(error);
         });
     });
-    it('should throw an error when it is unable to open PNR in rerminal', () => {
+    it('should throw an error when it is unable to open PNR in terminal', () => {
       const getUniversalRecordByPNR = sinon.spy(
         () => Promise.reject(new AirRuntimeError.NoReservationToImport())
       );
@@ -582,74 +582,10 @@ NOTE-
         ],
         terminalResults: ['FINISH OR IGNORE'],
         terminalCallCounts: {
-          executeCommand: 1,
-          closeSession: 1,
+          executeCommand: 0,
+          closeSession: 0,
         },
-        instanceOf: AirRuntimeError.UnableToImportPnr,
-        causedBy: AirRuntimeError.UnableToOpenPNRInTerminal,
-      });
-    });
-
-    it('should throw an error when it is unable to add an extra segment', () => {
-      const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.NoReservationToImport())
-      );
-
-      return assertServiceError({
-        airFunctions: [
-          { func: getUniversalRecordByPNR, name: 'getUniversalRecordByPNR', count: 1 },
-        ],
-        terminalResults: [
-          pnrString, 'ERR: FORMAT',
-        ],
-        terminalCallCounts: {
-          executeCommand: 2,
-          closeSession: 1,
-        },
-        instanceOf: AirRuntimeError.UnableToImportPnr,
-        causedBy: AirRuntimeError.UnableToAddExtraSegment,
-      });
-    });
-    it('should throw an error when it is unable to add an extra segment (no segment added)', () => {
-      const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.NoReservationToImport())
-      );
-
-      return assertServiceError({
-        airFunctions: [
-          { func: getUniversalRecordByPNR, name: 'getUniversalRecordByPNR', count: 1 },
-        ],
-        terminalResults: [
-          pnrString, segmentResult, true, true,
-          [pnrString].join('\n'),
-        ],
-        terminalCallCounts: {
-          executeCommand: 5,
-          closeSession: 1,
-        },
-        instanceOf: AirRuntimeError.UnableToImportPnr,
-        causedBy: AirRuntimeError.UnableToSaveBookingWithExtraSegment,
-      });
-    });
-    it('should throw an error when it is unable to add an extra segment (no PNR parsed)', () => {
-      const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.NoReservationToImport())
-      );
-
-      return assertServiceError({
-        airFunctions: [
-          { func: getUniversalRecordByPNR, name: 'getUniversalRecordByPNR', count: 1 },
-        ],
-        terminalResults: [
-          pnrString, segmentResult, true, true,
-          [segmentResult].join('\n'),
-        ],
-        terminalCallCounts: {
-          executeCommand: 5,
-          closeSession: 1,
-        },
-        instanceOf: AirRuntimeError.UnableToImportPnr,
-        causedBy: AirRuntimeError.UnableToSaveBookingWithExtraSegment,
+        instanceOf: AirRuntimeError.NoReservationToImport,
       });
     });
 
