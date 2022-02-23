@@ -7,6 +7,7 @@ module.exports = {
     validate(
       validators.passengers,
       validators.legs,
+      validators.carriers,
       validators.allowDirectAccess
     ),
     transform(
