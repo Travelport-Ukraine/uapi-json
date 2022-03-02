@@ -26,7 +26,7 @@ const params = {
      INS: 1, //infant with a seat
      */
   },
-  carriers: ['KL'],
+  permittedCarriers: ['KL'],
   cabins: ['Economy'], // ['Business'],
   requestId: '4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60',
   // permittedConnectionPoints: ['AMS'],
@@ -34,8 +34,8 @@ const params = {
   // prohibitedConnectionPoints: ['DME', 'SVO', 'PAR'],
   // maxJourneyTime: 300,
   // pricing: {
-    // currency: 'USD',
-    // eTicketability: true,
+  // currency: 'USD',
+  // eTicketability: true,
   // },
 };
 

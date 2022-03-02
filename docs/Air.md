@@ -46,7 +46,8 @@ Low Fare Shop functionality combines air availability and a fare quote request t
 | maxJourneyTime | `number` | Maximum travel time in hours 0-99. Total for all legs <i>Optional.</i> |
 | solutionResult | `Boolean` | Set true to retrieve [AirPricingSolution](https://support.travelport.com/webhelp/uapi/Content/Air/Low_Fare_Shopping/Low_Fare_Shopping_(Synchronous).htm#AirPricingSolutions), default is False (retrieves [AirPricePoint](https://support.travelport.com/webhelp/uapi/Content/Air/Low_Fare_Shopping/Low_Fare_Shopping_by_Price_Points.htm). <i>Optional.</i> |.
 | maxSolutions | `number` | Maximum number of solutions. <i>Optional.</i> |.
-| carriers | `Array<String>` | Array of carriers' codes. <i>Optional.</i> |
+| permittedCarriers | `Array<String>` | Array of carriers' codes. <i>Optional. Can not be used when `preferredCarriers` is set</i> |
+| preferredCarriers | `Array<String>` | Array of carriers' codes. <i>Optional. Can not be used when `permittedCarriers` is set</i> |
 | allowDirectAccess | `Boolean` | When passed, first  carrier is taken from the carriers list and the search is done in carrier specific display.
 | preferredConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |
 | prohibitedConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |

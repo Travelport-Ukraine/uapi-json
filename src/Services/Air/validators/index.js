@@ -21,6 +21,7 @@ const searchId = require('./search-id');
 const version = require('./version');
 const allowDirectAccess = require('./allow-direct-access');
 const emdNumber = require('./emd-number');
+const carriers = require('./carriers');
 
 module.exports = {
   legs,
@@ -46,4 +47,5 @@ module.exports = {
   searchId,
   version,
   emdNumber,
+  carriers,
 };
