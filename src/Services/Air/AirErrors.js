@@ -42,6 +42,8 @@ Object.assign(AirValidationError, createErrorsList({
   AllowDirectAccessInvalid: 'Invalid value provided for allowDirectAccess',
   AllowDirectAccessCarriersNotSpecified: 'Carriers not specified for carrier specific display',
   EMDItemNumberMissing: 'Missing EMD number. See data.',
+  SingleCarriesTypeIsAllowed: 'You could specified only one type of carriers',
+  CarriersIsInvalid: 'Cairers should be a non-empty array of carrier codes',
 }, AirValidationError));
 
 const GdsValidationError = createErrorClass(

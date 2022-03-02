@@ -29,9 +29,9 @@ module.exports = `
                       </com:ConnectionPoint>
                     {{/inline}}
 
-                    {{#if ../carriers}}
+                    {{#if ../permittedCarriers}}
                     <air:PermittedCarriers>
-                    {{#each ../carriers as |carrier|}}
+                    {{#each ../permittedCarriers as |carrier|}}
                         <com:Carrier Code="{{carrier}}" />
                     {{/each}}
                     </air:PermittedCarriers>
@@ -80,12 +80,21 @@ module.exports = `
                 <air:PreferredProviders>
                     <com:Provider Code="{{provider}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
                 </air:PreferredProviders>
-                {{#if carriers}}
+
+                {{#if permittedCarriers}}
                 <air:PermittedCarriers>
-                    {{#carriers}}
-                    <com:Carrier Code="{{.}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
-                    {{/carriers}}
+                    {{#each permittedCarriers as |carrier|}}
+                    <com:Carrier Code="{{carrier}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
+                    {{/each}}
                 </air:PermittedCarriers>
+                {{/if}}
+
+                {{#if preferredCarriers}}
+                <air:PreferredCarriers>
+                    {{#each preferredCarriers as |carrier|}}
+                    <com:Carrier Code="{{carrier}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
+                    {{/each}}
+                </air:PreferredCarriers>
                 {{/if}}
 
             </air:AirSearchModifiers>
