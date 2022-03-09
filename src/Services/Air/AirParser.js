@@ -14,7 +14,8 @@ const {
 
 const fareCalculationPattern = /^([\s\S]+)END($|\s)/;
 const firstOriginPattern = /^(?:s-)?(?:\d{2}[a-z]{3}\d{2}\s+)?([a-z]{3})/i;
-const noAgreementPattern = /NO AGENCY AGREEMENT/ig;
+const noAgreementPattern = /NO AGENCY AGREEMENT/i;
+const unableToRetreivePatterrn = /NO AGENCY AGREEMENT/i;
 
 const parseFareCalculation = (str) => {
   const fareCalculation = str.match(fareCalculationPattern)[1];
@@ -425,38 +426,57 @@ function airPriceRspPricingSolutionXML(obj) {
   };
 }
 
-function processUAPIError(source = {}, fallbackMessage = 'UAPI Service resulted in an error') {
+function getResponseMessages(source) {
+  const responseMessagesKey = `common_${this.uapi_version}:ResponseMessage`;
+  return source[responseMessagesKey] || [];
+}
+
+function getUAPIErrorMessage(source = {}, fallbackMessage = 'UAPI Service resulted in an error') {
+  const {
+    faultstring,
+    'air:DocumentFailureInfo': documentFailureInfo,
+  } = source;
+  const responseMessages = getResponseMessages.call(this, source);
+
   if (source.faultstring) {
-    throw new RequestRuntimeError.UAPIServiceError({
-      ...source,
-      faultstring: source.faultstring.toUpperCase()
-    });
+    return faultstring;
   }
 
-  const responseMessages = source[`common_${this.uapi_version}:ResponseMessage`];
-
-  if (Array.isArray(responseMessages) && responseMessages.length) {
+  if (responseMessages.length > 0) {
     const [responseMessage = {}] = responseMessages;
     const { _: message = fallbackMessage } = responseMessage;
 
-    throw new RequestRuntimeError.UAPIServiceError({
-      ...source,
-      faultstring: message.toUpperCase()
-    });
+    return message;
   }
-
-  const documentFailureInfo = source['air:DocumentFailureInfo'];
 
   if (documentFailureInfo) {
     const { Message: message = fallbackMessage } = documentFailureInfo;
 
-    throw new RequestRuntimeError.UAPIServiceError({
-      ...source,
-      faultstring: message.toUpperCase()
-    });
+    return message;
   }
 
-  throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(source));
+  return null;
+}
+
+function processUAPIError(source) {
+  const uapiErrorMessage = getUAPIErrorMessage.call(this, source);
+  if (!uapiErrorMessage) {
+    throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(source));
+  }
+
+  if (noAgreementPattern.test(uapiErrorMessage)) {
+    const pcc = utils.getErrorPcc(uapiErrorMessage);
+    throw new AirRuntimeError.NoAgreement({ pcc });
+  }
+
+  if (unableToRetreivePatterrn.test(uapiErrorMessage)) {
+    throw new AirRuntimeError.UnableToRetrieve(source);
+  }
+
+  throw new RequestRuntimeError.UAPIServiceError({
+    ...source,
+    faultstring: uapiErrorMessage.toUpperCase()
+  });
 }
 
 const AirErrorHandler = function (rsp) {
@@ -476,9 +496,7 @@ const AirErrorHandler = function (rsp) {
     case '345':
     case '1512':
       if (pcc !== null) {
-        throw new AirRuntimeError.NoAgreement({
-          pcc: utils.getErrorPcc(rsp.faultstring),
-        });
+        throw new AirRuntimeError.NoAgreement({ pcc });
       }
       throw new AirRuntimeError.UnableToRetrieve(rsp);
     case '4454':
@@ -703,6 +721,7 @@ const airGetTicket = function (obj, parseParams = {
   allowNoProviderLocatorCodeRetrieval: false
 }) {
   const failure = obj['air:DocumentFailureInfo'];
+  const responseMessages = getResponseMessages.call(this, obj);
 
   if (failure) {
     if (failure.Code === '3273') {
@@ -712,11 +731,8 @@ const airGetTicket = function (obj, parseParams = {
     processUAPIError.call(this, obj, 'Unable to retrieve ticket');
   }
 
-  const responseMessages = obj[`common_${this.uapi_version}:ResponseMessage`] || [];
-  const hasNoAgreementResponse = responseMessages.find(({ _: message, Code }) => Code === '12009' && noAgreementPattern.test(message));
-
-  if (hasNoAgreementResponse) {
-    throw new AirRuntimeError.NoAgreement({ screen: hasNoAgreementResponse._ });
+  if (responseMessages.some(({ Type }) => (Type === 'Error'))) {
+    processUAPIError.call(this, obj, 'Unable to retrieve ticket');
   }
 
   const etr = obj['air:ETR'];
