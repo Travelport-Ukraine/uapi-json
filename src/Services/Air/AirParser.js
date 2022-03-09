@@ -15,7 +15,7 @@ const {
 const fareCalculationPattern = /^([\s\S]+)END($|\s)/;
 const firstOriginPattern = /^(?:s-)?(?:\d{2}[a-z]{3}\d{2}\s+)?([a-z]{3})/i;
 const noAgreementPattern = /NO AGENCY AGREEMENT/i;
-const unableToRetreivePatterrn = /NO AGENCY AGREEMENT/i;
+const unableToRetreivePattern = /UNABLE TO RETRIEVE/i;
 
 const parseFareCalculation = (str) => {
   const fareCalculation = str.match(fareCalculationPattern)[1];
@@ -469,7 +469,7 @@ function processUAPIError(source) {
     throw new AirRuntimeError.NoAgreement({ pcc });
   }
 
-  if (unableToRetreivePatterrn.test(uapiErrorMessage)) {
+  if (unableToRetreivePattern.test(uapiErrorMessage)) {
     throw new AirRuntimeError.UnableToRetrieve(source);
   }
 
