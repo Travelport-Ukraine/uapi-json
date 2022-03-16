@@ -731,7 +731,7 @@ const airGetTicket = function (obj, parseParams = {
     processUAPIError.call(this, obj, 'Unable to retrieve ticket');
   }
 
-  if (responseMessages.some(({ Type }) => (Type === 'Error'))) {
+  if (responseMessages.some(({ Type, Code }) => (Type === 'Error' && Code !== '12009'))) {
     processUAPIError.call(this, obj, 'Unable to retrieve ticket');
   }
 
