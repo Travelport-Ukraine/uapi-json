@@ -16,6 +16,7 @@ const fareCalculationPattern = /^([\s\S]+)END($|\s)/;
 const firstOriginPattern = /^(?:s-)?(?:\d{2}[a-z]{3}\d{2}\s+)?([a-z]{3})/i;
 const noAgreementPattern = /NO AGENCY AGREEMENT/i;
 const unableToRetreivePattern = /UNABLE TO RETRIEVE/i;
+const ticketRetrieveError = /HOST ERROR DURING TICKET RETRIEVE/i;
 
 const parseFareCalculation = (str) => {
   const fareCalculation = str.match(fareCalculationPattern)[1];
@@ -464,19 +465,22 @@ function processUAPIError(source) {
     throw new RequestRuntimeError.UnhandledError(null, new AirRuntimeError(source));
   }
 
-  if (noAgreementPattern.test(uapiErrorMessage)) {
-    const pcc = utils.getErrorPcc(uapiErrorMessage);
-    throw new AirRuntimeError.NoAgreement({ pcc });
-  }
+  const pcc = utils.getErrorPcc(uapiErrorMessage);
 
-  if (unableToRetreivePattern.test(uapiErrorMessage)) {
-    throw new AirRuntimeError.UnableToRetrieve(source);
+  switch (true) {
+    case noAgreementPattern.test(uapiErrorMessage):
+      utils.getErrorPcc(uapiErrorMessage);
+      throw new AirRuntimeError.NoAgreement({ pcc });
+    case unableToRetreivePattern.test(uapiErrorMessage):
+      throw new AirRuntimeError.UnableToRetrieve(source);
+    case ticketRetrieveError.test(uapiErrorMessage):
+      throw new AirRuntimeError.UnableToRetrieve(source);
+    default:
+      throw new RequestRuntimeError.UAPIServiceError({
+        ...source,
+        faultstring: uapiErrorMessage.toUpperCase()
+      });
   }
-
-  throw new RequestRuntimeError.UAPIServiceError({
-    ...source,
-    faultstring: uapiErrorMessage.toUpperCase()
-  });
 }
 
 const AirErrorHandler = function (rsp) {

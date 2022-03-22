@@ -112,6 +112,8 @@ Object.assign(AirRuntimeError, createErrorsList({
   NoValidFare: 'No valid fare for input criteria.',
   TravelersListError: 'Not all BookingTravelers present in list or wrong lookup keys provided',
   ParseTicketPNRError: ['Failed to parse PNR from ticket information', errorCodes.Validation],
+  HostErrorDuringTicketRetrieve: 'Host error during ticket retrieve',
+  AccessedByAnotherTransaction: 'Accessed by another transaction. Retry later',
   UnableToRetrieveTickets: ['Unable to retrieve tickets list', errorCodes.NotFound],
   TicketInfoIncomplete: 'Ticket information is incomplete',
   RequestInconsistency: 'Request faced race condition. Please retry again',

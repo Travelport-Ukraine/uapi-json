@@ -568,17 +568,17 @@ describe('#AirParser', () => {
         });
     });
 
-    it('should return error when not available to return ticket', (done) => {
+    it('should return error when not available to return ticket', async () => {
       const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
-      const xml = fs.readFileSync(`${xmlFolder}/getTicket_FAILED.xml`).toString();
-      uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .then(() => done(new Error('Error has not occurred')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
-          done();
-        });
+      try {
+        const xml = fs.readFileSync(`${xmlFolder}/getTicket_FAILED.xml`).toString();
+        const json = await uParser.parse(xml);
+        parseFunction.call(uParser, json);
+        throw new Error('Error has not occurred');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieve);
+      }
     });
 
     it('should parse imported ticket', () => {
