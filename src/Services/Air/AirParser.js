@@ -16,7 +16,8 @@ const fareCalculationPattern = /^([\s\S]+)END($|\s)/;
 const firstOriginPattern = /^(?:s-)?(?:\d{2}[a-z]{3}\d{2}\s+)?([a-z]{3})/i;
 const noAgreementPattern = /NO AGENCY AGREEMENT/i;
 const unableToRetreivePattern = /UNABLE TO RETRIEVE/i;
-const ticketRetrieveError = /HOST ERROR DURING TICKET RETRIEVE/i;
+const ticketRetrieveErrorPattern = /HOST ERROR DURING TICKET RETRIEVE/i;
+const accessedByAnotherTransactionPattern = /ACCESSED BY ANOTHER TRANSACTION/i;
 
 const parseFareCalculation = (str) => {
   const fareCalculation = str.match(fareCalculationPattern)[1];
@@ -473,8 +474,10 @@ function processUAPIError(source) {
       throw new AirRuntimeError.NoAgreement({ pcc });
     case unableToRetreivePattern.test(uapiErrorMessage):
       throw new AirRuntimeError.UnableToRetrieve(source);
-    case ticketRetrieveError.test(uapiErrorMessage):
+    case ticketRetrieveErrorPattern.test(uapiErrorMessage):
       throw new AirRuntimeError.UnableToRetrieve(source);
+    case accessedByAnotherTransactionPattern.test(uapiErrorMessage):
+      throw new AirRuntimeError.AccessedByAnotherTransaction(source);
     default:
       throw new RequestRuntimeError.UAPIServiceError({
         ...source,
