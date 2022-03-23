@@ -135,7 +135,8 @@ Object.assign(AirRuntimeError, createErrorsList({
   DuplicateTicketFound: 'Duplicate ticket number found. Provide PNR, UR locator',
   NoPNRFoundInUR: ['No PNR found in Universal record', errorCodes.NotFound],
   NoAgreement: ['There is no agreement between current pcc, and one you try to reach', errorCodes.Validation],
-  UnableToRetrieve: ['Unable to retrieve PNR or document. Please contact your local Travelport Helpdesk.', errorCodes.NotFound],
+  UnableToRetrieve: ['Unable to retrieve PNR. Please contact your local Travelport Helpdesk.', errorCodes.NotFound],
+  UnableToRetrieveTicket: 'Unable to retrieve ticket. Please contact your local Travelport Helpdesk.',
   CouldNotRetrieveCurrency: 'We could not retrieve currency for commission from any fare in the booking. Please check fare quotes.',
   TicketNotFound: 'Ticket was not found in the tickets list',
 }, AirRuntimeError));
