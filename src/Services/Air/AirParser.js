@@ -475,7 +475,7 @@ function processUAPIError(source) {
     case unableToRetreivePattern.test(uapiErrorMessage):
       throw new AirRuntimeError.UnableToRetrieve(source);
     case ticketRetrieveErrorPattern.test(uapiErrorMessage):
-      throw new AirRuntimeError.UnableToRetrieve(source);
+      throw new AirRuntimeError.UnableToRetrieveTicket(source);
     case accessedByAnotherTransactionPattern.test(uapiErrorMessage):
       throw new AirRuntimeError.AccessedByAnotherTransaction(source);
     default:

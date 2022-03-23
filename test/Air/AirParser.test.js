@@ -577,7 +577,7 @@ describe('#AirParser', () => {
         parseFunction.call(uParser, json);
         throw new Error('Error has not occurred');
       } catch (err) {
-        expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieve);
+        expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieveTicket);
       }
     });
 
