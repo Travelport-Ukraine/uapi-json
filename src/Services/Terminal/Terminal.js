@@ -13,6 +13,10 @@ const TERMINAL_STATE_ERROR = 'TERMINAL_STATE_ERROR';
 const screenFunctions = screenLib({ cursor: '><' });
 const autoCloseTerminals = [];
 
+const ERROR_INFO_SUFFIX = 'ErrorInfo';
+const ERROR_CODE_SUFFIX = 'Code';
+const TOKEN_TIMEOUT_CODE = '14058';
+
 // Adding event handler on beforeExit and exit process events to process open terminals
 process.on('beforeExit', () => {
   Promise.all(
@@ -84,14 +88,23 @@ module.exports = function (settings) {
     terminalState: TERMINAL_STATE_NONE,
     sessionToken: token,
   };
+
+  const getErrorTagPrefix = (detailObject) => {
+    const [field] = Object.keys(detailObject);
+    const [prefix] = field.split(':');
+
+    return prefix;
+  };
+
   // Processing response with MD commands
-  const processResponse = (response, stopMD, previousResponse = null) => {
+  const processResponse = (response, stopMD, previousResponse = null, prevErrorCode = null) => {
+    const noPrevResponse = Array.isArray(response) ? response.join('\n') : response;
     const processedResponse = previousResponse
       ? screenFunctions.mergeResponse(
         previousResponse,
         response.join('\n')
       )
-      : response.join('\n');
+      : noPrevResponse;
     if (stopMD(processedResponse)) {
       return processedResponse;
     }
@@ -100,11 +113,25 @@ module.exports = function (settings) {
       command: 'MD',
     }).then(
       mdResponse => (
-        mdResponse.join('\n') === response.join('\n')
+        mdResponse.join('\n') === noPrevResponse
           ? processedResponse
           : processResponse(mdResponse, stopMD, processedResponse)
       )
-    );
+    ).catch((e) => {
+      if (!e.causedBy || !e.causedBy.data || !e.causedBy.data.detail) {
+        return Promise.reject(e);
+      }
+
+      const { detail } = e.causedBy.data;
+      const versionPrefix = getErrorTagPrefix(detail);
+      const errorCode = detail[`${versionPrefix}:${ERROR_INFO_SUFFIX}`]
+        && detail[`${versionPrefix}:${ERROR_INFO_SUFFIX}`][`${versionPrefix}:${ERROR_CODE_SUFFIX}`];
+      if (errorCode && errorCode === TOKEN_TIMEOUT_CODE && errorCode !== prevErrorCode) {
+        return processResponse(processedResponse, stopMD, null, errorCode);
+      }
+
+      return Promise.reject(e);
+    });
   };
   // Getting session token
   const getSessionToken = () => new Promise((resolve, reject) => {
