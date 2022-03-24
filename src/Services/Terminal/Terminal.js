@@ -15,7 +15,9 @@ const autoCloseTerminals = [];
 
 const ERROR_INFO_SUFFIX = 'ErrorInfo';
 const ERROR_CODE_SUFFIX = 'Code';
-const TOKEN_TIMEOUT_CODE = '14058';
+const RETRY_CODES_LIST = ['14058'];
+
+const DEFAULT_RETRY_TIMES = 3;
 
 // Adding event handler on beforeExit and exit process events to process open terminals
 process.on('beforeExit', () => {
@@ -71,6 +73,57 @@ process.on('exit', () => {
   });
 });
 
+const getErrorTagPrefix = (detailObject) => {
+  const [field] = Object.keys(detailObject);
+  const [prefix] = field.split(':');
+
+  return prefix;
+};
+
+const isErrorRetriable = (e) => {
+  if (!e.causedBy || !e.causedBy.data || !e.causedBy.data.detail) {
+    return false;
+  }
+
+  const { detail } = e.causedBy.data;
+  const versionPrefix = getErrorTagPrefix(detail);
+  const errorCode = detail[`${versionPrefix}:${ERROR_INFO_SUFFIX}`]
+    && detail[`${versionPrefix}:${ERROR_INFO_SUFFIX}`][`${versionPrefix}:${ERROR_CODE_SUFFIX}`];
+  if (errorCode && RETRY_CODES_LIST.includes(errorCode)) {
+    return true;
+  }
+
+  return false;
+};
+
+const commandRetry = async ({
+  service,
+  command,
+  sessionToken,
+  times = DEFAULT_RETRY_TIMES,
+  count = 0
+}) => {
+  try {
+    const result = await service.executeCommand({ command, sessionToken });
+    return result;
+  } catch (e) {
+    const res = isErrorRetriable(e);
+    const resCount = count + 1;
+
+    if (res && resCount <= times) {
+      return commandRetry({
+        service,
+        command,
+        sessionToken,
+        times,
+        count: resCount,
+      });
+    }
+
+    throw e;
+  }
+};
+
 module.exports = function (settings) {
   const service = terminalService(validateServiceSettings(settings));
   const log = (settings.options && settings.options.logFunction) || console.log;
@@ -89,49 +142,28 @@ module.exports = function (settings) {
     sessionToken: token,
   };
 
-  const getErrorTagPrefix = (detailObject) => {
-    const [field] = Object.keys(detailObject);
-    const [prefix] = field.split(':');
-
-    return prefix;
-  };
-
   // Processing response with MD commands
-  const processResponse = (response, stopMD, previousResponse = null, prevErrorCode = null) => {
-    const noPrevResponse = Array.isArray(response) ? response.join('\n') : response;
+  const processResponse = (response, stopMD, previousResponse = null) => {
     const processedResponse = previousResponse
       ? screenFunctions.mergeResponse(
         previousResponse,
         response.join('\n')
       )
-      : noPrevResponse;
+      : response.join('\n');
     if (stopMD(processedResponse)) {
       return processedResponse;
     }
-    return service.executeCommand({
+    return commandRetry({
+      service,
       sessionToken: state.sessionToken,
       command: 'MD',
     }).then(
       mdResponse => (
-        mdResponse.join('\n') === noPrevResponse
+        mdResponse.join('\n') === response.join('\n')
           ? processedResponse
           : processResponse(mdResponse, stopMD, processedResponse)
       )
-    ).catch((e) => {
-      if (!e.causedBy || !e.causedBy.data || !e.causedBy.data.detail) {
-        return Promise.reject(e);
-      }
-
-      const { detail } = e.causedBy.data;
-      const versionPrefix = getErrorTagPrefix(detail);
-      const errorCode = detail[`${versionPrefix}:${ERROR_INFO_SUFFIX}`]
-        && detail[`${versionPrefix}:${ERROR_INFO_SUFFIX}`][`${versionPrefix}:${ERROR_CODE_SUFFIX}`];
-      if (errorCode && errorCode === TOKEN_TIMEOUT_CODE && errorCode !== prevErrorCode) {
-        return processResponse(processedResponse, stopMD, null, errorCode);
-      }
-
-      return Promise.reject(e);
-    });
+    );
   };
   // Getting session token
   const getSessionToken = () => new Promise((resolve, reject) => {
@@ -189,7 +221,7 @@ module.exports = function (settings) {
           log(`[${terminalId}] Terminal request:\n${command}`);
         }
 
-        const screen = await service.executeCommand({ command, sessionToken });
+        const screen = await commandRetry({ service, command, sessionToken });
         const response = await processResponse(screen, stopMD);
 
         if (debug) {
