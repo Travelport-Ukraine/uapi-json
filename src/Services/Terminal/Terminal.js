@@ -89,11 +89,8 @@ const isErrorRetriable = (e) => {
   const versionPrefix = getErrorTagPrefix(detail);
   const errorCode = detail[`${versionPrefix}:${ERROR_INFO_SUFFIX}`]
     && detail[`${versionPrefix}:${ERROR_INFO_SUFFIX}`][`${versionPrefix}:${ERROR_CODE_SUFFIX}`];
-  if (errorCode && RETRY_CODES_LIST.includes(errorCode)) {
-    return true;
-  }
 
-  return false;
+  return (errorCode && RETRY_CODES_LIST.includes(errorCode));
 };
 
 const commandRetry = async ({
