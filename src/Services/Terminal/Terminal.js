@@ -13,6 +13,12 @@ const TERMINAL_STATE_ERROR = 'TERMINAL_STATE_ERROR';
 const screenFunctions = screenLib({ cursor: '><' });
 const autoCloseTerminals = [];
 
+const ERROR_INFO_SUFFIX = 'ErrorInfo';
+const ERROR_CODE_SUFFIX = 'Code';
+const RETRY_CODES_LIST = ['14058'];
+
+const DEFAULT_RETRY_TIMES = 3;
+
 // Adding event handler on beforeExit and exit process events to process open terminals
 process.on('beforeExit', () => {
   Promise.all(
@@ -67,6 +73,48 @@ process.on('exit', () => {
   });
 });
 
+const getErrorTagPrefix = (detailObject) => {
+  const [field] = Object.keys(detailObject);
+  const [prefix] = field.split(':');
+
+  return prefix;
+};
+
+const isErrorRetriable = (e) => {
+  if (!e.causedBy || !e.causedBy.data || !e.causedBy.data.detail) {
+    return false;
+  }
+
+  const { detail } = e.causedBy.data;
+  const versionPrefix = getErrorTagPrefix(detail);
+  const errorCode = detail[`${versionPrefix}:${ERROR_INFO_SUFFIX}`]
+    && detail[`${versionPrefix}:${ERROR_INFO_SUFFIX}`][`${versionPrefix}:${ERROR_CODE_SUFFIX}`];
+
+  return (errorCode && RETRY_CODES_LIST.includes(errorCode));
+};
+
+const commandRetry = async ({
+  service,
+  command,
+  sessionToken,
+  times = DEFAULT_RETRY_TIMES,
+}) => {
+  try {
+    return await service.executeCommand({ command, sessionToken });
+  } catch (e) {
+    if (!isErrorRetriable(e) || times <= 0) {
+      throw e;
+    }
+
+    return commandRetry({
+      service,
+      command,
+      sessionToken,
+      times: times - 1,
+    });
+  }
+};
+
 module.exports = function (settings) {
   const service = terminalService(validateServiceSettings(settings));
   const log = (settings.options && settings.options.logFunction) || console.log;
@@ -84,6 +132,7 @@ module.exports = function (settings) {
     terminalState: TERMINAL_STATE_NONE,
     sessionToken: token,
   };
+
   // Processing response with MD commands
   const processResponse = (response, stopMD, previousResponse = null) => {
     const processedResponse = previousResponse
@@ -95,7 +144,8 @@ module.exports = function (settings) {
     if (stopMD(processedResponse)) {
       return processedResponse;
     }
-    return service.executeCommand({
+    return commandRetry({
+      service,
       sessionToken: state.sessionToken,
       command: 'MD',
     }).then(
@@ -162,7 +212,7 @@ module.exports = function (settings) {
           log(`[${terminalId}] Terminal request:\n${command}`);
         }
 
-        const screen = await service.executeCommand({ command, sessionToken });
+        const screen = await commandRetry({ service, command, sessionToken });
         const response = await processResponse(screen, stopMD);
 
         if (debug) {
