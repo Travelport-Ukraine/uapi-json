@@ -11,6 +11,7 @@ const sinonChai = require('sinon-chai');
 const proxyquire = require('proxyquire');
 const config = require('../testconfig');
 const uAPI = require('../../src');
+const { RequestRuntimeError } = require('../../src/Request/RequestErrors');
 
 chai.use(sinonChai);
 process.setMaxListeners(20);
@@ -49,6 +50,14 @@ const getTerminalResponse = p => new Promise((resolve, reject) => {
 // Token const
 const token = 'TOKEN';
 
+const sessionError = {
+  detail: {
+    'common_v33_0:ErrorInfo': {
+      'common_v33_0:Code': '14058',
+    }
+  }
+};
+
 // Spied functions
 const getSessionToken = sinon.spy(() => Promise.resolve({ sessionToken: token }));
 const executeCommandSlow = sinon.spy((params) => {
@@ -84,16 +93,19 @@ const executeCommandOk = sinon.spy((params) => {
       return getTerminalResponse('ERR');
   }
 });
+const mdCallMdIssues = sinon.stub();
 const executeCommandMdIssues = sinon.spy((params) => {
   expect(params).to.be.an('object');
   expect(params.sessionToken).to.equal(token);
   expect(params.command).to.be.a('string');
 
-  const mdCall = sinon.stub();
-  mdCall.onCall(0).returns(
+  mdCallMdIssues.onCall(0).returns(
     getTerminalResponse('set02/HFF-P2')
   );
-  mdCall.onCall(1).returns(
+  mdCallMdIssues.onCall(1).throws(
+    new RequestRuntimeError.UnhandledError(null, new TerminalRuntimeError(sessionError))
+  );
+  mdCallMdIssues.onCall(2).returns(
     getTerminalResponse('set02/HFF-P3')
   );
 
@@ -101,7 +113,7 @@ const executeCommandMdIssues = sinon.spy((params) => {
     case '*HFF':
       return getTerminalResponse('set02/HFF-P1');
     case 'MD':
-      return mdCall();
+      return mdCallMdIssues();
     default:
       if (params.command.match(/^SEM/)) {
         return getTerminalResponse('SEM');
@@ -123,6 +135,7 @@ const executeCommandEmulationFailed = sinon.spy((params) => {
       return getTerminalResponse('ERR');
   }
 });
+
 const closeSession = sinon.spy(() => Promise.resolve(true));
 const closeSessionError = sinon.spy(() => Promise.reject(new Error('Error closing session')));
 
