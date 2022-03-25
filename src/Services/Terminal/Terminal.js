@@ -101,26 +101,20 @@ const commandRetry = async ({
   command,
   sessionToken,
   times = DEFAULT_RETRY_TIMES,
-  count = 0
 }) => {
   try {
-    const result = await service.executeCommand({ command, sessionToken });
-    return result;
+    return await service.executeCommand({ command, sessionToken });
   } catch (e) {
-    const res = isErrorRetriable(e);
-    const resCount = count + 1;
-
-    if (res && resCount <= times) {
-      return commandRetry({
-        service,
-        command,
-        sessionToken,
-        times,
-        count: resCount,
-      });
+    if (!isErrorRetriable(e) || times <= 0) {
+      throw e;
     }
 
-    throw e;
+    return commandRetry({
+      service,
+      command,
+      sessionToken,
+      times: times - 1,
+    });
   }
 };
 
