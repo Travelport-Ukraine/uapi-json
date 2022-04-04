@@ -61,7 +61,7 @@ module.exports = `
                 {{/ssr}}
                 {{#if isChild}}
                 <com:NameRemark Key="P_{{@index}}">
-                    <com:RemarkData>P-{{ageCategory}}</com:RemarkData>
+                    <com:RemarkData>P-{{ageCategory}} DOB{{dobString}}</com:RemarkData>
                 </com:NameRemark>
                 {{/if}}
             </com:BookingTraveler>
