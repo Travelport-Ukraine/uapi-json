@@ -467,22 +467,23 @@ function processUAPIError(source) {
   }
 
   const pcc = utils.getErrorPcc(uapiErrorMessage);
+  const sourceWithFaultString = {
+    ...source,
+    faultstring: uapiErrorMessage.toUpperCase()
+  };
 
   switch (true) {
     case noAgreementPattern.test(uapiErrorMessage):
       utils.getErrorPcc(uapiErrorMessage);
       throw new AirRuntimeError.NoAgreement({ pcc });
     case unableToRetreivePattern.test(uapiErrorMessage):
-      throw new AirRuntimeError.UnableToRetrieve(source);
+      throw new AirRuntimeError.UnableToRetrieve(sourceWithFaultString);
     case ticketRetrieveErrorPattern.test(uapiErrorMessage):
-      throw new AirRuntimeError.UnableToRetrieveTicket(source);
+      throw new AirRuntimeError.UnableToRetrieveTicket(sourceWithFaultString);
     case accessedByAnotherTransactionPattern.test(uapiErrorMessage):
-      throw new AirRuntimeError.AccessedByAnotherTransaction(source);
+      throw new AirRuntimeError.AccessedByAnotherTransaction(sourceWithFaultString);
     default:
-      throw new RequestRuntimeError.UAPIServiceError({
-        ...source,
-        faultstring: uapiErrorMessage.toUpperCase()
-      });
+      throw new RequestRuntimeError.UAPIServiceError(sourceWithFaultString);
   }
 }
 
