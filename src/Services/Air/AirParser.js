@@ -579,7 +579,7 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
         departure: coupon.DepartureTime,
         airline: coupon.MarketingCarrier,
         flightNumber: coupon.MarketingFlightNumber,
-        fareBasisCode: coupon.FareBasis,
+        fareBasisCode: utils.formFareBasisCode(airPricingInfo, coupon),
         status: coupon.Status,
         notValidBefore: coupon.NotValidBefore,
         notValidAfter: coupon.NotValidAfter,

@@ -815,6 +815,18 @@ describe('#AirParser', () => {
           done(e);
         });
     });
+
+    it('should correctly parse ticket designators', async () => {
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v47_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/getTicket_TICKET_DESIGNATORS.xml`).toString();
+
+      const json = await uParser.parse(xml);
+      const result = parseFunction.call(uParser, json);
+
+      expect(result.tickets[0].coupons[0].fareBasisCode).to.equal('ACOORP1CH/FS14');
+      expect(result.tickets[0].coupons[1].fareBasisCode).to.equal('ACOORP1/FS10');
+    });
   });
   describe('AIR_LOW_FARE_SEARCH()', () => {
     it('should test parsing of low fare search request', () => {
