@@ -13,6 +13,7 @@ const getBookingFromUr = require('./get-booking-from-ur');
 const getErrorPcc = require('./get-error-pcc');
 const clone = require('./clone');
 const getHashSubstr = require('./getHashSubstr');
+const formFareBasisCode = require('./form-fare-basis-code');
 
 const utils = {
   renameProperty,
@@ -30,6 +31,7 @@ const utils = {
   getErrorPcc,
   clone,
   getHashSubstr,
+  formFareBasisCode,
 };
 
 module.exports = utils;

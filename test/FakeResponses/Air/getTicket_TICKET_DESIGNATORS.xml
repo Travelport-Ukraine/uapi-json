@@ -1,0 +1,72 @@
+<SOAP:Envelope 
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:AirRetrieveDocumentRsp TransactionId="424E02AF0A0E7D00D07F64528F7956CE" ResponseTime="421" UniversalRecordLocatorCode="OX6L4S" 
+      xmlns:air="http://www.travelport.com/schema/air_v47_0" 
+      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+      <air:ETR Key="T4hE2GlxnDKAw/Ss+bAAAA==" TotalPrice="CZK4637" BasePrice="CZK21975" Taxes="CZK10792" Refundable="false" Exchangeable="false" TourCode="CCC59511" IssuedDate="2022-06-30T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="10R67F" IATANumber="15210591" PseudoCityCode="38K7" PlatingCarrier="TK">
+        <air:AirReservationLocatorCode>POL9BN</air:AirReservationLocatorCode>
+        <common_v47_0:AgencyInfo>
+          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2022-06-29T22:00:00.000+00:00"/>
+        </common_v47_0:AgencyInfo>
+        <common_v47_0:BookingTraveler Key="iAPJH9txnDKAOR7qDjAAAA==">
+          <common_v47_0:BookingTravelerName First="FILIP KHOI MSTR" Last="ZUBATY"/>
+          <common_v47_0:SSR Key="iAPJH9txnDKAQR7qDjAAAA==" Status="HK" Type="DOCS" FreeText="P/VNM/00003609/VNM/0000000/M/31JUL25/ZUBATY/FILIP/KHOI -1ZUBATY/FILIP KHOI MSTR" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="iAPJH9txnDKARR7qDjAAAA==" SegmentRef="iAPJH9txnDKAdR7qDjAAAA==" Status="HK" Type="BBML" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="iAPJH9txnDKASR7qDjAAAA==" SegmentRef="iAPJH9txnDKAdR7qDjAAAA==" Status="HK" Type="INFT" FreeText="11JUN20 OCCUPYING A SEAT" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="iAPJH9txnDKATR7qDjAAAA==" SegmentRef="iAPJH9txnDKAdR7qDjAAAA==" Status="HK" Type="TKNE" FreeText="2353775486081C1" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="iAPJH9txnDKAUR7qDjAAAA==" SegmentRef="iAPJH9txnDKAfR7qDjAAAA==" Status="HK" Type="BBML" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="iAPJH9txnDKAVR7qDjAAAA==" SegmentRef="iAPJH9txnDKAfR7qDjAAAA==" Status="HK" Type="INFT" FreeText="11JUN20 OCCUPYING A SEAT" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="iAPJH9txnDKAWR7qDjAAAA==" SegmentRef="iAPJH9txnDKAfR7qDjAAAA==" Status="HK" Type="TKNE" FreeText="2353775486081C2" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="T4hE2GlxnDKAX4Ss+bAAAA==" SegmentRef="uc9X3FN0nDKAEpoWAsAAAA==" Status="HK" Type="ASVC" FreeText="**A/0B5/RQST/CHARGEABLE AISLE STANDART/A" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="T4hE2GlxnDKAY4Ss+bAAAA==" SegmentRef="uc9X3FN0nDKAEpoWAsAAAA==" Status="HK" Type="CHML" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="T4hE2GlxnDKAZ4Ss+bAAAA==" SegmentRef="uc9X3FN0nDKAEpoWAsAAAA==" Status="HK" Type="TKNE" FreeText="2355046863500C1" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="T4hE2GlxnDKAa4Ss+bAAAA==" SegmentRef="uc9X3FN0nDKAGpoWAsAAAA==" Status="HK" Type="ASVC" FreeText="**A/0B5/RQST/CHARGEABLE AISLE STANDART/A" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="T4hE2GlxnDKAb4Ss+bAAAA==" SegmentRef="uc9X3FN0nDKAGpoWAsAAAA==" Status="HK" Type="CHML" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:SSR Key="T4hE2GlxnDKAc4Ss+bAAAA==" SegmentRef="uc9X3FN0nDKAGpoWAsAAAA==" Status="HK" Type="TKNE" FreeText="2355046863500C2" Carrier="TK" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA=="/>
+          <common_v47_0:NameRemark Key="iAPJH9txnDKAPR7qDjAAAA==">
+            <common_v47_0:RemarkData>P-C02 DOB11JUN20</common_v47_0:RemarkData>
+            <common_v47_0:ProviderReservationInfoRef Key="iAPJH9txnDKAF32qDjAAAA=="/>
+          </common_v47_0:NameRemark>
+          <common_v47_0:AirSeatAssignment Key="T4hE2GlxnDKAV4Ss+bAAAA==" Status="HK" Seat="010C" SegmentRef="uc9X3FN0nDKAEpoWAsAAAA==" FlightDetailsRef="uc9X3FN0nDKAFpoWAsAAAA=="/>
+          <common_v47_0:AirSeatAssignment Key="T4hE2GlxnDKAW4Ss+bAAAA==" Status="HK" Seat="009C" SegmentRef="uc9X3FN0nDKAGpoWAsAAAA==" FlightDetailsRef="uc9X3FN0nDKAHpoWAsAAAA=="/>
+        </common_v47_0:BookingTraveler>
+        <common_v47_0:FormOfPayment Key="iAPJH9txnDKACS7qDjAAAA==" Type="Cash" Reusable="false" ProfileKey="it6Y1xqDTHGeLBagJ71Z6A=="/>
+        <common_v47_0:Payment Key="T4hE2GlxnDKAoETs+bAAAA==" Type="Itinerary" Amount="CZK4637" FormOfPaymentRef="iAPJH9txnDKACS7qDjAAAA=="/>
+        <common_v47_0:SupplierLocator SupplierCode="TK" SupplierLocatorCode="RR7DLM"/>
+        <air:FareCalc>PRG TK X/IST TK SGN 646.36 TK X/IST TK PRG 362.65 NUC1009.01END ROE21.778765 XT PD22C4 PD213JC PD9654YR</air:FareCalc>
+        <air:Ticket Key="T4hE2GlxnDKA2BTs+bAAAA==" TicketNumber="2355046863500" TicketStatus="N">
+          <air:Coupon Key="T4hE2GlxnDKANCTs+bAAAA==" CouponNumber="1" MarketingCarrier="TK" MarketingFlightNumber="163" Origin="SGN" Destination="IST" DepartureTime="2022-08-26T21:25:00.000+07:00" StopoverCode="true" BookingClass="A" FareBasis="ACOORP1C" NotValidBefore="2022-03-03" Status="O" SegmentGroup="1" MarriageGroup="8"/>
+          <air:Coupon Key="T4hE2GlxnDKAkCTs+bAAAA==" CouponNumber="2" MarketingCarrier="TK" MarketingFlightNumber="1767" Origin="IST" Destination="PRG" DepartureTime="2022-08-27T06:55:00.000+03:00" StopoverCode="false" BookingClass="A" FareBasis="ACOORP1C" NotValidBefore="2022-03-03" Status="O" SegmentGroup="1" MarriageGroup="8"/>
+          <air:TourCode Value="CCC59511"/>
+          <air:ExchangedTicketInfo Number="2353775486081"/>
+          <air:ExchangedTicketInfo Number="2353775559744"/>
+        </air:Ticket>
+        <air:AirPricingInfo Key="42fN3FWynDKAXXs0FsAAAA==" TotalPrice="CZK21975" BasePrice="CZK21975" ApproximateTotalPrice="CZK21975" ApproximateBasePrice="CZK21975" Taxes="CZK0" PricingMethod="ManualFare" ETicketability="No" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA==" AirPricingInfoGroup="3" Ticketed="true" PricingType="StoredFare" FareCalculationInd="B">
+          <air:FareInfo Key="42fN3FWynDKAZXs0FsAAAA==" FareBasis="ACOORP1CH" PassengerTypeCode="CNN" Origin="SGN" Destination="IST" EffectiveDate="2022-06-30T00:00:00.000+02:00" NotValidBefore="2022-03-03">
+            <air:FareTicketDesignator Value="FS14"/>
+            <common_v47_0:Endorsement Value="NONEND-TK ONLY"/>
+            <air:BaggageAllowance>
+              <air:MaxWeight Value="40" Unit="Kilograms"/>
+            </air:BaggageAllowance>
+          </air:FareInfo>
+          <air:FareInfo Key="42fN3FWynDKAcXs0FsAAAA==" FareBasis="ACOORP1" PassengerTypeCode="CNN" Origin="IST" Destination="PRG" EffectiveDate="2022-06-30T00:00:00.000+02:00" NotValidBefore="2022-03-03">
+            <air:FareTicketDesignator Value="FS10"/>
+            <common_v47_0:Endorsement Value="NONEND-TK ONLY"/>
+            <air:BaggageAllowance>
+              <air:MaxWeight Value="40" Unit="Kilograms"/>
+            </air:BaggageAllowance>
+          </air:FareInfo>
+          <air:BookingInfo BookingCode="A" CabinClass="Economy" FareInfoRef="42fN3FWynDKAZXs0FsAAAA=="/>
+          <air:BookingInfo BookingCode="A" CabinClass="Economy" FareInfoRef="42fN3FWynDKAcXs0FsAAAA=="/>
+          <air:FareCalc>PRG TK X/IST TK SGN 646.36 TK X/IST TK PRG 362.65 NUC1009.01END ROE21.778765</air:FareCalc>
+          <air:PassengerType Code="CNN" Age="3" BookingTravelerRef="iAPJH9txnDKAOR7qDjAAAA==">
+            <air:FareGuaranteeInfo GuaranteeType="ManualFare"/>
+          </air:PassengerType>
+          <common_v47_0:BookingTravelerRef Key="iAPJH9txnDKAOR7qDjAAAA=="/>
+          <air:PaymentRef Key="42fN3FWynDKA9Zq0FsAAAA=="/>
+        </air:AirPricingInfo>
+      </air:ETR>
+    </air:AirRetrieveDocumentRsp>
+  </SOAP:Body>
+</SOAP:Envelope>
