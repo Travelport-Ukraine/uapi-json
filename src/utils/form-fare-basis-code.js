@@ -3,11 +3,9 @@ module.exports = (airPricingInfo, coupon) => {
     && coupon['air:TicketDesignator'].Value;
 
   if (!airPricingInfo) {
-    if (!couponTicketDesignator) {
-      return coupon.FareBasis;
-    }
-
-    return `${coupon.FareBasis}/${couponTicketDesignator}`;
+    return couponTicketDesignator
+      ? `${coupon.FareBasis}/${couponTicketDesignator}`
+      : coupon.FareBasis;
   }
 
   const [fareInfoData] = Object.values(airPricingInfo['air:FareInfo'])
