@@ -50,7 +50,7 @@ describe('#formFareBasisCode', () => {
         ...airPricingInfo['air:FareInfo'],
         '2hfKH9zxnDKAY9O4GjAAAA==': {
           ...fareInfo['2hfKH9zxnDKAY9O4GjAAAA=='],
-          'air:FareTicketDesignator': 'FS11',
+          'air:FareTicketDesignator': '/FS11',
         }
       }
     }, coupon)).to.be.eq('ECOORP7YCH/FS11');
