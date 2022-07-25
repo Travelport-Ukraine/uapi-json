@@ -44,7 +44,7 @@
         </air:Ticket>
         <air:AirPricingInfo Key="42fN3FWynDKAXXs0FsAAAA==" TotalPrice="CZK21975" BasePrice="CZK21975" ApproximateTotalPrice="CZK21975" ApproximateBasePrice="CZK21975" Taxes="CZK0" PricingMethod="ManualFare" ETicketability="No" ProviderReservationInfoRef="iAPJH9txnDKAF32qDjAAAA==" AirPricingInfoGroup="3" Ticketed="true" PricingType="StoredFare" FareCalculationInd="B">
           <air:FareInfo Key="42fN3FWynDKAZXs0FsAAAA==" FareBasis="ACOORP1CH" PassengerTypeCode="CNN" Origin="SGN" Destination="IST" EffectiveDate="2022-06-30T00:00:00.000+02:00" NotValidBefore="2022-03-03">
-            <air:FareTicketDesignator Value="FS14"/>
+            <air:FareTicketDesignator Value="/FS14"/>
             <common_v47_0:Endorsement Value="NONEND-TK ONLY"/>
             <air:BaggageAllowance>
               <air:MaxWeight Value="40" Unit="Kilograms"/>

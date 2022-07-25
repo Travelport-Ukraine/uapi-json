@@ -16,6 +16,6 @@ module.exports = (airPricingInfo, coupon) => {
 
   const ticketDesignator = fareInfoData && fareInfoData['air:FareTicketDesignator'];
   return ticketDesignator
-    ? `${fareInfoData.FareBasis}/${ticketDesignator}`
+    ? `${fareInfoData.FareBasis}/${ticketDesignator.replace(/\W/g, '')}`
     : fareInfoData.FareBasis;
 };
