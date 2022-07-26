@@ -108,6 +108,14 @@ module.exports = function uapiRequest(
               log('Unexpected Error: ', pd.json(e));
             }
 
+            if (['ECONNREFUSED', 'ECONNRESET'].includes(e.code)) {
+              return Promise.reject(new RequestRuntimeError.UAPIServiceError(e));
+            }
+
+            if (['ECONNABORTED'].includes(e.code)) {
+              return Promise.reject(new RequestRuntimeError.UAPIServiceTimeout(e));
+            }
+
             return Promise.reject(new RequestSoapError.SoapUnexpectedError(e));
           }
 

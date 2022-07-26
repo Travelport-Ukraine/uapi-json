@@ -29,6 +29,7 @@ Object.assign(RequestRuntimeError, createErrorsList({
   UnhandledError: 'Error during request. Please try again later',
   ResultsMissing: 'Missing results in response',
   UAPIServiceError: 'UAPI Service responded with an error',
+  UAPIServiceTimeout: 'UAPI Service timeout',
 }, RequestRuntimeError));
 
 // Soap errors

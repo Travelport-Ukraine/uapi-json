@@ -24,6 +24,11 @@ function errorHandler(rsp) {
         screen: faultString,
         pcc: utils.getErrorPcc(rsp.faultstring),
       });
+    case '6207':
+    case '6119':
+      throw new RequestRuntimeError.UAPIServiceError({
+        screen: faultString,
+      });
     default:
       throw new RequestRuntimeError.UnhandledError(null, new TerminalRuntimeError(rsp));
   }

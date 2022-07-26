@@ -490,12 +490,14 @@ function processUAPIError(source) {
 const AirErrorHandler = function (rsp) {
   let errorInfo;
   let code;
+  let screen;
   try {
     errorInfo = (
       rsp.detail[`common_${this.uapi_version}:ErrorInfo`]
       || rsp.detail['air:AvailabilityErrorInfo']
     );
     code = errorInfo[`common_${this.uapi_version}:Code`];
+    screen = errorInfo[`common_${this.uapi_version}:Description`];
   } catch (err) {
     processUAPIError.call(this, rsp);
   }
@@ -507,6 +509,9 @@ const AirErrorHandler = function (rsp) {
         throw new AirRuntimeError.NoAgreement({ pcc });
       }
       throw new AirRuntimeError.UnableToRetrieve(rsp);
+    case '6207':
+    case '6119':
+      throw new RequestRuntimeError.UAPIServiceError({ screen });
     case '4454':
       throw new AirRuntimeError.NoResidualValue(rsp);
     case '12009':
