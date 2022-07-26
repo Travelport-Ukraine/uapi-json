@@ -5,7 +5,7 @@ const sinon = require('sinon');
 const chai = require('chai');
 const sinonChai = require('sinon-chai');
 const {
-  RequestSoapError,
+  RequestSoapError, RequestRuntimeError,
 } = require('../../src/Request/RequestErrors');
 
 const { expect } = chai;
@@ -98,7 +98,7 @@ describe('#Request', () => {
       const request = requestUnexpectedError(...serviceParams.concat(3));
       return request({})
         .catch((err) => {
-          expect(err).to.be.an.instanceof(RequestSoapError.SoapUnexpectedError);
+          expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
           expect(err.data).to.not.equal(null);
           expect(err.data.code).to.equal('ECONNRESET');
         });
