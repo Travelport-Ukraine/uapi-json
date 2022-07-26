@@ -24,8 +24,8 @@ function errorHandler(rsp) {
         screen: faultString,
         pcc: utils.getErrorPcc(rsp.faultstring),
       });
-    case '6207':
-    case '6119':
+    case '6207': // Error retrieving AccessProfile Unable to retrieve enough Dynamic GTIDs for this transaction
+    case '6119': // Host system error
       throw new RequestRuntimeError.UAPIServiceError({
         screen: faultString,
       });

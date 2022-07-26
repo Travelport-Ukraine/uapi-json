@@ -509,8 +509,8 @@ const AirErrorHandler = function (rsp) {
         throw new AirRuntimeError.NoAgreement({ pcc });
       }
       throw new AirRuntimeError.UnableToRetrieve(rsp);
-    case '6207':
-    case '6119':
+    case '6207': // Error retrieving AccessProfile Unable to retrieve enough Dynamic GTIDs for this transaction
+    case '6119': // Host system error
       throw new RequestRuntimeError.UAPIServiceError({ screen });
     case '4454':
       throw new AirRuntimeError.NoResidualValue(rsp);
