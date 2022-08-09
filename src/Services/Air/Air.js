@@ -80,7 +80,7 @@ module.exports = (settings) => {
         }, data, options);
         return service.createReservation(bookingParams).catch((err) => {
           if (err instanceof AirRuntimeError.SegmentBookingFailed
-              || err instanceof AirRuntimeError.NoValidFare) {
+            || err instanceof AirRuntimeError.NoValidFare) {
             if (options.allowWaitlist) { // will not have a UR if waitlisting restricted
               const code = err.data['universal:UniversalRecord'].LocatorCode;
               return service.cancelUR({
@@ -411,14 +411,11 @@ module.exports = (settings) => {
       };
 
       return this.getUniversalRecordByPNR(options)
-        .then((ur) => {
-          const urr = Array.isArray(ur) ? ur[0] : ur;
-          const record = {
-            reservationLocatorCode: urr.uapi_reservation_locator
-          };
-          return (ignoreTickets
-            ? Promise.resolve([])
-            : this.getTickets(options).then(checkTickets)
+        .then(() => {
+          return (
+            ignoreTickets
+              ? Promise.resolve([])
+              : this.getTickets(options).then(checkTickets)
           )
             .then(() => this.getBooking(options))
             .then(booking => service.cancelBooking(booking))
