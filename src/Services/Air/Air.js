@@ -418,7 +418,7 @@ module.exports = (settings) => {
           };
           return (ignoreTickets
             ? Promise.resolve([])
-            : this.getTickets(record).then(checkTickets)
+            : this.getTickets(options).then(checkTickets)
           )
             .then(() => this.getBooking(options))
             .then(booking => service.cancelBooking(booking))
