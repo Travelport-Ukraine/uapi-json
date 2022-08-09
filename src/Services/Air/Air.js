@@ -410,19 +410,16 @@ module.exports = (settings) => {
         ));
       };
 
-      return this.getUniversalRecordByPNR(options)
-        .then(() => {
-          return (
-            ignoreTickets
-              ? Promise.resolve([])
-              : this.getTickets(options).then(checkTickets)
-          )
-            .then(() => this.getBooking(options))
-            .then(booking => service.cancelBooking(booking))
-            .catch(
-              err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
-            );
-        });
+      return (
+        ignoreTickets
+          ? Promise.resolve([])
+          : this.getTickets(options).then(checkTickets)
+      )
+        .then(() => this.getBooking(options))
+        .then(booking => service.cancelBooking(booking))
+        .catch(
+          err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
+        );
     },
 
     cancelPNR(options) {
