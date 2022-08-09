@@ -409,7 +409,6 @@ module.exports = (settings) => {
           }
         ));
       };
-     
       return this.getUniversalRecordByPNR(options)
         .then(() => {
           return (
