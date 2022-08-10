@@ -365,9 +365,11 @@ module.exports = (settings) => {
     },
 
     cancelBooking(options) {
-      const ignoreTickets = typeof options.ignoreTickets === 'undefined'
-        ? false // default value
-        : options.ignoreTickets;
+      const {
+        ignoreTickets = false,
+        cancelTickets = false,
+        pnr,
+      } = options;
 
       const checkTickets = (tickets) => {
         return Promise.all(tickets.map(
@@ -378,11 +380,12 @@ module.exports = (settings) => {
                 coupon => coupon.status === 'V' || coupon.status === 'R'
               )
             );
+
             if (allTicketsVoidOrRefund) {
               return Promise.resolve(true);
             }
-            // Check for cancelTicket option
-            if (options.cancelTickets !== true) {
+
+            if (cancelTickets !== true) {
               return Promise.reject(new AirRuntimeError.PNRHasOpenTickets());
             }
             // Check for not OPEN/VOID segments
@@ -398,10 +401,7 @@ module.exports = (settings) => {
               ticketData.tickets.map(
                 ticket => (
                   ticket.coupons[0].status !== 'V'
-                    ? service.cancelTicket({
-                      pnr: options.pnr,
-                      ticketNumber: ticket.ticketNumber,
-                    })
+                    ? service.cancelTicket({ pnr, ticketNumber: ticket.ticketNumber })
                     : Promise.resolve(true)
                 )
               )
@@ -410,22 +410,16 @@ module.exports = (settings) => {
         ));
       };
 
-      return this.getUniversalRecordByPNR(options)
-        .then((ur) => {
-          const urr = Array.isArray(ur) ? ur[0] : ur;
-          const record = {
-            reservationLocatorCode: urr.uapi_reservation_locator
-          };
-          return (ignoreTickets
-            ? Promise.resolve([])
-            : this.getTickets(record).then(checkTickets)
-          )
-            .then(() => this.getBooking(options))
-            .then(booking => service.cancelBooking(booking))
-            .catch(
-              err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
-            );
-        });
+      return (
+        ignoreTickets
+          ? Promise.resolve()
+          : this.getTickets({ pnr }).then(checkTickets)
+      )
+        .then(() => this.getBooking(options))
+        .then(booking => service.cancelBooking(booking))
+        .catch(
+          err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
+        );
     },
 
     cancelPNR(options) {
