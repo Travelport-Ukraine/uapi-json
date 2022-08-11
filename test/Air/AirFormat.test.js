@@ -404,7 +404,7 @@ describe('#AirFormat', () => {
 
     it('should correctly parse eTicketability', () => {
       const parsed = AirFormat.formatFarePricingInfo({
-        eTicketability: 'Yes'
+        ETicketability: 'Yes'
       });
 
       expect(parsed).to.be.an('object').and.to.include.any.keys([
