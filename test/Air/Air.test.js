@@ -169,29 +169,7 @@ describe('#AirService', () => {
       };
     }
 
-    async function assertCorrectCall(params) {
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve(pricingSolution)
-      );
-      const createReservation = sinon.spy(getCreateReservation(params));
-      const cancelUR = sinon.spy(async () => {});
-
-      const air = getAirServiceMock({
-        methods: {
-          airPricePricingSolutionXML, createReservation, cancelUR,
-        }
-      });
-
-      await air.book(params);
-
-      assertCalls([
-        { f: airPricePricingSolutionXML, count: 1 },
-        { f: createReservation, count: 1 },
-        { f: cancelUR, count: 0 },
-      ]);
-    }
-
-    async function assertIncorrectCall(params, err, cancelShouldBeCalled = true) {
+    async function assertCall(params, err, cancelShouldBeCalled = true) {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve(pricingSolution)
       );
@@ -208,7 +186,9 @@ describe('#AirService', () => {
 
       try {
         await air.book(params);
-        throw new Error('Error did not happen');
+        if (err) {
+          throw new Error('Error did not happen');
+        }
       } catch (e) {
         assertBookErrorAndCalls(e, err.constructor, [
           { f: airPricePricingSolutionXML, count: 1 },
@@ -219,47 +199,47 @@ describe('#AirService', () => {
     }
 
     it('should check if correct function from service is called', async () => {
-      await assertCorrectCall(paramsDefault);
+      await assertCall(paramsDefault);
     });
 
     it('should check if book is called correctly with TAU option provided', async () => {
-      await assertCorrectCall(paramsWithTau);
+      await assertCall(paramsWithTau);
     });
 
     it('should call cancel ur if no valid fare', async () => {
       const err = new AirRuntimeError.NoValidFare({
         'universal:UniversalRecord': { LocatorCode: 123 },
       });
-      await assertIncorrectCall(paramsWaitlist, err);
+      await assertCall(paramsWaitlist, err);
     });
 
     it('should call cancel ur if segment booking failed', async () => {
       const err = new AirRuntimeError.SegmentBookingFailed({
         'universal:UniversalRecord': { LocatorCode: 123 },
       });
-      await assertIncorrectCall(paramsWaitlist, err);
+      await assertCall(paramsWaitlist, err);
     });
 
     it('should not call cancel ur if other error', async () => {
       const err = new AirRuntimeError.TicketingFailed({
         'universal:UniversalRecord': { LocatorCode: 123 },
       });
-      await assertIncorrectCall(paramsWaitlist, err, false);
+      await assertCall(paramsWaitlist, err, false);
     });
 
     it('should not call cancel ur if segment booking failed with SegmentBookingFailed or NoValidFare but restrictWaitlist=true', async () => {
       const err = new AirRuntimeError.SegmentBookingFailed({ detail: {} });
-      await assertIncorrectCall(paramsNoWaitlist, err, false);
+      await assertCall(paramsNoWaitlist, err, false);
     });
 
     it('should not call cancel ur if segment booking failed with NoValidFare but restrictWaitlist=true', async () => {
       const err = new AirRuntimeError.NoValidFare({ detail: {} });
-      await assertIncorrectCall(paramsNoWaitlist, err, false);
+      await assertCall(paramsNoWaitlist, err, false);
     });
 
     it('should not call cancel ur if segment booking failed with other error and restrictWaitlist=true', async () => {
       const err = new AirRuntimeError.SegmentWaitlisted({ detail: {} });
-      await assertIncorrectCall(paramsNoWaitlist, err, false);
+      await assertCall(paramsNoWaitlist, err, false);
     });
   });
 
