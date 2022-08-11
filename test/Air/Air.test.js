@@ -137,20 +137,27 @@ describe('#AirService', () => {
   });
 
   describe('book', () => {
-    it('should check if correct function from service is called', () => {
-      const params = {
-        passengers: [],
-        rule: 'RULE',
-      };
+    const paramsDefault = { passengers: [], rule: 'RULE' };
+    const paramsWithTau = { ...paramsDefault, tau: '2020-02-08 09:30' };
+    const paramsWaitlist = { ...paramsDefault, allowWaitlist: true };
+    const paramsNoWaitlist = { ...paramsDefault, allowWaitlist: false };
 
+    function assertBookErrorAndCalls(err, expectedType, calls) {
+      expect(err).to.be.instanceof(expectedType);
+      calls.forEach(({ f, count }) => {
+        expect(f).to.have.callCount(count);
+      });
+    }
+
+    it('should check if correct function from service is called', () => {
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
       const createReservation = sinon.spy((options) => {
         expect(options.ActionStatusType).to.be.equal('TAU');
         expect(options.foo).to.be.equal(123);
-        expect(options.rule).to.be.equal(params.rule);
-        expect(options.passengers).to.be.equal(params.passengers);
+        expect(options.rule).to.be.equal(paramsDefault.rule);
+        expect(options.passengers).to.be.equal(paramsDefault.passengers);
         return Promise.resolve();
       });
       const cancelUR = sinon.spy(() => {});
@@ -161,7 +168,7 @@ describe('#AirService', () => {
         }
       });
 
-      return air.book(params).then(() => {
+      return air.book(paramsDefault).then(() => {
         expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
         expect(createReservation.calledOnce).to.be.equal(true);
         expect(cancelUR.calledOnce).to.be.equal(false);
@@ -169,28 +176,22 @@ describe('#AirService', () => {
     });
 
     it('should check if book is called correctly with TAU option provided', () => {
-      const params = {
-        passengers: [],
-        rule: 'RULE',
-        tau: '2020-02-08 09:30',
-      };
-
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
       const createReservation = sinon.spy((options) => {
         expect(options.foo).to.be.equal(123);
         expect(options.ActionStatusType).to.be.equal('TAU');
-        expect(options.rule).to.be.equal(params.rule);
-        expect(options.passengers).to.be.equal(params.passengers);
-        expect(options.tau).to.be.equal(params.tau);
+        expect(options.rule).to.be.equal(paramsWithTau.rule);
+        expect(options.passengers).to.be.equal(paramsWithTau.passengers);
+        expect(options.tau).to.be.equal(paramsWithTau.tau);
         return Promise.resolve();
       });
       const cancelUR = sinon.spy(() => {});
 
       const air = getAirServiceMock({ methods: { airPricePricingSolutionXML, createReservation } });
 
-      return air.book(params).then(() => {
+      return air.book(paramsWithTau).then(() => {
         expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
         expect(createReservation.calledOnce).to.be.equal(true);
         expect(cancelUR.calledOnce).to.be.equal(false);
@@ -198,7 +199,6 @@ describe('#AirService', () => {
     });
 
     it('should call cancel ur if no valid fare', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -220,20 +220,20 @@ describe('#AirService', () => {
         }
       });
 
-      return air.book(params)
+      return air.book(paramsWaitlist)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR.calledOnce).to.be.equal(true);
+          assertBookErrorAndCalls(err, AirRuntimeError.NoValidFare, [
+            { f: airPricePricingSolutionXML, count: 1 },
+            { f: createReservation, count: 1 },
+            { f: cancelUR, count: 1 },
+          ]);
         });
     });
 
     it('should call cancel ur if segment booking failed', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -255,20 +255,20 @@ describe('#AirService', () => {
         }
       });
 
-      return air.book(params)
+      return air.book(paramsWaitlist)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR.calledOnce).to.be.equal(true);
+          assertBookErrorAndCalls(err, AirRuntimeError.SegmentBookingFailed, [
+            { f: airPricePricingSolutionXML, count: 1 },
+            { f: createReservation, count: 1 },
+            { f: cancelUR, count: 1 },
+          ]);
         });
     });
 
     it('should not call cancel ur if other error', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -290,20 +290,20 @@ describe('#AirService', () => {
         }
       });
 
-      return air.book(params)
+      return air.book(paramsWaitlist)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.TicketingFailed);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR.calledOnce).to.be.equal(false);
+          assertBookErrorAndCalls(err, AirRuntimeError.TicketingFailed, [
+            { f: airPricePricingSolutionXML, count: 1 },
+            { f: createReservation, count: 1 },
+            { f: cancelUR, count: 0 },
+          ]);
         });
     });
 
     it('should not call cancel ur if segment booking failed with SegmentBookingFailed or NoValidFare but restrictWaitlist=true', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -325,20 +325,20 @@ describe('#AirService', () => {
         }
       });
 
-      return air.book(params)
+      return air.book(paramsNoWaitlist)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR).to.have.callCount(0);
+          assertBookErrorAndCalls(err, AirRuntimeError.SegmentBookingFailed, [
+            { f: airPricePricingSolutionXML, count: 1 },
+            { f: createReservation, count: 1 },
+            { f: cancelUR, count: 0 },
+          ]);
         });
     });
 
     it('should not call cancel ur if segment booking failed with NoValidFare but restrictWaitlist=true', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -354,20 +354,20 @@ describe('#AirService', () => {
         methods: { airPricePricingSolutionXML, createReservation, cancelUR }
       });
 
-      return air.book(params)
+      return air.book(paramsNoWaitlist)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR).to.have.callCount(0);
+          assertBookErrorAndCalls(err, AirRuntimeError.NoValidFare, [
+            { f: airPricePricingSolutionXML, count: 1 },
+            { f: createReservation, count: 1 },
+            { f: cancelUR, count: 0 },
+          ]);
         });
     });
 
     it('should not call cancel ur if segment booking failed with other error and restrictWaitlist=true', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
       const airPricePricingSolutionXML = sinon.spy(
         () => Promise.resolve({ foo: 123 })
       );
@@ -385,15 +385,16 @@ describe('#AirService', () => {
         methods: { createReservation, airPricePricingSolutionXML, cancelUR }
       });
 
-      return air.book(params)
+      return air.book(paramsNoWaitlist)
         .then(() => {
           throw new Error('Cant be success.');
         })
         .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.SegmentWaitlisted);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR).to.have.callCount(0);
+          assertBookErrorAndCalls(err, AirRuntimeError.SegmentWaitlisted, [
+            { f: airPricePricingSolutionXML, count: 1 },
+            { f: createReservation, count: 1 },
+            { f: cancelUR, count: 0 },
+          ]);
         });
     });
   });

@@ -364,62 +364,64 @@ module.exports = (settings) => {
         );
     },
 
-    cancelBooking(options) {
+    async cancelBooking(options) {
       const {
         ignoreTickets = false,
         cancelTickets = false,
         pnr,
       } = options;
 
-      const checkTickets = (tickets) => {
-        return Promise.all(tickets.map(
-          (ticketData) => {
-            // Check for VOID or REFUND
-            const allTicketsVoidOrRefund = ticketData.tickets.every(
-              ticket => ticket.coupons.every(
-                coupon => coupon.status === 'V' || coupon.status === 'R'
-              )
-            );
+      const checkTickets = tickets => Promise.all(tickets.map(
+        (ticketData) => {
+          // Check for VOID or REFUND
+          const allTicketsVoidOrRefund = ticketData.tickets.every(
+            ticket => ticket.coupons.every(
+              coupon => coupon.status === 'V' || coupon.status === 'R'
+            )
+          );
 
-            if (allTicketsVoidOrRefund) {
-              return Promise.resolve(true);
-            }
-
-            if (cancelTickets !== true) {
-              return Promise.reject(new AirRuntimeError.PNRHasOpenTickets());
-            }
-            // Check for not OPEN/VOID segments
-            const hasNotOpenSegment = ticketData.tickets.some(
-              ticket => ticket.coupons.some(
-                coupon => 'OV'.indexOf(coupon.status) === -1
-              )
-            );
-            if (hasNotOpenSegment) {
-              return Promise.reject(new AirRuntimeError.UnableToCancelTicketStatusNotOpen());
-            }
-            return Promise.all(
-              ticketData.tickets.map(
-                ticket => (
-                  ticket.coupons[0].status !== 'V'
-                    ? service.cancelTicket({ pnr, ticketNumber: ticket.ticketNumber })
-                    : Promise.resolve(true)
-                )
-              )
-            );
+          if (allTicketsVoidOrRefund) {
+            return true;
           }
-        ));
-      };
 
-      return (
-        ignoreTickets
-          ? Promise.resolve()
-          : this.getTickets({ pnr }).then(checkTickets)
-      )
-        .then(() => this.getBooking(options))
-        .then(booking => service.cancelBooking(booking))
-        .catch(
-          err => Promise.reject(new AirRuntimeError.FailedToCancelPnr(options, err))
-        );
+          if (cancelTickets !== true) {
+            throw new AirRuntimeError.PNRHasOpenTickets({ tickets });
+          }
+          // Check for not OPEN/VOID segments
+          const hasNotOpenSegment = ticketData.tickets.some(
+            ticket => ticket.coupons.some(
+              coupon => 'OV'.indexOf(coupon.status) === -1
+            )
+          );
+
+          if (hasNotOpenSegment) {
+            throw new AirRuntimeError.UnableToCancelTicketStatusNotOpen();
+          }
+
+          return Promise.all(
+            ticketData.tickets.map(
+              ticket => (
+                ticket.coupons[0].status !== 'V'
+                  ? service.cancelTicket({ pnr, ticketNumber: ticket.ticketNumber })
+                  : Promise.resolve(true)
+              )
+            )
+          );
+        }
+      ));
+
+      try {
+        if (!ignoreTickets) {
+          const tickets = await this.getTickets({ pnr });
+          await checkTickets(tickets);
+        }
+
+        const booking = await this.getBooking(options);
+        await service.cancelBooking(booking);
+        return true;
+      } catch (err) {
+        throw new AirRuntimeError.FailedToCancelPnr(options, err);
+      }
     },
 
     cancelPNR(options) {
