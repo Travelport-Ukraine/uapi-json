@@ -141,261 +141,125 @@ describe('#AirService', () => {
     const paramsWithTau = { ...paramsDefault, tau: '2020-02-08 09:30' };
     const paramsWaitlist = { ...paramsDefault, allowWaitlist: true };
     const paramsNoWaitlist = { ...paramsDefault, allowWaitlist: false };
+    const pricingSolution = { foo: 123 };
 
-    function assertBookErrorAndCalls(err, expectedType, calls) {
-      expect(err).to.be.instanceof(expectedType);
+    function assertCalls(calls) {
       calls.forEach(({ f, count }) => {
         expect(f).to.have.callCount(count);
       });
     }
 
-    it('should check if correct function from service is called', () => {
+    function assertBookErrorAndCalls(err, expectedType, calls) {
+      expect(err).to.be.instanceof(expectedType);
+      assertCalls(calls);
+    }
+
+    function getCreateReservation(params, err) {
+      return async (options) => {
+        if (params.tau) {
+          expect(options.ActionStatusType).to.be.equal('TAU');
+        }
+        expect(options.foo).to.be.equal(pricingSolution.foo);
+        expect(options.rule).to.be.equal(params.rule);
+        expect(options.passengers).to.be.equal(params.passengers);
+
+        if (err) {
+          throw err;
+        }
+      };
+    }
+
+    async function assertCorrectCall(params) {
       const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
+        () => Promise.resolve(pricingSolution)
       );
-      const createReservation = sinon.spy((options) => {
-        expect(options.ActionStatusType).to.be.equal('TAU');
-        expect(options.foo).to.be.equal(123);
-        expect(options.rule).to.be.equal(paramsDefault.rule);
-        expect(options.passengers).to.be.equal(paramsDefault.passengers);
-        return Promise.resolve();
-      });
-      const cancelUR = sinon.spy(() => {});
+      const createReservation = sinon.spy(getCreateReservation(params));
+      const cancelUR = sinon.spy(async () => {});
 
       const air = getAirServiceMock({
         methods: {
-          airPricePricingSolutionXML, createReservation
+          airPricePricingSolutionXML, createReservation, cancelUR,
         }
       });
 
-      return air.book(paramsDefault).then(() => {
-        expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-        expect(createReservation.calledOnce).to.be.equal(true);
-        expect(cancelUR.calledOnce).to.be.equal(false);
-      });
-    });
+      await air.book(params);
 
-    it('should check if book is called correctly with TAU option provided', () => {
+      assertCalls([
+        { f: airPricePricingSolutionXML, count: 1 },
+        { f: createReservation, count: 1 },
+        { f: cancelUR, count: 0 },
+      ]);
+    }
+
+    async function assertIncorrectCall(params, err, cancelShouldBeCalled = true) {
       const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
+        () => Promise.resolve(pricingSolution)
       );
-      const createReservation = sinon.spy((options) => {
-        expect(options.foo).to.be.equal(123);
-        expect(options.ActionStatusType).to.be.equal('TAU');
-        expect(options.rule).to.be.equal(paramsWithTau.rule);
-        expect(options.passengers).to.be.equal(paramsWithTau.passengers);
-        expect(options.tau).to.be.equal(paramsWithTau.tau);
-        return Promise.resolve();
-      });
-      const cancelUR = sinon.spy(() => {});
-
-      const air = getAirServiceMock({ methods: { airPricePricingSolutionXML, createReservation } });
-
-      return air.book(paramsWithTau).then(() => {
-        expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-        expect(createReservation.calledOnce).to.be.equal(true);
-        expect(cancelUR.calledOnce).to.be.equal(false);
-      });
-    });
-
-    it('should call cancel ur if no valid fare', () => {
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.NoValidFare({
-          'universal:UniversalRecord': { LocatorCode: 123 },
-        }))
-      );
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
+      const createReservation = sinon.spy(getCreateReservation(params, err));
+      const cancelUR = sinon.spy(async (options) => {
+        expect(options.LocatorCode).to.be.equal(err.data['universal:UniversalRecord'].LocatorCode);
       });
 
       const air = getAirServiceMock({
         methods: {
-          airPricePricingSolutionXML,
-          createReservation,
-          cancelUR
+          airPricePricingSolutionXML, createReservation, cancelUR,
         }
       });
 
-      return air.book(paramsWaitlist)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          assertBookErrorAndCalls(err, AirRuntimeError.NoValidFare, [
-            { f: airPricePricingSolutionXML, count: 1 },
-            { f: createReservation, count: 1 },
-            { f: cancelUR, count: 1 },
-          ]);
-        });
+      try {
+        await air.book(params);
+        throw new Error('Error did not happen');
+      } catch (e) {
+        assertBookErrorAndCalls(e, err.constructor, [
+          { f: airPricePricingSolutionXML, count: 1 },
+          { f: createReservation, count: 1 },
+          { f: cancelUR, count: cancelShouldBeCalled ? 1 : 0 },
+        ]);
+      }
+    }
+
+    it('should check if correct function from service is called', async () => {
+      await assertCorrectCall(paramsDefault);
     });
 
-    it('should call cancel ur if segment booking failed', () => {
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.SegmentBookingFailed({
-          'universal:UniversalRecord': { LocatorCode: 123 },
-        }))
-      );
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
-      });
-
-      const air = getAirServiceMock({
-        methods: {
-          cancelUR,
-          airPricePricingSolutionXML,
-          createReservation,
-        }
-      });
-
-      return air.book(paramsWaitlist)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          assertBookErrorAndCalls(err, AirRuntimeError.SegmentBookingFailed, [
-            { f: airPricePricingSolutionXML, count: 1 },
-            { f: createReservation, count: 1 },
-            { f: cancelUR, count: 1 },
-          ]);
-        });
+    it('should check if book is called correctly with TAU option provided', async () => {
+      await assertCorrectCall(paramsWithTau);
     });
 
-    it('should not call cancel ur if other error', () => {
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.TicketingFailed({
-          'universal:UniversalRecord': { LocatorCode: 123 },
-        }))
-      );
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
+    it('should call cancel ur if no valid fare', async () => {
+      const err = new AirRuntimeError.NoValidFare({
+        'universal:UniversalRecord': { LocatorCode: 123 },
       });
-
-      const air = getAirServiceMock({
-        methods: {
-          createReservation,
-          airPricePricingSolutionXML,
-          cancelUR
-        }
-      });
-
-      return air.book(paramsWaitlist)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          assertBookErrorAndCalls(err, AirRuntimeError.TicketingFailed, [
-            { f: airPricePricingSolutionXML, count: 1 },
-            { f: createReservation, count: 1 },
-            { f: cancelUR, count: 0 },
-          ]);
-        });
+      await assertIncorrectCall(paramsWaitlist, err);
     });
 
-    it('should not call cancel ur if segment booking failed with SegmentBookingFailed or NoValidFare but restrictWaitlist=true', () => {
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.SegmentBookingFailed({
-          detail: { },
-        }))
-      );
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
+    it('should call cancel ur if segment booking failed', async () => {
+      const err = new AirRuntimeError.SegmentBookingFailed({
+        'universal:UniversalRecord': { LocatorCode: 123 },
       });
-
-      const air = getAirServiceMock({
-        methods: {
-          airPricePricingSolutionXML,
-          createReservation,
-          cancelUR
-        }
-      });
-
-      return air.book(paramsNoWaitlist)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          assertBookErrorAndCalls(err, AirRuntimeError.SegmentBookingFailed, [
-            { f: airPricePricingSolutionXML, count: 1 },
-            { f: createReservation, count: 1 },
-            { f: cancelUR, count: 0 },
-          ]);
-        });
+      await assertIncorrectCall(paramsWaitlist, err);
     });
 
-    it('should not call cancel ur if segment booking failed with NoValidFare but restrictWaitlist=true', () => {
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(() => Promise.reject(new AirRuntimeError.NoValidFare({
-        detail: { },
-      })));
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
+    it('should not call cancel ur if other error', async () => {
+      const err = new AirRuntimeError.TicketingFailed({
+        'universal:UniversalRecord': { LocatorCode: 123 },
       });
-
-      const air = getAirServiceMock({
-        methods: { airPricePricingSolutionXML, createReservation, cancelUR }
-      });
-
-      return air.book(paramsNoWaitlist)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          assertBookErrorAndCalls(err, AirRuntimeError.NoValidFare, [
-            { f: airPricePricingSolutionXML, count: 1 },
-            { f: createReservation, count: 1 },
-            { f: cancelUR, count: 0 },
-          ]);
-        });
+      await assertIncorrectCall(paramsWaitlist, err, false);
     });
 
-    it('should not call cancel ur if segment booking failed with other error and restrictWaitlist=true', () => {
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.SegmentWaitlisted({
-          detail: { },
-        }))
-      );
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
-      });
+    it('should not call cancel ur if segment booking failed with SegmentBookingFailed or NoValidFare but restrictWaitlist=true', async () => {
+      const err = new AirRuntimeError.SegmentBookingFailed({ detail: {} });
+      await assertIncorrectCall(paramsNoWaitlist, err, false);
+    });
 
-      const air = getAirServiceMock({
-        methods: { createReservation, airPricePricingSolutionXML, cancelUR }
-      });
+    it('should not call cancel ur if segment booking failed with NoValidFare but restrictWaitlist=true', async () => {
+      const err = new AirRuntimeError.NoValidFare({ detail: {} });
+      await assertIncorrectCall(paramsNoWaitlist, err, false);
+    });
 
-      return air.book(paramsNoWaitlist)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          assertBookErrorAndCalls(err, AirRuntimeError.SegmentWaitlisted, [
-            { f: airPricePricingSolutionXML, count: 1 },
-            { f: createReservation, count: 1 },
-            { f: cancelUR, count: 0 },
-          ]);
-        });
+    it('should not call cancel ur if segment booking failed with other error and restrictWaitlist=true', async () => {
+      const err = new AirRuntimeError.SegmentWaitlisted({ detail: {} });
+      await assertIncorrectCall(paramsNoWaitlist, err, false);
     });
   });
 
