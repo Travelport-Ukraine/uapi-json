@@ -1234,11 +1234,10 @@ NOTE-
         }
       }
 
-      const requiredCancelCalls = (
-        tickets && tickets instanceof Error
+      const { requiredCancelCalls, ticketsWithInvalidStatus } = (
+        Array.isArray(tickets) ? tickets : []
       )
-        ? 0
-        : tickets.reduce((acc, ticket) => {
+        .reduce((acc, ticket) => {
           const allTicketsVoidOrRefund = ticket.tickets.every(
             t => t.coupons.every(
               coupon => coupon.status === 'V' || coupon.status === 'R'
@@ -1259,44 +1258,13 @@ NOTE-
 
           // Will not be cancelled because of error
           if (hasNotOpenSegment) {
-            return acc;
+            return { ...acc, ticketsWithInvalidStatus: acc.ticketsWithInvalidStatus + 1 };
           }
 
-          // Count of not cancelled tickets, called for cancel
-          return acc + ticket.tickets.filter(t => t.coupons[0].status !== 'V').length;
-        }, 0);
-
-
-      const ticketsWithInvalidStatus = (
-        tickets && tickets instanceof Error
-      )
-        ? 0
-        : tickets.reduce((acc, ticket) => {
-          const allTicketsVoidOrRefund = ticket.tickets.every(
-            t => t.coupons.every(
-              coupon => coupon.status === 'V' || coupon.status === 'R'
-            )
-          );
-
-          // Will not be cancelled, but is valid
-          if (allTicketsVoidOrRefund) {
-            return acc;
-          }
-
-          // Check for not OPEN/VOID segments
-          const hasNotOpenSegment = ticket.tickets.some(
-            t => t.coupons.some(
-              coupon => 'OV'.indexOf(coupon.status) === -1
-            )
-          );
-
-          // Will not be cancelled because of error
-          if (hasNotOpenSegment) {
-            return acc + 1;
-          }
-
-          return acc;
-        }, 0);
+          return {
+            ...acc, requiredCancelCalls: acc.requiredCancelCalls + ticket.tickets.filter(t => t.coupons[0].status !== 'V').length
+          };
+        }, { requiredCancelCalls: 0, ticketsWithInvalidStatus: 0 });
 
       const expectedCancelCalls = (
         (tickets && tickets instanceof Error)
