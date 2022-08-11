@@ -1189,6 +1189,10 @@ NOTE-
 
   describe('cancelBooking', () => {
     const pnr = 'PNR001';
+    const voidTicket = { tickets: [{ coupons: [{ status: 'V' }, { status: 'V' }] }] };
+    const refundTicket = { tickets: [{ coupons: [{ status: 'R' }, { status: 'R' }] }] };
+    const openTicket = { tickets: [{ coupons: [{ status: 'O' }, { status: 'O' }] }] };
+    const failTicket = { tickets: [{ coupons: [{ status: 'F' }, { status: 'A' }] }] };
 
     async function assertCall(options, tickets, errorClass, causedByClass) {
       const getUniversalRecordByPNR = sinon.stub()
@@ -1264,7 +1268,7 @@ NOTE-
 
 
       const ticketsWithInvalidStatus = (
-        (tickets && tickets instanceof Error)
+        tickets && tickets instanceof Error
       )
         ? 0
         : tickets.reduce((acc, ticket) => {
@@ -1326,40 +1330,13 @@ NOTE-
     it('should cancel PNR if tickets have only VOID coupons', async () => {
       await assertCall(
         { pnr },
-        [{
-          tickets: [{
-            coupons: [{
-              status: 'V',
-            }, {
-              status: 'V',
-            }],
-          }],
-        }]
+        [voidTicket]
       );
     });
     it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have OPEN coupons and no cancelTicket option', async () => {
       await assertCall(
         { pnr },
-        [
-          {
-            tickets: [{
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
-            }],
-          },
-          {
-            tickets: [{
-              coupons: [{
-                status: 'O',
-              }, {
-                status: 'O',
-              }],
-            }],
-          },
-        ],
+        [voidTicket, openTicket],
         AirRuntimeError.FailedToCancelPnr,
         AirRuntimeError.PNRHasOpenTickets
       );
@@ -1367,96 +1344,25 @@ NOTE-
     it('should succeed when there are no VOID, but REFUNDED tickets', async () => {
       await assertCall(
         { pnr },
-        [{
-          tickets: [{
-            coupons: [{
-              status: 'V',
-            }, {
-              status: 'V',
-            }],
-          }],
-        }]
+        [voidTicket]
       );
     });
     it('should succeed when there are VOID and REFUNDED tickets', async () => {
       await assertCall(
         { pnr },
-        [
-          {
-            tickets: [{
-              coupons: [{
-                status: 'R',
-              }, {
-                status: 'R',
-              }],
-            }],
-          },
-          {
-            tickets: [{
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
-            }],
-          },
-        ]
+        [refundTicket, voidTicket]
       );
     });
     it('should succeed when there are OPEN and VOID tickets and cancelTickets = true', async () => {
       await assertCall(
         { pnr, cancelTickets: true },
-        [
-          {
-            tickets: [{
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
-            }],
-          },
-          {
-            tickets: [{
-              coupons: [{
-                status: 'O',
-              }, {
-                status: 'O',
-              }],
-            }, {
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
-            }],
-          },
-        ]
+        [voidTicket, openTicket]
       );
     });
     it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have coupons other than OPEN', async () => {
       await assertCall(
         { pnr },
-        [
-          {
-            tickets: [{
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
-            }],
-          },
-          {
-            tickets: [{
-              coupons: [{
-                status: 'F',
-              }, {
-                status: 'A',
-              }],
-            }],
-          },
-        ],
+        [voidTicket, failTicket],
         AirRuntimeError.FailedToCancelPnr,
         AirRuntimeError.PNRHasOpenTickets
       );
@@ -1464,26 +1370,7 @@ NOTE-
     it('should fail with AirRuntimeError.UnableToCancelTicketStatusNotOpen if tickets have coupons other than OPEN and cancelTickets=true', async () => {
       await assertCall(
         { pnr, cancelTickets: true },
-        [
-          {
-            tickets: [{
-              coupons: [{
-                status: 'V',
-              }, {
-                status: 'V',
-              }],
-            }],
-          },
-          {
-            tickets: [{
-              coupons: [{
-                status: 'F',
-              }, {
-                status: 'A',
-              }],
-            }],
-          },
-        ],
+        [openTicket, failTicket],
         AirRuntimeError.FailedToCancelPnr,
         AirRuntimeError.UnableToCancelTicketStatusNotOpen
       );
