@@ -24,6 +24,12 @@ const getAirServiceMock = ({ methods = {}, options = {} }) => {
   return createAirService({ auth, ...options });
 };
 
+function assertCalls(calls) {
+  calls.forEach(({ f, count }) => {
+    expect(f).to.have.callCount(count);
+  });
+}
+
 describe('#AirService', () => {
   const getURByPNRSampleBooked = [
     {
@@ -137,264 +143,100 @@ describe('#AirService', () => {
   });
 
   describe('book', () => {
-    it('should check if correct function from service is called', () => {
-      const params = {
-        passengers: [],
-        rule: 'RULE',
-      };
+    const paramsDefault = { passengers: [], rule: 'RULE' };
+    const paramsWithTau = { ...paramsDefault, tau: '2020-02-08 09:30' };
+    const paramsWaitlist = { ...paramsDefault, allowWaitlist: true };
+    const paramsNoWaitlist = { ...paramsDefault, allowWaitlist: false };
+    const pricingSolution = { foo: 123 };
 
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy((options) => {
-        expect(options.ActionStatusType).to.be.equal('TAU');
-        expect(options.foo).to.be.equal(123);
+    function getCreateReservation(params, err) {
+      return async (options) => {
+        if (params.tau) {
+          expect(options.ActionStatusType).to.be.equal('TAU');
+        }
+        expect(options.foo).to.be.equal(pricingSolution.foo);
         expect(options.rule).to.be.equal(params.rule);
         expect(options.passengers).to.be.equal(params.passengers);
-        return Promise.resolve();
-      });
-      const cancelUR = sinon.spy(() => {});
 
-      const air = getAirServiceMock({
-        methods: {
-          airPricePricingSolutionXML, createReservation
+        if (err) {
+          throw err;
         }
-      });
-
-      return air.book(params).then(() => {
-        expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-        expect(createReservation.calledOnce).to.be.equal(true);
-        expect(cancelUR.calledOnce).to.be.equal(false);
-      });
-    });
-
-    it('should check if book is called correctly with TAU option provided', () => {
-      const params = {
-        passengers: [],
-        rule: 'RULE',
-        tau: '2020-02-08 09:30',
       };
+    }
 
+    async function assertCall(params, err, cancelShouldBeCalled = true) {
       const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
+        () => Promise.resolve(pricingSolution)
       );
-      const createReservation = sinon.spy((options) => {
-        expect(options.foo).to.be.equal(123);
-        expect(options.ActionStatusType).to.be.equal('TAU');
-        expect(options.rule).to.be.equal(params.rule);
-        expect(options.passengers).to.be.equal(params.passengers);
-        expect(options.tau).to.be.equal(params.tau);
-        return Promise.resolve();
-      });
-      const cancelUR = sinon.spy(() => {});
-
-      const air = getAirServiceMock({ methods: { airPricePricingSolutionXML, createReservation } });
-
-      return air.book(params).then(() => {
-        expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-        expect(createReservation.calledOnce).to.be.equal(true);
-        expect(cancelUR.calledOnce).to.be.equal(false);
-      });
-    });
-
-    it('should call cancel ur if no valid fare', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.NoValidFare({
-          'universal:UniversalRecord': { LocatorCode: 123 },
-        }))
-      );
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
+      const createReservation = sinon.spy(getCreateReservation(params, err));
+      const cancelUR = sinon.spy(async (options) => {
+        expect(options.LocatorCode).to.be.equal(err.data['universal:UniversalRecord'].LocatorCode);
       });
 
       const air = getAirServiceMock({
         methods: {
-          airPricePricingSolutionXML,
-          createReservation,
-          cancelUR
+          airPricePricingSolutionXML, createReservation, cancelUR,
         }
       });
 
-      return air.book(params)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR.calledOnce).to.be.equal(true);
-        });
-    });
-
-    it('should call cancel ur if segment booking failed', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.SegmentBookingFailed({
-          'universal:UniversalRecord': { LocatorCode: 123 },
-        }))
-      );
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
-      });
-
-      const air = getAirServiceMock({
-        methods: {
-          cancelUR,
-          airPricePricingSolutionXML,
-          createReservation,
+      try {
+        await air.book(params);
+        if (err) {
+          throw new Error('Error did not happen');
         }
-      });
+      } catch (e) {
+        expect(e).to.be.an.instanceOf(err.constructor);
+      }
 
-      return air.book(params)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR.calledOnce).to.be.equal(true);
-        });
+      assertCalls([
+        { f: airPricePricingSolutionXML, count: 1 },
+        { f: createReservation, count: 1 },
+        { f: cancelUR, count: err && cancelShouldBeCalled ? 1 : 0 },
+      ]);
+    }
+
+    it('should check if correct function from service is called', async () => {
+      await assertCall(paramsDefault);
     });
 
-    it('should not call cancel ur if other error', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: true };
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.TicketingFailed({
-          'universal:UniversalRecord': { LocatorCode: 123 },
-        }))
-      );
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
-      });
-
-      const air = getAirServiceMock({
-        methods: {
-          createReservation,
-          airPricePricingSolutionXML,
-          cancelUR
-        }
-      });
-
-      return air.book(params)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.TicketingFailed);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR.calledOnce).to.be.equal(false);
-        });
+    it('should check if book is called correctly with TAU option provided', async () => {
+      await assertCall(paramsWithTau);
     });
 
-    it('should not call cancel ur if segment booking failed with SegmentBookingFailed or NoValidFare but restrictWaitlist=true', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.SegmentBookingFailed({
-          detail: { },
-        }))
-      );
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
+    it('should call cancel ur if no valid fare', async () => {
+      const err = new AirRuntimeError.NoValidFare({
+        'universal:UniversalRecord': { LocatorCode: 123 },
       });
-
-      const air = getAirServiceMock({
-        methods: {
-          airPricePricingSolutionXML,
-          createReservation,
-          cancelUR
-        }
-      });
-
-      return air.book(params)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.SegmentBookingFailed);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR).to.have.callCount(0);
-        });
+      await assertCall(paramsWaitlist, err);
     });
 
-    it('should not call cancel ur if segment booking failed with NoValidFare but restrictWaitlist=true', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(() => Promise.reject(new AirRuntimeError.NoValidFare({
-        detail: { },
-      })));
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
+    it('should call cancel ur if segment booking failed', async () => {
+      const err = new AirRuntimeError.SegmentBookingFailed({
+        'universal:UniversalRecord': { LocatorCode: 123 },
       });
-
-      const air = getAirServiceMock({
-        methods: { airPricePricingSolutionXML, createReservation, cancelUR }
-      });
-
-      return air.book(params)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.NoValidFare);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR).to.have.callCount(0);
-        });
+      await assertCall(paramsWaitlist, err);
     });
 
-    it('should not call cancel ur if segment booking failed with other error and restrictWaitlist=true', () => {
-      const params = { passengers: [], rule: 'RULE', allowWaitlist: false };
-      const airPricePricingSolutionXML = sinon.spy(
-        () => Promise.resolve({ foo: 123 })
-      );
-      const createReservation = sinon.spy(
-        () => Promise.reject(new AirRuntimeError.SegmentWaitlisted({
-          detail: { },
-        }))
-      );
-      const cancelUR = sinon.spy((options) => {
-        expect(options.LocatorCode).to.be.equal(123);
-        return Promise.resolve();
+    it('should not call cancel ur if other error', async () => {
+      const err = new AirRuntimeError.TicketingFailed({
+        'universal:UniversalRecord': { LocatorCode: 123 },
       });
+      await assertCall(paramsWaitlist, err, false);
+    });
 
-      const air = getAirServiceMock({
-        methods: { createReservation, airPricePricingSolutionXML, cancelUR }
-      });
+    it('should not call cancel ur if segment booking failed with SegmentBookingFailed or NoValidFare but restrictWaitlist=true', async () => {
+      const err = new AirRuntimeError.SegmentBookingFailed({ detail: {} });
+      await assertCall(paramsNoWaitlist, err, false);
+    });
 
-      return air.book(params)
-        .then(() => {
-          throw new Error('Cant be success.');
-        })
-        .catch((err) => {
-          expect(err).to.be.instanceof(AirRuntimeError.SegmentWaitlisted);
-          expect(airPricePricingSolutionXML.calledOnce).to.be.equal(true);
-          expect(createReservation.calledOnce).to.be.equal(true);
-          expect(cancelUR).to.have.callCount(0);
-        });
+    it('should not call cancel ur if segment booking failed with NoValidFare but restrictWaitlist=true', async () => {
+      const err = new AirRuntimeError.NoValidFare({ detail: {} });
+      await assertCall(paramsNoWaitlist, err, false);
+    });
+
+    it('should not call cancel ur if segment booking failed with other error and restrictWaitlist=true', async () => {
+      const err = new AirRuntimeError.SegmentWaitlisted({ detail: {} });
+      await assertCall(paramsNoWaitlist, err, false);
     });
   });
 
@@ -1105,7 +947,6 @@ NOTE-
           await service.getTickets({ uapi_reservation_locator: 'RLC001' });
           throw new Error('No error thrown!');
         } catch (err) {
-          console.log(err);
           expect(err).to.be.an.instanceof(InstanceError);
 
           if (err.causedBy) {
@@ -1345,383 +1186,162 @@ NOTE-
       expect(closeSession).to.have.callCount(1);
     });
   });
+
   describe('cancelBooking', () => {
-    it('should throw general error', () => {
-      const airService = () => ({
-        getUniversalRecordByPNR: () => Promise.resolve({ uapi_reservation_locator: 'RLC001' }),
-        getTickets: () => Promise.reject(new Error('Some error')),
+    const pnr = 'PNR001';
+    const voidTicket = { tickets: [{ coupons: [{ status: 'V' }, { status: 'V' }] }] };
+    const refundTicket = { tickets: [{ coupons: [{ status: 'R' }, { status: 'R' }] }] };
+    const openTicket = { tickets: [{ coupons: [{ status: 'O' }, { status: 'O' }] }] };
+    const failTicket = { tickets: [{ coupons: [{ status: 'F' }, { status: 'A' }] }] };
+
+    async function assertCall(options, tickets, errorClass, causedByClass) {
+      const getUniversalRecordByPNR = sinon.stub()
+        .resolves(getURbyPNRSampleTicketedWithEmptyTickets);
+      const getTickets = sinon.spy(async () => {
+        if (tickets instanceof Error) {
+          throw tickets;
+        }
+
+        return tickets;
       });
-
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-      });
-
-      return createAirService({ auth })
-        .cancelBooking({
-          pnr: 'PNR001',
-        })
-        .then(() => Promise.reject(new Error('Error has not occured')))
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
-          expect(err.causedBy).to.be.an.instanceof(Error);
-        });
-    });
-    it('should cancel PNR if no tickets available', () => {
-      // Spies
-      const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.resolve(getURbyPNRSampleTicketedWithEmptyTickets)
-      );
-      const cancelBooking = sinon.spy(() => Promise.resolve(true));
-      const getTicket = sinon.spy(() => Promise.resolve({
-        coupons: [],
-      }));
-
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
-        getTicket,
-        cancelBooking,
-        getTickets: () => Promise.resolve([]),
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-      });
-
-      return createAirService({ auth })
-        .cancelBooking({
-          pnr: 'PNR001',
-        })
-        .then(() => {
-          expect(getUniversalRecordByPNR).to.have.callCount(3);
-          expect(getTicket).to.have.callCount(0);
-          expect(cancelBooking).to.have.callCount(1);
-        });
-    });
-    it('should cancel PNR if tickets have only VOID coupons', () => {
-      // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
-      const cancelBooking = sinon.spy(() => Promise.resolve(true));
-      const getTickets = sinon.spy(() => Promise.resolve([{
-        tickets: [{
-          coupons: [{
-            status: 'V',
-          }, {
-            status: 'V',
-          }],
-        }],
-      }]));
-
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
-        getTickets,
-        cancelBooking,
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-      });
-
-      return createAirService({ auth })
-        .cancelBooking({
-          pnr: 'PNR001',
-        })
-        .then(() => {
-          expect(getUniversalRecordByPNR).to.have.callCount(3);
-          expect(getTickets).to.have.callCount(1);
-          expect(cancelBooking).to.have.callCount(1);
-        });
-    });
-    it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have OPEN coupons and no cancelTicket option', () => {
-      const someTickets = [
-        {
-          tickets: [{
-            coupons: [{
-              status: 'V',
-            }, {
-              status: 'V',
-            }],
-          }],
-        },
-        {
-          tickets: [{
-            coupons: [{
-              status: 'O',
-            }, {
-              status: 'O',
-            }],
-          }],
-        },
-      ];
-
-      // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
-      const cancelBooking = sinon.spy(() => Promise.resolve(true));
-      const getTickets = sinon.spy(() => Promise.resolve(someTickets));
-
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
-        getTickets,
-        cancelBooking,
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-      });
-
-      return createAirService({ auth })
-        .cancelBooking({
-          pnr: 'PNR001',
-        })
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
-          expect(err.causedBy).to.be.an.instanceof(AirRuntimeError.PNRHasOpenTickets);
-          expect(getUniversalRecordByPNR).to.have.callCount(2);
-          expect(getTickets).to.have.callCount(1);
-          expect(cancelBooking).to.have.callCount(0);
-        });
-    });
-    it('should succeed when there are no VOID, but REFUNDED tickets', () => {
-      // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
       const cancelTicket = sinon.spy(() => Promise.resolve(true));
       const cancelBooking = sinon.spy(() => Promise.resolve(true));
 
-      const getTickets = sinon.spy(() => Promise.resolve([
-        {
-          tickets: [{
-            coupons: [{
-              status: 'R',
-            }, {
-              status: 'R',
-            }],
-          }],
-        },
-      ]));
-
-      // Services
       const airService = () => ({
         getUniversalRecordByPNR,
         getTickets,
-        cancelBooking,
         cancelTicket,
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-      });
-
-      return createAirService({ auth })
-        .cancelBooking({
-          pnr: 'PNR001',
-        })
-        .then(() => {
-          expect(getUniversalRecordByPNR).to.have.callCount(3);
-          expect(getTickets).to.have.callCount(1);
-          expect(cancelBooking).to.have.callCount(1);
-        });
-    });
-    it('should succeed when there are VOID and REFUNDED tickets', () => {
-      // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
-      const cancelTicket = sinon.spy(() => Promise.resolve(true));
-      const cancelBooking = sinon.spy(() => Promise.resolve(true));
-
-      const getTickets = sinon.spy(() => Promise.resolve([
-        {
-          tickets: [{
-            coupons: [{
-              status: 'R',
-            }, {
-              status: 'R',
-            }],
-          }],
-        },
-        {
-          tickets: [{
-            coupons: [{
-              status: 'V',
-            }, {
-              status: 'V',
-            }],
-          }],
-        },
-      ]));
-
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
-        getTickets,
-        cancelBooking,
-        cancelTicket,
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-      });
-
-      return createAirService({ auth })
-        .cancelBooking({
-          pnr: 'PNR001',
-        })
-        .then(() => {
-          expect(getUniversalRecordByPNR).to.have.callCount(3);
-          expect(getTickets).to.have.callCount(1);
-          expect(cancelBooking).to.have.callCount(1);
-        });
-    });
-    it('should succeed when there are OPEN and VOID tickets and cancelTickets = true', () => {
-      // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
-      const cancelTicket = sinon.spy(() => Promise.resolve(true));
-      const cancelBooking = sinon.spy(() => Promise.resolve(true));
-
-      const getTickets = sinon.spy(() => Promise.resolve([
-        {
-          tickets: [{
-            coupons: [{
-              status: 'V',
-            }, {
-              status: 'V',
-            }],
-          }],
-        },
-        {
-          tickets: [{
-            coupons: [{
-              status: 'O',
-            }, {
-              status: 'O',
-            }],
-          }, {
-            coupons: [{
-              status: 'V',
-            }, {
-              status: 'V',
-            }],
-          }],
-        },
-      ]));
-
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
-        getTickets,
-        cancelBooking,
-        cancelTicket,
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-      });
-
-      return createAirService({ auth })
-        .cancelBooking({
-          pnr: 'PNR001',
-          cancelTickets: true,
-        })
-        .then(() => {
-          expect(getUniversalRecordByPNR).to.have.callCount(3);
-          expect(getTickets).to.have.callCount(1);
-          expect(cancelBooking).to.have.callCount(1);
-          expect(cancelTicket).to.have.callCount(1);
-        });
-    });
-    it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have coupons other than OPEN', () => {
-      // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
-      const cancelBooking = sinon.spy(() => Promise.resolve(true));
-      const getTickets = sinon.spy(() => Promise.resolve([
-        {
-          tickets: [{
-            coupons: [{
-              status: 'V',
-            }, {
-              status: 'V',
-            }],
-          }],
-        },
-        {
-          tickets: [{
-            coupons: [{
-              status: 'F',
-            }, {
-              status: 'A',
-            }],
-          }],
-        },
-      ]));
-
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
-        getTickets,
         cancelBooking,
       });
+
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         './AirService': airService,
       });
 
-      return createAirService({ auth })
-        .cancelBooking({
-          pnr: 'PNR001',
-          cancelTickets: true,
-        })
-        .catch((err) => {
-          expect(err).to.be.an.instanceof(AirRuntimeError.FailedToCancelPnr);
-          expect(err.causedBy).to.be.an.instanceof(
-            AirRuntimeError.UnableToCancelTicketStatusNotOpen
+      try {
+        await createAirService({ auth }).cancelBooking(options);
+        if (errorClass) {
+          throw new Error('Error has not occured');
+        }
+      } catch (e) {
+        if (errorClass) {
+          expect(e).to.be.an.instanceOf(errorClass);
+          if (causedByClass) {
+            expect(e.causedBy).to.be.an.instanceOf(causedByClass);
+          }
+        } else {
+          throw e;
+        }
+      }
+
+      const { requiredCancelCalls, ticketsWithInvalidStatus } = (
+        Array.isArray(tickets) ? tickets : []
+      )
+        .reduce((acc, ticket) => {
+          const allTicketsVoidOrRefund = ticket.tickets.every(
+            t => t.coupons.every(
+              coupon => coupon.status === 'V' || coupon.status === 'R'
+            )
           );
-          expect(getUniversalRecordByPNR).to.have.callCount(2);
-          expect(getTickets).to.have.callCount(1);
-          expect(cancelBooking).to.have.callCount(0);
-        });
+
+          // Will not be cancelled as void or refund already
+          if (allTicketsVoidOrRefund) {
+            return acc;
+          }
+
+          // Check for not OPEN/VOID segments
+          const hasNotOpenSegment = ticket.tickets.some(
+            t => t.coupons.some(
+              coupon => 'OV'.indexOf(coupon.status) === -1
+            )
+          );
+
+          // Will not be cancelled because of error
+          if (hasNotOpenSegment) {
+            return { ...acc, ticketsWithInvalidStatus: acc.ticketsWithInvalidStatus + 1 };
+          }
+
+          return {
+            ...acc, requiredCancelCalls: acc.requiredCancelCalls + ticket.tickets.filter(t => t.coupons[0].status !== 'V').length
+          };
+        }, { requiredCancelCalls: 0, ticketsWithInvalidStatus: 0 });
+
+      const expectedCancelCalls = (
+        (tickets && tickets instanceof Error)
+        || (options.ignoreTickets || !options.cancelTickets)
+      )
+        ? 0
+        : requiredCancelCalls;
+
+      const getUniversalRecordByPNRCallCount = (
+        (tickets && tickets instanceof Error)
+        || (requiredCancelCalls > 0 && !options.cancelTickets)
+        || options.ignoreTickets
+        || ticketsWithInvalidStatus > 0
+      )
+        ? 1
+        : 2;
+
+      assertCalls([
+        { f: getUniversalRecordByPNR, count: getUniversalRecordByPNRCallCount },
+        { f: getTickets, count: options.ignoreTickets ? 0 : 1 },
+        { f: cancelTicket, count: expectedCancelCalls },
+      ]);
+    }
+
+    it('should throw general error', async () => {
+      await assertCall({ pnr }, new Error('Some error'), AirRuntimeError.FailedToCancelPnr);
     });
-    it('should cancel tickets and PNR if no errors occured', () => {
-      // Spies
-      const getUniversalRecordByPNR = sinon.spy(() => Promise.resolve(getURbyPNRSampleTicketed));
-      const cancelTicket = sinon.spy(() => Promise.resolve(true));
-      const cancelBooking = sinon.spy(() => Promise.resolve(true));
-      const getTickets = sinon.spy(() => Promise.resolve([
-        {
-          tickets: [{
-            coupons: [{
-              status: 'V',
-            }, {
-              status: 'V',
-            }],
-          }],
-        },
-        {
-          tickets: [{
-            coupons: [{
-              status: 'O',
-            }, {
-              status: 'O',
-            }],
-          }],
-        },
-      ]));
-
-      // Services
-      const airService = () => ({
-        getUniversalRecordByPNR,
-        getTickets,
-        cancelBooking,
-        cancelTicket,
-      });
-      const createAirService = proxyquire('../../src/Services/Air/Air', {
-        './AirService': airService,
-      });
-
-      return createAirService({ auth })
-        .cancelBooking({
-          pnr: 'PNR001',
-          cancelTickets: true,
-        })
-        .then((result) => {
-          expect(result).to.equal(true);
-          expect(getUniversalRecordByPNR).to.have.callCount(3);
-          expect(getTickets).to.have.callCount(1);
-          expect(cancelTicket).to.have.callCount(1);
-          expect(cancelBooking).to.have.callCount(1);
-        });
+    it('should cancel PNR if no tickets available', async () => {
+      await assertCall({ pnr }, []);
+    });
+    it('should cancel PNR if tickets have only VOID coupons', async () => {
+      await assertCall(
+        { pnr },
+        [voidTicket]
+      );
+    });
+    it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have OPEN coupons and no cancelTicket option', async () => {
+      await assertCall(
+        { pnr },
+        [voidTicket, openTicket],
+        AirRuntimeError.FailedToCancelPnr,
+        AirRuntimeError.PNRHasOpenTickets
+      );
+    });
+    it('should succeed when there are no VOID, but REFUNDED tickets', async () => {
+      await assertCall(
+        { pnr },
+        [voidTicket]
+      );
+    });
+    it('should succeed when there are VOID and REFUNDED tickets', async () => {
+      await assertCall(
+        { pnr },
+        [refundTicket, voidTicket]
+      );
+    });
+    it('should succeed when there are OPEN and VOID tickets and cancelTickets = true', async () => {
+      await assertCall(
+        { pnr, cancelTickets: true },
+        [voidTicket, openTicket]
+      );
+    });
+    it('should fail with AirRuntimeError.PNRHasOpenTickets PNR if tickets have coupons other than OPEN', async () => {
+      await assertCall(
+        { pnr },
+        [voidTicket, failTicket],
+        AirRuntimeError.FailedToCancelPnr,
+        AirRuntimeError.PNRHasOpenTickets
+      );
+    });
+    it('should fail with AirRuntimeError.UnableToCancelTicketStatusNotOpen if tickets have coupons other than OPEN and cancelTickets=true', async () => {
+      await assertCall(
+        { pnr, cancelTickets: true },
+        [openTicket, failTicket],
+        AirRuntimeError.FailedToCancelPnr,
+        AirRuntimeError.UnableToCancelTicketStatusNotOpen
+      );
     });
   });
 
