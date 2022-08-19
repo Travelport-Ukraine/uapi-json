@@ -1,6 +1,6 @@
 function urls(region, production = true) {
   const prefix = production ? '' : 'pp.';
-  const timeout = production ? 30000 : 90000;
+  const timeout = production ? 20000 : 90000;
   const url = `https://${region}.universal-api.${prefix}travelport.com/B2BGateway/connect/uAPI`;
   return {
     timeout,
