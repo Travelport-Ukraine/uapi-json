@@ -569,7 +569,13 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
   const fareInfo = airPricingInfo && airPricingInfo['air:FareInfo']
     ? utils.firstInObj(airPricingInfo['air:FareInfo'])
     : null;
-
+  const iataNumber = etr.IATANumber;
+  const fopData = etr[`common_${this.uapi_version}:FormOfPayment`]
+    ? Object.values(etr[`common_${this.uapi_version}:FormOfPayment`])
+    : [];
+  const formOfPayment = fopData.map((fop) => {
+    return fop.Type.toUpperCase();
+  });
   const ticketsList = Object.values(etr['air:Ticket']);
   const exchangedTickets = [];
 
@@ -680,7 +686,6 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
   const fareCalcSource = etr['air:FareCalc'].match(fareCalculationPattern)
     ? etr['air:FareCalc']
     : airPricingInfo['air:FareCalc'];
-
   const response = Object.assign(
     {
       uapi_ur_locator: obj.UniversalRecordLocatorCode,
@@ -698,6 +703,8 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
       taxesInfo: taxes,
       passengers,
       tickets,
+      iataNumber,
+      formOfPayment,
       // Flags
       noAdc: !etr.TotalPrice,
       isConjunctionTicket: tickets.length > 1,
