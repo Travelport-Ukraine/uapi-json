@@ -803,6 +803,8 @@ describe('#AirParser', () => {
             isConjunctionTicket: false,
             fareCalculation: 'IEV LO WAW 312.00 NUC312.00',
             firstOrigin: 'IEV',
+            formOfPayment: ['CASH'],
+            iataNumber: '99999992',
             roe: '1.0',
             totalPrice: 'UAH9641',
             tourCode: undefined,

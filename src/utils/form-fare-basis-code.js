@@ -1,11 +1,12 @@
 module.exports = (airPricingInfo, coupon) => {
   const couponTicketDesignator = coupon['air:TicketDesignator']
     && coupon['air:TicketDesignator'].Value;
+  const couponFareBasisResult = couponTicketDesignator
+    ? `${coupon.FareBasis}/${couponTicketDesignator}`
+    : coupon.FareBasis;
 
   if (!airPricingInfo) {
-    return couponTicketDesignator
-      ? `${coupon.FareBasis}/${couponTicketDesignator}`
-      : coupon.FareBasis;
+    return couponFareBasisResult;
   }
 
   const [fareInfoData] = Object.values(airPricingInfo['air:FareInfo'])
@@ -13,6 +14,10 @@ module.exports = (airPricingInfo, coupon) => {
       return obj.Origin === coupon.Origin
         && obj.Destination === coupon.Destination;
     });
+
+  if (!fareInfoData) {
+    return couponFareBasisResult;
+  }
 
   const ticketDesignator = fareInfoData && fareInfoData['air:FareTicketDesignator'];
   return ticketDesignator

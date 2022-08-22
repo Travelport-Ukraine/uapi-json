@@ -284,9 +284,9 @@ function formatFarePricingInfo(fare) {
 
   let eTicketability = false;
 
-  if (Object.prototype.hasOwnProperty.call(fare, 'eTicketability')) {
+  if (Object.prototype.hasOwnProperty.call(fare, 'ETicketability')) {
     // eslint-disable-next-line prefer-destructuring
-    eTicketability = fare.eTicketability;
+    eTicketability = fare.ETicketability;
   }
 
   return {
