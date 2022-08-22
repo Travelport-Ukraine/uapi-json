@@ -34,6 +34,14 @@ const coupon = {
   FareBasis: 'ECOORP1C',
 };
 
+const couponOtherData = {
+  Key: '+EO2VCTynDKAtbozoTAAAA==',
+  MarketingFlightNumber: '163',
+  Origin: 'WAW',
+  Destination: 'PRG',
+  FareBasis: 'ECOORP5S',
+};
+
 describe('#formFareBasisCode', () => {
   it('should properly form fare basis code with coupon designator', () => {
     expect(formFareBasisCode(null, {
@@ -54,6 +62,18 @@ describe('#formFareBasisCode', () => {
         }
       }
     }, coupon)).to.be.eq('ECOORP7YCH/FS11');
+  });
+
+  it('should properly form fare basis code with coupon data when Origin/Destination are not equal', () => {
+    expect(formFareBasisCode({
+      'air:FareInfo': {
+        ...airPricingInfo['air:FareInfo'],
+        '2hfKH9zxnDKAY9O4GjAAAA==': {
+          ...fareInfo['2hfKH9zxnDKAY9O4GjAAAA=='],
+          'air:FareTicketDesignator': '/FS11',
+        }
+      }
+    }, couponOtherData)).to.be.eq('ECOORP5S');
   });
 
   it('should properly form basis code with no ticket designators', () => {
