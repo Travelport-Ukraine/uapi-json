@@ -14,6 +14,7 @@ const getErrorPcc = require('./get-error-pcc');
 const clone = require('./clone');
 const getHashSubstr = require('./getHashSubstr');
 const formFareBasisCode = require('./form-fare-basis-code');
+const getCreditCardData = require('./get-credit-card-data');
 
 const utils = {
   renameProperty,
@@ -32,6 +33,7 @@ const utils = {
   clone,
   getHashSubstr,
   formFareBasisCode,
+  getCreditCardData,
 };
 
 module.exports = utils;
