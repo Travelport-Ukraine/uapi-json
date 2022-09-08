@@ -573,8 +573,13 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
   const fopData = etr[`common_${this.uapi_version}:FormOfPayment`]
     ? Object.values(etr[`common_${this.uapi_version}:FormOfPayment`])
     : [];
+  const ccAuthData = etr[`common_${this.uapi_version}:CreditCardAuth`]
+    ? etr[`common_${this.uapi_version}:CreditCardAuth`]
+    : [];
   const formOfPayment = fopData.map((fop) => {
-    return fop.Type.toUpperCase();
+    return fop.Type === 'Credit'
+      ? utils.getCreditCardData(fop[`common_${this.uapi_version}:CreditCard`], ccAuthData)
+      : fop.Type.toUpperCase();
   });
   const ticketsList = Object.values(etr['air:Ticket']);
   const exchangedTickets = [];
@@ -967,7 +972,10 @@ function extractBookings(obj) {
           Object.keys(travelerEmails).forEach(
             (i) => {
               const email = travelerEmails[i];
-              if (email[`common_${this.uapi_version}:ProviderReservationInfoRef`]) {
+              if (
+                email[`common_${this.uapi_version}:ProviderReservationInfoRef`]
+                && email.Type.toUpperCase() === 'TO'
+              ) {
                 emails.push({
                   index: emails.length + 1,
                   email: email.EmailID.toLowerCase(),
