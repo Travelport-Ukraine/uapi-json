@@ -972,7 +972,10 @@ function extractBookings(obj) {
           Object.keys(travelerEmails).forEach(
             (i) => {
               const email = travelerEmails[i];
-              if (email[`common_${this.uapi_version}:ProviderReservationInfoRef`]) {
+              if (
+                email[`common_${this.uapi_version}:ProviderReservationInfoRef`]
+                && email.Type.toUpperCase() === 'TO'
+              ) {
                 emails.push({
                   index: emails.length + 1,
                   email: email.EmailID.toLowerCase(),
