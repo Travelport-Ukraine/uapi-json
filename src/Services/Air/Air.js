@@ -273,10 +273,10 @@ module.exports = (settings) => {
     },
 
     async getTickets(options) {
-      const { pnr } = options;
-      const ur = await this.getUniversalRecordByPNR({ pnr });
-      const urData = Array.isArray(ur) ? ur[0] : ur;
-      const { uapi_reservation_locator: reservationLocatorCode } = urData;
+      const { pnr, reservationLocator = null } = options;
+      const reservationLocatorCode = reservationLocator || (
+        (await this.getBooking({ pnr })).uapi_reservation_locator
+      );
       try {
         return await service.getTickets({ reservationLocatorCode });
       } catch (err) {
