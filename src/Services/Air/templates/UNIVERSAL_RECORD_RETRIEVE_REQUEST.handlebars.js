@@ -4,8 +4,8 @@ Air Universal Record Retrieve For Galileo(1G) LFS Request
 -->
 <soapenv:Envelope
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:com="http://www.travelport.com/schema/common_v47_0"
-  xmlns:univ="http://www.travelport.com/schema/universal_v47_0">
+  xmlns:com="http://www.travelport.com/schema/common_v52_0"
+  xmlns:univ="http://www.travelport.com/schema/universal_v52_0">
   <soapenv:Body>
     <univ:UniversalRecordRetrieveReq
       ViewOnlyInd="{{viewOnly}}"

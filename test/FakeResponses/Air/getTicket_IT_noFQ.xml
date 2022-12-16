@@ -2,20 +2,20 @@
   xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP:Body>
     <air:AirRetrieveDocumentRsp TransactionId="E02EB2660A0759D098777CA778969AC6" ResponseTime="815" UniversalRecordLocatorCode="LPLSSP"
-      xmlns:air="http://www.travelport.com/schema/air_v47_0"
-      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+      xmlns:air="http://www.travelport.com/schema/air_v52_0"
+      xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0">
       <air:ETR Key="4BfqE3BAAA/BDyFP7EAAAA==" Taxes="UAH908.00" IssuedDate="2017-08-12T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="7ZN850" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="B2">
         <air:AirReservationLocatorCode>3T17VR</air:AirReservationLocatorCode>
-        <common_v47_0:AgencyInfo>
-          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-08-11T22:00:00.000+00:00"/>
-        </common_v47_0:AgencyInfo>
-        <common_v47_0:BookingTraveler Key="4BfqE3BAAA/B/xFP7EAAAA==">
-          <common_v47_0:BookingTravelerName First="OLESIAMRS" Last="BABCHUK"/>
-          <common_v47_0:SSR Key="4BfqE3BAAA/BAyFP7EAAAA==" SegmentRef="4BfqE3BAAA/BByFP7EAAAA==" Status="HK" Type="TKNE" FreeText="6289902930723C1" Carrier="B2" ProviderReservationInfoRef="4BfqE3BAAA/B05DP7EAAAA=="/>
-        </common_v47_0:BookingTraveler>
-        <common_v47_0:FormOfPayment Key="4BfqE3BAAA/BLyFP7EAAAA==" Type="Cash" Reusable="false" ProfileKey="vFUUt5/sSsO8neX475HM7g=="/>
-        <common_v47_0:Payment Key="4BfqE3BAAA/BMyFP7EAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="4BfqE3BAAA/BLyFP7EAAAA=="/>
-        <common_v47_0:SupplierLocator SupplierCode="B2" SupplierLocatorCode="DNGDQZ"/>
+        <common_v52_0:AgencyInfo>
+          <common_v52_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-08-11T22:00:00.000+00:00"/>
+        </common_v52_0:AgencyInfo>
+        <common_v52_0:BookingTraveler Key="4BfqE3BAAA/B/xFP7EAAAA==">
+          <common_v52_0:BookingTravelerName First="OLESIAMRS" Last="BABCHUK"/>
+          <common_v52_0:SSR Key="4BfqE3BAAA/BAyFP7EAAAA==" SegmentRef="4BfqE3BAAA/BByFP7EAAAA==" Status="HK" Type="TKNE" FreeText="6289902930723C1" Carrier="B2" ProviderReservationInfoRef="4BfqE3BAAA/B05DP7EAAAA=="/>
+        </common_v52_0:BookingTraveler>
+        <common_v52_0:FormOfPayment Key="4BfqE3BAAA/BLyFP7EAAAA==" Type="Cash" Reusable="false" ProfileKey="vFUUt5/sSsO8neX475HM7g=="/>
+        <common_v52_0:Payment Key="4BfqE3BAAA/BMyFP7EAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="4BfqE3BAAA/BLyFP7EAAAA=="/>
+        <common_v52_0:SupplierLocator SupplierCode="B2" SupplierLocatorCode="DNGDQZ"/>
         <air:FareCalc>IEV B2 MSQ Q11.22M/IT END ROE1.0 XT 386YK302YQ91YR</air:FareCalc>
         <air:Ticket Key="4BfqE3BAAA/BHyFP7EAAAA==" TicketNumber="6289902930723" TicketStatus="N">
           <air:Coupon Key="4BfqE3BAAA/BIyFP7EAAAA==" CouponNumber="1" MarketingCarrier="B2" MarketingFlightNumber="848" Origin="IEV" Destination="MSQ" DepartureTime="2018-05-20T06:15:00.000+03:00" StopoverCode="true" BookingClass="F" FareBasis="FSROW" NotValidBefore="2018-05-20" NotValidAfter="2018-05-20" Status="O" SegmentGroup="0" MarriageGroup="0"/>

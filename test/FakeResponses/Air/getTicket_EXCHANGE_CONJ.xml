@@ -2,26 +2,26 @@
   xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP:Body>
     <air:AirRetrieveDocumentRsp TransactionId="98022C490A074254674B346B08D03108" ResponseTime="824" UniversalRecordLocatorCode="W3DV7F"
-      xmlns:air="http://www.travelport.com/schema/air_v47_0"
-      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+      xmlns:air="http://www.travelport.com/schema/air_v52_0"
+      xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0">
       <air:ETR Key="ZJoyP2BAAA/BVUFFlCAAAA==" TotalPrice="UAH1114" BasePrice="USD227.00" Taxes="UAH6038" EquivalentBasePrice="UAH5885" Refundable="false" Exchangeable="false" IssuedDate="2017-07-31T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="L7VXR0" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="LH">
         <air:AirReservationLocatorCode>EVYYDR</air:AirReservationLocatorCode>
-        <common_v47_0:AgencyInfo>
-          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-07-30T22:00:00.000+00:00"/>
-        </common_v47_0:AgencyInfo>
-        <common_v47_0:BookingTraveler Key="ZJoyP2BAAA/B9TFFlCAAAA==">
-          <common_v47_0:BookingTravelerName First="FEDIRMR" Last="IVANOV"/>
-          <common_v47_0:PhoneNumber Key="ZJoyP2BAAA/B+TFFlCAAAA==" Type="None" Number="NOFARE">
-            <common_v47_0:ProviderReservationInfoRef Key="ZJoyP2BAAA/BCZ8ElCAAAA=="/>
-          </common_v47_0:PhoneNumber>
-          <common_v47_0:SSR Key="ZJoyP2BAAA/B/TFFlCAAAA==" SegmentRef="ZJoyP2BAAA/BDUFFlCAAAA==" Status="HK" Type="TKNE" FreeText="2209902930683C1/683-684" Carrier="LH" ProviderReservationInfoRef="ZJoyP2BAAA/BCZ8ElCAAAA=="/>
-          <common_v47_0:SSR Key="ZJoyP2BAAA/BAUFFlCAAAA==" SegmentRef="ZJoyP2BAAA/BFUFFlCAAAA==" Status="HK" Type="TKNE" FreeText="2209902930683C2/683-684" Carrier="LH" ProviderReservationInfoRef="ZJoyP2BAAA/BCZ8ElCAAAA=="/>
-          <common_v47_0:SSR Key="ZJoyP2BAAA/BBUFFlCAAAA==" SegmentRef="ZJoyP2BAAA/BHUFFlCAAAA==" Status="HK" Type="TKNE" FreeText="2209902930683C4/683-684" Carrier="LH" ProviderReservationInfoRef="ZJoyP2BAAA/BCZ8ElCAAAA=="/>
-          <common_v47_0:SSR Key="ZJoyP2BAAA/BCUFFlCAAAA==" SegmentRef="ZJoyP2BAAA/BJUFFlCAAAA==" Status="HK" Type="TKNE" FreeText="2209902930684C1/683-684" Carrier="LH" ProviderReservationInfoRef="ZJoyP2BAAA/BCZ8ElCAAAA=="/>
-        </common_v47_0:BookingTraveler>
-        <common_v47_0:FormOfPayment Key="ZJoyP2BAAA/BmUFFlCAAAA==" Type="Cash" Reusable="false" ProfileKey="jNWqX8poTfSRgMZE7AjqKg=="/>
-        <common_v47_0:Payment Key="ZJoyP2BAAA/BnUFFlCAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="ZJoyP2BAAA/BmUFFlCAAAA=="/>
-        <common_v47_0:SupplierLocator SupplierCode="LH" SupplierLocatorCode="TXYXE9"/>
+        <common_v52_0:AgencyInfo>
+          <common_v52_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-07-30T22:00:00.000+00:00"/>
+        </common_v52_0:AgencyInfo>
+        <common_v52_0:BookingTraveler Key="ZJoyP2BAAA/B9TFFlCAAAA==">
+          <common_v52_0:BookingTravelerName First="FEDIRMR" Last="IVANOV"/>
+          <common_v52_0:PhoneNumber Key="ZJoyP2BAAA/B+TFFlCAAAA==" Type="None" Number="NOFARE">
+            <common_v52_0:ProviderReservationInfoRef Key="ZJoyP2BAAA/BCZ8ElCAAAA=="/>
+          </common_v52_0:PhoneNumber>
+          <common_v52_0:SSR Key="ZJoyP2BAAA/B/TFFlCAAAA==" SegmentRef="ZJoyP2BAAA/BDUFFlCAAAA==" Status="HK" Type="TKNE" FreeText="2209902930683C1/683-684" Carrier="LH" ProviderReservationInfoRef="ZJoyP2BAAA/BCZ8ElCAAAA=="/>
+          <common_v52_0:SSR Key="ZJoyP2BAAA/BAUFFlCAAAA==" SegmentRef="ZJoyP2BAAA/BFUFFlCAAAA==" Status="HK" Type="TKNE" FreeText="2209902930683C2/683-684" Carrier="LH" ProviderReservationInfoRef="ZJoyP2BAAA/BCZ8ElCAAAA=="/>
+          <common_v52_0:SSR Key="ZJoyP2BAAA/BBUFFlCAAAA==" SegmentRef="ZJoyP2BAAA/BHUFFlCAAAA==" Status="HK" Type="TKNE" FreeText="2209902930683C4/683-684" Carrier="LH" ProviderReservationInfoRef="ZJoyP2BAAA/BCZ8ElCAAAA=="/>
+          <common_v52_0:SSR Key="ZJoyP2BAAA/BCUFFlCAAAA==" SegmentRef="ZJoyP2BAAA/BJUFFlCAAAA==" Status="HK" Type="TKNE" FreeText="2209902930684C1/683-684" Carrier="LH" ProviderReservationInfoRef="ZJoyP2BAAA/BCZ8ElCAAAA=="/>
+        </common_v52_0:BookingTraveler>
+        <common_v52_0:FormOfPayment Key="ZJoyP2BAAA/BmUFFlCAAAA==" Type="Cash" Reusable="false" ProfileKey="jNWqX8poTfSRgMZE7AjqKg=="/>
+        <common_v52_0:Payment Key="ZJoyP2BAAA/BnUFFlCAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="ZJoyP2BAAA/BmUFFlCAAAA=="/>
+        <common_v52_0:SupplierLocator SupplierCode="LH" SupplierLocatorCode="TXYXE9"/>
         <air:FareCalc>IEV LH X/FRA LH LIS 140.50V13CLS1 /-BCN LH X/FRA LH IEV 86.50W12CLS1 NUC227.00END ROE1.0 XT PD441YK PD290DE PD1298RA PD446JD PD18OG PD111QV PD2792YQ PD486YR</air:FareCalc>
         <air:Ticket Key="ZJoyP2BAAA/BZUFFlCAAAA==" TicketNumber="2209902930683" TicketStatus="N">
           <air:Coupon Key="ZJoyP2BAAA/BaUFFlCAAAA==" CouponNumber="1" MarketingCarrier="LH" MarketingFlightNumber="1493" Origin="KBP" Destination="FRA" DepartureTime="2018-05-26T06:40:00.000+03:00" StopoverCode="true" BookingClass="V" FareBasis="V13CLS1" NotValidBefore="2018-05-26" NotValidAfter="2018-05-26" Status="O" SegmentGroup="0" MarriageGroup="3"/>
@@ -34,25 +34,25 @@
         </air:Ticket>
         <air:AirPricingInfo Key="ZJoyP2BAAA/BvTFFlCAAAA==" TotalPrice="UAH5885" BasePrice="USD227.00" EquivalentBasePrice="UAH5885" Taxes="UAH0" LatestTicketingTime="2017-07-31T23:59:00.000+02:00" TrueLastDateToTicket="2017-08-03T23:59:00.000+02:00" PricingMethod="GuaranteedUsingAirlinePrivateFare" ETicketability="Yes" ProviderReservationInfoRef="ZJoyP2BAAA/BCZ8ElCAAAA==" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="A">
           <air:FareInfo Key="ZJoyP2BAAA/BxTFFlCAAAA==" FareBasis="V13CLS1" PassengerTypeCode="ADT" Origin="KBP" Destination="FRA" EffectiveDate="2017-07-31T00:00:00.000+02:00" NotValidBefore="2018-05-26" NotValidAfter="2018-05-26">
-            <common_v47_0:Endorsement Value="FARE RESTRICTION APPLY"/>
+            <common_v52_0:Endorsement Value="FARE RESTRICTION APPLY"/>
             <air:BaggageAllowance>
               <air:NumberOfPieces>1</air:NumberOfPieces>
             </air:BaggageAllowance>
           </air:FareInfo>
           <air:FareInfo Key="ZJoyP2BAAA/B0TFFlCAAAA==" FareBasis="V13CLS1" PassengerTypeCode="ADT" Origin="FRA" Destination="LIS" EffectiveDate="2017-07-31T00:00:00.000+02:00" NotValidBefore="2018-05-26" NotValidAfter="2018-05-26">
-            <common_v47_0:Endorsement Value="FARE RESTRICTION APPLY"/>
+            <common_v52_0:Endorsement Value="FARE RESTRICTION APPLY"/>
             <air:BaggageAllowance>
               <air:NumberOfPieces>1</air:NumberOfPieces>
             </air:BaggageAllowance>
           </air:FareInfo>
           <air:FareInfo Key="ZJoyP2BAAA/B3TFFlCAAAA==" FareBasis="W12CLS1" PassengerTypeCode="ADT" Origin="BCN" Destination="FRA" EffectiveDate="2017-07-31T00:00:00.000+02:00" NotValidBefore="2018-06-01" NotValidAfter="2018-06-01">
-            <common_v47_0:Endorsement Value="FARE RESTRICTION APPLY"/>
+            <common_v52_0:Endorsement Value="FARE RESTRICTION APPLY"/>
             <air:BaggageAllowance>
               <air:NumberOfPieces>1</air:NumberOfPieces>
             </air:BaggageAllowance>
           </air:FareInfo>
           <air:FareInfo Key="ZJoyP2BAAA/B6TFFlCAAAA==" FareBasis="W12CLS1" PassengerTypeCode="ADT" Origin="FRA" Destination="KBP" EffectiveDate="2017-07-31T00:00:00.000+02:00" NotValidBefore="2018-06-01" NotValidAfter="2018-06-01">
-            <common_v47_0:Endorsement Value="FARE RESTRICTION APPLY"/>
+            <common_v52_0:Endorsement Value="FARE RESTRICTION APPLY"/>
             <air:BaggageAllowance>
               <air:NumberOfPieces>1</air:NumberOfPieces>
             </air:BaggageAllowance>
@@ -65,7 +65,7 @@
           <air:PassengerType Code="ADT" BookingTravelerRef="ZJoyP2BAAA/B9TFFlCAAAA==">
             <air:FareGuaranteeInfo GuaranteeType="GuaranteedUsingAirlinePrivateFare"/>
           </air:PassengerType>
-          <common_v47_0:BookingTravelerRef Key="ZJoyP2BAAA/B9TFFlCAAAA=="/>
+          <common_v52_0:BookingTravelerRef Key="ZJoyP2BAAA/B9TFFlCAAAA=="/>
           <air:PaymentRef Key="ZJoyP2BAAA/BjUFFlCAAAA=="/>
         </air:AirPricingInfo>
       </air:ETR>

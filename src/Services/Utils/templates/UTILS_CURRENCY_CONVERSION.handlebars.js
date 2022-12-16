@@ -1,5 +1,5 @@
 module.exports = `
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:util="http://www.travelport.com/schema/util_v47_0" xmlns:com="http://www.travelport.com/schema/common_v47_0">
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:util="http://www.travelport.com/schema/util_v47_0" xmlns:com="http://www.travelport.com/schema/common_v52_0">
   <soapenv:Body>
     <util:CurrencyConversionReq TargetBranch="{{TargetBranch}}">
       <com:BillingPointOfSaleInfo OriginApplication="UAPI" />

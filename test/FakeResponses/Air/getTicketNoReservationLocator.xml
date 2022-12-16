@@ -2,29 +2,29 @@
   <SOAP:Body>
     <air:AirRetrieveDocumentRsp TransactionId="AC8CB20A0A0E5633E0DC4033A9D0DB54" ResponseTime="553"
                                 UniversalRecordLocatorCode="7XC9IB"
-                                xmlns:air="http://www.travelport.com/schema/air_v47_0"
-                                xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+                                xmlns:air="http://www.travelport.com/schema/air_v52_0"
+                                xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0">
       <air:ETR Key="SGNQhOBAAA/Bi2KYVCAAAA==" TotalPrice="UAH9641" BasePrice="USD312.00" Taxes="UAH1015"
                EquivalentBasePrice="UAH8626" Refundable="false" Exchangeable="false"
                IssuedDate="2020-07-31T00:00:00.000+02:00" ProviderCode="1G"
                IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="LO">
         <air:AirReservationLocatorCode>7XC9IC</air:AirReservationLocatorCode>
-        <common_v47_0:AgencyInfo>
-          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F"
+        <common_v52_0:AgencyInfo>
+          <common_v52_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F"
                                     BranchCode="P2731609" AgencyCode="S1473516"
                                     EventTime="2020-07-30T22:00:00.000+00:00"/>
-        </common_v47_0:AgencyInfo>
-        <common_v47_0:BookingTraveler Key="SGNQhOBAAA/Be2KYVCAAAA==">
-          <common_v47_0:BookingTravelerName First="MARKMR" Last="OMARO"/>
-          <common_v47_0:SSR Key="BAFllTmJ0BKAesqdKCAAAA==" SegmentRef="ApumlTZYlDKASUsgKCAAAA==" Status="HK"
+        </common_v52_0:AgencyInfo>
+        <common_v52_0:BookingTraveler Key="SGNQhOBAAA/Be2KYVCAAAA==">
+          <common_v52_0:BookingTravelerName First="MARKMR" Last="OMARO"/>
+          <common_v52_0:SSR Key="BAFllTmJ0BKAesqdKCAAAA==" SegmentRef="ApumlTZYlDKASUsgKCAAAA==" Status="HK"
                             Type="TKNE" FreeText="0809903654990C1" Carrier="LO"
                             ProviderReservationInfoRef="SGNQhOBAAA/BnpKYVCAAAA=="/>
-        </common_v47_0:BookingTraveler>
-        <common_v47_0:FormOfPayment Key="SGNQhOBAAA/Bq2KYVCAAAA==" Type="Cash" Reusable="false"
+        </common_v52_0:BookingTraveler>
+        <common_v52_0:FormOfPayment Key="SGNQhOBAAA/Bq2KYVCAAAA==" Type="Cash" Reusable="false"
                                     ProfileKey="uxXmOeceT/+1chcubif2xg=="/>
-        <common_v47_0:Payment Key="SGNQhOBAAA/Bs2KYVCAAAA==" Type="Itinerary" Amount="UAH9641"
+        <common_v52_0:Payment Key="SGNQhOBAAA/Bs2KYVCAAAA==" Type="Itinerary" Amount="UAH9641"
                               FormOfPaymentRef="SGNQhOBAAA/Bq2KYVCAAAA=="/>
-        <common_v47_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="Q9BSVF"/>
+        <common_v52_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="Q9BSVF"/>
         <air:FareCalc>IEV LO WAW 312.00 NUC312.00END ROE1.0 XT 360YK488YQ</air:FareCalc>
         <air:Ticket Key="SGNQhOBAAA/Bm2KYVCAAAA==" TicketNumber="0809903654876" TicketStatus="N">
           <air:Coupon Key="SGNQhOBAAA/Bn2KYVCAAAA==" CouponNumber="1" MarketingCarrier="LO"

@@ -13,7 +13,7 @@ describe('#hotelsParser', () => {
       const request = {
         location: 'IEV',
       };
-      const uParser = new Parser('hotel:HotelSearchAvailabilityRsp', 'v47_0', request);
+      const uParser = new Parser('hotel:HotelSearchAvailabilityRsp', 'v52_0', request);
       const parseFunction = hotelsParser.HOTELS_SEARCH_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/HOTELS_SEARCH_REQUEST.xml`).toString();
 
@@ -59,7 +59,7 @@ describe('#hotelsParser', () => {
         Address: 'test address',
         Amenties: [],
       };
-      const uParser = new Parser('hotel:HotelDetailsRsp', 'v47_0', request);
+      const uParser = new Parser('hotel:HotelDetailsRsp', 'v52_0', request);
       const parseFunction = hotelsParser.HOTELS_RATE_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/HOTELS_RATE_REQUEST.xml`).toString();
 
@@ -110,7 +110,7 @@ describe('#hotelsParser', () => {
 
   describe('bookParse()', () => {
     it('give response object', () => {
-      const uParser = new Parser('universal:HotelCreateReservationRsp', 'v47_0', {});
+      const uParser = new Parser('universal:HotelCreateReservationRsp', 'v52_0', {});
       const parseFunction = hotelsParser.HOTELS_BOOK_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/HOTELS_BOOK_REQUEST.xml`).toString();
 
@@ -137,7 +137,7 @@ describe('#hotelsParser', () => {
 
   describe('cancelBookParse()', () => {
     it('give response object', () => {
-      const uParser = new Parser('universal:UniversalRecordCancelRsp', 'v47_0', {});
+      const uParser = new Parser('universal:UniversalRecordCancelRsp', 'v52_0', {});
       const parseFunction = hotelsParser.HOTELS_CANCEL_BOOK_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/HOTELS_CANCEL_BOOK_REQUEST.xml`).toString();
 

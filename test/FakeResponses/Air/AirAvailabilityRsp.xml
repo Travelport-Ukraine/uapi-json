@@ -2,7 +2,7 @@
         xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
         <air:AvailabilitySearchRsp TraceId="4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60" TransactionId="F993948D0A074261212ADFD0023CA66E" ResponseTime="525" DistanceUnits="MI"
-                                   xmlns:air="http://www.travelport.com/schema/air_v47_0">
+                                   xmlns:air="http://www.travelport.com/schema/air_v52_0">
             <air:FlightDetailsList>
                 <air:FlightDetails Key="TbTehBBAAA/B9tfnB5AAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T06:40:00.000+02:00" ArrivalTime="2018-03-18T09:10:00.000+01:00" FlightTime="210" TravelTime="210" Equipment="319" DestinationTerminal="2E"/>
                 <air:FlightDetails Key="TbTehBBAAA/B/tfnB5AAAA==" Origin="KBP" Destination="CDG" DepartureTime="2018-03-18T06:40:00.000+02:00" ArrivalTime="2018-03-18T09:10:00.000+01:00" FlightTime="210" TravelTime="210" Equipment="319" DestinationTerminal="2E"/>

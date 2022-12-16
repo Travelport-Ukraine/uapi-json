@@ -3,10 +3,10 @@ module.exports = `
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
     <soapenv:Body>
         <univ:HotelCreateReservationReq
-            xmlns:com="http://www.travelport.com/schema/common_v47_0"
-            xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
+            xmlns:com="http://www.travelport.com/schema/common_v52_0"
+            xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0"
             xmlns:hotel="http://www.travelport.com/schema/hotel_v47_0"
-            xmlns:univ="http://www.travelport.com/schema/universal_v47_0"
+            xmlns:univ="http://www.travelport.com/schema/universal_v52_0"
             ProviderCode="TRM"
             TargetBranch="{{{TargetBranch}}}"
             UserAcceptance="true">
@@ -33,7 +33,7 @@ module.exports = `
             </com:BookingTraveler>
             {{/each}}
 
-           <!--  <com:ReservationName xmlns:com="http://www.travelport.com/schema/common_v47_0">
+           <!--  <com:ReservationName xmlns:com="http://www.travelport.com/schema/common_v52_0">
                 <com:BookingTravelerRef Key="1">
                 </com:BookingTravelerRef>
             </com:ReservationName> -->
@@ -52,13 +52,13 @@ module.exports = `
             </hotel:HotelStay>
             {{#Guarantee}}
             <com:Guarantee
-                    xmlns:com="http://www.travelport.com/schema/common_v47_0" Type="Guarantee">
+                    xmlns:com="http://www.travelport.com/schema/common_v52_0" Type="Guarantee">
                     <com:CreditCard Type="{{& CardType}}" Number="{{& CardNumber}}" ExpDate="{{& ExpDate}}" Name="{{& CardHolder}}" CVV="{{& CVV}}" BankName="{{& BankName}}" BankCountryCode="{{& BankCountryCode}}" />
             </com:Guarantee>
             {{/Guarantee}}
-            <common_v47_0:HostToken Host="TRM">
+            <common_v52_0:HostToken Host="TRM">
                 {{& HostToken}}
-            </common_v47_0:HostToken>
+            </common_v52_0:HostToken>
            <hot:BookingGuestInformation xmlns:hot="http://www.travelport.com/schema/hotel_v47_0">
                 {{#roomsRefs}}
                <hot:Room>

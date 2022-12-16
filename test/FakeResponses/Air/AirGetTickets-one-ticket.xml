@@ -2,21 +2,21 @@
   xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP:Body>
     <air:AirRetrieveDocumentRsp TransactionId="83646F920A0759D0CC0AF07C6DC9EE36" ResponseTime="824" UniversalRecordLocatorCode="D52L0U" 
-      xmlns:air="http://www.travelport.com/schema/air_v47_0" 
-      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+      xmlns:air="http://www.travelport.com/schema/air_v52_0" 
+      xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0">
       <air:ETR Key="Uq5I7oKc1BKA6naH+RAAAA==" TotalPrice="UAH14929" BasePrice="USD501.00" Taxes="UAH1564" EquivalentBasePrice="UAH13365" Refundable="false" Exchangeable="false" IssuedDate="2019-04-26T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="VTXVHA" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="LO">
         <air:AirReservationLocatorCode>0LDQXJ</air:AirReservationLocatorCode>
-        <common_v47_0:AgencyInfo>
-          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-04-25T22:00:00.000+00:00"/>
-        </common_v47_0:AgencyInfo>
-        <common_v47_0:BookingTraveler Key="Uq5I7oKc1BKAznaH+RAAAA==">
-          <common_v47_0:BookingTravelerName First="JAIROMR" Last="PANDURO"/>
-          <common_v47_0:SSR Key="Uq5I7oKc1BKA0naH+RAAAA==" SegmentRef="Uq5I7oKc1BKA2naH+RAAAA==" Status="HK" Type="TKNE" FreeText="0809903399048C1" Carrier="LO" ProviderReservationInfoRef="Uq5I7oKc1BKAWDNH+RAAAA=="/>
-          <common_v47_0:SSR Key="Uq5I7oKc1BKA1naH+RAAAA==" SegmentRef="Uq5I7oKc1BKA4naH+RAAAA==" Status="HK" Type="TKNE" FreeText="0809903399048C2" Carrier="LO" ProviderReservationInfoRef="Uq5I7oKc1BKAWDNH+RAAAA=="/>
-        </common_v47_0:BookingTraveler>
-        <common_v47_0:FormOfPayment Key="Uq5I7oKc1BKADoaH+RAAAA==" Type="Cash" Reusable="false" ProfileKey="vBnOTXnETxSzQ+s5T/xZnA=="/>
-        <common_v47_0:Payment Key="Uq5I7oKc1BKAFoaH+RAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="Uq5I7oKc1BKADoaH+RAAAA=="/>
-        <common_v47_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="KZOQPT"/>
+        <common_v52_0:AgencyInfo>
+          <common_v52_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-04-25T22:00:00.000+00:00"/>
+        </common_v52_0:AgencyInfo>
+        <common_v52_0:BookingTraveler Key="Uq5I7oKc1BKAznaH+RAAAA==">
+          <common_v52_0:BookingTravelerName First="JAIROMR" Last="PANDURO"/>
+          <common_v52_0:SSR Key="Uq5I7oKc1BKA0naH+RAAAA==" SegmentRef="Uq5I7oKc1BKA2naH+RAAAA==" Status="HK" Type="TKNE" FreeText="0809903399048C1" Carrier="LO" ProviderReservationInfoRef="Uq5I7oKc1BKAWDNH+RAAAA=="/>
+          <common_v52_0:SSR Key="Uq5I7oKc1BKA1naH+RAAAA==" SegmentRef="Uq5I7oKc1BKA4naH+RAAAA==" Status="HK" Type="TKNE" FreeText="0809903399048C2" Carrier="LO" ProviderReservationInfoRef="Uq5I7oKc1BKAWDNH+RAAAA=="/>
+        </common_v52_0:BookingTraveler>
+        <common_v52_0:FormOfPayment Key="Uq5I7oKc1BKADoaH+RAAAA==" Type="Cash" Reusable="false" ProfileKey="vBnOTXnETxSzQ+s5T/xZnA=="/>
+        <common_v52_0:Payment Key="Uq5I7oKc1BKAFoaH+RAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="Uq5I7oKc1BKADoaH+RAAAA=="/>
+        <common_v52_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="KZOQPT"/>
         <air:FareCalc>IEV LO X/WAW LO BRU 501.00 NUC501.00END ROE1.0 XT 401YK6ND418XW7BE598YQ</air:FareCalc>
         <air:Ticket Key="Uq5I7oKc1BKA+naH+RAAAA==" TicketNumber="0809903399048" TicketStatus="N">
           <air:Coupon Key="Uq5I7oKc1BKA/naH+RAAAA==" CouponNumber="1" MarketingCarrier="LO" MarketingFlightNumber="756" Origin="IEV" Destination="WAW" DepartureTime="2020-02-01T06:00:00.000+02:00" StopoverCode="true" BookingClass="Y" FareBasis="Y1SAV0" NotValidBefore="2020-02-01" NotValidAfter="2020-02-01" Status="O" SegmentGroup="0" MarriageGroup="0"/>
@@ -24,13 +24,13 @@
         </air:Ticket>
         <air:AirPricingInfo Key="Uq5I7oKc1BKAknaH+RAAAA==" TotalPrice="UAH14929" BasePrice="USD501.00" EquivalentBasePrice="UAH13365" Taxes="UAH1564" LatestTicketingTime="2019-04-29T23:59:00.000+02:00" TrueLastDateToTicket="2019-05-03T23:59:00.000+02:00" PricingMethod="Guaranteed" ETicketability="Yes" ProviderReservationInfoRef="Uq5I7oKc1BKAWDNH+RAAAA==" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="G">
           <air:FareInfo Key="Uq5I7oKc1BKAmnaH+RAAAA==" FareBasis="Y1SAV0" PassengerTypeCode="ADT" Origin="IEV" Destination="WAW" EffectiveDate="2019-04-26T00:00:00.000+02:00" NotValidBefore="2020-02-01" NotValidAfter="2020-02-01">
-            <common_v47_0:Endorsement Value="NONREF/ NO CHNG"/>
+            <common_v52_0:Endorsement Value="NONREF/ NO CHNG"/>
             <air:BaggageAllowance>
               <air:NumberOfPieces>0</air:NumberOfPieces>
             </air:BaggageAllowance>
           </air:FareInfo>
           <air:FareInfo Key="Uq5I7oKc1BKApnaH+RAAAA==" FareBasis="Y1SAV0" PassengerTypeCode="ADT" Origin="WAW" Destination="BRU" EffectiveDate="2019-04-26T00:00:00.000+02:00" NotValidBefore="2020-02-01" NotValidAfter="2020-02-01">
-            <common_v47_0:Endorsement Value="NONREF/ NO CHNG"/>
+            <common_v52_0:Endorsement Value="NONREF/ NO CHNG"/>
             <air:BaggageAllowance>
               <air:NumberOfPieces>0</air:NumberOfPieces>
             </air:BaggageAllowance>
@@ -48,7 +48,7 @@
           <air:PassengerType Code="ADT" BookingTravelerRef="Uq5I7oKc1BKAznaH+RAAAA==">
             <air:FareGuaranteeInfo GuaranteeType="Guaranteed"/>
           </air:PassengerType>
-          <common_v47_0:BookingTravelerRef Key="Uq5I7oKc1BKAznaH+RAAAA=="/>
+          <common_v52_0:BookingTravelerRef Key="Uq5I7oKc1BKAznaH+RAAAA=="/>
           <air:PaymentRef Key="Uq5I7oKc1BKAEoaH+RAAAA=="/>
         </air:AirPricingInfo>
         <air:BaggageAllowances>

@@ -2,47 +2,47 @@
         xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
         <universal:UniversalRecordImportRsp TraceId="" TransactionId="E3B7781C0A0759D48C9CEE33608E4278" ResponseTime="1796"
-                                            xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
-                                            xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
-                                            xmlns:air="http://www.travelport.com/schema/air_v47_0">
-            <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record UKF7AJ</common_v47_0:ResponseMessage>
-            <common_v47_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival cities for segments Air CHI-YTO UA476 2018-02-02T06:45:00.000-06:00 in 1G and Air IEV-FRA UA9149 2018-02-08T06:00:00.000+02:00 in 1G</common_v47_0:ResponseMessage>
-            <common_v47_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival cities for segments Air FRA-IEV AC9207 2018-03-02T09:30:00.000+01:00 in 1G and Air YTO-FRA AC9104 2018-03-10T18:05:00.000-05:00 in 1G</common_v47_0:ResponseMessage>
+                                            xmlns:universal="http://www.travelport.com/schema/universal_v52_0"
+                                            xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0"
+                                            xmlns:air="http://www.travelport.com/schema/air_v52_0">
+            <common_v52_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record UKF7AJ</common_v52_0:ResponseMessage>
+            <common_v52_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival cities for segments Air CHI-YTO UA476 2018-02-02T06:45:00.000-06:00 in 1G and Air IEV-FRA UA9149 2018-02-08T06:00:00.000+02:00 in 1G</common_v52_0:ResponseMessage>
+            <common_v52_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival cities for segments Air FRA-IEV AC9207 2018-03-02T09:30:00.000+01:00 in 1G and Air YTO-FRA AC9104 2018-03-10T18:05:00.000-05:00 in 1G</common_v52_0:ResponseMessage>
             <universal:UniversalRecord LocatorCode="UKF7AJ" Version="1" Status="Active">
-                <common_v47_0:BookingTraveler Key="/RsbWzBAAA/B/3qYmDAAAA==">
-                    <common_v47_0:BookingTravelerName First="GLAS" Last="SIMOR"/>
-                    <common_v47_0:SSR Key="/RsbWzBAAA/BA4qYmDAAAA==" Status="HK" Type="DOCS" FreeText="////12JUL76/M//SIMOR/GLAS -1SIMOR/GLAS" Carrier="UA" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
-                    <common_v47_0:SSR Key="/RsbWzBAAA/BB4qYmDAAAA==" Status="HK" Type="DOCS" FreeText="////12JUL76/M//SIMOR/GLAS -1SIMOR/GLAS" Carrier="AC" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
-                    <common_v47_0:SSR Key="/RsbWzBAAA/BC4qYmDAAAA==" SegmentRef="/RsbWzBAAA/BJ4qYmDAAAA==" Status="HK" Type="TKNE" FreeText="0749902914260C1/260-261" Carrier="UA" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
-                    <common_v47_0:SSR Key="/RsbWzBAAA/BD4qYmDAAAA==" SegmentRef="/RsbWzBAAA/BM4qYmDAAAA==" Status="HK" Type="TKNE" FreeText="0749902914260C2/260-261" Carrier="UA" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
-                    <common_v47_0:SSR Key="/RsbWzBAAA/BE4qYmDAAAA==" SegmentRef="/RsbWzBAAA/BP4qYmDAAAA==" Status="HK" Type="TKNE" FreeText="0749902914260C3/260-261" Carrier="UA" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
-                    <common_v47_0:SSR Key="/RsbWzBAAA/BF4qYmDAAAA==" SegmentRef="/RsbWzBAAA/BZ4qYmDAAAA==" Status="HK" Type="TKNE" FreeText="0749902914260C4/260-261" Carrier="AC" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
-                    <common_v47_0:SSR Key="/RsbWzBAAA/BG4qYmDAAAA==" SegmentRef="/RsbWzBAAA/Bb4qYmDAAAA==" Status="HK" Type="TKNE" FreeText="0749902914261C1/260-261" Carrier="AC" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
-                </common_v47_0:BookingTraveler>
-                <common_v47_0:ActionStatus Key="/RsbWzBAAA/BxVqYmDAAAA==" Type="ACTIVE" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" ProviderCode="1G">
-                    <common_v47_0:Remark>IEV 22JUN1513Z 12 AG</common_v47_0:Remark>
-                </common_v47_0:ActionStatus>
+                <common_v52_0:BookingTraveler Key="/RsbWzBAAA/B/3qYmDAAAA==">
+                    <common_v52_0:BookingTravelerName First="GLAS" Last="SIMOR"/>
+                    <common_v52_0:SSR Key="/RsbWzBAAA/BA4qYmDAAAA==" Status="HK" Type="DOCS" FreeText="////12JUL76/M//SIMOR/GLAS -1SIMOR/GLAS" Carrier="UA" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
+                    <common_v52_0:SSR Key="/RsbWzBAAA/BB4qYmDAAAA==" Status="HK" Type="DOCS" FreeText="////12JUL76/M//SIMOR/GLAS -1SIMOR/GLAS" Carrier="AC" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
+                    <common_v52_0:SSR Key="/RsbWzBAAA/BC4qYmDAAAA==" SegmentRef="/RsbWzBAAA/BJ4qYmDAAAA==" Status="HK" Type="TKNE" FreeText="0749902914260C1/260-261" Carrier="UA" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
+                    <common_v52_0:SSR Key="/RsbWzBAAA/BD4qYmDAAAA==" SegmentRef="/RsbWzBAAA/BM4qYmDAAAA==" Status="HK" Type="TKNE" FreeText="0749902914260C2/260-261" Carrier="UA" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
+                    <common_v52_0:SSR Key="/RsbWzBAAA/BE4qYmDAAAA==" SegmentRef="/RsbWzBAAA/BP4qYmDAAAA==" Status="HK" Type="TKNE" FreeText="0749902914260C3/260-261" Carrier="UA" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
+                    <common_v52_0:SSR Key="/RsbWzBAAA/BF4qYmDAAAA==" SegmentRef="/RsbWzBAAA/BZ4qYmDAAAA==" Status="HK" Type="TKNE" FreeText="0749902914260C4/260-261" Carrier="AC" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
+                    <common_v52_0:SSR Key="/RsbWzBAAA/BG4qYmDAAAA==" SegmentRef="/RsbWzBAAA/Bb4qYmDAAAA==" Status="HK" Type="TKNE" FreeText="0749902914261C1/260-261" Carrier="AC" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA=="/>
+                </common_v52_0:BookingTraveler>
+                <common_v52_0:ActionStatus Key="/RsbWzBAAA/BxVqYmDAAAA==" Type="ACTIVE" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" ProviderCode="1G">
+                    <common_v52_0:Remark>IEV 22JUN1513Z 12 AG</common_v52_0:Remark>
+                </common_v52_0:ActionStatus>
                 <universal:ProviderReservationInfo Key="/RsbWzBAAA/BbSgYmDAAAA==" ProviderCode="1G" LocatorCode="STFTTG" CreateDate="2017-06-26T08:18:47.398+00:00" ModifiedDate="2017-06-26T09:24:32.141+00:00" HostCreateDate="2017-06-22" Imported="true" OwningPCC="7J8J">
                     <universal:ProviderReservationDetails ProviderReservationDetail="false" CustomCheck="true" ProviderProfile="false" DivideDetails="false" EnhancedItinModifiers="false" IntegratedContent="false" Cruise="false" RailSegment="false"/>
                 </universal:ProviderReservationInfo>
                 <air:AirReservation LocatorCode="J203WA" CreateDate="2017-06-26T08:18:45.399+00:00" ModifiedDate="2017-06-26T08:47:39.767+00:00">
-                    <common_v47_0:SupplierLocator SupplierCode="UA" SupplierLocatorCode="NWDSGT" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" CreateDateTime="2017-06-22T15:24:00.000+00:00"/>
-                    <common_v47_0:SupplierLocator SupplierCode="AC" SupplierLocatorCode="L4EREZ" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" CreateDateTime="2017-06-22T15:24:00.000+00:00"/>
+                    <common_v52_0:SupplierLocator SupplierCode="UA" SupplierLocatorCode="NWDSGT" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" CreateDateTime="2017-06-22T15:24:00.000+00:00"/>
+                    <common_v52_0:SupplierLocator SupplierCode="AC" SupplierLocatorCode="L4EREZ" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" CreateDateTime="2017-06-22T15:24:00.000+00:00"/>
                     <air:DocumentInfo>
                         <air:TicketInfo Number="0749902914260" Status="N" BookingTravelerRef="/RsbWzBAAA/B/3qYmDAAAA==" AirPricingInfoRef="/RsbWzBAAA/BcaqYmDAAAA==">
-                            <common_v47_0:Name First="GLAS" Last="SIMOR"/>
+                            <common_v52_0:Name First="GLAS" Last="SIMOR"/>
                             <air:ConjunctedTicketInfo Number="0749902914261" Status="N"/>
                         </air:TicketInfo>
                     </air:DocumentInfo>
-                    <common_v47_0:BookingTravelerRef Key="/RsbWzBAAA/B/3qYmDAAAA=="/>
-                    <common_v47_0:ProviderReservationInfoRef Key="/RsbWzBAAA/BbSgYmDAAAA=="/>
+                    <common_v52_0:BookingTravelerRef Key="/RsbWzBAAA/B/3qYmDAAAA=="/>
+                    <common_v52_0:ProviderReservationInfoRef Key="/RsbWzBAAA/BbSgYmDAAAA=="/>
                     <air:AirSegment Key="/RsbWzBAAA/BJ4qYmDAAAA==" Group="0" Carrier="UA" CabinClass="Economy" FlightNumber="8953" ProviderCode="1G" Origin="KBP" Destination="MUC" DepartureTime="2018-02-01T06:05:00.000+02:00" ArrivalTime="2018-02-01T07:35:00.000+01:00" TravelTime="150" ClassOfService="K" ETicketability="No" MarriageGroup="1" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" TravelOrder="1" OptionalServicesIndicator="false">
-                        <common_v47_0:SegmentRemark Key="/RsbWzBAAA/BL4qYmDAAAA==">DEUTSCHE LUFTHANSA AG</common_v47_0:SegmentRemark>
+                        <common_v52_0:SegmentRemark Key="/RsbWzBAAA/BL4qYmDAAAA==">DEUTSCHE LUFTHANSA AG</common_v52_0:SegmentRemark>
                         <air:CodeshareInfo OperatingCarrier="LH"/>
                         <air:FlightDetails Key="/RsbWzBAAA/BK4qYmDAAAA==" Origin="KBP" Destination="MUC" DepartureTime="2018-02-01T06:05:00.000+02:00" ArrivalTime="2018-02-01T07:35:00.000+01:00" FlightTime="150" TravelTime="150" Equipment="320" DestinationTerminal="2"/>
                     </air:AirSegment>
                     <air:AirSegment Key="/RsbWzBAAA/BM4qYmDAAAA==" Group="1" Carrier="UA" CabinClass="Economy" FlightNumber="8855" ProviderCode="1G" Origin="MUC" Destination="ORD" DepartureTime="2018-02-01T15:55:00.000+01:00" ArrivalTime="2018-02-01T19:05:00.000-06:00" TravelTime="610" ClassOfService="K" ETicketability="No" MarriageGroup="1" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" TravelOrder="2" OptionalServicesIndicator="false">
-                        <common_v47_0:SegmentRemark Key="/RsbWzBAAA/BO4qYmDAAAA==">DEUTSCHE LUFTHANSA AG</common_v47_0:SegmentRemark>
+                        <common_v52_0:SegmentRemark Key="/RsbWzBAAA/BO4qYmDAAAA==">DEUTSCHE LUFTHANSA AG</common_v52_0:SegmentRemark>
                         <air:CodeshareInfo OperatingCarrier="LH"/>
                         <air:FlightDetails Key="/RsbWzBAAA/BN4qYmDAAAA==" Origin="MUC" Destination="ORD" DepartureTime="2018-02-01T15:55:00.000+01:00" ArrivalTime="2018-02-01T19:05:00.000-06:00" FlightTime="610" TravelTime="610" Equipment="346" OriginTerminal="2" DestinationTerminal="5"/>
                     </air:AirSegment>
@@ -50,13 +50,13 @@
                         <air:FlightDetails Key="/RsbWzBAAA/BQ4qYmDAAAA==" Origin="ORD" Destination="YYZ" DepartureTime="2018-02-02T06:45:00.000-06:00" ArrivalTime="2018-02-02T09:17:00.000-05:00" FlightTime="92" TravelTime="92" Equipment="320" OriginTerminal="1" DestinationTerminal="1"/>
                     </air:AirSegment>
                     <air:AirSegment Key="/RsbWzBAAA/BR4qYmDAAAA==" Group="3" Carrier="UA" CabinClass="Economy" FlightNumber="9149" ProviderCode="1G" Origin="KBP" Destination="FRA" DepartureTime="2018-02-08T06:00:00.000+02:00" ArrivalTime="2018-02-08T07:55:00.000+01:00" TravelTime="175" ClassOfService="Y" ETicketability="No" MarriageGroup="3" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" TravelOrder="4" OptionalServicesIndicator="false">
-                        <common_v47_0:SegmentRemark Key="/RsbWzBAAA/BT4qYmDAAAA==">DEUTSCHE LUFTHANSA AG</common_v47_0:SegmentRemark>
+                        <common_v52_0:SegmentRemark Key="/RsbWzBAAA/BT4qYmDAAAA==">DEUTSCHE LUFTHANSA AG</common_v52_0:SegmentRemark>
                         <air:CodeshareInfo OperatingCarrier="LH"/>
                         <air:FlightDetails Key="/RsbWzBAAA/BS4qYmDAAAA==" Origin="KBP" Destination="FRA" DepartureTime="2018-02-08T06:00:00.000+02:00" ArrivalTime="2018-02-08T07:55:00.000+01:00" FlightTime="175" TravelTime="175" Equipment="320" DestinationTerminal="1"/>
                         <air:Connection Duration="165"/>
                     </air:AirSegment>
                     <air:AirSegment Key="/RsbWzBAAA/BU4qYmDAAAA==" Group="3" Carrier="UA" CabinClass="Economy" FlightNumber="8836" ProviderCode="1G" Origin="FRA" Destination="ORD" DepartureTime="2018-02-08T10:40:00.000+01:00" ArrivalTime="2018-02-08T13:05:00.000-06:00" TravelTime="565" ClassOfService="Y" ETicketability="No" MarriageGroup="3" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" TravelOrder="5" OptionalServicesIndicator="false">
-                        <common_v47_0:SegmentRemark Key="/RsbWzBAAA/BW4qYmDAAAA==">DEUTSCHE LUFTHANSA AG</common_v47_0:SegmentRemark>
+                        <common_v52_0:SegmentRemark Key="/RsbWzBAAA/BW4qYmDAAAA==">DEUTSCHE LUFTHANSA AG</common_v52_0:SegmentRemark>
                         <air:CodeshareInfo OperatingCarrier="LH"/>
                         <air:FlightDetails Key="/RsbWzBAAA/BV4qYmDAAAA==" Origin="FRA" Destination="ORD" DepartureTime="2018-02-08T10:40:00.000+01:00" ArrivalTime="2018-02-08T13:05:00.000-06:00" FlightTime="565" TravelTime="565" Equipment="74H" OriginTerminal="1" DestinationTerminal="5"/>
                     </air:AirSegment>
@@ -68,53 +68,53 @@
                         <air:Connection Duration="180"/>
                     </air:AirSegment>
                     <air:AirSegment Key="/RsbWzBAAA/Bb4qYmDAAAA==" Group="5" Carrier="AC" CabinClass="Economy" FlightNumber="9207" ProviderCode="1G" Origin="FRA" Destination="KBP" DepartureTime="2018-03-02T09:30:00.000+01:00" ArrivalTime="2018-03-02T12:55:00.000+02:00" TravelTime="145" ClassOfService="L" ETicketability="No" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" TravelOrder="8" OptionalServicesIndicator="false">
-                        <common_v47_0:SegmentRemark Key="/RsbWzBAAA/Bd4qYmDAAAA==">LUFTHANSA OR LH CITYLINE</common_v47_0:SegmentRemark>
+                        <common_v52_0:SegmentRemark Key="/RsbWzBAAA/Bd4qYmDAAAA==">LUFTHANSA OR LH CITYLINE</common_v52_0:SegmentRemark>
                         <air:CodeshareInfo OperatingCarrier="LH"/>
                         <air:FlightDetails Key="/RsbWzBAAA/Bc4qYmDAAAA==" Origin="FRA" Destination="KBP" DepartureTime="2018-03-02T09:30:00.000+01:00" ArrivalTime="2018-03-02T12:55:00.000+02:00" FlightTime="145" TravelTime="145" Equipment="320" OriginTerminal="1"/>
                     </air:AirSegment>
                     <air:AirSegment Key="/RsbWzBAAA/Be4qYmDAAAA==" Group="6" Carrier="AC" CabinClass="Economy" FlightNumber="9104" ProviderCode="1G" Origin="YYZ" Destination="FRA" DepartureTime="2018-03-10T18:05:00.000-05:00" ArrivalTime="2018-03-11T07:50:00.000+01:00" TravelTime="465" ClassOfService="Y" ETicketability="No" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" TravelOrder="9" OptionalServicesIndicator="false">
-                        <common_v47_0:SegmentRemark Key="/RsbWzBAAA/Bg4qYmDAAAA==">LUFTHANSA OR LH CITYLINE</common_v47_0:SegmentRemark>
+                        <common_v52_0:SegmentRemark Key="/RsbWzBAAA/Bg4qYmDAAAA==">LUFTHANSA OR LH CITYLINE</common_v52_0:SegmentRemark>
                         <air:CodeshareInfo OperatingCarrier="LH"/>
                         <air:FlightDetails Key="/RsbWzBAAA/Bf4qYmDAAAA==" Origin="YYZ" Destination="FRA" DepartureTime="2018-03-10T18:05:00.000-05:00" ArrivalTime="2018-03-11T07:50:00.000+01:00" FlightTime="465" TravelTime="465" Equipment="744" OriginTerminal="1" DestinationTerminal="1"/>
                         <air:Connection Duration="100"/>
                     </air:AirSegment>
                     <air:AirSegment Key="/RsbWzBAAA/Bq4qYmDAAAA==" Group="6" Carrier="AC" CabinClass="Economy" FlightNumber="9207" ProviderCode="1G" Origin="FRA" Destination="KBP" DepartureTime="2018-03-11T09:30:00.000+01:00" ArrivalTime="2018-03-11T12:55:00.000+02:00" TravelTime="145" ClassOfService="Y" ETicketability="No" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" TravelOrder="10" OptionalServicesIndicator="false">
-                        <common_v47_0:SegmentRemark Key="/RsbWzBAAA/BD6qYmDAAAA==">LUFTHANSA OR LH CITYLINE</common_v47_0:SegmentRemark>
+                        <common_v52_0:SegmentRemark Key="/RsbWzBAAA/BD6qYmDAAAA==">LUFTHANSA OR LH CITYLINE</common_v52_0:SegmentRemark>
                         <air:CodeshareInfo OperatingCarrier="LH"/>
                         <air:FlightDetails Key="/RsbWzBAAA/BX5qYmDAAAA==" Origin="FRA" Destination="KBP" DepartureTime="2018-03-11T09:30:00.000+01:00" ArrivalTime="2018-03-11T12:55:00.000+02:00" FlightTime="145" TravelTime="145" Equipment="320" OriginTerminal="1"/>
                     </air:AirSegment>
                     <air:AirPricingInfo Key="/RsbWzBAAA/BcaqYmDAAAA==" TotalPrice="UAH27777" BasePrice="USD865.00" EquivalentBasePrice="UAH22529" Taxes="UAH5248" TrueLastDateToTicket="2017-06-25T23:59:00.000+02:00" PricingMethod="Guaranteed" ETicketability="Yes" ProviderCode="1G" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="G">
                         <air:FareInfo Key="/RsbWzBAAA/BioqYmDAAAA==" FareBasis="KLNCE37W" PassengerTypeCode="ADT" Origin="KBP" Destination="MUC" EffectiveDate="2017-06-22T00:00:00.000+02:00" NotValidBefore="2018-02-01" NotValidAfter="2018-02-01" PseudoCityCode="7J8J">
-                            <common_v47_0:Endorsement Value="NONREF/FL/CHG RESTRICTED"/>
-                            <common_v47_0:Endorsement Value="CHECK FARE NOTE"/>
+                            <common_v52_0:Endorsement Value="NONREF/FL/CHG RESTRICTED"/>
+                            <common_v52_0:Endorsement Value="CHECK FARE NOTE"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>1</air:NumberOfPieces>
                             </air:BaggageAllowance>
                         </air:FareInfo>
                         <air:FareInfo Key="/RsbWzBAAA/BspqYmDAAAA==" FareBasis="KLNCE37W" PassengerTypeCode="ADT" Origin="MUC" Destination="ORD" EffectiveDate="2017-06-22T00:00:00.000+02:00" NotValidBefore="2018-02-01" NotValidAfter="2018-02-01" PseudoCityCode="7J8J">
-                            <common_v47_0:Endorsement Value="NONREF/FL/CHG RESTRICTED"/>
-                            <common_v47_0:Endorsement Value="CHECK FARE NOTE"/>
+                            <common_v52_0:Endorsement Value="NONREF/FL/CHG RESTRICTED"/>
+                            <common_v52_0:Endorsement Value="CHECK FARE NOTE"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>1</air:NumberOfPieces>
                             </air:BaggageAllowance>
                         </air:FareInfo>
                         <air:FareInfo Key="/RsbWzBAAA/BMqqYmDAAAA==" FareBasis="KLNCE37W" PassengerTypeCode="ADT" Origin="ORD" Destination="YYZ" EffectiveDate="2017-06-22T00:00:00.000+02:00" NotValidBefore="2018-02-02" NotValidAfter="2018-02-02" PseudoCityCode="7J8J">
-                            <common_v47_0:Endorsement Value="NONREF/FL/CHG RESTRICTED"/>
-                            <common_v47_0:Endorsement Value="CHECK FARE NOTE"/>
+                            <common_v52_0:Endorsement Value="NONREF/FL/CHG RESTRICTED"/>
+                            <common_v52_0:Endorsement Value="CHECK FARE NOTE"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>1</air:NumberOfPieces>
                             </air:BaggageAllowance>
                         </air:FareInfo>
                         <air:FareInfo Key="/RsbWzBAAA/BmqqYmDAAAA==" FareBasis="LLNCUAW" PassengerTypeCode="ADT" Origin="YYZ" Destination="FRA" EffectiveDate="2017-06-22T00:00:00.000+02:00" NotValidBefore="2018-03-01" NotValidAfter="2018-03-01" PseudoCityCode="7J8J">
-                            <common_v47_0:Endorsement Value="NONREF/FL/CHG RESTRICTED"/>
-                            <common_v47_0:Endorsement Value="CHECK FARE NOTE"/>
+                            <common_v52_0:Endorsement Value="NONREF/FL/CHG RESTRICTED"/>
+                            <common_v52_0:Endorsement Value="CHECK FARE NOTE"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>1</air:NumberOfPieces>
                             </air:BaggageAllowance>
                         </air:FareInfo>
                         <air:FareInfo Key="/RsbWzBAAA/BqqqYmDAAAA==" FareBasis="LLNCUAW" PassengerTypeCode="ADT" Origin="FRA" Destination="KBP" EffectiveDate="2017-06-22T00:00:00.000+02:00" NotValidBefore="2018-03-02" NotValidAfter="2018-03-02" PseudoCityCode="7J8J">
-                            <common_v47_0:Endorsement Value="NONREF/FL/CHG RESTRICTED"/>
-                            <common_v47_0:Endorsement Value="CHECK FARE NOTE"/>
+                            <common_v52_0:Endorsement Value="NONREF/FL/CHG RESTRICTED"/>
+                            <common_v52_0:Endorsement Value="CHECK FARE NOTE"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>1</air:NumberOfPieces>
                             </air:BaggageAllowance>
@@ -132,7 +132,7 @@
                         <air:TaxInfo Category="AY" Amount="UAH146" Key="/RsbWzBAAA/BX3qYmDAAAA=="/>
                         <air:TaxInfo Category="XA" Amount="UAH104" Key="/RsbWzBAAA/BY3qYmDAAAA=="/>
                         <air:TaxInfo Category="XF" Amount="UAH118" Key="/RsbWzBAAA/BZ3qYmDAAAA==">
-                            <common_v47_0:TaxDetail Amount="USD5" OriginAirport="ORD"/>
+                            <common_v52_0:TaxDetail Amount="USD5" OriginAirport="ORD"/>
                         </air:TaxInfo>
                         <air:TaxInfo Category="XY" Amount="UAH183" Key="/RsbWzBAAA/Ba3qYmDAAAA=="/>
                         <air:TaxInfo Category="YC" Amount="UAH144" Key="/RsbWzBAAA/Bb3qYmDAAAA=="/>
@@ -144,36 +144,36 @@
                         <air:PassengerType Code="ADT" BookingTravelerRef="/RsbWzBAAA/B/3qYmDAAAA==">
                             <air:FareGuaranteeInfo GuaranteeType="Guaranteed"/>
                         </air:PassengerType>
-                        <common_v47_0:BookingTravelerRef Key="/RsbWzBAAA/B/3qYmDAAAA=="/>
+                        <common_v52_0:BookingTravelerRef Key="/RsbWzBAAA/B/3qYmDAAAA=="/>
                         <air:TicketingModifiersRef Key="/RsbWzBAAA/BhoqYmDAAAA=="/>
                     </air:AirPricingInfo>
                     <air:AirPricingInfo Key="/RsbWzBAAA/Bg3qYmDAAAA==" TotalPrice="UAH156830" BasePrice="USD5814.00" EquivalentBasePrice="UAH151426" Taxes="UAH5404" TrueLastDateToTicket="2018-02-08T23:59:00.000+01:00" PricingMethod="Guaranteed" ETicketability="Yes" ProviderCode="1G" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" AirPricingInfoGroup="2" PricingType="StoredFare" FareCalculationInd="G">
                         <air:FareInfo Key="/RsbWzBAAA/Bi3qYmDAAAA==" FareBasis="Y77RT" PassengerTypeCode="ADT" Origin="KBP" Destination="FRA" EffectiveDate="2017-06-22T00:00:00.000+02:00" PseudoCityCode="7J8J">
-                            <common_v47_0:Endorsement Value="CHG BA FOC/CNX BA FOC"/>
+                            <common_v52_0:Endorsement Value="CHG BA FOC/CNX BA FOC"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>1</air:NumberOfPieces>
                             </air:BaggageAllowance>
                         </air:FareInfo>
                         <air:FareInfo Key="/RsbWzBAAA/Bl3qYmDAAAA==" FareBasis="Y77RT" PassengerTypeCode="ADT" Origin="FRA" Destination="ORD" EffectiveDate="2017-06-22T00:00:00.000+02:00" PseudoCityCode="7J8J">
-                            <common_v47_0:Endorsement Value="CHG BA FOC/CNX BA FOC"/>
+                            <common_v52_0:Endorsement Value="CHG BA FOC/CNX BA FOC"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>1</air:NumberOfPieces>
                             </air:BaggageAllowance>
                         </air:FareInfo>
                         <air:FareInfo Key="/RsbWzBAAA/Bo3qYmDAAAA==" FareBasis="Y77RT" PassengerTypeCode="ADT" Origin="ORD" Destination="YYZ" EffectiveDate="2017-06-22T00:00:00.000+02:00" PseudoCityCode="7J8J">
-                            <common_v47_0:Endorsement Value="CHG BA FOC/CNX BA FOC"/>
+                            <common_v52_0:Endorsement Value="CHG BA FOC/CNX BA FOC"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>1</air:NumberOfPieces>
                             </air:BaggageAllowance>
                         </air:FareInfo>
                         <air:FareInfo Key="/RsbWzBAAA/Br3qYmDAAAA==" FareBasis="Y77RT" PassengerTypeCode="ADT" Origin="YYZ" Destination="FRA" EffectiveDate="2017-06-22T00:00:00.000+02:00" PseudoCityCode="7J8J">
-                            <common_v47_0:Endorsement Value="CHG BA FOC/CNX BA FOC"/>
+                            <common_v52_0:Endorsement Value="CHG BA FOC/CNX BA FOC"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>1</air:NumberOfPieces>
                             </air:BaggageAllowance>
                         </air:FareInfo>
                         <air:FareInfo Key="/RsbWzBAAA/Bu3qYmDAAAA==" FareBasis="Y77RT" PassengerTypeCode="ADT" Origin="FRA" Destination="KBP" EffectiveDate="2017-06-22T00:00:00.000+02:00" PseudoCityCode="7J8J">
-                            <common_v47_0:Endorsement Value="CHG BA FOC/CNX BA FOC"/>
+                            <common_v52_0:Endorsement Value="CHG BA FOC/CNX BA FOC"/>
                             <air:BaggageAllowance>
                                 <air:NumberOfPieces>1</air:NumberOfPieces>
                             </air:BaggageAllowance>
@@ -191,7 +191,7 @@
                         <air:TaxInfo Category="AY" Amount="UAH146" Key="/RsbWzBAAA/B23qYmDAAAA=="/>
                         <air:TaxInfo Category="XA" Amount="UAH104" Key="/RsbWzBAAA/B33qYmDAAAA=="/>
                         <air:TaxInfo Category="XF" Amount="UAH118" Key="/RsbWzBAAA/B43qYmDAAAA==">
-                            <common_v47_0:TaxDetail Amount="USD5" OriginAirport="ORD"/>
+                            <common_v52_0:TaxDetail Amount="USD5" OriginAirport="ORD"/>
                         </air:TaxInfo>
                         <air:TaxInfo Category="XY" Amount="UAH183" Key="/RsbWzBAAA/B53qYmDAAAA=="/>
                         <air:TaxInfo Category="YC" Amount="UAH144" Key="/RsbWzBAAA/B63qYmDAAAA=="/>
@@ -203,7 +203,7 @@
                         <air:PassengerType Code="ADT" BookingTravelerRef="/RsbWzBAAA/B/3qYmDAAAA==">
                             <air:FareGuaranteeInfo GuaranteeType="Expired"/>
                         </air:PassengerType>
-                        <common_v47_0:BookingTravelerRef Key="/RsbWzBAAA/B/3qYmDAAAA=="/>
+                        <common_v52_0:BookingTravelerRef Key="/RsbWzBAAA/B/3qYmDAAAA=="/>
                         <air:TicketingModifiersRef Key="/RsbWzBAAA/Bh3qYmDAAAA=="/>
                     </air:AirPricingInfo>
                     <air:TicketingModifiers PlatingCarrier="KL" Key="/RsbWzBAAA/BhoqYmDAAAA==">
@@ -213,19 +213,19 @@
                         <air:DocumentSelect IssueElectronicTicket="true"/>
                     </air:TicketingModifiers>
                 </air:AirReservation>
-                <common_v47_0:GeneralRemark Key="/RsbWzBAAA/BaPrYmDAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" CreateDate="2017-06-22T15:12:00.000+00:00">
-                    <common_v47_0:RemarkData>VIEWTRIPITIN</common_v47_0:RemarkData>
-                </common_v47_0:GeneralRemark>
-                <common_v47_0:AgencyInfo>
-                    <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="257f/VZmSaKqfMsUWfwY6Q==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2017-06-26T08:18:44.927+00:00"/>
-                    <common_v47_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-06-26T08:47:39.788+00:00"/>
-                    <common_v47_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-06-26T08:18:47.396+00:00"/>
-                </common_v47_0:AgencyInfo>
-                <common_v47_0:AgencyContactInfo>
-                    <common_v47_0:PhoneNumber Key="/RsbWzBAAA/BzVqYmDAAAA==" Type="Agency" Location="IEV" Number="380 44 9999999">
-                        <common_v47_0:ProviderReservationInfoRef Key="/RsbWzBAAA/BbSgYmDAAAA=="/>
-                    </common_v47_0:PhoneNumber>
-                </common_v47_0:AgencyContactInfo>
+                <common_v52_0:GeneralRemark Key="/RsbWzBAAA/BaPrYmDAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="/RsbWzBAAA/BbSgYmDAAAA==" CreateDate="2017-06-22T15:12:00.000+00:00">
+                    <common_v52_0:RemarkData>VIEWTRIPITIN</common_v52_0:RemarkData>
+                </common_v52_0:GeneralRemark>
+                <common_v52_0:AgencyInfo>
+                    <common_v52_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="257f/VZmSaKqfMsUWfwY6Q==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2017-06-26T08:18:44.927+00:00"/>
+                    <common_v52_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-06-26T08:47:39.788+00:00"/>
+                    <common_v52_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2017-06-26T08:18:47.396+00:00"/>
+                </common_v52_0:AgencyInfo>
+                <common_v52_0:AgencyContactInfo>
+                    <common_v52_0:PhoneNumber Key="/RsbWzBAAA/BzVqYmDAAAA==" Type="Agency" Location="IEV" Number="380 44 9999999">
+                        <common_v52_0:ProviderReservationInfoRef Key="/RsbWzBAAA/BbSgYmDAAAA=="/>
+                    </common_v52_0:PhoneNumber>
+                </common_v52_0:AgencyContactInfo>
             </universal:UniversalRecord>
         </universal:UniversalRecordImportRsp>
     </SOAP:Body>

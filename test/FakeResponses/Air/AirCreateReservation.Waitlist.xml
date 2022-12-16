@@ -4,14 +4,14 @@
             <faultcode>Server.Business</faultcode>
             <faultstring>General air service Error.</faultstring>
             <detail>
-                <air:AvailabilityErrorInfo xmlns:air="http://www.travelport.com/schema/air_v47_0"
-                                           xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
-                    <common_v47_0:Code>3000</common_v47_0:Code>
-                    <common_v47_0:Service>AIRSVC</common_v47_0:Service>
-                    <common_v47_0:Type>Business</common_v47_0:Type>
-                    <common_v47_0:Description>General air service Error.</common_v47_0:Description>
-                    <common_v47_0:TransactionId>22979F7A0A0759C564EBE0905941DA4B</common_v47_0:TransactionId>
-                    <common_v47_0:TraceId/>
+                <air:AvailabilityErrorInfo xmlns:air="http://www.travelport.com/schema/air_v52_0"
+                                           xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0">
+                    <common_v52_0:Code>3000</common_v52_0:Code>
+                    <common_v52_0:Service>AIRSVC</common_v52_0:Service>
+                    <common_v52_0:Type>Business</common_v52_0:Type>
+                    <common_v52_0:Description>General air service Error.</common_v52_0:Description>
+                    <common_v52_0:TransactionId>22979F7A0A0759C564EBE0905941DA4B</common_v52_0:TransactionId>
+                    <common_v52_0:TraceId/>
                     <air:AirSegmentError>
                         <air:AirSegment Key="2lmtfoBAAA/B7/4irAAAAA==" Group="0" Carrier="CA" FlightNumber="910"
                                         Origin="SVO" Destination="PEK" DepartureTime="2017-04-13T18:45:00.000+03:00"

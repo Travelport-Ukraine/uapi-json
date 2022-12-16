@@ -1,7 +1,7 @@
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
         <air:LowFareSearchAsynchRsp TraceId="" TransactionId="A93F11A30A076478EAD0520D3E91FDC7" ResponseTime="3655" DistanceUnits="MI" SearchId="A93F11A30A076478EAD0520D3E91FDC7_OICNKKJ20Oct19Economyfnull-1f-1-1tftnull300-1-1MI1GnullfADTKRWnullnullnullnullnullnullnullnullnullfff2124774" CurrencyType="KRW"
-                                    xmlns:air="http://www.travelport.com/schema/air_v47_0">
+                                    xmlns:air="http://www.travelport.com/schema/air_v52_0">
             <air:FlightDetailsList>
                 <air:FlightDetails Key="jsXfwx4R2BKADnbpFAAAAA==" Origin="ICN" Destination="KKJ" DepartureTime="2019-10-20T07:10:00.000+09:00" ArrivalTime="2019-10-20T08:35:00.000+09:00" FlightTime="85" Equipment="738" OriginTerminal="1"/>
                 <air:FlightDetails Key="jsXfwx4R2BKAFnbpFAAAAA==" Origin="ICN" Destination="KKJ" DepartureTime="2019-10-20T16:10:00.000+09:00" ArrivalTime="2019-10-20T17:35:00.000+09:00" FlightTime="85" Equipment="738" OriginTerminal="1"/>

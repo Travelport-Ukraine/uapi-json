@@ -12,7 +12,7 @@ const xmlFolder = path.join(__dirname, '/FakeResponses');
 
 describe('uapi-parser tests', () => {
   it('parse with errors', () => {
-    const parser = new Parser('someroot', 'v47_0');
+    const parser = new Parser('someroot', 'v52_0');
     return parser.parseXML('adsdasds').then(() => {
       throw new Error('Error should be thrown');
     }, (err) => {
@@ -21,17 +21,17 @@ describe('uapi-parser tests', () => {
   });
 
   it('should detect error version automaticly', () => {
-    const parser = new Parser('someroot', 'v47_0');
+    const parser = new Parser('someroot', 'v52_0');
     const xml = fs.readFileSync(path.join(xmlFolder, '/Other/UnableToFareQuoteError.xml'));
     return parser.parse(xml).then(() => {
-      assert(parser.uapi_version === 'v47_0', 'Version is not overrided');
+      assert(parser.uapi_version === 'v52_0', 'Version is not overrided');
     });
   });
 });
 
 describe('uapi-parser error handling tests', () => {
   it('trouble case at withVersionProp handling', () => {
-    const parser = new Parser('someroot', 'v47_0');
+    const parser = new Parser('someroot', 'v52_0');
     const xml = fs.readFileSync(path.join(xmlFolder, '/Other/validationErrorAddress.xml')).toString();
     return parser.parse(xml);
   });

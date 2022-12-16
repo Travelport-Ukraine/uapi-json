@@ -4,14 +4,14 @@
             <faultcode>Server.Business</faultcode>
             <faultstring>General air service Error.</faultstring>
             <detail>
-                <air:AvailabilityErrorInfo xmlns:air="http://www.travelport.com/schema/air_v47_0"
-                                           xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
-                    <common_v47_0:Code>3000</common_v47_0:Code>
-                    <common_v47_0:Service>AIRSVC</common_v47_0:Service>
-                    <common_v47_0:Type>Business</common_v47_0:Type>
-                    <common_v47_0:Description>General air service Error.</common_v47_0:Description>
-                    <common_v47_0:TransactionId>E64EEED50A0764783F7D287DEAB3612C</common_v47_0:TransactionId>
-                    <common_v47_0:TraceId/>
+                <air:AvailabilityErrorInfo xmlns:air="http://www.travelport.com/schema/air_v52_0"
+                                           xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0">
+                    <common_v52_0:Code>3000</common_v52_0:Code>
+                    <common_v52_0:Service>AIRSVC</common_v52_0:Service>
+                    <common_v52_0:Type>Business</common_v52_0:Type>
+                    <common_v52_0:Description>General air service Error.</common_v52_0:Description>
+                    <common_v52_0:TransactionId>E64EEED50A0764783F7D287DEAB3612C</common_v52_0:TransactionId>
+                    <common_v52_0:TraceId/>
                     <air:AirSegmentError>
                         <air:AirSegment Key="9VYj923R2BKAVCf4FAAAAA==" Group="0" Carrier="FZ" FlightNumber="744"
                                         Origin="IEV" Destination="DXB" DepartureTime="2017-11-10T23:15:00.000+02:00"
