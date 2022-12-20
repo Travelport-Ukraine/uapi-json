@@ -1,8 +1,8 @@
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <air:AirPriceRsp TraceId="test" TransactionId="B659C23D0A0759C48942E0BF717F834D" ResponseTime="3106" xmlns:air="http://www.travelport.com/schema/air_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
-            <common_v47_0:ResponseMessage Code="710401" Type="Warning" ProviderCode="1G">Taxes returned at the FareInfo level are for informational purposes only, and may differ from those returned at the Itinerary/Passenger Type levels.</common_v47_0:ResponseMessage>
-            <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">The price is informational and can only be stored manually.</common_v47_0:ResponseMessage>
+        <air:AirPriceRsp TraceId="test" TransactionId="B659C23D0A0759C48942E0BF717F834D" ResponseTime="3106" xmlns:air="http://www.travelport.com/schema/air_v52_0" xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0">
+            <common_v52_0:ResponseMessage Code="710401" Type="Warning" ProviderCode="1G">Taxes returned at the FareInfo level are for informational purposes only, and may differ from those returned at the Itinerary/Passenger Type levels.</common_v52_0:ResponseMessage>
+            <common_v52_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">The price is informational and can only be stored manually.</common_v52_0:ResponseMessage>
             <air:AirItinerary>
                 <air:AirSegment Key="hYdWSVCYSHaGarlvxCFZXA==" Group="0" Carrier="KL" FlightNumber="1382" ProviderCode="1G" Origin="KBP" Destination="AMS" DepartureTime="2016-07-01T05:45:00.000+03:00" ArrivalTime="2016-07-01T07:35:00.000+02:00" FlightTime="170" TravelTime="170" Distance="1119" ClassOfService="T" ChangeOfPlane="false" OptionalServicesIndicator="true" AvailabilitySource="S" PolledAvailabilityOption="O and D cache or polled status used with different local status" AvailabilityDisplayType="Fare Specific Fare Quote Unbooked">
                     <air:FlightDetails Key="BBBaqJtJTHeG3R3QzOT78g==" Origin="KBP" Destination="AMS" DepartureTime="2016-07-01T05:45:00.000+03:00" ArrivalTime="2016-07-01T07:35:00.000+02:00" FlightTime="170" TravelTime="170" Distance="1119"/>
@@ -17,7 +17,7 @@
                     <air:AirSegmentRef Key="tSDAYAJUStOa0baNH7CzNQ=="/>
                     <air:AirPricingInfo Key="7WFKqC/wRH+4JZ989QmI4Q==" TotalPrice="UAH8909" BasePrice="USD314.00" ApproximateTotalPrice="UAH8909" ApproximateBasePrice="UAH7970" EquivalentBasePrice="UAH7970" ApproximateTaxes="UAH939" Taxes="UAH939" LatestTicketingTime="2016-05-23T23:59:00.000+03:00" PricingMethod="Guaranteed" IncludesVAT="false" ETicketability="Yes" PlatingCarrier="KL" ProviderCode="1G">
                         <air:FareInfo Key="MxjLUjVJQUWvBrD6X3uIbQ==" FareBasis="T7WKWUA" PassengerTypeCode="ADT" Origin="KBP" Destination="CDG" EffectiveDate="2016-05-17T00:36:00.000+03:00" DepartureDate="2016-07-01" Amount="UAH7970" NotValidBefore="2016-07-01" NotValidAfter="2016-07-01" TaxAmount="UAH939.00">
-                            <common_v47_0:Endorsement Value="NONENDO/NONREF"/>
+                            <common_v52_0:Endorsement Value="NONENDO/NONREF"/>
                             <air:FareRuleKey FareInfoRef="MxjLUjVJQUWvBrD6X3uIbQ==" ProviderCode="1G">6UUVoSldxwguAjerT1zTqcbKj3F8T9EyxsqPcXxP0TIjSPOlaHfQe5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA5cuasWd6i8Dly5qxZ3qLwOXLmrFneovA+sf5EYPtqNHM3ExqSoG050YrFZ2txsEb9H3UAmOMhkSQu0ZscBMSQ6OEAXXLugEWpuPVwn/pjQ0/woAkFsEj4laOxvxXbSjgBll6FxyIC6cYuAWfcH2w92IEQfz1U0L74i+OmnuOQqbpDPMn48bBn3qkp0FEw0raOCbZ1nsUQQBNiYoiAk5NpyB9hn26g2z+uaeJIc23zoev4Xvb2u1Qx+/he9va7VDH7+F729rtUMfv4Xvb2u1Qx+/he9va7VDH8ONhV50oNexly5qxZ3qLwMUu+QC5Q/Q9gU2i5vKx7Q6ILj4xa7lLkoTkeKXc2PFjBqICTKtPV+75GwF8kqQiiA=</air:FareRuleKey>
                             <air:Brand BrandFound="false" UpSellBrandFound="false"/>
                         </air:FareInfo>
@@ -94,15 +94,15 @@
                     <air:OptionalServices>
                         <air:OptionalServicesTotal/>
                         <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="UAH406" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="551300" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="gwtYA8UPSxmHszCRoEdzmw==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH406" ApproximateTotalPrice="UAH406" ApproximateBasePrice="UAH406" Taxes="UAH0" OptionalServicesRuleRef="JdTPrzQcRzSi/YtoexKQUQ==">
-                            <common_v47_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT">
-                                <common_v47_0:SeatAttributes>
-                                    <common_v47_0:SeatAttribute Value="O"/>
-                                </common_v47_0:SeatAttributes>
-                            </common_v47_0:ServiceData>
-                            <common_v47_0:ServiceInfo>
-                                <common_v47_0:Description>CHARGEABLE SEAT</common_v47_0:Description>
-                            </common_v47_0:ServiceInfo>
-                            <common_v47_0:Remark>KL 1382 - UAH406.00 PER PASSENGER CHARGEABLE SEAT</common_v47_0:Remark>
+                            <common_v52_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT">
+                                <common_v52_0:SeatAttributes>
+                                    <common_v52_0:SeatAttribute Value="O"/>
+                                </common_v52_0:SeatAttributes>
+                            </common_v52_0:ServiceData>
+                            <common_v52_0:ServiceInfo>
+                                <common_v52_0:Description>CHARGEABLE SEAT</common_v52_0:Description>
+                            </common_v52_0:ServiceInfo>
+                            <common_v52_0:Remark>KL 1382 - UAH406.00 PER PASSENGER CHARGEABLE SEAT</common_v52_0:Remark>
                             <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
                             <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
                             <air:BrandingInfo Key="BI5" CommercialName="CHARGEABLE SEAT">
@@ -111,15 +111,15 @@
                             </air:BrandingInfo>
                         </air:OptionalService>
                         <air:OptionalService Type="PreReservedSeatAssignment" TotalPrice="UAH232" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="551225" ServiceSubCode="0B5" SSRCode="RQST" IssuanceReason="A" Key="Pj3mVuGqQcumOe4cur5H4w==" AssessIndicator="MileageOrCurrency" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Sector" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH232" ApproximateTotalPrice="UAH232" ApproximateBasePrice="UAH232" Taxes="UAH0" OptionalServicesRuleRef="Cbh3+6NpQDahkYk/hNP3PQ==">
-                            <common_v47_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" TravelerType="ADT">
-                                <common_v47_0:SeatAttributes>
-                                    <common_v47_0:SeatAttribute Value="O"/>
-                                </common_v47_0:SeatAttributes>
-                            </common_v47_0:ServiceData>
-                            <common_v47_0:ServiceInfo>
-                                <common_v47_0:Description>CHARGEABLE SEAT</common_v47_0:Description>
-                            </common_v47_0:ServiceInfo>
-                            <common_v47_0:Remark>KL 1233 - UAH232.00 PER PASSENGER CHARGEABLE SEAT</common_v47_0:Remark>
+                            <common_v52_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" TravelerType="ADT">
+                                <common_v52_0:SeatAttributes>
+                                    <common_v52_0:SeatAttribute Value="O"/>
+                                </common_v52_0:SeatAttributes>
+                            </common_v52_0:ServiceData>
+                            <common_v52_0:ServiceInfo>
+                                <common_v52_0:Description>CHARGEABLE SEAT</common_v52_0:Description>
+                            </common_v52_0:ServiceInfo>
+                            <common_v52_0:Remark>KL 1233 - UAH232.00 PER PASSENGER CHARGEABLE SEAT</common_v52_0:Remark>
                             <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
                             <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
                             <air:BrandingInfo Key="BI6" CommercialName="CHARGEABLE SEAT">
@@ -128,11 +128,11 @@
                             </air:BrandingInfo>
                         </air:OptionalService>
                         <air:OptionalService Type="Baggage" TotalPrice="UAH1304" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="2018500" ServiceSubCode="0CC" SSRCode="ABAG" IssuanceReason="C" Key="5G8A2gosSPKJgQNHI2Nq0g==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH1304" ApproximateTotalPrice="UAH1304" ApproximateBasePrice="UAH1304" Taxes="UAH0" OptionalServicesRuleRef="HVeba16yTP6djNEhs+/Opg==">
-                            <common_v47_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT"/>
-                            <common_v47_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" StopOver="true" TravelerType="ADT"/>
-                            <common_v47_0:ServiceInfo>
-                                <common_v47_0:Description>1ST ADDITIONAL BAG</common_v47_0:Description>
-                            </common_v47_0:ServiceInfo>
+                            <common_v52_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT"/>
+                            <common_v52_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v52_0:ServiceInfo>
+                                <common_v52_0:Description>1ST ADDITIONAL BAG</common_v52_0:Description>
+                            </common_v52_0:ServiceInfo>
                             <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
                             <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
                             <air:BrandingInfo Key="BI4" CommercialName="1ST ADDITIONAL BAG">
@@ -142,11 +142,11 @@
                             </air:BrandingInfo>
                         </air:OptionalService>
                         <air:OptionalService Type="Baggage" TotalPrice="UAH1304" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="139500" ServiceSubCode="0CD" SSRCode="BBAG" IssuanceReason="C" Key="kuuQN2yyQJqfQOBDTFg6pw==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH1304" ApproximateTotalPrice="UAH1304" ApproximateBasePrice="UAH1304" Taxes="UAH0" OptionalServicesRuleRef="2Qva4B9iT/mM+EV4dudoyw==">
-                            <common_v47_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT"/>
-                            <common_v47_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" StopOver="true" TravelerType="ADT"/>
-                            <common_v47_0:ServiceInfo>
-                                <common_v47_0:Description>2ND ADDITIONAL BAG</common_v47_0:Description>
-                            </common_v47_0:ServiceInfo>
+                            <common_v52_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT"/>
+                            <common_v52_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v52_0:ServiceInfo>
+                                <common_v52_0:Description>2ND ADDITIONAL BAG</common_v52_0:Description>
+                            </common_v52_0:ServiceInfo>
                             <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
                             <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
                             <air:BrandingInfo Key="BI1" CommercialName="2ND ADDITIONAL BAG">
@@ -156,11 +156,11 @@
                             </air:BrandingInfo>
                         </air:OptionalService>
                         <air:OptionalService Type="Baggage" TotalPrice="UAH1304" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="140000" ServiceSubCode="0CE" SSRCode="CBAG" IssuanceReason="C" Key="FtXCX+uSSSSepIYRQ2al4Q==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH1304" ApproximateTotalPrice="UAH1304" ApproximateBasePrice="UAH1304" Taxes="UAH0" OptionalServicesRuleRef="G3DNwsG6TvCbN/mBHEgtCQ==">
-                            <common_v47_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT"/>
-                            <common_v47_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" StopOver="true" TravelerType="ADT"/>
-                            <common_v47_0:ServiceInfo>
-                                <common_v47_0:Description>3RD OR MORE ADDITIONAL BAG</common_v47_0:Description>
-                            </common_v47_0:ServiceInfo>
+                            <common_v52_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="hYdWSVCYSHaGarlvxCFZXA==" TravelerType="ADT"/>
+                            <common_v52_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" StopOver="true" TravelerType="ADT"/>
+                            <common_v52_0:ServiceInfo>
+                                <common_v52_0:Description>3RD OR MORE ADDITIONAL BAG</common_v52_0:Description>
+                            </common_v52_0:ServiceInfo>
                             <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Reuse" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
                             <air:FeeApplication Code="3">Per Item</air:FeeApplication>
                             <air:BrandingInfo Key="BI2" CommercialName="3RD OR MORE ADDITIONAL BAG">
@@ -170,10 +170,10 @@
                             </air:BrandingInfo>
                         </air:OptionalService>
                         <air:OptionalService Type="Baggage" TotalPrice="UAH290" SupplierCode="KL" PerTraveler="false" CreateDate="2016-05-15T21:36:59.432+00:00" ServiceStatus="Offered" SequenceNumber="102250" ServiceSubCode="0CF" SSRCode="IBAG" IssuanceReason="C" Key="CAwQRoCCS+uz47w70+J3rg==" AssessIndicator="MileageOrCurrency" Private="true" InclusiveOfTax="true" InterlineSettlementAllowed="false" GeographySpecification="Portion" Source="MCE" ViewableOnly="false" ProviderCode="1G" Quantity="1" BasePrice="UAH290" ApproximateTotalPrice="UAH290" ApproximateBasePrice="UAH290" Taxes="UAH0" OptionalServicesRuleRef="EnPgnjOyS5O1sMtK7W6n3w==">
-                            <common_v47_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" TravelerType="ADT"/>
-                            <common_v47_0:ServiceInfo>
-                                <common_v47_0:Description>1ST ADDITIONAL IVORY BAG</common_v47_0:Description>
-                            </common_v47_0:ServiceInfo>
+                            <common_v52_0:ServiceData BookingTravelerRef="PzqS+uhBQoSlAznIe/2pLA==" AirSegmentRef="tSDAYAJUStOa0baNH7CzNQ==" TravelerType="ADT"/>
+                            <common_v52_0:ServiceInfo>
+                                <common_v52_0:Description>1ST ADDITIONAL IVORY BAG</common_v52_0:Description>
+                            </common_v52_0:ServiceInfo>
                             <air:EMD FulfillmentType="2" AssociatedItem="Flight" RefundReissueIndicator="Refundable" Commissionable="false" Booking="SSR" FulfillmentTypeDescription="Associated to a flight coupon of a ticket"/>
                             <air:FeeApplication Code="4">Per Travel</air:FeeApplication>
                             <air:BrandingInfo Key="BI3" CommercialName="1ST ADDITIONAL IVORY BAG">
@@ -182,22 +182,22 @@
                             </air:BrandingInfo>
                         </air:OptionalService>
                         <air:OptionalServiceRules Key="JdTPrzQcRzSi/YtoexKQUQ==">
-                            <common_v47_0:ApplicationRules RequiredForAllTravelers="false"/>
+                            <common_v52_0:ApplicationRules RequiredForAllTravelers="false"/>
                         </air:OptionalServiceRules>
                         <air:OptionalServiceRules Key="Cbh3+6NpQDahkYk/hNP3PQ==">
-                            <common_v47_0:ApplicationRules RequiredForAllTravelers="false"/>
+                            <common_v52_0:ApplicationRules RequiredForAllTravelers="false"/>
                         </air:OptionalServiceRules>
                         <air:OptionalServiceRules Key="HVeba16yTP6djNEhs+/Opg==">
-                            <common_v47_0:ApplicationRules RequiredForAllTravelers="false"/>
+                            <common_v52_0:ApplicationRules RequiredForAllTravelers="false"/>
                         </air:OptionalServiceRules>
                         <air:OptionalServiceRules Key="2Qva4B9iT/mM+EV4dudoyw==">
-                            <common_v47_0:ApplicationRules RequiredForAllTravelers="false"/>
+                            <common_v52_0:ApplicationRules RequiredForAllTravelers="false"/>
                         </air:OptionalServiceRules>
                         <air:OptionalServiceRules Key="G3DNwsG6TvCbN/mBHEgtCQ==">
-                            <common_v47_0:ApplicationRules RequiredForAllTravelers="false"/>
+                            <common_v52_0:ApplicationRules RequiredForAllTravelers="false"/>
                         </air:OptionalServiceRules>
                         <air:OptionalServiceRules Key="EnPgnjOyS5O1sMtK7W6n3w==">
-                            <common_v47_0:ApplicationRules RequiredForAllTravelers="false"/>
+                            <common_v52_0:ApplicationRules RequiredForAllTravelers="false"/>
                         </air:OptionalServiceRules>
                     </air:OptionalServices>
                 </air:AirPricingSolution>

@@ -4,8 +4,8 @@ module.exports = `
   <soap:Header/>
   <soap:Body>
     <air:AirTicketingReq AuthorizedBy="user" ReturnInfoOnFail="true" TargetBranch="{{TargetBranch}}"
-      xmlns:air="http://www.travelport.com/schema/air_v47_0"
-      xmlns:com="http://www.travelport.com/schema/common_v47_0"
+      xmlns:air="http://www.travelport.com/schema/air_v52_0"
+      xmlns:com="http://www.travelport.com/schema/common_v52_0"
       >
       <com:BillingPointOfSaleInfo OriginApplication="uAPI"/>
       {{#if emulatePcc}}

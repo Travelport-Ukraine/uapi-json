@@ -1,6 +1,6 @@
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <air:FlightInformationRsp xmlns:air="http://www.travelport.com/schema/air_v47_0" TransactionId="7B5690F00A07643B4901CAA2635E89E6" ResponseTime="47">
+        <air:FlightInformationRsp xmlns:air="http://www.travelport.com/schema/air_v52_0" TransactionId="7B5690F00A07643B4901CAA2635E89E6" ResponseTime="47">
             <air:FlightInfo CriteriaKey="DWHdPqSuQ3O4ed+x29TvlQ==" Carrier="OK" FlightNumber="xxx" DepartureDate="2016-12-16">
                 <air:FlightInfoErrorMessage Code="-1" Type="Error">Invalid Flight Number field</air:FlightInfoErrorMessage>
             </air:FlightInfo>

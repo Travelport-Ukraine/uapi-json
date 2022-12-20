@@ -5,14 +5,14 @@
       <faultcode>Server.Business</faultcode>
       <faultstring>Record locator not found.</faultstring>
       <detail>
-        <common_v47_0:ErrorInfo
-          xmlns:common_v47_0="https://www.travelport.com/schema/common_v47_0">
-          <common_v47_0:Code>3130</common_v47_0:Code>
-          <common_v47_0:Service>WEBSVC</common_v47_0:Service>
-          <common_v47_0:Type>Business</common_v47_0:Type>
-          <common_v47_0:Description>Record locator not found.</common_v47_0:Description>
-          <common_v47_0:TransactionId>838261280A07425809813A4629F6C7D1</common_v47_0:TransactionId>
-        </common_v47_0:ErrorInfo>
+        <common_v52_0:ErrorInfo
+          xmlns:common_v52_0="https://www.travelport.com/schema/common_v52_0">
+          <common_v52_0:Code>3130</common_v52_0:Code>
+          <common_v52_0:Service>WEBSVC</common_v52_0:Service>
+          <common_v52_0:Type>Business</common_v52_0:Type>
+          <common_v52_0:Description>Record locator not found.</common_v52_0:Description>
+          <common_v52_0:TransactionId>838261280A07425809813A4629F6C7D1</common_v52_0:TransactionId>
+        </common_v52_0:ErrorInfo>
       </detail>
     </SOAP:Fault>
   </SOAP:Body>

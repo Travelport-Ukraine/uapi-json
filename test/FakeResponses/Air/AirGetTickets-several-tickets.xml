@@ -2,20 +2,20 @@
   xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP:Body>
     <air:AirRetrieveDocumentRsp TransactionId="83615CB00A0759BD7DA171CC26F87BAB" ResponseTime="1064" UniversalRecordLocatorCode="P2350X" 
-      xmlns:air="http://www.travelport.com/schema/air_v47_0" 
-      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
+      xmlns:air="http://www.travelport.com/schema/air_v52_0" 
+      xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0">
       <air:ETR Key="y/FG7oiB0BKA0UFY2FAAAA==" TotalPrice="UAH8836" BasePrice="USD292.00" Taxes="UAH992" EquivalentBasePrice="UAH7844" Refundable="false" Exchangeable="false" IssuedDate="2019-04-22T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="HX8R24" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="LO">
         <air:AirReservationLocatorCode>9LCJNR</air:AirReservationLocatorCode>
-        <common_v47_0:AgencyInfo>
-          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-04-21T22:00:00.000+00:00"/>
-        </common_v47_0:AgencyInfo>
-        <common_v47_0:BookingTraveler Key="m6GG7odB0BKAN+nLnFAAAA==">
-          <common_v47_0:BookingTravelerName First="JAIROMR" Last="PANDURO"/>
-          <common_v47_0:SSR Key="y/FG7oiB0BKAtUFY2FAAAA==" SegmentRef="m6GG7odB0BKAu+nLnFAAAA==" Status="HK" Type="TKNE" FreeText="0809903384346C1" Carrier="LO" ProviderReservationInfoRef="m6GG7odB0BKA2YiLnFAAAA=="/>
-        </common_v47_0:BookingTraveler>
-        <common_v47_0:FormOfPayment Key="y/FG7oiB0BKAfUFY2FAAAA==" Type="Cash" Reusable="false" ProfileKey="gE/vwTE2QYqTezvB6ILGag=="/>
-        <common_v47_0:Payment Key="y/FG7oiB0BKAiUFY2FAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="y/FG7oiB0BKAfUFY2FAAAA=="/>
-        <common_v47_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="MY3PLL"/>
+        <common_v52_0:AgencyInfo>
+          <common_v52_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-04-21T22:00:00.000+00:00"/>
+        </common_v52_0:AgencyInfo>
+        <common_v52_0:BookingTraveler Key="m6GG7odB0BKAN+nLnFAAAA==">
+          <common_v52_0:BookingTravelerName First="JAIROMR" Last="PANDURO"/>
+          <common_v52_0:SSR Key="y/FG7oiB0BKAtUFY2FAAAA==" SegmentRef="m6GG7odB0BKAu+nLnFAAAA==" Status="HK" Type="TKNE" FreeText="0809903384346C1" Carrier="LO" ProviderReservationInfoRef="m6GG7odB0BKA2YiLnFAAAA=="/>
+        </common_v52_0:BookingTraveler>
+        <common_v52_0:FormOfPayment Key="y/FG7oiB0BKAfUFY2FAAAA==" Type="Cash" Reusable="false" ProfileKey="gE/vwTE2QYqTezvB6ILGag=="/>
+        <common_v52_0:Payment Key="y/FG7oiB0BKAiUFY2FAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="y/FG7oiB0BKAfUFY2FAAAA=="/>
+        <common_v52_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="MY3PLL"/>
         <air:FareCalc>IEV LO WAW 292.00 NUC292.00END ROE1.0 XT 403YK454YQ</air:FareCalc>
         <air:Ticket Key="y/FG7oiB0BKA4UFY2FAAAA==" TicketNumber="0809903384346" TicketStatus="N">
           <air:Coupon Key="y/FG7oiB0BKA5UFY2FAAAA==" CouponNumber="1" MarketingCarrier="LO" MarketingFlightNumber="750" Origin="IEV" Destination="WAW" DepartureTime="2020-02-01T08:40:00.000+02:00" StopoverCode="true" BookingClass="Y" FareBasis="Y1SAV0" NotValidBefore="2020-02-01" NotValidAfter="2020-02-01" Status="O" SegmentGroup="0" MarriageGroup="0"/>
@@ -60,16 +60,16 @@
       </air:ETR>
       <air:ETR Key="y/FG7oiB0BKAuUFY2FAAAA==" TotalPrice="UAH8836" BasePrice="USD292.00" Taxes="UAH992" EquivalentBasePrice="UAH7844" Refundable="false" Exchangeable="false" IssuedDate="2019-04-22T00:00:00.000+02:00" ProviderCode="1G" ProviderLocatorCode="HX8R24" IATANumber="99999992" PseudoCityCode="7J8J" PlatingCarrier="LO">
         <air:AirReservationLocatorCode>9LCJNR</air:AirReservationLocatorCode>
-        <common_v47_0:AgencyInfo>
-          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-04-21T22:00:00.000+00:00"/>
-        </common_v47_0:AgencyInfo>
-        <common_v47_0:BookingTraveler Key="m6GG7odB0BKAM+nLnFAAAA==">
-          <common_v47_0:BookingTravelerName First="TCPEUW" Last="EST"/>
-          <common_v47_0:SSR Key="y/FG7oiB0BKAsUFY2FAAAA==" SegmentRef="m6GG7odB0BKAu+nLnFAAAA==" Status="HK" Type="TKNE" FreeText="0809903384345C1" Carrier="LO" ProviderReservationInfoRef="m6GG7odB0BKA2YiLnFAAAA=="/>
-        </common_v47_0:BookingTraveler>
-        <common_v47_0:FormOfPayment Key="y/FG7oiB0BKAfUFY2FAAAA==" Type="Cash" Reusable="false" ProfileKey="I9TkbiE8QAqivDhqygA/lw=="/>
-        <common_v47_0:Payment Key="y/FG7oiB0BKAhUFY2FAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="y/FG7oiB0BKAfUFY2FAAAA=="/>
-        <common_v47_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="MY3PLL"/>
+        <common_v52_0:AgencyInfo>
+          <common_v52_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2019-04-21T22:00:00.000+00:00"/>
+        </common_v52_0:AgencyInfo>
+        <common_v52_0:BookingTraveler Key="m6GG7odB0BKAM+nLnFAAAA==">
+          <common_v52_0:BookingTravelerName First="TCPEUW" Last="EST"/>
+          <common_v52_0:SSR Key="y/FG7oiB0BKAsUFY2FAAAA==" SegmentRef="m6GG7odB0BKAu+nLnFAAAA==" Status="HK" Type="TKNE" FreeText="0809903384345C1" Carrier="LO" ProviderReservationInfoRef="m6GG7odB0BKA2YiLnFAAAA=="/>
+        </common_v52_0:BookingTraveler>
+        <common_v52_0:FormOfPayment Key="y/FG7oiB0BKAfUFY2FAAAA==" Type="Cash" Reusable="false" ProfileKey="I9TkbiE8QAqivDhqygA/lw=="/>
+        <common_v52_0:Payment Key="y/FG7oiB0BKAhUFY2FAAAA==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="y/FG7oiB0BKAfUFY2FAAAA=="/>
+        <common_v52_0:SupplierLocator SupplierCode="LO" SupplierLocatorCode="MY3PLL"/>
         <air:FareCalc>IEV LO WAW 292.00 NUC292.00END ROE1.0 XT 403YK454YQ</air:FareCalc>
         <air:Ticket Key="y/FG7oiB0BKAyUFY2FAAAA==" TicketNumber="0809903384345" TicketStatus="N">
           <air:Coupon Key="y/FG7oiB0BKAzUFY2FAAAA==" CouponNumber="1" MarketingCarrier="LO" MarketingFlightNumber="750" Origin="IEV" Destination="WAW" DepartureTime="2020-02-01T08:40:00.000+02:00" StopoverCode="true" BookingClass="Y" FareBasis="Y1SAV0" NotValidBefore="2020-02-01" NotValidAfter="2020-02-01" Status="O" SegmentGroup="0" MarriageGroup="0"/>

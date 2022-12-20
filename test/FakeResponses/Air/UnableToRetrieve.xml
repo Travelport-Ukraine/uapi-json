@@ -5,19 +5,19 @@
       <faultcode>Server.Business</faultcode>
       <faultstring>UNABLE TO RETRIEVE - CALL HELP DESK</faultstring>
       <detail>
-        <common_v47_0:ErrorInfo 
-          xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
-          <common_v47_0:Code>1512</common_v47_0:Code>
-          <common_v47_0:Service>WEBSVC</common_v47_0:Service>
-          <common_v47_0:Type>Business</common_v47_0:Type>
-          <common_v47_0:Description>
+        <common_v52_0:ErrorInfo 
+          xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0">
+          <common_v52_0:Code>1512</common_v52_0:Code>
+          <common_v52_0:Service>WEBSVC</common_v52_0:Service>
+          <common_v52_0:Type>Business</common_v52_0:Type>
+          <common_v52_0:Description>
 &lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;universal:UniversalRecord  
-            xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"      LocatorCode="XXXX" Version="0" Status="XX"/>
-          </common_v47_0:Description>
-          <common_v47_0:TransactionId>C80ABDA70A0742567B82CD384439F4BF</common_v47_0:TransactionId>
-          <common_v47_0:TraceId/>
-        </common_v47_0:ErrorInfo>
+            xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0"      LocatorCode="XXXX" Version="0" Status="XX"/>
+          </common_v52_0:Description>
+          <common_v52_0:TransactionId>C80ABDA70A0742567B82CD384439F4BF</common_v52_0:TransactionId>
+          <common_v52_0:TraceId/>
+        </common_v52_0:ErrorInfo>
       </detail>
     </SOAP:Fault>
   </SOAP:Body>

@@ -1,13 +1,13 @@
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <air:AirTicketingRsp xmlns:air="http://www.travelport.com/schema/air_v47_0"
-                             xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
+        <air:AirTicketingRsp xmlns:air="http://www.travelport.com/schema/air_v52_0"
+                             xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0"
                              TransactionId="4D272F5D0A0759BFBFD9E51CC6BF7A26" ResponseTime="830">
             <air:TicketFailureInfo BookingTravelerRef="y5qr18BAAA/Be0RcPHAAAA=="
                                    Code="3979"
                                    Message="The Provider reservation is being modified externally. Please Air Ticket later.">
                 <AirPricingInfoRef Key="dBE018gB0BKA2+jrLHAAAA==" />
-                <common_v47_0:Name First="VLADYSLAV" Last="VLASENKO" />
+                <common_v52_0:Name First="VLADYSLAV" Last="VLASENKO" />
             </air:TicketFailureInfo>
         </air:AirTicketingRsp>
     </SOAP:Body>

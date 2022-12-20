@@ -8,8 +8,8 @@ module.exports = `
         <air:LowFareSearchAsynchReq
             AuthorizedBy="user" TraceId="{{requestId}}" TargetBranch="{{TargetBranch}}"
             ReturnUpsellFare="true"
-            xmlns:air="http://www.travelport.com/schema/air_v47_0"
-            xmlns:com="http://www.travelport.com/schema/common_v47_0"
+            xmlns:air="http://www.travelport.com/schema/air_v52_0"
+            xmlns:com="http://www.travelport.com/schema/common_v52_0"
             >
         {{else}}
         <air:LowFareSearchReq
@@ -18,8 +18,8 @@ module.exports = `
             {{#if solutionResult}}
             SolutionResult="true"
             {{/if}}
-            xmlns:air="http://www.travelport.com/schema/air_v47_0"
-            xmlns:com="http://www.travelport.com/schema/common_v47_0"
+            xmlns:air="http://www.travelport.com/schema/air_v52_0"
+            xmlns:com="http://www.travelport.com/schema/common_v52_0"
             >
         {{/if}}
             <com:BillingPointOfSaleInfo OriginApplication="uAPI"/>
@@ -82,13 +82,13 @@ module.exports = `
                 {{/if}}
             >
                 <air:PreferredProviders>
-                    <com:Provider Code="{{provider}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
+                    <com:Provider Code="{{provider}}" xmlns:com="http://www.travelport.com/schema/common_v52_0"/>
                 </air:PreferredProviders>
 
                 {{#if permittedCarriers}}
                 <air:PermittedCarriers>
                     {{#each permittedCarriers as |carrier|}}
-                    <com:Carrier Code="{{carrier}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
+                    <com:Carrier Code="{{carrier}}" xmlns:com="http://www.travelport.com/schema/common_v52_0"/>
                     {{/each}}
                 </air:PermittedCarriers>
                 {{/if}}
@@ -96,13 +96,13 @@ module.exports = `
                 {{#if preferredCarriers}}
                 <air:PreferredCarriers>
                     {{#each preferredCarriers as |carrier|}}
-                    <com:Carrier Code="{{carrier}}" xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
+                    <com:Carrier Code="{{carrier}}" xmlns:com="http://www.travelport.com/schema/common_v52_0"/>
                     {{/each}}
                 </air:PreferredCarriers>
                 {{/if}}
             </air:AirSearchModifiers>
             {{#passengers}}
-            <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v47_0"/>
+            <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v52_0"/>
             {{/passengers}}
             {{#if pricing}}
             <air:AirPricingModifiers

@@ -1,13 +1,13 @@
 {
   "detail": {
-    "common_v47_0:ErrorInfo": {
-      "common_v47_0:Code": "2602",
-      "common_v47_0:Description": "No Solutions in the response.",
-      "common_v47_0:Service": "LFSSVC",
-      "common_v47_0:TraceId": "b09e4233-9a24-fef2-6e32-852481a88d6c",
-      "common_v47_0:TransactionId": "F88DAEE00A0759D94A76D3918CAB7A6C",
-      "common_v47_0:Type": "Business",
-      "xmlns:common_v47_0": "http://www.travelport.com/schema/common_v47_0"
+    "common_v52_0:ErrorInfo": {
+      "common_v52_0:Code": "2602",
+      "common_v52_0:Description": "No Solutions in the response.",
+      "common_v52_0:Service": "LFSSVC",
+      "common_v52_0:TraceId": "b09e4233-9a24-fef2-6e32-852481a88d6c",
+      "common_v52_0:TransactionId": "F88DAEE00A0759D94A76D3918CAB7A6C",
+      "common_v52_0:Type": "Business",
+      "xmlns:common_v52_0": "http://www.travelport.com/schema/common_v52_0"
     }
   },
   "faultcode": "Server.Business",
