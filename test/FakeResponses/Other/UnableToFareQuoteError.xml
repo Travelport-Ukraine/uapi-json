@@ -5,14 +5,14 @@
             <faultcode>Server.Business</faultcode>
             <faultstring>UNABLE TO FARE QUOTE</faultstring>
             <detail>
-                <common_v47_0:ErrorInfo xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0">
-                    <common_v47_0:Code>3037</common_v47_0:Code>
-                    <common_v47_0:Service>AIRSVC</common_v47_0:Service>
-                    <common_v47_0:Type>Business</common_v47_0:Type>
-                    <common_v47_0:Description>No availability on chosen flights.</common_v47_0:Description>
-                    <common_v47_0:TransactionId>AEA29E780A0759C0864E89C1F08A14F9</common_v47_0:TransactionId>
-                    <common_v47_0:TraceId>admin-5862fc7c7c593</common_v47_0:TraceId>
-                </common_v47_0:ErrorInfo>
+                <common_v52_0:ErrorInfo xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0">
+                    <common_v52_0:Code>3037</common_v52_0:Code>
+                    <common_v52_0:Service>AIRSVC</common_v52_0:Service>
+                    <common_v52_0:Type>Business</common_v52_0:Type>
+                    <common_v52_0:Description>No availability on chosen flights.</common_v52_0:Description>
+                    <common_v52_0:TransactionId>AEA29E780A0759C0864E89C1F08A14F9</common_v52_0:TransactionId>
+                    <common_v52_0:TraceId>admin-5862fc7c7c593</common_v52_0:TraceId>
+                </common_v52_0:ErrorInfo>
             </detail>
         </SOAP:Fault>
     </SOAP:Body>

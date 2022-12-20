@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
-        <air:AirTicketingRsp xmlns:air="http://www.travelport.com/schema/air_v47_0" xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" TransactionId="4268BA470A0759BB7528F262B5F078F4" ResponseTime="2430">
-            <common_v47_0:ResponseMessage Code="0" Type="Info" ProviderCode="1G">PNR TVBZQ2 Fare 1 - ELECTRONIC TKT GENERATED TTL FARE  UAH      2700 SUPPORTING DOCUMENTS GENERATED MIR GENERATED - TTL FARE  UAH      2700 ------------------------------------- ITINERARY/INVOICE GENERATED</common_v47_0:ResponseMessage>
-            <common_v47_0:ResponseMessage Code="0" Type="Info" ProviderCode="1G">OK:Ticket issued</common_v47_0:ResponseMessage>
+        <air:AirTicketingRsp xmlns:air="http://www.travelport.com/schema/air_v52_0" xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0" TransactionId="4268BA470A0759BB7528F262B5F078F4" ResponseTime="2430">
+            <common_v52_0:ResponseMessage Code="0" Type="Info" ProviderCode="1G">PNR TVBZQ2 Fare 1 - ELECTRONIC TKT GENERATED TTL FARE  UAH      2700 SUPPORTING DOCUMENTS GENERATED MIR GENERATED - TTL FARE  UAH      2700 ------------------------------------- ITINERARY/INVOICE GENERATED</common_v52_0:ResponseMessage>
+            <common_v52_0:ResponseMessage Code="0" Type="Info" ProviderCode="1G">OK:Ticket issued</common_v52_0:ResponseMessage>
             <air:ETR Key="70RAOQKBQVyC/qn27zvXEg==" TotalPrice="UAH2700" BasePrice="GBP9.00" Taxes="UAH2389" EquivalentBasePrice="UAH311" Refundable="false" Exchangeable="false" IssuedDate="2016-09-19T00:00:00.000+03:00" ProviderCode="1G" ProviderLocatorCode="TVBZQ2" IATANumber="72324464" PseudoCityCode="3AQ0" PlatingCarrier="AF" ElStat="A">
                 <air:AirReservationLocatorCode>FL9MJB</air:AirReservationLocatorCode>
-                <common_v47_0:AgencyInfo>
-                    <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI4466145968-D6034EC2" BranchCode="P2660493" AgencyCode="S1828245" EventTime="2016-09-19T00:00:00.000+03:00"/>
-                </common_v47_0:AgencyInfo>
-                <common_v47_0:BookingTraveler Key="7w6MfzOjSW2Fqu3qXGV+uw==">
-                    <common_v47_0:BookingTravelerName First="MARKMR" Last="OREL"/>
-                    <common_v47_0:SSR Key="Cg6U+DgOQ9+1YhDqyPnZVg==" Status="HK" Type="DOCS" FreeText="P/UA/CN855037/UA/18APR94/M/19SEP21/OREL/MARK -1OREL/MARKMR" Carrier="AF" ProviderReservationInfoRef="UzhfsyrHTBylFatPnBdkbw=="/>
-                    <common_v47_0:SSR Key="lbsCazwnTwiU6Hcu5T5k8A==" SegmentRef="hEmgZ6WfQW6AE0KbSTmKyg==" Status="HK" Type="TKNE" FreeText="0575460246214C1" Carrier="AF" ProviderReservationInfoRef="UzhfsyrHTBylFatPnBdkbw==" ElStat="A"/>
-                    <common_v47_0:SSR Key="ofpQbFNPRh+Y+GvOmtFIwA==" SegmentRef="KSYMgKllSOq2nyEcriV1Lg==" Status="HK" Type="TKNE" FreeText="0575460246214C2" Carrier="AF" ProviderReservationInfoRef="UzhfsyrHTBylFatPnBdkbw==" ElStat="A"/>
-                </common_v47_0:BookingTraveler>
-                <common_v47_0:FormOfPayment Key="dujD+mqPSzijv6rzKNbOzg==" Type="Cash" Reusable="false" ProfileKey="dLuGIMf+THuMXkw49DAZ7Q=="/>
-                <common_v47_0:Payment Key="Qvux8RdqQ4SBaOAJefpsBQ==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="dujD+mqPSzijv6rzKNbOzg=="/>
-                <common_v47_0:SupplierLocator SupplierCode="AF" SupplierLocatorCode="4JVDJ7"/>
+                <common_v52_0:AgencyInfo>
+                    <common_v52_0:AgentAction ActionType="Created" AgentCode="UAPI4466145968-D6034EC2" BranchCode="P2660493" AgencyCode="S1828245" EventTime="2016-09-19T00:00:00.000+03:00"/>
+                </common_v52_0:AgencyInfo>
+                <common_v52_0:BookingTraveler Key="7w6MfzOjSW2Fqu3qXGV+uw==">
+                    <common_v52_0:BookingTravelerName First="MARKMR" Last="OREL"/>
+                    <common_v52_0:SSR Key="Cg6U+DgOQ9+1YhDqyPnZVg==" Status="HK" Type="DOCS" FreeText="P/UA/CN855037/UA/18APR94/M/19SEP21/OREL/MARK -1OREL/MARKMR" Carrier="AF" ProviderReservationInfoRef="UzhfsyrHTBylFatPnBdkbw=="/>
+                    <common_v52_0:SSR Key="lbsCazwnTwiU6Hcu5T5k8A==" SegmentRef="hEmgZ6WfQW6AE0KbSTmKyg==" Status="HK" Type="TKNE" FreeText="0575460246214C1" Carrier="AF" ProviderReservationInfoRef="UzhfsyrHTBylFatPnBdkbw==" ElStat="A"/>
+                    <common_v52_0:SSR Key="ofpQbFNPRh+Y+GvOmtFIwA==" SegmentRef="KSYMgKllSOq2nyEcriV1Lg==" Status="HK" Type="TKNE" FreeText="0575460246214C2" Carrier="AF" ProviderReservationInfoRef="UzhfsyrHTBylFatPnBdkbw==" ElStat="A"/>
+                </common_v52_0:BookingTraveler>
+                <common_v52_0:FormOfPayment Key="dujD+mqPSzijv6rzKNbOzg==" Type="Cash" Reusable="false" ProfileKey="dLuGIMf+THuMXkw49DAZ7Q=="/>
+                <common_v52_0:Payment Key="Qvux8RdqQ4SBaOAJefpsBQ==" Type="Itinerary" Amount="UAH0" FormOfPaymentRef="dujD+mqPSzijv6rzKNbOzg=="/>
+                <common_v52_0:SupplierLocator SupplierCode="AF" SupplierLocatorCode="4JVDJ7"/>
                 <air:FareCalc>LON AF PAR 5.88AF LON 5.88 NUC11.76END ROE0.765204 XT 505FR34IZ372QX</air:FareCalc>
                 <air:Ticket Key="kMxqkefxRPq4Ikjfs+lABg==" TicketNumber="0575460246214" TicketStatus="N" ElStat="A">
                     <air:Coupon Key="4KrsxGYfRdmMVOl3Fvr4Aw==" CouponNumber="1" MarketingCarrier="AF" MarketingFlightNumber="1081" Origin="LHR" Destination="CDG" DepartureTime="2016-11-02T06:20:00.000+00:00" StopoverCode="true" BookingClass="X" FareBasis="XRD0GB9" NotValidBefore="2016-11-02" NotValidAfter="2016-11-02" Status="O" SegmentGroup="0" MarriageGroup="0" ElStat="A"/>
@@ -26,16 +26,16 @@
                 <air:AirPricingInfo Key="FvzDWFV6TTiCbH+jMI4nQA==" TotalPrice="UAH2700" BasePrice="GBP9.00" ApproximateTotalPrice="UAH2700" ApproximateBasePrice="UAH311" EquivalentBasePrice="UAH311" Taxes="UAH2389" LatestTicketingTime="2016-09-22T23:59:00.000+03:00" TrueLastDateToTicket="2016-09-22T23:59:00.000+03:00" PricingMethod="GuaranteedUsingAirlinePrivateFare" ETicketability="Yes" ProviderReservationInfoRef="UzhfsyrHTBylFatPnBdkbw==" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="A">
                     <air:FareInfo Key="XODoA2d7TU6AkdDCWkOI6A==" FareBasis="XRD0GB9" PassengerTypeCode="ADT" Origin="LHR" Destination="CDG" EffectiveDate="2016-09-19T00:00:00.000+03:00" NotValidBefore="2016-11-02" NotValidAfter="2016-11-02">
                         <air:ContractCode Code="RDM9" ProviderCode="1G"/>
-                        <common_v47_0:Endorsement Value="NONREF /NO CHANGE"/>
-                        <common_v47_0:Endorsement Value="NONREF / NO CHANGE"/>
+                        <common_v52_0:Endorsement Value="NONREF /NO CHANGE"/>
+                        <common_v52_0:Endorsement Value="NONREF / NO CHANGE"/>
                         <air:BaggageAllowance>
                             <air:NumberOfPieces>0</air:NumberOfPieces>
                         </air:BaggageAllowance>
                     </air:FareInfo>
                     <air:FareInfo Key="Dh7Dd68CQfuk9niW53dcjg==" FareBasis="XRD0GB9" PassengerTypeCode="ADT" Origin="CDG" Destination="LHR" EffectiveDate="2016-09-19T00:00:00.000+03:00" NotValidBefore="2016-11-10" NotValidAfter="2016-11-10">
                         <air:ContractCode Code="RDM9" ProviderCode="1G"/>
-                        <common_v47_0:Endorsement Value="NONREF /NO CHANGE"/>
-                        <common_v47_0:Endorsement Value="NONREF / NO CHANGE"/>
+                        <common_v52_0:Endorsement Value="NONREF /NO CHANGE"/>
+                        <common_v52_0:Endorsement Value="NONREF / NO CHANGE"/>
                         <air:BaggageAllowance>
                             <air:NumberOfPieces>0</air:NumberOfPieces>
                         </air:BaggageAllowance>
@@ -51,7 +51,7 @@
                     <air:PassengerType Code="ADT" BookingTravelerRef="7w6MfzOjSW2Fqu3qXGV+uw==">
                         <air:FareGuaranteeInfo GuaranteeType="GuaranteedUsingAirlinePrivateFare"/>
                     </air:PassengerType>
-                    <common_v47_0:BookingTravelerRef Key="7w6MfzOjSW2Fqu3qXGV+uw=="/>
+                    <common_v52_0:BookingTravelerRef Key="7w6MfzOjSW2Fqu3qXGV+uw=="/>
                     <air:ChangePenalty>
                         <air:Amount>USD0.00</air:Amount>
                     </air:ChangePenalty>

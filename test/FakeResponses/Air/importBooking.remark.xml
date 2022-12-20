@@ -2,63 +2,63 @@
         xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP:Body>
         <universal:UniversalRecordImportRsp TraceId="" TransactionId="7C72743B0A07570F6C90B16F37DA7333" ResponseTime="494"
-                                            xmlns:universal="http://www.travelport.com/schema/universal_v47_0"
-                                            xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0"
-                                            xmlns:air="http://www.travelport.com/schema/air_v47_0"
+                                            xmlns:universal="http://www.travelport.com/schema/universal_v52_0"
+                                            xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0"
+                                            xmlns:air="http://www.travelport.com/schema/air_v52_0"
                                             xmlns:passive="http://www.travelport.com/schema/passive_v47_0">
-            <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record EEFMSA</common_v47_0:ResponseMessage>
+            <common_v52_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record EEFMSA</common_v52_0:ResponseMessage>
             <universal:UniversalRecord LocatorCode="EEFMSA" Version="8" Status="Active">
-                <common_v47_0:BookingTraveler Key="GlT3JZBAAA/BfUF5PJAAAA==">
-                    <common_v47_0:BookingTravelerName First="YEVHENIIMR" Last="HUSELIETOV"/>
-                </common_v47_0:BookingTraveler>
-                <common_v47_0:ActionStatus Key="GlT3JZBAAA/BoOF5PJAAAA==" Type="ACTIVE" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==" ProviderCode="1G">
-                    <common_v47_0:Remark>QSB 10OCT0925Z WS AG</common_v47_0:Remark>
-                </common_v47_0:ActionStatus>
+                <common_v52_0:BookingTraveler Key="GlT3JZBAAA/BfUF5PJAAAA==">
+                    <common_v52_0:BookingTravelerName First="YEVHENIIMR" Last="HUSELIETOV"/>
+                </common_v52_0:BookingTraveler>
+                <common_v52_0:ActionStatus Key="GlT3JZBAAA/BoOF5PJAAAA==" Type="ACTIVE" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==" ProviderCode="1G">
+                    <common_v52_0:Remark>QSB 10OCT0925Z WS AG</common_v52_0:Remark>
+                </common_v52_0:ActionStatus>
                 <universal:ProviderReservationInfo Key="GlT3JZBAAA/BBr+4PJAAAA==" ProviderCode="1G" LocatorCode="4FJVM2" CreateDate="2018-10-10T09:25:16.081+00:00" ModifiedDate="2018-10-16T10:36:07.933+00:00" HostCreateDate="2018-10-10" Imported="true" OwningPCC="38K7">
                     <universal:ProviderReservationDetails ProviderReservationDetail="false" CustomCheck="false" ProviderProfile="false" DivideDetails="false" EnhancedItinModifiers="false" IntegratedContent="false" Cruise="false" RailSegment="false"/>
                 </universal:ProviderReservationInfo>
                 <air:AirReservation LocatorCode="MFGLCE" CreateDate="2018-10-10T09:25:15.383+00:00" ModifiedDate="2018-10-16T10:36:04.133+00:00">
-                    <common_v47_0:SupplierLocator SupplierCode="AF" SupplierLocatorCode="OFXXZW" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==" CreateDateTime="2018-10-10T09:24:00.000+00:00"/>
+                    <common_v52_0:SupplierLocator SupplierCode="AF" SupplierLocatorCode="OFXXZW" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==" CreateDateTime="2018-10-10T09:24:00.000+00:00"/>
                     <air:DocumentInfo>
                         <air:TicketInfo Number="0572753985347" Status="N" BookingTravelerRef="GlT3JZBAAA/BfUF5PJAAAA==">
-                            <common_v47_0:Name First="YEVHENIIMR" Last="HUSELIETOV"/>
+                            <common_v52_0:Name First="YEVHENIIMR" Last="HUSELIETOV"/>
                         </air:TicketInfo>
                     </air:DocumentInfo>
-                    <common_v47_0:BookingTravelerRef Key="GlT3JZBAAA/BfUF5PJAAAA=="/>
-                    <common_v47_0:ProviderReservationInfoRef Key="GlT3JZBAAA/BBr+4PJAAAA=="/>
+                    <common_v52_0:BookingTravelerRef Key="GlT3JZBAAA/BfUF5PJAAAA=="/>
+                    <common_v52_0:ProviderReservationInfoRef Key="GlT3JZBAAA/BBr+4PJAAAA=="/>
                 </air:AirReservation>
                 <passive:PassiveReservation LocatorCode="WZR2H6" CreateDate="2018-10-16T10:36:04.133+00:00" ModifiedDate="2018-10-16T10:36:04.133+00:00" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==">
-                    <common_v47_0:BookingTravelerRef Key="GlT3JZBAAA/BfUF5PJAAAA=="/>
+                    <common_v52_0:BookingTravelerRef Key="GlT3JZBAAA/BfUF5PJAAAA=="/>
                     <passive:PassiveSegment NumberOfItems="0" SegmentType="AirTaxi" Status="BK" SupplierCode="ZZ" StartDate="2018-10-18T00:00:00.000+00:00" Key="Ri4SKZlB0BKACB05vXAAAA==" Group="0" TravelOrder="1"/>
                     <passive:PassiveRemark PassiveSegmentRef="Ri4SKZlB0BKACB05vXAAAA==">
                         <passive:Text>**MH**</passive:Text>
                     </passive:PassiveRemark>
                 </passive:PassiveReservation>
-                <common_v47_0:ProviderARNKSegment Key="bTjVKZPc1BKA70rFyXAAAA==" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==">
-                    <common_v47_0:PreviousSegment>
-                        <common_v47_0:PassiveSegmentRef Key="Ri4SKZlB0BKACB05vXAAAA=="/>
-                    </common_v47_0:PreviousSegment>
-                </common_v47_0:ProviderARNKSegment>
-                <common_v47_0:GeneralRemark Key="GlT3JZBAAA/BLwF5PJAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==" SupplierCode="AF" Direction="Incoming" CreateDate="2018-10-10T09:24:00.000+00:00">
-                    <common_v47_0:RemarkData>ADTK1GTOAF BY 17OCT 1200 OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
-                </common_v47_0:GeneralRemark>
-                <common_v47_0:GeneralRemark Key="NLI6JZBAAA/BFFYQ5XAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==" CreateDate="2018-10-11T15:02:00.000+00:00">
-                    <common_v47_0:RemarkData>RESIM JA &lt;&lt;</common_v47_0:RemarkData>
-                </common_v47_0:GeneralRemark>
-                <common_v47_0:GeneralRemark Key="NLI6JZBAAA/BGFYQ5XAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==" CreateDate="2018-10-15T08:46:00.000+00:00">
-                    <common_v47_0:RemarkData>DOTAZ NA GALILEO ODESLAN &lt;&lt;</common_v47_0:RemarkData>
-                </common_v47_0:GeneralRemark>
-                <common_v47_0:AgencyInfo>
-                    <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="vdEslKQYSjuB13VGWvLnQw==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2018-10-10T09:25:15.016+00:00"/>
-                    <common_v47_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2018-10-16T10:36:04.133+00:00"/>
-                    <common_v47_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2018-10-10T09:25:16.079+00:00"/>
-                </common_v47_0:AgencyInfo>
-                <common_v47_0:AgencyContactInfo>
-                    <common_v47_0:PhoneNumber Key="GlT3JZBAAA/BqOF5PJAAAA==" Type="Agency" Location="PRG" Number="PHONE 00420 606 652 199">
-                        <common_v47_0:ProviderReservationInfoRef Key="GlT3JZBAAA/BBr+4PJAAAA=="/>
-                    </common_v47_0:PhoneNumber>
-                </common_v47_0:AgencyContactInfo>
-                <common_v47_0:ReviewBooking Key="NLI6JZBAAA/BdahQ5XAAAA==" Queue="12" DateTime="2018-10-18T07:00:00.000+02:00" PseudoCityCode="38K7" Remarks="V RESENI VYJIMKA FULL REFUNDU RESA BY GALILEO OMYLEM" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA=="/>
+                <common_v52_0:ProviderARNKSegment Key="bTjVKZPc1BKA70rFyXAAAA==" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==">
+                    <common_v52_0:PreviousSegment>
+                        <common_v52_0:PassiveSegmentRef Key="Ri4SKZlB0BKACB05vXAAAA=="/>
+                    </common_v52_0:PreviousSegment>
+                </common_v52_0:ProviderARNKSegment>
+                <common_v52_0:GeneralRemark Key="GlT3JZBAAA/BLwF5PJAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==" SupplierCode="AF" Direction="Incoming" CreateDate="2018-10-10T09:24:00.000+00:00">
+                    <common_v52_0:RemarkData>ADTK1GTOAF BY 17OCT 1200 OTHERWISE WILL BE XLD</common_v52_0:RemarkData>
+                </common_v52_0:GeneralRemark>
+                <common_v52_0:GeneralRemark Key="NLI6JZBAAA/BFFYQ5XAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==" CreateDate="2018-10-11T15:02:00.000+00:00">
+                    <common_v52_0:RemarkData>RESIM JA &lt;&lt;</common_v52_0:RemarkData>
+                </common_v52_0:GeneralRemark>
+                <common_v52_0:GeneralRemark Key="NLI6JZBAAA/BGFYQ5XAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==" CreateDate="2018-10-15T08:46:00.000+00:00">
+                    <common_v52_0:RemarkData>DOTAZ NA GALILEO ODESLAN &lt;&lt;</common_v52_0:RemarkData>
+                </common_v52_0:GeneralRemark>
+                <common_v52_0:AgencyInfo>
+                    <common_v52_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="vdEslKQYSjuB13VGWvLnQw==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2018-10-10T09:25:15.016+00:00"/>
+                    <common_v52_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2018-10-16T10:36:04.133+00:00"/>
+                    <common_v52_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2018-10-10T09:25:16.079+00:00"/>
+                </common_v52_0:AgencyInfo>
+                <common_v52_0:AgencyContactInfo>
+                    <common_v52_0:PhoneNumber Key="GlT3JZBAAA/BqOF5PJAAAA==" Type="Agency" Location="PRG" Number="PHONE 00420 606 652 199">
+                        <common_v52_0:ProviderReservationInfoRef Key="GlT3JZBAAA/BBr+4PJAAAA=="/>
+                    </common_v52_0:PhoneNumber>
+                </common_v52_0:AgencyContactInfo>
+                <common_v52_0:ReviewBooking Key="NLI6JZBAAA/BdahQ5XAAAA==" Queue="12" DateTime="2018-10-18T07:00:00.000+02:00" PseudoCityCode="38K7" Remarks="V RESENI VYJIMKA FULL REFUNDU RESA BY GALILEO OMYLEM" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA=="/>
             </universal:UniversalRecord>
         </universal:UniversalRecordImportRsp>
     </SOAP:Body>

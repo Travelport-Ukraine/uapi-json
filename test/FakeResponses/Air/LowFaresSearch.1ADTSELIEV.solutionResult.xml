@@ -2,7 +2,7 @@
   xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP:Body>
     <air:LowFareSearchRsp TraceId="" TransactionId="EEEEEEEEEEEE59CD33ED7BE13D945FEE" ResponseTime="2275" DistanceUnits="MI" CurrencyType="KRW"
-                          xmlns:air="http://www.travelport.com/schema/air_v47_0">
+                          xmlns:air="http://www.travelport.com/schema/air_v52_0">
       <air:FlightDetailsList>
         <air:FlightDetails Key="JHouk/BAAA/B/UEm8FAAAA==" Origin="ICN" Destination="WAW" DepartureTime="2020-10-16T10:55:00.000+09:00" ArrivalTime="2020-10-16T14:25:00.000+02:00" FlightTime="630" TravelTime="1080" Equipment="789" OriginTerminal="1"/>
         <air:FlightDetails Key="JHouk/BAAA/BBVEm8FAAAA==" Origin="WAW" Destination="IEV" DepartureTime="2020-10-16T20:20:00.000+02:00" ArrivalTime="2020-10-16T22:55:00.000+03:00" FlightTime="95" TravelTime="1080" Equipment="E95" DestinationTerminal="0"/>

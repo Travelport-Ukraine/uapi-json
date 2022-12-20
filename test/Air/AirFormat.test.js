@@ -40,7 +40,7 @@ describe('#AirFormat', () => {
 
   describe('.formatLowFaresSearch()', () => {
     it('should return list of fares without faresOnly param', () => {
-      const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
+      const uParser = new Parser('air:LowFareSearchRsp', 'v52_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.xml`).toString();
 
       return uParser.parse(xml).then((json) => {
@@ -53,7 +53,7 @@ describe('#AirFormat', () => {
     });
 
     it('should return an array with solutionResult = true', () => {
-      const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
+      const uParser = new Parser('air:LowFareSearchRsp', 'v52_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.1ADTSELIEV.solutionResult.xml`).toString();
 
       return uParser.parse(xml).then((json) => {
@@ -67,7 +67,7 @@ describe('#AirFormat', () => {
     });
 
     it('should return an object with fares with solutionResult = true and faresOnly=false', () => {
-      const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
+      const uParser = new Parser('air:LowFareSearchRsp', 'v52_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.1ADTSELIEV.solutionResult.xml`).toString();
 
       return uParser.parse(xml).then((json) => {
@@ -85,7 +85,7 @@ describe('#AirFormat', () => {
     });
 
     it('should return an object with fares with faresOnly=false', () => {
-      const uParser = new Parser('air:LowFareSearchRsp', 'v47_0', {});
+      const uParser = new Parser('air:LowFareSearchRsp', 'v52_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.xml`).toString();
 
       return uParser.parse(xml).then((json) => {
@@ -102,7 +102,7 @@ describe('#AirFormat', () => {
     });
 
     it('should return an object with fares with faresOnly=false in asynch results', () => {
-      const uParser = new Parser('air:LowFareSearchAsynchRsp', 'v47_0', {});
+      const uParser = new Parser('air:LowFareSearchAsynchRsp', 'v52_0', {});
       const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearchAsync.1ADTICNKKJ.xml`).toString();
 
       return uParser.parse(xml).then((json) => {
@@ -287,7 +287,7 @@ describe('#AirFormat', () => {
                 Key: 't7MhYq3R2BKAPHnsEAAAAA=='
               },
               't7MhYq3R2BKAQHnsEAAAAA==': {
-                'common_v47_0:TaxDetail': [
+                'common_v52_0:TaxDetail': [
                   {
                     Amount: 'USD5.00',
                     OriginAirport: 'SLC'
@@ -298,7 +298,7 @@ describe('#AirFormat', () => {
                 Key: 't7MhYq3R2BKAQHnsEAAAAA=='
               },
               't7MhYq3R2BKARHnsEAAAAA==': {
-                'common_v47_0:TaxDetail': [
+                'common_v52_0:TaxDetail': [
                   {
                     Amount: 'USD4.20',
                     OriginAirport: 'SLC'
