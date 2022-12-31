@@ -11,7 +11,7 @@ module.exports = (params) => {
       gender
     } = item;
 
-    const due = moment().add(12, 'month').format('DDMMMYY');
+    const due = num ? moment().add(12, 'month').format('DDMMMYY') : '';
     const birth = birthSSR.format('DDMMMYY');
 
     if (item.ageCategory === 'CNN') {
@@ -26,13 +26,15 @@ module.exports = (params) => {
 
     item.ssr = item.ssr || [];
 
-    item.ssr.push({
-      type: 'FOID',
-      text: `PP${country}${num}`,
-    });
+    if (num) {
+      item.ssr.push({
+        type: 'FOID',
+        text: `PP${country}${num}`,
+      });
+    }
     item.ssr.push({
       type: 'DOCS',
-      text: `P/${country}/${num}/${country}/${birth}/${gender}/${due}/${last}/${first}`,
+      text: `${num ? `P/${country}/${num}` : `//`}/${country}/${birth}/${gender}/${due}/${last}/${first}`,
     });
 
     item.DOB = birthSSR.format('YYYY-MM-DD');
