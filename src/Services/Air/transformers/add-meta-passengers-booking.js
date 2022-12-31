@@ -34,7 +34,7 @@ module.exports = (params) => {
     }
     item.ssr.push({
       type: 'DOCS',
-      text: `${num ? `P/${country}/${num}` : '//'}/${country}/${birth}/${gender}/${due}/${last}/${first}`,
+      text: num ? `P/${country}/${num}` : '//' + `/${country}/${birth}/${gender}/${due}/${last}/${first}`,
     });
 
     item.DOB = birthSSR.format('YYYY-MM-DD');
