@@ -446,6 +446,14 @@ function formatLowFaresSearch(searchRequest, searchResult) {
   return fares;
 }
 
+const getSegmentsData = segmentsObject => (segmentsObject
+  ? Object.keys(segmentsObject).map(k => segmentsObject[k])
+  : null);
+
+const setSegmentsIndexes = segments => segments.map(
+  (s, i) => ({ ...s, index: (parseInt(s.ProviderSegmentOrder, 10) || (i + 1)) })
+);
+
 /**
  * This function used to transform segments and service segments objects
  * to arrays. After that this function try to set indexes with same as in
@@ -459,33 +467,20 @@ function setIndexesForSegments(
   segmentsObject = null,
   serviceSegmentsObject = null
 ) {
-  const segments = segmentsObject
-    ? Object.keys(segmentsObject).map(k => segmentsObject[k])
-    : null;
-
-  const serviceSegments = serviceSegmentsObject
-    ? Object.keys(serviceSegmentsObject).map(k => serviceSegmentsObject[k])
-    : null;
+  const segments = getSegmentsData(segmentsObject);
+  const serviceSegments = getSegmentsData(serviceSegmentsObject);
 
   if (segments === null && serviceSegments === null) {
     return { segments, serviceSegments };
   }
 
   if (segments !== null && serviceSegments === null) {
-    const segmentsNew = segments.map((segment, key) => ({
-      ...segment,
-      index: parseInt((segment.ProviderSegmentOrder || (key + 1)), 10),
-    }));
+    const segmentsNew = setSegmentsIndexes(segments);
     return { segments: segmentsNew, serviceSegments };
   }
 
   if (segments === null && serviceSegments !== null) {
-    const serviceSegmentsNew = serviceSegments.map(
-      (segment, key) => ({
-        ...segment,
-        index: (segment.ProviderSegmentOrder || (key + 1)),
-      })
-    );
+    const serviceSegmentsNew = setSegmentsIndexes(serviceSegments);
     return { segments, serviceSegments: serviceSegmentsNew };
   }
 
@@ -506,9 +501,7 @@ function setIndexesForSegments(
     ));
   }
 
-  const indexedSegments = allSegments.map(
-    (s, i) => ({ ...s, index: parseInt((s.ProviderSegmentOrder || (i + 1)), 10) })
-  );
+  const indexedSegments = setSegmentsIndexes(allSegments);
 
   return {
     segments: indexedSegments.filter(s => s.SegmentType === undefined),
