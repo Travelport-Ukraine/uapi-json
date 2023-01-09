@@ -474,7 +474,7 @@ function setIndexesForSegments(
   if (segments !== null && serviceSegments === null) {
     const segmentsNew = segments.map((segment, key) => ({
       ...segment,
-      index: key + 1,
+      index: parseInt((segment.ProviderSegmentOrder || (key + 1)), 10),
     }));
     return { segments: segmentsNew, serviceSegments };
   }
@@ -483,7 +483,7 @@ function setIndexesForSegments(
     const serviceSegmentsNew = serviceSegments.map(
       (segment, key) => ({
         ...segment,
-        index: key + 1,
+        index: (segment.ProviderSegmentOrder || (key + 1)),
       })
     );
     return { segments, serviceSegments: serviceSegmentsNew };
@@ -506,7 +506,9 @@ function setIndexesForSegments(
     ));
   }
 
-  const indexedSegments = allSegments.map((s, k) => ({ ...s, index: k + 1 }));
+  const indexedSegments = allSegments.map(
+    (s, i) => ({ ...s, index: parseInt((s.ProviderSegmentOrder || (i + 1)), 10) })
+  );
 
   return {
     segments: indexedSegments.filter(s => s.SegmentType === undefined),
