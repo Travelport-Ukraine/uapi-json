@@ -81,7 +81,7 @@
           <common_v52_0:SupplierLocator SupplierCode="AF" SupplierLocatorCode="PGWQSH" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" CreateDateTime="2018-02-20T10:47:00.000+00:00"/>
           <common_v52_0:SupplierLocator SupplierCode="KL" SupplierLocatorCode="PGWQSH" ProviderReservationInfoRef="RwB4cFBAAA/B58h2uCAAAA==" CreateDateTime="2018-02-20T10:47:00.000+00:00"/>
           <common_v52_0:BookingTravelerRef Key="RwB4cFBAAA/B28h2uCAAAA=="/>
-          <passive:PassiveSegment NumberOfItems="1" SegmentType="Service" Status="HI" SupplierCode="AF" Origin="YYZ" StartDate="2018-04-11T00:00:00.000-04:00" Key="eGmEUHBAAA/BRO7/1GAAAA==" Group="0" TravelOrder="5"/>
+          <passive:PassiveSegment NumberOfItems="1" SegmentType="Service" Status="HI" SupplierCode="AF" Origin="YYZ" StartDate="2018-04-11T00:00:00.000-04:00" Key="eGmEUHBAAA/BRO7/1GAAAA==" Group="0" TravelOrder="5" ProviderSegmentOrder="5"/>
           <passive:PassiveRemark PassiveSegmentRef="eGmEUHBAAA/BRO7/1GAAAA==">
             <passive:Text>-D/98F/PENALTY FEE/NM-1BREZHNIEV/IEVGENMR/0572904112346C1/5045/UAH</passive:Text>
           </passive:PassiveRemark>

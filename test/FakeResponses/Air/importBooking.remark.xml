@@ -29,7 +29,7 @@
                 </air:AirReservation>
                 <passive:PassiveReservation LocatorCode="WZR2H6" CreateDate="2018-10-16T10:36:04.133+00:00" ModifiedDate="2018-10-16T10:36:04.133+00:00" ProviderReservationInfoRef="GlT3JZBAAA/BBr+4PJAAAA==">
                     <common_v52_0:BookingTravelerRef Key="GlT3JZBAAA/BfUF5PJAAAA=="/>
-                    <passive:PassiveSegment NumberOfItems="0" SegmentType="AirTaxi" Status="BK" SupplierCode="ZZ" StartDate="2018-10-18T00:00:00.000+00:00" Key="Ri4SKZlB0BKACB05vXAAAA==" Group="0" TravelOrder="1"/>
+                    <passive:PassiveSegment NumberOfItems="0" SegmentType="AirTaxi" Status="BK" SupplierCode="ZZ" StartDate="2018-10-18T00:00:00.000+00:00" Key="Ri4SKZlB0BKACB05vXAAAA==" Group="0" TravelOrder="1" ProviderSegmentOrder="1"/>
                     <passive:PassiveRemark PassiveSegmentRef="Ri4SKZlB0BKACB05vXAAAA==">
                         <passive:Text>**MH**</passive:Text>
                     </passive:PassiveRemark>

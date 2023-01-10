@@ -88,6 +88,7 @@ Object.assign(AirParsingError, createErrorsList({
   ReservationProviderInfoMissing: 'Can\'t find provider information about reservation',
   CancelResponseNotFound: 'Cancel response not found',
   InvalidServiceSegmentFormat: 'Service segment format is invalid',
+  NoProviderSegmentOrder: 'Segment is missing ProviderSegmentOrder field',
 }, AirParsingError));
 
 // Runtime errors

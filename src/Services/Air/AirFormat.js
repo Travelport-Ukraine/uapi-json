@@ -2,14 +2,6 @@ const moment = require('moment');
 const parsers = require('../../utils/parsers');
 const { AirParsingError } = require('./AirErrors');
 
-function ProviderSegmentOrderReducer(acc, { ProviderSegmentOrder }) {
-  const x = parseInt(ProviderSegmentOrder, 10);
-  if (x > acc) {
-    return x;
-  }
-  return acc;
-}
-
 /**
  * getBaggage -- get baggage information from LFS search
  * @param baggageAllowance
@@ -450,9 +442,19 @@ const getSegmentsData = segmentsObject => (segmentsObject
   ? Object.keys(segmentsObject).map(k => segmentsObject[k])
   : null);
 
-const setSegmentsIndexes = segments => segments.map(
-  (s, i) => ({ ...s, index: (parseInt(s.ProviderSegmentOrder, 10) || (i + 1)) })
+const setIndexes = segments => segments.map(
+  (segment) => {
+    const { ProviderSegmentOrder: index } = segment;
+    if (index === undefined) {
+      throw new AirParsingError.NoProviderSegmentOrder({
+        segment,
+      });
+    }
+
+    return { ...segment, index: parseInt(index, 10) };
+  }
 );
+
 
 /**
  * This function used to transform segments and service segments objects
@@ -467,45 +469,20 @@ function setIndexesForSegments(
   segmentsObject = null,
   serviceSegmentsObject = null
 ) {
-  const segments = getSegmentsData(segmentsObject);
-  const serviceSegments = getSegmentsData(serviceSegmentsObject);
+  const segmentsData = getSegmentsData(segmentsObject);
+  const serviceSegmentsData = getSegmentsData(serviceSegmentsObject);
 
-  if (segments === null && serviceSegments === null) {
-    return { segments, serviceSegments };
-  }
+  const segments = segmentsData
+    ? setIndexes(segmentsData)
+    : null;
 
-  if (segments !== null && serviceSegments === null) {
-    const segmentsNew = setSegmentsIndexes(segments);
-    return { segments: segmentsNew, serviceSegments };
-  }
-
-  if (segments === null && serviceSegments !== null) {
-    const serviceSegmentsNew = setSegmentsIndexes(serviceSegments);
-    return { segments, serviceSegments: serviceSegmentsNew };
-  }
-
-  const maxSegmentsSegmentOrder = segments.reduce(ProviderSegmentOrderReducer, 0);
-  const maxServiceSegmentsSegmentOrder = serviceSegments.reduce(ProviderSegmentOrderReducer, 0);
-
-  const maxOrder = Math.max(
-    maxSegmentsSegmentOrder,
-    maxServiceSegmentsSegmentOrder
-  );
-
-  const allSegments = [];
-
-  for (let i = 1; i <= maxOrder; i += 1) {
-    segments.forEach(s => (Number(s.ProviderSegmentOrder) === i ? allSegments.push(s) : null));
-    serviceSegments.forEach(s => (
-      Number(s.ProviderSegmentOrder) === i ? allSegments.push(s) : null
-    ));
-  }
-
-  const indexedSegments = setSegmentsIndexes(allSegments);
+  const serviceSegments = serviceSegmentsData
+    ? setIndexes(serviceSegmentsData)
+    : null;
 
   return {
-    segments: indexedSegments.filter(s => s.SegmentType === undefined),
-    serviceSegments: indexedSegments.filter(s => s.SegmentType === 'Service'),
+    segments,
+    serviceSegments,
   };
 }
 
