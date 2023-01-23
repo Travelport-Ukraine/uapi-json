@@ -1,0 +1,302 @@
+<SOAP:Envelope 
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <universal:UniversalRecordRetrieveRsp TraceId="" TransactionId="AF5FBC150A0E7DBF55EEDECF1A2CC6CE" ResponseTime="7908" 
+      xmlns:universal="http://www.travelport.com/schema/universal_v52_0" 
+      xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0" 
+      xmlns:air="http://www.travelport.com/schema/air_v52_0" 
+      xmlns:passive="http://www.travelport.com/schema/passive_v52_0">
+      <common_v52_0:ResponseMessage Code="1301" Type="Warning">Failed refresh: Universal Record data may be stale</common_v52_0:ResponseMessage>
+      <universal:UniversalRecord LocatorCode="C7T2AD" Version="1" Status="Active">
+        <common_v52_0:BookingTraveler Key="K8I6DWg3nDKA9+8ebUAAAA==">
+          <common_v52_0:BookingTravelerName First="DANA STIU MS" Last="OKOIK"/>
+          <common_v52_0:SSR Key="K8I6DWg3nDKA++8ebUAAAA==" Status="HK" Type="DOCS" FreeText="P/KE/00000046/KE/0000000/F/13OCT29/OKOIK/RUTH/CYNTHIA CHEBET  -1OKOIK/DANA STIU MS" Carrier="BA" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA=="/>
+          <common_v52_0:SSR Key="K8I6DWg3nDKA/+8ebUAAAA==" SegmentRef="K8I6DWg3nDKAB/8ebUAAAA==" Status="HK" Type="TKNE" FreeText="1251021244368C1" Carrier="BA" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA=="/>
+          <common_v52_0:SSR Key="K8I6DWg3nDKAA/8ebUAAAA==" SegmentRef="K8I6DWg3nDKAD/8ebUAAAA==" Status="HK" Type="TKNE" FreeText="1251021244368C2" Carrier="BA" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA=="/>
+        </common_v52_0:BookingTraveler>
+        <common_v52_0:ActionStatus Key="K8I6DWg3nDKAs+8ebUAAAA==" Type="ACTIVE" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA==" ProviderCode="1G">
+          <common_v52_0:Remark>NBO 13JAN0634Z AM AG</common_v52_0:Remark>
+        </common_v52_0:ActionStatus>
+        <universal:ProviderReservationInfo Key="K8I6DWg3nDKAgC8ebUAAAA==" ProviderCode="1G" LocatorCode="3G9TJ8" CreateDate="2023-01-14T07:27:20.723+00:00" ModifiedDate="2023-01-14T08:22:45.100+00:00" HostCreateDate="2023-01-12" OwningPCC="77QU"/>
+        <air:AirReservation LocatorCode="ENUJQF" CreateDate="2023-01-14T07:27:19.867+00:00" ModifiedDate="2023-01-14T07:29:36.387+00:00">
+          <common_v52_0:SupplierLocator SupplierCode="BA" SupplierLocatorCode="K3R2PV" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA==" CreateDateTime="2023-01-12T12:07:00.000+00:00"/>
+          <air:DocumentInfo>
+            <air:TicketInfo Number="1251021244368" TicketIssueDate="2023-01-13T00:00:00.000+01:00" IATANumber="41210046" TicketingAgentSignOn="Z77QUAM" CountryCode="KE" Status="N" BookingTravelerRef="K8I6DWg3nDKA9+8ebUAAAA==" AirPricingInfoRef="K8I6DWg3nDKAw+8ebUAAAA==">
+              <common_v52_0:Name First="DANA STIU MS" Last="OKOIK"/>
+            </air:TicketInfo>
+          </air:DocumentInfo>
+          <common_v52_0:BookingTravelerRef Key="K8I6DWg3nDKA9+8ebUAAAA=="/>
+          <common_v52_0:ProviderReservationInfoRef Key="K8I6DWg3nDKAgC8ebUAAAA=="/>
+          <air:AirSegment Key="K8I6DWg3nDKAB/8ebUAAAA==" Group="0" Carrier="BA" CabinClass="Economy" FlightNumber="64" ProviderCode="1G" Origin="NBO" Destination="LHR" DepartureTime="2023-01-15T23:25:00.000+03:00" ArrivalTime="2023-01-16T05:45:00.000+00:00" ClassOfService="V" ETicketability="Yes" Equipment="777" MarriageGroup="2" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA==" TravelOrder="1" ProviderSegmentOrder="1" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="K8I6DWg3nDKAC/8ebUAAAA==" Origin="NBO" Destination="LHR" DepartureTime="2023-01-15T23:25:00.000+03:00" ArrivalTime="2023-01-16T05:45:00.000+00:00" FlightTime="560" TravelTime="560" Equipment="777" OriginTerminal="1A" DestinationTerminal="5" AutomatedCheckin="false"/>
+            <air:Connection Duration="290"/>
+          </air:AirSegment>
+          <air:AirSegment Key="K8I6DWg3nDKAD/8ebUAAAA==" Group="0" Carrier="BA" CabinClass="Economy" FlightNumber="1434" ProviderCode="1G" Origin="LHR" Destination="EDI" DepartureTime="2023-01-16T10:35:00.000+00:00" ArrivalTime="2023-01-16T12:05:00.000+00:00" ClassOfService="N" ETicketability="Yes" Equipment="32N" MarriageGroup="2" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA==" TravelOrder="2" ProviderSegmentOrder="2" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="K8I6DWg3nDKAE/8ebUAAAA==" Origin="LHR" Destination="EDI" DepartureTime="2023-01-16T10:35:00.000+00:00" ArrivalTime="2023-01-16T12:05:00.000+00:00" FlightTime="90" TravelTime="90" Equipment="32N" OriginTerminal="5" AutomatedCheckin="false"/>
+          </air:AirSegment>
+          <air:AirPricingInfo Key="K8I6DWg3nDKAw+8ebUAAAA==" TotalPrice="KES78230" BasePrice="USD365.00" ApproximateTotalPrice="KES78230" ApproximateBasePrice="KES45530" EquivalentBasePrice="KES45530" Taxes="KES32700" LatestTicketingTime="2023-01-15T23:59:00.000+03:00" TrueLastDateToTicket="2023-01-15T23:59:00.000+03:00" PricingMethod="GuaranteedUsingAirlinePrivateFare" ETicketability="Yes" ProviderCode="1G" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA==" AirPricingInfoGroup="1" TotalNetPrice="KES78230" Ticketed="true" PricingType="StoredFare" FareCalculationInd="A">
+            <air:FareInfo Key="K8I6DWg3nDKAy+8ebUAAAA==" FareBasis="VNNF00S4Y" PassengerTypeCode="STU" Origin="NBO" Destination="LHR" EffectiveDate="2023-01-13T00:00:00.000+01:00" NegotiatedFare="true" TourCode="1008719" NotValidBefore="2023-01-15" NotValidAfter="2023-01-15" PseudoCityCode="77QU">
+              <air:FareTicketDesignator Value="KE06"/>
+              <common_v52_0:AccountCode Code="G351201" ProviderCode="1G"/>
+              <air:ContractCode Code="KE06" ProviderCode="1G"/>
+              <common_v52_0:Endorsement Value="GGAIRBAGSTUDENT"/>
+              <common_v52_0:Endorsement Value="535290/L/ADT/STU/NON END"/>
+              <air:BaggageAllowance>
+                <air:NumberOfPieces>2</air:NumberOfPieces>
+              </air:BaggageAllowance>
+              <air:Brand Key="K8I6DWg3nDKAy+8ebUAAAA==" BrandID="1145922" Name="STANDARD ECONOMY" Carrier="BA" BrandTier="0002">
+                <air:Title Type="External" LanguageCode="EN">Standard Economy</air:Title>
+                <air:Title Type="Short" LanguageCode="EN">BAG</air:Title>
+                <air:Text Type="ATPCO" LanguageCode="EN">//06I/C/CHANGES BEFORE DEPARTURE//06J/C/CHANGESAFTER DEPARTURE//06K/C/REFUND BEFOREDEPARTURE//06L/D/REFUND AFTERDEPARTURE//050/C/SEAT CHOICE//0CC/F/1ST BAGMAX 23KG//0CD/F/2ND BAG MAX 23KG//0MO/F/CABIN BAGMAX 23KG//04J/F/LAPTOP OR HANDBAG//0AT/F/FOOD ANDBAR SERVICE//0BX/D/LOUNGE ACCESS//0LW/D/PRIORITYSECURITY//0LO/C/PREMIUM CATERING//03P/D/DEDICATEDCHECK IN ZONE</air:Text>
+                <air:Text Type="MarketingConsumer" LanguageCode="EN">BA Standard Economy fare includes:-
+
+&#8226; Changes before/after at a charge
+&#8226; Refunds not available
+&#8226; Seat choice anytime at a fee, -24 hours for free
+&#8226; Hand Baggage 23kgs max (126LCM)
+&#8226; Laptop or Handbag included
+&#8226; Checked Baggage x 2 23kgs
+&#8226; Food and Bar service on-board
+
+*Please refer to fare rules for full conditions
+&#8226; Please note that if the flight is operated by another airline then the onboard product or service maybe different to that described above.</air:Text>
+                <air:Text Type="Upsell" LanguageCode="EN">Upgrade to Standard Economy fares which include a checked bag</air:Text>
+                <air:Text Type="MarketingAgent" LanguageCode="EN">BA Standard Economy fare includes:-
+
+&#8226; Changes before/after at a charge
+&#8226; Refunds not available
+&#8226; Seat choice anytime at a fee, -24 hours for free
+&#8226; Hand Baggage 23kgs max (126LCM)
+&#8226; Laptop or Handbag included
+&#8226; Checked Baggage x 2 23kgs
+&#8226; Food and Bar service on-board
+
+*Please refer to fare rules for full conditions
+&#8226; Please note that if the flight is operated by another airline then the onboard product or service maybe different to that described above.</air:Text>
+                <air:Text Type="Strapline" LanguageCode="EN">Standard Economy</air:Text>
+                <air:ImageLocation Type="Agent" ImageWidth="150" ImageHeight="150">https://cdn.travelport.com/britishairways/BA_general_medium_1057.jpg</air:ImageLocation>
+                <air:ImageLocation Type="Consumer" ImageWidth="150" ImageHeight="150">https://cdn.travelport.com/britishairways/BA_general_medium_1057.jpg</air:ImageLocation>
+                <air:OptionalServices>
+                  <air:OptionalService Type="Baggage" SupplierCode="BA" CreateDate="2023-01-14T07:27:19.912+00:00" ServiceSubCode="0CC" Key="K8I6DWg3nDKAbV8ebUAAAA==" Chargeable="Included in the brand">
+                    <common_v52_0:ServiceInfo>
+                      <common_v52_0:Description>1 Checked bag max 23kg</common_v52_0:Description>
+                      <common_v52_0:MediaItem caption="AGENT" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_1043.jpg"/>
+                      <common_v52_0:MediaItem caption="CONSUMER" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_1043.jpg"/>
+                    </common_v52_0:ServiceInfo>
+                    <air:EMD AssociatedItem="Flight"/>
+                    <air:Text Type="Strapline" LanguageCode="EN">Check in your bags for extra convenience</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">1x23kg</air:Text>
+                    <air:Text Type="MarketingConsumer" LanguageCode="EN">1x23kg</air:Text>
+                    <air:Title Type="External" LanguageCode="EN">1 Checked bag max 23kg</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">HoldBag</air:Title>
+                  </air:OptionalService>
+                  <air:OptionalService Type="Baggage" SupplierCode="BA" CreateDate="2023-01-14T07:27:19.912+00:00" ServiceSubCode="0CD" Key="K8I6DWg3nDKAnV8ebUAAAA==" Chargeable="Included in the brand">
+                    <common_v52_0:ServiceInfo>
+                      <common_v52_0:Description>2nd Checked bag max 23kg</common_v52_0:Description>
+                      <common_v52_0:MediaItem caption="AGENT" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88580.jpg"/>
+                      <common_v52_0:MediaItem caption="CONSUMER" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88580.jpg"/>
+                    </common_v52_0:ServiceInfo>
+                    <air:EMD AssociatedItem="Flight"/>
+                    <air:Text Type="Strapline" LanguageCode="EN">Taking extra baggage as required</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">Check in a 2nd bag max 23kg.</air:Text>
+                    <air:Text Type="MarketingConsumer" LanguageCode="EN">Check in a 2nd bag max 23kg.</air:Text>
+                    <air:Title Type="External" LanguageCode="EN">2nd Checked bag max 23kg</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">HoldBags</air:Title>
+                  </air:OptionalService>
+                  <air:OptionalService Type="Baggage" SupplierCode="BA" CreateDate="2023-01-14T07:27:19.912+00:00" ServiceSubCode="0MO" Key="K8I6DWg3nDKApV8ebUAAAA==" SecondaryType="Carry On Hand Baggage" Chargeable="Included in the brand">
+                    <common_v52_0:ServiceInfo>
+                      <common_v52_0:Description>Cabin bag max 23kg</common_v52_0:Description>
+                      <common_v52_0:MediaItem caption="AGENT" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_1042.jpg"/>
+                      <common_v52_0:MediaItem caption="CONSUMER" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_1042.jpg"/>
+                    </common_v52_0:ServiceInfo>
+                    <air:EMD AssociatedItem="Chargeable Baggage"/>
+                    <air:Text Type="Strapline" LanguageCode="EN">Taking bags on board</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">You can take on board a bag weighing up to 23kg, however no more than 126LCM around.</air:Text>
+                    <air:Text Type="MarketingConsumer" LanguageCode="EN">You can take on board a bag weighing up to 23kg, however no more than 126LCM around.</air:Text>
+                    <air:Title Type="External" LanguageCode="EN">Cabin bag max 23kg</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">Carry bag</air:Title>
+                  </air:OptionalService>
+                  <air:OptionalService Type="Baggage" SupplierCode="BA" CreateDate="2023-01-14T07:27:19.912+00:00" ServiceSubCode="04J" Key="K8I6DWg3nDKAsV8ebUAAAA==" SecondaryType="Carry On Hand Baggage" Chargeable="Included in the brand">
+                    <common_v52_0:ServiceInfo>
+                      <common_v52_0:Description>Laptop or handbag up to 85LCM</common_v52_0:Description>
+                      <common_v52_0:MediaItem caption="AGENT" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88582.jpg"/>
+                      <common_v52_0:MediaItem caption="CONSUMER" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88582.jpg"/>
+                    </common_v52_0:ServiceInfo>
+                    <air:EMD AssociatedItem="Chargeable Baggage"/>
+                    <air:Text Type="Strapline" LanguageCode="EN">An extra small item to take on board</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">Additionally you can take on board a laptop bag or handbag max 85LCM.</air:Text>
+                    <air:Text Type="MarketingConsumer" LanguageCode="EN">Additionally you can take on board a laptop bag or handbag max 85LCM.</air:Text>
+                    <air:Title Type="External" LanguageCode="EN">Laptop or handbag up to 85LCM</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">SmlBAG</air:Title>
+                  </air:OptionalService>
+                  <air:OptionalService Type="MealOrBeverage" SupplierCode="BA" CreateDate="2023-01-14T07:27:19.912+00:00" ServiceSubCode="0AT" Key="K8I6DWg3nDKA7V8ebUAAAA==" SecondaryType="Snack" Chargeable="Included in the brand">
+                    <common_v52_0:ServiceInfo>
+                      <common_v52_0:Description>Food and bar service</common_v52_0:Description>
+                      <common_v52_0:MediaItem caption="AGENT" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88585.jpg"/>
+                      <common_v52_0:MediaItem caption="CONSUMER" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88585.jpg"/>
+                    </common_v52_0:ServiceInfo>
+                    <air:EMD AssociatedItem="Flight"/>
+                    <air:Text Type="Strapline" LanguageCode="EN">On board catering</air:Text>
+                    <air:Title Type="External" LanguageCode="EN">Food and bar service</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">Meals</air:Title>
+                  </air:OptionalService>
+                </air:OptionalServices>
+              </air:Brand>
+              <common_v52_0:Commission Level="Fare" Type="PercentBase" Percentage="0.0"/>
+            </air:FareInfo>
+            <air:FareInfo Key="K8I6DWg3nDKA2+8ebUAAAA==" FareBasis="VNNF00S4Y" PassengerTypeCode="STU" Origin="LHR" Destination="EDI" EffectiveDate="2023-01-13T00:00:00.000+01:00" NegotiatedFare="true" TourCode="1008719" NotValidBefore="2023-01-16" NotValidAfter="2023-01-16" PseudoCityCode="77QU">
+              <air:FareTicketDesignator Value="KE06"/>
+              <common_v52_0:AccountCode Code="G351201" ProviderCode="1G"/>
+              <air:ContractCode Code="KE06" ProviderCode="1G"/>
+              <common_v52_0:Endorsement Value="GGAIRBAGSTUDENT"/>
+              <common_v52_0:Endorsement Value="535290/L/ADT/STU/NON END"/>
+              <air:BaggageAllowance>
+                <air:NumberOfPieces>2</air:NumberOfPieces>
+              </air:BaggageAllowance>
+              <air:Brand Key="K8I6DWg3nDKA2+8ebUAAAA==" BrandID="1145922" Name="STANDARD ECONOMY" Carrier="BA" BrandTier="0002">
+                <air:Title Type="External" LanguageCode="EN">Standard Economy</air:Title>
+                <air:Title Type="Short" LanguageCode="EN">BAG</air:Title>
+                <air:Text Type="ATPCO" LanguageCode="EN">//06I/C/CHANGES BEFORE DEPARTURE//06J/C/CHANGESAFTER DEPARTURE//06K/C/REFUND BEFOREDEPARTURE//06L/D/REFUND AFTERDEPARTURE//050/C/SEAT CHOICE//0CC/F/1ST BAGMAX 23KG//0CD/F/2ND BAG MAX 23KG//0MO/F/CABIN BAGMAX 23KG//04J/F/LAPTOP OR HANDBAG//0AT/F/FOOD ANDBAR SERVICE//0BX/D/LOUNGE ACCESS//0LW/D/PRIORITYSECURITY//0LO/C/PREMIUM CATERING//03P/D/DEDICATEDCHECK IN ZONE</air:Text>
+                <air:Text Type="MarketingConsumer" LanguageCode="EN">BA Standard Economy fare includes:-
+
+&#8226; Changes before/after at a charge
+&#8226; Refunds not available
+&#8226; Seat choice anytime at a fee, -24 hours for free
+&#8226; Hand Baggage 23kgs max (126LCM)
+&#8226; Laptop or Handbag included
+&#8226; Checked Baggage x 2 23kgs
+&#8226; Food and Bar service on-board
+
+*Please refer to fare rules for full conditions
+&#8226; Please note that if the flight is operated by another airline then the onboard product or service maybe different to that described above.</air:Text>
+                <air:Text Type="Upsell" LanguageCode="EN">Upgrade to Standard Economy fares which include a checked bag</air:Text>
+                <air:Text Type="MarketingAgent" LanguageCode="EN">BA Standard Economy fare includes:-
+
+&#8226; Changes before/after at a charge
+&#8226; Refunds not available
+&#8226; Seat choice anytime at a fee, -24 hours for free
+&#8226; Hand Baggage 23kgs max (126LCM)
+&#8226; Laptop or Handbag included
+&#8226; Checked Baggage x 2 23kgs
+&#8226; Food and Bar service on-board
+
+*Please refer to fare rules for full conditions
+&#8226; Please note that if the flight is operated by another airline then the onboard product or service maybe different to that described above.</air:Text>
+                <air:Text Type="Strapline" LanguageCode="EN">Standard Economy</air:Text>
+                <air:ImageLocation Type="Agent" ImageWidth="150" ImageHeight="150">https://cdn.travelport.com/britishairways/BA_general_medium_1057.jpg</air:ImageLocation>
+                <air:ImageLocation Type="Consumer" ImageWidth="150" ImageHeight="150">https://cdn.travelport.com/britishairways/BA_general_medium_1057.jpg</air:ImageLocation>
+                <air:OptionalServices>
+                  <air:OptionalService Type="Baggage" SupplierCode="BA" CreateDate="2023-01-14T07:27:19.932+00:00" ServiceSubCode="0CC" Key="K8I6DWg3nDKAa+8ebUAAAA==" Chargeable="Included in the brand">
+                    <common_v52_0:ServiceInfo>
+                      <common_v52_0:Description>1 Checked bag max 23kg</common_v52_0:Description>
+                      <common_v52_0:MediaItem caption="AGENT" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_1043.jpg"/>
+                      <common_v52_0:MediaItem caption="CONSUMER" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_1043.jpg"/>
+                    </common_v52_0:ServiceInfo>
+                    <air:EMD AssociatedItem="Flight"/>
+                    <air:Text Type="Strapline" LanguageCode="EN">Check in your bags for extra convenience</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">1x23kg</air:Text>
+                    <air:Text Type="MarketingConsumer" LanguageCode="EN">1x23kg</air:Text>
+                    <air:Title Type="External" LanguageCode="EN">1 Checked bag max 23kg</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">HoldBag</air:Title>
+                  </air:OptionalService>
+                  <air:OptionalService Type="Baggage" SupplierCode="BA" CreateDate="2023-01-14T07:27:19.932+00:00" ServiceSubCode="0CD" Key="K8I6DWg3nDKAb+8ebUAAAA==" Chargeable="Included in the brand">
+                    <common_v52_0:ServiceInfo>
+                      <common_v52_0:Description>2nd Checked bag max 23kg</common_v52_0:Description>
+                      <common_v52_0:MediaItem caption="AGENT" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88580.jpg"/>
+                      <common_v52_0:MediaItem caption="CONSUMER" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88580.jpg"/>
+                    </common_v52_0:ServiceInfo>
+                    <air:EMD AssociatedItem="Flight"/>
+                    <air:Text Type="Strapline" LanguageCode="EN">Taking extra baggage as required</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">Check in a 2nd bag max 23kg.</air:Text>
+                    <air:Text Type="MarketingConsumer" LanguageCode="EN">Check in a 2nd bag max 23kg.</air:Text>
+                    <air:Title Type="External" LanguageCode="EN">2nd Checked bag max 23kg</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">HoldBags</air:Title>
+                  </air:OptionalService>
+                  <air:OptionalService Type="Baggage" SupplierCode="BA" CreateDate="2023-01-14T07:27:19.932+00:00" ServiceSubCode="0MO" Key="K8I6DWg3nDKAc+8ebUAAAA==" SecondaryType="Carry On Hand Baggage" Chargeable="Included in the brand">
+                    <common_v52_0:ServiceInfo>
+                      <common_v52_0:Description>Cabin bag max 23kg</common_v52_0:Description>
+                      <common_v52_0:MediaItem caption="AGENT" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_1042.jpg"/>
+                      <common_v52_0:MediaItem caption="CONSUMER" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_1042.jpg"/>
+                    </common_v52_0:ServiceInfo>
+                    <air:EMD AssociatedItem="Chargeable Baggage"/>
+                    <air:Text Type="Strapline" LanguageCode="EN">Taking bags on board</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">You can take on board a bag weighing up to 23kg, however no more than 126LCM around.</air:Text>
+                    <air:Text Type="MarketingConsumer" LanguageCode="EN">You can take on board a bag weighing up to 23kg, however no more than 126LCM around.</air:Text>
+                    <air:Title Type="External" LanguageCode="EN">Cabin bag max 23kg</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">Carry bag</air:Title>
+                  </air:OptionalService>
+                  <air:OptionalService Type="Baggage" SupplierCode="BA" CreateDate="2023-01-14T07:27:19.932+00:00" ServiceSubCode="04J" Key="K8I6DWg3nDKAd+8ebUAAAA==" SecondaryType="Carry On Hand Baggage" Chargeable="Included in the brand">
+                    <common_v52_0:ServiceInfo>
+                      <common_v52_0:Description>Laptop or handbag up to 85LCM</common_v52_0:Description>
+                      <common_v52_0:MediaItem caption="AGENT" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88582.jpg"/>
+                      <common_v52_0:MediaItem caption="CONSUMER" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88582.jpg"/>
+                    </common_v52_0:ServiceInfo>
+                    <air:EMD AssociatedItem="Chargeable Baggage"/>
+                    <air:Text Type="Strapline" LanguageCode="EN">An extra small item to take on board</air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">Additionally you can take on board a laptop bag or handbag max 85LCM.</air:Text>
+                    <air:Text Type="MarketingConsumer" LanguageCode="EN">Additionally you can take on board a laptop bag or handbag max 85LCM.</air:Text>
+                    <air:Title Type="External" LanguageCode="EN">Laptop or handbag up to 85LCM</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">SmlBAG</air:Title>
+                  </air:OptionalService>
+                  <air:OptionalService Type="MealOrBeverage" SupplierCode="BA" CreateDate="2023-01-14T07:27:19.933+00:00" ServiceSubCode="0AT" Key="K8I6DWg3nDKAm+8ebUAAAA==" SecondaryType="Snack" Chargeable="Included in the brand">
+                    <common_v52_0:ServiceInfo>
+                      <common_v52_0:Description>Food and bar service</common_v52_0:Description>
+                      <common_v52_0:MediaItem caption="AGENT" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88585.jpg"/>
+                      <common_v52_0:MediaItem caption="CONSUMER" height="60" width="60" url="https://cdn.travelport.com/britishairways/BA_general_medium_88585.jpg"/>
+                    </common_v52_0:ServiceInfo>
+                    <air:EMD AssociatedItem="Flight"/>
+                    <air:Text Type="Strapline" LanguageCode="EN">On board catering</air:Text>
+                    <air:Title Type="External" LanguageCode="EN">Food and bar service</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">Meals</air:Title>
+                  </air:OptionalService>
+                </air:OptionalServices>
+              </air:Brand>
+            </air:FareInfo>
+            <air:BookingInfo BookingCode="V" CabinClass="Economy" FareInfoRef="K8I6DWg3nDKAy+8ebUAAAA==" SegmentRef="K8I6DWg3nDKAB/8ebUAAAA=="/>
+            <air:BookingInfo BookingCode="N" CabinClass="Economy" FareInfoRef="K8I6DWg3nDKA2+8ebUAAAA==" SegmentRef="K8I6DWg3nDKAD/8ebUAAAA=="/>
+            <air:TaxInfo Category="TU" Amount="KES6240" Key="K8I6DWg3nDKA6+8ebUAAAA=="/>
+            <air:TaxInfo Category="UB" Amount="KES1825" Key="K8I6DWg3nDKA7+8ebUAAAA=="/>
+            <air:TaxInfo Category="YQ" Amount="KES24635" Key="K8I6DWg3nDKA8+8ebUAAAA=="/>
+            <air:FareCalc>NBO BA X/LON BA EDI Q NBOEDI14.00 351.00VNNF00S4Y/KE06 NUC365.00END ROE1.0</air:FareCalc>
+            <air:PassengerType Code="STU" Age="27" BookingTravelerRef="K8I6DWg3nDKA9+8ebUAAAA==">
+              <air:FareGuaranteeInfo GuaranteeType="GuaranteedUsingAirlinePrivateFare"/>
+            </air:PassengerType>
+            <common_v52_0:BookingTravelerRef Key="K8I6DWg3nDKA9+8ebUAAAA=="/>
+            <air:PaymentRef Key="K8I6DWg3nDKAI/8ebUAAAA=="/>
+            <air:TicketingModifiersRef Key="K8I6DWg3nDKAx+8ebUAAAA=="/>
+          </air:AirPricingInfo>
+          <common_v52_0:Payment Key="K8I6DWg3nDKAI/8ebUAAAA==" Type="Itinerary" Amount="KES78230" FormOfPaymentRef="K8I6DWg3nDKAH/8ebUAAAA=="/>
+          <air:TicketingModifiers PlatingCarrier="BA" Key="K8I6DWg3nDKAx+8ebUAAAA==">
+            <air:DocumentSelect IssueTicketOnly="true" IssueElectronicTicket="true"/>
+          </air:TicketingModifiers>
+        </air:AirReservation>
+        <passive:PassiveReservation LocatorCode="QTSB1L" CreateDate="2023-01-14T07:27:20.724+00:00" ModifiedDate="2023-01-14T07:27:20.724+00:00" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA==">
+          <common_v52_0:SupplierLocator SupplierCode="BA" SupplierLocatorCode="K3R2PV" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA==" CreateDateTime="2023-01-12T12:07:00.000+00:00"/>
+          <common_v52_0:BookingTravelerRef Key="K8I6DWg3nDKA9+8ebUAAAA=="/>
+          <passive:PassiveSegment NumberOfItems="0" SegmentType="Tour" Status="BK" SupplierCode="ZZ" StartDate="2023-04-16T00:00:00.000+00:00" Key="K8I6DWg3nDKAL/8ebUAAAA==" Group="0" TravelOrder="3" ProviderSegmentOrder="3"/>
+          <passive:PassiveRemark PassiveSegmentRef="K8I6DWg3nDKAL/8ebUAAAA==">
+            <passive:Text>**KEEP PNR LIVE**</passive:Text>
+          </passive:PassiveRemark>
+        </passive:PassiveReservation>
+        <common_v52_0:GeneralRemark Key="K8I6DWg3nDKAG/8ebUAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA==" SupplierCode="BA" Direction="Incoming" CreateDate="2023-01-12T12:05:00.000+00:00">
+          <common_v52_0:RemarkData>MISSING SSR CTCM MOBILE OR SSR CTCE EMAIL OR SSR CTCR NON-CONSENT FOR BA</common_v52_0:RemarkData>
+        </common_v52_0:GeneralRemark>
+        <common_v52_0:AgencyInfo>
+          <common_v52_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2023-01-14T07:27:19.629+00:00"/>
+          <common_v52_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2023-01-14T07:29:36.391+00:00"/>
+          <common_v52_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2023-01-14T07:27:20.723+00:00"/>
+        </common_v52_0:AgencyInfo>
+        <common_v52_0:AgencyContactInfo>
+          <common_v52_0:PhoneNumber Key="K8I6DWg3nDKAu+8ebUAAAA==" Type="Agency" Location="EDL" Number="ELGEYO TRAVEL 0727559714 ABI">
+            <common_v52_0:ProviderReservationInfoRef Key="K8I6DWg3nDKAgC8ebUAAAA=="/>
+          </common_v52_0:PhoneNumber>
+        </common_v52_0:AgencyContactInfo>
+        <common_v52_0:SSR Key="K8I6DWg3nDKAN/8ebUAAAA==" Status="HK" Type="CTCM" FreeText="/254727559714-1OKOIK/DANA STIU MS" Carrier="BA" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA=="/>
+        <common_v52_0:SSR Key="K8I6DWg3nDKAO/8ebUAAAA==" Status="HK" Type="CTCE" FreeText="/INFO//ELGEYOTRAVEL.COM-1OKOIK/DANA STIU MS" Carrier="BA" ProviderReservationInfoRef="K8I6DWg3nDKAgC8ebUAAAA=="/>
+        <common_v52_0:FormOfPayment Key="K8I6DWg3nDKAH/8ebUAAAA==" Type="MiscFormOfPayment" Reusable="false" ProfileKey="1RRWSmRvRz+ebt5W8LnoZg==">
+          <common_v52_0:MiscFormOfPayment Text="AGT" Category="Invoice"/>
+        </common_v52_0:FormOfPayment>
+      </universal:UniversalRecord>
+    </universal:UniversalRecordRetrieveRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

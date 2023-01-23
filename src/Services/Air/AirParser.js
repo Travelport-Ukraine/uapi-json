@@ -18,6 +18,10 @@ const noAgreementPattern = /NO AGENCY AGREEMENT/i;
 const unableToRetreivePattern = /UNABLE TO RETRIEVE/i;
 const ticketRetrieveErrorPattern = /HOST ERROR DURING TICKET RETRIEVE/i;
 const accessedByAnotherTransactionPattern = /ACCESSED BY ANOTHER TRANSACTION/i;
+const noValidFare = /NO VALID FARE FOR INPUT CRITERIA/;
+const bookingStaleData = /failed refresh|data may be stale/i;
+
+const BOOKING_STALE_DATA_ERROR_CODE = 1301;
 
 const parseFareCalculation = (str) => {
   const fareCalculation = str.match(fareCalculationPattern)[1];
@@ -859,20 +863,18 @@ function extractBookings(obj) {
   const record = obj['universal:UniversalRecord'];
   const messages = obj[`common_${this.uapi_version}:ResponseMessage`] || [];
 
-  messages.forEach((message) => {
-    if (/NO VALID FARE FOR INPUT CRITERIA/.exec(message._)) {
+  messages.forEach(({ _, Code }) => {
+    if (noValidFare.exec(_)) {
       throw new AirRuntimeError.NoValidFare(obj);
+    }
+
+    if (bookingStaleData.exec(_) || Code === BOOKING_STALE_DATA_ERROR_CODE) {
+      throw new AirRuntimeError.UniversalRecordDataCouldBeStale(messages);
     }
   });
 
   if (obj['air:AirSegmentSellFailureInfo']) {
     throw new AirRuntimeError.SegmentBookingFailed(obj);
-  }
-
-  let responseMessage;
-
-  if (obj[`common_${this.uapi_version}:ResponseMessage`]) {
-    responseMessage = obj[`common_${this.uapi_version}:ResponseMessage`];
   }
 
   const travelers = record['common_' + this.uapi_version + ':BookingTraveler'];
@@ -925,6 +927,7 @@ function extractBookings(obj) {
         passengers,
         emails: [],
         bookingPCC: providerInfo.OwningPCC,
+        ...(messages ? { messages } : null),
       };
     });
   }
@@ -1206,7 +1209,7 @@ function extractBookings(obj) {
       splitBookings.length > 0
         ? { splitBookings }
         : null,
-      responseMessage ? { messages: responseMessage } : null
+      messages ? { messages } : null
     );
   });
 }
