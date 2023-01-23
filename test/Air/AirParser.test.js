@@ -1838,6 +1838,28 @@ describe('#AirParser', () => {
           testBooking(jsonResult, false);
         });
     });
+
+    it('should throw UniversalRecordDataCouldBeStale in cas of stale data', async () => {
+      const uParser = new Parser('universal:UniversalRecordRetrieveRsp', 'v52_0', {});
+      const parseFunction = airParser.UNIVERSAL_RECORD_RETRIEVE_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordRetrieve_stale-data.xml`)
+        .toString();
+
+      const json = await uParser.parse(xml);
+      try {
+        parseFunction.call(uParser, json);
+        throw new Error('no error');
+      } catch (e) {
+        expect(e).to.be.instanceOf(AirRuntimeError.UniversalRecordDataCouldBeStale);
+        expect(e.data).to.deep.equal([
+          {
+            _: 'Failed refresh: Universal Record data may be stale',
+            Code: '1301',
+            Type: 'Warning'
+          },
+        ]);
+      }
+    });
   });
 
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
