@@ -139,6 +139,7 @@ Object.assign(AirRuntimeError, createErrorsList({
   UnableToRetrieveTicket: 'Unable to retrieve ticket. Please contact your local Travelport Helpdesk.',
   CouldNotRetrieveCurrency: 'We could not retrieve currency for commission from any fare in the booking. Please check fare quotes.',
   TicketNotFound: 'Ticket was not found in the tickets list',
+  UniversalRecordDataCouldBeStale: 'The system failed to refresh booking. Data may be stale',
 }, AirRuntimeError));
 
 const AirFlightInfoRuntimeError = createErrorClass(
