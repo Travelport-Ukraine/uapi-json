@@ -439,7 +439,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
 }
 
 const getSegmentsData = segmentsObject => (segmentsObject
-  ? Object.keys(segmentsObject).map(k => segmentsObject[k])
+  ? Object.values(segmentsObject)
   : null);
 
 const setIndexes = segments => segments.map(
