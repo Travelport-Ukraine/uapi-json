@@ -1,6 +1,6 @@
 {
   "name": "uapi-json",
-  "version": "1.14.6",
+  "version": "1.14.7",
   "description": "Travelport Universal API",
   "main": "src/",
   "files": [
@@ -32,7 +32,7 @@
     "Artem Pylypchuk <articicejuice@gmail.com>",
     "Yevhenii Huselietov <d46k16@gmail.com>",
     "Mark Omarov <dev.mark.omarov@gmail.com>",
-    "Oleksii Duvanov <kommandant@web-hata.com>"
+    "Oleksii Duvanov <colden.aid@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
