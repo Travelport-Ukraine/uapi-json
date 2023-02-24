@@ -2,14 +2,6 @@ const moment = require('moment');
 const parsers = require('../../utils/parsers');
 const { AirParsingError } = require('./AirErrors');
 
-function ProviderSegmentOrderReducer(acc, { ProviderSegmentOrder }) {
-  const x = parseInt(ProviderSegmentOrder, 10);
-  if (x > acc) {
-    return x;
-  }
-  return acc;
-}
-
 /**
  * getBaggage -- get baggage information from LFS search
  * @param baggageAllowance
@@ -446,6 +438,24 @@ function formatLowFaresSearch(searchRequest, searchResult) {
   return fares;
 }
 
+const getSegmentsData = segmentsObject => (segmentsObject
+  ? Object.values(segmentsObject)
+  : null);
+
+const setIndexes = segments => segments.map(
+  (segment) => {
+    const { ProviderSegmentOrder: index } = segment;
+    if (index === undefined) {
+      throw new AirParsingError.NoProviderSegmentOrder({
+        segment,
+      });
+    }
+
+    return { ...segment, index: parseInt(index, 10) };
+  }
+);
+
+
 /**
  * This function used to transform segments and service segments objects
  * to arrays. After that this function try to set indexes with same as in
@@ -459,58 +469,20 @@ function setIndexesForSegments(
   segmentsObject = null,
   serviceSegmentsObject = null
 ) {
-  const segments = segmentsObject
-    ? Object.keys(segmentsObject).map(k => segmentsObject[k])
+  const segmentsData = getSegmentsData(segmentsObject);
+  const serviceSegmentsData = getSegmentsData(serviceSegmentsObject);
+
+  const segments = segmentsData
+    ? setIndexes(segmentsData)
     : null;
 
-  const serviceSegments = serviceSegmentsObject
-    ? Object.keys(serviceSegmentsObject).map(k => serviceSegmentsObject[k])
+  const serviceSegments = serviceSegmentsData
+    ? setIndexes(serviceSegmentsData)
     : null;
-
-  if (segments === null && serviceSegments === null) {
-    return { segments, serviceSegments };
-  }
-
-  if (segments !== null && serviceSegments === null) {
-    const segmentsNew = segments.map((segment, key) => ({
-      ...segment,
-      index: key + 1,
-    }));
-    return { segments: segmentsNew, serviceSegments };
-  }
-
-  if (segments === null && serviceSegments !== null) {
-    const serviceSegmentsNew = serviceSegments.map(
-      (segment, key) => ({
-        ...segment,
-        index: key + 1,
-      })
-    );
-    return { segments, serviceSegments: serviceSegmentsNew };
-  }
-
-  const maxSegmentsSegmentOrder = segments.reduce(ProviderSegmentOrderReducer, 0);
-  const maxServiceSegmentsSegmentOrder = serviceSegments.reduce(ProviderSegmentOrderReducer, 0);
-
-  const maxOrder = Math.max(
-    maxSegmentsSegmentOrder,
-    maxServiceSegmentsSegmentOrder
-  );
-
-  const allSegments = [];
-
-  for (let i = 1; i <= maxOrder; i += 1) {
-    segments.forEach(s => (Number(s.ProviderSegmentOrder) === i ? allSegments.push(s) : null));
-    serviceSegments.forEach(s => (
-      Number(s.ProviderSegmentOrder) === i ? allSegments.push(s) : null
-    ));
-  }
-
-  const indexedSegments = allSegments.map((s, k) => ({ ...s, index: k + 1 }));
 
   return {
-    segments: indexedSegments.filter(s => s.SegmentType === undefined),
-    serviceSegments: indexedSegments.filter(s => s.SegmentType === 'Service'),
+    segments,
+    serviceSegments,
   };
 }
 
