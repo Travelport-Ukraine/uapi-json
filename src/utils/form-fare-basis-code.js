@@ -5,7 +5,7 @@ module.exports = (airPricingInfo, coupon) => {
     ? `${coupon.FareBasis}/${couponTicketDesignator}`
     : coupon.FareBasis;
 
-  if (!airPricingInfo) {
+  if (!airPricingInfo || !airPricingInfo['air:FareInfo']) {
     return couponFareBasisResult;
   }
 
