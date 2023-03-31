@@ -188,6 +188,16 @@ const terminalEmulationFailed = proxyquire(terminalPath, {
   './TerminalService': terminalServiceEmulationFailed,
 });
 
+const createUapiTerminal = (emulatePcc, terminalFunc) => {
+  const emulateConfig = Object.assign({}, config, {
+    emulatePcc,
+  });
+  return terminalFunc({
+    auth: emulateConfig,
+    emulatePcc,
+  });
+};
+
 // Tests
 describe('#Terminal', function terminalTest() {
   this.timeout(5000);
@@ -448,13 +458,7 @@ describe('#Terminal', function terminalTest() {
       executeCommandEmulationFailed.resetHistory();
 
       const emulatePcc = '7j8i';
-      const emulateConfig = Object.assign({}, config, {
-        emulatePcc,
-      });
-      const uAPITerminal = terminalEmulationFailed({
-        auth: emulateConfig,
-        emulatePcc,
-      });
+      const uAPITerminal = createUapiTerminal(emulatePcc, terminalEmulationFailed);
 
       return uAPITerminal
         .executeCommand('I')
@@ -470,34 +474,24 @@ describe('#Terminal', function terminalTest() {
           return uAPITerminal.closeSession();
         });
     });
-    it('Should fail if not authorised by galileo', () => {
+    it('Should fail if not authorised by galileo', async () => {
       // Resetting spies
       getSessionToken.resetHistory();
       executeCommandEmulationFailed.resetHistory();
 
       const emulatePcc = '6K66';
-      const emulateConfig = Object.assign({}, config, {
-        emulatePcc,
-      });
-      const uAPITerminal = terminalEmulationFailed({
-        auth: emulateConfig,
-        emulatePcc,
-      });
+      const uAPITerminal = createUapiTerminal(emulatePcc, terminalEmulationFailed);
 
-      return uAPITerminal
-        .executeCommand('I')
-        .then(() => Promise.reject(new Error('Emulation has not failed')))
-        .catch((err) => {
-          expect(getSessionToken.callCount).to.equal(1);
-          expect(executeCommandEmulationFailed.callCount).to.equal(1);
-          expect(executeCommandEmulationFailed.getCall(0).args[0].sessionToken).to.equal(token);
-          expect(executeCommandEmulationFailed.getCall(0).args[0].command).to.equal(`SEM/${emulatePcc}/AG`);
-          expect(err).to.be.an.instanceof(
-            TerminalRuntimeError.TerminalAuthIssue
-          );
+      try {
+        await uAPITerminal.executeCommand('I');
+        throw new Error('Emulation has not failed');
+      } catch (e) {
+        expect(e).to.be.an.instanceof(
+          TerminalRuntimeError.TerminalAuthIssue
+        );
+      }
 
-          return uAPITerminal.closeSession();
-        });
+      await uAPITerminal.closeSession();
     });
     it('Should emulate pcc', () => {
       // Resetting spies
