@@ -129,6 +129,10 @@ const executeCommandEmulationFailed = sinon.spy((params) => {
     case 'I':
       return getTerminalResponse('I');
     default:
+      if (params.command.match(/SEM\/6K66\/AG/)) {
+        return getTerminalResponse('NOT_AUTHORISED');
+      }
+
       if (params.command.match(/^SEM/)) {
         return getTerminalResponse('RESTRICTED');
       }
@@ -463,6 +467,35 @@ describe('#Terminal', function terminalTest() {
           expect(err).to.be.an.instanceof(
             TerminalRuntimeError.TerminalEmulationFailed
           );
+          return uAPITerminal.closeSession();
+        });
+    });
+    it('Should fail if not authorised by galileo', () => {
+      // Resetting spies
+      getSessionToken.resetHistory();
+      executeCommandEmulationFailed.resetHistory();
+
+      const emulatePcc = '6K66';
+      const emulateConfig = Object.assign({}, config, {
+        emulatePcc,
+      });
+      const uAPITerminal = terminalEmulationFailed({
+        auth: emulateConfig,
+        emulatePcc,
+      });
+
+      return uAPITerminal
+        .executeCommand('I')
+        .then(() => Promise.reject(new Error('Emulation has not failed')))
+        .catch((err) => {
+          expect(getSessionToken.callCount).to.equal(1);
+          expect(executeCommandEmulationFailed.callCount).to.equal(1);
+          expect(executeCommandEmulationFailed.getCall(0).args[0].sessionToken).to.equal(token);
+          expect(executeCommandEmulationFailed.getCall(0).args[0].command).to.equal(`SEM/${emulatePcc}/AG`);
+          expect(err).to.be.an.instanceof(
+            TerminalRuntimeError.TerminalAuthIssue
+          );
+
           return uAPITerminal.closeSession();
         });
     });
