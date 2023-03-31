@@ -210,7 +210,7 @@ module.exports = function (settings) {
 
   const terminal = {
     getToken: getSessionToken,
-    executeCommand: (rawCommand, stopMD = defaultStopMD) => new Promise(async (resolve, reject) => {
+    executeCommand: async (rawCommand, stopMD = defaultStopMD) => {
       try {
         const sessionToken = await getSessionToken();
         const terminalId = getTerminalId(sessionToken);
@@ -232,17 +232,17 @@ module.exports = function (settings) {
         });
 
         if (UNEXPECTED_TERMINAL_ERRORS.some(e => response.includes(e))) {
-          reject(new TerminalRuntimeError.TerminalUnexpectedError(response));
+          throw new TerminalRuntimeError.TerminalUnexpectedError({ screen: response });
         }
 
-        resolve(response);
+        return response;
       } catch (err) {
         Object.assign(state, {
           terminalState: TERMINAL_STATE_ERROR,
         });
-        reject(err);
+        throw err;
       }
-    }),
+    },
     closeSession: () => getSessionToken()
       .then(
         sessionToken => service.closeSession({
