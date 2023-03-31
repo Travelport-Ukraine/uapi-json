@@ -46,6 +46,8 @@ Object.assign(TerminalRuntimeError, createErrorsList({
   TerminalIsClosed: 'Terminal is closed',
   ErrorClosingSession: 'Error closing session',
   NoAgreement: ['There is no agreement between current pcc and you trying to reach', errorCodes.Validation],
+  TerminalAuthIssue: ['Temporary terminal auth issue. Please, try again later', errorCodes.Validation],
+  TerminalUnexpectedError: ['Terminal unexpected error. Please, try again later', errorCodes.Validation],
 }, TerminalRuntimeError));
 
 module.exports = {

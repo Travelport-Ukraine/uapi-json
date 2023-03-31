@@ -19,6 +19,10 @@ const RETRY_CODES_LIST = ['14058'];
 
 const DEFAULT_RETRY_TIMES = 3;
 
+const UNEXPECTED_TERMINAL_ERRORS = [
+  'NO PREVIOUS OR ORIGINAL REQUEST',
+];
+
 // Adding event handler on beforeExit and exit process events to process open terminals
 process.on('beforeExit', () => {
   Promise.all(
@@ -188,6 +192,10 @@ module.exports = function (settings) {
           sessionToken: tokenData.sessionToken,
           command: `SEM/${emulatePcc}/AG`,
         }).then((response) => {
+          if (response[0].match(/duty code not authorised/i)) {
+            return Promise.reject(new TerminalRuntimeError.TerminalAuthIssue(response));
+          }
+
           if (!response[0].match(/^PROCEED/)) {
             return Promise.reject(new TerminalRuntimeError.TerminalEmulationFailed(response));
           }
@@ -202,7 +210,7 @@ module.exports = function (settings) {
 
   const terminal = {
     getToken: getSessionToken,
-    executeCommand: (rawCommand, stopMD = defaultStopMD) => new Promise(async (resolve, reject) => {
+    executeCommand: async (rawCommand, stopMD = defaultStopMD) => {
       try {
         const sessionToken = await getSessionToken();
         const terminalId = getTerminalId(sessionToken);
@@ -223,14 +231,18 @@ module.exports = function (settings) {
           terminalState: TERMINAL_STATE_READY,
         });
 
-        resolve(response);
+        if (UNEXPECTED_TERMINAL_ERRORS.some(e => response.includes(e))) {
+          throw new TerminalRuntimeError.TerminalUnexpectedError({ screen: response });
+        }
+
+        return response;
       } catch (err) {
         Object.assign(state, {
           terminalState: TERMINAL_STATE_ERROR,
         });
-        reject(err);
+        throw err;
       }
-    }),
+    },
     closeSession: () => getSessionToken()
       .then(
         sessionToken => service.closeSession({

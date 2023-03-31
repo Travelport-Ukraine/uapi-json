@@ -129,6 +129,10 @@ const executeCommandEmulationFailed = sinon.spy((params) => {
     case 'I':
       return getTerminalResponse('I');
     default:
+      if (params.command.match(/SEM\/6K66\/AG/)) {
+        return getTerminalResponse('NOT_AUTHORISED');
+      }
+
       if (params.command.match(/^SEM/)) {
         return getTerminalResponse('RESTRICTED');
       }
@@ -183,6 +187,16 @@ const terminalMdIssues = proxyquire(terminalPath, {
 const terminalEmulationFailed = proxyquire(terminalPath, {
   './TerminalService': terminalServiceEmulationFailed,
 });
+
+const createUapiTerminal = (emulatePcc, terminalFunc) => {
+  const emulateConfig = Object.assign({}, config, {
+    emulatePcc,
+  });
+  return terminalFunc({
+    auth: emulateConfig,
+    emulatePcc,
+  });
+};
 
 // Tests
 describe('#Terminal', function terminalTest() {
@@ -444,13 +458,7 @@ describe('#Terminal', function terminalTest() {
       executeCommandEmulationFailed.resetHistory();
 
       const emulatePcc = '7j8i';
-      const emulateConfig = Object.assign({}, config, {
-        emulatePcc,
-      });
-      const uAPITerminal = terminalEmulationFailed({
-        auth: emulateConfig,
-        emulatePcc,
-      });
+      const uAPITerminal = createUapiTerminal(emulatePcc, terminalEmulationFailed);
 
       return uAPITerminal
         .executeCommand('I')
@@ -465,6 +473,25 @@ describe('#Terminal', function terminalTest() {
           );
           return uAPITerminal.closeSession();
         });
+    });
+    it('Should fail if not authorised by galileo', async () => {
+      // Resetting spies
+      getSessionToken.resetHistory();
+      executeCommandEmulationFailed.resetHistory();
+
+      const emulatePcc = '6K66';
+      const uAPITerminal = createUapiTerminal(emulatePcc, terminalEmulationFailed);
+
+      try {
+        await uAPITerminal.executeCommand('I');
+        throw new Error('Emulation has not failed');
+      } catch (e) {
+        expect(e).to.be.an.instanceof(
+          TerminalRuntimeError.TerminalAuthIssue
+        );
+      }
+
+      await uAPITerminal.closeSession();
     });
     it('Should emulate pcc', () => {
       // Resetting spies
