@@ -98,6 +98,7 @@ const AirRuntimeError = createErrorClass(
   errorTypes.RuntimeError
 );
 Object.assign(AirRuntimeError, createErrorsList({
+  NoSeatsAvailable: 'No seats available',
   PNRSyncFailed: 'Unexpected System Error. PNR(s) sync failed',
   SegmentBookingFailed: 'Failed to book on or more segments',
   SegmentWaitlisted: 'One or more segments is waitlisted, not allowed',

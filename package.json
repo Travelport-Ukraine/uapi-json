@@ -1,6 +1,6 @@
 {
   "name": "uapi-json",
-  "version": "1.14.9",
+  "version": "1.14.10",
   "description": "Travelport Universal API",
   "main": "src/",
   "files": [
@@ -45,7 +45,7 @@
     "node-errors-helpers": "^1.0.0",
     "pretty-data": "^0.40.0",
     "promise-retry": "^1.1.1",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.5.0"
   },
   "devDependencies": {
     "chai": "^4.3.7",
