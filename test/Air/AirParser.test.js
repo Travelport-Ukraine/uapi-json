@@ -2416,6 +2416,18 @@ describe('#AirParser', () => {
         expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieve);
       }
     });
+    it.only('should throw NoSeatsAvailable', async () => {
+      try {
+        await getParseResponse(
+          'air:AvailabilitySearchRsp', 'AirAvailabilityRsp6.xml',
+          airParser.AIR_AVAILABILITY, airParser.AIR_ERRORS
+        );
+        throw new Error('Error not thrown');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(AirRuntimeError.NoSeatsAvailable);
+      }
+    });
+
     it('should correctly handle error of agreement 2', async () => {
       try {
         await getParseResponse(
