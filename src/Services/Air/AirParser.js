@@ -507,6 +507,8 @@ const AirErrorHandler = function (rsp) {
   }
   const pcc = utils.getErrorPcc(rsp.faultstring);
   switch (code) {
+    case '20':
+      throw new AirRuntimeError.NoSeatsAvailable(rsp);
     case '345':
     case '1512':
       if (pcc !== null) {
