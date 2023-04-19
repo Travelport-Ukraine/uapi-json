@@ -2416,7 +2416,7 @@ describe('#AirParser', () => {
         expect(err).to.be.an.instanceof(AirRuntimeError.UnableToRetrieve);
       }
     });
-    it.only('should throw NoSeatsAvailable', async () => {
+    it('should throw NoSeatsAvailable', async () => {
       try {
         await getParseResponse(
           'air:AvailabilitySearchRsp', 'AirAvailabilityRsp6.xml',
