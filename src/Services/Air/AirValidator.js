@@ -8,7 +8,8 @@ module.exports = {
       validators.passengers,
       validators.legs,
       validators.carriers,
-      validators.allowDirectAccess
+      validators.allowDirectAccess,
+      validators.returnFirstAvailableOnly
     ),
     transform(
       transformers.convertPassengersObjectToArray

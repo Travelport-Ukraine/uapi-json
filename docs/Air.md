@@ -48,7 +48,8 @@ Low Fare Shop functionality combines air availability and a fare quote request t
 | maxSolutions | `number` | Maximum number of solutions. <i>Optional.</i> |.
 | permittedCarriers | `Array<String>` | Array of carriers' codes. <i>Optional. Can not be used when `preferredCarriers` is set</i> |
 | preferredCarriers | `Array<String>` | Array of carriers' codes. <i>Optional. Can not be used when `permittedCarriers` is set</i> |
-| allowDirectAccess | `Boolean` | When passed, first  carrier is taken from the carriers list and the search is done in carrier specific display.
+| allowDirectAccess | `Boolean` | When passed, first  carrier is taken from the carriers list and the search is done in carrier specific display. <i>Optional.</i> |
+| returnFirstAvailableOnly | `Boolean` | When passed, next days availability is returned if available. <i>Optional.</i> |
 | preferredConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |
 | prohibitedConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |
 | permittedConnectionPoints | `Array<String>` | Array of IATA codes. <i>Optional.</i> |

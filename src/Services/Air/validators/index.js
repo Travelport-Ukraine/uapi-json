@@ -20,6 +20,7 @@ const platingCarrier = require('./platingCarrier');
 const searchId = require('./search-id');
 const version = require('./version');
 const allowDirectAccess = require('./allow-direct-access');
+const returnFirstAvailableOnly = require('./return-first-available-only');
 const emdNumber = require('./emd-number');
 const carriers = require('./carriers');
 
@@ -29,6 +30,7 @@ module.exports = {
   pricingSolutionXml,
   paramsIsObject,
   allowDirectAccess,
+  returnFirstAvailableOnly,
   fop,
   fopCreditCard,
   pnr,
