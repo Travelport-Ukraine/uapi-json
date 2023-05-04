@@ -39,6 +39,7 @@ Object.assign(AirValidationError, createErrorsList({
   PlatingCarrierInvalid: 'Plating Carrier Invalid',
   SearchIdMissing: 'SearchId is missing',
   VersionMissing: 'Version is missing in request',
+  ReturnFirstAvailableOnlyInvalid: 'Invalid value provided for returnFirstAvailableOnly',
   AllowDirectAccessInvalid: 'Invalid value provided for allowDirectAccess',
   AllowDirectAccessCarriersNotSpecified: 'Carriers not specified for carrier specific display',
   EMDItemNumberMissing: 'Missing EMD number. See data.',
