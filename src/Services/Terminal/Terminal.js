@@ -235,7 +235,7 @@ module.exports = function (settings) {
         });
 
         if (UNEXPECTED_TERMINAL_ERRORS.some(e => response.includes(e))) {
-          const errorObject = isFinancialCommand(response)
+          const errorObject = isFinancialCommand(command)
             ? new TerminalRuntimeError.TerminalUnexpectedFinancialError({ screen: response })
             : new TerminalRuntimeError.TerminalUnexpectedError({ screen: response });
 
