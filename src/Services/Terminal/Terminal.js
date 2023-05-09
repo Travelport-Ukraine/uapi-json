@@ -24,7 +24,7 @@ const UNEXPECTED_TERMINAL_ERRORS = [
   'OPTIONS ERROR',
 ];
 
-const isFinancialCommand = screen => /^>F.*/.test(screen);
+const isFinancialCommand = command => /^F.*/.test(command);
 
 // Adding event handler on beforeExit and exit process events to process open terminals
 process.on('beforeExit', () => {
