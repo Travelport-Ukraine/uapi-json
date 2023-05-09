@@ -23,6 +23,8 @@ const bookingStaleData = /failed refresh|data may be stale/i;
 
 const BOOKING_STALE_DATA_ERROR_CODE = 1301;
 
+const REQEUEST_DATE_INVALID_REGEXP = /Preferred date-time is before the current departure city date-time/i;
+
 const parseFareCalculation = (str) => {
   const fareCalculation = str.match(fareCalculationPattern)[1];
   const firstOrigin = str.match(firstOriginPattern);
@@ -507,6 +509,8 @@ const AirErrorHandler = function (rsp) {
   }
   const pcc = utils.getErrorPcc(rsp.faultstring);
   switch (code) {
+    case '1':
+      throw new AirRuntimeError.RequestedDateInvalid(rsp);
     case '20':
       throw new AirRuntimeError.NoSeatsAvailable(rsp);
     case '345':
@@ -525,6 +529,9 @@ const AirErrorHandler = function (rsp) {
     case '13003':
       throw new AirRuntimeError.NoReservationToImport(rsp);
     case '3003':
+      if (REQEUEST_DATE_INVALID_REGEXP.test(screen)) {
+        throw new AirRuntimeError.RequestedDateInvalid(rsp);
+      }
       throw new AirRuntimeError.InvalidRequestData(rsp);
     case '3000': {
       if (rsp.faultstring === 'At least one valid locator code or ticket number or tcr number or service fee info should have been specified') {

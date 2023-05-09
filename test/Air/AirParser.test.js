@@ -970,6 +970,21 @@ describe('#AirParser', () => {
       return Promise.resolve()
         .then(() => parseFunction(JSON.parse(json)))
         .catch((err) => {
+          expect(err).to.be.an.instanceof(AirRuntimeError.RequestedDateInvalid);
+        });
+    });
+    it('should throw AirRuntimeError.NoResultsFound error3', () => {
+      const uParser = new Parser('SOAP:Fault', 'v52_0', {});
+      const parseFunction = airParser.AIR_ERRORS.bind(uParser);
+      const json = fs.readFileSync(`${xmlFolder}/../Air/LowFaresSearch.date-time-in-past.Parsed.error.json`)
+        .toString()
+        .replace(
+          'Preferred date-time is before the current departure city date-time',
+          'SOME OTHER DESCRIPTION'
+        );
+      return Promise.resolve()
+        .then(() => parseFunction(JSON.parse(json)))
+        .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.InvalidRequestData);
         });
     });
