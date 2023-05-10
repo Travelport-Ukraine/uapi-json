@@ -21,7 +21,10 @@ const DEFAULT_RETRY_TIMES = 3;
 
 const UNEXPECTED_TERMINAL_ERRORS = [
   'NO PREVIOUS OR ORIGINAL REQUEST',
+  'OPTIONS ERROR',
 ];
+
+const isFinancialCommand = command => /^F.*/.test(command);
 
 // Adding event handler on beforeExit and exit process events to process open terminals
 process.on('beforeExit', () => {
@@ -232,7 +235,11 @@ module.exports = function (settings) {
         });
 
         if (UNEXPECTED_TERMINAL_ERRORS.some(e => response.includes(e))) {
-          throw new TerminalRuntimeError.TerminalUnexpectedError({ screen: response });
+          const errorObject = isFinancialCommand(command)
+            ? new TerminalRuntimeError.TerminalUnexpectedFinancialError({ screen: response })
+            : new TerminalRuntimeError.TerminalUnexpectedError({ screen: response });
+
+          throw errorObject;
         }
 
         return response;
