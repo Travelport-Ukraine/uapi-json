@@ -13,9 +13,9 @@ const AirService = uAPI.createAirService(
 const params = {
   legs: [
     {
-      from: 'IEV',
-      to: 'NYC',
-      departureDate: '2018-11-10',
+      from: 'WAW',
+      to: 'AMS',
+      departureDate: '2023-11-10',
     },
   ],
   passengers: {
@@ -26,8 +26,9 @@ const params = {
      INS: 1, //infant with a seat
      */
   },
-  permittedCarriers: ['KL'],
+  permittedCarriers: ['LO'],
   cabins: ['Economy'], // ['Business'],
+  bookingCodes: ['Q', 'G'],
   requestId: '4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60',
   // permittedConnectionPoints: ['AMS'],
   // preferredConnectionPoints: ['KBP'],
