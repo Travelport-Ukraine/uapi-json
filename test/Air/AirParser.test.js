@@ -1447,7 +1447,7 @@ describe('#AirParser', () => {
 
           const [passenger] = booking.passengers;
 
-          expect(passenger.firstName).to.equal('IANINAMRS');
+          expect(passenger.firstName).to.equal('IANINA');
           expect(passenger.lastName).to.equal('IVANOVA');
           expect(passenger.uapi_passenger_ref).to.equal('Q4mT6BhYlDKA+D4IsGAAAA==');
         });
@@ -2055,6 +2055,21 @@ describe('#AirParser', () => {
         expect(booking.fareQuotes[0].tourCode).to.be.equal('SC001S17');
       }).catch(err => assert(false, 'Error during parsing' + err.stack));
     });
+  });
+
+  it('should test parsing of universal record retrieve request with infant passengers', () => {
+    const uParser = new Parser('universal:UniversalRecordImportRsp', 'v47_0', {});
+    const parseFunction = airParser.AIR_IMPORT_REQUEST;
+    const xml = fs.readFileSync(`${xmlFolder}/getBooking-with-infant-passenger.xml`);
+    return uParser.parse(xml)
+      .then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        testBooking(jsonResult);
+        const [booking] = jsonResult;
+        expect(booking.passengers[3].firstName).to.be.equal('YUNJUN');
+        expect(booking.passengers[3].ageCategory).to.be.equal('INF');
+        expect(booking.passengers[3].gender).to.be.equal('M');
+      });
   });
 
   describe('AIR_CANCEL_UR', () => {
