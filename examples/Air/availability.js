@@ -28,7 +28,7 @@ const params = {
   },
   permittedCarriers: ['LO'],
   cabins: ['Economy'], // ['Business'],
-  bookingCode: 'Y',
+  bookingCodes: ['Q', 'G'],
   requestId: '4e2fd1f8-2221-4b6c-bb6e-cf05c367cf60',
   // permittedConnectionPoints: ['AMS'],
   // preferredConnectionPoints: ['KBP'],
