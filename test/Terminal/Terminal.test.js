@@ -28,7 +28,6 @@ const ModifiedTerminalRuntimeError = {
 const wait = (time) => new Promise((resolve) => {
   setTimeout(() => resolve(), time);
 });
-const rTrim = (str) => str.replace(/\s*$/, '');
 
 const getTerminalRequest = (p) => fs.readFileSync(
   `${__dirname}/TerminalRequests/${p}.txt`
@@ -42,7 +41,7 @@ const getTerminalResponse = (p) => new Promise((resolve, reject) => {
         reject(err);
         return;
       }
-      const res = rTrim(data.toString());
+      const res = data.toString().trimEnd();
       resolve(res.split(/\n/));
     }
   );
@@ -399,7 +398,7 @@ describe('#Terminal', function terminalTest() {
         getTerminalResponse('set01/TE-composed'),
       ])
         .then(([response, composed]) => {
-          expect(rTrim(response)).to.equal(rTrim(composed.join('\n')));
+          expect(response.trimEnd()).to.equal(composed.join('\n').trimEnd());
         })
         .then(() => uAPITerminal.closeSession())
         .then(() => {
@@ -426,7 +425,7 @@ describe('#Terminal', function terminalTest() {
         getTerminalResponse('set02/HFF-composed'),
       ])
         .then(([response, composed]) => {
-          expect(rTrim(response)).to.equal(rTrim(composed.join('\n')));
+          expect(response.trimEnd()).to.equal(composed.join('\n').trimEnd());
         });
     });
     it('should replace ; with \t in commands', async () => {

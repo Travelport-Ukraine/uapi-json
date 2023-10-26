@@ -1882,7 +1882,7 @@ describe('#AirParser', () => {
         });
     });
 
-    it.only('should parse booking with duplicated segments and should remove duplications', async () => {
+    it('should parse booking with duplicated segments and should remove duplications', async () => {
       const uParser = new Parser('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getBooking_duplications.xml`).toString();
