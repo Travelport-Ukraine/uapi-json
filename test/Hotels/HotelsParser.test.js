@@ -1,4 +1,3 @@
-
 const assert = require('assert');
 const fs = require('fs');
 const Parser = require('../../src/Request/uapi-parser');

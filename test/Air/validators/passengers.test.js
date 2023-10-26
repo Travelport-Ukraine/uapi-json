@@ -9,7 +9,6 @@ describe('Air.validators.passenger', () => {
     expect(fn).to.throw(AirValidationError.PassengersHashMissing);
   });
 
-
   it('should throw error when passengers key is incorrect', () => {
     const fn = () => passengers({ passengers: { adult: '123' } });
     expect(fn).to.throw(AirValidationError.PassengersCategoryInvalid);

@@ -7,7 +7,7 @@ const {
   RequestRuntimeError,
 } = require('./RequestErrors');
 
-const parseString = xml => new Promise((resolve, reject) => {
+const parseString = (xml) => new Promise((resolve, reject) => {
   xml2js.parseString(xml, (err, json) => {
     if (err) {
       reject(err);
@@ -33,7 +33,7 @@ function mergeLeaf(item) {
   delete (item.$);
   // item.renameProperty('_', 'text'); //TODO decide if _ is the best name
 
-  return Object.assign({}, item, leaf);
+  return { ...item, ...leaf };
 }
 
 function Parser(root, uapiVersion, env, debug, config, provider) {
@@ -71,7 +71,7 @@ Parser.prototype.mapArrayKeys = function mapArrayKeys(array, name) {
   }
 
   if (!hasAllKeys) {
-    return array.map(value => self.mergeLeafRecursive(value, name /* + ':' + key */));
+    return array.map((value) => self.mergeLeafRecursive(value, name /* + ':' + key */));
   }
 
   const object = array
@@ -155,18 +155,18 @@ Parser.prototype.parseVersion = function (obj) {
   const detail = obj['SOAP:Fault'][0].detail[0];
   const parsedVersions = Object.keys(detail)
     .filter(
-      key => key.match(/ErrorInfo$/i)
+      (key) => key.match(/ErrorInfo$/i)
     )
     .reduce(
       (acc, key) => acc.concat(
         Object.keys(detail[key][0].$)
-          .filter(detailKey => detailKey.match(/^xmlns/i))
-          .map(detailKey => detail[key][0].$[detailKey])
+          .filter((detailKey) => detailKey.match(/^xmlns/i))
+          .map((detailKey) => detail[key][0].$[detailKey])
       ),
       []
     )
-    .map(xmlns => xmlns.match(/_(v\d+_\d+)$/))
-    .filter(version => version !== null);
+    .map((xmlns) => xmlns.match(/_(v\d+_\d+)$/))
+    .filter((version) => version !== null);
   return parsedVersions[0][1];
 };
 

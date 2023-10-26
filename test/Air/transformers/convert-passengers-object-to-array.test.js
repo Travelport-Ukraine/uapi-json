@@ -2,7 +2,6 @@ const { expect } = require('chai');
 
 const convert = require('../../../src/Services/Air/transformers/convert-passengers-object-to-array');
 
-
 describe('Air.transformers.convertPassengersObjectToArray', () => {
   it('should correclty convert passengers', () => {
     const converted = convert({ passengers: { ADT: 1, CNN: 3, INF: 1 } });

@@ -182,14 +182,13 @@ module.exports = function uapiRequest(
       return result;
     };
 
-
     return validateInput()
       .then(handlebars.compile)
-      .then(template => prepareRequest(template, auth, params))
+      .then((template) => prepareRequest(template, auth, params))
       .then(sendRequest)
       .then(parseResponse)
       .then(validateSOAP)
-      .then(res => parseFunction.call(uParser, res, params))
+      .then((res) => parseFunction.call(uParser, res, params))
       .then(handleSuccess);
   };
 };

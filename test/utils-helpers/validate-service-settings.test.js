@@ -6,7 +6,7 @@ describe('Service settings validation', () => {
     .resolve()
     .then(() => validateServiceSettings())
     .then(() => Promise.reject(new Error('PASSED')))
-    .catch(err => (
+    .catch((err) => (
       err instanceof ServiceError.ServiceParamsMissing
         ? Promise.resolve()
         : Promise.reject(err)
@@ -15,7 +15,7 @@ describe('Service settings validation', () => {
     .resolve()
     .then(() => validateServiceSettings('STRING'))
     .then(() => Promise.reject(new Error('PASSED')))
-    .catch(err => (
+    .catch((err) => (
       err instanceof ServiceError.ServiceParamsInvalid
         ? Promise.resolve()
         : Promise.reject(err)
@@ -24,7 +24,7 @@ describe('Service settings validation', () => {
     .resolve()
     .then(() => validateServiceSettings({}))
     .then(() => Promise.reject(new Error('PASSED')))
-    .catch(err => (
+    .catch((err) => (
       err instanceof ServiceError.ServiceParamsAuthMissing
         ? Promise.resolve()
         : Promise.reject(err)
@@ -35,7 +35,7 @@ describe('Service settings validation', () => {
       auth: 'STRING',
     }))
     .then(() => Promise.reject(new Error('PASSED')))
-    .catch(err => (
+    .catch((err) => (
       err instanceof ServiceError.ServiceParamsAuthInvalid
         ? Promise.resolve()
         : Promise.reject(err)
@@ -46,7 +46,7 @@ describe('Service settings validation', () => {
       auth: {},
     }))
     .then(() => Promise.reject(new Error('PASSED')))
-    .catch(err => (
+    .catch((err) => (
       err instanceof ServiceError.ServiceParamsAuthInvalid
         ? Promise.resolve()
         : Promise.reject(err)
@@ -57,7 +57,7 @@ describe('Service settings validation', () => {
       auth: { username: 'USERNAME' },
     }))
     .then(() => Promise.reject(new Error('PASSED')))
-    .catch(err => (
+    .catch((err) => (
       err instanceof ServiceError.ServiceParamsAuthInvalid
         ? Promise.resolve()
         : Promise.reject(err)
@@ -68,7 +68,7 @@ describe('Service settings validation', () => {
       auth: { username: 'USERNAME', password: 'PASSWORD' },
     }))
     .then(() => Promise.reject(new Error('PASSED')))
-    .catch(err => (
+    .catch((err) => (
       err instanceof ServiceError.ServiceParamsAuthInvalid
         ? Promise.resolve()
         : Promise.reject(err)
