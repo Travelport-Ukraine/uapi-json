@@ -442,18 +442,49 @@ const getSegmentsData = segmentsObject => (segmentsObject
   ? Object.values(segmentsObject)
   : null);
 
-const setIndexes = segments => segments.map(
-  (segment) => {
-    const { ProviderSegmentOrder: index } = segment;
-    if (index === undefined) {
-      throw new AirParsingError.NoProviderSegmentOrder({
-        segment,
-      });
-    }
+const setIndexes = (segments) => {
+  return segments
+    // Adding index and travelOrder fields
+    .map((segment) => {
+      const { ProviderSegmentOrder: index, TravelOrder: travelOrder } = segment;
+      if (index === undefined) {
+        throw new AirParsingError.NoProviderSegmentOrder({
+          segment,
+        });
+      }
+      if (travelOrder === undefined) {
+        throw new AirParsingError.NoTravelOrder({
+          segment,
+        });
+      }
+      return { ...segment, index: parseInt(index, 10), travelOrder: parseInt(travelOrder, 10) };
+    })
+    // Sorting segments in order to remove possible duplicates effectively
+    .sort((a, b) => {
+      // Get segments data required for comparison
+      const { index: aIndex, travelOrder: aTravelOrder } = a;
+      const { index: bIndex, travelOrder: bTravelOrder } = b;
+      const travelOrderDiff = aTravelOrder - bTravelOrder;
+      const indexDiff = aIndex - bIndex;
 
-    return { ...segment, index: parseInt(index, 10) };
-  }
-);
+      // Comparing provider order (index)
+      if (indexDiff !== 0) {
+        return indexDiff;
+      }
+
+      // Provider order is the same, possible duplicates, comparing travel order
+      if (travelOrderDiff !== 0) {
+        return travelOrderDiff;
+      }
+
+      // Travel order is the same, most probably duplicates, first in list goes first
+      return 0;
+    })
+    // Removing duplicates
+    .filter((segment, i, arr) => {
+      return arr.findIndex(el => el.index === segment.index) === i;
+    });
+};
 
 
 /**

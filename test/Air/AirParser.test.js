@@ -1875,6 +1875,16 @@ describe('#AirParser', () => {
         });
     });
 
+    it.only('should parse booking with duplicated segments and should remove duplications', async () => {
+      const uParser = new Parser('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/getBooking_duplications.xml`).toString();
+      const json = await uParser.parse(xml);
+      const result = parseFunction.call(uParser, json);
+
+      expect(result[0].segments).to.be.an('array').and.to.have.lengthOf(2);
+    });
+
     it('should parse booking with warnings and missing fare info and should show messages', () => {
       const uParser = new Parser('universal:UniversalRecordImportRsp', 'v36_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
