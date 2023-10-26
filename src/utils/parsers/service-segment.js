@@ -27,19 +27,17 @@ const parse = (string) => {
     currency,
   ] = match;
 
-  return Object.assign(
-    {
-      rfiCode,
-      rfiSubcode,
-      feeDescription,
-      name,
-      amount: Number(amount),
-      currency,
-    },
-    documentNumber !== ''
+  return {
+    rfiCode,
+    rfiSubcode,
+    feeDescription,
+    name,
+    amount: Number(amount),
+    currency,
+    ...(documentNumber !== ''
       ? { documentNumber: documentNumber.substr(0, 13) }
-      : null
-  );
+      : null)
+  };
 };
 
 module.exports = parse;

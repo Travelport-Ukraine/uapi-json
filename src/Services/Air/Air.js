@@ -63,7 +63,7 @@ module.exports = (settings) => {
               ),
             };
 
-            return service.addSegments(Object.assign({}, options, missedOptions));
+            return service.addSegments({ ...options, ...missedOptions });
           });
       }
 
@@ -74,10 +74,12 @@ module.exports = (settings) => {
       return service.airPricePricingSolutionXML(options).then((data) => {
         const tauDate = moment(options.tau || null);
         const tau = tauDate.isValid() ? tauDate.format() : moment().add(3, 'hours').format();
-        const bookingParams = Object.assign({}, {
+        const bookingParams = {
           ticketDate: tau,
           ActionStatusType: 'TAU',
-        }, data, options);
+          ...data,
+          ...options
+        };
         return service.createReservation(bookingParams).catch((err) => {
           if (err instanceof AirRuntimeError.SegmentBookingFailed
               || err instanceof AirRuntimeError.NoValidFare) {
@@ -97,7 +99,7 @@ module.exports = (settings) => {
     getBooking(options) {
       return this.getUniversalRecordByPNR(options)
         .then(
-          ur => getBookingFromUr(ur, options.pnr)
+          (ur) => getBookingFromUr(ur, options.pnr)
             || Promise.reject(new AirRuntimeError.NoPNRFoundInUR(ur))
         )
         .then((data) => {
@@ -186,7 +188,7 @@ module.exports = (settings) => {
             .catch((err) => {
               if (err instanceof AirRuntimeError.TicketingFoidRequired) {
                 return this.getBooking(options)
-                  .then(updatedBooking => service.foid(updatedBooking))
+                  .then((updatedBooking) => service.foid(updatedBooking))
                   .then(() => again(err));
               }
               if (err instanceof AirRuntimeError.TicketingPNRBusy) {
@@ -206,7 +208,7 @@ module.exports = (settings) => {
 
     async getTicketFromTicketsList(pnr, ticketNumber) {
       const tickets = await this.getTickets({ pnr });
-      return tickets.find(t => t.ticketNumber === ticketNumber);
+      return tickets.find((t) => t.ticketNumber === ticketNumber);
     },
 
     retryableTicketErrorHandlers: {
@@ -250,7 +252,7 @@ module.exports = (settings) => {
             }
           }));
 
-          const [ticket = null] = results.filter(result => result);
+          const [ticket = null] = results.filter((result) => result);
           return ticket;
         }
       },
@@ -331,7 +333,7 @@ module.exports = (settings) => {
                       .then(() => ({ ...line, pnr }));
                   });
               }))
-              .then(data => ({ type: 'list', data }));
+              .then((data) => ({ type: 'list', data }));
           }
 
           const pnr = parsers.bookingPnr(firstScreen);
@@ -346,7 +348,7 @@ module.exports = (settings) => {
             new AirRuntimeError.MissingPaxListAndBooking(firstScreen)
           );
         })
-        .then(results => terminal.closeSession()
+        .then((results) => terminal.closeSession()
           .then(() => results)
           .catch(() => results));
     },
@@ -354,13 +356,13 @@ module.exports = (settings) => {
     cancelTicket(options) {
       return this.getTicket(options)
         .then(
-          ticketData => service.cancelTicket({
+          (ticketData) => service.cancelTicket({
             pnr: ticketData.pnr,
             ticketNumber: options.ticketNumber,
           })
         )
         .catch(
-          err => Promise.reject(new AirRuntimeError.FailedToCancelTicket(options, err))
+          (err) => Promise.reject(new AirRuntimeError.FailedToCancelTicket(options, err))
         );
     },
 
@@ -371,12 +373,12 @@ module.exports = (settings) => {
         pnr,
       } = options;
 
-      const checkTickets = tickets => Promise.all(tickets.map(
+      const checkTickets = (tickets) => Promise.all(tickets.map(
         (ticketData) => {
           // Check for VOID or REFUND
           const allTicketsVoidOrRefund = ticketData.tickets.every(
-            ticket => ticket.coupons.every(
-              coupon => coupon.status === 'V' || coupon.status === 'R'
+            (ticket) => ticket.coupons.every(
+              (coupon) => coupon.status === 'V' || coupon.status === 'R'
             )
           );
 
@@ -389,8 +391,8 @@ module.exports = (settings) => {
           }
           // Check for not OPEN/VOID segments
           const hasNotOpenSegment = ticketData.tickets.some(
-            ticket => ticket.coupons.some(
-              coupon => 'OV'.indexOf(coupon.status) === -1
+            (ticket) => ticket.coupons.some(
+              (coupon) => 'OV'.indexOf(coupon.status) === -1
             )
           );
 
@@ -400,7 +402,7 @@ module.exports = (settings) => {
 
           return Promise.all(
             ticketData.tickets.map(
-              ticket => (
+              (ticket) => (
                 ticket.coupons[0].status !== 'V'
                   ? service.cancelTicket({ pnr, ticketNumber: ticket.ticketNumber })
                   : Promise.resolve(true)
@@ -431,7 +433,7 @@ module.exports = (settings) => {
 
     getExchangeInformation(options) {
       return this.getBooking(options)
-        .then(booking => service.exchangeQuote({
+        .then((booking) => service.exchangeQuote({
           ...options,
           bookingDate: moment(booking.createdAt).format('YYYY-MM-DD'),
         }));
@@ -439,7 +441,7 @@ module.exports = (settings) => {
 
     exchangeBooking(options) {
       return this.getBooking(options)
-        .then(booking => service.exchangeBooking({
+        .then((booking) => service.exchangeBooking({
           ...options,
           uapi_reservation_locator: booking.uapi_reservation_locator,
         }));

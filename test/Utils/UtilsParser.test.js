@@ -18,7 +18,7 @@ describe('#utilsParser', () => {
       return uParser.parse(xml).then((json) => {
         const result = parseFunction.call(uParser, json);
         expect(result).to.be.an('array').and.to.have.lengthOf(1);
-        result.forEach(c => expect(c).to.be.an('object').and.to.have.all.keys(['from', 'to', 'rate']));
+        result.forEach((c) => expect(c).to.be.an('object').and.to.have.all.keys(['from', 'to', 'rate']));
       });
     });
 
@@ -72,7 +72,7 @@ describe('#utilsParser', () => {
       return uParser.parse(xml).then((json) => {
         const result = parseFunction.call(uParser, json);
         expect(result).to.be.an('array').and.to.have.lengthOf(3);
-        result.forEach(c => expect(c).to.be.an('object').and.to.have.all.keys(['code', 'name', 'deprecated']));
+        result.forEach((c) => expect(c).to.be.an('object').and.to.have.all.keys(['code', 'name', 'deprecated']));
       });
     });
 
@@ -83,7 +83,7 @@ describe('#utilsParser', () => {
       return uParser.parse(xml).then((json) => {
         const result = parseFunction.call(uParser, json);
         expect(result).to.be.an('array').and.to.have.lengthOf(3);
-        result.forEach(c => expect(c).to.be.an('object').and.to.have.all.keys(['code', 'name', 'description', 'deprecated', 'additionalInfo']));
+        result.forEach((c) => expect(c).to.be.an('object').and.to.have.all.keys(['code', 'name', 'description', 'deprecated', 'additionalInfo']));
       });
     });
 
@@ -94,7 +94,7 @@ describe('#utilsParser', () => {
       return uParser.parse(xml).then((json) => {
         const result = parseFunction.call(uParser, json);
         expect(result).to.be.an('array').and.to.have.lengthOf(3);
-        result.forEach(c => expect(c).to.be.an('object').and.to.have.all.keys(['code', 'name', 'description', 'deprecated', 'additionalInfo']));
+        result.forEach((c) => expect(c).to.be.an('object').and.to.have.all.keys(['code', 'name', 'description', 'deprecated', 'additionalInfo']));
       });
     });
 

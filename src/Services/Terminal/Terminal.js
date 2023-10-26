@@ -24,7 +24,7 @@ const UNEXPECTED_TERMINAL_ERRORS = [
   'OPTIONS ERROR',
 ];
 
-const isFinancialCommand = command => /^F.*/.test(command);
+const isFinancialCommand = (command) => /^F.*/.test(command);
 
 // Adding event handler on beforeExit and exit process events to process open terminals
 process.on('beforeExit', () => {
@@ -132,7 +132,7 @@ module.exports = function (settings) {
     ? true
     : settings.autoClose;
 
-  const defaultStopMD = screens => !screenFunctions.hasMore(screens);
+  const defaultStopMD = (screens) => !screenFunctions.hasMore(screens);
   const token = settings.auth.token || null;
 
   const state = {
@@ -156,7 +156,7 @@ module.exports = function (settings) {
       sessionToken: state.sessionToken,
       command: 'MD',
     }).then(
-      mdResponse => (
+      (mdResponse) => (
         mdResponse.join('\n') === response.join('\n')
           ? processedResponse
           : processResponse(mdResponse, stopMD, processedResponse)
@@ -209,7 +209,7 @@ module.exports = function (settings) {
       .catch(reject);
   });
   // Get terminal ID
-  const getTerminalId = sessionToken => getHashSubstr(sessionToken);
+  const getTerminalId = (sessionToken) => getHashSubstr(sessionToken);
 
   const terminal = {
     getToken: getSessionToken,
@@ -234,7 +234,7 @@ module.exports = function (settings) {
           terminalState: TERMINAL_STATE_READY,
         });
 
-        if (UNEXPECTED_TERMINAL_ERRORS.some(e => response.includes(e))) {
+        if (UNEXPECTED_TERMINAL_ERRORS.some((e) => response.includes(e))) {
           const errorObject = isFinancialCommand(command)
             ? new TerminalRuntimeError.TerminalUnexpectedFinancialError({ screen: response })
             : new TerminalRuntimeError.TerminalUnexpectedError({ screen: response });
@@ -252,7 +252,7 @@ module.exports = function (settings) {
     },
     closeSession: () => getSessionToken()
       .then(
-        sessionToken => service.closeSession({
+        (sessionToken) => service.closeSession({
           sessionToken,
         })
       ).then(

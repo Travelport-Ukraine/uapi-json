@@ -58,7 +58,7 @@ describe('#AirService', () => {
       totalPrice: 'UAH11',
     }]
   };
-  const getURbyPNRSampleWithCurrency = getURbyPNRSampleTicketed.map(booking => ({
+  const getURbyPNRSampleWithCurrency = getURbyPNRSampleTicketed.map((booking) => ({
     ...booking,
     fareQuotes: [fq, fq]
   }));
@@ -470,7 +470,7 @@ NOTE-
       const params = { pnr: 'PNR001' };
 
       const getUniversalRecordByPNR = sinon.spy(
-        () => Promise.resolve(getURbyPNRSampleTicketed.map(booking => ({
+        () => Promise.resolve(getURbyPNRSampleTicketed.map((booking) => ({
           ...booking,
           fareQuotes: [{
             pricingInfos: [{
@@ -596,7 +596,6 @@ NOTE-
         return ticketResponses.pop();
       });
 
-
       const air = getAirServiceMock({ methods: { getUniversalRecordByPNR, ticket } });
 
       return air.ticket(params).then(() => {
@@ -604,7 +603,6 @@ NOTE-
         expect(ticket.calledTwice).to.be.equal(true);
       });
     });
-
 
     it('should set FOID and retry ticketing if PNR busy', function () {
       this.timeout(5000);
@@ -771,7 +769,6 @@ NOTE-
           expect(getUniversalRecordByPNR.calledOnce).to.be.equal(true);
         });
     });
-
 
     it('should rethrow getTickets error in case of duplicate ticket found and no split booking data', () => {
       const originalURbyPNR = [
@@ -975,7 +972,7 @@ NOTE-
           expect(response).to.be.an('array');
         })
         .then(done)
-        .catch(err => done(err.causedBy));
+        .catch((err) => done(err.causedBy));
     });
   });
 
@@ -996,17 +993,16 @@ NOTE-
       const closeSession = sinon.spy(() => Promise.resolve());
 
       const bookingPnr = sinon.spy(
-        screen => ((screen === 'pnrscreen') ? '123QWE' : null)
+        (screen) => ((screen === 'pnrscreen') ? '123QWE' : null)
       );
 
       const searchPassengersList = sinon.spy(
-        screen => (
+        (screen) => (
           (screen === 'listscreen')
             ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
             : null
         )
       );
-
 
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         '../../utils': {
@@ -1042,17 +1038,16 @@ NOTE-
       const executeCommand = sinon.spy(() => returnBooking());
 
       const bookingPnr = sinon.spy(
-        screen => ((screen === 'pnrscreen') ? '123QWE' : null)
+        (screen) => ((screen === 'pnrscreen') ? '123QWE' : null)
       );
 
       const searchPassengersList = sinon.spy(
-        screen => (
+        (screen) => (
           (screen === 'listscreen')
             ? [{ id: 1, name: 'first' }, { id: 2, name: 'last' }]
             : null
         )
       );
-
 
       const createAirService = proxyquire('../../src/Services/Air/Air', {
         '../../utils': {
@@ -1239,8 +1234,8 @@ NOTE-
       )
         .reduce((acc, ticket) => {
           const allTicketsVoidOrRefund = ticket.tickets.every(
-            t => t.coupons.every(
-              coupon => coupon.status === 'V' || coupon.status === 'R'
+            (t) => t.coupons.every(
+              (coupon) => coupon.status === 'V' || coupon.status === 'R'
             )
           );
 
@@ -1251,8 +1246,8 @@ NOTE-
 
           // Check for not OPEN/VOID segments
           const hasNotOpenSegment = ticket.tickets.some(
-            t => t.coupons.some(
-              coupon => 'OV'.indexOf(coupon.status) === -1
+            (t) => t.coupons.some(
+              (coupon) => 'OV'.indexOf(coupon.status) === -1
             )
           );
 
@@ -1262,7 +1257,7 @@ NOTE-
           }
 
           return {
-            ...acc, requiredCancelCalls: acc.requiredCancelCalls + ticket.tickets.filter(t => t.coupons[0].status !== 'V').length
+            ...acc, requiredCancelCalls: acc.requiredCancelCalls + ticket.tickets.filter((t) => t.coupons[0].status !== 'V').length
           };
         }, { requiredCancelCalls: 0, ticketsWithInvalidStatus: 0 });
 

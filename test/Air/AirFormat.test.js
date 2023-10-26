@@ -49,7 +49,7 @@ describe('#AirFormat', () => {
         }, json);
 
         expect(result).to.be.an('array').and.to.have.length.above(0);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should return an array with solutionResult = true', () => {
@@ -63,7 +63,7 @@ describe('#AirFormat', () => {
         }, json);
 
         expect(result).to.be.an('array').and.to.have.length.above(0);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should return an object with fares with solutionResult = true and faresOnly=false', () => {
@@ -81,7 +81,7 @@ describe('#AirFormat', () => {
         expect(result).to.have.all.keys('transactionId', 'fares');
         expect(result.transactionId).to.be.equal('EEEEEEEEEEEE59CD33ED7BE13D945FEE');
         expect(result.fares).to.be.an('array').and.to.have.length(55);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should return an object with fares with faresOnly=false', () => {
@@ -98,7 +98,7 @@ describe('#AirFormat', () => {
         expect(result).to.have.all.keys('transactionId', 'fares');
         expect(result.transactionId).to.be.equal('EA12C12B0A0759C12225F702ADCB99E9');
         expect(result.fares).to.be.an('array').and.to.have.length(27);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should return an object with fares with faresOnly=false in asynch results', () => {
@@ -117,7 +117,7 @@ describe('#AirFormat', () => {
         expect(result.searchId).to.be.equal('A93F11A30A076478EAD0520D3E91FDC7_OICNKKJ20Oct19Economyfnull-1f-1-1tftnull300-1-1MI1GnullfADTKRWnullnullnullnullnullnullnullnullnullfff2124774');
         expect(result.providerCode).to.be.equal('1G');
         expect(result.fares).to.be.an('array').and.to.have.length(13);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
   });
   describe('.getBaggageInfo()', () => {

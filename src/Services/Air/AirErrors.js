@@ -90,6 +90,7 @@ Object.assign(AirParsingError, createErrorsList({
   CancelResponseNotFound: 'Cancel response not found',
   InvalidServiceSegmentFormat: 'Service segment format is invalid',
   NoProviderSegmentOrder: 'Segment is missing ProviderSegmentOrder field',
+  NoTravelOrder: 'Segment is missing TravelOrder field',
 }, AirParsingError));
 
 // Runtime errors

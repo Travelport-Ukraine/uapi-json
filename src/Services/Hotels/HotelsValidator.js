@@ -34,7 +34,6 @@ Validator.prototype.rooms = function () {
   return this;
 };
 
-
 Validator.prototype.code = function () {
   if (this.params.location) {
     return this;
@@ -92,7 +91,6 @@ Validator.prototype.hotelCode = function () {
   }
   return this;
 };
-
 
 Validator.prototype.people = function () {
   if (!(this.params.people instanceof Array) || this.params.people.length < 1) {

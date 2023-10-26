@@ -18,7 +18,7 @@ module.exports = (params) => {
     && (
       !Array.isArray(carriers)
       || carriers.length === 0
-      || carriers.some(c => !carrierRegExp.test(c))
+      || carriers.some((c) => !carrierRegExp.test(c))
     )
   ) {
     throw new AirValidationError.CarriersIsInvalid(params);
