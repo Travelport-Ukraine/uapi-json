@@ -470,6 +470,7 @@ const setIndexes = (segments) => {
       }
 
       // Provider order is the same, possible duplicates, comparing travel order
+      // Travel order could be some high number, regardless of low provirder order (index)
       if (travelOrderDiff !== 0) {
         return travelOrderDiff;
       }
