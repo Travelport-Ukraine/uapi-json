@@ -12,12 +12,12 @@ function isIata(str) {
 
 function validateIsArray(params, prop) {
   if (params[prop]
-    && (!Array.isArray(params[prop]) || params[prop].find(item => !isIata(item)))
+    && (!Array.isArray(params[prop]) || params[prop].find((item) => !isIata(item)))
   ) {
     throw new AirValidationError.IncorrectConnectionsFormat(params);
   }
 }
 
 module.exports = (params) => {
-  connectionsFields.forEach(cf => validateIsArray(params, cf));
+  connectionsFields.forEach((cf) => validateIsArray(params, cf));
 };

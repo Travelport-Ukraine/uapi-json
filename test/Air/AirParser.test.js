@@ -77,13 +77,13 @@ const checkLowSearchFareXml = (filename) => {
                     }
                     // Planes
                     expect(segment.plane).to.be.an('array').and.to.have.length.above(0);
-                    segment.plane.forEach(plane => expect(plane).to.be.a('string'));
+                    segment.plane.forEach((plane) => expect(plane).to.be.a('string'));
                     // Duration
                     expect(segment.duration).to.be.an('array').and.to.have.length.above(0);
-                    segment.duration.forEach(duration => expect(duration).to.match(/^\d+$/));
+                    segment.duration.forEach((duration) => expect(duration).to.match(/^\d+$/));
                     // Tech stops
                     expect(segment.techStops).to.be.an('array');
-                    segment.techStops.forEach(stop => expect(stop).to.match(/^[A-Z]{3}$/));
+                    segment.techStops.forEach((stop) => expect(stop).to.match(/^[A-Z]{3}$/));
                     // Baggage
                     expect(segment.baggage).to.be.an('array');
                     segment.baggage.forEach(
@@ -241,21 +241,25 @@ describe('#AirParser', () => {
   describe('getTickets', () => {
     it('should return empty array if UR have no tickets', async () => {
       const res = await getParseResponse(
-        'air:AirRetrieveDocumentRsp', 'AirGetTickets-error-no-tickets.xml',
-        airParser.AIR_GET_TICKETS, airParser.AIR_GET_TICKETS_ERROR_HANDLER
+        'air:AirRetrieveDocumentRsp',
+        'AirGetTickets-error-no-tickets.xml',
+        airParser.AIR_GET_TICKETS,
+        airParser.AIR_GET_TICKETS_ERROR_HANDLER
       );
       expect(res).to.be.a('array').that.is.empty;
     });
     it('should return array if UR have tickets', async () => {
       const res = await getParseResponse(
-        'air:AirRetrieveDocumentRsp', 'AirGetTickets-several-tickets.xml',
+        'air:AirRetrieveDocumentRsp',
+        'AirGetTickets-several-tickets.xml',
         airParser.AIR_GET_TICKETS
       );
       expect(res).to.be.a('array').and.to.have.lengthOf(2);
     });
     it('should return array if UR has one ticket', async () => {
       const res = await getParseResponse(
-        'air:AirRetrieveDocumentRsp', 'AirGetTickets-one-ticket.xml',
+        'air:AirRetrieveDocumentRsp',
+        'AirGetTickets-one-ticket.xml',
         airParser.AIR_GET_TICKETS
       );
       expect(res).to.be.a('array').and.to.have.lengthOf(1);
@@ -263,8 +267,10 @@ describe('#AirParser', () => {
     it('should correctly handle error of agreement 1', async () => {
       try {
         await getParseResponse(
-          'air:AirRetrieveDocumentRsp', 'NoAgreementError.xml',
-          airParser.AIR_GET_TICKETS, airParser.AIR_GET_TICKETS_ERROR_HANDLER
+          'air:AirRetrieveDocumentRsp',
+          'NoAgreementError.xml',
+          airParser.AIR_GET_TICKETS,
+          airParser.AIR_GET_TICKETS_ERROR_HANDLER
         );
         throw new Error('Skipped error!');
       } catch (err) {
@@ -275,8 +281,10 @@ describe('#AirParser', () => {
     it('should correctly handle other errors', async () => {
       try {
         await getParseResponse(
-          'air:AirRetrieveDocumentRsp', 'AirGetTickets-error-general.xml',
-          airParser.AIR_GET_TICKETS, airParser.AIR_GET_TICKETS_ERROR_HANDLER
+          'air:AirRetrieveDocumentRsp',
+          'AirGetTickets-error-general.xml',
+          airParser.AIR_GET_TICKETS,
+          airParser.AIR_GET_TICKETS_ERROR_HANDLER
         );
         throw new Error('Skipped error!');
       } catch (err) {
@@ -402,7 +410,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_NOADC.xml`).toString();
 
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
           expect(result.priceInfoDetailsAvailable).to.equal(false);
@@ -418,7 +426,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_NO_BOOKING_INFO.xml`).toString();
 
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
         });
@@ -430,7 +438,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_DUPLICATE_TICKET.xml`).toString();
 
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then(() => Promise.reject(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.DuplicateTicketFound);
@@ -442,7 +450,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_EXCHANGED_TICKET.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
           expect(result.priceInfoDetailsAvailable).to.equal(true);
@@ -455,7 +463,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_COMMISSION_FARE.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
           expect(result.commission).to.be.deep.equal({ type: 'ZA', value: 0 });
@@ -468,7 +476,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_IT.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
           expect(result.commission).to.be.deep.equal({ type: 'Z', value: 0.1 });
@@ -480,7 +488,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_IT_noFQ.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
         });
@@ -492,7 +500,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_EXCHANGE_CONJ.xml`).toString();
 
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
           const couponsStopover = [false, true, false, true];
@@ -500,7 +508,7 @@ describe('#AirParser', () => {
             (acc, ticket) => acc.concat(ticket.coupons),
             []
           );
-          console.log(coupons.map(c => c.stopover));
+          console.log(coupons.map((c) => c.stopover));
           coupons.forEach((coupon, index) => {
             expect(coupon.stopover).to.be.equal(couponsStopover[index]);
           });
@@ -524,7 +532,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/Stopover/StopoverWithConjunctionAndArnk.xml`).toString();
 
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((tickets) => {
           tickets.forEach((result) => {
             testTicket(result);
@@ -548,7 +556,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_UNKNOWN_FAILURE.xml`).toString();
 
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then(() => Promise.reject(new Error('Error has not occurred')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(RequestRuntimeError.UAPIServiceError);
@@ -561,7 +569,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_NO_AGREEMENT_RESPONSE_MESSAGE.xml`).toString();
 
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then(() => Promise.reject(new Error('Error has not occured')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.NoAgreement);
@@ -587,7 +595,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_IMPORTED.xml`).toString();
 
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
           expect(result.priceInfoDetailsAvailable).to.equal(true);
@@ -601,7 +609,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_ONE_CABIN_CLASS.xml`).toString();
 
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
           expect(result.priceInfoDetailsAvailable).to.equal(true);
@@ -614,13 +622,13 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_XF_ZP.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
           expect(result.priceInfoDetailsAvailable).to.equal(true);
           expect(result.taxesInfo).to.have.length.above(0);
           const detialedTaxes = result.taxesInfo.filter(
-            tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
+            (tax) => ['XF', 'ZP'].indexOf(tax.type) !== -1
           );
           expect(detialedTaxes).to.have.lengthOf(2);
           detialedTaxes.forEach(
@@ -644,7 +652,7 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/getTicket_NOT_IMPORTED.xml`).toString();
 
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           expect(result).to.be.an('object');
           expect(result).to.include.all.keys([
@@ -736,7 +744,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicketNoReservationLocator.xml`).toString();
       uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then(() => done(new Error('Error has not occurred')))
         .catch((err) => {
           expect(err).to.be.an.instanceof(AirRuntimeError.TicketInfoIncomplete);
@@ -749,7 +757,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_GET_TICKET;
       const xml = fs.readFileSync(`${xmlFolder}/getTicketNoReservationLocator.xml`).toString();
       uParser.parse(xml)
-        .then(json => parseFunction.call(
+        .then((json) => parseFunction.call(
           uParser,
           json,
           { allowNoProviderLocatorCodeRetrieval: true }
@@ -861,9 +869,8 @@ describe('#AirParser', () => {
         assert(segment.bookingClass, 'Segement should have bookingClass');
         assert(segment.from, 'Segement should have from');
         assert(segment.to, 'Segement should have to');
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
-
 
     it('Should throw ResponseDataMissing if any of mandatory attribute is missing from LFS ', () => {
       const dummyObj1 = {
@@ -914,7 +921,7 @@ describe('#AirParser', () => {
           }
         )
         .catch(
-          err => expect(err).to.be.an.instanceof(AirRuntimeError.NoResultsFound)
+          (err) => expect(err).to.be.an.instanceof(AirRuntimeError.NoResultsFound)
         );
     });
 
@@ -1025,7 +1032,7 @@ describe('#AirParser', () => {
         const jsonResult = parseFunction.call(uParser, json);
         testPricing(jsonResult);
         testSegments(jsonResult, [2]);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test another request with 2 adults and 1 child', () => {
@@ -1035,7 +1042,7 @@ describe('#AirParser', () => {
         const jsonResult = parseFunction.call(uParser, json);
         testPricing(jsonResult);
         testSegments(jsonResult, [2]);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test another request with 2 air priceing solutions', () => {
@@ -1046,7 +1053,7 @@ describe('#AirParser', () => {
         testPricing(jsonResult);
         // TODO: Shouldn't this example be seperated to 2 segment groups? (round-trip)
         testSegments(jsonResult, [4]);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
   });
 
@@ -1088,7 +1095,7 @@ describe('#AirParser', () => {
         const jsonResult = parseFunction.call(uParser, json);
         test(jsonResult);
         assert(JSON.stringify(jsonSaved) === JSON.stringify(jsonResult), 'Result is not equal to parsed');
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test another request with 2 adults and 1 child', () => {
@@ -1113,7 +1120,7 @@ describe('#AirParser', () => {
         const jsonResult = parseFunction.call(uParser, json);
         test(jsonResult);
         assert(JSON.stringify(jsonSaved) === JSON.stringify(jsonResult), 'Result is not equal to parsed');
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test another request with 2 air priceing solutions', () => {
@@ -1135,7 +1142,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         test(jsonResult);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
   });
 
@@ -1154,7 +1161,7 @@ describe('#AirParser', () => {
     return uParser.parse(xml).then((json) => {
       const jsonResult = parseFunction.call(uParser, json);
       assert.deepEqual(jsonResult, jsonSaved, 'Result is not equivalent to expected');
-    }).catch(err => assert(false, 'Error during parsing' + err.stack));
+    }).catch((err) => assert(false, 'Error during parsing' + err.stack));
   });
 
   describe('AIR_PRICE_FARE_RULES()', () => {
@@ -1186,7 +1193,7 @@ describe('#AirParser', () => {
           return null;
         });
         assert.deepEqual(jsonResult, jsonSaved, 'Result is not equivalent to expected');
-      }).catch(err => assert(false, 'Error during parsing ' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing ' + err.stack));
     });
   });
 
@@ -1261,14 +1268,14 @@ describe('#AirParser', () => {
         expect(fareQuote.uapi_passenger_refs).to.be.an('array');
         expect(fareQuote.uapi_passenger_refs).to.have.length.above(0);
         fareQuote.uapi_passenger_refs.forEach(
-          reference => expect(reference).to.be.a('string')
+          (reference) => expect(reference).to.be.a('string')
         );
 
         // Segment references
         expect(fareQuote.uapi_segment_refs).to.be.an('array');
         expect(fareQuote.uapi_segment_refs).to.have.length.above(0);
         fareQuote.uapi_segment_refs.forEach(
-          reference => expect(reference).to.be.a('string')
+          (reference) => expect(reference).to.be.a('string')
         );
 
         fareQuote.pricingInfos.forEach(
@@ -1307,7 +1314,7 @@ describe('#AirParser', () => {
 
             expect(pricingInfo.passengersCount).to.be.an('object');
             Object.keys(pricingInfo.passengersCount).forEach(
-              ptc => expect(pricingInfo.passengersCount[ptc]).to.be.a('number')
+              (ptc) => expect(pricingInfo.passengersCount[ptc]).to.be.a('number')
             );
             expect(pricingInfo.taxesInfo).to.be.an('array');
             pricingInfo.taxesInfo.forEach(
@@ -1355,14 +1362,14 @@ describe('#AirParser', () => {
           // Planes
           if (segment.plane) {
             expect(segment.plane).to.be.an('array');
-            segment.plane.forEach(plane => expect(plane).to.be.a('string'));
+            segment.plane.forEach((plane) => expect(plane).to.be.a('string'));
           }
           // Duration
           expect(segment.duration).to.be.an('array');
-          segment.duration.forEach(duration => expect(duration).to.match(/^\d+$/));
+          segment.duration.forEach((duration) => expect(duration).to.match(/^\d+$/));
           // Tech stops
           expect(segment.techStops).to.be.an('array');
-          segment.techStops.forEach(stop => expect(stop).to.match(/^[A-Z]{3}$/));
+          segment.techStops.forEach((stop) => expect(stop).to.match(/^[A-Z]{3}$/));
           // Segment reference
           expect(segment.uapi_segment_ref).to.be.a('string');
           // Next segment reference
@@ -1427,7 +1434,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/GetBooking-no-itinerary.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           const [booking] = result;
 
@@ -1458,8 +1465,8 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/GetBooking-no-itinerary-no-passengers.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
-        .catch(err => (
+        .then((json) => parseFunction.call(uParser, json))
+        .catch((err) => (
           assert(err instanceof AirParsingError.ReservationsMissing, 'Should be SegmentBookingFailed error.')
         ));
     });
@@ -1469,7 +1476,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getBooking-no-details.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testBooking(result);
           const { segments } = result[0];
@@ -1488,11 +1495,11 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getBooking_XF_ZP.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testBooking(result);
           const detialedTaxes = result[0].fareQuotes[0].pricingInfos[0].taxesInfo.filter(
-            tax => ['XF', 'ZP'].indexOf(tax.type) !== -1
+            (tax) => ['XF', 'ZP'].indexOf(tax.type) !== -1
           );
           expect(detialedTaxes).to.have.lengthOf(2);
           detialedTaxes.forEach(
@@ -1517,7 +1524,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getBooking_split_child.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           expect(result[0].splitBookings).to.be.an('array').and.to.have.lengthOf(1);
         });
@@ -1528,7 +1535,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getBooking_split_parent.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           expect(result[0].splitBookings).to.be.an('array').and.to.have.lengthOf(1);
         });
@@ -1539,7 +1546,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getBooking_emails.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testBooking(result);
           const { emails } = result[0];
@@ -1558,7 +1565,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getBooking_EXCHANGE_CONJ.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           // General booking test is skipped as no info about plane is avialable
           // @todo: add general parsing here
@@ -1576,11 +1583,11 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getBooking-EMD-issued.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testBooking(result);
           const issuedServiceSegments = result[0].serviceSegments.find(
-            item => item.documentNumber !== undefined
+            (item) => item.documentNumber !== undefined
           );
           expect(issuedServiceSegments).to.be.an('object');
         });
@@ -1591,7 +1598,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getBooking-with-service-segments.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           const { segments } = result[0];
           testBooking(result);
@@ -1607,7 +1614,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test parsing of create reservation 1ADT', () => {
@@ -1617,7 +1624,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test parsing of create reservation 1ADT (2)', () => {
@@ -1627,7 +1634,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test parsing of create reservation 1ADT (3)', () => {
@@ -1637,7 +1644,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test parsing of reservation with no valid fare error', () => {
@@ -1868,7 +1875,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordMalformedAirPrice.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testBooking(result);
           expect(result[0].fareQuotes.length).to.be.eq(1);
@@ -1890,7 +1897,7 @@ describe('#AirParser', () => {
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordWithWarnings.xml`).toString();
       return uParser.parse(xml)
-        .then(json => parseFunction.call(uParser, json))
+        .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           expect(result[0].fareQuotes.length).to.be.eq(1);
           expect(result[0].messages.length).to.be.eq(2);
@@ -1953,7 +1960,6 @@ describe('#AirParser', () => {
       });
     });
 
-
     it('should test parsing of universal record with only passive segments', () => {
       const uParser = new Parser('universal:UniversalRecordImportRsp', 'v52_0', { });
       const parseFunction = airParser.AIR_IMPORT_REQUEST;
@@ -2014,7 +2020,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult, false, true);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test parsing of universal record import request with tickets (multiple passengers)', () => {
@@ -2024,7 +2030,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         testBooking(jsonResult, false, true);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test for correct fq order in pnr', () => {
@@ -2046,7 +2052,7 @@ describe('#AirParser', () => {
 
         expect(booking.fareQuotes[3].effectiveDate)
           .to.be.equal('2017-07-30T00:00:00.000+02:00');
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should test parsing of tour code', () => {
@@ -2063,7 +2069,7 @@ describe('#AirParser', () => {
           'NONEND/CHNG FOC/PS ONLY REF AT ISSUING OFFICE ONLY'
         );
         expect(booking.fareQuotes[0].tourCode).to.be.equal('SC001S17');
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
   });
 
@@ -2075,7 +2081,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         assert(jsonResult);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
   });
 
@@ -2087,7 +2093,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         const jsonResult = parseFunction.call(uParser, json);
         assert(jsonResult);
-      }).catch(err => assert(false, 'Error during parsing' + err.stack));
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
     it('should return `Flight not found` error from flight info', () => {
@@ -2097,7 +2103,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         parseFunction.call(uParser, json);
         assert(false, 'Should be FlightNotFound error.');
-      }).catch(err => assert(err instanceof AirFlightInfoRuntimeError.FlightNotFound, 'Should be FlightNotFound error.'));
+      }).catch((err) => assert(err instanceof AirFlightInfoRuntimeError.FlightNotFound, 'Should be FlightNotFound error.'));
     });
 
     it('should return `Airline not supported` error from flight info', () => {
@@ -2107,7 +2113,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         parseFunction.call(uParser, json);
         assert(false, 'Should be AirlineNotSupported error.');
-      }).catch(err => assert(err instanceof AirFlightInfoRuntimeError.AirlineNotSupported, 'Should be AirlineNotSupported error.'));
+      }).catch((err) => assert(err instanceof AirFlightInfoRuntimeError.AirlineNotSupported, 'Should be AirlineNotSupported error.'));
     });
 
     it('should return `Invalid flight number` error from flight info', () => {
@@ -2117,7 +2123,7 @@ describe('#AirParser', () => {
       return uParser.parse(xml).then((json) => {
         parseFunction.call(uParser, json);
         assert(false, 'Should be InvalidFlightNumber error.');
-      }).catch(err => assert(err instanceof AirFlightInfoRuntimeError.InvalidFlightNumber, 'Should be InvalidFlightNumber error.'));
+      }).catch((err) => assert(err instanceof AirFlightInfoRuntimeError.InvalidFlightNumber, 'Should be InvalidFlightNumber error.'));
     });
   });
 
@@ -2250,7 +2256,7 @@ describe('#AirParser', () => {
       const uParser = new Parser(null, 'v52_0', { });
       const parseFunction = airParser.AIR_EXCHANGE_QUOTE;
       const xml = fs.readFileSync(`${xmlFolder}/AirExchangeQuote-1.xml`).toString();
-      return uParser.parse(xml).then(json => parseFunction.call(uParser, json)).then((result) => {
+      return uParser.parse(xml).then((json) => parseFunction.call(uParser, json)).then((result) => {
         testExchangeFormat(result);
       });
     });
@@ -2259,7 +2265,7 @@ describe('#AirParser', () => {
       const uParser = new Parser(null, 'v52_0', { });
       const parseFunction = airParser.AIR_EXCHANGE_QUOTE;
       const xml = fs.readFileSync(`${xmlFolder}/AirExchangeQuote-2.xml`).toString();
-      return uParser.parse(xml).then(json => parseFunction.call(uParser, json)).then((result) => {
+      return uParser.parse(xml).then((json) => parseFunction.call(uParser, json)).then((result) => {
         testExchangeFormat(result);
       });
     });
@@ -2308,7 +2314,7 @@ describe('#AirParser', () => {
       const uParser = new Parser('air:AirExchangeRsp', 'v52_0', { });
       const parseFunction = airParser.AIR_EXCHANGE;
       const xml = fs.readFileSync(`${xmlFolder}/AirExchange-1pas-1ticket.xml`).toString();
-      return uParser.parse(xml).then(json => parseFunction.call(uParser, json)).then((result) => {
+      return uParser.parse(xml).then((json) => parseFunction.call(uParser, json)).then((result) => {
         expect(result).to.be.equal(true);
       });
     });
@@ -2360,8 +2366,10 @@ describe('#AirParser', () => {
     }
     it('should parse simple response', async () => {
       const res = await getParseResponse(
-        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp.xml',
-        airParser.AIR_AVAILABILITY, airParser.AIR_ERRORS,
+        'air:AvailabilitySearchRsp',
+        'AirAvailabilityRsp.xml',
+        airParser.AIR_AVAILABILITY,
+        airParser.AIR_ERRORS,
         { cabins: ['Economy'] }
       );
       testAvailability(res);
@@ -2369,8 +2377,10 @@ describe('#AirParser', () => {
 
     it('should parse response with A and C availability', async () => {
       const res = await getParseResponse(
-        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp3.xml',
-        airParser.AIR_AVAILABILITY, airParser.AIR_ERRORS,
+        'air:AvailabilitySearchRsp',
+        'AirAvailabilityRsp3.xml',
+        airParser.AIR_AVAILABILITY,
+        airParser.AIR_ERRORS,
         { cabins: ['Economy'] }
       );
       testAvailability(res);
@@ -2378,7 +2388,8 @@ describe('#AirParser', () => {
 
     it('should parse response without connections', async () => {
       const res = await getParseResponse(
-        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp2.xml',
+        'air:AvailabilitySearchRsp',
+        'AirAvailabilityRsp2.xml',
         airParser.AIR_AVAILABILITY
       );
       testAvailability(res);
@@ -2387,7 +2398,8 @@ describe('#AirParser', () => {
 
     it('should parse response with single connection', async () => {
       const res = await getParseResponse(
-        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp-single-connection.xml',
+        'air:AvailabilitySearchRsp',
+        'AirAvailabilityRsp-single-connection.xml',
         airParser.AIR_AVAILABILITY
       );
       testAvailability(res);
@@ -2396,7 +2408,8 @@ describe('#AirParser', () => {
 
     it('should parse response without 1G avail info', async () => {
       const res = await getParseResponse(
-        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp4-NO1G.xml',
+        'air:AvailabilitySearchRsp',
+        'AirAvailabilityRsp4-NO1G.xml',
         airParser.AIR_AVAILABILITY
       );
       testAvailability(res);
@@ -2405,7 +2418,8 @@ describe('#AirParser', () => {
 
     it('should parse response without 1G avail info', async () => {
       const res = await getParseResponse(
-        'air:AvailabilitySearchRsp', 'AirAvailabilityRsp5.xml',
+        'air:AvailabilitySearchRsp',
+        'AirAvailabilityRsp5.xml',
         airParser.AIR_AVAILABILITY
       );
       testAvailability(res);
@@ -2418,8 +2432,10 @@ describe('#AirParser', () => {
     it('should correctly handle archived booking', async () => {
       try {
         await getParseResponse(
-          'air:LowFareSearchRsp', 'UnableToRetrieve.xml',
-          airParser.AIR_LOW_FARE_SEARCH_REQUEST, airParser.AIR_ERRORS
+          'air:LowFareSearchRsp',
+          'UnableToRetrieve.xml',
+          airParser.AIR_LOW_FARE_SEARCH_REQUEST,
+          airParser.AIR_ERRORS
         );
         throw new Error('Error not thrown');
       } catch (err) {
@@ -2429,8 +2445,10 @@ describe('#AirParser', () => {
     it('should throw NoSeatsAvailable', async () => {
       try {
         await getParseResponse(
-          'air:AvailabilitySearchRsp', 'AirAvailabilityRsp6.xml',
-          airParser.AIR_AVAILABILITY, airParser.AIR_ERRORS
+          'air:AvailabilitySearchRsp',
+          'AirAvailabilityRsp6.xml',
+          airParser.AIR_AVAILABILITY,
+          airParser.AIR_ERRORS
         );
         throw new Error('Error not thrown');
       } catch (err) {
@@ -2441,8 +2459,10 @@ describe('#AirParser', () => {
     it('should correctly handle error of agreement 2', async () => {
       try {
         await getParseResponse(
-          'air:LowFareSearchRsp', 'NoAgreementError.xml',
-          airParser.AIR_LOW_FARE_SEARCH_REQUEST, airParser.AIR_ERRORS
+          'air:LowFareSearchRsp',
+          'NoAgreementError.xml',
+          airParser.AIR_LOW_FARE_SEARCH_REQUEST,
+          airParser.AIR_ERRORS
         );
         throw new Error('Error not thrown');
       } catch (err) {
@@ -2456,8 +2476,10 @@ describe('#AirParser', () => {
     it('should correctly handle errors', async () => {
       try {
         await getParseResponse(
-          'air:EMDRetrieveRsp', 'AirEMDListNoItemsError.xml',
-          airParser.AIR_EMD_LIST, airParser.AIR_ERRORS
+          'air:EMDRetrieveRsp',
+          'AirEMDListNoItemsError.xml',
+          airParser.AIR_EMD_LIST,
+          airParser.AIR_ERRORS
         );
         throw new Error('Skipped error!');
       } catch (err) {
@@ -2466,7 +2488,8 @@ describe('#AirParser', () => {
     });
     it('check correct response parsing', async () => {
       const res = await getParseResponse(
-        'air:EMDRetrieveRsp', 'AirEMDList.xml',
+        'air:EMDRetrieveRsp',
+        'AirEMDList.xml',
         airParser.AIR_EMD_LIST
       );
       expect(res.length).to.be.equal(3);
@@ -2492,8 +2515,10 @@ describe('#AirParser', () => {
     it('should correctly handle errors', async () => {
       try {
         await getParseResponse(
-          'air:EMDRetrieveRsp', 'AirEMDItemError.xml',
-          airParser.AIR_EMD_ITEM, airParser.AIR_ERRORS
+          'air:EMDRetrieveRsp',
+          'AirEMDItemError.xml',
+          airParser.AIR_EMD_ITEM,
+          airParser.AIR_ERRORS
         );
         throw new Error('Skipped error!');
       } catch (err) {
@@ -2502,7 +2527,8 @@ describe('#AirParser', () => {
     });
     it('check correct response parsing', async () => {
       const res = await getParseResponse(
-        'air:EMDRetrieveRsp', 'AirEMDItem.xml',
+        'air:EMDRetrieveRsp',
+        'AirEMDItem.xml',
         airParser.AIR_EMD_ITEM
       );
       const mainObjects = ['passenger', 'details', 'pricingInfo'];

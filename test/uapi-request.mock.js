@@ -1,14 +1,16 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
 
-const r = params => sinon.spy((url,
+const r = (params) => sinon.spy((
+  url,
   auth,
   template,
   root,
   validator,
   error,
   parser,
-  debug) => {
+  debug
+) => {
   expect(url.match(/.*.pp.*/)).to.be.equal(null);
   expect(auth).to.be.equal(params.auth);
   expect(template).to.be.a('string');

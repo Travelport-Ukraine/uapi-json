@@ -141,8 +141,8 @@ describe('#Utils', () => {
 
   describe('.compose', () => {
     it('should compose two functions', () => {
-      const add1 = a => a + 1;
-      const mul2 = a => a * 2;
+      const add1 = (a) => a + 1;
+      const mul2 = (a) => a * 2;
 
       const addMul = utils.compose(add1, mul2);
       const res = addMul(5);

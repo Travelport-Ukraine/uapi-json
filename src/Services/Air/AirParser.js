@@ -27,17 +27,15 @@ const parseFareCalculation = (str) => {
   const fareCalculation = str.match(fareCalculationPattern)[1];
   const firstOrigin = str.match(firstOriginPattern);
   const roe = str.match(/ROE((?:\d+\.)?\d+)/);
-  return Object.assign(
-    {
-      fareCalculation,
-    },
-    firstOrigin
+  return {
+    fareCalculation,
+    ...(firstOrigin
       ? { firstOrigin: firstOrigin[1] }
-      : null,
-    roe
+      : null),
+    ...(roe
       ? { roe: roe[1] }
-      : null
-  );
+      : null)
+  };
 };
 
 const searchLowFaresValidate = (obj) => {
@@ -68,7 +66,7 @@ const countHistogram = (arr) => {
   }
 
   if (Object.prototype.toString.call(arr[0]) === '[object Object]') {
-    arr = arr.map(elem => elem.Code);
+    arr = arr.map((elem) => elem.Code);
   }
 
   arr.sort();
@@ -91,7 +89,6 @@ function lowFaresSearchRequest(obj) {
     faresOnly: this.env.faresOnly !== false,
   }, searchLowFaresValidate.call(this, obj));
 }
-
 
 const ticketParse = function (obj) {
   let checkResponseMessage = false;
@@ -148,7 +145,7 @@ const ticketParse = function (obj) {
   return checkResponseMessage && checkTickets;
 };
 
-const nullParsing = obj => obj;
+const nullParsing = (obj) => obj;
 
 function fillAirFlightInfoResponseItem(data) {
   const item = data['air:FlightInfoDetail'];
@@ -222,7 +219,7 @@ function airPrice(obj) {
   let pricingSolution = 0;
   if (priceKeys.length > 1) {
     console.log('More than one solution found in booking. Resolving the cheapest one.');
-    const solutions = priceKeys.map(key => pricingSolutions[key]);
+    const solutions = priceKeys.map((key) => pricingSolutions[key]);
 
     [pricingSolution] = solutions.sort(
       (a, b) => parseFloat(a.TotalPrice.slice(3)) - parseFloat(b.TotalPrice.slice(3))
@@ -259,9 +256,9 @@ function airPrice(obj) {
 
     const trips = segs.map((segment) => {
       const tripFlightDetails = Object.keys(segment['air:FlightDetails'])
-        .map(flightDetailsRef => segment['air:FlightDetails'][flightDetailsRef]);
+        .map((flightDetailsRef) => segment['air:FlightDetails'][flightDetailsRef]);
 
-      const [bookingInfo] = thisFare['air:BookingInfo'].filter(info => info.SegmentRef === segment.Key);
+      const [bookingInfo] = thisFare['air:BookingInfo'].filter((info) => info.SegmentRef === segment.Key);
       const fareInfo = thisFare['air:FareInfo'][bookingInfo.FareInfoRef];
 
       const baggage = format.getBaggageInfo(thisFare['air:BaggageAllowances']['air:BaggageAllowanceInfo'][leg]);
@@ -294,22 +291,20 @@ function airPrice(obj) {
   const taxesInfo = thisFare['air:TaxInfo']
     ? Object.keys(thisFare['air:TaxInfo'])
       .map(
-        taxKey => Object.assign(
-          {
-            value: thisFare['air:TaxInfo'][taxKey].Amount,
-            type: thisFare['air:TaxInfo'][taxKey].Category,
-          },
-          thisFare['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`]
+        (taxKey) => ({
+          value: thisFare['air:TaxInfo'][taxKey].Amount,
+          type: thisFare['air:TaxInfo'][taxKey].Category,
+          ...(thisFare['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`]
             ? {
               details: thisFare['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`].map(
-                taxDetail => ({
+                (taxDetail) => ({
                   airport: taxDetail.OriginAirport,
                   value: taxDetail.Amount,
                 })
               ),
             }
-            : null
-        )
+            : null)
+        })
       )
     : [];
 
@@ -360,7 +355,6 @@ function airPriceRspPricingSolutionXML(obj) {
     [pricingSolution] = pricingSolutions;
   }
 
-
   // remove segment references and add real segments (required)
   delete (pricingSolution['air:AirSegmentRef']);
 
@@ -370,7 +364,7 @@ function airPriceRspPricingSolutionXML(obj) {
 
   // delete existing air passenger types for each fare (map stored in passengersPerReservations)
   const pricingInfos = pricingSolution['air:AirPricingInfo'].map(
-    info => Object.assign({}, info, { 'air:PassengerType': [] })
+    (info) => ({ ...info, 'air:PassengerType': [] })
   );
 
   this.env.passengers.forEach((passenger, index) => {
@@ -385,7 +379,7 @@ function airPriceRspPricingSolutionXML(obj) {
       return false;
     });
 
-    const pricingInfo = pricingInfos.find(info => info.$.Key === reservationKey);
+    const pricingInfo = pricingInfos.find((info) => info.$.Key === reservationKey);
 
     pricingInfo['air:PassengerType'].push({
       $: {
@@ -532,7 +526,7 @@ const AirErrorHandler = function (rsp) {
       }
 
       const airSegmentErrors = errorInfo['air:AirSegmentError'] || [];
-      const messages = airSegmentErrors.map(err => err['air:ErrorMessage']);
+      const messages = airSegmentErrors.map((err) => err['air:ErrorMessage']);
 
       if (messages.indexOf('Booking is not complete due to waitlisted segment') !== -1) {
         throw new AirRuntimeError.SegmentWaitlisted(rsp);
@@ -617,13 +611,13 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
     (ticket) => {
       if (ticket['air:ExchangedTicketInfo']) {
         ticket['air:ExchangedTicketInfo'].forEach(
-          t => exchangedTickets.push(t.Number)
+          (t) => exchangedTickets.push(t.Number)
         );
       }
 
       const coupons = Object.keys(ticket['air:Coupon']).map(
         (couponKey) => {
-          const allCouponsIndex = allCoupons.findIndex(ac => ac.key === couponKey);
+          const allCouponsIndex = allCoupons.findIndex((ac) => ac.key === couponKey);
           const coupon = allCoupons[allCouponsIndex];
           const nextCoupon = allCoupons[allCouponsIndex + 1];
 
@@ -637,7 +631,7 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
                 if (fare.FareBasis === coupon.FareBasis
                   && airPricingInfo['air:BookingInfo']) {
                   const bInfo = airPricingInfo['air:BookingInfo'].find(
-                    info => info.FareInfoRef === fareKey
+                    (info) => info.FareInfoRef === fareKey
                   );
 
                   if (bInfo) {
@@ -669,22 +663,20 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
 
   const taxes = (airPricingInfo && airPricingInfo['air:TaxInfo'])
     ? Object.keys(airPricingInfo['air:TaxInfo']).map(
-      taxKey => Object.assign(
-        {
-          type: airPricingInfo['air:TaxInfo'][taxKey].Category,
-          value: airPricingInfo['air:TaxInfo'][taxKey].Amount,
-        },
-        airPricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`]
+      (taxKey) => ({
+        type: airPricingInfo['air:TaxInfo'][taxKey].Category,
+        value: airPricingInfo['air:TaxInfo'][taxKey].Amount,
+        ...(airPricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`]
           ? {
             details: airPricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`].map(
-              taxDetail => ({
+              (taxDetail) => ({
                 airport: taxDetail.OriginAirport,
                 value: taxDetail.Amount,
               })
             ),
           }
-          : null
-      )
+          : null)
+      })
     )
     : [];
   const priceSource = airPricingInfo || etr;
@@ -697,32 +689,30 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
   const fareCalcSource = etr['air:FareCalc'].match(fareCalculationPattern)
     ? etr['air:FareCalc']
     : airPricingInfo['air:FareCalc'];
-  const response = Object.assign(
-    {
-      uapi_ur_locator: obj.UniversalRecordLocatorCode,
-      uapi_reservation_locator: etr['air:AirReservationLocatorCode'],
-      pnr: etr.ProviderLocatorCode,
-      ticketNumber: tickets[0].ticketNumber,
-      platingCarrier: etr.PlatingCarrier,
-      ticketingPcc: etr.PseudoCityCode,
-      issuedAt: etr.IssuedDate,
-      farePricingMethod: airPricingInfo ? airPricingInfo.PricingMethod : null,
-      farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
-      priceInfoAvailable,
-      priceInfoDetailsAvailable: (airPricingInfo !== null),
-      taxes: priceSource.Taxes,
-      taxesInfo: taxes,
-      passengers,
-      tickets,
-      iataNumber,
-      formOfPayment,
-      // Flags
-      noAdc: !etr.TotalPrice,
-      isConjunctionTicket: tickets.length > 1,
-      tourCode,
-    },
-    parseFareCalculation(fareCalcSource),
-    commission
+  const response = {
+    uapi_ur_locator: obj.UniversalRecordLocatorCode,
+    uapi_reservation_locator: etr['air:AirReservationLocatorCode'],
+    pnr: etr.ProviderLocatorCode,
+    ticketNumber: tickets[0].ticketNumber,
+    platingCarrier: etr.PlatingCarrier,
+    ticketingPcc: etr.PseudoCityCode,
+    issuedAt: etr.IssuedDate,
+    farePricingMethod: airPricingInfo ? airPricingInfo.PricingMethod : null,
+    farePricingType: airPricingInfo ? airPricingInfo.PricingType : null,
+    priceInfoAvailable,
+    priceInfoDetailsAvailable: (airPricingInfo !== null),
+    taxes: priceSource.Taxes,
+    taxesInfo: taxes,
+    passengers,
+    tickets,
+    iataNumber,
+    formOfPayment,
+    // Flags
+    noAdc: !etr.TotalPrice,
+    isConjunctionTicket: tickets.length > 1,
+    tourCode,
+    ...parseFareCalculation(fareCalcSource),
+    ...(commission
       ? {
         commission: {
           type: commission.Type === 'PercentBase' ? 'Z' : 'ZA',
@@ -731,19 +721,19 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
             : parseFloat(commission.Amount.slice(3))
         },
       }
-      : null,
-    priceInfoAvailable
+      : null),
+    ...(priceInfoAvailable
       ? {
         totalPrice: priceSource.TotalPrice
         || `${(priceSource.EquivalentBasePrice || priceSource.BasePrice).slice(0, 3)}0`,
         basePrice: priceSource.BasePrice,
         equivalentBasePrice: priceSource.EquivalentBasePrice,
       }
-      : null,
-    exchangedTickets.length > 0
+      : null),
+    ...(exchangedTickets.length > 0
       ? { exchangedTickets }
-      : null
-  );
+      : null)
+  };
 
   return response;
 }
@@ -776,16 +766,15 @@ const airGetTicket = function (obj, parseParams = {
 
   if (multipleTickets) {
     return Object.values(etr)
-      .map(innerEtr => (
+      .map((innerEtr) => (
         getTicketFromEtr.call(this, innerEtr, obj, parseParams.allowNoProviderLocatorCodeRetrieval)
       ));
   }
 
-
   return getTicketFromEtr.call(this, etr, obj, parseParams.allowNoProviderLocatorCodeRetrieval);
 };
 
-const responseHasNoTickets = rsp => (
+const responseHasNoTickets = (rsp) => (
   rsp.faultcode !== undefined
   && rsp.faultstring !== undefined
   && /has no tickets/.test(rsp.faultstring)
@@ -845,7 +834,7 @@ function airCancelPnr(obj) {
   const messages = obj[`common_${this.uapi_version}:ResponseMessage`] || [];
   if (
     messages.some(
-      message => message._ === 'Itinerary Cancelled'
+      (message) => message._ === 'Itinerary Cancelled'
     )
   ) {
     return true;
@@ -854,7 +843,7 @@ function airCancelPnr(obj) {
 }
 
 function formSupplierLocatorBlock(supplierLocator) {
-  return supplierLocator.map(info => ({
+  return supplierLocator.map((info) => ({
     createDate: info.CreateDateTime,
     supplierCode: info.SupplierCode,
     locatorCode: info.SupplierLocatorCode,
@@ -958,7 +947,7 @@ function extractBookings(obj) {
       : [];
 
     const passiveReservation = record['passive:PassiveReservation']
-      ? record['passive:PassiveReservation'].find(res => res.ProviderReservationInfoRef === providerInfoKey)
+      ? record['passive:PassiveReservation'].find((res) => res.ProviderReservationInfoRef === providerInfoKey)
       : null;
 
     if (!providerInfo) {
@@ -1006,7 +995,7 @@ function extractBookings(obj) {
 
     const supplierLocator = booking[`common_${this.uapi_version}:SupplierLocator`] || [];
     const segments = indexedSegments
-      ? indexedSegments.map(segment => ({
+      ? indexedSegments.map((segment) => ({
         ...format.formatTrip(segment, segment['air:FlightDetails']),
         index: segment.index,
         status: segment.Status,
@@ -1018,7 +1007,7 @@ function extractBookings(obj) {
     const serviceSegments = indexedServiceSegments
       ? indexedServiceSegments.map((s) => {
         const remark = passiveReservation['passive:PassiveRemark'].find(
-          r => r.PassiveSegmentRef === s.Key
+          (r) => r.PassiveSegmentRef === s.Key
         );
 
         try {
@@ -1028,13 +1017,13 @@ function extractBookings(obj) {
 
           return null;
         }
-      }).filter(v => v)
+      }).filter((v) => v)
       : [];
 
     const fareQuotesCommon = {};
     const tickets = (booking['air:DocumentInfo'] && booking['air:DocumentInfo']['air:TicketInfo']) ? (
       booking['air:DocumentInfo']['air:TicketInfo'].map(
-        ticket => ({
+        (ticket) => ({
           number: ticket.Number,
           passengers: [{
             firstName: ticket[`common_${this.uapi_version}:Name`].First,
@@ -1055,7 +1044,7 @@ function extractBookings(obj) {
           const pricingInfo = booking['air:AirPricingInfo'][key];
 
           const uapiSegmentRefs = (pricingInfo['air:BookingInfo'] || []).map(
-            segment => segment.SegmentRef
+            (segment) => segment.SegmentRef
           );
 
           const uapiPassengerRefs = pricingInfo[`common_${this.uapi_version}:BookingTravelerRef`];
@@ -1063,7 +1052,7 @@ function extractBookings(obj) {
           const fareInfo = pricingInfo['air:FareInfo'];
 
           const baggage = fareInfo && Object.keys(fareInfo).map(
-            fareLegKey => format.getBaggage(fareInfo[fareLegKey]['air:BaggageAllowance'])
+            (fareLegKey) => format.getBaggage(fareInfo[fareLegKey]['air:BaggageAllowance'])
           );
 
           const passengersCount = (pricingInfo['air:PassengerType'] || [])
@@ -1073,22 +1062,20 @@ function extractBookings(obj) {
 
           const taxesInfo = pricingInfo['air:TaxInfo']
             ? Object.keys(pricingInfo['air:TaxInfo']).map(
-              taxKey => Object.assign(
-                {
-                  value: pricingInfo['air:TaxInfo'][taxKey].Amount,
-                  type: pricingInfo['air:TaxInfo'][taxKey].Category,
-                },
-                pricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`]
+              (taxKey) => ({
+                value: pricingInfo['air:TaxInfo'][taxKey].Amount,
+                type: pricingInfo['air:TaxInfo'][taxKey].Category,
+                ...(pricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`]
                   ? {
                     details: pricingInfo['air:TaxInfo'][taxKey][`common_${this.uapi_version}:TaxDetail`].map(
-                      taxDetail => ({
+                      (taxDetail) => ({
                         airport: taxDetail.OriginAirport,
                         value: taxDetail.Amount,
                       })
                     ),
                   }
-                  : null
-              )
+                  : null)
+              })
             )
             : [];
 
@@ -1108,72 +1095,64 @@ function extractBookings(obj) {
 
           const endorsement = fareInfo && firstFareInfo[`common_${this.uapi_version}:Endorsement`]
             ? firstFareInfo[`common_${this.uapi_version}:Endorsement`]
-              .map(end => end.Value)
+              .map((end) => end.Value)
               .join(' ')
             : null;
 
-          fareQuotesCommon[pricingInfo.AirPricingInfoGroup] = Object.assign(
-            {
-              uapi_segment_refs: uapiSegmentRefs,
-              effectiveDate: fareInfo && firstFareInfo.EffectiveDate,
-              endorsement,
-              tourCode,
-            },
-            platingCarrier
+          fareQuotesCommon[pricingInfo.AirPricingInfoGroup] = {
+            uapi_segment_refs: uapiSegmentRefs,
+            effectiveDate: fareInfo && firstFareInfo.EffectiveDate,
+            endorsement,
+            tourCode,
+            ...(platingCarrier
               ? { platingCarrier }
-              : null
-          );
+              : null)
+          };
 
           const pricingInfoPassengers = (uapiPassengerRefs || []).map(
             (ref) => {
               const ticket = tickets.find(
-                t => t.uapi_passenger_ref === ref && t.uapi_pricing_info_ref === key
+                (t) => t.uapi_passenger_ref === ref && t.uapi_pricing_info_ref === key
               );
-              return Object.assign(
-                {
-                  uapi_passenger_ref: ref,
-                  isTicketed: !!ticket,
-                },
-                ticket
+              return {
+                uapi_passenger_ref: ref,
+                isTicketed: !!ticket,
+                ...(ticket
                   ? { ticketNumber: ticket.number }
-                  : null
-              );
+                  : null)
+              };
             }
           );
 
-          return Object.assign(
-            {
-              uapi_pricing_info_ref: key,
-              passengers: pricingInfoPassengers,
-              uapi_pricing_info_group: pricingInfo.AirPricingInfoGroup,
-              farePricingMethod: pricingInfo.PricingMethod,
-              farePricingType: pricingInfo.PricingType,
-              totalPrice: pricingInfo.TotalPrice,
-              basePrice: pricingInfo.BasePrice,
-              equivalentBasePrice: pricingInfo.EquivalentBasePrice,
-              taxes: pricingInfo.Taxes,
-              passengersCount,
-              taxesInfo,
-              baggage,
-              timeToReprice: pricingInfo.LatestTicketingTime,
-            },
-            parseFareCalculation(pricingInfo['air:FareCalc'])
-          );
+          return {
+            uapi_pricing_info_ref: key,
+            passengers: pricingInfoPassengers,
+            uapi_pricing_info_group: pricingInfo.AirPricingInfoGroup,
+            farePricingMethod: pricingInfo.PricingMethod,
+            farePricingType: pricingInfo.PricingType,
+            totalPrice: pricingInfo.TotalPrice,
+            basePrice: pricingInfo.BasePrice,
+            equivalentBasePrice: pricingInfo.EquivalentBasePrice,
+            taxes: pricingInfo.Taxes,
+            passengersCount,
+            taxesInfo,
+            baggage,
+            timeToReprice: pricingInfo.LatestTicketingTime,
+            ...parseFareCalculation(pricingInfo['air:FareCalc'])
+          };
         }
       ).filter(Boolean);
 
-    const fareQuotesGrouped = pricingInfos.reduce(
-      (acc, pricingInfo) => Object.assign(acc, {
-        [pricingInfo.uapi_pricing_info_group]: (acc[pricingInfo.uapi_pricing_info_group] || [])
-          .concat(pricingInfo),
-      }), {}
-    );
+    const fareQuotesGrouped = pricingInfos.reduce((acc, pricingInfo) => Object.assign(acc, {
+      [pricingInfo.uapi_pricing_info_group]: (acc[pricingInfo.uapi_pricing_info_group] || [])
+        .concat(pricingInfo),
+    }), {});
 
     const fareQuotes = Object.keys(fareQuotesGrouped).map((key) => {
       const fqGroup = fareQuotesGrouped[key];
       const fqGroupPassengers = fqGroup.reduce(
         (acc, fq) => acc.concat(
-          fq.passengers.map(p => p.uapi_passenger_ref)
+          fq.passengers.map((p) => p.uapi_passenger_ref)
         ),
         []
       );
@@ -1189,30 +1168,28 @@ function extractBookings(obj) {
       (fq, index) => ({ ...fq, index: index + 1 })
     );
 
-    return Object.assign(
-      {
-        type: 'uAPI',
-        pnr: providerInfo.LocatorCode,
-        version: Number(record.Version),
-        uapi_ur_locator: record.LocatorCode,
-        uapi_reservation_locator: booking.LocatorCode,
-        airlineLocatorInfo: formSupplierLocatorBlock(supplierLocator),
-        createdAt: providerInfo.CreateDate,
-        hostCreatedAt: providerInfo.HostCreateDate,
-        modifiedAt: providerInfo.ModifiedDate,
-        fareQuotes,
-        segments: format.setReferencesForSegments(segments),
-        serviceSegments,
-        passengers,
-        emails,
-        bookingPCC: providerInfo.OwningPCC,
-        tickets,
-      },
-      splitBookings.length > 0
+    return {
+      type: 'uAPI',
+      pnr: providerInfo.LocatorCode,
+      version: Number(record.Version),
+      uapi_ur_locator: record.LocatorCode,
+      uapi_reservation_locator: booking.LocatorCode,
+      airlineLocatorInfo: formSupplierLocatorBlock(supplierLocator),
+      createdAt: providerInfo.CreateDate,
+      hostCreatedAt: providerInfo.HostCreateDate,
+      modifiedAt: providerInfo.ModifiedDate,
+      fareQuotes,
+      segments: format.setReferencesForSegments(segments),
+      serviceSegments,
+      passengers,
+      emails,
+      bookingPCC: providerInfo.OwningPCC,
+      tickets,
+      ...(splitBookings.length > 0
         ? { splitBookings }
-        : null,
-      messages ? { messages } : null
-    );
+        : null),
+      ...(messages ? { messages } : null)
+    };
   });
 }
 
@@ -1299,7 +1276,7 @@ function exchangeQuote(req) {
       const exchangeDetails = json['air:AirExchangeBundle'].map((bundle) => {
         const exchange = bundle[exchangeInfoRoot];
         const taxes = exchange[`common_${this.uapi_version}:PaidTax`]
-          .map(tax => ({ type: tax.Code, value: tax.Amount }));
+          .map((tax) => ({ type: tax.Code, value: tax.Amount }));
 
         return {
           ...format.formatAirExchangeBundle(exchange),
@@ -1338,14 +1315,12 @@ function exchangeQuote(req) {
               };
             });
 
-          return Object.assign(
-            {
-              ...format.formatPrices(pricing),
-              bookingInfo,
-              uapi_pricing_info_ref: pricing.Key,
-            },
-            parseFareCalculation(pricing['air:FareCalc'])
-          );
+          return {
+            ...format.formatPrices(pricing),
+            bookingInfo,
+            uapi_pricing_info_ref: pricing.Key,
+            ...parseFareCalculation(pricing['air:FareCalc'])
+          };
         });
 
       const airPricingDetails = solution['air:PricingDetails'];
@@ -1386,7 +1361,7 @@ function availability(rsp) {
 
   const connectedSegments = itinerarySolution['air:Connection']
     ? itinerarySolution['air:Connection'].map(
-      s => parseInt(s.SegmentIndex, 10)
+      (s) => parseInt(s.SegmentIndex, 10)
     )
     : [];
 
@@ -1394,9 +1369,9 @@ function availability(rsp) {
   let leg = [];
   itinerarySolution['air:AirSegmentRef'].forEach((segmentRef, key) => {
     const segment = rsp['air:AirSegmentList'][segmentRef];
-    const isConnected = connectedSegments.find(s => s === key);
+    const isConnected = connectedSegments.find((s) => s === key);
     const availInfoList = segment['air:AirAvailInfo'] || [];
-    const availInfo = availInfoList.find(info => info.ProviderCode === this.provider);
+    const availInfo = availInfoList.find((info) => info.ProviderCode === this.provider);
 
     if (!availInfo) {
       return;
@@ -1417,7 +1392,7 @@ function availability(rsp) {
       .reduce((acc, x) => {
         const codes = x.BookingCounts
           .split('|')
-          .map(item => ({
+          .map((item) => ({
             bookingClass: item[0],
             cabin: x.CabinClass,
             seats: item[1].trim(),
@@ -1504,7 +1479,7 @@ function getEMDList(obj) {
     processUAPIError.call(this, obj, 'Unable to retrieve EMD list');
   }
 
-  return Object.values(eMDSummaryInfo).map(val => (getEMDListItem.call(this, val)));
+  return Object.values(eMDSummaryInfo).map((val) => (getEMDListItem.call(this, val)));
 }
 
 function getEMDItem(obj) {

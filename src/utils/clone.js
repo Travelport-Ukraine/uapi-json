@@ -1,1 +1,1 @@
-module.exports = obj => JSON.parse(JSON.stringify(obj));
+module.exports = (obj) => JSON.parse(JSON.stringify(obj));

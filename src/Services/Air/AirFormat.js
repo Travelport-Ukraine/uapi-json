@@ -134,16 +134,15 @@ function formatPrices(prices) {
   };
 }
 
-
 function formatTrip(segment, flightDetails) {
   const flightInfo = flightDetails
     ? Object.keys(flightDetails).map(
-      detailsKey => flightDetails[detailsKey]
+      (detailsKey) => flightDetails[detailsKey]
     )
     : [];
-  const plane = flightInfo.map(details => details.Equipment || 'Unknown');
-  const duration = flightInfo.map(details => details.FlightTime || 0);
-  const techStops = flightInfo.slice(1).map(details => details.Origin);
+  const plane = flightInfo.map((details) => details.Equipment || 'Unknown');
+  const duration = flightInfo.map((details) => details.FlightTime || 0);
+  const techStops = flightInfo.slice(1).map((details) => details.Origin);
 
   segment['air:FlightDetails'] = flightInfo;
 
@@ -208,17 +207,15 @@ function formatPassengerCategories(pricingInfo) {
     }, {});
 
   const passengerFares = Object.keys(passengerCategories)
-    .reduce(
-      (memo, ptc) => Object.assign(memo, {
-        [ptc]: {
-          totalPrice: passengerCategories[ptc].TotalPrice,
-          basePrice: passengerCategories[ptc].BasePrice,
-          equivalentBasePrice: passengerCategories[ptc].EquivalentBasePrice,
-          taxes: passengerCategories[ptc].Taxes,
-          fareCalc: passengerCategories[ptc].FareCalc,
-        },
-      }), {}
-    );
+    .reduce((memo, ptc) => Object.assign(memo, {
+      [ptc]: {
+        totalPrice: passengerCategories[ptc].TotalPrice,
+        basePrice: passengerCategories[ptc].BasePrice,
+        equivalentBasePrice: passengerCategories[ptc].EquivalentBasePrice,
+        taxes: passengerCategories[ptc].Taxes,
+        fareCalc: passengerCategories[ptc].FareCalc,
+      },
+    }), {});
 
   return {
     passengerCounts,
@@ -325,9 +322,9 @@ function formatLowFaresSearch(searchRequest, searchResult) {
         const trips = leg['air:AirSegmentRef'].map((segmentRef) => {
           const segment = segments[segmentRef];
 
-          const tripFlightDetails = segment['air:FlightDetailsRef'].map(flightDetailsRef => flightDetails[flightDetailsRef]);
+          const tripFlightDetails = segment['air:FlightDetailsRef'].map((flightDetailsRef) => flightDetails[flightDetailsRef]);
 
-          const [bookingInfo] = thisFare['air:BookingInfo'].filter(info => info.SegmentRef === segmentRef);
+          const [bookingInfo] = thisFare['air:BookingInfo'].filter((info) => info.SegmentRef === segmentRef);
           const fareInfo = fareInfos[bookingInfo.FareInfoRef];
 
           const seatsAvailable = Number(bookingInfo.BookingCount);
@@ -354,13 +351,13 @@ function formatLowFaresSearch(searchRequest, searchResult) {
         }];
       });
     } else {
-      directions = thisFare['air:FlightOptionsList'].map(direction => Object.values(direction['air:Option']).map((option) => {
+      directions = thisFare['air:FlightOptionsList'].map((direction) => Object.values(direction['air:Option']).map((option) => {
         const trips = option['air:BookingInfo'].map(
           (segmentInfo) => {
             const fareInfo = fareInfos[segmentInfo.FareInfoRef];
             const segment = segments[segmentInfo.SegmentRef];
             const tripFlightDetails = segment['air:FlightDetailsRef'].map(
-              flightDetailsRef => flightDetails[flightDetailsRef]
+              (flightDetailsRef) => flightDetails[flightDetailsRef]
             );
             const seatsAvailable = (
               segment['air:AirAvailInfo']
@@ -438,7 +435,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
   return fares;
 }
 
-const getSegmentsData = segmentsObject => (segmentsObject
+const getSegmentsData = (segmentsObject) => (segmentsObject
   ? Object.values(segmentsObject)
   : null);
 
@@ -482,10 +479,9 @@ const setIndexes = (segments) => {
     })
     // Removing duplicates
     .filter((segment, i, arr) => {
-      return arr.findIndex(el => el.index === segment.index) === i;
+      return arr.findIndex((el) => el.index === segment.index) === i;
     });
 };
-
 
 /**
  * This function used to transform segments and service segments objects
@@ -518,22 +514,20 @@ function setIndexesForSegments(
 }
 
 function buildPassenger(name, traveler) {
-  return Object.assign(
-    {
-      lastName: name.Last,
-      firstName: name.First,
-      uapi_passenger_ref: traveler.Key,
-    },
-    traveler.DOB ? {
+  return {
+    lastName: name.Last,
+    firstName: name.First,
+    uapi_passenger_ref: traveler.Key,
+    ...(traveler.DOB ? {
       birthDate: moment(traveler.DOB).format('YYYY-MM-DD'),
-    } : null,
-    traveler.TravelerType ? {
+    } : null),
+    ...(traveler.TravelerType ? {
       ageCategory: traveler.TravelerType,
-    } : null,
-    traveler.Gender ? {
+    } : null),
+    ...(traveler.Gender ? {
       gender: traveler.Gender,
-    } : null
-  );
+    } : null)
+  };
 }
 
 /**

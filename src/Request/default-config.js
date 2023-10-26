@@ -51,7 +51,6 @@ module.exports = function defaultConfig(ver) {
   // air:AirSegment
   // universal:ProviderReservationInfo
 
-
   // Some single-object arrays with one key can be safely collapsed into an object or a scalar,
   // because they would never have a second item or any more fields in objects
   // NOTE: if such array name ends in list, e.g. FlightOptionsList (with FlightOption item),

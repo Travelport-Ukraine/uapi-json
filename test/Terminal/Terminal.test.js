@@ -20,20 +20,21 @@ const terminalPath = path.join(__dirname, '../../src/Services/Terminal/Terminal'
 const { Terminal: { TerminalRuntimeError } } = uAPI.errors;
 
 const DumbErrorClosingSession = sinon.spy(() => true);
-const ModifiedTerminalRuntimeError = Object.assign({}, TerminalRuntimeError, {
+const ModifiedTerminalRuntimeError = {
+  ...TerminalRuntimeError,
   ErrorClosingSession: DumbErrorClosingSession,
-});
+};
 
-const wait = time => new Promise((resolve) => {
+const wait = (time) => new Promise((resolve) => {
   setTimeout(() => resolve(), time);
 });
-const rTrim = str => str.replace(/\s*$/, '');
+const rTrim = (str) => str.replace(/\s*$/, '');
 
-const getTerminalRequest = p => fs.readFileSync(
+const getTerminalRequest = (p) => fs.readFileSync(
   `${__dirname}/TerminalRequests/${p}.txt`
 ).toString().trim();
 
-const getTerminalResponse = p => new Promise((resolve, reject) => {
+const getTerminalResponse = (p) => new Promise((resolve, reject) => {
   fs.readFile(
     `${__dirname}/TerminalResponses/${p}.txt`,
     (err, data) => {
@@ -189,9 +190,7 @@ const terminalEmulationFailed = proxyquire(terminalPath, {
 });
 
 const createUapiTerminal = (emulatePcc, terminalFunc) => {
-  const emulateConfig = Object.assign({}, config, {
-    emulatePcc,
-  });
+  const emulateConfig = { ...config, emulatePcc };
   return terminalFunc({
     auth: emulateConfig,
     emulatePcc,
@@ -325,7 +324,7 @@ describe('#Terminal', function terminalTest() {
 
       return uAPITerminal
         .executeCommand('I')
-        .then(() => Promise.all(['I', 'I'].map(command => uAPITerminal.executeCommand(command))))
+        .then(() => Promise.all(['I', 'I'].map((command) => uAPITerminal.executeCommand(command))))
         .then(() => Promise.reject(new Error('Command has been executed on busy terminal')))
         .catch((err) => {
           expect(getSessionToken.callCount).to.equal(1);
@@ -500,9 +499,7 @@ describe('#Terminal', function terminalTest() {
       closeSession.resetHistory();
 
       const emulatePcc = '7j8i';
-      const emulateConfig = Object.assign({}, config, {
-        emulatePcc,
-      });
+      const emulateConfig = { ...config, emulatePcc };
       const uAPITerminal = terminalOk({
         auth: emulateConfig,
         emulatePcc,
@@ -532,9 +529,7 @@ describe('#Terminal', function terminalTest() {
 
       const emulatePcc = '7j8i';
 
-      const emulateConfig = Object.assign({}, config, {
-        emulatePcc,
-      });
+      const emulateConfig = { ...config, emulatePcc };
 
       let uAPITerminal = terminalOk({
         auth: emulateConfig,
@@ -550,11 +545,11 @@ describe('#Terminal', function terminalTest() {
 
           uAPITerminal = null;
 
-          const auth = Object.assign(
-            {},
-            emulateConfig,
-            { token: sessionToken }
-          );
+          const auth = {
+
+            ...emulateConfig,
+            token: sessionToken
+          };
 
           uAPITerminal = terminalOk({
             auth,

@@ -9,7 +9,6 @@ const {
 const amenties = require('./amenties');
 const Utils = require('../../utils');
 
-
 const getNextResult = (version, obj) => {
   const ref = obj[`common_${version}:NextResultReference`];
   return (ref && ref._) || null;
@@ -22,7 +21,7 @@ const getHostToken = (version, obj) => {
 
 const getAmenties = (property) => {
   if (property && property['hotel:Amenities']) {
-    return property['hotel:Amenities']['hotel:Amenity'].map(e => ({
+    return property['hotel:Amenities']['hotel:Amenity'].map((e) => ({
       [e.Code]: amenties[e.Code],
     }));
   }
@@ -39,8 +38,8 @@ const getIcon = (version, elem) => {
 const getMedia = (version, rate) => {
   if (rate[`common_${version}:MediaItem`]) {
     return rate[`common_${version}:MediaItem`]
-      .filter(elem => elem.type !== 'Gallery')
-      .map(elem => elem);
+      .filter((elem) => elem.type !== 'Gallery')
+      .map((elem) => elem);
   }
   return [];
 };
@@ -50,7 +49,7 @@ const getComments = (rsp) => {
     && rsp['hotel:GuestReviews'][0]
     && rsp['hotel:GuestReviews'][0]['hotel:Comments']
   ) {
-    return rsp['hotel:GuestReviews'][0]['hotel:Comments'].map(comment => ({
+    return rsp['hotel:GuestReviews'][0]['hotel:Comments'].map((comment) => ({
       text: comment._,
       id: comment.$.CommentId,
       date: comment.$.Date,
@@ -80,13 +79,13 @@ const searchParse = function (rsp) {
       hotel.Description = elem['hotel:PropertyDescription']._;
       hotel.Icon = getIcon(self.uapi_version, elem);
       hotel.HotelRating = property['hotel:HotelRating']['hotel:Rating'] * 1;
-      hotel.Rates = elem['hotel:RateInfo'].map(rate => ({
+      hotel.Rates = elem['hotel:RateInfo'].map((rate) => ({
         RateSupplier: rate.RateSupplier,
         RateSupplierLogo: rate.RateSupplierLogo,
         PaymentType: rate.PaymentType,
         ApproximateMinimumStayAmount: Utils.price(rate.ApproximateMinimumStayAmount),
       }));
-      hotel.Suppliers = hotel.Rates.map(rate => rate.RateSupplier);
+      hotel.Suppliers = hotel.Rates.map((rate) => rate.RateSupplier);
       hotel.Amenties = getAmenties(property);
       hotel.Location = {
         lat: property[`common_${self.uapi_version}:CoordinateLocation`].latitude,
@@ -106,7 +105,6 @@ const rateParse = function (rsp) {
 
   result.HostToken = getHostToken(self.uapi_version, rsp);
   result.Comments = getComments(self.uapi_version, rsp);
-
 
   result.Agregators = rateobj['hotel:AggregatorHotelDetails'].map((rate) => {
     const agregator = {
@@ -193,7 +191,7 @@ const bookParse = function (rsp) {
 
   const msg = rsp[`common_${self.uapi_version}:ResponseMessage`] || [];
 
-  result.ResponseMessages = msg.map(elem => ({
+  result.ResponseMessages = msg.map((elem) => ({
     type: elem.Type,
     text: elem._,
   }));

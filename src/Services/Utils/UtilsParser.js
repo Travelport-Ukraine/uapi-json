@@ -6,10 +6,9 @@ const {
   RequestRuntimeError,
 } = require('../../Request/RequestErrors');
 
-
 function currencyConvertParse(json) {
   try {
-    json = json['util:CurrencyConversion'].map(curr => ({
+    json = json['util:CurrencyConversion'].map((curr) => ({
       from: curr.From,
       to: curr.To,
       rate: parseFloat(curr.BankSellingRate),
