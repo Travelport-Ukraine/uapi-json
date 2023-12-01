@@ -26,6 +26,7 @@ function errorHandler(rsp) {
       });
     case '6207': // Error retrieving AccessProfile Unable to retrieve enough Dynamic GTIDs for this transaction
     case '6119': // Host system error
+    case '14058': // Could not locate Session Token Information Session May Have Timed Out
       throw new RequestRuntimeError.UAPIServiceError({
         screen: faultString,
       });
