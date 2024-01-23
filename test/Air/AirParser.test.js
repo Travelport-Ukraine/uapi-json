@@ -1867,6 +1867,23 @@ describe('#AirParser', () => {
         ]);
       }
     });
+
+    it('should test fareCalculation update', () => {
+      const updatedFareCalculation = 'S-PRG EK X/DXB EK X/BKK PG USM Q PRGUSM17.75 300.83 PG X/BKK EK X/DXB EK PRG Q USMPRG17.75 300.84 NUC637.17';
+      const uParser = new Parser('universal:UniversalRecordRetrieveRsp', 'v52_0', {});
+      const parseFunction = airParser.UNIVERSAL_RECORD_RETRIEVE_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordRetrieve_fareCalculation.xml`)
+        .toString();
+      return uParser.parse(xml)
+        .then((json) => {
+          const jsonResult = parseFunction.call(uParser, json);
+          jsonResult[0].fareQuotes.forEach((fq) => {
+            fq.pricingInfos.forEach(
+              (pi) => expect(pi.fareCalculation).to.be.eq(updatedFareCalculation)
+            );
+          });
+        });
+    });
   });
 
   describe('UNIVERSAL_RECORD_IMPORT_SIMPLE_REQUEST', () => {
