@@ -449,28 +449,30 @@ const setIndexes = (segments) => {
           segment,
         });
       }
-      if (travelOrder === undefined) {
-        throw new AirParsingError.NoTravelOrder({
-          segment,
-        });
-      }
-      return { ...segment, index: parseInt(index, 10), travelOrder: parseInt(travelOrder, 10) };
+      return { ...segment, index: parseInt(index, 10), travelOrder };
     })
     // Sorting segments in order to remove possible duplicates effectively
     .sort((a, b) => {
       // Get segments data required for comparison
       const { index: aIndex, travelOrder: aTravelOrder } = a;
       const { index: bIndex, travelOrder: bTravelOrder } = b;
-      const travelOrderDiff = aTravelOrder - bTravelOrder;
-      const indexDiff = aIndex - bIndex;
 
-      // Comparing provider order (index)
+      // Comparing by provider order (index)
+      const indexDiff = aIndex - bIndex;
       if (indexDiff !== 0) {
         return indexDiff;
       }
 
+      // If any of the travel order values is not returned by uAPI, first in list goes first
+      if (!aTravelOrder || !bTravelOrder) {
+        return 0;
+      }
+
+      // No undefined values are now provided, can compare numbers
+      const travelOrderDiff = parseInt(aTravelOrder, 10) - parseInt(bTravelOrder, 10);
+
       // Provider order is the same, possible duplicates, comparing travel order
-      // Travel order could be some high number, regardless of low provirder order (index)
+      // Travel order could be some high number, regardless of low provider order (index)
       if (travelOrderDiff !== 0) {
         return travelOrderDiff;
       }
