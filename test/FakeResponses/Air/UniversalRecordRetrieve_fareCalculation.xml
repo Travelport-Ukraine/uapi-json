@@ -1,0 +1,239 @@
+<SOAP:Envelope 
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <universal:UniversalRecordRetrieveRsp TraceId="" TransactionId="DB7E328D0A0E7D1C5EF19F6F68F89F73" ResponseTime="1196" 
+      xmlns:universal="http://www.travelport.com/schema/universal_v47_0" 
+      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" 
+      xmlns:air="http://www.travelport.com/schema/air_v47_0">
+      <common_v47_0:ResponseMessage Code="13100" Type="Warning">'ViewOnly' retrieval of a PNR already existing in a UR is not possible. Sync is done.</common_v47_0:ResponseMessage>
+      <universal:UniversalRecord LocatorCode="PW8HHI" Version="29" Status="Active">
+        <common_v47_0:BookingTraveler Key="yvuOH9OynDKAzfSTquAAAA==">
+          <common_v47_0:BookingTravelerName First="PETRAMRS" Last="SOBOTOVA"/>
+          <common_v47_0:PhoneNumber Key="yvuOH9OynDKA0fSTquAAAA==" Type="Mobile" Location="BTS" Number="00421917391221">
+            <common_v47_0:ProviderReservationInfoRef Key="yvuOH9OynDKAF5KTquAAAA=="/>
+          </common_v47_0:PhoneNumber>
+          <common_v47_0:SSR Key="yvuOH9OynDKA1fSTquAAAA==" Status="HK" Type="DOCS" FreeText="////0000000/F//SOBOTOVA/PETRA -1SOBOTOVA/PETRAMRS" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKA2fSTquAAAA==" Status="HK" Type="DOCS" FreeText="////0000000/F//SOBOTOVA/PETRA -1SOBOTOVA/PETRAMRS" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKA3fSTquAAAA==" Status="HK" Type="DOCS" FreeText="P/SK/000004052/SK/0000000/F/03JAN28/SOBOTOVA/PETRA -1SOBOTOVA/PETRAMRS" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKA4fSTquAAAA==" Status="HK" Type="DOCS" FreeText="P/SK/000004052/SK/0000000/F/03JAN28/SOBOTOVA/PETRA -1SOBOTOVA/PETRAMRS" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKA5fSTquAAAA==" Status="HK" Type="DOCS" FreeText="BKKUSM 5171Q20MAR/P/SVK/000004052/SVK/0000000/F/03JAN28/SOBOTOVA/PETRA-1SOBOTOVA/PETRAMRS" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKA6fSTquAAAA==" SegmentRef="yvuOH9OynDKAKgSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885757074C1/074-075" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKA7fSTquAAAA==" SegmentRef="yvuOH9OynDKAMgSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885757074C2/074-075" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKA8fSTquAAAA==" SegmentRef="yvuOH9OynDKAPgSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885757074C3/074-075" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="a5EHy++xnDKAqvzYZEAAAA==" SegmentRef="yvuOH9OynDKAPhSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885769367C1" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="a5EHy++xnDKArvzYZEAAAA==" SegmentRef="yvuOH9OynDKARhSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885769367C2" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="a5EHy++xnDKAsvzYZEAAAA==" SegmentRef="yvuOH9OynDKAThSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885769367C3" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        </common_v47_0:BookingTraveler>
+        <common_v47_0:BookingTraveler Key="yvuOH9OynDKA/fSTquAAAA==">
+          <common_v47_0:BookingTravelerName First="MIROSLAVMR" Last="JASEK"/>
+          <common_v47_0:SSR Key="yvuOH9OynDKAAgSTquAAAA==" Status="HK" Type="DOCS" FreeText="////0000000/M//JASEK/MIROSLAV -1JASEK/MIROSLAVMR" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKABgSTquAAAA==" Status="HK" Type="DOCS" FreeText="////0000000/M//JASEK/MIROSLAV -1JASEK/MIROSLAVMR" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKACgSTquAAAA==" Status="HK" Type="DOCS" FreeText="P/SK/000002077/SK/0000000/M/01JUN27/JASEK/MIROSLAV -1JASEK/MIROSLAVMR" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKADgSTquAAAA==" Status="HK" Type="DOCS" FreeText="P/SK/000002077/SK/0000000/M/01JUN27/JASEK/MIROSLAV -1JASEK/MIROSLAVMR" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKAEgSTquAAAA==" Status="HK" Type="DOCS" FreeText="BKKUSM 5171Q20MAR/P/SVK/000002077/SVK/0000000/M/01JUN27/JASEK/MIROSLAV-1JASEK/MIROSLAVMR" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKAFgSTquAAAA==" SegmentRef="yvuOH9OynDKAKgSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885757076C1/076-077" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKAGgSTquAAAA==" SegmentRef="yvuOH9OynDKAMgSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885757076C2/076-077" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="yvuOH9OynDKAHgSTquAAAA==" SegmentRef="yvuOH9OynDKAPgSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885757076C3/076-077" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="a5EHy++xnDKAtvzYZEAAAA==" SegmentRef="yvuOH9OynDKAPhSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885769368C1" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="a5EHy++xnDKAuvzYZEAAAA==" SegmentRef="yvuOH9OynDKARhSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885769368C2" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+          <common_v47_0:SSR Key="a5EHy++xnDKAvvzYZEAAAA==" SegmentRef="yvuOH9OynDKAThSTquAAAA==" Status="HK" Type="TKNE" FreeText="1763885769368C3" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        </common_v47_0:BookingTraveler>
+        <common_v47_0:OSI Key="yvuOH9OynDKA2lSTquAAAA==" Carrier="YY" Text="CTCT PAX 00421917391221" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:OSI Key="yvuOH9OynDKA/lSTquAAAA==" Carrier="YY" Text="CTCE/LETENKY//PELIKAN.SK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:OSI Key="yvuOH9OynDKAMmSTquAAAA==" Carrier="YY" Text="INVL RBKG DUE TO UN PG962/03APR" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:OSI Key="yvuOH9OynDKAbmSTquAAAA==" Carrier="1G" Text="SNC RLOC 1A LBZZ72" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:ActionStatus Key="yvuOH9OynDKAHfSTquAAAA==" Type="ACTIVE" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" ProviderCode="1G">
+          <common_v47_0:Remark>QSB 24MAR0859Z LB AG</common_v47_0:Remark>
+        </common_v47_0:ActionStatus>
+        <universal:ProviderReservationInfo Key="yvuOH9OynDKAF5KTquAAAA==" ProviderCode="1G" LocatorCode="0XY60Y" CreateDate="2022-03-22T14:05:07.747+00:00" ModifiedDate="2022-03-30T15:42:35.387+00:00" HostCreateDate="2022-01-25" OwningPCC="79YK"/>
+        <air:AirReservation LocatorCode="PW8HI3" CreateDate="2022-03-22T14:05:06.806+00:00" ModifiedDate="2022-03-30T15:42:36.121+00:00">
+          <common_v47_0:SupplierLocator SupplierCode="EK" SupplierLocatorCode="KTYEJN" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" CreateDateTime="2022-03-20T06:13:00.000+00:00"/>
+          <common_v47_0:SupplierLocator SupplierCode="PG" SupplierLocatorCode="LBZZ72" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" CreateDateTime="2022-01-25T11:11:00.000+00:00"/>
+          <air:DocumentInfo>
+            <air:TicketInfo Number="1763885757074" TicketIssueDate="2022-01-25T00:00:00.000+01:00" IATANumber="78320642" TicketingAgentSignOn="Z79YKGWS" Status="X" BookingTravelerRef="yvuOH9OynDKAzfSTquAAAA==">
+              <common_v47_0:Name First="PETRAMRS" Last="SOBOTOVA"/>
+              <air:ConjunctedTicketInfo Number="1763885757075" TicketIssueDate="2022-01-25T00:00:00.000+01:00" IATANumber="78320642" TicketingAgentSignOn="Z79YKGWS" Status="X"/>
+            </air:TicketInfo>
+            <air:TicketInfo Number="1763885769367" TicketIssueDate="2022-03-24T00:00:00.000+01:00" IATANumber="78320642" TicketingAgentSignOn="0869691" Status="N" BookingTravelerRef="yvuOH9OynDKAzfSTquAAAA==" AirPricingInfoRef="UeeKH90xnDKAoK5/FzAAAA==">
+              <common_v47_0:Name First="PETRAMRS" Last="SOBOTOVA"/>
+              <air:ExchangedTicketInfo Number="1763885757074"/>
+            </air:TicketInfo>
+            <air:TicketInfo Number="1763885757076" TicketIssueDate="2022-01-25T00:00:00.000+01:00" IATANumber="78320642" TicketingAgentSignOn="Z79YKGWS" Status="X" BookingTravelerRef="yvuOH9OynDKA/fSTquAAAA==">
+              <common_v47_0:Name First="MIROSLAVMR" Last="JASEK"/>
+              <air:ConjunctedTicketInfo Number="1763885757077" TicketIssueDate="2022-01-25T00:00:00.000+01:00" IATANumber="78320642" TicketingAgentSignOn="Z79YKGWS" Status="X"/>
+            </air:TicketInfo>
+            <air:TicketInfo Number="1763885769368" TicketIssueDate="2022-03-24T00:00:00.000+01:00" IATANumber="78320642" TicketingAgentSignOn="0869691" Status="N" BookingTravelerRef="yvuOH9OynDKA/fSTquAAAA==" AirPricingInfoRef="UeeKH90xnDKAzK5/FzAAAA==">
+              <common_v47_0:Name First="MIROSLAVMR" Last="JASEK"/>
+              <air:ExchangedTicketInfo Number="1763885757076"/>
+            </air:TicketInfo>
+          </air:DocumentInfo>
+          <common_v47_0:BookingTravelerRef Key="yvuOH9OynDKAzfSTquAAAA=="/>
+          <common_v47_0:BookingTravelerRef Key="yvuOH9OynDKA/fSTquAAAA=="/>
+          <common_v47_0:ProviderReservationInfoRef Key="yvuOH9OynDKAF5KTquAAAA=="/>
+          <air:AirSegment Key="yvuOH9OynDKAKgSTquAAAA==" Group="0" Carrier="EK" CabinClass="Economy" FlightNumber="140" ProviderCode="1G" Origin="PRG" Destination="DXB" DepartureTime="2022-03-19T15:30:00.000+01:00" ArrivalTime="2022-03-20T00:25:00.000+04:00" ClassOfService="T" ETicketability="Yes" MarriageGroup="1" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" TravelOrder="1" ProviderSegmentOrder="1" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="yvuOH9OynDKALgSTquAAAA==" Origin="PRG" Destination="DXB" DepartureTime="2022-03-19T15:30:00.000+01:00" ArrivalTime="2022-03-20T00:25:00.000+04:00"/>
+            <air:Connection Duration="165"/>
+          </air:AirSegment>
+          <air:AirSegment Key="yvuOH9OynDKAMgSTquAAAA==" Group="0" Carrier="EK" CabinClass="Economy" FlightNumber="378" ProviderCode="1G" Origin="DXB" Destination="BKK" DepartureTime="2022-03-20T03:10:00.000+04:00" ArrivalTime="2022-03-20T15:20:00.000+07:00" ClassOfService="T" ETicketability="Yes" Equipment="77W" MarriageGroup="1" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" TravelOrder="2" ProviderSegmentOrder="2" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="RvNNH9H0nDKAerYctwAAAA==" Origin="DXB" Destination="BKK" DepartureTime="2022-03-20T03:10:00.000+04:00" ArrivalTime="2022-03-20T06:10:00.000+07:00" TravelTime="550"/>
+            <air:Connection Duration="110"/>
+          </air:AirSegment>
+          <air:AirSegment Key="yvuOH9OynDKAPgSTquAAAA==" Group="0" Carrier="PG" CabinClass="Economy" FlightNumber="5171" ProviderCode="1G" Origin="BKK" Destination="USM" DepartureTime="2022-03-20T17:10:00.000+07:00" ArrivalTime="2022-03-20T18:20:00.000+07:00" ClassOfService="Q" ETicketability="Yes" Equipment="319" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" TravelOrder="3" ProviderSegmentOrder="3" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="yvuOH9OynDKAQgSTquAAAA==" Origin="BKK" Destination="USM" DepartureTime="2022-03-20T17:10:00.000+07:00" ArrivalTime="2022-03-20T18:20:00.000+07:00" TravelTime="70"/>
+          </air:AirSegment>
+          <air:AirSegment Key="yvuOH9OynDKAPhSTquAAAA==" Group="1" Carrier="PG" CabinClass="Economy" FlightNumber="184" ProviderCode="1G" Origin="USM" Destination="BKK" DepartureTime="2022-04-03T20:20:00.000+07:00" ArrivalTime="2022-04-03T21:50:00.000+07:00" ClassOfService="G" ETicketability="No" Equipment="ATR" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" TravelOrder="4" ProviderSegmentOrder="4" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="yvuOH9OynDKAQhSTquAAAA==" Origin="USM" Destination="BKK" DepartureTime="2022-04-03T20:20:00.000+07:00" ArrivalTime="2022-04-03T21:50:00.000+07:00" FlightTime="90" TravelTime="90" Equipment="ATR" AutomatedCheckin="false"/>
+            <air:Connection Duration="205"/>
+          </air:AirSegment>
+          <air:AirSegment Key="yvuOH9OynDKARhSTquAAAA==" Group="1" Carrier="EK" CabinClass="Economy" FlightNumber="385" ProviderCode="1G" Origin="BKK" Destination="DXB" DepartureTime="2022-04-04T01:15:00.000+07:00" ArrivalTime="2022-04-04T04:45:00.000+04:00" ClassOfService="T" ETicketability="Yes" Equipment="77W" MarriageGroup="2" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" TravelOrder="5" ProviderSegmentOrder="5" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="yvuOH9OynDKAShSTquAAAA==" Origin="BKK" Destination="DXB" DepartureTime="2022-04-04T01:15:00.000+07:00" ArrivalTime="2022-04-04T04:45:00.000+04:00" FlightTime="390" TravelTime="390" Equipment="77W" DestinationTerminal="3" AutomatedCheckin="false"/>
+            <air:Connection Duration="230"/>
+          </air:AirSegment>
+          <air:AirSegment Key="yvuOH9OynDKAThSTquAAAA==" Group="1" Carrier="EK" CabinClass="Economy" FlightNumber="139" ProviderCode="1G" Origin="DXB" Destination="PRG" DepartureTime="2022-04-04T08:35:00.000+04:00" ArrivalTime="2022-04-04T13:00:00.000+02:00" ClassOfService="T" ETicketability="Yes" Equipment="77W" MarriageGroup="2" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" TravelOrder="6" ProviderSegmentOrder="6" OptionalServicesIndicator="false">
+            <air:FlightDetails Key="yvuOH9OynDKAUhSTquAAAA==" Origin="DXB" Destination="PRG" DepartureTime="2022-04-04T08:35:00.000+04:00" ArrivalTime="2022-04-04T13:00:00.000+02:00" FlightTime="385" TravelTime="385" Equipment="77W" OriginTerminal="3" DestinationTerminal="1" AutomatedCheckin="false"/>
+          </air:AirSegment>
+          <air:AirPricingInfo Key="UeeKH90xnDKAoK5/FzAAAA==" TotalPrice="EUR589.00" BasePrice="CZK14355" ApproximateTotalPrice="EUR589.00" ApproximateBasePrice="EUR589.00" EquivalentBasePrice="EUR589.00" Taxes="EUR0.00" PricingMethod="ManualFare" ETicketability="No" ProviderCode="1G" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" AirPricingInfoGroup="1" Ticketed="true" PricingType="StoredFare" FareCalculationInd="B">
+            <air:FareInfo Key="UeeKH90xnDKAqK5/FzAAAA==" FareBasis="TLEEPCZ1" PassengerTypeCode="ADT" Origin="USM" Destination="BKK" EffectiveDate="2022-03-24T00:00:00.000+01:00" NotValidBefore="2022-04-03" NotValidAfter="2022-04-03">
+              <common_v47_0:Endorsement Value="SKCHG INVL DUE TO UN PG962 03APR - NON-END-SAVER-REWARD UPGDS  ALLOWED"/>
+              <air:BaggageAllowance>
+                <air:MaxWeight Value="25" Unit="Kilograms"/>
+              </air:BaggageAllowance>
+            </air:FareInfo>
+            <air:FareInfo Key="UeeKH90xnDKAtK5/FzAAAA==" FareBasis="TLEEPCZ1" PassengerTypeCode="ADT" Origin="BKK" Destination="DXB" EffectiveDate="2022-03-24T00:00:00.000+01:00" NotValidBefore="2022-04-04" NotValidAfter="2022-04-04">
+              <common_v47_0:Endorsement Value="SKCHG INVL DUE TO UN PG962 03APR - NON-END-SAVER-REWARD UPGDS  ALLOWED"/>
+              <air:BaggageAllowance>
+                <air:MaxWeight Value="25" Unit="Kilograms"/>
+              </air:BaggageAllowance>
+            </air:FareInfo>
+            <air:FareInfo Key="UeeKH90xnDKAwK5/FzAAAA==" FareBasis="TLEEPCZ1" PassengerTypeCode="ADT" Origin="DXB" Destination="PRG" EffectiveDate="2022-03-24T00:00:00.000+01:00" NotValidBefore="2022-04-04" NotValidAfter="2022-04-04">
+              <common_v47_0:Endorsement Value="SKCHG INVL DUE TO UN PG962 03APR - NON-END-SAVER-REWARD UPGDS  ALLOWED"/>
+              <air:BaggageAllowance>
+                <air:MaxWeight Value="25" Unit="Kilograms"/>
+              </air:BaggageAllowance>
+            </air:FareInfo>
+            <air:BookingInfo BookingCode="G" CabinClass="Economy" FareInfoRef="UeeKH90xnDKAqK5/FzAAAA==" SegmentRef="yvuOH9OynDKAPhSTquAAAA=="/>
+            <air:BookingInfo BookingCode="T" CabinClass="Economy" FareInfoRef="UeeKH90xnDKAtK5/FzAAAA==" SegmentRef="yvuOH9OynDKARhSTquAAAA=="/>
+            <air:BookingInfo BookingCode="T" CabinClass="Economy" FareInfoRef="UeeKH90xnDKAwK5/FzAAAA==" SegmentRef="yvuOH9OynDKAThSTquAAAA=="/>
+            <air:FareCalc>S-PRG EK X/DXB EK X/BKK PG USM Q PRGUSM17.75 300.83 PG X/BKK EK X/DXB EK PRG Q USMPRG17.75 300.84 NUC637 (17END ROE22.529456</air:FareCalc>
+            <air:PassengerType Code="ADT" BookingTravelerRef="yvuOH9OynDKAzfSTquAAAA==">
+              <air:FareGuaranteeInfo GuaranteeType="ManualFare"/>
+            </air:PassengerType>
+            <common_v47_0:BookingTravelerRef Key="yvuOH9OynDKAzfSTquAAAA=="/>
+            <air:PaymentRef Key="UeeKH90xnDKAlK5/FzAAAA=="/>
+            <air:TicketingModifiersRef Key="UeeKH90xnDKApK5/FzAAAA=="/>
+          </air:AirPricingInfo>
+          <air:AirPricingInfo Key="UeeKH90xnDKAzK5/FzAAAA==" TotalPrice="EUR589.00" BasePrice="CZK14355" ApproximateTotalPrice="EUR589.00" ApproximateBasePrice="EUR589.00" EquivalentBasePrice="EUR589.00" Taxes="EUR0.00" PricingMethod="ManualFare" ETicketability="No" ProviderCode="1G" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" AirPricingInfoGroup="2" Ticketed="true" PricingType="StoredFare" FareCalculationInd="B">
+            <air:FareInfo Key="UeeKH90xnDKA1K5/FzAAAA==" FareBasis="TLEEPCZ1" PassengerTypeCode="ADT" Origin="USM" Destination="BKK" EffectiveDate="2022-03-24T00:00:00.000+01:00" NotValidBefore="2022-04-03" NotValidAfter="2022-04-03">
+              <common_v47_0:Endorsement Value="SKCHG INVL DUE TO UN PG962 03APR - NON-END-SAVER-REWARD UPGDS  ALLOWED"/>
+              <air:BaggageAllowance>
+                <air:MaxWeight Value="25" Unit="Kilograms"/>
+              </air:BaggageAllowance>
+            </air:FareInfo>
+            <air:FareInfo Key="UeeKH90xnDKA4K5/FzAAAA==" FareBasis="TLEEPCZ1" PassengerTypeCode="ADT" Origin="BKK" Destination="DXB" EffectiveDate="2022-03-24T00:00:00.000+01:00" NotValidBefore="2022-04-04" NotValidAfter="2022-04-04">
+              <common_v47_0:Endorsement Value="SKCHG INVL DUE TO UN PG962 03APR - NON-END-SAVER-REWARD UPGDS  ALLOWED"/>
+              <air:BaggageAllowance>
+                <air:MaxWeight Value="25" Unit="Kilograms"/>
+              </air:BaggageAllowance>
+            </air:FareInfo>
+            <air:FareInfo Key="UeeKH90xnDKA7K5/FzAAAA==" FareBasis="TLEEPCZ1" PassengerTypeCode="ADT" Origin="DXB" Destination="PRG" EffectiveDate="2022-03-24T00:00:00.000+01:00" NotValidBefore="2022-04-04" NotValidAfter="2022-04-04">
+              <common_v47_0:Endorsement Value="SKCHG INVL DUE TO UN PG962 03APR - NON-END-SAVER-REWARD UPGDS  ALLOWED"/>
+              <air:BaggageAllowance>
+                <air:MaxWeight Value="25" Unit="Kilograms"/>
+              </air:BaggageAllowance>
+            </air:FareInfo>
+            <air:BookingInfo BookingCode="G" CabinClass="Economy" FareInfoRef="UeeKH90xnDKA1K5/FzAAAA==" SegmentRef="yvuOH9OynDKAPhSTquAAAA=="/>
+            <air:BookingInfo BookingCode="T" CabinClass="Economy" FareInfoRef="UeeKH90xnDKA4K5/FzAAAA==" SegmentRef="yvuOH9OynDKARhSTquAAAA=="/>
+            <air:BookingInfo BookingCode="T" CabinClass="Economy" FareInfoRef="UeeKH90xnDKA7K5/FzAAAA==" SegmentRef="yvuOH9OynDKAThSTquAAAA=="/>
+            <air:FareCalc>S-PRG EK X/DXB EK X/BKK PG USM Q PRGUSM17.75 300.83 PG X/BKK EK X/DXB EK PRG Q USMPRG17.75 300.84 NUC637 (17END ROE22.529456</air:FareCalc>
+            <air:PassengerType Code="ADT" BookingTravelerRef="yvuOH9OynDKA/fSTquAAAA==">
+              <air:FareGuaranteeInfo GuaranteeType="ManualFare"/>
+            </air:PassengerType>
+            <common_v47_0:BookingTravelerRef Key="yvuOH9OynDKA/fSTquAAAA=="/>
+            <air:PaymentRef Key="UeeKH90xnDKAnK5/FzAAAA=="/>
+            <air:TicketingModifiersRef Key="UeeKH90xnDKA0K5/FzAAAA=="/>
+          </air:AirPricingInfo>
+          <common_v47_0:Payment Key="UeeKH90xnDKAlK5/FzAAAA==" Type="Itinerary" Amount="EUR589.00" FormOfPaymentRef="UeeKH90xnDKAkK5/FzAAAA=="/>
+          <common_v47_0:Payment Key="UeeKH90xnDKAnK5/FzAAAA==" Type="Itinerary" Amount="EUR589.00" FormOfPaymentRef="UeeKH90xnDKAmK5/FzAAAA=="/>
+          <air:TicketingModifiers PlatingCarrier="EK" Key="UeeKH90xnDKApK5/FzAAAA==">
+            <common_v47_0:Commission Level="Fare" Type="PercentBase" Percentage="0.0"/>
+          </air:TicketingModifiers>
+          <air:TicketingModifiers PlatingCarrier="EK" Key="UeeKH90xnDKA0K5/FzAAAA==">
+            <common_v47_0:Commission Level="Fare" Type="PercentBase" Percentage="0.0"/>
+          </air:TicketingModifiers>
+        </air:AirReservation>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKANiSTquAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" CreateDate="2022-01-25T11:10:00.000+00:00">
+          <common_v47_0:RemarkData>VIEWTRIPNET</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKAjiSTquAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" CreateDate="2022-01-25T11:10:00.000+00:00">
+          <common_v47_0:RemarkData>BOOKED THROUGH NEW ONLINE</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKAHlSTquAAAA==" TypeInGds="Confidential" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" CreateDate="2022-01-25T11:10:00.000+00:00">
+          <common_v47_0:RemarkData>EMAIL - PETKASOBOTOVA//GMAIL.COM</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKAIlSTquAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" CreateDate="2022-01-25T14:47:00.000+00:00">
+          <common_v47_0:RemarkData>NP. VC NBR 941867 EXP 07/23 1513.42 EUR</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKAJlSTquAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" CreateDate="2022-01-27T11:01:00.000+00:00">
+          <common_v47_0:RemarkData>ZMENENY LET TKT PNR PAXINFORMOVANY - Q22 SK</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKAKlSTquAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" CreateDate="2022-02-17T11:00:00.000+00:00">
+          <common_v47_0:RemarkData>ZMENENY LET TKT PNR PAX INFORMOVANY - Q21 SK</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKALlSTquAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" CreateDate="2022-02-18T08:13:00.000+00:00">
+          <common_v47_0:RemarkData>PAX ACC UNTK VIA MAIL VQJ-CXCKF-509</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKAMlSTquAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" SupplierCode="YY" Direction="Outgoing" CreateDate="2022-02-18T08:14:00.000+00:00">
+          <common_v47_0:RemarkData>INVL RBKG DUE TO UN PG962/03APR</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKANlSTquAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" SupplierCode="EK" Direction="Incoming" CreateDate="2022-01-25T11:11:00.000+00:00">
+          <common_v47_0:RemarkData>ADTK1GRITK/ADTKT BY 28JAN 1310 BTS LT</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKAOlSTquAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" SupplierCode="EK" Direction="Incoming" CreateDate="2022-01-25T14:47:00.000+00:00">
+          <common_v47_0:RemarkData>CHECK MINIMUM CONNECT TIME SEGMENTS EK0378T20MARDXBBKK/PG5171Q20MARBKKUSM</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKAPlSTquAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" SupplierCode="EK" Direction="Incoming" CreateDate="2022-02-20T06:11:00.000+00:00">
+          <common_v47_0:RemarkData>CHECK MINIMUM CONNECT TIME SEGMENTS EK0378T20MARDXBBKK/PG5171Q20MARBKKUSM</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKAQlSTquAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" SupplierCode="EK" Direction="Incoming" CreateDate="2022-03-13T06:13:00.000+00:00">
+          <common_v47_0:RemarkData>CHECK MINIMUM CONNECT TIME SEGMENTS EK0378T20MARDXBBKK/PG5171Q20MARBKKUSM</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKARlSTquAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" SupplierCode="EK" Direction="Incoming" CreateDate="2022-03-20T06:13:00.000+00:00">
+          <common_v47_0:RemarkData>CHECK MINIMUM CONNECT TIME SEGMENTS EK0378T20MARDXBBKK/PG5171Q20MARBKKUSM</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKASlSTquAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2022-01-25T11:11:00.000+00:00">
+          <common_v47_0:RemarkData>520675230891 - PLS ADV PAX EMAIL AND MOBILE PER SSR CTCM CTCE</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="yvuOH9OynDKAilSTquAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2022-01-25T11:11:00.000+00:00">
+          <common_v47_0:RemarkData>ADTK1GTOPG BY 06MAR 1110 BTS TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:GeneralRemark Key="a5EHy++xnDKApvzYZEAAAA==" TypeInGds="Basic" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA==" CreateDate="2022-03-24T09:13:00.000+00:00">
+          <common_v47_0:RemarkData>ETKT PREVYSTAVENE A ODOSLANE PAX Z OFFICE</common_v47_0:RemarkData>
+        </common_v47_0:GeneralRemark>
+        <common_v47_0:AgencyInfo>
+          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="+yF4egIfQW6rXnyTTXlzWA==" AgencyCode="TVPORTDYNASKLTONWABAGENCY" EventTime="2022-03-22T14:05:06.465+00:00"/>
+          <common_v47_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2022-03-30T15:42:36.132+00:00"/>
+          <common_v47_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2022-03-22T14:05:07.747+00:00"/>
+        </common_v47_0:AgencyInfo>
+        <common_v47_0:AgencyContactInfo>
+          <common_v47_0:PhoneNumber Key="yvuOH9OynDKAJfSTquAAAA==" Type="Agency" Location="BTS" Number="00421 2 5464 9494 - PELIKAN.SK">
+            <common_v47_0:ProviderReservationInfoRef Key="yvuOH9OynDKAF5KTquAAAA=="/>
+          </common_v47_0:PhoneNumber>
+        </common_v47_0:AgencyContactInfo>
+        <common_v47_0:SSR Key="yvuOH9OynDKArtSTquAAAA==" Status="HK" Type="CTCM" FreeText="/00421917391221-1SOBOTOVA/PETRAMRS" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:SSR Key="yvuOH9OynDKAytSTquAAAA==" Status="HK" Type="CTCM" FreeText="/00421917391221-1SOBOTOVA/PETRAMRS" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:SSR Key="yvuOH9OynDKAztSTquAAAA==" Status="HK" Type="CTCE" FreeText="/LETENKY//PELIKAN.SK-1SOBOTOVA/PETRAMRS" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:SSR Key="yvuOH9OynDKA0tSTquAAAA==" Status="HK" Type="CTCE" FreeText="/LETENKY//PELIKAN.SK-1SOBOTOVA/PETRAMRS" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:SSR Key="yvuOH9OynDKA1tSTquAAAA==" Status="HK" Type="CTCM" FreeText="/00421917391221-1JASEK/MIROSLAVMR" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:SSR Key="yvuOH9OynDKA2tSTquAAAA==" Status="HK" Type="CTCM" FreeText="/00421917391221-1JASEK/MIROSLAVMR" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:SSR Key="yvuOH9OynDKA3tSTquAAAA==" Status="HK" Type="CTCE" FreeText="/LETENKY//PELIKAN.SK-1JASEK/MIROSLAVMR" Carrier="EK" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:SSR Key="yvuOH9OynDKA4tSTquAAAA==" Status="HK" Type="CTCE" FreeText="/LETENKY//PELIKAN.SK-1JASEK/MIROSLAVMR" Carrier="PG" ProviderReservationInfoRef="yvuOH9OynDKAF5KTquAAAA=="/>
+        <common_v47_0:FormOfPayment Key="UeeKH90xnDKAkK5/FzAAAA==" Type="MiscFormOfPayment" Reusable="false" ProfileKey="KVRNgxGUT/2y9gQtTBA1+Q==">
+          <common_v47_0:MiscFormOfPayment Text="1763885757074" Category="Exchange"/>
+        </common_v47_0:FormOfPayment>
+        <common_v47_0:FormOfPayment Key="UeeKH90xnDKAmK5/FzAAAA==" Type="MiscFormOfPayment" Reusable="false" ProfileKey="qKoi7I2UTI+K7zNeGq2m6Q==">
+          <common_v47_0:MiscFormOfPayment Text="1763885757076" Category="Exchange"/>
+        </common_v47_0:FormOfPayment>
+      </universal:UniversalRecord>
+    </universal:UniversalRecordRetrieveRsp>
+  </SOAP:Body>
+</SOAP:Envelope>

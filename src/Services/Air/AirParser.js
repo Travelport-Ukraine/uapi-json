@@ -28,7 +28,7 @@ const parseFareCalculation = (str) => {
   const firstOrigin = str.match(firstOriginPattern);
   const roe = str.match(/ROE((?:\d+\.)?\d+)/);
   return {
-    fareCalculation,
+    fareCalculation: fareCalculation.replace(/\s+\(/, '.'),
     ...(firstOrigin
       ? { firstOrigin: firstOrigin[1] }
       : null),
