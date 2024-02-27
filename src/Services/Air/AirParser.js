@@ -555,7 +555,7 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
   const passengers = Object.keys(passengersList).map(
     (passengerKey) => {
       const travelerDetails = passengersList[passengerKey][`common_${this.uapi_version}:BookingTravelerName`];
-      const firstName = travelerDetails.First.concat(travelerDetails.Prefix || '');
+      const firstName = travelerDetails.First.concat(travelerDetails.Prefix || '').toUpperCase();
       const lastName = travelerDetails.Last;
 
       return { firstName, lastName };
