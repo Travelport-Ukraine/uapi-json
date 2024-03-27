@@ -79,6 +79,10 @@ function getBaggageInfo(info) {
 }
 
 function formatSegment(segment) {
+  const operatingAirline = segment['air:CodeshareInfo']
+    ? segment['air:CodeshareInfo'].OperatingCarrier
+    : null;
+
   const seg = {
     from: segment.Origin,
     to: segment.Destination,
@@ -86,6 +90,7 @@ function formatSegment(segment) {
     departure: segment.DepartureTime,
     arrival: segment.ArrivalTime,
     airline: segment.Carrier,
+    operatingAirline,
     flightNumber: segment.FlightNumber,
     uapi_segment_ref: segment.Key,
     uapiSegmentReference: segment.Key,
