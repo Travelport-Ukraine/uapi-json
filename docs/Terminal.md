@@ -21,6 +21,21 @@ for several PCC emulations.
 See [advanced emulation example](../examples/Terminal/emulation.js) to get an example
 on how to use emulation.
 
+# uAPI error handling
+
+In case you want to handle some specific errors from uAPI, you can provde `uapiErrorHandler` function
+in options.
+
+Footprint of the functions should be as follows:
+```javascript
+async (
+  executeCommandWithRetry,
+  { command, error: err }
+) => {
+  // your code goes here
+}
+```
+
 # Session closing
 Be aware to close the session after all your manipulations with the terminal.
 

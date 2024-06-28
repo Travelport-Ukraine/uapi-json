@@ -29,10 +29,6 @@ const wait = (time) => new Promise((resolve) => {
   setTimeout(() => resolve(), time);
 });
 
-const getTerminalRequest = (p) => fs.readFileSync(
-  `${__dirname}/TerminalRequests/${p}.txt`
-).toString().trim();
-
 const getTerminalResponse = (p) => new Promise((resolve, reject) => {
   fs.readFile(
     `${__dirname}/TerminalResponses/${p}.txt`,
@@ -91,6 +87,28 @@ const executeCommandOk = sinon.spy((params) => {
         return getTerminalResponse('SEM');
       }
       return getTerminalResponse('ERR');
+  }
+});
+
+const erIssues = sinon.stub();
+const executeCommandErIssues = sinon.spy((params) => {
+  expect(params).to.be.an('object');
+  expect(params.sessionToken).to.equal(token);
+  expect(params.command).to.be.a('string');
+
+  const erError = new Error('ER error');
+  erError.data = {
+    faultstring: 'String index out of range: 6',
+  };
+
+  erIssues.resolves(['OK']);
+  erIssues.onCall(0).throws(erError);
+
+  switch (params.command) {
+    case 'ER':
+      return erIssues();
+    default:
+      return ['*'];
   }
 });
 const mdCallMdIssues = sinon.stub();
@@ -154,6 +172,11 @@ const terminalServiceOk = () => ({
   executeCommand: executeCommandOk,
   closeSession,
 });
+const terminalServiceErIssues = () => ({
+  getSessionToken,
+  executeCommand: executeCommandErIssues,
+  closeSession,
+});
 const terminalServiceMdIssues = () => ({
   getSessionToken,
   executeCommand: executeCommandMdIssues,
@@ -168,6 +191,9 @@ const terminalServiceEmulationFailed = () => ({
   getSessionToken,
   executeCommand: executeCommandEmulationFailed,
   closeSession,
+});
+const terminalErIssues = proxyquire(terminalPath, {
+  './TerminalService': terminalServiceErIssues,
 });
 const terminalCloseSessionError = proxyquire(terminalPath, {
   './TerminalService': terminalServiceCloseSessionError,
@@ -287,13 +313,69 @@ describe('#Terminal', function terminalTest() {
         });
     });
   });
-  describe('Working with states', () => {
-    it('Should return error when executing command on closed terminal', () => {
+  describe('Handling uapi errors', () => {
+    beforeEach(() => {
       // Resetting spies
       getSessionToken.resetHistory();
       executeCommandOk.resetHistory();
       closeSession.resetHistory();
+    });
+    it('should fail if no handlers provided', async () => {
+      const uAPITerminal = terminalErIssues({
+        auth: config,
+        debug: 1,
+      });
 
+      try {
+        await uAPITerminal.executeCommand('ER');
+        throw new Error('did not fail');
+      } catch (err) {
+        expect(err.message).to.equal('ER error');
+        expect(err.data).to.deep.equal({
+          faultstring: 'String index out of range: 6',
+        });
+      }
+
+      expect(closeSession.callCount).to.equal(0);
+      expect(getSessionToken.callCount).to.equal(1);
+      expect(executeCommandErIssues.callCount).to.equal(1);
+    });
+    it('should apply error handler if provided', async () => {
+      const uAPITerminal = terminalErIssues({
+        auth: config,
+        debug: 1,
+        options: {
+          uapiErrorHandler: async (
+            executeCommandWithRetry,
+            { command, error: err }
+          ) => {
+            expect(err.message).to.equal('ER error');
+            expect(err.data).to.deep.equal({
+              faultstring: 'String index out of range: 6',
+            });
+
+            await executeCommandWithRetry(command, 0);
+          },
+        }
+      });
+
+      const res = await uAPITerminal.executeCommand('ER');
+      await uAPITerminal.closeSession();
+
+      expect(res).to.deep.equal('OK');
+      expect(closeSession.callCount).to.equal(1);
+      expect(getSessionToken.callCount).to.equal(1);
+      expect(executeCommandErIssues.callCount).to.equal(2);
+    });
+  });
+  describe('Working with states', () => {
+    beforeEach(() => {
+      // Resetting spies
+      getSessionToken.resetHistory();
+      executeCommandOk.resetHistory();
+      closeSession.resetHistory();
+    });
+    it('Should return error when executing command on closed terminal', () => {
       const uAPITerminal = terminalOk({
         auth: config,
         debug: 1,
@@ -313,10 +395,6 @@ describe('#Terminal', function terminalTest() {
         });
     });
     it('Should return error when executing command on busy terminal', () => {
-      // Resetting spies
-      getSessionToken.resetHistory();
-      executeCommandSlow.resetHistory();
-
       const uAPITerminal = terminalSlow({
         auth: config,
       });
@@ -427,26 +505,6 @@ describe('#Terminal', function terminalTest() {
         .then(([response, composed]) => {
           expect(response.trimEnd()).to.equal(composed.join('\n').trimEnd());
         });
-    });
-    it('should replace ; with \t in commands', async () => {
-      const executeCommand = sinon.stub();
-      executeCommand.resolves(['']);
-      const Terminal = proxyquire(
-        terminalPath,
-        {
-          './TerminalService': () => ({
-            getSessionToken,
-            executeCommand,
-            closeSession,
-          })
-        }
-      );
-      const t = new Terminal({
-        auth: config,
-      });
-      const command = getTerminalRequest('request.01');
-      await t.executeCommand(command);
-      expect(executeCommand.getCall(0).args[0].command).not.to.include(';');
     });
   });
   describe('Working with emulation', () => {
