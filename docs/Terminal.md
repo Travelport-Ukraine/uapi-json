@@ -26,6 +26,8 @@ on how to use emulation.
 In case you want to handle some specific errors from uAPI, you can provde `uapiErrorHandler` function
 in options.
 
+Function should return response from retried command or any other command.
+
 Footprint of the functions should be as follows:
 ```javascript
 async (
@@ -33,6 +35,8 @@ async (
   { command, error: err }
 ) => {
   // your code goes here
+  // response is an array of strings (lines of terminal response)
+  return response;
 }
 ```
 
