@@ -170,7 +170,7 @@ module.exports = function (settings) {
     } catch (e) {
       if (!isErrorRetriable(e) || times <= 0) {
         if (uapiErrorHandler) {
-          await uapiErrorHandler(
+          return uapiErrorHandler(
             executeCommandWithRetry,
             { command, error: e }
           );
