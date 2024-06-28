@@ -313,12 +313,14 @@ describe('#Terminal', function terminalTest() {
         });
     });
   });
-  describe('Handling uapi errors', () => {
+  describe.only('Handling uapi errors', () => {
     beforeEach(() => {
       // Resetting spies
       getSessionToken.resetHistory();
       executeCommandOk.resetHistory();
       closeSession.resetHistory();
+      erIssues.resetHistory();
+      executeCommandErIssues.resetHistory();
     });
     it('should fail if no handlers provided', async () => {
       const uAPITerminal = terminalErIssues({
@@ -354,7 +356,7 @@ describe('#Terminal', function terminalTest() {
               faultstring: 'String index out of range: 6',
             });
 
-            await executeCommandWithRetry(command, 0);
+            return executeCommandWithRetry(command, 0);
           },
         }
       });
