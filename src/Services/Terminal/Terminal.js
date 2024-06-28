@@ -16,6 +16,7 @@ const autoCloseTerminals = [];
 const ERROR_INFO_SUFFIX = 'ErrorInfo';
 const ERROR_CODE_SUFFIX = 'Code';
 const RETRY_CODES_LIST = ['14058'];
+const MD_COMMAND = 'MD';
 
 const DEFAULT_RETRY_TIMES = 3;
 
@@ -100,69 +101,21 @@ const isErrorRetriable = (e) => {
   return (errorCode && RETRY_CODES_LIST.includes(errorCode));
 };
 
-const commandRetry = async ({
-  service,
-  command,
-  sessionToken,
-  times = DEFAULT_RETRY_TIMES,
-}) => {
-  try {
-    return await service.executeCommand({ command, sessionToken });
-  } catch (e) {
-    if (!isErrorRetriable(e) || times <= 0) {
-      throw e;
-    }
-
-    return commandRetry({
-      service,
-      command,
-      sessionToken,
-      times: times - 1,
-    });
-  }
-};
-
 module.exports = function (settings) {
-  const service = terminalService(validateServiceSettings(settings));
-  const log = (settings.options && settings.options.logFunction) || console.log;
-  const emulatePcc = settings.auth.emulatePcc || false;
-  const timeout = settings.timeout || false;
-  const debug = settings.debug || 0;
-  const autoClose = settings.autoClose === undefined
-    ? true
-    : settings.autoClose;
+  const {
+    timeout = false, debug = 0, autoClose = true,
+    auth: { emulatePcc = false, token = null } = {},
+    options: { logFunction: log = console.log, uapiErrorHandler = null } = {},
+  } = settings;
 
+  const service = terminalService(validateServiceSettings(settings));
   const defaultStopMD = (screens) => !screenFunctions.hasMore(screens);
-  const token = settings.auth.token || null;
 
   const state = {
     terminalState: TERMINAL_STATE_NONE,
     sessionToken: token,
   };
 
-  // Processing response with MD commands
-  const processResponse = (response, stopMD, previousResponse = null) => {
-    const processedResponse = previousResponse
-      ? screenFunctions.mergeResponse(
-        previousResponse,
-        response.join('\n')
-      )
-      : response.join('\n');
-    if (stopMD(processedResponse)) {
-      return processedResponse;
-    }
-    return commandRetry({
-      service,
-      sessionToken: state.sessionToken,
-      command: 'MD',
-    }).then(
-      (mdResponse) => (
-        mdResponse.join('\n') === response.join('\n')
-          ? processedResponse
-          : processResponse(mdResponse, stopMD, processedResponse)
-      )
-    );
-  };
   // Getting session token
   const getSessionToken = () => new Promise((resolve, reject) => {
     if (state.terminalState === TERMINAL_STATE_BUSY) {
@@ -208,22 +161,66 @@ module.exports = function (settings) {
       .then(resolve)
       .catch(reject);
   });
+
+  // Runtime error handling
+  const executeCommandWithRetry = async (command, times = DEFAULT_RETRY_TIMES) => {
+    const { sessionToken } = state;
+    try {
+      return await service.executeCommand({ command, sessionToken });
+    } catch (e) {
+      if (!isErrorRetriable(e) || times <= 0) {
+        if (uapiErrorHandler) {
+          await uapiErrorHandler(
+            executeCommandWithRetry,
+            { command, error: e }
+          );
+        }
+        throw e;
+      }
+
+      return executeCommandWithRetry(command, times - 1);
+    }
+  };
+
+  // Processing response with MD commands
+  const processResponse = (response, stopMD, previousResponse = null) => {
+    const processedResponse = previousResponse
+      ? screenFunctions.mergeResponse(
+        previousResponse,
+        response.join('\n')
+      )
+      : response.join('\n');
+
+    // Full response is processed no MD commands needed
+    if (stopMD(processedResponse)) {
+      return processedResponse;
+    }
+
+    // Processing MD commands
+    return executeCommandWithRetry(MD_COMMAND).then(
+      (mdResponse) => (
+        mdResponse.join('\n') === response.join('\n')
+          ? processedResponse
+          : processResponse(mdResponse, stopMD, processedResponse)
+      )
+    );
+  };
+
   // Get terminal ID
   const getTerminalId = (sessionToken) => getHashSubstr(sessionToken);
 
   const terminal = {
     getToken: getSessionToken,
-    executeCommand: async (rawCommand, stopMD = defaultStopMD) => {
+    executeCommand: async (command, stopMD = defaultStopMD) => {
       try {
         const sessionToken = await getSessionToken();
         const terminalId = getTerminalId(sessionToken);
-        const command = rawCommand.replace(/;/g, '\t');
 
         if (debug) {
           log(`[${terminalId}] Terminal request:\n${command}`);
         }
 
-        const screen = await commandRetry({ service, command, sessionToken });
+        const screen = await executeCommandWithRetry(command);
         const response = await processResponse(screen, stopMD);
 
         if (debug) {
