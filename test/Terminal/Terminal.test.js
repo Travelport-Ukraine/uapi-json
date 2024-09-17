@@ -313,7 +313,7 @@ describe('#Terminal', function terminalTest() {
         });
     });
   });
-  describe.only('Handling uapi errors', () => {
+  describe('Handling uapi errors', () => {
     beforeEach(() => {
       // Resetting spies
       getSessionToken.resetHistory();

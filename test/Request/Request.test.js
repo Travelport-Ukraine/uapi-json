@@ -12,6 +12,8 @@ const { expect } = chai;
 chai.use(sinonChai);
 
 const templates = require('../../src/Services/Air/templates');
+const terminalTemplates = require('../../src/Services/Terminal/templates');
+const config = require('../testconfig');
 
 const errorXML = fs.readFileSync(path.join(
   __dirname,
@@ -119,7 +121,6 @@ describe('#Request', () => {
           expect(console.log).to.have.callCount(6);
         });
     });
-
     it('should test custom log function with success', () => {
       const log = sinon.spy((...args) => {
         console.log(args);
@@ -133,7 +134,6 @@ describe('#Request', () => {
           expect(log).to.have.callCount(6);
         });
     });
-
     it('should test custom log function with error', () => {
       const log = sinon.spy((...args) => {
         console.log(args);
@@ -147,7 +147,6 @@ describe('#Request', () => {
           expect(log).to.have.callCount(6);
         });
     });
-
     it('should test result of parser as string', () => {
       const log = sinon.spy((...args) => {
         console.log(args);
@@ -162,6 +161,57 @@ describe('#Request', () => {
         .then(() => {
           expect(log).to.have.callCount(6);
         });
+    });
+    it('should handle SOAP:Fault in case when sent with 500 header', async () => {
+      const uapiRequest = proxyquire('../../src/Request/uapi-request', {
+        axios: {
+          request: async () => {
+            const error = new Error('Request failed with status code 500');
+            error.response = {
+              status: 500,
+              data: '<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SOAP:Body><SOAP:Fault><faultcode>Server.System</faultcode><faultstring>String index out of range: 6</faultstring><detail><common_v33_0:ErrorInfo xmlns:common_v33_0="http://www.travelport.com/schema/common_v33_0"><common_v33_0:Code>1</common_v33_0:Code><common_v33_0:Service>SYSTEM</common_v33_0:Service><common_v33_0:Type>System</common_v33_0:Type><common_v33_0:Description>Unexpected system error.</common_v33_0:Description><common_v33_0:TransactionId>8D8D39030A0E7DE522FBC89CC3DAC930</common_v33_0:TransactionId></common_v33_0:ErrorInfo></detail></SOAP:Fault></SOAP:Body></SOAP:Envelope>',
+            };
+            throw error;
+          },
+        },
+      });
+
+      const errorHandler = sinon.mock().resolves({ error: 'handled' });
+
+      const uapiRequestParams = [
+        'URL',
+        config,
+        terminalTemplates.request,
+        null,
+        (params) => params,
+        errorHandler,
+        (res) => res,
+        true,
+      ];
+
+      const request = uapiRequest(...uapiRequestParams);
+      const requestParams = {
+        sessionToken: 'SESSION_TOKEN',
+        command: 'ER',
+      };
+
+      const res = await request(requestParams);
+      expect(res).to.deep.equal({ error: 'handled' });
+
+      expect(errorHandler).to.be.calledOnceWith({
+        faultcode: 'Server.System',
+        faultstring: 'String index out of range: 6',
+        detail: {
+          'common_v33_0:ErrorInfo': {
+            'common_v33_0:Code': '1',
+            'common_v33_0:Service': 'SYSTEM',
+            'common_v33_0:Type': 'System',
+            'common_v33_0:Description': 'Unexpected system error.',
+            'common_v33_0:TransactionId': '8D8D39030A0E7DE522FBC89CC3DAC930',
+            'xmlns:common_v33_0': 'http://www.travelport.com/schema/common_v33_0'
+          }
+        }
+      });
     });
   });
 });
