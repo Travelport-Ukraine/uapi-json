@@ -75,61 +75,71 @@ module.exports = function uapiRequest(
           return reqType;
         }));
 
-    const sendRequest = function (xml) {
+    const sendRequest = async (xml) => {
       if (debugMode) {
         log('Request URL: ', service);
         log('Request XML: ', pd.xml(xml));
       }
-      return axios.request({
-        url: service,
-        method: 'POST',
-        timeout: config.timeout || 5000,
-        auth: {
-          username: auth.username,
-          password: auth.password,
-        },
-        headers: {
-          'Accept-Encoding': 'gzip',
-          'Content-Type': 'text/xml',
-        },
-        data: xml,
-      })
-        .then((response) => {
-          if (debugMode) {
-            log('Response SOAP: ', pd.xml(response.data));
-          }
-          return response.data;
-        })
-        .catch((e) => {
-          const rsp = e.response;
 
-          if (['ECONNREFUSED', 'ECONNRESET'].includes(e.code)) {
-            return Promise.reject(new RequestRuntimeError.UAPIServiceError(e));
-          }
-
-          if (['ECONNABORTED'].includes(e.code)) {
-            return Promise.reject(new RequestRuntimeError.UAPIServiceTimeout(e));
-          }
-
-          if (!rsp) {
-            if (debugMode) {
-              log('Unexpected Error: ', pd.json(e));
-            }
-
-            return Promise.reject(new RequestSoapError.SoapUnexpectedError(e));
-          }
-
-          const error = {
-            status: rsp.status,
-            data: rsp.data,
-          };
-
-          if (debugMode) {
-            log('Error Response SOAP: ', pd.json(error));
-          }
-
-          return Promise.reject(new RequestSoapError.SoapRequestError(error));
+      try {
+        const response = await axios.request({
+          url: service,
+          method: 'POST',
+          timeout: config.timeout || 5000,
+          auth: {
+            username: auth.username,
+            password: auth.password,
+          },
+          headers: {
+            'Accept-Encoding': 'gzip',
+            'Content-Type': 'text/xml',
+          },
+          data: xml,
         });
+
+        if (debugMode) {
+          log('Response SOAP: ', pd.xml(response.data));
+        }
+
+        return response.data;
+      } catch (e) {
+        const rsp = e.response;
+
+        if (['ECONNREFUSED', 'ECONNRESET'].includes(e.code)) {
+          throw new RequestRuntimeError.UAPIServiceError(e);
+        }
+
+        if (['ECONNABORTED'].includes(e.code)) {
+          throw new RequestRuntimeError.UAPIServiceTimeout(e);
+        }
+
+        if (!rsp) {
+          if (debugMode) {
+            log('Unexpected Error: ', pd.json(e));
+          }
+
+          throw new RequestSoapError.SoapUnexpectedError(e);
+        }
+
+        // TVPT error response with 500 header
+        if (rsp.data.toUpperCase().includes('SOAP:FAULT')) {
+          if (debugMode) {
+            log('Response SOAP: ', pd.xml(rsp.data));
+          }
+          return rsp.data;
+        }
+
+        const error = {
+          status: rsp.status,
+          data: rsp.data,
+        };
+
+        if (debugMode) {
+          log('Error Response SOAP: ', pd.json(error));
+        }
+
+        throw new RequestSoapError.SoapRequestError(error);
+      }
     };
 
     const parseResponse = function (response, parseParams) {
@@ -146,6 +156,7 @@ module.exports = function uapiRequest(
     };
 
     const validateSOAP = function (parsedXML) {
+      console.log(parsedXML);
       if (parsedXML['SOAP:Fault']) {
         if (debugMode > 2) {
           log('Parsed error response', pd.json(parsedXML));
