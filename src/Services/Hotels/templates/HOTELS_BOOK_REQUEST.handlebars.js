@@ -5,7 +5,7 @@ module.exports = `
         <univ:HotelCreateReservationReq
             xmlns:com="http://www.travelport.com/schema/common_v52_0"
             xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0"
-            xmlns:hotel="http://www.travelport.com/schema/hotel_v47_0"
+            xmlns:hotel="http://www.travelport.com/schema/hotel_v52_0"
             xmlns:univ="http://www.travelport.com/schema/universal_v52_0"
             ProviderCode="TRM"
             TargetBranch="{{{TargetBranch}}}"
@@ -41,12 +41,12 @@ module.exports = `
 
 
             {{#rates}}
-            <hotel:HotelRateDetail xmlns:hotel="http://www.travelport.com/schema/hotel_v47_0"  RatePlanType="{{& RatePlanType}}" RateSupplier="{{& RateSupplier}}" RateOfferId="{{& RateOfferId}}" Base="{{& Base.currency}}{{& Base.value}}" Tax="{{& Tax.currency}}{{& Tax.value}}" Total="{{& Total.currency}}{{& Total.value}}" Surcharge="{{& Surcharge.currency}}{{& Surcharge.value}}" />
+            <hotel:HotelRateDetail xmlns:hotel="http://www.travelport.com/schema/hotel_v52_0"  RatePlanType="{{& RatePlanType}}" RateSupplier="{{& RateSupplier}}" RateOfferId="{{& RateOfferId}}" Base="{{& Base.currency}}{{& Base.value}}" Tax="{{& Tax.currency}}{{& Tax.value}}" Total="{{& Total.currency}}{{& Total.value}}" Surcharge="{{& Surcharge.currency}}{{& Surcharge.value}}" />
             {{/rates}}
 
-            <hotel:HotelProperty xmlns:hotel="http://www.travelport.com/schema/hotel_v47_0" HotelChain="{{& HotelChain}}" HotelCode="{{& HotelCode}}" {{#if Name}} Name="{{Name}}" {{/if}}>
+            <hotel:HotelProperty xmlns:hotel="http://www.travelport.com/schema/hotel_v52_0" HotelChain="{{& HotelChain}}" HotelCode="{{& HotelCode}}" {{#if Name}} Name="{{Name}}" {{/if}}>
             </hotel:HotelProperty>
-            <hotel:HotelStay xmlns:hot="http://www.travelport.com/schema/hotel_v47_0">
+            <hotel:HotelStay xmlns:hot="http://www.travelport.com/schema/hotel_v52_0">
                 <hotel:CheckinDate>{{{startDate}}}</hotel:CheckinDate>
                 <hotel:CheckoutDate>{{{endDate}}}</hotel:CheckoutDate>
             </hotel:HotelStay>
@@ -59,7 +59,7 @@ module.exports = `
             <common_v52_0:HostToken Host="TRM">
                 {{& HostToken}}
             </common_v52_0:HostToken>
-           <hot:BookingGuestInformation xmlns:hot="http://www.travelport.com/schema/hotel_v47_0">
+           <hot:BookingGuestInformation xmlns:hot="http://www.travelport.com/schema/hotel_v52_0">
                 {{#roomsRefs}}
                <hot:Room>
                    <hot:Adults>{{& adults}}</hot:Adults>
