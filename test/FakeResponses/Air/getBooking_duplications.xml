@@ -2,47 +2,47 @@
   xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP:Body>
     <universal:UniversalRecordImportRsp TraceId="" TransactionId="DD9D84830A0E7C6AC05650BA362B0E17" ResponseTime="618" 
-      xmlns:universal="http://www.travelport.com/schema/universal_v47_0" 
-      xmlns:common_v47_0="http://www.travelport.com/schema/common_v47_0" 
-      xmlns:air="http://www.travelport.com/schema/air_v47_0">
-      <common_v47_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record KKH25C</common_v47_0:ResponseMessage>
-      <common_v47_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival cities for segments Air PRG-TLV LY2522 2021-12-16T11:45:00.000+01:00 in 1G and Air PRG-TLV LY2522 2021-12-16T11:45:00.000+01:00 in 1G for traveler KLIMOVA/MISA MRS</common_v47_0:ResponseMessage>
-      <common_v47_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival cities for segments Air TLV-PRG LY2521 2021-12-31T06:00:00.000+02:00 in 1G and Air TLV-PRG LY2521 2021-12-31T06:00:00.000+02:00 in 1G for traveler KLIMOVA/MISA MRS</common_v47_0:ResponseMessage>
-      <common_v47_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival times for segments Air PRG-TLV LY2522 2021-12-16T11:45:00.000+01:00 in 1G and Air PRG-TLV LY2522 2021-12-16T11:45:00.000+01:00 in 1G for traveler KLIMOVA/MISA MRS</common_v47_0:ResponseMessage>
-      <common_v47_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival times for segments Air TLV-PRG LY2521 2021-12-31T06:00:00.000+02:00 in 1G and Air TLV-PRG LY2521 2021-12-31T06:00:00.000+02:00 in 1G for traveler KLIMOVA/MISA MRS</common_v47_0:ResponseMessage>
+      xmlns:universal="http://www.travelport.com/schema/universal_v52_0" 
+      xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0" 
+      xmlns:air="http://www.travelport.com/schema/air_v52_0">
+      <common_v52_0:ResponseMessage Code="0" Type="Warning" ProviderCode="1G">PNR already exists in Universal Record KKH25C</common_v52_0:ResponseMessage>
+      <common_v52_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival cities for segments Air PRG-TLV LY2522 2021-12-16T11:45:00.000+01:00 in 1G and Air PRG-TLV LY2522 2021-12-16T11:45:00.000+01:00 in 1G for traveler KLIMOVA/MISA MRS</common_v52_0:ResponseMessage>
+      <common_v52_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival cities for segments Air TLV-PRG LY2521 2021-12-31T06:00:00.000+02:00 in 1G and Air TLV-PRG LY2521 2021-12-31T06:00:00.000+02:00 in 1G for traveler KLIMOVA/MISA MRS</common_v52_0:ResponseMessage>
+      <common_v52_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival times for segments Air PRG-TLV LY2522 2021-12-16T11:45:00.000+01:00 in 1G and Air PRG-TLV LY2522 2021-12-16T11:45:00.000+01:00 in 1G for traveler KLIMOVA/MISA MRS</common_v52_0:ResponseMessage>
+      <common_v52_0:ResponseMessage Code="1303" Type="Warning" ProviderCode="1G">Continuity Check - Validate departure/arrival times for segments Air TLV-PRG LY2521 2021-12-31T06:00:00.000+02:00 in 1G and Air TLV-PRG LY2521 2021-12-31T06:00:00.000+02:00 in 1G for traveler KLIMOVA/MISA MRS</common_v52_0:ResponseMessage>
       <universal:UniversalRecord LocatorCode="KKH25C" Version="53" Status="Active">
-        <common_v47_0:BookingTraveler Key="K/G1Xs1xnDKAFqSYTjAAAA==">
-          <common_v47_0:BookingTravelerName First="JOSEF MR" Last="KLIMO"/>
-        </common_v47_0:BookingTraveler>
-        <common_v47_0:BookingTraveler Key="K/G1Xs1xnDKAaqSYTjAAAA==">
-          <common_v47_0:BookingTravelerName First="MISA MRS" Last="KLIMOVA"/>
-        </common_v47_0:BookingTraveler>
-        <common_v47_0:ActionStatus Key="rz6xTzYynDKAIPbcNFAAAA==" Type="ACTIVE" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" ProviderCode="1G"/>
-        <common_v47_0:ActionStatus Key="Kcf0TzN0nDKASj05MFAAAA==" Type="ACTIVE" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" ProviderCode="1G"/>
+        <common_v52_0:BookingTraveler Key="K/G1Xs1xnDKAFqSYTjAAAA==">
+          <common_v52_0:BookingTravelerName First="JOSEF MR" Last="KLIMO"/>
+        </common_v52_0:BookingTraveler>
+        <common_v52_0:BookingTraveler Key="K/G1Xs1xnDKAaqSYTjAAAA==">
+          <common_v52_0:BookingTravelerName First="MISA MRS" Last="KLIMOVA"/>
+        </common_v52_0:BookingTraveler>
+        <common_v52_0:ActionStatus Key="rz6xTzYynDKAIPbcNFAAAA==" Type="ACTIVE" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" ProviderCode="1G"/>
+        <common_v52_0:ActionStatus Key="Kcf0TzN0nDKASj05MFAAAA==" Type="ACTIVE" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" ProviderCode="1G"/>
         <universal:ProviderReservationInfo Key="K/G1Xs1xnDKA9ARYTjAAAA==" ProviderCode="1G" LocatorCode="Q04R37" CreateDate="2021-08-24T13:35:26.550+00:00" ModifiedDate="2021-11-01T22:27:40.497+00:00" HostCreateDate="2021-06-03" Imported="true" OwningPCC="79YE">
           <universal:ProviderReservationDetails ProviderReservationDetail="false" CustomCheck="false" ProviderProfile="false" DivideDetails="true" EnhancedItinModifiers="false" IntegratedContent="false" Cruise="false" RailSegment="false"/>
         </universal:ProviderReservationInfo>
         <air:AirReservation LocatorCode="KKH26I" CreateDate="2021-08-24T13:35:25.951+00:00" ModifiedDate="2021-11-01T22:22:14.644+00:00">
-          <common_v47_0:SupplierLocator SupplierCode="LY" SupplierLocatorCode="RS2UTJ" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" CreateDateTime="2021-08-24T13:31:00.000+00:00"/>
+          <common_v52_0:SupplierLocator SupplierCode="LY" SupplierLocatorCode="RS2UTJ" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" CreateDateTime="2021-08-24T13:31:00.000+00:00"/>
           <air:DocumentInfo>
             <air:TicketInfo Number="1149904154921" TicketIssueDate="2021-06-03T00:00:00.000+02:00" IATANumber="99999992" TicketingAgentSignOn="N347373" Status="N" BookingTravelerRef="K/G1Xs1xnDKAaqSYTjAAAA==">
-              <common_v47_0:Name First="MISA MRS" Last="KLIMOVA"/>
+              <common_v52_0:Name First="MISA MRS" Last="KLIMOVA"/>
             </air:TicketInfo>
             <air:TicketInfo Number="1149904184710" TicketIssueDate="2021-08-24T00:00:00.000+02:00" IATANumber="99999992" TicketingAgentSignOn="ZV6U4WS" Status="V" BookingTravelerRef="K/G1Xs1xnDKAaqSYTjAAAA==">
-              <common_v47_0:Name First="MISA MRS" Last="KLIMOVA"/>
+              <common_v52_0:Name First="MISA MRS" Last="KLIMOVA"/>
               <air:ExchangedTicketInfo Number="1149904154921"/>
             </air:TicketInfo>
             <air:TicketInfo Number="1149904239440" TicketIssueDate="2021-10-24T00:00:00.000+02:00" IATANumber="99999992" TicketingAgentSignOn="ZV5A5N" Status="V" BookingTravelerRef="K/G1Xs1xnDKAaqSYTjAAAA==">
-              <common_v47_0:Name First="MISA MRS" Last="KLIMOVA"/>
+              <common_v52_0:Name First="MISA MRS" Last="KLIMOVA"/>
               <air:ExchangedTicketInfo Number="1149904154921"/>
             </air:TicketInfo>
             <air:TicketInfo Number="1149904239441" TicketIssueDate="2021-10-24T00:00:00.000+02:00" IATANumber="99999992" TicketingAgentSignOn="ZV6U4WS" Status="V" BookingTravelerRef="K/G1Xs1xnDKAaqSYTjAAAA==">
-              <common_v47_0:Name First="MISA MRS" Last="KLIMOVA"/>
+              <common_v52_0:Name First="MISA MRS" Last="KLIMOVA"/>
               <air:ExchangedTicketInfo Number="1149904154921"/>
             </air:TicketInfo>
           </air:DocumentInfo>
-          <common_v47_0:BookingTravelerRef Key="K/G1Xs1xnDKAaqSYTjAAAA=="/>
-          <common_v47_0:ProviderReservationInfoRef Key="K/G1Xs1xnDKA9ARYTjAAAA=="/>
+          <common_v52_0:BookingTravelerRef Key="K/G1Xs1xnDKAaqSYTjAAAA=="/>
+          <common_v52_0:ProviderReservationInfoRef Key="K/G1Xs1xnDKA9ARYTjAAAA=="/>
           <air:AirSegment Key="rz6xTzYynDKAIUbcNFAAAA==" Group="0" Carrier="LY" CabinClass="Economy" FlightNumber="2522" ProviderCode="1G" Origin="PRG" Destination="TLV" DepartureTime="2021-12-16T11:45:00.000+01:00" ArrivalTime="2021-12-16T16:25:00.000+02:00" TravelTime="220" ClassOfService="S" ETicketability="Yes" Equipment="739" Status="HK" ChangeOfPlane="false" GuaranteedPaymentCarrier="No" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" TravelOrder="1" ProviderSegmentOrder="1" OptionalServicesIndicator="false">
             <air:FlightDetails Key="rz6xTzYynDKAeWbcNFAAAA==" Origin="PRG" Destination="TLV" DepartureTime="2021-12-16T11:45:00.000+01:00" ArrivalTime="2021-12-16T16:25:00.000+02:00" FlightTime="220" TravelTime="220" Equipment="739" OriginTerminal="1" DestinationTerminal="3" AutomatedCheckin="false"/>
           </air:AirSegment>
@@ -62,46 +62,46 @@
             <air:NameInfo First="MISA MRS" Last="KLIMOVA"/>
           </air:EMDTravelerInfo>
         </air:EMDSummaryInfo>
-        <common_v47_0:GeneralRemark Key="K/G1Xs1xnDKAwqSYTjAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-06-03T10:29:00.000+00:00">
-          <common_v47_0:RemarkData>ADTK1GTOLY BY 06JUN 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
-        </common_v47_0:GeneralRemark>
-        <common_v47_0:GeneralRemark Key="K/G1Xs1xnDKAxqSYTjAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-08-24T13:31:00.000+00:00">
-          <common_v47_0:RemarkData>ADTK1GTOLY BY 27AUG 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
-        </common_v47_0:GeneralRemark>
-        <common_v47_0:GeneralRemark Key="3y/3Xs2znDKA+dTgWjAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-08-24T14:18:00.000+00:00">
-          <common_v47_0:RemarkData>ADTK1GTOLY BY 27AUG 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
-        </common_v47_0:GeneralRemark>
-        <common_v47_0:GeneralRemark Key="3y/3Xs2znDKA/dTgWjAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-08-24T14:18:00.000+00:00">
-          <common_v47_0:RemarkData>ADTK1GTOLY BY 27AUG 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
-        </common_v47_0:GeneralRemark>
-        <common_v47_0:GeneralRemark Key="Hm7hxxDynDKAirPWJVAAAA==" Category="-S" TypeInGds="Alpha" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" CreateDate="2021-10-19T12:33:00.000+00:00">
-          <common_v47_0:RemarkData>SPLIT PTY/19OCT/5NAG/QSB/0DPG8B</common_v47_0:RemarkData>
-        </common_v47_0:GeneralRemark>
-        <common_v47_0:GeneralRemark Key="Hm7hxxDynDKAjrPWJVAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-10-19T12:29:00.000+00:00">
-          <common_v47_0:RemarkData>ADTK1GTOLY BY 22OCT 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
-        </common_v47_0:GeneralRemark>
-        <common_v47_0:GeneralRemark Key="ydCexxHynDKA1j+JTeAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-10-24T10:56:00.000+00:00">
-          <common_v47_0:RemarkData>ADTK1GTOLY BY 31OCT 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
-        </common_v47_0:GeneralRemark>
-        <common_v47_0:GeneralRemark Key="kRTfxxeynDKAHknADiAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-10-25T08:23:00.000+00:00">
-          <common_v47_0:RemarkData>ADTK1GTOLY BY 01NOV 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
-        </common_v47_0:GeneralRemark>
-        <common_v47_0:GeneralRemark Key="rz6xTzYynDKAXPbcNFAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-11-01T20:54:00.000+00:00">
-          <common_v47_0:RemarkData>ADTK1GTOLY BY 08NOV 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
-        </common_v47_0:GeneralRemark>
-        <common_v47_0:GeneralRemark Key="Kcf0TzN0nDKATj05MFAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-11-01T20:54:00.000+00:00">
-          <common_v47_0:RemarkData>ADTK1GTOLY BY 08NOV 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v47_0:RemarkData>
-        </common_v47_0:GeneralRemark>
-        <common_v47_0:AgencyInfo>
-          <common_v47_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2021-08-24T13:35:25.853+00:00"/>
-          <common_v47_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2021-11-01T22:22:14.648+00:00"/>
-          <common_v47_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2021-08-24T13:35:26.548+00:00"/>
-        </common_v47_0:AgencyInfo>
-        <common_v47_0:AgencyContactInfo>
-          <common_v47_0:PhoneNumber Key="K/G1Xs1xnDKAumSYTjAAAA==" Type="Agency" Location="PRG" Number="222252419">
-            <common_v47_0:ProviderReservationInfoRef Key="K/G1Xs1xnDKA9ARYTjAAAA=="/>
-          </common_v47_0:PhoneNumber>
-        </common_v47_0:AgencyContactInfo>
+        <common_v52_0:GeneralRemark Key="K/G1Xs1xnDKAwqSYTjAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-06-03T10:29:00.000+00:00">
+          <common_v52_0:RemarkData>ADTK1GTOLY BY 06JUN 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v52_0:RemarkData>
+        </common_v52_0:GeneralRemark>
+        <common_v52_0:GeneralRemark Key="K/G1Xs1xnDKAxqSYTjAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-08-24T13:31:00.000+00:00">
+          <common_v52_0:RemarkData>ADTK1GTOLY BY 27AUG 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v52_0:RemarkData>
+        </common_v52_0:GeneralRemark>
+        <common_v52_0:GeneralRemark Key="3y/3Xs2znDKA+dTgWjAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-08-24T14:18:00.000+00:00">
+          <common_v52_0:RemarkData>ADTK1GTOLY BY 27AUG 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v52_0:RemarkData>
+        </common_v52_0:GeneralRemark>
+        <common_v52_0:GeneralRemark Key="3y/3Xs2znDKA/dTgWjAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-08-24T14:18:00.000+00:00">
+          <common_v52_0:RemarkData>ADTK1GTOLY BY 27AUG 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v52_0:RemarkData>
+        </common_v52_0:GeneralRemark>
+        <common_v52_0:GeneralRemark Key="Hm7hxxDynDKAirPWJVAAAA==" Category="-S" TypeInGds="Alpha" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" CreateDate="2021-10-19T12:33:00.000+00:00">
+          <common_v52_0:RemarkData>SPLIT PTY/19OCT/5NAG/QSB/0DPG8B</common_v52_0:RemarkData>
+        </common_v52_0:GeneralRemark>
+        <common_v52_0:GeneralRemark Key="Hm7hxxDynDKAjrPWJVAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-10-19T12:29:00.000+00:00">
+          <common_v52_0:RemarkData>ADTK1GTOLY BY 22OCT 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v52_0:RemarkData>
+        </common_v52_0:GeneralRemark>
+        <common_v52_0:GeneralRemark Key="ydCexxHynDKA1j+JTeAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-10-24T10:56:00.000+00:00">
+          <common_v52_0:RemarkData>ADTK1GTOLY BY 31OCT 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v52_0:RemarkData>
+        </common_v52_0:GeneralRemark>
+        <common_v52_0:GeneralRemark Key="kRTfxxeynDKAHknADiAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-10-25T08:23:00.000+00:00">
+          <common_v52_0:RemarkData>ADTK1GTOLY BY 01NOV 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v52_0:RemarkData>
+        </common_v52_0:GeneralRemark>
+        <common_v52_0:GeneralRemark Key="rz6xTzYynDKAXPbcNFAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-11-01T20:54:00.000+00:00">
+          <common_v52_0:RemarkData>ADTK1GTOLY BY 08NOV 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v52_0:RemarkData>
+        </common_v52_0:GeneralRemark>
+        <common_v52_0:GeneralRemark Key="Kcf0TzN0nDKATj05MFAAAA==" Category="Vendor" TypeInGds="Vendor" SupplierType="Air" ProviderReservationInfoRef="K/G1Xs1xnDKA9ARYTjAAAA==" SupplierCode="1A" Direction="Incoming" CreateDate="2021-11-01T20:54:00.000+00:00">
+          <common_v52_0:RemarkData>ADTK1GTOLY BY 08NOV 2300 PRG TIME ZONE OTHERWISE WILL BE XLD</common_v52_0:RemarkData>
+        </common_v52_0:GeneralRemark>
+        <common_v52_0:AgencyInfo>
+          <common_v52_0:AgentAction ActionType="Created" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2021-08-24T13:35:25.853+00:00"/>
+          <common_v52_0:AgentAction ActionType="Modified" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2021-11-01T22:22:14.648+00:00"/>
+          <common_v52_0:AgentAction ActionType="Ticketed" AgentCode="UAPI7980742859-07362D4F" BranchCode="P2731609" AgencyCode="S1473516" EventTime="2021-08-24T13:35:26.548+00:00"/>
+        </common_v52_0:AgencyInfo>
+        <common_v52_0:AgencyContactInfo>
+          <common_v52_0:PhoneNumber Key="K/G1Xs1xnDKAumSYTjAAAA==" Type="Agency" Location="PRG" Number="222252419">
+            <common_v52_0:ProviderReservationInfoRef Key="K/G1Xs1xnDKA9ARYTjAAAA=="/>
+          </common_v52_0:PhoneNumber>
+        </common_v52_0:AgencyContactInfo>
       </universal:UniversalRecord>
     </universal:UniversalRecordImportRsp>
   </SOAP:Body>

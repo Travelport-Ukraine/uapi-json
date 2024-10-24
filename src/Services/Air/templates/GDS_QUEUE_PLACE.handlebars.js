@@ -2,7 +2,7 @@ module.exports = `
 <soapenv:Envelope
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
   xmlns:univ="http://www.travelport.com/schema/universal_v52_0"
-  xmlns:gds="http://www.travelport.com/schema/gdsQueue_v47_0"
+  xmlns:gds="http://www.travelport.com/schema/gdsQueue_v52_0"
   xmlns:com="http://www.travelport.com/schema/common_v52_0"
   >
   <soapenv:Header />

@@ -163,7 +163,7 @@ function checkEMDError(err, errString, transId) {
     faultstring: errString,
     detail: {
       'common_v51_0:ErrorInfo': {
-        'common_v51_0:Code': '13041', 'common_v51_0:Service': 'URSVC', 'common_v51_0:Type': 'Business', 'common_v51_0:Description': 'EMD validation error', 'common_v51_0:TraceId': '', 'common_v51_0:TransactionId': transId, 'xmlns:common_v51_0': 'https://www.travelport.com/schema/common_v51_0'
+        'common_v51_0:Code': '13041', 'common_v51_0:Service': 'URSVC', 'common_v51_0:Type': 'Business', 'common_v51_0:Description': 'EMD validation error', 'common_v51_0:TraceId': '', 'common_v51_0:TransactionId': transId, 'xmlns:common_v51_0': 'https://www.travelport.com/schema/common_v52_0'
       }
     }
   });
@@ -1883,7 +1883,7 @@ describe('#AirParser', () => {
     });
 
     it('should parse booking with duplicated segments and should remove duplications', async () => {
-      const uParser = new Parser('universal:UniversalRecordImportRsp', 'v36_0', { });
+      const uParser = new Parser('universal:UniversalRecordImportRsp', 'v52_0', { });
       const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
       const xml = fs.readFileSync(`${xmlFolder}/getBooking_duplications.xml`).toString();
       const json = await uParser.parse(xml);

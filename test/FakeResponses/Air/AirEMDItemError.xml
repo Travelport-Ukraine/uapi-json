@@ -6,7 +6,7 @@
       <faultstring>ERC-364-INVALID DOCUMENT NUMBER</faultstring>
       <detail>
         <common_v51_0:ErrorInfo 
-          xmlns:common_v51_0="https://www.travelport.com/schema/common_v51_0">
+          xmlns:common_v51_0="https://www.travelport.com/schema/common_v52_0">
           <common_v51_0:Code>13041</common_v51_0:Code>
           <common_v51_0:Service>URSVC</common_v51_0:Service>
           <common_v51_0:Type>Business</common_v51_0:Type>

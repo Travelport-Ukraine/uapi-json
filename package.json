@@ -1,6 +1,6 @@
 {
   "name": "uapi-json",
-  "version": "1.17.2",
+  "version": "1.17.3",
   "description": "Travelport Universal API",
   "main": "src/",
   "files": [
@@ -15,7 +15,8 @@
     "coveralls": "nyc report --reporter=text-lcov > coverage.lcov",
     "fix": "eslint --fix src/ test/",
     "lint": "eslint src/ test/",
-    "prepublish": "npm run lint && npm run test"
+    "prepublish": "npm run lint && npm run test",
+    "cleanup": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
   },
   "repository": {
     "type": "git",
@@ -36,27 +37,27 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "joi": "^17.6.2",
-    "axios": "^1.6.2",
+    "axios": "^1.7.7",
     "galileo-screen": "1.0.5",
-    "handlebars": "^4.7.7",
+    "handlebars": "^4.7.8",
     "handlebars-helper-equal": "^1.0.0",
-    "moment": "^2.29.4",
+    "joi": "^17.13.3",
+    "moment": "^2.30.1",
     "node-errors-helpers": "^1.0.0",
     "pretty-data": "^0.40.0",
-    "promise-retry": "^1.1.1",
-    "xml2js": "^0.5.0"
+    "promise-retry": "^2.0.1",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
-    "chai": "^4.3.7",
+    "chai": "^4.5.0",
     "eslint": "^8.39.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.0",
-    "mocha": "^10.2.0",
-    "nyc": "^15.1.0",
+    "mocha": "^10.7.3",
+    "nyc": "^17.1.0",
     "proxyquire": "^2.1.3",
     "readline2": "^1.0.1",
-    "sinon": "^16.1.1",
+    "sinon": "^19.0.2",
     "sinon-chai": "^3.7.0"
   }
 }
