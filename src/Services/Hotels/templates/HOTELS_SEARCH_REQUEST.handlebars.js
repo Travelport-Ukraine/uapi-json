@@ -1,5 +1,5 @@
 module.exports = `
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hot="http://www.travelport.com/schema/hotel_v47_0" xmlns:com="http://www.travelport.com/schema/common_v52_0">
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hot="http://www.travelport.com/schema/hotel_v52_0" xmlns:com="http://www.travelport.com/schema/common_v52_0">
   <soapenv:Header/>
   <soapenv:Body>
     <hot:HotelSearchAvailabilityReq TargetBranch="{{TargetBranch}}" >

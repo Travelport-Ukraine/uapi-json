@@ -50,7 +50,7 @@ const requestError = proxyquire('../../src/Request/uapi-request', {
   axios: {
     request: () => {
       const err = new Error();
-      err.response = { status: 300, data: 3 };
+      err.response = { status: 300, data: '3' };
       return Promise.reject(err);
     }
   },
@@ -92,7 +92,7 @@ describe('#Request', () => {
           expect(err).to.be.an.instanceof(RequestSoapError.SoapRequestError);
           expect(err.data).to.not.equal(null);
           expect(err.data.status).to.be.equal(300);
-          expect(err.data.data).to.be.equal(3);
+          expect(err.data.data).to.be.equal('3');
           expect(console.log).to.have.callCount(4);
         });
     });
@@ -118,7 +118,7 @@ describe('#Request', () => {
       return request({})
         .then((response) => {
           expect(response).to.deep.equal({});
-          expect(console.log).to.have.callCount(6);
+          expect(console.log).to.have.callCount(7);
         });
     });
     it('should test custom log function with success', () => {
