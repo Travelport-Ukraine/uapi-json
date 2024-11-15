@@ -311,7 +311,8 @@ describe('#AirParser', () => {
   });
 
   describe('getTicket', () => {
-    function testTicket(result) {
+    function testTicket(result, options = {}) {
+      const { allowNoProviderLocatorCodeRetrieval = false } = options;
       expect(result).to.be.an('object');
       expect(result).to.include.all.keys([
         'uapi_ur_locator', 'uapi_reservation_locator', 'pnr', 'ticketNumber',
@@ -330,9 +331,11 @@ describe('#AirParser', () => {
           }
         );
       }
-      expect(result.uapi_ur_locator).to.match(pnrRegExp);
-      expect(result.uapi_reservation_locator).to.match(pnrRegExp);
-      expect(result.pnr).to.match(pnrRegExp);
+      if (!allowNoProviderLocatorCodeRetrieval) {
+        expect(result.uapi_ur_locator).to.match(pnrRegExp);
+        expect(result.uapi_reservation_locator).to.match(pnrRegExp);
+        expect(result.pnr).to.match(pnrRegExp);
+      }
       expect(result.ticketNumber).to.match(ticketRegExp);
       expect(result.platingCarrier).to.match(/^[A-Z0-9]{2}$/i);
       expect(result.ticketingPcc).to.match(/^[A-Z0-9]{3,4}$/i);
@@ -494,6 +497,23 @@ describe('#AirParser', () => {
         });
     });
 
+    it('should parse conjunction ticket with 3 parts and missing data', async () => {
+      const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v52_0', {});
+      const parseFunction = airParser.AIR_GET_TICKET;
+      const xml = fs.readFileSync(`${xmlFolder}/get-ticket-conjunction.xml`).toString();
+      const json = await uParser.parse(xml);
+      const parsingOptions = { allowNoProviderLocatorCodeRetrieval: true };
+      const result = parseFunction.call(uParser, json, parsingOptions);
+
+      testTicket(result, parsingOptions);
+      result.tickets.forEach((ticket) => {
+        const { ticketNumber, coupons } = ticket;
+        coupons.forEach((coupon) => {
+          expect(coupon.ticketNumber).to.equal(ticketNumber);
+        });
+      });
+    });
+
     it('should parse exchanged conjunction ticket', () => {
       const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v52_0', {});
       const parseFunction = airParser.AIR_GET_TICKET;
@@ -503,15 +523,14 @@ describe('#AirParser', () => {
         .then((json) => parseFunction.call(uParser, json))
         .then((result) => {
           testTicket(result);
-          const couponsStopover = [false, true, false, true];
+          const expectedStopovers = [false, true, false, true];
           const coupons = result.tickets.reduce(
             (acc, ticket) => acc.concat(ticket.coupons),
             []
           );
           console.log(coupons.map((c) => c.stopover));
-          coupons.forEach((coupon, index) => {
-            expect(coupon.stopover).to.be.equal(couponsStopover[index]);
-          });
+          const parsedStopovers = coupons.flatMap((coupon) => coupon.stopover);
+          expect(parsedStopovers).to.deep.equal(expectedStopovers);
           expect(result.priceInfoDetailsAvailable).to.equal(true);
           expect(result.exchangedTickets).to.have.length.above(0);
         });
@@ -720,7 +739,7 @@ describe('#AirParser', () => {
               expect(coupon).to.have.all.keys([
                 'couponNumber', 'from', 'to', 'departure', 'airline', 'flightNumber',
                 'fareBasisCode', 'status', 'notValidBefore', 'notValidAfter', 'bookingClass', 'stopover',
-                'key', 'ticketNumber',
+                'ticketNumber',
               ]);
               expect(coupon.couponNumber).to.match(/\d+/i);
               expect(coupon.from).to.match(/[A-Z]{3}/i);
@@ -789,7 +808,6 @@ describe('#AirParser', () => {
                 ticketNumber: '0809903654876',
                 coupons: [
                   {
-                    key: 'SGNQhOBAAA/Bn2KYVCAAAA==',
                     ticketNumber: '0809903654876',
                     couponNumber: '1',
                     from: 'KBP',
