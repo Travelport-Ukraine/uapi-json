@@ -1,0 +1,48 @@
+<SOAP:Envelope 
+  xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP:Body>
+    <air:AirRetrieveDocumentRsp TransactionId="E30219CD0A0EE00F5D97AF538AA4DED9" ResponseTime="416" 
+      xmlns:air="http://www.travelport.com/schema/air_v52_0" 
+      xmlns:common_v52_0="http://www.travelport.com/schema/common_v52_0">
+      <air:ETR Taxes="PLN2205.94" TourCode="PLS0011F" IssuedDate="2024-10-01T00:00:00.000+02:00" ProviderCode="1G" IATANumber="63210825" PseudoCityCode="5N14" CountryCode="PL" PlatingCarrier="VN">
+        <common_v52_0:BookingTraveler>
+          <common_v52_0:BookingTravelerName First="KATARZYNAMRS" Last="CYPRYNOWSKA"/>
+        </common_v52_0:BookingTraveler>
+        <common_v52_0:FormOfPayment Key="rb0W2KPAuDKAZGOEeaAAAA==" Type="Cash" Reusable="false" ProfileKey="VyWTtuxmQVG7+wwBcYO3tQ=="/>
+        <common_v52_0:Payment Key="rb0W2KPAuDKAaGOEeaAAAA==" Type="Itinerary" Amount="PLN5999.94" FormOfPaymentRef="rb0W2KPAuDKAZGOEeaAAAA=="/>
+        <air:FareCalc>WAW LO X/FRA VN SGN M/IT //HAN VN LPQ VN REP//PNH VN X/HAN VN X/LON LO WAW M/IT END ROE3.866426 XT 42.77DE109.71RA7.66C495.79JC57.47LA72.80O6114.95KX19.16L538.49T870.31UB1488.44YQ</air:FareCalc>
+        <air:Ticket TicketNumber="7385489198571" TicketStatus="N">
+          <air:Coupon CouponNumber="1" MarketingCarrier="LO" MarketingFlightNumber="381" Origin="WAW" Destination="FRA" DepartureTime="2024-10-16T07:40:00.000+02:00" StopoverCode="true" BookingClass="G" FareBasis="RL1YEUF" NotValidBefore="2024-10-16" NotValidAfter="2024-10-16" Status="F"/>
+          <air:Coupon CouponNumber="2" MarketingCarrier="VN" MarketingFlightNumber="30" Origin="FRA" Destination="SGN" DepartureTime="2024-10-16T14:35:00.000+02:00" StopoverCode="false" BookingClass="R" FareBasis="RL1YEUF" NotValidBefore="2024-10-16" NotValidAfter="2024-10-16" Status="F"/>
+          <air:Coupon CouponNumber="4" MarketingCarrier="VN" MarketingFlightNumber="931" Origin="HAN" Destination="LPQ" DepartureTime="2024-10-25T12:55:00.000+07:00" StopoverCode="true" BookingClass="B" FareBasis="LL1YEUF" NotValidBefore="2024-10-25" NotValidAfter="2024-10-25" Status="F"/>
+          <air:TourCode Value="PLS0011F"/>
+        </air:Ticket>
+        <air:Ticket TicketNumber="7385489198572" TicketStatus="N">
+          <air:Coupon CouponNumber="1" MarketingCarrier="VN" MarketingFlightNumber="931" Origin="LPQ" Destination="SAI" DepartureTime="2024-10-28T14:40:00.000+07:00" StopoverCode="true" BookingClass="B" FareBasis="LL1YEUF" NotValidBefore="2024-10-28" NotValidAfter="2024-10-28" Status="F"/>
+          <air:Coupon CouponNumber="3" MarketingCarrier="VN" MarketingFlightNumber="920" Origin="PNH" Destination="HAN" DepartureTime="2024-11-02T17:30:00.000+07:00" StopoverCode="true" BookingClass="B" FareBasis="LL1YEUF" NotValidBefore="2024-11-02" NotValidAfter="2024-11-02" Status="A"/>
+          <air:Coupon CouponNumber="4" MarketingCarrier="VN" MarketingFlightNumber="55" Origin="HAN" Destination="LHR" DepartureTime="2024-11-03T00:40:00.000+07:00" StopoverCode="false" BookingClass="L" FareBasis="LL1YEUF" NotValidBefore="2024-11-03" NotValidAfter="2024-11-03" Status="O"/>
+        </air:Ticket>
+        <air:Ticket TicketNumber="7385489198573" TicketStatus="N">
+          <air:Coupon CouponNumber="1" MarketingCarrier="LO" MarketingFlightNumber="282" Origin="LHR" Destination="WAW" DepartureTime="2024-11-03T10:25:00.000+00:00" StopoverCode="false" BookingClass="G" FareBasis="LL1YEUF" NotValidBefore="2024-11-03" NotValidAfter="2024-11-03" Status="O"/>
+        </air:Ticket>
+        <common_v52_0:Commission Level="Fare" Type="PercentBase" Percentage="0.01"/>
+        <air:AirPricingInfo Key="rb0W2KPAuDKAlUOEeaAAAA==" BasePrice="USD0.00" Taxes="PLN2205.94" PricingMethod="Auto" Ticketed="true">
+          <air:FareInfo Key="rb0W2KPAuDKApUOEeaAAAA==" FareBasis="RL1YEUF" PassengerTypeCode="ADT" Origin="WAW" Destination="FRA" EffectiveDate="2024-10-01T00:00:00.000+02:00"/>
+          <air:FareInfo Key="rb0W2KPAuDKAqUOEeaAAAA==" FareBasis="RL1YEUF" PassengerTypeCode="ADT" Origin="FRA" Destination="SGN" EffectiveDate="2024-10-01T00:00:00.000+02:00"/>
+          <air:FareInfo Key="rb0W2KPAuDKArUOEeaAAAA==" FareBasis="LL1YEUF" PassengerTypeCode="ADT" Origin="HAN" Destination="LPQ" EffectiveDate="2024-10-01T00:00:00.000+02:00"/>
+          <air:FareInfo Key="rb0W2KPAuDKAsUOEeaAAAA==" FareBasis="LL1YEUF" PassengerTypeCode="ADT" Origin="LPQ" Destination="SAI" EffectiveDate="2024-10-01T00:00:00.000+02:00"/>
+          <air:FareInfo Key="rb0W2KPAuDKAtUOEeaAAAA==" FareBasis="LL1YEUF" PassengerTypeCode="ADT" Origin="PNH" Destination="HAN" EffectiveDate="2024-10-01T00:00:00.000+02:00"/>
+          <air:FareInfo Key="rb0W2KPAuDKAuUOEeaAAAA==" FareBasis="LL1YEUF" PassengerTypeCode="ADT" Origin="HAN" Destination="LHR" EffectiveDate="2024-10-01T00:00:00.000+02:00"/>
+          <air:FareInfo Key="rb0W2KPAuDKAvUOEeaAAAA==" FareBasis="LL1YEUF" PassengerTypeCode="ADT" Origin="LHR" Destination="WAW" EffectiveDate="2024-10-01T00:00:00.000+02:00"/>
+          <air:TaxInfo Category="ND" Amount="PLN1.05" Key="rb0W2KPAuDKAmUOEeaAAAA=="/>
+          <air:TaxInfo Category="XW" Amount="PLN87.34" Key="rb0W2KPAuDKAnUOEeaAAAA=="/>
+          <air:TaxInfo Category="XT" Amount="PLN2117.55" Key="rb0W2KPAuDKAoUOEeaAAAA=="/>
+          <air:FareCalc>WAW LO X/FRA VN SGN M/IT //HAN VN LPQ VN REP//PNH VN X/HAN VN X/LON LO WAW M/IT END ROE3.866426 XT 42.77DE109.71RA7.66C495.79JC57.47LA72.80O6114.95KX19.16L538.49T870.31UB1488.44YQ</air:FareCalc>
+          <air:PassengerType Code="ADT">
+            <air:FareGuaranteeInfo GuaranteeType="Auto"/>
+          </air:PassengerType>
+        </air:AirPricingInfo>
+      </air:ETR>
+    </air:AirRetrieveDocumentRsp>
+  </SOAP:Body>
+</SOAP:Envelope>
