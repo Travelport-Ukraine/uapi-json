@@ -585,9 +585,8 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
   const exchangedTickets = [];
 
   const allCoupons = ticketsList.map((ticket) => {
-    return Object.entries(ticket['air:Coupon']).map(([couponKey, coupon]) => {
+    return Object.values(ticket['air:Coupon']).map((coupon) => {
       return {
-        key: couponKey,
         ticketNumber: ticket.TicketNumber,
         couponNumber: coupon.CouponNumber,
         from: coupon.Origin,
@@ -607,59 +606,54 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
     return all.concat(nextChunk);
   }, []);
 
-  const tickets = ticketsList.map(
-    (ticket) => {
-      if (ticket['air:ExchangedTicketInfo']) {
-        ticket['air:ExchangedTicketInfo'].forEach(
-          (t) => exchangedTickets.push(t.Number)
-        );
-      }
+  // Filling exchanged tickets array
+  ticketsList.forEach((ticket) => {
+    if (ticket['air:ExchangedTicketInfo']) {
+      ticket['air:ExchangedTicketInfo'].forEach(
+        (t) => exchangedTickets.push(t.Number)
+      );
+    }
+  });
 
-      const coupons = Object.keys(ticket['air:Coupon']).map(
-        (couponKey) => {
-          const allCouponsIndex = allCoupons.findIndex((ac) => ac.key === couponKey);
-          const coupon = allCoupons[allCouponsIndex];
-          const nextCoupon = allCoupons[allCouponsIndex + 1];
+  // Getting ticket coupons
+  const ticketsObject = allCoupons.reduce((acc, coupon, index) => {
+    const { ticketNumber } = coupon;
+    const ticket = acc[ticketNumber] || { ticketNumber, coupons: [] };
+    const { coupons } = ticket;
+    const nextCoupon = allCoupons[index + 1];
 
-          let bookingInfo = null;
-          // looking for fareInfo by it's fareBasis
-          // and for bookingInfo by correct FareInfoRef
-          if (airPricingInfo && airPricingInfo['air:FareInfo']) {
-            Object.keys(airPricingInfo['air:FareInfo']).forEach(
-              (fareKey) => {
-                const fare = airPricingInfo['air:FareInfo'][fareKey];
-                if (fare.FareBasis === coupon.FareBasis
-                  && airPricingInfo['air:BookingInfo']) {
-                  const bInfo = airPricingInfo['air:BookingInfo'].find(
-                    (info) => info.FareInfoRef === fareKey
-                  );
-
-                  if (bInfo) {
-                    bookingInfo = bInfo;
-                  }
-                }
-              }
+    let bookingInfo = null;
+    // looking for fareInfo by it's fareBasis
+    // and for bookingInfo by correct FareInfoRef
+    if (airPricingInfo && airPricingInfo['air:FareInfo']) {
+      Object.keys(airPricingInfo['air:FareInfo']).forEach(
+        (fareKey) => {
+          const fare = airPricingInfo['air:FareInfo'][fareKey];
+          if (fare.FareBasis === coupon.FareBasis && airPricingInfo['air:BookingInfo']) {
+            const bInfo = airPricingInfo['air:BookingInfo'].find(
+              (info) => info.FareInfoRef === fareKey
             );
-          }
 
-          return {
-            ...coupon,
-            stopover: (
-              nextCoupon
-                ? nextCoupon.stopover
-                : true
-            ),
-            ...(bookingInfo !== null ? { serviceClass: bookingInfo.CabinClass } : null)
-          };
+            if (bInfo) {
+              bookingInfo = bInfo;
+            }
+          }
         }
       );
-
-      return {
-        ticketNumber: ticket.TicketNumber,
-        coupons,
-      };
     }
-  );
+    const couponData = {
+      ...coupon,
+      stopover: (
+        nextCoupon
+          ? nextCoupon.stopover
+          : true
+      ),
+      ...(bookingInfo !== null ? { serviceClass: bookingInfo.CabinClass } : null)
+    };
+    return { ...acc, [ticketNumber]: { ...ticket, coupons: [...coupons, couponData] } };
+  }, {});
+
+  const tickets = Object.values(ticketsObject);
 
   const taxes = (airPricingInfo && airPricingInfo['air:TaxInfo'])
     ? Object.keys(airPricingInfo['air:TaxInfo']).map(
