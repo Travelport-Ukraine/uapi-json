@@ -35,13 +35,14 @@ module.exports = function uapiRequest(
   errorHandler,
   parseFunction,
   debugMode = false,
-  options = {}
+  options = {},
+  production = true
 ) {
   // Assign default value
   auth.provider = auth.provider || '1G';
   auth.region = auth.region || 'emea';
 
-  const config = configInit(auth.region);
+  const config = configInit(auth.region, production);
   const log = options.logFunction || console.log;
 
   // Performing checks
