@@ -313,7 +313,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
   Object.entries(results).forEach(([fareKey, price]) => {
     const [firstKey] = Object.keys(price['air:AirPricingInfo']);
     const thisFare = price['air:AirPricingInfo'][firstKey]; // get trips from first reservation
-    if (!thisFare.PlatingCarrier) {
+    if (provider !== 'ACH' && !thisFare.PlatingCarrier) {
       return;
     }
 
