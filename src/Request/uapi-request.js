@@ -156,7 +156,6 @@ module.exports = function uapiRequest(
     };
 
     const validateSOAP = function (parsedXML) {
-      console.log(parsedXML);
       if (parsedXML['SOAP:Fault']) {
         if (debugMode > 2) {
           log('Parsed error response', pd.json(parsedXML));

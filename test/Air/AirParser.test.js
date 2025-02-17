@@ -560,8 +560,6 @@ describe('#AirParser', () => {
               (acc, ticket) => acc.concat(ticket.coupons),
               []
             );
-
-            console.log(coupons);
             coupons.forEach((coupon, index) => {
               expect(coupon.stopover).to.be.equal(couponsStopover[index]);
             });
