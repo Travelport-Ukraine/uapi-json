@@ -117,50 +117,49 @@ module.exports = function (settings) {
   };
 
   // Getting session token
-  const getSessionToken = () => new Promise((resolve, reject) => {
+  const getSessionToken = async () => {
+    // Return error if not in correct state
     if (state.terminalState === TERMINAL_STATE_BUSY) {
-      reject(new TerminalRuntimeError.TerminalIsBusy());
-      return;
+      throw new TerminalRuntimeError.TerminalIsBusy();
     }
     if (state.terminalState === TERMINAL_STATE_CLOSED) {
-      reject(new TerminalRuntimeError.TerminalIsClosed());
-      return;
+      throw new TerminalRuntimeError.TerminalIsClosed();
     }
-    Object.assign(state, {
-      terminalState: TERMINAL_STATE_BUSY,
-    });
+
+    state.terminalState = TERMINAL_STATE_BUSY;
+
     // Return token if already obtained
     if (state.sessionToken !== null) {
-      resolve(state.sessionToken);
-      return;
+      return state.sessionToken;
     }
-    // Getting token
-    service.getSessionToken({ timeout })
-      .then((tokenData) => {
-        // Remember sesion token
-        Object.assign(state, tokenData);
-        // Return if no emulation needed
-        if (!emulatePcc) {
-          return tokenData.sessionToken;
-        }
-        // Emulate pcc
-        return service.executeCommand({
-          sessionToken: tokenData.sessionToken,
-          command: `SEM/${emulatePcc}/AG`,
-        }).then((response) => {
-          if (response[0].match(/duty code not authorised/i)) {
-            return Promise.reject(new TerminalRuntimeError.TerminalAuthIssue(response));
-          }
 
-          if (!response[0].match(/^PROCEED/)) {
-            return Promise.reject(new TerminalRuntimeError.TerminalEmulationFailed(response));
-          }
-          return Promise.resolve(tokenData.sessionToken);
-        });
-      })
-      .then(resolve)
-      .catch(reject);
-  });
+    const { sessionToken } = await service.getSessionToken({ timeout });
+    state.sessionToken = sessionToken;
+
+    if (!emulatePcc) {
+      state.terminalState = TERMINAL_STATE_READY;
+      return state.sessionToken;
+    }
+
+    const response = await service.executeCommand({
+      sessionToken,
+      command: `SEM/${emulatePcc}/AG`,
+    });
+
+    if (response[0].match(/duty code not authorised/i)) {
+      throw new TerminalRuntimeError.TerminalAuthIssue(response);
+    }
+
+    if (response[0].match(/INVALID ACCOUNT/)) {
+      throw new TerminalRuntimeError.InvalidAccount(response);
+    }
+
+    if (!response[0].match(/^PROCEED/)) {
+      throw new TerminalRuntimeError.TerminalEmulationFailed(response);
+    }
+
+    return sessionToken;
+  };
 
   // Runtime error handling
   const executeCommandWithRetry = async (command, times = DEFAULT_RETRY_TIMES) => {
@@ -210,7 +209,12 @@ module.exports = function (settings) {
   const getTerminalId = (sessionToken) => getHashSubstr(sessionToken);
 
   const terminal = {
-    getToken: getSessionToken,
+    getToken: async () => {
+      await getSessionToken();
+      // Needed here as getSessionToken marks terminal as busy
+      state.terminalState = TERMINAL_STATE_READY;
+      return state.sessionToken;
+    },
     executeCommand: async (command, stopMD = defaultStopMD) => {
       try {
         const sessionToken = await getSessionToken();
