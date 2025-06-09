@@ -47,6 +47,7 @@ Object.assign(TerminalRuntimeError, createErrorsList({
   ErrorClosingSession: 'Error closing session',
   NoAgreement: ['There is no agreement between current pcc and you trying to reach', errorCodes.Validation],
   TerminalAuthIssue: ['Temporary terminal auth issue. Please, try again later', errorCodes.Validation],
+  InvalidAccount: ['Invalid account', errorCodes.Validation],
   TerminalUnexpectedError: ['Unexpected error message is returned by Travelport system. Please check PNR and try again later.', errorCodes.Validation],
   TerminalUnexpectedFinancialError: ['Unexpected error message is returned by Travelport system. Please check PNR and new Fare calculation. If the problem persists, contact your local helpdesk.', errorCodes.Validation],
 }, TerminalRuntimeError));
