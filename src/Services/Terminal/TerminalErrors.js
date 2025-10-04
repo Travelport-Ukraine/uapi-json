@@ -50,6 +50,7 @@ Object.assign(TerminalRuntimeError, createErrorsList({
   InvalidAccount: ['Invalid account', errorCodes.Validation],
   TerminalUnexpectedError: ['Unexpected error message is returned by Travelport system. Please check PNR and try again later.', errorCodes.Validation],
   TerminalUnexpectedFinancialError: ['Unexpected error message is returned by Travelport system. Please check PNR and new Fare calculation. If the problem persists, contact your local helpdesk.', errorCodes.Validation],
+  InvalidResponseFromHCA: 'Invalid response from HCA',
 }, TerminalRuntimeError));
 
 module.exports = {

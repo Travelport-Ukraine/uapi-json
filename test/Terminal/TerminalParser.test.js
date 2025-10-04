@@ -24,6 +24,21 @@ describe('#TerminalParser', () => {
         expect(err.causedBy).to.be.an.instanceOf(TerminalError.TerminalRuntimeError);
       }));
 
+    it('should throw an error on HCA error', async () => {
+      const errorConfig = errorsConfig();
+      const uParser = new Parser('terminal:TerminalReq', 'v33_0', {}, errorConfig);
+      const xml = fs.readFileSync(`${xmlFolder}/hcaError.xml`).toString();
+      try {
+        const json = await uParser.parse(xml);
+        const errData = uParser.mergeLeafRecursive(json['SOAP:Fault'][0]);
+        terminalParser.TERMINAL_ERROR.call(uParser, errData);
+        throw new Error('Error not thrown');
+      } catch (err) {
+        expect(err).to.be.an.instanceof(TerminalError.TerminalRuntimeError.InvalidResponseFromHCA);
+        expect(err.data.screen).to.be.equal('Invalid response from HCA');
+      }
+    });
+
     it('should throw correct error in case of no agreement', () => {
       const errorConfig = errorsConfig();
       const uParser = new Parser('terminal:TerminalReq', 'v33_0', {}, errorConfig);
