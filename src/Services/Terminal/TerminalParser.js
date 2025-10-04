@@ -24,12 +24,12 @@ function errorHandler(rsp) {
         screen: faultString,
         pcc: utils.getErrorPcc(rsp.faultstring),
       });
+    case '2614':
+      throw new TerminalRuntimeError.InvalidResponseFromHCA({ screen: faultString });
     case '6207': // Error retrieving AccessProfile Unable to retrieve enough Dynamic GTIDs for this transaction
     case '6119': // Host system error
     case '14058': // Could not locate Session Token Information Session May Have Timed Out
-      throw new RequestRuntimeError.UAPIServiceError({
-        screen: faultString,
-      });
+      throw new RequestRuntimeError.UAPIServiceError({ screen: faultString });
     default:
       throw new RequestRuntimeError.UnhandledError(null, new TerminalRuntimeError(rsp));
   }
