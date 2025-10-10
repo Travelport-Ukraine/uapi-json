@@ -6,7 +6,7 @@ const templates = require('./templates');
 
 module.exports = function (settings) {
   const {
-    auth, debug, production, options
+    auth, debug, production = true, options
   } = settings;
   const config = getConfig(auth.region, production);
 
@@ -20,7 +20,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_LOW_FARE_SEARCH_REQUEST,
       debug,
-      options
+      options,
+      production
     ),
     searchLowFaresAsync: uApiRequest(
       config.AirService.url,
@@ -31,7 +32,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_LOW_FARE_SEARCH_REQUEST,
       debug,
-      options
+      options,
+      production
     ),
     searchLowFaresRetrieve: uApiRequest(
       config.AirService.url,
@@ -42,7 +44,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_LOW_FARE_SEARCH_REQUEST,
       debug,
-      options
+      options,
+      production
     ),
     availability: uApiRequest(
       config.AirService.url,
@@ -53,7 +56,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_AVAILABILITY,
       debug,
-      options
+      options,
+      production
     ),
     airPrice: uApiRequest(
       config.AirService.url,
@@ -64,7 +68,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_PRICE_REQUEST,
       debug,
-      options
+      options,
+      production
     ),
     lookupFareRules: uApiRequest(
       config.AirService.url,
@@ -75,7 +80,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_PRICE_FARE_RULES_REQUEST,
       debug,
-      options
+      options,
+      production
     ),
     airPricePricingSolutionXML: uApiRequest(
       config.AirService.url,
@@ -86,7 +92,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML,
       debug,
-      options
+      options,
+      production
     ),
     createReservation: uApiRequest(
       config.AirService.url,
@@ -97,7 +104,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_CREATE_RESERVATION_REQUEST,
       debug,
-      options
+      options,
+      production
     ),
     ticket: uApiRequest(
       config.AirService.url,
@@ -108,7 +116,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_TICKET_REQUEST,
       debug,
-      options
+      options,
+      production
     ),
     getUniversalRecordByPNR: uApiRequest(
       config.UniversalRecord.url,
@@ -119,7 +128,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.UNIVERSAL_RECORD_RETRIEVE_REQUEST,
       debug,
-      options
+      options,
+      production
     ),
     importUniversalRecordByPNR: uApiRequest(
       config.UniversalRecord.url,
@@ -130,7 +140,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_IMPORT_REQUEST,
       debug,
-      options
+      options,
+      production
     ),
     getUniversalRecord: uApiRequest(
       config.UniversalRecord.url,
@@ -141,7 +152,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.UNIVERSAL_RECORD_RETRIEVE_REQUEST,
       debug,
-      options
+      options,
+      production
     ),
     gdsQueue: uApiRequest(
       config.GdsQueueService.url,
@@ -152,7 +164,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.GDS_QUEUE_PLACE_RESPONSE,
       debug,
-      options
+      options,
+      production
     ),
     foid: uApiRequest(
       config.UniversalRecord.url,
@@ -163,7 +176,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.UNIVERSAL_RECORD_FOID,
       debug,
-      options
+      options,
+      production
     ),
     addSegments: uApiRequest(
       config.UniversalRecord.url,
@@ -174,7 +188,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.UNIVERSAL_RECORD_MODIFY,
       debug,
-      options
+      options,
+      production
     ),
     cancelUR: uApiRequest(
       config.UniversalRecord.url,
@@ -185,7 +200,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_CANCEL_UR,
       debug,
-      options
+      options,
+      production
     ),
     flightInfo: uApiRequest(
       config.FlightService.url,
@@ -196,7 +212,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_FLIGHT_INFORMATION,
       debug,
-      options
+      options,
+      production
     ),
     getTicket: uApiRequest(
       config.AirService.url,
@@ -207,7 +224,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_GET_TICKET,
       debug,
-      options
+      options,
+      production
     ),
     getTickets: uApiRequest(
       config.AirService.url,
@@ -218,7 +236,8 @@ module.exports = function (settings) {
       AirParser.AIR_GET_TICKETS_ERROR_HANDLER,
       AirParser.AIR_GET_TICKETS,
       debug,
-      options
+      options,
+      production
     ),
     cancelTicket: uApiRequest(
       config.AirService.url,
@@ -229,7 +248,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_CANCEL_TICKET,
       debug,
-      options
+      options,
+      production
     ),
     cancelBooking: uApiRequest(
       config.AirService.url,
@@ -240,7 +260,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_CANCEL_PNR,
       debug,
-      options
+      options,
+      production
     ),
 
     exchangeQuote: uApiRequest(
@@ -252,7 +273,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_EXCHANGE_QUOTE,
       debug,
-      options
+      options,
+      production
     ),
 
     exchangeBooking: uApiRequest(
@@ -264,7 +286,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_EXCHANGE,
       debug,
-      options
+      options,
+      production
     ),
 
     getEMDList: uApiRequest(
@@ -276,7 +299,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_EMD_LIST,
       debug,
-      options
+      options,
+      production
     ),
 
     getEMDItem: uApiRequest(
@@ -288,7 +312,8 @@ module.exports = function (settings) {
       AirParser.AIR_ERRORS,
       AirParser.AIR_EMD_ITEM,
       debug,
-      options
+      options,
+      production
     )
   };
 };
