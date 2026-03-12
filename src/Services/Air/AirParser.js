@@ -543,6 +543,20 @@ const AirErrorHandler = function (rsp) {
   }
 };
 
+function parseMiscFormOfPayment(miscFop) {
+  if (!miscFop) {
+    return 'MISCFORMOFPAYMENT';
+  }
+  const { Category: category, Text: text } = miscFop;
+  if (category === 'Invoice') {
+    return text ? `INVOICE:${text}` : 'INVOICE';
+  }
+  if (category === 'Exchange') {
+    return text ? `EXCHANGE:${text}` : 'EXCHANGE';
+  }
+  return text ? `${category.toUpperCase()}:${text}` : category.toUpperCase();
+}
+
 function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false) {
   // Checking if pricing info exists
   if (!allowNoProviderLocatorCodeRetrieval && !etr.ProviderLocatorCode) {
@@ -581,17 +595,7 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
       return utils.getCreditCardData(fop[`common_${this.uapi_version}:CreditCard`], ccAuthData);
     }
     if (fop.Type === 'MiscFormOfPayment') {
-      const miscFop = fop[`common_${this.uapi_version}:MiscFormOfPayment`];
-      if (miscFop) {
-        const { Category: category, Text: text } = miscFop;
-        if (category === 'Invoice') {
-          return text ? `INVOICE:${text}` : 'INVOICE';
-        }
-        if (category === 'Exchange') {
-          return text ? `EXCHANGE:${text}` : 'EXCHANGE';
-        }
-        return text ? `${category.toUpperCase()}:${text}` : category.toUpperCase();
-      }
+      return parseMiscFormOfPayment(fop[`common_${this.uapi_version}:MiscFormOfPayment`]);
     }
     return fop.Type.toUpperCase();
   });
