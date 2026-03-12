@@ -577,9 +577,23 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
     ? etr[`common_${this.uapi_version}:CreditCardAuth`]
     : [];
   const formOfPayment = fopData.map((fop) => {
-    return fop.Type === 'Credit'
-      ? utils.getCreditCardData(fop[`common_${this.uapi_version}:CreditCard`], ccAuthData)
-      : fop.Type.toUpperCase();
+    if (fop.Type === 'Credit') {
+      return utils.getCreditCardData(fop[`common_${this.uapi_version}:CreditCard`], ccAuthData);
+    }
+    if (fop.Type === 'MiscFormOfPayment') {
+      const miscFop = fop[`common_${this.uapi_version}:MiscFormOfPayment`];
+      if (miscFop) {
+        const { Category: category, Text: text } = miscFop;
+        if (category === 'Invoice') {
+          return text ? `INVOICE:${text}` : 'INVOICE';
+        }
+        if (category === 'Exchange') {
+          return text ? `EXCHANGE:${text}` : 'EXCHANGE';
+        }
+        return text ? `${category.toUpperCase()}:${text}` : category.toUpperCase();
+      }
+    }
+    return fop.Type.toUpperCase();
   });
   const ticketsList = Object.values(etr['air:Ticket']);
   const exchangedTickets = [];

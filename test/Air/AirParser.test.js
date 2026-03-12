@@ -855,6 +855,63 @@ describe('#AirParser', () => {
       expect(result.tickets[0].coupons[0].fareBasisCode).to.equal('ACOORP1CH/FS14');
       expect(result.tickets[0].coupons[1].fareBasisCode).to.equal('ACOORP1/FS10');
     });
+
+    describe('FOP parsing', () => {
+      it('should parse invoice FOP without number', async () => {
+        const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v52_0', {});
+        const parseFunction = airParser.AIR_GET_TICKET;
+        const xml = fs.readFileSync(`${xmlFolder}/getTicket_FOP_INVOICE.xml`).toString();
+
+        const json = await uParser.parse(xml);
+        const result = parseFunction.call(uParser, json);
+
+        expect(result.formOfPayment).to.deep.equal(['INVOICE']);
+      });
+
+      it('should parse invoice FOP with number', async () => {
+        const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v52_0', {});
+        const parseFunction = airParser.AIR_GET_TICKET;
+        const xml = fs.readFileSync(`${xmlFolder}/getTicket_FOP_INVOICE_WITH_NUMBER.xml`).toString();
+
+        const json = await uParser.parse(xml);
+        const result = parseFunction.call(uParser, json);
+
+        expect(result.formOfPayment).to.deep.equal(['INVOICE:AGT']);
+      });
+
+      it('should parse credit card FOP', async () => {
+        const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v52_0', {});
+        const parseFunction = airParser.AIR_GET_TICKET;
+        const xml = fs.readFileSync(`${xmlFolder}/getTicket_FOP_CC.xml`).toString();
+
+        const json = await uParser.parse(xml);
+        const result = parseFunction.call(uParser, json);
+
+        expect(result.formOfPayment).to.deep.equal(['VI4111111111111111']);
+      });
+
+      it('should parse exchange ticket FOP', async () => {
+        const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v52_0', {});
+        const parseFunction = airParser.AIR_GET_TICKET;
+        const xml = fs.readFileSync(`${xmlFolder}/getTicket_FOP_EXCHANGE.xml`).toString();
+
+        const json = await uParser.parse(xml);
+        const result = parseFunction.call(uParser, json);
+
+        expect(result.formOfPayment).to.deep.equal(['EXCHANGE:0649902789371']);
+      });
+
+      it('should parse mixed FOP (cash + invoice with number)', async () => {
+        const uParser = new Parser('air:AirRetrieveDocumentRsp', 'v52_0', {});
+        const parseFunction = airParser.AIR_GET_TICKET;
+        const xml = fs.readFileSync(`${xmlFolder}/getTicket_FOP_MIXED.xml`).toString();
+
+        const json = await uParser.parse(xml);
+        const result = parseFunction.call(uParser, json);
+
+        expect(result.formOfPayment).to.deep.equal(['CASH', 'INVOICE:AGT']);
+      });
+    });
   });
   describe('AIR_LOW_FARE_SEARCH()', () => {
     it('should test parsing of low fare search request', () => {
