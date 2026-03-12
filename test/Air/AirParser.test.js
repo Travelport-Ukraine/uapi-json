@@ -1272,6 +1272,63 @@ describe('#AirParser', () => {
     });
   });
 
+  function testPricingInfo(pricingInfo) {
+    expect(pricingInfo).to.include.all.keys([
+      'fareCalculation',
+      'farePricingMethod',
+      'farePricingType',
+      'baggage',
+      'timeToReprice',
+      'passengers',
+      'uapi_pricing_info_ref',
+      'totalPrice',
+      'basePrice',
+      'equivalentBasePrice',
+      'taxes',
+      'passengersCount',
+      'taxesInfo',
+    ]);
+
+    // Passengers
+    pricingInfo.passengers.forEach(
+      (p) => {
+        expect(p).to.be.an('object');
+        expect(p).to.include.all.keys(['uapi_passenger_ref', 'isTicketed']);
+        expect(p.uapi_passenger_ref).to.be.a('string');
+        expect(p.isTicketed).to.be.a('boolean');
+        if (p.isTicketed) {
+          expect(p.ticketNumber).to.be.a('string').and.to.match(ticketRegExp);
+        }
+      }
+    );
+
+    expect(pricingInfo.fareCalculation).to.be.a('string').and.to.have.length.above(0);
+    expect(new Date(pricingInfo.timeToReprice)).to.be.an.instanceof(Date);
+
+    expect(pricingInfo.passengersCount).to.be.an('object');
+    Object.keys(pricingInfo.passengersCount).forEach(
+      (ptc) => expect(pricingInfo.passengersCount[ptc]).to.be.a('number')
+    );
+    expect(pricingInfo.taxesInfo).to.be.an('array');
+    pricingInfo.taxesInfo.forEach(
+      (tax) => {
+        expect(tax).to.be.an('object');
+        expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
+        expect(tax.type).to.match(/^[A-Z]{2}$/);
+      }
+    );
+    // Checking baggage
+    expect(pricingInfo.baggage).to.be.an('array');
+    pricingInfo.baggage.forEach(
+      (baggage) => {
+        expect(baggage).to.be.an('object');
+        expect(baggage).to.have.all.keys(['units', 'amount']);
+        expect(baggage.units).to.be.a('string');
+        expect(baggage.amount).to.be.a('number');
+      }
+    );
+  }
+
   function testBooking(jsonResult) {
     expect(jsonResult).to.be.an('array');
     jsonResult.forEach((result) => {
@@ -1353,64 +1410,7 @@ describe('#AirParser', () => {
           (reference) => expect(reference).to.be.a('string')
         );
 
-        fareQuote.pricingInfos.forEach(
-          (pricingInfo) => {
-            expect(pricingInfo).to.include.all.keys([
-              'fareCalculation',
-              'farePricingMethod',
-              'farePricingType',
-              'baggage',
-              'timeToReprice',
-              'passengers',
-              'uapi_pricing_info_ref',
-              'totalPrice',
-              'basePrice',
-              'equivalentBasePrice',
-              'taxes',
-              'passengersCount',
-              'taxesInfo',
-            ]);
-
-            // Passengers
-            pricingInfo.passengers.forEach(
-              (p) => {
-                expect(p).to.be.an('object');
-                expect(p).to.include.all.keys(['uapi_passenger_ref', 'isTicketed']);
-                expect(p.uapi_passenger_ref).to.be.a('string');
-                expect(p.isTicketed).to.be.a('boolean');
-                if (p.isTicketed) {
-                  expect(p.ticketNumber).to.be.a('string').and.to.match(ticketRegExp);
-                }
-              }
-            );
-
-            expect(pricingInfo.fareCalculation).to.be.a('string').and.to.have.length.above(0);
-            expect(new Date(pricingInfo.timeToReprice)).to.be.an.instanceof(Date);
-
-            expect(pricingInfo.passengersCount).to.be.an('object');
-            Object.keys(pricingInfo.passengersCount).forEach(
-              (ptc) => expect(pricingInfo.passengersCount[ptc]).to.be.a('number')
-            );
-            expect(pricingInfo.taxesInfo).to.be.an('array');
-            pricingInfo.taxesInfo.forEach(
-              (tax) => {
-                expect(tax).to.be.an('object');
-                expect(tax.value).to.match(/^[A-Z]{3}(\d+\.)?\d+$/);
-                expect(tax.type).to.match(/^[A-Z]{2}$/);
-              }
-            );
-            // Checking baggage
-            expect(pricingInfo.baggage).to.be.an('array');
-            pricingInfo.baggage.forEach(
-              (baggage) => {
-                expect(baggage).to.be.an('object');
-                expect(baggage).to.have.all.keys(['units', 'amount']);
-                expect(baggage.units).to.be.a('string');
-                expect(baggage.amount).to.be.a('number');
-              }
-            );
-          }
-        );
+        fareQuote.pricingInfos.forEach(testPricingInfo);
       });
       // Checking segments format
       expect(result.segments).to.be.an('array');

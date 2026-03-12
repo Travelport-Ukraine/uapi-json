@@ -833,10 +833,7 @@ function airGetTickets(obj) {
 }
 
 function airCancelTicket(obj) {
-  if (
-    !obj['air:VoidResultInfo']
-    || obj['air:VoidResultInfo'].ResultType !== 'Success'
-  ) {
+  if (obj['air:VoidResultInfo']?.ResultType !== 'Success') {
     throw new AirRuntimeError.TicketCancelResultUnknown(obj);
   }
   return true;
@@ -943,8 +940,7 @@ function extractBookings(obj) {
     const providerInfoKey = providerInfo.Key;
     const resRemarks = remarks[providerInfoKey] || [];
     const splitBookings = (
-      providerInfo['universal:ProviderReservationDetails']
-      && providerInfo['universal:ProviderReservationDetails'].DivideDetails === 'true'
+      providerInfo['universal:ProviderReservationDetails']?.DivideDetails === 'true'
     )
       ? resRemarks.reduce(
         (acc, remark) => {
