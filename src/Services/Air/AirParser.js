@@ -201,7 +201,15 @@ function airPriceRspPassengersPerReservation(obj) {
   const prices = priceResult['air:AirPricingSolution'];
   const priceKeys = Object.keys(prices);
 
-  const pricing = prices[priceKeys[0]]['air:AirPricingInfo'];
+  const cheapestKey = priceKeys.length > 1
+    ? priceKeys.reduce((minKey, key) => (
+      parseFloat(prices[key].TotalPrice.slice(3)) < parseFloat(prices[minKey].TotalPrice.slice(3))
+        ? key
+        : minKey
+    ))
+    : priceKeys[0];
+
+  const pricing = prices[cheapestKey]['air:AirPricingInfo'];
 
   return Object.keys(pricing)
     .reduce((acc, right) => ({
@@ -380,6 +388,10 @@ function airPriceRspPricingSolutionXML(obj) {
     });
 
     const pricingInfo = pricingInfos.find((info) => info.$.Key === reservationKey);
+
+    if (!pricingInfo) {
+      return;
+    }
 
     pricingInfo['air:PassengerType'].push({
       $: {

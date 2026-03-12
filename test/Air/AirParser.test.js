@@ -1162,6 +1162,45 @@ describe('#AirParser', () => {
         test(jsonResult);
       }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
+
+    it('should correctly select cheapest solution when it is not first', () => {
+      const passengers = [{
+        lastName: 'ENEKEN',
+        firstName: 'SKYWALKER',
+        passCountry: 'UA',
+        passNumber: 'ES221731',
+        birthDate: '19680725',
+        Age: 30,
+        gender: 'M',
+        ageCategory: 'ADT',
+      }];
+
+      const uParser = new Parser(null, 'v52_0', { passengers });
+      const parseFunction = airParser.AIR_PRICE_REQUEST_PRICING_SOLUTION_XML;
+      const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.2AirPrice.cheapest-second.xml`).toString();
+      return uParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(uParser, json);
+        const airprice = jsonResult['air:AirPricingSolution'];
+        const airpricexml = jsonResult['air:AirPricingSolution_XML'];
+        assert(airprice, 'no air:AirPricingSolution');
+        assert(airpricexml, 'no xml object');
+        assert(airprice.TotalPrice, 'No total price');
+        assert(airprice.Key, 'No key');
+        assert(airprice.Taxes, 'No taxes');
+        assert(airpricexml['air:AirPricingInfo_XML'], 'no air:AirPricingInfo_XML');
+        assert(airpricexml['air:AirSegment_XML'], 'no air:AirSegment_XML');
+        // The cheapest solution (ou8oAxJKTlGiEXhqo3pIZA== with EUR178.88) should be selected,
+        // not the first one (FBdwwNHxRbC87v3+2SGmfQ== with EUR227.88).
+        assert.equal(airprice.TotalPrice, 'EUR178.88', 'Should select cheapest solution');
+        assert.equal(airprice.Key, 'ou8oAxJKTlGiEXhqo3pIZA==', 'Should use key of cheapest solution');
+        // Verify passenger type refs are present in the result XML and associated
+        // with the correct pricing info key from the cheapest solution.
+        const pricingInfoXml = airpricexml['air:AirPricingInfo_XML'];
+        assert(pricingInfoXml.indexOf('BookingTravelerRef') !== -1, 'BookingTravelerRef should be present');
+        // AirPricingInfo key of the cheapest solution should appear in the XML
+        assert(pricingInfoXml.indexOf('0cSmjfEaSVecrbEn/Ae8Eg==') !== -1, 'AirPricingInfo key of cheapest solution should be present');
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
+    });
   });
 
   it('should test a request with hosttoken', () => {
