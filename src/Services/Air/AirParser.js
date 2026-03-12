@@ -554,7 +554,8 @@ function parseMiscFormOfPayment(miscFop) {
   if (category === 'Exchange') {
     return text ? `EXCHANGE:${text}` : 'EXCHANGE';
   }
-  return text ? `${category.toUpperCase()}:${text}` : category.toUpperCase();
+  const normalizedCategory = category ? category.toUpperCase() : 'UNKNOWN';
+  return text ? `${normalizedCategory}:${text}` : normalizedCategory;
 }
 
 function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false) {
