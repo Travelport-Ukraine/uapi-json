@@ -118,7 +118,15 @@ describe('#Request', () => {
       return request({})
         .then((response) => {
           expect(response).to.deep.equal({});
-          expect(console.log).to.have.callCount(7);
+          expect(console.log).to.have.callCount(6);
+        });
+    });
+    it('should not log parsed XML when debug is disabled', () => {
+      const request = requestXMLResponse(...serviceParams);
+      return request({})
+        .then((response) => {
+          expect(response).to.deep.equal({});
+          expect(console.log).to.not.have.been.called;
         });
     });
     it('should test custom log function with success', () => {
