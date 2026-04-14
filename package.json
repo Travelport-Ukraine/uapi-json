@@ -27,13 +27,13 @@
     "node",
     "travelport"
   ],
-  "author": "Mark Orel <mail.ormark@gmail.com>",
   "contributors": [
-    "Dmytro Chertousov <d.chertousov@gmail.com>",
     "Artem Pylypchuk <articicejuice@gmail.com>",
-    "Yevhenii Huselietov <d46k16@gmail.com>",
+    "Dmytro Chertousov <d.chertousov@gmail.com>",
+    "Mark Orel <mail.ormark@gmail.com>",
     "Mark Omarov <dev.mark.omarov@gmail.com>",
-    "Oleksii Duvanov <colden.aid@gmail.com>"
+    "Oleksii Duvanov <colden.aid@gmail.com>",
+    "Yevhenii Huselietov <d46k16@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
