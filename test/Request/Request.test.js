@@ -19,6 +19,13 @@ const errorXML = fs.readFileSync(path.join(
   __dirname,
   '../FakeResponses/Other/UnableToFareQuoteError.xml'
 )).toString();
+const successXML = '<?xml version="1.0" encoding="UTF-8"?><SOAP:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><SOAP:Body><xml>Some xml</xml></SOAP:Body></SOAP:Envelope>';
+const requestAgentOptions = {
+  keepAlive: true,
+  keepAliveMsecs: 5000,
+  maxSockets: 20,
+  maxFreeSockets: 20,
+};
 
 const serviceParams = [
   'URL',
@@ -73,7 +80,7 @@ const requestJsonResponse = proxyquire('../../src/Request/uapi-request', {
 });
 const requestXMLResponse = proxyquire('../../src/Request/uapi-request', {
   axios: {
-    request: () => Promise.resolve({ data: '<?xml version="1.0" encoding="UTF-8"?><SOAP:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><SOAP:Body><xml>Some xml</xml></SOAP:Body></SOAP:Envelope>' }),
+    request: () => Promise.resolve({ data: successXML }),
   },
 });
 
@@ -220,6 +227,48 @@ describe('#Request', () => {
           }
         }
       });
+    });
+    it('should pass shared keep-alive agents to axios requests', () => {
+      const httpAgents = [];
+      const httpsAgents = [];
+      const axiosRequest = sinon.stub().resolves({ data: successXML });
+      function HttpAgent(options) {
+        this.options = options;
+        httpAgents.push(this);
+      }
+      function HttpsAgent(options) {
+        this.options = options;
+        httpsAgents.push(this);
+      }
+      const uapiRequest = proxyquire('../../src/Request/uapi-request', {
+        axios: {
+          request: axiosRequest,
+        },
+        http: {
+          Agent: HttpAgent,
+        },
+        https: {
+          Agent: HttpsAgent,
+        },
+      });
+      const request = uapiRequest(...serviceParams);
+
+      return request({})
+        .then(() => request({}))
+        .then(() => {
+          expect(httpAgents).to.have.length(1);
+          expect(httpsAgents).to.have.length(1);
+          expect(httpAgents[0].options).to.deep.equal(requestAgentOptions);
+          expect(httpsAgents[0].options).to.deep.equal(requestAgentOptions);
+          expect(axiosRequest.firstCall.args[0]).to.deep.include({
+            httpAgent: httpAgents[0],
+            httpsAgent: httpsAgents[0],
+          });
+          expect(axiosRequest.secondCall.args[0]).to.deep.include({
+            httpAgent: httpAgents[0],
+            httpsAgent: httpsAgents[0],
+          });
+        });
     });
   });
 });

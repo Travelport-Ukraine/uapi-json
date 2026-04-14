@@ -1,5 +1,7 @@
 const handlebars = require('handlebars');
 const axios = require('axios');
+const http = require('http');
+const https = require('https');
 const { pd } = require('pretty-data');
 const {
   RequestValidationError,
@@ -12,6 +14,15 @@ const prepareRequest = require('./prepare-request');
 const configInit = require('../config');
 
 handlebars.registerHelper('equal', require('handlebars-helper-equal'));
+
+const REQUEST_AGENT_OPTIONS = {
+  keepAlive: true,
+  keepAliveMsecs: 5000,
+  maxSockets: 20,
+  maxFreeSockets: 20,
+};
+const httpAgent = new http.Agent(REQUEST_AGENT_OPTIONS);
+const httpsAgent = new https.Agent(REQUEST_AGENT_OPTIONS);
 
 /**
  * basic function for requests/responses
@@ -86,6 +97,8 @@ module.exports = function uapiRequest(
           url: service,
           method: 'POST',
           timeout: config.timeout || 5000,
+          httpAgent,
+          httpsAgent,
           auth: {
             username: auth.username,
             password: auth.password,
