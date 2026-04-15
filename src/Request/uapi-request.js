@@ -1,6 +1,5 @@
 const handlebars = require('handlebars');
 const axios = require('axios');
-const http = require('http');
 const https = require('https');
 const { pd } = require('pretty-data');
 const {
@@ -21,7 +20,6 @@ const REQUEST_AGENT_OPTIONS = {
   maxSockets: 20,
   maxFreeSockets: 20,
 };
-const httpAgent = new http.Agent(REQUEST_AGENT_OPTIONS);
 const httpsAgent = new https.Agent(REQUEST_AGENT_OPTIONS);
 
 /**
@@ -54,6 +52,15 @@ module.exports = function uapiRequest(
 
   const config = configInit(auth.region);
   const log = options.logFunction || console.log;
+  const customHttpsAgent = options.httpsAgent;
+  const requestHttpsAgent = customHttpsAgent || httpsAgent;
+  const requestTimeout = (
+    customHttpsAgent
+    && customHttpsAgent.options
+    && typeof customHttpsAgent.options.timeout === 'number'
+  )
+    ? customHttpsAgent.options.timeout
+    : config.timeout || 5000;
 
   // Performing checks
   if (!service || service.length <= 0) {
@@ -96,9 +103,8 @@ module.exports = function uapiRequest(
         const response = await axios.request({
           url: service,
           method: 'POST',
-          timeout: config.timeout || 5000,
-          httpAgent,
-          httpsAgent,
+          timeout: requestTimeout,
+          httpsAgent: requestHttpsAgent,
           auth: {
             username: auth.username,
             password: auth.password,
