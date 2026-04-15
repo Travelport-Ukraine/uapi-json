@@ -36,8 +36,9 @@ function mergeLeaf(item) {
   return { ...item, ...leaf };
 }
 
-function Parser(root, uapiVersion, env, debug, config, provider) {
+function Parser(root, uapiVersion, env, debug, config, provider, log) {
   this.debug = debug;
+  this.log = log || console.info;
   if (!config) {
     this.config = defaultConfig(uapiVersion);
   } else {
@@ -212,7 +213,7 @@ Parser.prototype.parse = function (xml) {
 
       const end = new Date() - start;
       if (this.debug > 1) {
-        console.info('uAPI_Parse execution time: %dms', end);
+        this.log('uAPI_Parse execution time: %dms', end);
       }
 
       return data[self.rootObject];
