@@ -49,11 +49,12 @@ see [close_session](#close_session) method.
 # API
 
 **TerminalService**
-* [`.executeCommand(command, stopMD)`](#execute_command)
+* [`.executeCommand(command, options)`](#execute_command)
+* [`.executeStatelessCommandWhenIdle(command, options)`](#execute_stateless_command_when_idle)
 * [`.closeSession()`](#close_session)
 * [`.getToken()`](#get_token)
 
-## .executeCommand(command, stopMD)
+## .executeCommand(command, options)
 <a name="execute_command"></a>
 Executes a command in terminal and returns its terminal response
 
@@ -62,7 +63,61 @@ Executes a command in terminal and returns its terminal response
 | Param | Type | Description |
 | --- | --- | --- |
 | command | `String` | String representation of the command you want to execute |
+| options | `Object` | Optional command execution options. |
+
+**Options**
+
+| Param | Type | Description |
+| --- | --- | --- |
 | stopMD | `(screens) => boolean` | Function which gets all previous screens concatenated and detects if more `MD` command needed. |
+| sleepInterval | `Number` | Minimum delay in milliseconds from the last successful full terminal response to the next command send. |
+
+`stopMD` must be passed inside `options`; passing it directly as the second argument
+is not supported.
+
+## .executeStatelessCommandWhenIdle(command, options)
+<a name="execute_stateless_command_when_idle"></a>
+Executes a stateless command when terminal is idle and returns its terminal response.
+
+If terminal is busy, command is added to the stateless commands queue and executed
+after the current command and previously queued stateless commands are finished.
+Queued commands are executed one by one in FIFO order.
+If terminal is idle, regular `executeCommand` calls execute before queued stateless
+commands.
+
+This method is promise based. Every caller receives the result or error from its own
+command execution. If one queued command fails, later queued commands are still executed.
+If the active command fails before the queue is drained, queued stateless commands are
+skipped and rejected with the same terminal error.
+
+Stateless means command is independent of terminal context, such as an open booking,
+fare search, or other GDS working state. This method does not detect or enforce
+statelessness; caller is responsible for using it only for commands safe in any
+terminal context.
+
+**Returns**: `Promise` that returns terminal command response in `String` format
+
+| Param | Type | Description |
+| --- | --- | --- |
+| command | `String` | String representation of the stateless command you want to execute |
+| options | `Object` | Optional command execution options. |
+
+**Options**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| stopMD | `(screens) => boolean` | Function which gets all previous screens concatenated and detects if more `MD` command needed. |
+| sleepInterval | `Number` | Minimum delay in milliseconds from the last successful full terminal response to the next command send. |
+
+```javascript
+await TerminalService.executeCommand('TE', {
+  stopMD: (screens) => screens.includes('END OF DISPLAY'),
+});
+
+await TerminalService.executeStatelessCommandWhenIdle('.CDIEV', {
+  sleepInterval: 1000,
+});
+```
 
 ## .closeSession()
 <a name="close_session"></a>
