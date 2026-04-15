@@ -19,6 +19,13 @@ const errorXML = fs.readFileSync(path.join(
   __dirname,
   '../FakeResponses/Other/UnableToFareQuoteError.xml'
 )).toString();
+const successXML = '<?xml version="1.0" encoding="UTF-8"?><SOAP:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><SOAP:Body><xml>Some xml</xml></SOAP:Body></SOAP:Envelope>';
+const requestAgentOptions = {
+  keepAlive: true,
+  keepAliveMsecs: 5000,
+  maxSockets: 20,
+  maxFreeSockets: 20,
+};
 
 const serviceParams = [
   'URL',
@@ -73,7 +80,7 @@ const requestJsonResponse = proxyquire('../../src/Request/uapi-request', {
 });
 const requestXMLResponse = proxyquire('../../src/Request/uapi-request', {
   axios: {
-    request: () => Promise.resolve({ data: '<?xml version="1.0" encoding="UTF-8"?><SOAP:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><SOAP:Body><xml>Some xml</xml></SOAP:Body></SOAP:Envelope>' }),
+    request: () => Promise.resolve({ data: successXML }),
   },
 });
 
@@ -118,7 +125,15 @@ describe('#Request', () => {
       return request({})
         .then((response) => {
           expect(response).to.deep.equal({});
-          expect(console.log).to.have.callCount(7);
+          expect(console.log).to.have.callCount(6);
+        });
+    });
+    it('should not log parsed XML when debug is disabled', () => {
+      const request = requestXMLResponse(...serviceParams);
+      return request({})
+        .then((response) => {
+          expect(response).to.deep.equal({});
+          expect(console.log).to.not.have.been.called;
         });
     });
     it('should test custom log function with success', () => {
@@ -212,6 +227,114 @@ describe('#Request', () => {
           }
         }
       });
+    });
+    it('should pass shared keep-alive https agent to axios requests', () => {
+      const httpsAgents = [];
+      const axiosRequest = sinon.stub().resolves({ data: successXML });
+      function HttpsAgent(options) {
+        this.options = options;
+        httpsAgents.push(this);
+      }
+      const uapiRequest = proxyquire('../../src/Request/uapi-request', {
+        axios: {
+          request: axiosRequest,
+        },
+        https: {
+          Agent: HttpsAgent,
+        },
+      });
+      const request = uapiRequest(...serviceParams);
+
+      return request({})
+        .then(() => request({}))
+        .then(() => {
+          expect(httpsAgents).to.have.length(1);
+          expect(httpsAgents[0].options).to.deep.equal(requestAgentOptions);
+          expect(axiosRequest.firstCall.args[0]).to.deep.include({
+            timeout: 20000,
+            httpsAgent: httpsAgents[0],
+          });
+          expect(axiosRequest.firstCall.args[0]).to.not.have.property('httpAgent');
+          expect(axiosRequest.secondCall.args[0]).to.deep.include({
+            timeout: 20000,
+            httpsAgent: httpsAgents[0],
+          });
+          expect(axiosRequest.secondCall.args[0]).to.not.have.property('httpAgent');
+        });
+    });
+    it('should pass custom https agent to axios requests', () => {
+      const httpsAgents = [];
+      const customHttpsAgent = { options: {} };
+      const axiosRequest = sinon.stub().resolves({ data: successXML });
+      function HttpsAgent(options) {
+        this.options = options;
+        httpsAgents.push(this);
+      }
+      const uapiRequest = proxyquire('../../src/Request/uapi-request', {
+        axios: {
+          request: axiosRequest,
+        },
+        https: {
+          Agent: HttpsAgent,
+        },
+      });
+      const request = uapiRequest(...serviceParams.concat([false, {
+        httpsAgent: customHttpsAgent,
+      }]));
+
+      return request({})
+        .then(() => {
+          expect(httpsAgents).to.have.length(1);
+          expect(axiosRequest.firstCall.args[0]).to.deep.include({
+            timeout: 20000,
+            httpsAgent: customHttpsAgent,
+          });
+          expect(axiosRequest.firstCall.args[0].httpsAgent).to.not.equal(httpsAgents[0]);
+        });
+    });
+    it('should use custom https agent timeout for axios timeout', () => {
+      const customHttpsAgent = {
+        options: {
+          timeout: 90000,
+        },
+      };
+      const axiosRequest = sinon.stub().resolves({ data: successXML });
+      const uapiRequest = proxyquire('../../src/Request/uapi-request', {
+        axios: {
+          request: axiosRequest,
+        },
+      });
+      const request = uapiRequest(...serviceParams.concat([false, {
+        httpsAgent: customHttpsAgent,
+      }]));
+
+      return request({})
+        .then(() => {
+          expect(axiosRequest.firstCall.args[0]).to.deep.include({
+            timeout: 90000,
+            httpsAgent: customHttpsAgent,
+          });
+        });
+    });
+    it('should use config timeout when custom https agent has no timeout', () => {
+      const customHttpsAgent = { options: {} };
+      const axiosRequest = sinon.stub().resolves({ data: successXML });
+      const uapiRequest = proxyquire('../../src/Request/uapi-request', {
+        axios: {
+          request: axiosRequest,
+        },
+      });
+      const request = uapiRequest(...serviceParams.concat([false, {
+        httpsAgent: customHttpsAgent,
+      }]));
+
+      return request({})
+        .then(() => {
+          expect(axiosRequest.firstCall.args[0]).to.deep.include({
+            timeout: 20000,
+            httpsAgent: customHttpsAgent,
+          });
+        });
     });
   });
 });

@@ -89,6 +89,24 @@ It also has several useful helpers to handle errors.
 
 `logFunction` - set custom logging function that should match next shape `(...args) => {}`. Will receive all requests and responses from uapi/terminal.
 
+`httpsAgent` - set custom HTTPS agent for all requests created by the service. If the agent has `options.timeout`, that value is used as the request timeout.
+
+```javascript
+const https = require('https');
+
+const TerminalService = uAPI.createTerminalService({
+  auth,
+  options: {
+    httpsAgent: new https.Agent({
+      keepAlive: true,
+      maxSockets: 1,
+      maxFreeSockets: 1,
+      timeout: 90000,
+    }),
+  },
+});
+```
+
 ### Auth object
 <a name="auth"></a>
 

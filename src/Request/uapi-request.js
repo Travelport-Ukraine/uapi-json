@@ -1,5 +1,6 @@
 const handlebars = require('handlebars');
 const axios = require('axios');
+const https = require('https');
 const { pd } = require('pretty-data');
 const {
   RequestValidationError,
@@ -12,6 +13,14 @@ const prepareRequest = require('./prepare-request');
 const configInit = require('../config');
 
 handlebars.registerHelper('equal', require('handlebars-helper-equal'));
+
+const REQUEST_AGENT_OPTIONS = {
+  keepAlive: true,
+  keepAliveMsecs: 5000,
+  maxSockets: 20,
+  maxFreeSockets: 20,
+};
+const httpsAgent = new https.Agent(REQUEST_AGENT_OPTIONS);
 
 /**
  * basic function for requests/responses
@@ -43,6 +52,15 @@ module.exports = function uapiRequest(
 
   const config = configInit(auth.region);
   const log = options.logFunction || console.log;
+  const customHttpsAgent = options.httpsAgent;
+  const requestHttpsAgent = customHttpsAgent || httpsAgent;
+  const requestTimeout = (
+    customHttpsAgent
+    && customHttpsAgent.options
+    && typeof customHttpsAgent.options.timeout === 'number'
+  )
+    ? customHttpsAgent.options.timeout
+    : config.timeout || 5000;
 
   // Performing checks
   if (!service || service.length <= 0) {
@@ -64,7 +82,7 @@ module.exports = function uapiRequest(
     }
 
     // create a v52 uAPI parser with default params and request data in env
-    const uParser = new Parser(rootObject, 'v52_0', params, debugMode, null, auth.provider);
+    const uParser = new Parser(rootObject, 'v52_0', params, debugMode, null, auth.provider, log);
 
     const validateInput = () => (
       Promise.resolve(params)
@@ -85,7 +103,8 @@ module.exports = function uapiRequest(
         const response = await axios.request({
           url: service,
           method: 'POST',
-          timeout: config.timeout || 5000,
+          timeout: requestTimeout,
+          httpsAgent: requestHttpsAgent,
           auth: {
             username: auth.username,
             password: auth.password,
@@ -156,7 +175,6 @@ module.exports = function uapiRequest(
     };
 
     const validateSOAP = function (parsedXML) {
-      console.log(parsedXML);
       if (parsedXML['SOAP:Fault']) {
         if (debugMode > 2) {
           log('Parsed error response', pd.json(parsedXML));
@@ -169,7 +187,8 @@ module.exports = function uapiRequest(
           params,
           debugMode,
           errParserConfig,
-          auth.provider
+          auth.provider,
+          log
         );
         const errData = errParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
         return errorHandler.call(errParser, errData);

@@ -207,6 +207,8 @@ module.exports = function (settings) {
 
   // Get terminal ID
   const getTerminalId = (sessionToken) => getHashSubstr(sessionToken);
+  const isClosed = () => state.terminalState === TERMINAL_STATE_CLOSED;
+  const isInitialized = () => state.terminalState !== TERMINAL_STATE_NONE;
 
   const terminal = {
     getToken: async () => {
@@ -250,6 +252,20 @@ module.exports = function (settings) {
         });
         throw err;
       }
+    },
+    isClosed,
+    isInitialized,
+    closeSessionSafe: async () => {
+      if (isClosed()) {
+        console.warn('UAPI-JSON WARNING: Terminal session is already closed');
+        return;
+      }
+      if (!isInitialized()) {
+        console.warn('UAPI-JSON WARNING: Terminal session is not initialized');
+        return;
+      }
+
+      await terminal.closeSession().catch(console.error);
     },
     closeSession: () => getSessionToken()
       .then(

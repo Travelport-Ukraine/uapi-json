@@ -218,7 +218,7 @@ function airPrice(obj) {
 
   let pricingSolution = 0;
   if (priceKeys.length > 1) {
-    console.log('More than one solution found in booking. Resolving the cheapest one.');
+    console.warn('More than one solution found in booking. Resolving the cheapest one.');
     const solutions = priceKeys.map((key) => pricingSolutions[key]);
 
     [pricingSolution] = solutions.sort(
@@ -347,7 +347,7 @@ function airPriceRspPricingSolutionXML(obj) {
   let pricingSolution = 0;
   if (pricingSolutions.length > 1) {
     // TODO: Check result for multiple passenger type results.
-    console.log('More than one solution found in booking. Resolving the cheapest one.');
+    console.warn('More than one solution found in booking. Resolving the cheapest one.');
     [pricingSolution] = pricingSolutions.sort(
       (a, b) => parseFloat(a.$.TotalPrice.slice(3)) - parseFloat(b.$.TotalPrice.slice(3))
     );

@@ -197,7 +197,7 @@ function formatPassengerCategories(pricingInfo) {
 
         [code] = list;
         if (!list[0] || list.length !== 1) { // TODO throw error
-          console.log('Warning: different categories '
+          console.warn('Warning: different categories '
             + list.join() + ' in single fare calculation ' + key + ' in fare ' + key);
         }
         passengerCounts[code] = count;
