@@ -543,6 +543,21 @@ const AirErrorHandler = function (rsp) {
   }
 };
 
+function parseMiscFormOfPayment(miscFop) {
+  if (!miscFop) {
+    return 'MISCFORMOFPAYMENT';
+  }
+  const { Category: category, Text: text } = miscFop;
+  if (category === 'Invoice') {
+    return text ? `INVOICE:${text}` : 'INVOICE';
+  }
+  if (category === 'Exchange') {
+    return text ? `EXCHANGE:${text}` : 'EXCHANGE';
+  }
+  const normalizedCategory = category ? category.toUpperCase() : 'UNKNOWN';
+  return text ? `${normalizedCategory}:${text}` : normalizedCategory;
+}
+
 function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false) {
   // Checking if pricing info exists
   if (!allowNoProviderLocatorCodeRetrieval && !etr.ProviderLocatorCode) {
@@ -577,9 +592,13 @@ function getTicketFromEtr(etr, obj, allowNoProviderLocatorCodeRetrieval = false)
     ? etr[`common_${this.uapi_version}:CreditCardAuth`]
     : [];
   const formOfPayment = fopData.map((fop) => {
-    return fop.Type === 'Credit'
-      ? utils.getCreditCardData(fop[`common_${this.uapi_version}:CreditCard`], ccAuthData)
-      : fop.Type.toUpperCase();
+    if (fop.Type === 'Credit') {
+      return utils.getCreditCardData(fop[`common_${this.uapi_version}:CreditCard`], ccAuthData);
+    }
+    if (fop.Type === 'MiscFormOfPayment') {
+      return parseMiscFormOfPayment(fop[`common_${this.uapi_version}:MiscFormOfPayment`]);
+    }
+    return fop.Type.toUpperCase();
   });
   const ticketsList = Object.values(etr['air:Ticket']);
   const exchangedTickets = [];
@@ -815,10 +834,7 @@ function airGetTickets(obj) {
 }
 
 function airCancelTicket(obj) {
-  if (
-    !obj['air:VoidResultInfo']
-    || obj['air:VoidResultInfo'].ResultType !== 'Success'
-  ) {
+  if (obj['air:VoidResultInfo']?.ResultType !== 'Success') {
     throw new AirRuntimeError.TicketCancelResultUnknown(obj);
   }
   return true;
@@ -925,8 +941,7 @@ function extractBookings(obj) {
     const providerInfoKey = providerInfo.Key;
     const resRemarks = remarks[providerInfoKey] || [];
     const splitBookings = (
-      providerInfo['universal:ProviderReservationDetails']
-      && providerInfo['universal:ProviderReservationDetails'].DivideDetails === 'true'
+      providerInfo['universal:ProviderReservationDetails']?.DivideDetails === 'true'
     )
       ? resRemarks.reduce(
         (acc, remark) => {
