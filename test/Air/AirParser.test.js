@@ -12,14 +12,23 @@ const {
 const {
   RequestRuntimeError
 } = require('../../src/Request/RequestErrors');
-const Parser = require('../../src/Request/uapi-parser');
+const UapiParser = require('../../src/Request/uapi-parser');
 const errorsConfig = require('../../src/Request/errors-config');
+const defaultOptions = require('../default-options');
 
 const xmlFolder = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const timestampRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[-+]{1}\d{2}:\d{2}/i;
 const ticketRegExp = /^\d{13}$/;
 const pnrRegExp = /^[A-Z0-9]{6}$/i;
 const amountRegExp = /[A-Z]{3}(?:\d+\.)?\d+/i;
+const version2Options = {
+  ...defaultOptions,
+  baggageInfoVersion: '2',
+};
+
+function Parser(root, uapiVersion, env, debug, config, provider, log, options = defaultOptions) {
+  return new UapiParser(root, uapiVersion, env, debug, config, provider, log, options);
+}
 
 const checkLowSearchFareXml = (filename) => {
   const uParser = new Parser('air:LowFareSearchRsp', 'v52_0', {});
@@ -890,6 +899,23 @@ describe('#AirParser', () => {
       }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
 
+    it('should return segment baggage strings for baggage version 2', () => {
+      const uParser = new Parser('air:LowFareSearchRsp', 'v52_0', {});
+      const parseFunction = airParser.AIR_LOW_FARE_SEARCH_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/LowFaresSearch.2ADT1CNNIEVBKK.xml`).toString();
+      uParser.options = version2Options;
+
+      return uParser.parse(xml).then((json) => {
+        const result = parseFunction.call(uParser, json);
+        const [firstDirection] = result[0].directions;
+        const [firstLeg] = firstDirection;
+        const [firstSegment] = firstLeg.segments;
+
+        expect(firstSegment.baggage).to.be.a('string');
+        expect(firstSegment.baggage).to.match(/^(\d+(PC|K)|CHK|NIL)$/);
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
+    });
+
     it('Should throw ResponseDataMissing if any of mandatory attribute is missing from LFS ', () => {
       const dummyObj1 = {
         AirSegment: null, FareInfo: null, FlightDetails: null, Route: null
@@ -1071,6 +1097,25 @@ describe('#AirParser', () => {
         testPricing(jsonResult);
         // TODO: Shouldn't this example be seperated to 2 segment groups? (round-trip)
         testSegments(jsonResult, [4]);
+      }).catch((err) => assert(false, 'Error during parsing' + err.stack));
+    });
+
+    it('should return segment baggage strings without root baggage for baggage version 2', () => {
+      const localParser = new Parser('air:AirPriceRsp', 'v52_0', { passengers });
+      const xml = fs.readFileSync(`${xmlFolder}/AirPricingSolution.IEVPAR.xml`).toString();
+      localParser.options = version2Options;
+
+      return localParser.parse(xml).then((json) => {
+        const jsonResult = parseFunction.call(localParser, json);
+        const segments = jsonResult.directions.flatMap(
+          (direction) => direction.flatMap((leg) => leg.segments)
+        );
+
+        expect(jsonResult).to.not.have.property('baggage');
+        segments.forEach((segment) => {
+          expect(segment.baggage).to.be.a('string');
+          expect(segment.baggage).to.match(/^(\d+(PC|K)|CHK|NIL)$/);
+        });
       }).catch((err) => assert(false, 'Error during parsing' + err.stack));
     });
   });
@@ -1303,6 +1348,7 @@ describe('#AirParser', () => {
               'farePricingMethod',
               'farePricingType',
               'baggage',
+              'segments',
               'timeToReprice',
               'passengers',
               'uapi_pricing_info_ref',
@@ -1350,6 +1396,22 @@ describe('#AirParser', () => {
                 expect(baggage).to.have.all.keys(['units', 'amount']);
                 expect(baggage.units).to.be.a('string');
                 expect(baggage.amount).to.be.a('number');
+              }
+            );
+            expect(pricingInfo.segments).to.be.an('array').and.to.have.length.above(0);
+            pricingInfo.segments.forEach(
+              (segment) => {
+                expect(segment).to.include.all.keys([
+                  'baggage',
+                  'fareBasisCode',
+                  'from',
+                  'to',
+                  'uapi_segment_ref',
+                ]);
+                expect(segment.baggage).to.be.an('object');
+                expect(segment.baggage).to.have.all.keys(['units', 'amount']);
+                expect(segment.baggage.units).to.be.a('string');
+                expect(segment.baggage.amount).to.be.a('number');
               }
             );
           }
@@ -1864,6 +1926,35 @@ describe('#AirParser', () => {
         });
     });
 
+    it('should move fare quote baggage to pricing info segments for baggage version 2', () => {
+      const uParser = new Parser('universal:UniversalRecordImportRsp', 'v52_0', {});
+      const parseFunction = airParser.AIR_CREATE_RESERVATION_REQUEST;
+      const xml = fs.readFileSync(`${xmlFolder}/UniversalRecordImport.xml`)
+        .toString();
+      uParser.options = version2Options;
+
+      return uParser.parse(xml)
+        .then((json) => {
+          const bookings = parseFunction.call(uParser, json);
+          const booking = bookings.find((item) => item.fareQuotes.length > 0);
+          const [fareQuote] = booking.fareQuotes;
+          const [pricingInfo] = fareQuote.pricingInfos;
+
+          expect(pricingInfo).to.not.have.property('baggage');
+          expect(pricingInfo.segments).to.be.an('array').and.to.have.length.above(0);
+          pricingInfo.segments.forEach((segment) => {
+            expect(segment).to.include.all.keys([
+              'baggage',
+              'fareBasisCode',
+              'from',
+              'to',
+              'uapi_segment_ref',
+            ]);
+            expect(segment.baggage).to.match(/^(\d+(PC|K)|CHK|NIL)$/);
+          });
+        });
+    });
+
     it('should throw UniversalRecordDataCouldBeStale in cas of stale data', async () => {
       const uParser = new Parser('universal:UniversalRecordRetrieveRsp', 'v52_0', {});
       const parseFunction = airParser.UNIVERSAL_RECORD_RETRIEVE_REQUEST;
@@ -2286,6 +2377,22 @@ describe('#AirParser', () => {
       const xml = fs.readFileSync(`${xmlFolder}/AirExchangeQuote-2.xml`).toString();
       return uParser.parse(xml).then((json) => parseFunction.call(uParser, json)).then((result) => {
         testExchangeFormat(result);
+      });
+    });
+
+    it('should return booking info baggage strings for baggage version 2', () => {
+      const uParser = new Parser(null, 'v52_0', { });
+      const parseFunction = airParser.AIR_EXCHANGE_QUOTE;
+      const xml = fs.readFileSync(`${xmlFolder}/AirExchangeQuote-1.xml`).toString();
+      uParser.options = version2Options;
+
+      return uParser.parse(xml).then((json) => parseFunction.call(uParser, json)).then((result) => {
+        result.pricingInfo.forEach((pricing) => {
+          pricing.bookingInfo.forEach((info) => {
+            expect(info.baggage).to.be.a('string');
+            expect(info.baggage).to.match(/^(\d+(PC|K)|CHK|NIL)$/);
+          });
+        });
       });
     });
 

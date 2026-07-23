@@ -3,15 +3,81 @@ const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 const AirFormat = require('../../src/Services/Air/AirFormat');
-const Parser = require('../../src/Request/uapi-parser');
+const UapiParser = require('../../src/Request/uapi-parser');
+const { AirParsingError } = require('../../src/Services/Air/AirErrors');
+const defaultOptions = require('../default-options');
 
 const xmlFolder = path.join(__dirname, '..', 'FakeResponses', 'Air');
-const { AirParsingError } = require('../../src/Services/Air/AirErrors');
+const version2Options = {
+  ...defaultOptions,
+  baggageInfoVersion: AirFormat.BG_VERSION_2,
+};
+
+function Parser(root, uapiVersion, env, debug, config, provider, log, options = defaultOptions) {
+  return new UapiParser(root, uapiVersion, env, debug, config, provider, log, options);
+}
 
 describe('#AirFormat', () => {
+  describe('.normalizeBaggageInfoVersion()', () => {
+    it('should normalize baggage info versions', () => {
+      expect(AirFormat.normalizeBaggageInfoVersion()).to.be.equal(AirFormat.BG_VERSION_DEFAULT);
+      expect(AirFormat.normalizeBaggageInfoVersion(
+        AirFormat.BG_VERSION_1
+      )).to.be.equal(AirFormat.BG_VERSION_1);
+      expect(AirFormat.normalizeBaggageInfoVersion(
+        AirFormat.BG_VERSION_2
+      )).to.be.equal(AirFormat.BG_VERSION_2);
+      expect(AirFormat.normalizeBaggageInfoVersion('3')).to.be.equal(AirFormat.BG_VERSION_DEFAULT);
+    });
+  });
+
+  describe('default options', () => {
+    it('should use baggage version 1 by default', () => {
+      expect(defaultOptions.baggageInfoVersion).to.be.equal(AirFormat.BG_VERSION_DEFAULT);
+    });
+  });
+
+  describe('.returnEmptyBaggage()', () => {
+    it('should return an empty baggage value for the active baggage version', () => {
+      expect(AirFormat.returnEmptyBaggage(defaultOptions))
+        .to.deep.equal({ amount: 0, units: 'piece' });
+      expect(AirFormat.returnEmptyBaggage(version2Options)).to.be.equal('CHK');
+    });
+  });
+
+  describe('.detectBaggageType()', () => {
+    it('should detect uAPI baggage allowance types', () => {
+      expect(AirFormat.detectBaggageType({ 'air:NumberOfPieces': 1 })).to.be.equal(AirFormat.BG_TYPE_PIECE);
+      expect(AirFormat.detectBaggageType({ 'air:MaxWeight': { Unit: 'kg', Value: 40 } })).to.be.equal(AirFormat.BG_TYPE_WEIGHT);
+      expect(AirFormat.detectBaggageType(null)).to.be.equal(AirFormat.BG_TYPE_CHK);
+      expect(AirFormat.detectBaggageType('CHK')).to.be.equal(AirFormat.BG_TYPE_CHK);
+      expect(AirFormat.detectBaggageType('NIL')).to.be.equal(AirFormat.BG_TYPE_NIL);
+    });
+  });
+
+  describe('.formatBaggageValue()', () => {
+    it('should return version 1 baggage objects', () => {
+      expect(AirFormat.formatBaggageValue('1PC', defaultOptions))
+        .to.deep.equal({ amount: 1, units: 'piece' });
+      expect(AirFormat.formatBaggageValue('40K', defaultOptions, {
+        weightUnits: 'kilograms',
+      })).to.deep.equal({ amount: 40, units: 'kilograms' });
+      expect(AirFormat.formatBaggageValue('CHK', defaultOptions))
+        .to.deep.equal({ amount: 0, units: 'piece' });
+    });
+
+    it('should return normalized baggage strings for version 2', () => {
+      expect(AirFormat.formatBaggageValue('PC', version2Options)).to.be.equal('1PC');
+      expect(AirFormat.formatBaggageValue('0KG', version2Options)).to.be.equal('0PC');
+      expect(AirFormat.formatBaggageValue('40KG', version2Options)).to.be.equal('40K');
+      expect(AirFormat.formatBaggageValue('INVALID', version2Options)).to.be.equal('CHK');
+      expect(AirFormat.formatBaggageValue('NIL', version2Options)).to.be.equal('NIL');
+    });
+  });
+
   describe('.getBaggage()', () => {
     it('should work when object is null and undefined', () => {
-      const parsed = AirFormat.getBaggage(null);
+      const parsed = AirFormat.getBaggage(null, defaultOptions);
       expect(parsed).to.be.an('object').and.to.have.all.keys([
         'amount', 'units',
       ]);
@@ -20,7 +86,7 @@ describe('#AirFormat', () => {
     });
 
     it('should correctly parse air:NumberOfPieces', () => {
-      const parsed = AirFormat.getBaggage({ 'air:NumberOfPieces': 10 });
+      const parsed = AirFormat.getBaggage({ 'air:NumberOfPieces': 10 }, defaultOptions);
       expect(parsed).to.be.an('object').and.to.have.all.keys([
         'amount', 'units',
       ]);
@@ -29,12 +95,28 @@ describe('#AirFormat', () => {
     });
 
     it('should correctly parse air:MaxWeight', () => {
-      const parsed = AirFormat.getBaggage({ 'air:MaxWeight': { Unit: 'kg', Value: 10 } });
+      const parsed = AirFormat.getBaggage(
+        { 'air:MaxWeight': { Unit: 'kg', Value: 10 } },
+        defaultOptions
+      );
       expect(parsed).to.be.an('object').and.to.have.all.keys([
         'amount', 'units',
       ]);
       expect(parsed.amount).to.be.equal(10);
       expect(parsed.units).to.be.equal('kg');
+    });
+
+    it('should return normalized baggage strings for baggage version 2', () => {
+      expect(AirFormat.getBaggage({ 'air:NumberOfPieces': 1 }, version2Options)).to.be.equal('1PC');
+      expect(AirFormat.getBaggage(
+        { 'air:MaxWeight': { Unit: 'kg', Value: 40 } },
+        version2Options
+      )).to.be.equal('40K');
+      expect(AirFormat.getBaggage(
+        { 'air:MaxWeight': { Unit: 'kg', Value: 0 } },
+        version2Options
+      )).to.be.equal('0PC');
+      expect(AirFormat.getBaggage(null, version2Options)).to.be.equal('CHK');
     });
   });
 
@@ -46,7 +128,7 @@ describe('#AirFormat', () => {
       return uParser.parse(xml).then((json) => {
         const result = AirFormat.formatLowFaresSearch({
           provider: '1G',
-        }, json);
+        }, json, defaultOptions);
 
         expect(result).to.be.an('array').and.to.have.length.above(0);
       }).catch((err) => assert(false, 'Error during parsing' + err.stack));
@@ -60,7 +142,7 @@ describe('#AirFormat', () => {
         const result = AirFormat.formatLowFaresSearch({
           provider: '1G',
           solutionResult: true,
-        }, json);
+        }, json, defaultOptions);
 
         expect(result).to.be.an('array').and.to.have.length.above(0);
       }).catch((err) => assert(false, 'Error during parsing' + err.stack));
@@ -75,7 +157,7 @@ describe('#AirFormat', () => {
           provider: '1G',
           solutionResult: true,
           faresOnly: false,
-        }, json);
+        }, json, defaultOptions);
 
         expect(result).to.be.an('object');
         expect(result).to.have.all.keys('transactionId', 'fares');
@@ -92,7 +174,7 @@ describe('#AirFormat', () => {
         const result = AirFormat.formatLowFaresSearch({
           provider: '1G',
           faresOnly: false,
-        }, json);
+        }, json, defaultOptions);
 
         expect(result).to.be.an('object');
         expect(result).to.have.all.keys('transactionId', 'fares');
@@ -109,7 +191,7 @@ describe('#AirFormat', () => {
         const result = AirFormat.formatLowFaresSearch({
           provider: '1G',
           faresOnly: false,
-        }, json);
+        }, json, defaultOptions);
 
         expect(result).to.be.an('object');
         expect(result).to.have.any.keys('transactionId', 'searchId', 'providerCode', 'hasMoreResults', 'fares');
@@ -122,7 +204,7 @@ describe('#AirFormat', () => {
   });
   describe('.getBaggageInfo()', () => {
     it('should work when object is null and undefined', () => {
-      const parsed = AirFormat.getBaggageInfo(null);
+      const parsed = AirFormat.getBaggageInfo(null, defaultOptions);
       expect(parsed).to.be.an('object').and.to.have.all.keys([
         'amount', 'units',
       ]);
@@ -157,11 +239,11 @@ describe('#AirFormat', () => {
           '1P',
           'BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.',
         ]
-      });
+      }, defaultOptions);
       expect(parsed).to.be.an('object').and.to.have.keys([
         'amount', 'units',
       ]);
-      expect(parsed.amount).to.be.equal('1');
+      expect(parsed.amount).to.be.equal(1);
       expect(parsed.units).to.be.equal('piece');
     });
     it('should correctly parse air:TextInfo in kgs', () => {
@@ -170,22 +252,31 @@ describe('#AirFormat', () => {
           '20K',
           'BAGGAGE DISCOUNTS MAY APPLY BASED ON FREQUENT FLYER STATUS/ ONLINE CHECKIN/FORM OF PAYMENT/MILITARY/ETC.',
         ]
-      });
+      }, defaultOptions);
       expect(parsed).to.be.an('object').and.to.have.keys([
         'amount', 'units',
       ]);
-      expect(parsed.amount).to.be.equal('20');
-      expect(parsed.units).to.be.equal('kilograms');
+      expect(parsed.amount).to.be.equal(20);
+      expect(parsed.units).to.be.equal('kg');
     });
 
     it('should correctly parse air:BagDetails', () => {
-      const parsed = AirFormat.getBaggageInfo(defaultValue);
+      const parsed = AirFormat.getBaggageInfo(defaultValue, defaultOptions);
       expect(parsed).to.be.an('object').and.to.have.keys([
         'amount', 'units',
         'detail',
       ]);
       expect(parsed.detail[0].applicableBags).to.be.equal('1stChecked');
       expect(parsed.detail[0].basePrice).to.be.equal('UAH1026');
+    });
+
+    it('should return normalized baggage text for baggage version 2', () => {
+      expect(AirFormat.getBaggageInfo({ 'air:TextInfo': ['PC'] }, version2Options)).to.be.equal('1PC');
+      expect(AirFormat.getBaggageInfo({ 'air:TextInfo': ['NIL'] }, version2Options)).to.be.equal('NIL');
+      expect(AirFormat.getBaggageInfo({ 'air:TextInfo': ['CHK'] }, version2Options)).to.be.equal('CHK');
+      expect(AirFormat.getBaggageInfo({ 'air:TextInfo': ['0K'] }, version2Options)).to.be.equal('0PC');
+      expect(AirFormat.getBaggageInfo({ 'air:TextInfo': ['INVALID'] }, version2Options)).to.be.equal('CHK');
+      expect(AirFormat.getBaggageInfo(null, version2Options)).to.be.equal('CHK');
     });
   });
 
@@ -399,7 +490,15 @@ describe('#AirFormat', () => {
         'refundable',
       ]);
 
-      expect(parsed.refundable).to.be.equal('true');
+      expect(parsed.refundable).to.be.equal(true);
+    });
+
+    it('should return false when fare is not refundable', () => {
+      const parsed = AirFormat.formatFarePricingInfo({
+        Refundable: 'false'
+      });
+
+      expect(parsed.refundable).to.be.equal(false);
     });
 
     it('should correctly parse eTicketability', () => {
@@ -411,7 +510,15 @@ describe('#AirFormat', () => {
         'eTicketability',
       ]);
 
-      expect(parsed.eTicketability).to.be.equal('Yes');
+      expect(parsed.eTicketability).to.be.equal(true);
+    });
+
+    it('should return false when fare is not e-ticketable', () => {
+      const parsed = AirFormat.formatFarePricingInfo({
+        ETicketability: 'No'
+      });
+
+      expect(parsed.eTicketability).to.be.equal(false);
     });
 
     it('should correctly parse latestTicketingTime', () => {

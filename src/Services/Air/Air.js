@@ -5,12 +5,28 @@ const { parsers } = require('../../utils');
 const getBookingFromUr = require('../../utils/get-booking-from-ur');
 const airService = require('./AirService');
 const createTerminalService = require('../Terminal/Terminal');
+const { normalizeBaggageInfoVersion } = require('./AirFormat');
 const { AirRuntimeError } = require('./AirErrors');
 const validateServiceSettings = require('../../utils/validate-service-settings');
 
+function normalizeSettings(settings) {
+  const validatedSettings = validateServiceSettings(settings);
+  const options = validatedSettings.options || {};
+
+  return {
+    ...validatedSettings,
+    options: {
+      ...options,
+      baggageInfoVersion: normalizeBaggageInfoVersion(options.baggageInfoVersion),
+    },
+  };
+}
+
 module.exports = (settings) => {
-  const service = airService(validateServiceSettings(settings));
-  const log = (settings.options && settings.options.logFunction) || console.log;
+  const serviceSettings = normalizeSettings(settings);
+  const service = airService(serviceSettings);
+  const log = (serviceSettings.options && serviceSettings.options.logFunction) || console.log;
+
   return {
     shop(options) {
       if (options.async === true) {

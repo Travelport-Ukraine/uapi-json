@@ -87,7 +87,7 @@ function lowFaresSearchRequest(obj) {
     debug: false,
     provider: this.provider,
     faresOnly: this.env.faresOnly !== false,
-  }, searchLowFaresValidate.call(this, obj));
+  }, searchLowFaresValidate.call(this, obj), this.options);
 }
 
 const ticketParse = function (obj) {
@@ -211,6 +211,7 @@ function airPriceRspPassengersPerReservation(obj) {
 }
 
 function airPrice(obj) {
+  const { baggageInfoVersion } = this.options;
   const priceResult = obj['air:AirPriceResult'];
 
   const pricingSolutions = priceResult['air:AirPricingSolution'];
@@ -246,8 +247,7 @@ function airPrice(obj) {
     return previousValue;
   }, []);
 
-  /* eslint-disable prefer-const */
-  let baggageInfos = [];
+  const baggageInfos = [];
 
   const directions = groups.map((leg) => {
     const segs = segments.filter((value) => {
@@ -261,8 +261,14 @@ function airPrice(obj) {
       const [bookingInfo] = thisFare['air:BookingInfo'].filter((info) => info.SegmentRef === segment.Key);
       const fareInfo = thisFare['air:FareInfo'][bookingInfo.FareInfoRef];
 
-      const baggage = format.getBaggageInfo(thisFare['air:BaggageAllowances']['air:BaggageAllowanceInfo'][leg]);
-      baggageInfos.push(baggage);
+      const baggage = format.getBaggageInfo(
+        thisFare['air:BaggageAllowances']['air:BaggageAllowanceInfo'][leg],
+        this.options
+      );
+
+      if (baggageInfoVersion === format.BG_VERSION_1) {
+        baggageInfos.push(baggage);
+      }
 
       return Object.assign(
         format.formatTrip(segment, tripFlightDetails),
@@ -287,6 +293,9 @@ function airPrice(obj) {
 
   const { passengerCounts, passengerFares } = format.formatPassengerCategories(pricingSolution['air:AirPricingInfo']);
   const fareInfo = format.formatFarePricingInfo(thisFare);
+  const baggageData = baggageInfoVersion === format.BG_VERSION_1
+    ? { baggage: baggageInfos }
+    : null;
 
   const taxesInfo = thisFare['air:TaxInfo']
     ? Object.keys(thisFare['air:TaxInfo'])
@@ -331,7 +340,7 @@ function airPrice(obj) {
     passengerFares,
     fareInfo,
     taxesInfo,
-    baggage: baggageInfos,
+    ...baggageData,
     timeToReprice: thisFare.LatestTicketingTime,
   };
 }
@@ -845,6 +854,7 @@ function formSupplierLocatorBlock(supplierLocator) {
 }
 
 function extractBookings(obj) {
+  const { baggageInfoVersion } = this.options;
   const record = obj['universal:UniversalRecord'];
   const messages = obj[`common_${this.uapi_version}:ResponseMessage`] || [];
 
@@ -1037,7 +1047,8 @@ function extractBookings(obj) {
         (key) => {
           const pricingInfo = booking['air:AirPricingInfo'][key];
 
-          const uapiSegmentRefs = (pricingInfo['air:BookingInfo'] || []).map(
+          const bookingInfos = pricingInfo['air:BookingInfo'] || [];
+          const uapiSegmentRefs = bookingInfos.map(
             (segment) => segment.SegmentRef
           );
 
@@ -1045,9 +1056,31 @@ function extractBookings(obj) {
 
           const fareInfo = pricingInfo['air:FareInfo'];
 
-          const baggage = fareInfo && Object.keys(fareInfo).map(
-            (fareLegKey) => format.getBaggage(fareInfo[fareLegKey]['air:BaggageAllowance'])
-          );
+          const pricingInfoSegments = bookingInfos.map((bookingInfo) => {
+            const segmentFareInfo = fareInfo && fareInfo[bookingInfo.FareInfoRef];
+            const baggageAllowance = segmentFareInfo && segmentFareInfo['air:BaggageAllowance'];
+
+            return {
+              bookingCode: bookingInfo.BookingCode,
+              cabinClass: bookingInfo.CabinClass,
+              baggage: format.getBaggage(baggageAllowance, this.options),
+              fareBasisCode: segmentFareInfo ? segmentFareInfo.FareBasis : null,
+              from: segmentFareInfo ? segmentFareInfo.Origin : null,
+              to: segmentFareInfo ? segmentFareInfo.Destination : null,
+              uapi_segment_ref: bookingInfo.SegmentRef,
+            };
+          });
+
+          const baggageData = baggageInfoVersion === format.BG_VERSION_1
+            ? {
+              baggage: fareInfo && Object.keys(fareInfo).map(
+                (fareLegKey) => format.getBaggage(
+                  fareInfo[fareLegKey]['air:BaggageAllowance'],
+                  this.options
+                )
+              ),
+            }
+            : null;
 
           const passengersCount = (pricingInfo['air:PassengerType'] || [])
             .reduce((acc, data) => Object.assign(acc, {
@@ -1130,7 +1163,8 @@ function extractBookings(obj) {
             taxes: pricingInfo.Taxes,
             passengersCount,
             taxesInfo,
-            baggage,
+            segments: pricingInfoSegments,
+            ...baggageData,
             timeToReprice: pricingInfo.LatestTicketingTime,
             ...parseFareCalculation(pricingInfo['air:FareCalc'])
           };
@@ -1301,7 +1335,7 @@ function exchangeQuote(req) {
               return {
                 bookingCode: info.BookingCode,
                 cabinClass: info.CabinClass,
-                baggage: format.getBaggage(fare['air:BaggageAllowance']),
+                baggage: format.getBaggage(fare['air:BaggageAllowance'], this.options),
                 fareBasis: fare.FareBasis,
                 from: fare.Origin,
                 to: fare.Destination,
