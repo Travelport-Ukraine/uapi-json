@@ -16,9 +16,13 @@ chai.use(sinonChai);
 const responsesDir = path.join(__dirname, '..', 'FakeResponses', 'Air');
 const terminalResponsesDir = path.join(__dirname, '..', 'FakeResponses', 'Terminal');
 
-const getAirServiceMock = ({ methods = {}, options = {} }) => {
+const getAirServiceMock = ({ methods = {}, options = {}, onCreate = () => {} }) => {
   const createAirService = proxyquire('../../src/Services/Air/Air', {
-    './AirService': () => ({ ...methods }),
+    './AirService': (settings) => {
+      onCreate(settings);
+
+      return { ...methods };
+    },
   });
 
   return createAirService({ auth, ...options });
@@ -71,6 +75,39 @@ describe('#AirService', () => {
       tickets: [],
     },
   ];
+
+  describe('settings', () => {
+    it('should normalize baggage info version on service creation', () => {
+      const defaultSettingsSpy = sinon.spy();
+      const version2SettingsSpy = sinon.spy();
+      const invalidSettingsSpy = sinon.spy();
+      const logFunction = () => {};
+
+      getAirServiceMock({ onCreate: defaultSettingsSpy });
+      getAirServiceMock({
+        onCreate: version2SettingsSpy,
+        options: {
+          options: {
+            baggageInfoVersion: '2',
+            logFunction,
+          },
+        },
+      });
+      getAirServiceMock({
+        onCreate: invalidSettingsSpy,
+        options: {
+          options: {
+            baggageInfoVersion: '3',
+          },
+        },
+      });
+
+      expect(defaultSettingsSpy.firstCall.args[0].options.baggageInfoVersion).to.be.equal('1');
+      expect(version2SettingsSpy.firstCall.args[0].options.baggageInfoVersion).to.be.equal('2');
+      expect(version2SettingsSpy.firstCall.args[0].options.logFunction).to.be.equal(logFunction);
+      expect(invalidSettingsSpy.firstCall.args[0].options.baggageInfoVersion).to.be.equal('1');
+    });
+  });
 
   describe('shop', () => {
     it('should check if correct function from service is called', () => {

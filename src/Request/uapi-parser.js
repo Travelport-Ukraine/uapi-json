@@ -36,7 +36,7 @@ function mergeLeaf(item) {
   return { ...item, ...leaf };
 }
 
-function Parser(root, uapiVersion, env, debug, config, provider, log) {
+function Parser(root, uapiVersion, env, debug, config, provider, log, options) {
   this.debug = debug;
   this.log = log || console.info;
   if (!config) {
@@ -49,6 +49,7 @@ function Parser(root, uapiVersion, env, debug, config, provider, log) {
   this.uapi_version = uapiVersion;
   this.env = env;
   this.rootObject = root;
+  this.options = options || {};
 }
 
 Parser.prototype.mapArrayKeys = function mapArrayKeys(array, name) {

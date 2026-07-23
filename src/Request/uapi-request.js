@@ -82,7 +82,7 @@ module.exports = function uapiRequest(
     }
 
     // create a v52 uAPI parser with default params and request data in env
-    const uParser = new Parser(rootObject, 'v52_0', params, debugMode, null, auth.provider, log);
+    const uParser = new Parser(rootObject, 'v52_0', params, debugMode, null, auth.provider, log, options);
 
     const validateInput = () => (
       Promise.resolve(params)
@@ -188,7 +188,8 @@ module.exports = function uapiRequest(
           debugMode,
           errParserConfig,
           auth.provider,
-          log
+          log,
+          options
         );
         const errData = errParser.mergeLeafRecursive(parsedXML['SOAP:Fault'][0]); // parse error data
         return errorHandler.call(errParser, errData);
