@@ -2,35 +2,161 @@ const moment = require('moment');
 const parsers = require('../../utils/parsers');
 const { AirParsingError } = require('./AirErrors');
 
+const BG_TYPE_PIECE = 'piece';
+const BG_TYPE_WEIGHT = 'weight';
+const BG_TYPE_CHK = 'CHK';
+const BG_TYPE_NIL = 'NIL';
+const BG_SPECIAL_IDENTIFIERS = [BG_TYPE_CHK, BG_TYPE_NIL];
+const BG_STRING_PATTERN = /^(\d*)(P|PC|K|KG)$/;
+const BG_VERSION_1 = '1';
+const BG_VERSION_2 = '2';
+const BG_VERSION_DEFAULT = BG_VERSION_1;
+const BG_INFO_VERSIONS = [BG_VERSION_1, BG_VERSION_2];
+
+function normalizeBaggageInfoVersion(version) {
+  const normalizedVersion = `${version || BG_VERSION_DEFAULT}`;
+
+  return BG_INFO_VERSIONS.includes(normalizedVersion)
+    ? normalizedVersion
+    : BG_VERSION_DEFAULT;
+}
+
+function normalizeBaggageString(str) {
+  if (typeof str !== 'string') {
+    return BG_TYPE_CHK;
+  }
+
+  const value = str.trim().toUpperCase();
+
+  if (!value) {
+    return BG_TYPE_CHK;
+  }
+
+  if (BG_SPECIAL_IDENTIFIERS.includes(value)) {
+    return value;
+  }
+
+  const match = value.match(BG_STRING_PATTERN);
+
+  if (!match) {
+    return BG_TYPE_CHK;
+  }
+
+  const [, amountString, unit] = match;
+  const amount = amountString || (unit === 'P' || unit === 'PC' ? '1' : null);
+
+  if (amount === null) {
+    return BG_TYPE_CHK;
+  }
+
+  if (Number(amount) === 0 && ['K', 'KG'].includes(unit)) {
+    return '0PC';
+  }
+
+  return `${amount}${unit === 'P' || unit === 'PC' ? 'PC' : 'K'}`;
+}
+
+function formatBaggageValue(baggageValue, options = {}, formatOptions = {}) {
+  const { baggageInfoVersion } = options;
+  const normalizedValue = normalizeBaggageString(baggageValue);
+
+  if (baggageInfoVersion === BG_VERSION_1) {
+    if (BG_SPECIAL_IDENTIFIERS.includes(normalizedValue)) {
+      return {
+        units: 'piece',
+        amount: 0,
+        ...(formatOptions.detail
+          ? { detail: formatOptions.detail }
+          : null),
+      };
+    }
+
+    const baggageString = baggageValue.toString().trim().toUpperCase();
+    const match = baggageString.match(BG_STRING_PATTERN)
+      || normalizedValue.match(BG_STRING_PATTERN);
+    const [, amountString, unit] = match;
+    const amount = amountString || (unit === 'P' || unit === 'PC' ? '1' : '0');
+    const units = ['P', 'PC'].includes(unit)
+      ? 'piece'
+      : formatOptions.weightUnits || 'kg';
+
+    return {
+      units,
+      amount: Number(amount),
+      ...(formatOptions.detail
+        ? { detail: formatOptions.detail }
+        : null),
+    };
+  }
+
+  if (baggageInfoVersion === BG_VERSION_2) {
+    return normalizedValue;
+  }
+
+  throw new Error(`Unknown baggageInfoVersion: ${baggageInfoVersion}`);
+}
+
+function returnEmptyBaggage(options = {}, formatOptions = {}) {
+  return formatBaggageValue(BG_TYPE_CHK, options, formatOptions);
+}
+
+function detectBaggageType(baggageAllowance) {
+  if (BG_SPECIAL_IDENTIFIERS.includes(baggageAllowance)) {
+    return baggageAllowance;
+  }
+
+  if (!baggageAllowance) {
+    return BG_TYPE_CHK;
+  }
+
+  if (baggageAllowance['air:MaxWeight']) {
+    return BG_TYPE_WEIGHT;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(baggageAllowance, 'air:NumberOfPieces')) {
+    return BG_TYPE_PIECE;
+  }
+
+  return BG_TYPE_CHK;
+}
+
 /**
  * getBaggage -- get baggage information from LFS search
  * @param baggageAllowance
  * @returns {{amount: number, units: string}}
  */
-function getBaggage(baggageAllowance) {
-  // Checking for allowance
-  if (
-    !baggageAllowance
-    || (
-      !baggageAllowance['air:NumberOfPieces']
-      && !baggageAllowance['air:MaxWeight']
-    )
-  ) {
+function getBaggage(baggageAllowance, options = {}) {
+  const baggageType = detectBaggageType(baggageAllowance);
+
+  if (BG_SPECIAL_IDENTIFIERS.includes(baggageType)) {
     console.warn('Baggage information is not number and is not weight!', JSON.stringify(baggageAllowance));
-    return { units: 'piece', amount: 0 };
+    return formatBaggageValue(baggageType, options);
   }
-  // Checking for max weight
-  if (baggageAllowance['air:MaxWeight']) {
-    return {
-      units: baggageAllowance['air:MaxWeight'].Unit.toLowerCase(),
-      amount: Number(baggageAllowance['air:MaxWeight'].Value),
-    };
+
+  const unit = baggageType === BG_TYPE_WEIGHT ? baggageAllowance['air:MaxWeight'].Unit : 'PC';
+  const amount = baggageType === BG_TYPE_WEIGHT ? baggageAllowance['air:MaxWeight'].Value : baggageAllowance['air:NumberOfPieces'];
+  const baggageValue = `${Number(amount) || 0}${unit}`.toUpperCase();
+
+  return formatBaggageValue(
+    baggageValue,
+    options,
+    { weightUnits: unit.toLowerCase() }
+  );
+}
+
+function formatSegmentBaggage(baggageAllowance, options = {}) {
+  const { baggageInfoVersion } = options;
+  const baggage = getBaggage(baggageAllowance, options);
+
+  if (baggageInfoVersion === BG_VERSION_1) {
+    return [baggage];
   }
-  // Returning pieces
-  return {
-    units: 'piece',
-    amount: Number(baggageAllowance['air:NumberOfPieces']),
-  };
+
+  if (baggageInfoVersion === BG_VERSION_2) {
+    return baggage;
+  }
+
+  return [baggage];
 }
 
 /**
@@ -38,16 +164,15 @@ function getBaggage(baggageAllowance) {
  * @param info
  * @returns {{amount: number, units: string}}
  */
-function getBaggageInfo(info) {
-  // Checking for allowance
-  let baggageInfo = { units: 'piece', amount: 0 };
-
+function getBaggageInfo(info, options = {}) {
   if (typeof info === 'undefined' || info == null) {
-    return baggageInfo;
+    return formatBaggageValue(BG_TYPE_CHK, options);
   }
+  const hasTextInfo = Object.prototype.hasOwnProperty.call(info, 'air:TextInfo');
 
-  if (Object.prototype.hasOwnProperty.call(info, 'air:BagDetails')) {
-    baggageInfo.detail = info['air:BagDetails'].map((detail) => {
+  const textInfo = hasTextInfo ? info['air:TextInfo'][0] : BG_TYPE_CHK;
+  const baggageDetails = Object.prototype.hasOwnProperty.call(info, 'air:BagDetails')
+    ? info['air:BagDetails'].map((detail) => {
       return {
         applicableBags: detail.ApplicableBags,
         basePrice: detail.BasePrice,
@@ -56,26 +181,13 @@ function getBaggageInfo(info) {
         approximateTotalPrice: detail.ApproximateTotalPrice,
         restrictionText: detail['air:BaggageRestriction']['air:TextInfo'],
       };
-    });
-  }
-
-  if (Object.prototype.hasOwnProperty.call(info, 'air:TextInfo')) {
-    const match = info['air:TextInfo'][0].match(/^(\d+)([KP]+)$/);
-
-    if (match) {
-      if (match[2] === 'P') {
-        baggageInfo = Object.assign(baggageInfo, { units: 'piece', amount: match[1] });
-      } else if (match[2] === 'K') {
-        baggageInfo = Object.assign(baggageInfo, { units: 'kilograms', amount: match[1] });
-      }
-    } else {
-      console.warn('Baggage information is not number and is not weight!', JSON.stringify(info));
-    }
-  } else {
-    console.warn('Unknown', JSON.stringify(info));
-  }
-
-  return baggageInfo;
+    })
+    : null;
+  return formatBaggageValue(
+    normalizeBaggageString(textInfo),
+    options,
+    { detail: baggageDetails }
+  );
 }
 
 function formatSegment(segment) {
@@ -292,7 +404,7 @@ function formatFarePricingInfo(fare) {
   };
 }
 
-function formatLowFaresSearch(searchRequest, searchResult) {
+function formatLowFaresSearch(searchRequest, searchResult, options = {}) {
   const pricesList = searchResult['air:AirPricePointList'];
   const solutionsList = searchResult['air:AirPricingSolution'];
   const fareInfos = searchResult['air:FareInfoList'];
@@ -339,7 +451,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
             {
               serviceClass: bookingInfo.CabinClass,
               bookingClass: bookingInfo.BookingCode,
-              baggage: [getBaggage(fareInfo['air:BaggageAllowance'])],
+              baggage: formatSegmentBaggage(fareInfo['air:BaggageAllowance'], options),
               fareBasisCode: fareInfo.FareBasis,
             },
             seatsAvailable ? { seatsAvailable } : null
@@ -377,7 +489,7 @@ function formatLowFaresSearch(searchRequest, searchResult) {
               {
                 serviceClass: segmentInfo.CabinClass,
                 bookingClass: segmentInfo.BookingCode,
-                baggage: [getBaggage(fareInfo['air:BaggageAllowance'])],
+                baggage: formatSegmentBaggage(fareInfo['air:BaggageAllowance'], options),
                 fareBasisCode: fareInfo.FareBasis,
               },
               seatsAvailable ? { seatsAvailable } : null
@@ -571,6 +683,21 @@ module.exports = {
   setIndexesForSegments,
   getBaggage,
   getBaggageInfo,
+  BG_TYPE_PIECE,
+  BG_TYPE_WEIGHT,
+  BG_TYPE_CHK,
+  BG_TYPE_NIL,
+  BG_SPECIAL_IDENTIFIERS,
+  BG_STRING_PATTERN,
+  BG_VERSION_1,
+  BG_VERSION_2,
+  BG_VERSION_DEFAULT,
+  BG_INFO_VERSIONS,
+  normalizeBaggageInfoVersion,
+  detectBaggageType,
+  formatBaggageValue,
+  returnEmptyBaggage,
+  normalizeBaggageString,
   buildPassenger,
   setReferencesForSegments
 };
