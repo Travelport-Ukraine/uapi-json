@@ -376,18 +376,13 @@ function formatFarePricingInfo(fare) {
     }
   }
 
-  let refundable = false;
-
-  if (Object.prototype.hasOwnProperty.call(fare, 'Refundable')) {
-    refundable = fare.Refundable;
-  }
-
   let latestTicketingTime = null;
 
   if (Object.prototype.hasOwnProperty.call(fare, 'LatestTicketingTime')) {
     latestTicketingTime = fare.LatestTicketingTime;
   }
 
+  const refundable = fare.Refundable === 'true';
   const eTicketability = fare.ETicketability === 'Yes';
 
   return {

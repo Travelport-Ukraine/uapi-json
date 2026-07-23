@@ -490,7 +490,15 @@ describe('#AirFormat', () => {
         'refundable',
       ]);
 
-      expect(parsed.refundable).to.be.equal('true');
+      expect(parsed.refundable).to.be.equal(true);
+    });
+
+    it('should return false when fare is not refundable', () => {
+      const parsed = AirFormat.formatFarePricingInfo({
+        Refundable: 'false'
+      });
+
+      expect(parsed.refundable).to.be.equal(false);
     });
 
     it('should correctly parse eTicketability', () => {
