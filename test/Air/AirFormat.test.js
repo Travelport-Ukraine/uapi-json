@@ -502,7 +502,15 @@ describe('#AirFormat', () => {
         'eTicketability',
       ]);
 
-      expect(parsed.eTicketability).to.be.equal('Yes');
+      expect(parsed.eTicketability).to.be.equal(true);
+    });
+
+    it('should return false when fare is not e-ticketable', () => {
+      const parsed = AirFormat.formatFarePricingInfo({
+        ETicketability: 'No'
+      });
+
+      expect(parsed.eTicketability).to.be.equal(false);
     });
 
     it('should correctly parse latestTicketingTime', () => {

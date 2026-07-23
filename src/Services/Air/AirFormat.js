@@ -388,12 +388,7 @@ function formatFarePricingInfo(fare) {
     latestTicketingTime = fare.LatestTicketingTime;
   }
 
-  let eTicketability = false;
-
-  if (Object.prototype.hasOwnProperty.call(fare, 'ETicketability')) {
-    // eslint-disable-next-line prefer-destructuring
-    eTicketability = fare.ETicketability;
-  }
+  const eTicketability = fare.ETicketability === 'Yes';
 
   return {
     latestTicketingTime,
