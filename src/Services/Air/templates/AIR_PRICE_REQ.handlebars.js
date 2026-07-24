@@ -50,7 +50,7 @@ module.exports = `
             <air:AirPricingModifiers InventoryRequestType="DirectAccess"/>
             {{/if}}
             {{#passengers}}
-            <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}" {{#if child}}Age="9"{{else if Age}}Age="{{Age}}"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v52_0"/>
+            <com:SearchPassenger Key="P_{{@index}}" Code="{{ageCategory}}" {{#if isChild}}Age="9"{{else if Age}}Age="{{Age}}"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v52_0"/>
             {{/passengers}}
             <air:AirPricingCommand>
                 {{#segments}}

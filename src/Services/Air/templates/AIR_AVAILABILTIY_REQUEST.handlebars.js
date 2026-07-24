@@ -120,7 +120,7 @@ module.exports = `
             />
             {{/if}}
             {{#passengers}}
-                <com:SearchPassenger Code="{{ageCategory}}"{{#if child}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v52_0"/>
+                <com:SearchPassenger Code="{{ageCategory}}"{{#if isChild}} Age="9"{{/if}} xmlns:com="http://www.travelport.com/schema/common_v52_0"/>
             {{/passengers}}
         </air:AvailabilitySearchReq>
     </soap:Body>
