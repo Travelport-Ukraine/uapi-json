@@ -9,7 +9,7 @@ const templates = require('./templates');
 
 module.exports = function (settings) {
   const {
-    auth, debug, production, options
+    auth, debug, production = true, options
   } = validateServiceSettings(settings);
   const config = getConfig(auth.region, production);
   return {
@@ -22,7 +22,8 @@ module.exports = function (settings) {
       UtilsParser.UTILS_ERROR,
       UtilsParser.CURRENCY_CONVERSION,
       debug,
-      options
+      options,
+      production
     ),
     referenceData: uApiRequest(
       config.UtilService.url,
@@ -33,7 +34,8 @@ module.exports = function (settings) {
       UtilsParser.UTILS_ERROR,
       UtilsParser.REFERENCE_DATATYPE,
       debug,
-      options
+      options,
+      production
     ),
   };
 };
